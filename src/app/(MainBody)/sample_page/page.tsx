@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import SamplePageContainer from "@/Components/SamplePage/SamplePageContainer";
 import React from "react";
 

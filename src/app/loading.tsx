@@ -1,6 +1,7 @@
 import React from "react";
 
 const Loading = () => {
+
   return (
     <div className="loader-wrapper">
       <div className="loader loader-1">
@@ -10,6 +11,7 @@ const Loading = () => {
       </div>
     </div>
   );
+
 };
 
 export default Loading;

@@ -10,6 +10,7 @@ export const Profile = () => {
   const router = useRouter();
   const LogOutUser = () => {
     Cookies.remove("mofi_token");
+    // Coukies.remove("cinolu_token");
     router.push("/auth/login");
   };
 
