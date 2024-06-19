@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { AuthResponse, LoginSubmitProp, PasswordData, ProfileData, ProfileImageData, AuthState } from "@/Types/AuthType";
 import { RootState, AppDispatch } from "@/Redux/Store";
 
+
 export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: { message: string }, dispatch: AppDispatch }>(
     "auth/login",
     async (data, { rejectWithValue }) => {
@@ -17,11 +18,22 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
     }
 );
 
+export const logout = createAsyncThunk ( "auth/logout", async (_, thunkAPI) => {
+    try{
+        await axios.post(`${apiBaseUrl}/auth/logout`, {});
+        Cookies.remove('cinolu_token');
+        return {}
+    }catch (error: any){
+        return thunkAPI.rejectWithValue(error.response.data);
+    }
+})
+
 
 
 const initialState: AuthState = {
     user: null,
-    status: "idle",
+    statusLogin: "idle",
+    statusLogout: "idle",
     error: null,
     isAuthenticated: false,
 };
@@ -30,18 +42,18 @@ const authSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(login.pending, (state) => {
-                state.status = "loading";
+                state.statusLogin = "loading";
                 state.error = null;
             })
             .addCase(login.fulfilled,
                 (state, action) => {
-                    state.status = "succeeded";
+                    state.statusLogin = "succeeded";
                     state.user = action.payload.data;
                     state.isAuthenticated = true;
                     Cookies.set("cinolu_token", JSON.stringify(action.payload.data));
                 })
             .addCase(login.rejected, (state, action) => {
-                state.status = "failed";
+                state.statusLogin = "failed";
                 state.error = action.payload?.message || "Login failed";
             })
 

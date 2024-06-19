@@ -54,7 +54,8 @@ export interface ProfileImageData {
 
 export interface AuthState {
   user : User | null;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  statusLogin: 'idle' | 'loading' | 'succeeded' | 'failed';
+  statusLogout: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
   isAuthenticated: boolean;
 }

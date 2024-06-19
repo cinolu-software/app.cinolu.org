@@ -8,6 +8,7 @@ import { LogOut } from "react-feather";
 export const Profile = () => {
   
   const router = useRouter();
+
   const LogOutUser = () => {
     Cookies.remove("cinolu_token");
     router.push("/auth/login");
