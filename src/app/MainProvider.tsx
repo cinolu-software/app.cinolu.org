@@ -7,7 +7,9 @@ import { Provider } from "react-redux";
 
 const MainProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-      <Provider store={Store}>{children}</Provider>
+      <Provider store={Store}>
+        {children}
+      </Provider>
   );
 };
 

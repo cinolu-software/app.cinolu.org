@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import SVG from "@/CommonComponent/SVG";
 
 export const BookmarkListData = () => {
+
   const {bookmarkedData} = useAppSelector((state)=>state.headerBookMark)
   const dispatch = useAppDispatch();
   const router = useRouter();

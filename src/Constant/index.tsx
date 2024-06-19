@@ -3,6 +3,7 @@ export const ImagePath = "/assets/images";
 export const StarColor = "var(--theme-default)";
 export const StarColorTwo = "#D77748";
 
+
 //Layout
 export const Loading: string = "Loading...";
 export const SearchMofi: string = "Search Mofi ..";

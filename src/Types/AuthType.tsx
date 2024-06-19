@@ -1,8 +1,62 @@
 import { ChangeEvent } from "react";
 
+export interface Role{
+  id: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface User {
+  id: number | undefined;
+  email: string;
+  first_name: string;
+  name: string;
+  last_name: string;
+  password: string;
+  phone_number: string;
+  address: string;
+  token: string | null;
+  google_image: string | null;
+  profile: string | null;
+  verified_at: string;
+  created_at: string;
+  updated_at: string;
+  roles: Role[];
+}
+
+export interface AuthResponse {
+  data: User | undefined;
+}
+
 export interface LoginSubmitProp {
   email: string;
   password: string;
+}
+
+export interface PasswordData {
+  currentPassword: string;
+  newPassword: string;
+}
+
+export interface ProfileData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  address: string
+}
+
+export interface ProfileImageData {
+  userId: number;
+  image: File;
+}
+
+export interface AuthState {
+  user : User | null;
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: string | null;
+  isAuthenticated: boolean;
 }
 
 export interface LoginFormType {
