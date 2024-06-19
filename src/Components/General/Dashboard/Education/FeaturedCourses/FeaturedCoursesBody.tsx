@@ -1,6 +1,6 @@
-import { ImagePath } from "../../../../../../../../mofi/cinolu.admin/src/Constant";
-import { FeaturedCourseData } from "../../../../../../../../mofi/cinolu.admin/src/Data/General/Dashboard/Education";
-import { useAppSelector } from "../../../../../../../../mofi/cinolu.admin/src/Redux/Hooks";
+import { ImagePath } from "@/Constant";
+import { FeaturedCourseData } from "@/Data/General/Dashboard/Education";
+import { useAppSelector } from "@/Redux/Hooks";
 import Link from "next/link";
 import { useState } from "react";
 import { Bookmark, Star } from "react-feather";

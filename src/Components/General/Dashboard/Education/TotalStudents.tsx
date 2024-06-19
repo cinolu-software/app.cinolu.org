@@ -1,5 +1,5 @@
-import { ImagePath } from "../../../../../../../mofi/cinolu.admin/src/Constant";
-import { TotalStudentData } from "../../../../../../../mofi/cinolu.admin/src/Data/General/Widgets/General";
+import { ImagePath } from "@/Constant";
+import { TotalStudentData } from "@/Data/General/Widgets/General";
 import { Card, CardBody, Col, Row } from "reactstrap";
 
 const TotalStudents = () => {

@@ -1,6 +1,6 @@
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
-import { Href, LiveMeetings } from "../../../../../../../../mofi/cinolu.admin/src/Constant";
-import DashboardCommonHeader from "../../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/DashboardCommonHeader";
+import { Href, LiveMeetings } from "@/Constant";
+import DashboardCommonHeader from "@/Components/General/Dashboard/common/DashboardCommonHeader";
 import { useState } from "react";
 
 export const LiveMeetingCardHeader = () => {

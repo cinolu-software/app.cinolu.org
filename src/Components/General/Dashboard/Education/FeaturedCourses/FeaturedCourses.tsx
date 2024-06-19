@@ -1,7 +1,7 @@
 import { Card, CardBody, Col, Table } from "reactstrap";
-import { FeaturedCourse } from "../../../../../../../../mofi/cinolu.admin/src/Constant";
+import { FeaturedCourse } from "@/Constant";
 import FeaturedCoursesBody from "./FeaturedCoursesBody";
-import DashboardCommonHeader from "../../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/DashboardCommonHeader";
+import DashboardCommonHeader from "@/Components/General/Dashboard/common/DashboardCommonHeader";
 
 const FeaturedCourses = () => {
   return (

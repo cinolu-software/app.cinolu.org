@@ -1,10 +1,10 @@
 import { Card, CardBody, Col, Input, Label, Table } from "reactstrap";
-import { Assignments } from "../../../../../../../../mofi/cinolu.admin/src/Constant";
+import { Assignments } from "@/Constant";
 import AssignmentsTableBody from "./AssignmentsTableBody";
-import DashboardCommonHeader from "../../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/DashboardCommonHeader";
+import DashboardCommonHeader from "@/Components/General/Dashboard/common/DashboardCommonHeader";
 import { useMemo, useState } from "react";
-import { AssignmentData } from "../../../../../../../../mofi/cinolu.admin/src/Data/General/Dashboard/Education";
-import PaginationDynamic from "../../../../../../../../mofi/cinolu.admin/src/utils/Paginations";
+import { AssignmentData } from "@/Data/General/Dashboard/Education";
+import PaginationDynamic from "@/utils/Paginations";
 
 const AssignmentsTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,7 +22,7 @@ const AssignmentsTable = () => {
   return (
     <Col xl="8" md="12" className="proorder-md-4">
       <Card>
-        <DashboardCommonHeader title={Assignments} />
+        {/* <DashboardCommonHeader title={Assignments} /> */}
         <CardBody className="pt-0 assignments-table px-0">
           <div className="dataTables_wrapper">
             <div className="table-responsive theme-scrollbar">

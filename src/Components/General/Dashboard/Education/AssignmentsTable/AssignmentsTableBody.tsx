@@ -1,9 +1,9 @@
-import { ImagePath } from "../../../../../../../../mofi/cinolu.admin/src/Constant";
-import { useAppSelector } from "../../../../../../../../mofi/cinolu.admin/src/Redux/Hooks";
-import { AssignmentsTableBodyType } from "../../../../../../../../mofi/cinolu.admin/src/Types/DashboardType";
+import { ImagePath } from "@/Constant";
+import { useAppSelector } from "@/Redux/Hooks";
+import { AssignmentsTableBodyType } from "@/Types/DashboardType";
 import Link from "next/link";
 import { Input, Label, Progress } from "reactstrap";
-import { CommonDropdown } from "../../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/CommonDropdown";
+import { CommonDropdown } from "@/Components/General/Dashboard/common/CommonDropdown";
 
 const AssignmentsTableBody :React.FC<AssignmentsTableBodyType>= ({currentItems}) => {
   

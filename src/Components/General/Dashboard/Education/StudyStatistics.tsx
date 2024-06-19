@@ -1,8 +1,8 @@
 import { Card, CardBody, Col } from "reactstrap";
-import { Illustrations, StudyStatistic, UXDesign } from "../../../../../../../mofi/cinolu.admin/src/Constant";
+import { Illustrations, StudyStatistic, UXDesign } from "@/Constant";
 import ReactApexChart from "react-apexcharts";
-import DashboardCommonHeader from "../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/DashboardCommonHeader";
-import { StudyStatisticChart } from "../../../../../../../mofi/cinolu.admin/src/Data/General/Dashboard/Education";
+import DashboardCommonHeader from "@/Components/General/Dashboard/common/DashboardCommonHeader";
+import { StudyStatisticChart } from "@/Data/General/Dashboard/Education";
 
 const StudyStatistics = () => {
   return (

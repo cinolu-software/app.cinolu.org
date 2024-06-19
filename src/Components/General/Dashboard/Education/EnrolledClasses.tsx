@@ -1,9 +1,9 @@
 import { Card, CardBody, Col } from "reactstrap";
-import { EnrolledClass, Href } from "../../../../../../../mofi/cinolu.admin/src/Constant";
-import DashboardCommonHeader from "../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/DashboardCommonHeader";
-import { EnrolledData } from "../../../../../../../mofi/cinolu.admin/src/Data/General/Dashboard/Education";
+import { EnrolledClass, Href } from "@/Constant";
+import DashboardCommonHeader from "@/Components/General/Dashboard/common/DashboardCommonHeader";
+import { EnrolledData } from "@/Data/General/Dashboard/Education";
 import Link from "next/link";
-import { CommonDropdown } from "../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/CommonDropdown";
+import { CommonDropdown } from "@/Components/General/Dashboard/common/CommonDropdown";
 
 const EnrolledClasses = () => {
   return (
