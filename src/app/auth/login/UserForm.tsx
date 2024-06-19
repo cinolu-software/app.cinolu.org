@@ -3,20 +3,27 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast, ToastContainer  } from "react-toastify";
+import { toast, ToastContainer,Flip  } from "react-toastify";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import imageOne from "../../../../public/assets/images/logo/logo.png";
 import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
 import UserSocialApp from "./UserSocialApp";
+import {useDispatch, useSelector} from "react-redux";
+import {login, selectStatus, selectIsAuthenticated, selectError} from "@/Redux/Reducers/AuthSlice";
 
 const UserForm = () => {
 
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("test123@gmail.com");
   const [password, setPassword] = useState("Test@123");
+  const dispatch = useDispatch();
+
   const router = useRouter();
 
-  const formSubmitHandle = () => {
+  const formSubmitHandle = async () => {
+    // e.preventDefault();
+    //
+    // console.log(email, password)
 
     window.location.reload();
 
@@ -24,7 +31,17 @@ const UserForm = () => {
       // Cookies.set("cinolu_token", JSON.stringify(true));
       Cookies.set("mofi_token", JSON.stringify(true));
       router.push(`/dashboard`);
-      toast.success("login successful");
+      // toast.success("login successful");
+      toast.success(
+          <p className="text-white tx-16 mb-0">{"Connexion éffectuée avec succès"}</p>,
+          {
+            autoClose: 5000,
+            position: toast.POSITION.TOP_CENTER,
+            hideProgressBar: false,
+            transition: Flip,
+            theme: "colored",
+          }
+      );
     } else {
       // alert("Please Enter Valid Email Or Password");
       toast.error('Please Enter Valid Email Or Password')
