@@ -57,6 +57,7 @@ export const getGender = (products: ProductItemInterface[]) => {
   });
   return uniqueGender;
 };
+
 export const getVisibleProducts = (data: ProductItemInterface[], { brand, color, value, sortBy, searchBy, category }: FilterInterface) => {
   return data
     .filter((product) => {
