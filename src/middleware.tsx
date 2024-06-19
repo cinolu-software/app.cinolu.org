@@ -2,13 +2,14 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
+
   const path = request.nextUrl.pathname;
 
-  if (path.split("/")[1] !== "auth" && !request.cookies.has("mofi_token")) {
+  if (path.split("/")[1] !== "auth" && !request.cookies.has("cinolu_token")) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
-  if (path.split("/")[1] === "auth" && request.cookies.has("mofi_token")) {
-    return NextResponse.redirect(new URL(`/sample_page`, request.url));
+  if (path.split("/")[1] === "auth" && request.cookies.has("cinolu_token")) {
+    return NextResponse.redirect(new URL(`/dashboard`, request.url));
   }
 
   return NextResponse.next();

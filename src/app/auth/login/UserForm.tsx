@@ -1,37 +1,30 @@
 import {CreateAccount, DontHaveAccount, EmailAddressLogIn, OrSignInWith, Password, RememberPassword, SignIn, SignInToAccount } from "@/Constant";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer,Flip  } from "react-toastify";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import imageOne from "../../../../public/assets/images/logo/logo.png";
 import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
 import UserSocialApp from "./UserSocialApp";
 import {useDispatch, useSelector} from "react-redux";
-import {login, selectStatus, selectIsAuthenticated, selectError} from "@/Redux/Reducers/AuthSlice";
+import {login, selectStatus, selectError} from "@/Redux/Reducers/AuthSlice";
+import {AppDispatch} from "@/Redux/Store";
 
 const UserForm = () => {
 
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("test123@gmail.com");
-  const [password, setPassword] = useState("Test@123");
-  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+  const loginStatus = useSelector(selectStatus);
+  const loginErrors = useSelector(selectError);
+
 
   const router = useRouter();
 
-  const formSubmitHandle = async () => {
-    // e.preventDefault();
-    //
-    // console.log(email, password)
-
-    window.location.reload();
-
-    if (email == "test123@gmail.com" && password == "Test@123") {
-      // Cookies.set("cinolu_token", JSON.stringify(true));
-      Cookies.set("mofi_token", JSON.stringify(true));
-      router.push(`/dashboard`);
-      // toast.success("login successful");
+  useEffect(()=>{
+    if(loginStatus === 'succeeded'){
       toast.success(
           <p className="text-white tx-16 mb-0">{"Connexion éffectuée avec succès"}</p>,
           {
@@ -42,11 +35,32 @@ const UserForm = () => {
             theme: "colored",
           }
       );
-    } else {
-      // alert("Please Enter Valid Email Or Password");
-      toast.error('Please Enter Valid Email Or Password')
+      setTimeout(()=>{
+        router.push('/dashboard');
+      },1000)
     }
+    if(loginStatus === 'failed'){
+      setTimeout(()=>{
+        toast.error(
+            <p className="text-white tx-16 mb-0">{`${loginErrors}`}</p>,
+            {
+              autoClose: 5000,
+              position: toast.POSITION.TOP_CENTER,
+              hideProgressBar: false,
+              transition: Flip,
+              theme: "colored",
+            }
+        );
+      },1000)
+    }
+  }, [loginStatus, loginErrors])
 
+  const formSubmitHandle = async () => {
+    const payload = {
+      email : email,
+      password: password
+    }
+    dispatch(login(payload))
   };
 
 
@@ -64,12 +78,12 @@ const UserForm = () => {
           <p>Enter your email & password to login</p>
           <FormGroup>
             <Label className="col-form-label">{EmailAddressLogIn}</Label>
-            <Input type="email" defaultValue={email} onChange={(event) => setEmail(event.target.value)} placeholder="test123@gmail.com" />
+            <Input type="email" onChange={(event) => setEmail(event.target.value)} placeholder="" />
           </FormGroup>
           <FormGroup>
             <Label className="col-form-label">{Password}</Label>
             <div className="position-relative">
-              <Input type={show ? "text" : "password"} defaultValue={password} onChange={(event) => setPassword(event.target.value)} placeholder="Test@123" />
+              <Input type={show ? "text" : "password"}  onChange={(event) => setPassword(event.target.value)} placeholder="" />
               <div className="show-hide" onClick={() => setShow(!show)}><span className="show"> </span></div>
             </div>
           </FormGroup>
