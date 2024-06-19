@@ -1,8 +1,10 @@
 import { Card, CardBody, Col } from "reactstrap";
-import { ActivelyHour } from "../../../../../../../mofi/cinolu.admin/src/Constant";
+import { ActivelyHour } from "@/Constant";
 import ReactApexChart from "react-apexcharts";
-import DashboardCommonHeader from "../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/DashboardCommonHeader";
-import { ActivelyHoursChart } from "../../../../../../../mofi/cinolu.admin/src/Data/General/Dashboard/Education";
+import DashboardCommonHeader from "../common/DashboardCommonHeader";
+import { ActivelyHoursChart } from "@/Data/General/Dashboard/Education";
+// import DashboardCommonHeader from "@/Components/General/Dashboard/common/DashboardCommonHeader";
+// import { ActivelyHoursChart } from "@/Data/General/Dashboard/Education";
 
 const ActivelyHours = () => {
   return (

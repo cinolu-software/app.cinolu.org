@@ -1,8 +1,8 @@
 import { Card, CardBody, Col } from "reactstrap";
-import { MonthlyAttendances } from "../../../../../../../mofi/cinolu.admin/src/Constant";
+import { MonthlyAttendances } from "@/Constant";
 import ReactApexChart from "react-apexcharts";
-import DashboardCommonHeader from "../../../../../../../mofi/cinolu.admin/src/Components/General/Dashboard/common/DashboardCommonHeader";
-import { MonthlyChartData } from "../../../../../../../mofi/cinolu.admin/src/Data/General/Dashboard/Education";
+import DashboardCommonHeader from "@/Components/General/Dashboard/common/DashboardCommonHeader";
+import { MonthlyChartData } from "@/Data/General/Dashboard/Education";
 
 const MonthlyAttendance = () => {
   return (
