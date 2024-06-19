@@ -56,6 +56,7 @@ export interface AuthState {
   user : User | null;
   statusLogin: 'idle' | 'loading' | 'succeeded' | 'failed';
   statusLogout: 'idle' | 'loading' | 'succeeded' | 'failed';
+  statusCheckAuth : 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
   isAuthenticated: boolean;
 }

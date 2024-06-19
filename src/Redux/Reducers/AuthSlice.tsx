@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { apiBaseUrl } from "@/services/axios";
 import Cookies from "js-cookie";
-import { AuthResponse, LoginSubmitProp, PasswordData, ProfileData, ProfileImageData, AuthState } from "@/Types/AuthType";
-import { RootState, AppDispatch } from "@/Redux/Store";
+import { AuthResponse, LoginSubmitProp, AuthState } from "@/Types/AuthType";
+import { RootState } from "@/Redux/Store";
 
-
-export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: { message: string }, dispatch: AppDispatch }>(
+export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: { message: string } }>(
     "auth/login",
     async (data, { rejectWithValue }) => {
         try {
@@ -18,48 +17,44 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
     }
 );
 
-export const logout = createAsyncThunk ( "auth/logout", async (_, thunkAPI) => {
-    try{
-        await axios.post(`${apiBaseUrl}/auth/logout`, {});
-        Cookies.remove('cinolu_token');
-        return {}
-    }catch (error: any){
-        return thunkAPI.rejectWithValue(error.response.data);
+export const logout = createAsyncThunk<void, void, { rejectValue: { message: string } }>(
+    "auth/logout",
+    async (_, thunkAPI) => {
+        try {
+            await axios.post(`${apiBaseUrl}/auth/logout`, {});
+            Cookies.remove("cinolu_token");
+            return {};
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
     }
-})
+);
 
-
+export const checkAuth = createAsyncThunk<AuthResponse | null, void, { rejectValue: { message: string } }>(
+    "auth/checkAuth",
+    async (_, { rejectWithValue }) => {
+        const token = Cookies.get("cinolu_token");
+        if (token) {
+            const user = JSON.parse(token);
+            return user;
+        } else {
+            return null;
+        }
+    }
+);
 
 const initialState: AuthState = {
     user: null,
     statusLogin: "idle",
     statusLogout: "idle",
+    statusCheckAuth: "idle",
     error: null,
     isAuthenticated: false,
 };
 
 const authSlice = createSlice({
-    extraReducers: (builder) => {
-        builder
-            .addCase(login.pending, (state) => {
-                state.statusLogin = "loading";
-                state.error = null;
-            })
-            .addCase(login.fulfilled,
-                (state, action) => {
-                    state.statusLogin = "succeeded";
-                    state.user = action.payload.data;
-                    state.isAuthenticated = true;
-                    Cookies.set("cinolu_token", JSON.stringify(action.payload.data));
-                })
-            .addCase(login.rejected, (state, action) => {
-                state.statusLogin = "failed";
-                state.error = action.payload?.message || "Login failed";
-            })
-
-    },
-    initialState,
     name: "auth",
+    initialState,
     reducers: {
         setAuthenticated: (state, action) => {
             state.isAuthenticated = action.payload;
@@ -68,6 +63,45 @@ const authSlice = createSlice({
             state.user = action.payload;
         },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(login.pending, (state) => {
+                state.statusLogin = "loading";
+                state.error = null;
+            })
+            .addCase(login.fulfilled, (state, action) => {
+                state.statusLogin = "succeeded";
+                state.user = action.payload.data;
+                state.isAuthenticated = true;
+                Cookies.set("cinolu_token", JSON.stringify(action.payload.data));
+            })
+            .addCase(login.rejected, (state, action) => {
+                state.statusLogin = "failed";
+                state.error = action.payload?.message || "Login failed";
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.statusLogout = 'idle';
+                state.user = null;
+                state.isAuthenticated = false;
+            })
+            .addCase(checkAuth.pending, (state) => {
+                state.statusCheckAuth = "loading";
+            })
+            .addCase(checkAuth.fulfilled, (state, action) => {
+                state.statusCheckAuth = "succeeded";
+                if (action.payload) {
+                    state.user = action.payload;
+                    state.isAuthenticated = true;
+                } else {
+                    state.user = null;
+                    state.isAuthenticated = false;
+                }
+            })
+            .addCase(checkAuth.rejected, (state, action) => {
+                state.statusCheckAuth = "failed";
+                state.error = action.payload?.message || "Check auth failed";
+            });
+    },
 });
 
 export const { setAuthenticated, setUser } = authSlice.actions;
@@ -75,6 +109,6 @@ export const { setAuthenticated, setUser } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth;
 export const selectIsAuthenticated = (state: RootState) => state.auth.isAuthenticated;
 export const selectError = (state: RootState) => state.auth.error;
-export const selectStatus = (state: RootState) => state.auth.status;
+export const selectStatus = (state: RootState) => state.auth.statusLogin;
 
 export default authSlice.reducer;

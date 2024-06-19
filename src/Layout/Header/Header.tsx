@@ -6,9 +6,11 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { headerResponsive } from "@/Redux/Reducers/LayoutSlice";
 
+
 export const Header = () => {
   const { toggleSidebar } = useAppSelector((state) => state.layout);
   const dispatch = useAppDispatch();
+
 
   useEffect(() => {
     dispatch(headerResponsive());

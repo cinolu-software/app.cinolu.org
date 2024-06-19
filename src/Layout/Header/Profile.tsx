@@ -1,18 +1,29 @@
 import { Href, ImagePath, Logout } from "@/Constant";
+import {useEffect} from "react";
 import { UserProfileData } from "@/Data/Layout";
-import Cookies from "js-cookie";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogOut } from "react-feather";
+import {checkAuth, selectAuth, logout} from "@/Redux/Reducers/AuthSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 export const Profile = () => {
-  
-  const router = useRouter();
 
-  const LogOutUser = () => {
-    Cookies.remove("cinolu_token");
-    router.push("/auth/login");
-  };
+    const dispatch = useDispatch();
+    const router = useRouter();
+    const auth = useSelector(selectAuth);
+
+    useEffect(() => {
+        dispatch(checkAuth());
+    }, [dispatch]);
+
+    const LogOutUser = async () => {
+        await dispatch(logout());
+
+        router.push("/auth/login");
+    };
+
+    console.log(auth)
 
   return (
     <li className="profile-nav onhover-dropdown px-0 py-0">
