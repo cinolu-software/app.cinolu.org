@@ -16,6 +16,20 @@ export const MenuList: MenuItem [] | undefined = [
     ]
   },
   {
+    title: "Hubs",
+    lanClass: "lan-1",
+    menucontent: "Hub",
+    Items: [
+      {
+        path: "/hub",
+        icon: "learning",
+        type: "link",
+        title: "F-360"
+      }
+
+    ]
+  },
+  {
     title: "Administration",
     lanClass: "lan-1",
     menucontent: "admin",
@@ -38,18 +52,47 @@ export const MenuList: MenuItem [] | undefined = [
       {
         title: "Programmes",
         id: 2,
-        icon: "project",
+        icon: "builders",
         type: "sub",
         lanClass: "lan-6",
         active: false,
         children: [
-          { path: "/widgets/general", title: "Camp d'innovation", type: "link" },
-          { path: "/widgets/chart", title: "Stages", type: "link" },
-          { path: "/widgets/chart", title: "Incubation", type: "link" },
-          { path: "/widgets/general", title: "Mentors programs", type: "link" },
-          { path: "/widgets/chart", title: "F-360", type: "link" },
-          { path: "/widgets/chart", title: "Expo & Conférence", type: "link" },
-          { path: "/widgets/chart", title: "statut", type: "link" },
+          {
+            title: "type",
+            type: "sub",
+            lanClass: "lan-6",
+            active: false,
+            children : [
+              { path: "/widgets/general", title: "Camp d'innovation", type: "link" },
+              { path: "/widgets/chart", title: "Stages", type: "link" },
+              { path: "/widgets/chart", title: "Incubation", type: "link" },
+              { path: "/widgets/general", title: "Mentors programs", type: "link" },
+              { path: "/widgets/chart", title: "Expo & Conférence", type: "link" },
+            ]},
+          {path: "/", title: "status", type: "link",}
+        ],
+      },
+      {
+        title: "Projets",
+        id: 3,
+        icon: "file",
+        type: "sub",
+        lanClass: "lan-6",
+        active: false,
+        children: [
+          {
+            title: "type",
+            type: "sub",
+            lanClass: "lan-6",
+            active: false,
+            children : [
+              { path: "/widgets/general", title: "Camp d'innovation", type: "link" },
+              { path: "/widgets/chart", title: "Stages", type: "link" },
+              { path: "/widgets/chart", title: "Incubation", type: "link" },
+              { path: "/widgets/general", title: "Mentors programs", type: "link" },
+              { path: "/widgets/chart", title: "Expo & Conférence", type: "link" },
+            ]},
+          {path: "/", title: "status", type: "link",}
         ],
       },
     ],

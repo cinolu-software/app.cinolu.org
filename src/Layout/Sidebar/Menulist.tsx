@@ -15,6 +15,7 @@ const Menulist: React.FC<MenuListType> = ({ menu, setActiveMenu, activeMenu, lev
   const { t } = useTranslation("common");
   const { sidebarIconType } = useAppSelector((state) => state.themeCustomizer)
 
+
   const ActiveNavLinkUrl = (path?: string, active?: boolean) => {
     return pathname === path ? (active ? active : true) : "";
   };
