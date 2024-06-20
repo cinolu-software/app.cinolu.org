@@ -27,9 +27,12 @@ export const MenuList: MenuItem [] | undefined = [
         type: "sub",
         lanClass: "lan-3",
         children: [
-          { path: "/dashboard/default_dashboard", title: "entrepreneur", type: "link", lanClass: "lan-4" },
-          { path: "/dashboard/project", title: "coach", type: "link", lanClass: "lan-5" },
-          { path: "/dashboard/ecommerce", title: "admin", type: "link" },
+          { path: "/dashboard/default_dashboard", title: "internautes", type: "link", lanClass: "lan-4" },
+          { path: "/dashboard/project", title: "entrepreneurs", type: "link", lanClass: "lan-5" },
+          { path: "/dashboard/ecommerce", title: "membres", type: "link" },
+          { path: "/dashboard/ecommerce", title: "coachs", type: "link" },
+          { path: "/dashboard/ecommerce", title: "partenaires", type: "link" },
+          { path: "/dashboard/ecommerce", title: "administrateurs", type: "link" },
         ],
       },
       {
