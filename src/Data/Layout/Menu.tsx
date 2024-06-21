@@ -11,7 +11,8 @@ export const MenuList: MenuItem [] | undefined = [
         icon: "home",
         type: "link",
         title: "Dashboard"
-      }
+      },
+      { path: "/app/calendar", icon: "calendar", type: "link", title: "Calendar" },
       
     ]
   },
@@ -21,7 +22,7 @@ export const MenuList: MenuItem [] | undefined = [
     menucontent: "Hub",
     Items: [
       {
-        path: "/hub",
+        path: "/hubs/360",
         icon: "learning",
         type: "link",
         title: "F-360"
@@ -41,12 +42,12 @@ export const MenuList: MenuItem [] | undefined = [
         type: "sub",
         lanClass: "lan-3",
         children: [
-          { path: "/dashboard/default_dashboard", title: "internautes", type: "link", lanClass: "lan-4" },
-          { path: "/dashboard/project", title: "entrepreneurs", type: "link", lanClass: "lan-5" },
-          { path: "/dashboard/ecommerce", title: "membres", type: "link" },
-          { path: "/dashboard/ecommerce", title: "coachs", type: "link" },
-          { path: "/dashboard/ecommerce", title: "partenaires", type: "link" },
-          { path: "/dashboard/ecommerce", title: "administrateurs", type: "link" },
+          { path: "/users/internetUsers", title: "internetUsers", type: "link", lanClass: "lan-4" },
+          { path: "/users/entrepreneurs", title: "entrepreneurs", type: "link", lanClass: "lan-5" },
+          { path: "/users/members", title: "membres", type: "link" },
+          { path: "/users/coachs", title: "coachs", type: "link" },
+          { path: "/users/partners", title: "partenaires", type: "link" },
+          { path: "/users/administrators", title: "administrateurs", type: "link" },
         ],
       },
       {
@@ -63,13 +64,13 @@ export const MenuList: MenuItem [] | undefined = [
             lanClass: "lan-6",
             active: false,
             children : [
-              { path: "/widgets/general", title: "Camp d'innovation", type: "link" },
-              { path: "/widgets/chart", title: "Stages", type: "link" },
-              { path: "/widgets/chart", title: "Incubation", type: "link" },
-              { path: "/widgets/general", title: "Mentors programs", type: "link" },
-              { path: "/widgets/chart", title: "Expo & Conférence", type: "link" },
+              { path: "/programs/programsTypes/innovationCamps", title: "Camp d'innovation", type: "link" },
+              { path: "/programs/programsTypes/internships", title: "Stages", type: "link" },
+              { path: "/programs/programsTypes/incubations", title: "Incubation", type: "link" },
+              { path: "/programs/programsTypes/MentorsPrograms", title: "Mentors programs", type: "link" },
+              { path: "/programs/programsTypes/ExpoAndConference", title: "Expo & Conférence", type: "link" },
             ]},
-          {path: "/", title: "status", type: "link",}
+          {path: "/programs/programsStatus", title: "status", type: "link",}
         ],
       },
       {
@@ -86,13 +87,9 @@ export const MenuList: MenuItem [] | undefined = [
             lanClass: "lan-6",
             active: false,
             children : [
-              { path: "/widgets/general", title: "Camp d'innovation", type: "link" },
-              { path: "/widgets/chart", title: "Stages", type: "link" },
-              { path: "/widgets/chart", title: "Incubation", type: "link" },
-              { path: "/widgets/general", title: "Mentors programs", type: "link" },
-              { path: "/widgets/chart", title: "Expo & Conférence", type: "link" },
+              { path: "/projects/general", title: "", type: "link" },
             ]},
-          {path: "/", title: "status", type: "link",}
+          {path: "/projets/projectStatus", title: "status", type: "link",}
         ],
       },
     ],

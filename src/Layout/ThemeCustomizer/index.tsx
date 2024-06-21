@@ -5,7 +5,7 @@ import NavCustomizer from "./NavCustomizer";
 import TabCustomizer from "./TabCustomizer";
 
 const ThemeCustomizer = () => {
-  const [selected, setSelected] = useState("sidebar-type");
+  const [selected, setSelected] = useState("sidebar-types");
   const { openCus } = useAppSelector((state) => state.themeCustomizer);
   const dispatch = useAppDispatch();
 
