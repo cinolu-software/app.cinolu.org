@@ -22,7 +22,7 @@ export const MenuList: MenuItem [] | undefined = [
     menucontent: "Hub",
     Items: [
       {
-        path: "/hubs/360",
+        path: "/hubs/f360",
         icon: "learning",
         type: "link",
         title: "F-360"
@@ -65,10 +65,11 @@ export const MenuList: MenuItem [] | undefined = [
             active: false,
             children : [
               { path: "/programs/programsTypes/innovationCamps", title: "Camp d'innovation", type: "link" },
-              { path: "/programs/programsTypes/internships", title: "Stages", type: "link" },
+              { path: "/programs/programsTypes/Internships", title: "Stages", type: "link" },
               { path: "/programs/programsTypes/incubations", title: "Incubation", type: "link" },
               { path: "/programs/programsTypes/MentorsPrograms", title: "Mentors programs", type: "link" },
               { path: "/programs/programsTypes/ExpoAndConference", title: "Expo & Conférence", type: "link" },
+
             ]},
           {path: "/programs/programsStatus", title: "status", type: "link",}
         ],

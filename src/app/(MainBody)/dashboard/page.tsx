@@ -15,6 +15,7 @@ const Education = () => {
             }
         })();
     }, []);
+
     return MyAwesomeMap ? <MyAwesomeMap/> : "";
 }
 
