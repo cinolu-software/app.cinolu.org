@@ -17,11 +17,7 @@ export const HeaderRight = () => {
         <SearchBox />
         <HeaderSearch />
         <MaximizeScreen />
-        <Notification />
-        <BookMark />
         <DarkMode />
-        <MessageBox />
-        <CartData />
         <Languages/>
         <Profile/>
       </ul>

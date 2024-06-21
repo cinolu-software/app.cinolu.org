@@ -42,7 +42,7 @@ export const Profile = () => {
             <Link href={`/${item.link}`}>{item.icon}<span>{item.title} </span></Link>
           </li>
         ))}
-        <li onClick={LogOutUser}><Link href={Href}scroll={false} ><LogOut /><span>{Logout} </span></Link></li>
+        <li onClick={LogOutUser}><Link href={Href} scroll={false} ><LogOut /><span>{Logout} </span></Link></li>
       </ul>
     </li>
   );

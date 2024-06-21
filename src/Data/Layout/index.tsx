@@ -86,22 +86,7 @@ export const UserProfileData = [
   {
     icon: <Users />,
     title: "Account",
-    link: "chat/private_chat",
-  },
-  {
-    icon: <Mail />,
-    title: "Inbox",
-    link: "app/letter_box",
-  },
-  {
-    icon: <FileText />,
-    title: "Taskboard",
-    link: "app/task",
-  },
-  {
-    icon: <Settings />,
-    title: "Settings",
-    link: "users/edit_profile",
+    link: "users/profile",
   },
 ];
 
