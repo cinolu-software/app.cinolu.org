@@ -1,12 +1,9 @@
+'use client'
+import CalenderContainer from "@/Components/Applications/Calender";
+import React from "react";
 
+const Calender = () => {
+  return <CalenderContainer/>
+};
 
-const Calendar = () => {
-
-    return (
-        <>
-            <h1>Calendar</h1>
-        </>
-    )
-}
-
-export default Calendar
+export default Calender;

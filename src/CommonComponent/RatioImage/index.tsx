@@ -35,4 +35,6 @@ const RatioImage = (props: Component) => {
 
   return <img ref={bgImg} {...props} alt={alt} />;
 };
+
+
 export default RatioImage;
