@@ -1,5 +1,4 @@
 import axios from "axios";
-
 export const apiBaseUrl = "http://localhost:8000";
 export const imageBaseUrl = "http://localhost:8000/uploads";
 
@@ -9,4 +8,4 @@ export default axios.create({
         "Content-Type": "application/json",
     },
     withCredentials: true,
-})
+});

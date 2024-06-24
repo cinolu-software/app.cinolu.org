@@ -23,16 +23,14 @@ export const Profile = () => {
         router.push("/auth/login");
     };
 
-    console.log(auth)
-
   return (
     <li className="profile-nav onhover-dropdown px-0 py-0">
       <div className="d-flex profile-media align-items-center">
         <img className="img-30" src={`${ImagePath}/dashboard/profile.png`} alt="" />
         <div className="flex-grow-1">
-          <span>Alen Miller</span>
+          <span>{`${auth?.user?.first_name}-${auth?.user?.name}`}</span>
           <p className="mb-0 font-outfit">
-            UI Designer<i className="fa fa-angle-down"></i>
+              {`${auth?.user?.roles[0].name}`} <i className="fa fa-angle-down"></i>
           </p>
         </div>
       </div>

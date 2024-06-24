@@ -1,7 +1,9 @@
 import { Href } from "@/Constant";
+
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 
 const PaginationDynamic = ({totalPages, currentPage, setCurrentPage}:any) => {
+
   const handlePageChange = (page: number) => setCurrentPage(page);
 
   const handlePreviousButton = () => {
