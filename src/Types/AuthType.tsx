@@ -7,6 +7,15 @@ export interface Role{
   updated_at: string;
 }
 
+export interface UpdateProfilePayload {
+  name: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  address: string
+}
+
 export interface User {
   id: number | undefined;
   email: string;
@@ -57,6 +66,7 @@ export interface AuthState {
   statusLogin: 'idle' | 'loading' | 'succeeded' | 'failed';
   statusLogout: 'idle' | 'loading' | 'succeeded' | 'failed';
   statusCheckAuth : 'idle' | 'loading' | 'succeeded' | 'failed';
+  statusUpdateProfile : 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
   isAuthenticated: boolean;
 }

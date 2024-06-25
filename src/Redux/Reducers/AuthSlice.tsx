@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { apiBaseUrl } from "@/services/axios";
 import Cookies from "js-cookie";
-import { AuthResponse, LoginSubmitProp, AuthState } from "@/Types/AuthType";
+import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload } from "@/Types/AuthType";
 import { RootState } from "@/Redux/Store";
 
 export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: { message: string } }>(
@@ -43,10 +43,55 @@ export const checkAuth = createAsyncThunk<AuthResponse | null, void, { rejectVal
     }
 );
 
+export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, { rejectValue: { message: string } }>(
+    "auth/updateProfile",
+    async (profileData, { rejectWithValue }) => {
+        try {
+            const response = await axios.patch(
+                `${apiBaseUrl}/auth/profile`,
+                profileData
+            );
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const updatePassword = createAsyncThunk(
+    "auth/updatePassword",
+    async (passwordData, { rejectWithValue }) => {
+        try {
+            const response = await axios.patch(
+                `${apiBaseUrl}/auth/update-password`,
+                passwordData
+            );
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+);
+
+export const updateProfileImage = createAsyncThunk(
+    "profile/updateProfileImage",
+    async ({ userId, image }) => {
+        const formData = new FormData();
+        formData.append("image", image);
+
+        const response = await axios.post(`/users/image/${userId}`, formData, {
+            withCredentials: true,
+        });
+
+        return response.data;
+    }
+);
+
 const initialState: AuthState = {
     user: null,
     statusLogin: "idle",
     statusLogout: "idle",
+    statusUpdateProfile: 'idle',
     statusCheckAuth: "idle",
     error: null,
     isAuthenticated: false,
@@ -100,7 +145,24 @@ const authSlice = createSlice({
             .addCase(checkAuth.rejected, (state, action) => {
                 state.statusCheckAuth = "failed";
                 state.error = action.payload?.message || "Check auth failed";
-            });
+            })
+            .addCase(updateProfile.pending, (state) => {
+                state.statusUpdateProfile = "loading";
+                state.error = null;
+            })
+            .addCase(updateProfile.fulfilled, (state, action) => {
+                state.statusUpdateProfile = "succeeded";
+                state.user = action.payload.data;
+                localStorage.setItem(
+                    "ACCESS_ACCOUNT",
+                    JSON.stringify(action.payload.data)
+                );
+            })
+            .addCase(updateProfile.rejected, (state, action) => {
+                state.statusUpdateProfile = "failed";
+                state.error = action.payload?.message || "Update failed";
+            })
+        ;
     },
 });
 
@@ -110,5 +172,6 @@ export const selectAuth = (state: RootState) => state.auth;
 export const selectIsAuthenticated = (state: RootState) => state.auth.isAuthenticated;
 export const selectError = (state: RootState) => state.auth.error;
 export const selectStatus = (state: RootState) => state.auth.statusLogin;
+export const selectStatusUpdateProfil = (state: RootState) => state.auth.statusUpdateProfile;
 
 export default authSlice.reducer;

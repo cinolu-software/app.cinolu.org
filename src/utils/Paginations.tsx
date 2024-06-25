@@ -19,13 +19,11 @@ const PaginationDynamic = ({totalPages, currentPage, setCurrentPage}:any) => {
       <PaginationItem onClick={handlePreviousButton} disabled={currentPage === 1}>
         <PaginationLink href={Href} previous>Previous</PaginationLink>
       </PaginationItem>
-
       {Array.from({ length: totalPages }, (_, index) => (
         <PaginationItem key={index} active={index + 1 === currentPage} onClick={() => handlePageChange(index + 1)}>
           <PaginationLink href={Href}>{index + 1}</PaginationLink>
         </PaginationItem>
       ))}
-
       <PaginationItem onClick={handleNextButton} disabled={currentPage === totalPages}>
         <PaginationLink href={Href} next>Next</PaginationLink>
       </PaginationItem>

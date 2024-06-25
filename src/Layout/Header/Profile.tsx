@@ -1,4 +1,4 @@
-import { Href, ImagePath, Logout } from "@/Constant";
+import { Href, Logout } from "@/Constant";
 import {useEffect} from "react";
 import { UserProfileData } from "@/Data/Layout";
 import Link from "next/link";
@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { LogOut } from "react-feather";
 import {checkAuth, selectAuth, logout} from "@/Redux/Reducers/AuthSlice";
 import {useDispatch, useSelector} from "react-redux";
+import {imageBaseUrl} from "@/services/axios";
 
 export const Profile = () => {
 
@@ -19,14 +20,13 @@ export const Profile = () => {
 
     const LogOutUser = async () => {
         await dispatch(logout());
-
         router.push("/auth/login");
     };
 
   return (
     <li className="profile-nav onhover-dropdown px-0 py-0">
       <div className="d-flex profile-media align-items-center">
-        <img className="img-30" src={`${ImagePath}/dashboard/profile.png`} alt="" />
+        <img className="img-30 rounded-circle" src={`${imageBaseUrl}/profiles/${auth?.user?.profile}`} alt="profile utilisateur" />
         <div className="flex-grow-1">
           <span>{`${auth?.user?.first_name}-${auth?.user?.name}`}</span>
           <p className="mb-0 font-outfit">

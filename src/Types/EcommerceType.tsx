@@ -78,7 +78,7 @@ export interface ProductSliceProp {
   symbol: string;
 }
 
-export interface ClothsDetailsTabContentProp {
+export interface ProfileTabContentProp {
   activeTab: number;
 }
 
