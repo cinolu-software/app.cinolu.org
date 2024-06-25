@@ -9,6 +9,8 @@ const ImagePreview = () => {
 
   const [files, setFiles] = useState([]);
 
+  console.log(files);
+
   return (
     <Col lg="12">
         <CardBody>

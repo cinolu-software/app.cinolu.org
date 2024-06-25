@@ -8,7 +8,7 @@ import imageOne from "../../../../public/assets/images/logo/logo.png";
 import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
 import UserSocialApp from "./UserSocialApp";
 import { useDispatch, useSelector } from "react-redux";
-import { login, selectStatus, selectError } from "@/Redux/Reducers/AuthSlice";
+import { login, selectStatusLogin, selectErrorLogin } from "@/Redux/Reducers/AuthSlice";
 import { AppDispatch } from "@/Redux/Store";
 
 const UserForm = () => {
@@ -16,8 +16,8 @@ const UserForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch<AppDispatch>();
-  const loginStatus = useSelector(selectStatus);
-  const loginErrors = useSelector(selectError);
+  const loginStatus = useSelector(selectStatusLogin);
+  const loginErrors = useSelector(selectErrorLogin);
   const router = useRouter();
 
   useEffect(() => {
@@ -47,6 +47,8 @@ const UserForm = () => {
             theme: "colored",
           }
       );
+
+      console.log(loginErrors)
     }
   }, [loginStatus, loginErrors, router]);
 

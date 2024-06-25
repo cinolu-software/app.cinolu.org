@@ -16,6 +16,12 @@ export interface UpdateProfilePayload {
   address: string
 }
 
+export interface UpdateProfilePassword {
+  old_password: string;
+  password: string;
+  password_confirm: string;
+}
+
 export interface User {
   id: number | undefined;
   email: string;
@@ -37,6 +43,18 @@ export interface User {
 export interface AuthResponse {
   data: User | undefined;
 }
+
+export interface ApiError {
+  property: string;
+  message: string;
+}
+
+export interface AuthError {
+  message: ApiError[];
+  error: string;
+  statusCode: number;
+}
+
 
 export interface LoginSubmitProp {
   email: string;
@@ -62,12 +80,21 @@ export interface ProfileImageData {
 }
 
 export interface AuthState {
+
   user : User | null;
   statusLogin: 'idle' | 'loading' | 'succeeded' | 'failed';
   statusLogout: 'idle' | 'loading' | 'succeeded' | 'failed';
   statusCheckAuth : 'idle' | 'loading' | 'succeeded' | 'failed';
   statusUpdateProfile : 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
+  statusUpdatePassword : 'idle' | 'loading' | 'succeeded' | 'failed';
+
+  errorLogin: string | null;
+  errorLogout: string | null;
+  errorCheckAuth: string | null;
+  errorUpdateProfile: string | null;
+  errorUpdatePassword: string | null;
+
+
   isAuthenticated: boolean;
 }
 

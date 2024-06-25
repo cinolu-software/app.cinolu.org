@@ -15,9 +15,9 @@ export const UserFormHead = () => {
           <img className="img-70 rounded-circle" alt="" src={`${imageBaseUrl}/profiles/${auth?.user?.profile}`} />
           <div className="flex-grow-1">
             <h4 className="mb-1 text-uppercase">
-              {`${auth?.user?.first_name}-${auth?.user?.name}`}
+              {`${auth?.user?.name}-${auth?.user?.first_name}`}
             </h4>
-            <p>{`${auth?.user?.roles[0].name}`}</p>
+            <p>{`${auth?.user?.last_name}`}</p>
           </div>
         </div>
       </div>

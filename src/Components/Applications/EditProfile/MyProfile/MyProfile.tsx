@@ -4,7 +4,7 @@ import { MyProfiles, Save } from "@/Constant";
 import { UserFormHead } from "./UserFormHead";
 import CommonUserFormGroup from "../Common/CommonUserFormGroup";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import { selectAuth, selectError, updateProfile, selectStatusUpdateProfil } from "@/Redux/Reducers/AuthSlice";
+import { selectAuth, selectErrorUpdateProfile, updateProfile, selectStatusUpdateProfile } from "@/Redux/Reducers/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Flip, toast } from "react-toastify";
 import { UpdateProfilePayload } from "@/Types/AuthType";
@@ -21,8 +21,8 @@ const MyProfile = () => {
     const [newPhoneNumber, setNewPhoneNumber] = useState(auth?.user?.phone_number);
     const [newAddress, setNewAddress] = useState(auth?.user?.address);
 
-    const statusUpdate = useSelector(selectStatusUpdateProfil);
-    const updateError = useSelector(selectError);
+    const statusUpdate = useSelector(selectStatusUpdateProfile);
+    const updateError = useSelector(selectErrorUpdateProfile);
 
     useEffect(() => {
 
