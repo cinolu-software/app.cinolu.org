@@ -3,12 +3,16 @@ import HeaderBookmarkSlice from "./Reducers/HeaderBookmarkSlice";
 import LayoutSlice from "./Reducers/LayoutSlice";
 import ThemeCustomizerSlice from "./Reducers/ThemeCustomizerSlice";
 import AuthSlice from "@/Redux/Reducers/AuthSlice";
+import LetterBoxSlice from "./Reducers/LetterBoxSlice";
+import ContactSlice from "./Reducers/ContactSlice";
 
 const Store = configureStore({
   reducer: {
     layout: LayoutSlice,
     headerBookMark: HeaderBookmarkSlice,
     themeCustomizer: ThemeCustomizerSlice,
+    letterBox: LetterBoxSlice,
+    contact: ContactSlice,
     auth: AuthSlice
   },
   middleware: getDefaultMiddleware =>

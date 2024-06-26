@@ -54,25 +54,10 @@ export const MenuList: MenuItem [] | undefined = [
         title: "Programmes",
         id: 2,
         icon: "builders",
-        type: "sub",
+        type: "link",
         lanClass: "lan-6",
         active: false,
-        children: [
-          {
-            title: "type",
-            type: "sub",
-            lanClass: "lan-6",
-            active: false,
-            children : [
-              { path: "/programs/programsTypes/innovationCamps", title: "Camp d'innovation", type: "link" },
-              { path: "/programs/programsTypes/Internships", title: "Stages", type: "link" },
-              { path: "/programs/programsTypes/incubations", title: "Incubation", type: "link" },
-              { path: "/programs/programsTypes/MentorsPrograms", title: "Mentors programs", type: "link" },
-              { path: "/programs/programsTypes/ExpoAndConference", title: "Expo & Conférence", type: "link" },
-
-            ]},
-          {path: "/programs/programsStatus", title: "status", type: "link",}
-        ],
+        path: "/programs/programsTypes",
       },
       {
         title: "Projets",
