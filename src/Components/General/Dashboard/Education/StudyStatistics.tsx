@@ -13,10 +13,10 @@ const StudyStatistics = () => {
           <div className="studay-statistics">
             <ul className="d-flex align-item-center gap-2 simple-list flex-row">
               <li>
-                <span className="bg-primary"> </span>{UXDesign}
+                <span className="bg-primary"> </span>{"Coachés"}
               </li>
               <li>
-                <span className="bg-secondary"> </span>{Illustrations}
+                <span className="bg-secondary"> </span>{'Coach'}
               </li>
             </ul>
           </div>

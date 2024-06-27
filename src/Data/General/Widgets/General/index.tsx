@@ -898,42 +898,42 @@ export const SocialWidgetsData = [
 
 export const TotalStudentData = [
     {
-        student:"42,954",
-        title:"Total Students",
+        student:"42",
+        title:"Total de Coachés",
         color:"danger",
         icon:"down",
         percentage:"- 17.06%",
-        detail:"than last 6 Month",
+        detail:"Les 6 derniers mois",
         image:"student.png",
         class:"student"
     },
     {
         student:"659",
-        title:"Total Teachers",
+        title:"Total de Coach",
         color:"success",
         icon:"up",
         percentage:"+27.02%",
-        detail:"than last 4 Month",
+        detail:"Les 6 derniers mois",
         image:"teacher.png",
         class:"student-2"
     },
     {
-        student:"984",
-        title:"Events",
+        student:"9",
+        title:"Événements",
         color:"success",
         icon:"up",
         percentage:"+ 12.01%",
-        detail:"than last 8 Month",
+        detail:"Les 6 derniers mois",
         image:"calendar.png",
         class:"student-3"
     },
     {
-        student:"1,984",
-        title:"Invoice Status",
+        student:"10",
+        title:"Total de Programme",
         color:"danger",
         icon:"down",
         percentage:"- 15.02%",
-        detail:"than last 5 Month",
+        detail:"Les 6 derniers mois",
         image:"invoice.png",
         class:"student-4"
     },

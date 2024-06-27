@@ -200,7 +200,7 @@ export const EmailNavTabs = [
   },
   {
     title: "Rapports",
-    icon: "tread",
+    icon: "sale",
     id: "pills-promotion-tab",
   },
 ];
