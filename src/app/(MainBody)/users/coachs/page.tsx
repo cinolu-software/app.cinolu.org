@@ -1,12 +1,10 @@
+'use client';
 
+import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
+import React from "react";
 
-const Coach = () => {
+const ProductList = () => {
+    return <ProductListContainer/>
+};
 
-    return (
-        <>
-            <h1>Coach</h1>
-        </>
-    )
-}
-
-export default Coach
+export default ProductList;

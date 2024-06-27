@@ -1,12 +1,10 @@
+'use client';
 
+import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
+import React from "react";
 
-const Administrators = () => {
+const ProductList = () => {
+    return <ProductListContainer/>
+};
 
-    return (
-        <>
-            <h1>Administrators</h1>
-        </>
-    )
-}
-
-export default Administrators
+export default ProductList;

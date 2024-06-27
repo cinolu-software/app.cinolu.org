@@ -1,10 +1,10 @@
-"use client"
+'use client';
 
-import EditProfileContainer from "@/Components/Applications/EditProfile";
+import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
 import React from "react";
 
-const EditProfile = () => {
-    return <EditProfileContainer/>
-}
+const ProductList = () => {
+    return <ProductListContainer/>
+};
 
-export default EditProfile;
+export default ProductList;

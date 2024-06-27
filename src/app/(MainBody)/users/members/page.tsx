@@ -1,11 +1,10 @@
+'use client';
 
-const Members = () => {
+import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
+import React from "react";
 
-    return (
-        <>
-            <h1>Members</h1>
-        </>
-    )
-}
+const ProductList = () => {
+    return <ProductListContainer/>
+};
 
-export default Members
+export default ProductList;

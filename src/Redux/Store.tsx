@@ -5,6 +5,7 @@ import ThemeCustomizerSlice from "./Reducers/ThemeCustomizerSlice";
 import AuthSlice from "@/Redux/Reducers/AuthSlice";
 import LetterBoxSlice from "./Reducers/LetterBoxSlice";
 import ContactSlice from "./Reducers/ContactSlice";
+import ProductSlice from "./Reducers/ProductSlice";
 
 const Store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const Store = configureStore({
     themeCustomizer: ThemeCustomizerSlice,
     letterBox: LetterBoxSlice,
     contact: ContactSlice,
+    product: ProductSlice,
     auth: AuthSlice
   },
   middleware: getDefaultMiddleware =>
