@@ -171,65 +171,35 @@ export const InboxEmailData = [
 
 export const LetterBoxSidebar = [
   {
-    title: "Inbox",
-    icon: "inbox",
+    title: "L-Impact",
+    icon: "draft",
     id: "1",
     badge: true,
+    color: "success",
   },
   {
-    title: "Sent",
-    icon: "sent",
-    id: "2",
-  },
-  {
-    title: "Starred",
-    icon: "star",
+    title: "Katalicc",
+    icon: "draft",
     id: "3",
     badge: true,
-  },
-  {
-    title: "Draft",
-    icon: "draft",
-    id: "4",
-  },
-  {
-    title: "Trash",
-    icon: "trash",
-    id: "5",
-  },
-  {
-    title: "Work",
-    icon: "pintag",
-    id: "6",
     color: "primary",
-  },
-  {
-    title: "Private",
-    icon: "pintag",
-    id: "7",
-    color: "warning",
-  },
-  {
-    title: "Support",
-    icon: "pintag",
-    id: "8",
-    color: "success",
   },
 ];
 
 export const EmailNavTabs = [
   {
-    title: "Important",
-    icon: "mail",
+    title: "Participant",
+    // icon: "fill-user",
+    icon: "customers",
     id: "pills-important-tab",
   },
   {
-    title: "Social",
-    icon: "goal",
+    title: "Evaluations",
+    icon: "user-visitor",
     id: "pills-social-tab",
   },
   {
-    title: "Promotion",
+    title: "Rapports",
     icon: "tread",
     id: "pills-promotion-tab",
   },

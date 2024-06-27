@@ -6,6 +6,7 @@ import { setComposeEmail } from "@/Redux/Reducers/LetterBoxSlice";
 import { LetterBoxNavType } from "@/Types/LatterBoxType";
 
 const EmailLeftSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
+
   const {composeEmail} = useAppSelector((state)=>state.letterBox)
   const dispatch = useAppDispatch()
 
@@ -15,7 +16,7 @@ const EmailLeftSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
         <CardBody>
           <div className="email-app-sidebar">
             <Button color="primary" className="emailbox" onClick={()=>dispatch(setComposeEmail(!composeEmail))} >
-              <i className="fa fa-plus" />{ComposeEmail}
+              <i className="fa fa-plus" />{'Ajouter un programme'}
             </Button>
             <EmailNavMenu navId={navId} setNavId={setNavId} />
           </div>

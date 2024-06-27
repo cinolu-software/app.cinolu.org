@@ -7,8 +7,9 @@ import AddLabel from "./AddLabel";
 import { LetterBoxNavType } from "@/Types/LatterBoxType";
 
 const EmailNavMenu: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
-  const {inboxEmail} = useAppSelector((state)=>state.letterBox)
-  let starBadges = inboxEmail.filter((data)=> data.star === true && 1)
+
+  const {inboxEmail} = useAppSelector((state)=>state.letterBox);
+  let starBadges = inboxEmail.filter((data)=> data.star === true && 1);
 
   return (
     <Nav pills tabs className="main-menu email-category border-0">
@@ -18,12 +19,12 @@ const EmailNavMenu: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
             <SVG className={`stroke-icon ${data.color ? `stroke-${data.color}` : ""}`} iconId={data.icon} />
             <div>
               {data.title}
-              {data.badge && <Badge color="light-primary">{data.title === Inbox ? inboxEmail.length : starBadges.length}</Badge>}
+              {data.badge && <Badge color="light-primary">{data.title === 'L-Impact' ? inboxEmail.length : starBadges.length}</Badge>}
             </div>
           </NavLink>
         </NavItem>
       ))}
-      <AddLabel />
+      {/*<AddLabel />*/}
     </Nav>
   );
 };

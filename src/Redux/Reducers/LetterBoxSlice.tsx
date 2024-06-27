@@ -1,6 +1,6 @@
 import { InboxEmailData } from '@/Data/Application/LetterBox';
 import { InitialStateType } from '@/Types/LatterBoxType';
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: InitialStateType = {
     modal : false,
@@ -17,10 +17,10 @@ const LetterBoxSlice = createSlice({
   initialState,
   reducers: {
     setModal:(state,action)=>{
-        state.modal = action.payload
+        state.modal = action.payload;
     },
     setComposeEmail : (state,action)=>{
-        state.composeEmail = action.payload
+        state.composeEmail = action.payload;
     },
     handleEnvelope :(state,action) => {
         state.faIcon = action.payload

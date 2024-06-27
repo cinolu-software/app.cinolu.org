@@ -8,6 +8,7 @@ const EmailSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
   const [open, setOpen] = useState(false);
 
   return (
+
     <Col xxl="3" xl="4" className="box-col-12">
       <div className="md-sidebar">
         <Button color="primary" className="md-sidebar-toggle" href={Href} onClick={() => setOpen(!open)}>{EmailFilter}</Button>
@@ -16,6 +17,7 @@ const EmailSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
         </div>
       </div>
     </Col>
+
   );
 };
 

@@ -6,9 +6,13 @@ import { CommonDataType } from '@/Types/LatterBoxType';
 import { Badge, Input, Label } from 'reactstrap';
 
 const InboxEmailContent :React.FC<CommonDataType> = ({data,ids}) => {
+
   const {faIcon } = useAppSelector((state) => state.letterBox);
+
   const dispatch = useAppDispatch()
+
   const handleValue= ()=> dispatch(handleInterview(true))
+
   const handleRemoveEmail = (id:number) => {
     dispatch(removeItems(id));    
   }
@@ -16,10 +20,6 @@ const InboxEmailContent :React.FC<CommonDataType> = ({data,ids}) => {
     return (
       <>
         <div className="inbox-user">
-          <div className="form-check form-check-inline m-0">
-            <Input className={`checkbox-${data.color}`} name="emailCheckbox" id={`emailCheckbox${ids}`} type="checkbox" />
-            <Label check for={`emailCheckbox${ids}`} />
-          </div>
           <div onClick={() => dispatch(addToFavorites(data))}>
             <SVG className={`important-mail ${data.star ? "active" : ""}`} iconId="fill-star"/>
           </div>

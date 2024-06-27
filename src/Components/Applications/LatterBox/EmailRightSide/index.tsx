@@ -11,10 +11,11 @@ import PrivateContent from "./PrivateContent";
 import SupportContent from "./SupportContent";
 import AddLabelModal from "./AddLabelModal";
 import InterviewMail from "./InterviewMail";
-import { useAppSelector } from "../../../../Redux/Hooks";
+import { useAppSelector } from "@/Redux/Hooks";
 import { LetterBoxNavContentType } from "@/Types/LatterBoxType";
 
 const EmailRightSide: React.FC<LetterBoxNavContentType> = ({ navId }) => {
+
   const { interviewEmail } = useAppSelector((state) => state.letterBox);
 
   return (

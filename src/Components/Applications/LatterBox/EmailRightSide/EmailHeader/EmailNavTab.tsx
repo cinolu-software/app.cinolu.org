@@ -5,9 +5,11 @@ import { EmailNavTabs } from "@/Data/Application/LetterBox";
 import SVG from "@/CommonComponent/SVG";
 
 const EmailNavTab = () => {
+
   const [navId,setNavId] = useState("pills-important-tab")
 
   return (
+
     <Nav className="email-tabs" id="email-content-tab">
       {EmailNavTabs.map((data, i) => (
         <NavItem key={i}>
@@ -18,6 +20,7 @@ const EmailNavTab = () => {
         </NavItem>
       ))}
     </Nav>
+
   );
 };
 

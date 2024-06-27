@@ -10,6 +10,7 @@ import { addNewEmail, setComposeEmail, setEmailValidation } from "@/Redux/Reduce
 import Link from "next/link";
 
 const ComposeEmailModal = () => {
+
   const [ccShow,setCcShow] = useState(false);
   const [bccShow,setBccShow] = useState(false)
   const {composeEmail,emailValidation} = useAppSelector((state)=>state.letterBox)
