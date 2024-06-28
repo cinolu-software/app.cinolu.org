@@ -7,6 +7,10 @@ import LetterBoxSlice from "./Reducers/LetterBoxSlice";
 import ContactSlice from "./Reducers/ContactSlice";
 import ProductSlice from "./Reducers/ProductSlice";
 
+import UserAdminSlice from "./Reducers/userSlice/AdminSlice";
+import UserCoachSlice from "./Reducers/userSlice/CoachSlice";
+
+
 const Store = configureStore({
   reducer: {
     layout: LayoutSlice,
@@ -15,8 +19,12 @@ const Store = configureStore({
     letterBox: LetterBoxSlice,
     contact: ContactSlice,
     product: ProductSlice,
-    auth: AuthSlice
+
+    userAdmin: UserAdminSlice,
+    userCoach: UserCoachSlice,
+    auth: AuthSlice,
   },
+
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,

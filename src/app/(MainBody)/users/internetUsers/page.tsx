@@ -3,8 +3,9 @@
 import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
 import React from "react";
 
-const ProductList = () => {
+const InternetUsers = () => {
+
     return <ProductListContainer/>
 };
 
-export default ProductList;
+export default InternetUsers;

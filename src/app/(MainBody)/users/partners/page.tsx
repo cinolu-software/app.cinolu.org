@@ -3,8 +3,8 @@
 import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
 import React from "react";
 
-const ProductList = () => {
+const Partners = () => {
     return <ProductListContainer/>
 };
 
-export default ProductList;
+export default Partners;

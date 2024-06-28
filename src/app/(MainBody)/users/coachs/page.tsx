@@ -1,10 +1,13 @@
 'use client';
 
-import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
+import CoachListContainer from "@/Components/Applications/TabAdmin/CoachList";
+
 import React from "react";
 
-const ProductList = () => {
-    return <ProductListContainer/>
+const Coachs = () => {
+
+    return <CoachListContainer/>
+
 };
 
-export default ProductList;
+export default Coachs;
