@@ -1,10 +1,8 @@
-import { ProductItemInterface, ProductSliceProp } from "@/Types/Users/Coachs/CoachType";
+import { ProductItemInterface, ProductSliceProp } from "@/Types/Users/Admins/AdminType";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import axios from "axios";
-
-
 
 const initialState :ProductSliceProp = {
     filterToggle: false,
@@ -17,8 +15,8 @@ export const fetchProductApiData = createAsyncThunk<ProductItemInterface[], void
     return response.data;
 });
 
-const UserCoachSlice = createSlice({
-    name: "UserCoachSlice",
+const MembersSlice = createSlice({
+    name: "MembersSlice",
     initialState,
     reducers: {
         setFilterToggle: (state) => {
@@ -32,6 +30,6 @@ const UserCoachSlice = createSlice({
     },
 });
 
-export const { setFilterToggle } = UserCoachSlice.actions;
+export const { setFilterToggle } = MembersSlice.actions;
 
-export default UserCoachSlice.reducer;
+export default MembersSlice.reducer;

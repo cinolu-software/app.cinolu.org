@@ -4,7 +4,7 @@ import { setFilterToggle } from "@/Redux/Reducers/userSlice/CoachSlice";
 import Link from "next/link";
 import { Filter } from "react-feather";
 
-export const MembersListFilterHeader = () => {
+export const InternetUserListFilterHeader = () => {
   
   const { filterToggle } = useAppSelector((state) => state.product);
   const dispatch = useAppDispatch();
@@ -23,4 +23,5 @@ export const MembersListFilterHeader = () => {
       </Link>
     </div>
   );
+
 };

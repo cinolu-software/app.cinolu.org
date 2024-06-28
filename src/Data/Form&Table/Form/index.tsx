@@ -2344,11 +2344,11 @@ export const SelectAmountData = [
 export const VerticalBoxData = [
     {
         title: "Tivo",
-        details: "2-3 Members",
+        details: "2-3 MembersList",
     },
     {
         title: "Cuba",
-        details: "4-5 Members",
+        details: "4-5 MembersList",
     },
     {
         title: "Multikart",

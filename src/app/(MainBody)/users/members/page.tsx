@@ -1,10 +1,10 @@
 'use client';
 
-import ProductListContainer from "@/Components/Applications/Ecommerce/ProductList";
+import MembersListContainer from "../../../../Components/Applications/TabAdmin/MembersList";
 import React from "react";
 
 const Members = () => {
-    return <ProductListContainer/>
+    return <MembersListContainer/>
 };
 
 export default Members;
