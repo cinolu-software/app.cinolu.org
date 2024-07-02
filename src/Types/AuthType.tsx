@@ -1,5 +1,8 @@
 import { ChangeEvent } from "react";
 
+
+
+
 export interface Role{
   id: number;
   name: string;
@@ -54,7 +57,6 @@ export interface AuthError {
   error: string;
   statusCode: number;
 }
-
 
 export interface LoginSubmitProp {
   email: string;

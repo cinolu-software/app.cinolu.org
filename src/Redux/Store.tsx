@@ -14,9 +14,10 @@ import PartnersSlice from "./Reducers/userSlice/PartnersSlice";
 import InternetUsersSlice from "./Reducers/userSlice/InternetUsersSlice";
 
 
-
 const Store = configureStore({
+
   reducer: {
+
     layout: LayoutSlice,
     headerBookMark: HeaderBookmarkSlice,
     themeCustomizer: ThemeCustomizerSlice,
@@ -30,6 +31,7 @@ const Store = configureStore({
     partners: PartnersSlice,
     internetUsers: InternetUsersSlice,
     auth: AuthSlice,
+
   },
 
   middleware: getDefaultMiddleware =>
