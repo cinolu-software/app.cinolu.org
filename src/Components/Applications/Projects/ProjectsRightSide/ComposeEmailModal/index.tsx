@@ -50,7 +50,7 @@ const ComposeEmailModal = () => {
               </Col>
               <Col sm="10">
                 <input className={`form-control ${emailValidation && `${errors.userEmail ? "is-invalid":"is-valid"}`}`} type="email" {...register("userEmail", { required: true })} autoComplete="off"/>
-                <div className="add-bcc">
+                <div className="add-bcc">Handler
                   <div className="d-flex gap-2">
                     <Link className="btn" href={Href} onClick={()=>setCcShow(!ccShow)} > Cc</Link>
                     <Link className="btn" href={Href} onClick={()=>setBccShow(!bccShow)}> Bcc </Link>

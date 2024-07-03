@@ -6,6 +6,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState: InitialStateType = {
     modal : false,
     composeEmail : false,
+    modalCreateCategory: false,
     faIcon :false,
     page : false,
     interviewEmail : false,
@@ -27,6 +28,10 @@ const ProjectSlice = createSlice({
     setComposeEmail : (state,action)=>{
         state.composeEmail = action.payload;
     },
+
+    setModalCreateCategory : (state, action) => {
+        state.modalCreateCategory = action.payload;
+      },
 
     handleEnvelope :(state,action) => {
         state.faIcon = action.payload
@@ -76,6 +81,6 @@ const ProjectSlice = createSlice({
   }
 });
 
-export const {setModal,setComposeEmail,setPage,handleEnvelope,handleInterview,removeItems,addToFavorites,removeFromFavorite,setEmailValidation,addNewEmail} = ProjectSlice.actions;
+export const {setModal,setComposeEmail,setModalCreateCategory,setPage,handleEnvelope,handleInterview,removeItems,addToFavorites,removeFromFavorite,setEmailValidation,addNewEmail} = ProjectSlice.actions;
 
 export default ProjectSlice.reducer;

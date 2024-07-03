@@ -1,6 +1,7 @@
 export interface InitialStateType {
     modal: boolean;
     composeEmail: boolean;
+    modalCreateCategory : boolean;
     faIcon: boolean;
     interviewEmail: boolean;
     page?: boolean;
