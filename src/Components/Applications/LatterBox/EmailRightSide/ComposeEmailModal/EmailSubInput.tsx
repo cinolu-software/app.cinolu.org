@@ -2,6 +2,7 @@ import { EmailSubInputType } from "@/Types/LatterBoxType";
 import { Col, FormGroup, Input, Label, Row } from "reactstrap";
 
 const EmailSubInput :React.FC<EmailSubInputType> = ({ccShow,bccShow}) => {
+
   return (
     <>
       <FormGroup>

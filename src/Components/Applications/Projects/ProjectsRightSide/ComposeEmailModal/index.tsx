@@ -5,16 +5,19 @@ import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import EmailSubInput from "./EmailSubInput";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { AddNewEmailInterFace } from "@/Types/LatterBoxType";
-import { addNewEmail, setComposeEmail, setEmailValidation } from "@/Redux/Reducers/LetterBoxSlice";
+import { AddNewEmailInterFace } from "@/Types/Projects/ProjectsType";
+import { addNewEmail, setComposeEmail, setEmailValidation } from "@/Redux/Reducers/projectSlice/projectSlice";
 import Link from "next/link";
 
 const ComposeEmailModal = () => {
 
   const [ccShow,setCcShow] = useState(false);
-  const [bccShow,setBccShow] = useState(false)
-  const {composeEmail,emailValidation} = useAppSelector((state)=>state.letterBox)
+  const [bccShow,setBccShow] = useState(false);
+
+  const {composeEmail,emailValidation} = useAppSelector((state)=>state.project);
+
   const dispatch = useAppDispatch();
+
   const {register,handleSubmit,formState: { errors },reset} = useForm<AddNewEmailInterFace>();
 
   const onSubmitForm:SubmitHandler<AddNewEmailInterFace> = (data) => {
@@ -25,7 +28,7 @@ const ComposeEmailModal = () => {
   };
 
   return (
-      
+
     <Modal isOpen={composeEmail} className={`${composeEmail ? "show" : ""}`} size="lg"  id="compose_mail" >
       <ModalHeader toggle={()=>dispatch(setComposeEmail(false))}> {ComposeMessage} </ModalHeader>
       <ModalBody className="compose-modal">
@@ -79,7 +82,9 @@ const ComposeEmailModal = () => {
         </Form>
       </ModalBody>
     </Modal>
+
   );
+
 };
 
 export default ComposeEmailModal;

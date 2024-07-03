@@ -2,6 +2,7 @@ import { InboxEmailData } from '@/Data/Application/Projects';
 import { InitialStateType } from '@/Types/Projects/ProjectsType';
 import { createSlice } from '@reduxjs/toolkit';
 
+
 const initialState: InitialStateType = {
     modal : false,
     composeEmail : false,
@@ -13,40 +14,52 @@ const initialState: InitialStateType = {
 };
 
 const ProjectSlice = createSlice({
+
   name: "Project",
   initialState,
+
   reducers : {
+
     setModal:(state,action)=>{
         state.modal = action.payload;
     },
+
     setComposeEmail : (state,action)=>{
         state.composeEmail = action.payload;
     },
+
     handleEnvelope :(state,action) => {
         state.faIcon = action.payload
     },
+
     handleInterview: (state,action) => {
         state.interviewEmail = action.payload
     },
+
     setPage: (state,action) => {
         state.page = action.payload
     },
+
     removeItems: (state, action) => {
         state.inboxEmail = state.inboxEmail?.filter((data) => data.id !== action.payload);
     },
+
     addToFavorites :(state, action) => {
         if(action.payload.star === false){
             state.inboxEmail = state.inboxEmail.map((item)=>(item.id === action.payload.id) ? {...item,star:true}:item)
-          }else{
+        }else{
             state.inboxEmail = state.inboxEmail.map((item)=>(item.id === action.payload.id) ? {...item,star:false}:item)
-          }
+        }
     },
+
     removeFromFavorite : (state,action) => {
         state.inboxEmail = state.inboxEmail.map((data) => (data.id === action.payload.id ? { ...data, star: false } : data));
     },
+
     setEmailValidation: (state,action) => {
         state.emailValidation = action.payload
     },
+
     addNewEmail: (state, action) => {
         const emailTemp = {
           id: state.inboxEmail.length + 1,

@@ -4,6 +4,7 @@ import EmailSidebar from "./EmailSidebar";
 import EmailRightSide from "./EmailRightSide";
 
 const LatterBoxContainer = () => {
+
   const [navId, setNavId]= useState("1");
 
   return (

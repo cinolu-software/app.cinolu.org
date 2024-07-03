@@ -1,4 +1,5 @@
 export class ConfigDB {
+
     static data = {
       settings: {
         layout_type: 'ltr',
@@ -14,5 +15,6 @@ export class ConfigDB {
         mix_background_layout: '',
       },
     };
+
   }
   export default ConfigDB;
