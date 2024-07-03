@@ -1,6 +1,6 @@
 import { DeliveryFoodApp, NFTillustrationPackage, PodcastlandingPage } from "@/Constant";
 import { ApexOptions } from "apexcharts";
-import moment from "moment"
+import moment from "moment";
 
 const primary = "var(--theme-default)";
 const secondary = "var(--theme-secondary)";

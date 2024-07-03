@@ -66,6 +66,7 @@ export const MenuList: MenuItem [] | undefined = [
         type: "link",
         lanClass: "lan-6",
         active: false,
+        path: "/projects"
 
       },
     ],

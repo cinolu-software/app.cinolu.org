@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+
 import HeaderBookmarkSlice from "./Reducers/HeaderBookmarkSlice";
 import LayoutSlice from "./Reducers/LayoutSlice";
 import ThemeCustomizerSlice from "./Reducers/ThemeCustomizerSlice";
@@ -12,11 +13,12 @@ import UserCoachSlice from "./Reducers/userSlice/CoachSlice";
 import MembersSlice from "./Reducers/userSlice/MembersSlice";
 import PartnersSlice from "./Reducers/userSlice/PartnersSlice";
 import InternetUsersSlice from "./Reducers/userSlice/InternetUsersSlice";
+import ProjectSlice from "./Reducers/projectSlice/projectSlice";
 
 
 const Store = configureStore({
 
-  reducer: {
+  reducer : {
 
     layout: LayoutSlice,
     headerBookMark: HeaderBookmarkSlice,
@@ -24,6 +26,8 @@ const Store = configureStore({
     letterBox: LetterBoxSlice,
     contact: ContactSlice,
     product: ProductSlice,
+
+    project : ProjectSlice,
 
     userAdmin: UserAdminSlice,
     userCoach: UserCoachSlice,
@@ -34,10 +38,8 @@ const Store = configureStore({
 
   },
 
-  middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+  middleware: getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
+
 });
 
 export default Store;
