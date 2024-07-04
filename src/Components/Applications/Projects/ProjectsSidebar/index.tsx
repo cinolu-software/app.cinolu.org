@@ -18,6 +18,8 @@ const ProjectSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
       </div>
     </Col>
   );
+
+
 };
 
 export default ProjectSidebar;

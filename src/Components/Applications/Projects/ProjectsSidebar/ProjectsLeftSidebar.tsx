@@ -1,12 +1,12 @@
 import { Button, Card, CardBody } from "reactstrap";
 import ProjectsNavMenu from "./ProjectsNavMenu";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setComposeEmail } from "@/Redux/Reducers/projectSlice/projectSlice";
+import { setModalCreateCategory } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { LetterBoxNavType } from "@/Types/Projects/ProjectsType";
 
 const ProjectsLeftSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
 
-  const {composeEmail} = useAppSelector((state)=>state.project);
+  const {modalCreateCategory} = useAppSelector((state)=>state.project);
 
 
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ const ProjectsLeftSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) =>
       <Card>
         <CardBody>
           <div className="email-app-sidebar">
-            <Button color="primary" className="emailbox" onClick={()=>dispatch(setComposeEmail(!composeEmail))} >
+            <Button color="primary" className="emailbox" onClick={()=>dispatch(setModalCreateCategory(!modalCreateCategory))} >
               <i className="fa fa-plus"/>{'Ajouter une Cathégorie'}
             </Button>
             <ProjectsNavMenu navId={navId} setNavId={setNavId} />

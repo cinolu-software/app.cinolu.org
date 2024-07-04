@@ -4,8 +4,9 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModal } from "@/Redux/Reducers/LetterBoxSlice";
 
 const AddLabelModal = () => {
-  const {modal} = useAppSelector((state)=>state.letterBox)
-  const dispatch = useAppDispatch()
+
+  const {modal} = useAppSelector((state)=>state.letterBox);
+  const dispatch = useAppDispatch();
 
   return (
     <Modal isOpen={modal} size="lg" className={`${modal ? "show" : ""}`} id="label-pill-modal" >

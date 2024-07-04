@@ -1,6 +1,6 @@
 import { Card, Col, TabContent } from "reactstrap";
 import EmailHeader from "./EmailHeader";
-import ComposeEmailModal from "./ComposeEmailModal";
+import CreateCategoryModal from "./CreateCategoryModal";
 import SentContent from "./SentContent";
 import InboxContent from "./InboxContent";
 import StarredContent from "./StarredContent";
@@ -22,7 +22,7 @@ const ProjectRightSide: React.FC<LetterBoxNavContentType> = ({ navId }) => {
     <Col xxl="9" xl="8" className="box-col-12">
       <div className="email-right-aside">
         <Card className={`email-body email-list ${interviewEmail ? "hide" : "show"}`}>
-          <ComposeEmailModal />
+          {/*<CreateCategoryModal />*/}
           <EmailHeader />
           <TabContent activeTab={navId} id="email-pills-tabContent">
             <InboxContent />

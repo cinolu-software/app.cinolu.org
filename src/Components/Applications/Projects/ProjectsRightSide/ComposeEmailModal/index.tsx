@@ -28,7 +28,6 @@ const ComposeEmailModal = () => {
   };
 
   return (
-
     <Modal isOpen={composeEmail} className={`${composeEmail ? "show" : ""}`} size="lg"  id="compose_mail" >
       <ModalHeader toggle={()=>dispatch(setComposeEmail(false))}> {ComposeMessage} </ModalHeader>
       <ModalBody className="compose-modal">
@@ -82,9 +81,7 @@ const ComposeEmailModal = () => {
         </Form>
       </ModalBody>
     </Modal>
-
   );
-
 };
 
 export default ComposeEmailModal;
