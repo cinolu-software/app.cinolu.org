@@ -22,7 +22,7 @@ const ProjectRightSide: React.FC<LetterBoxNavContentType> = ({ navId }) => {
     <Col xxl="9" xl="8" className="box-col-12">
       <div className="email-right-aside">
         <Card className={`email-body email-list ${interviewEmail ? "hide" : "show"}`}>
-          {/*<CreateCategoryModal />*/}
+          <CreateCategoryModal />
           <EmailHeader />
           <TabContent activeTab={navId} id="email-pills-tabContent">
             <InboxContent />

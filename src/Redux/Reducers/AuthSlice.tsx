@@ -1,31 +1,35 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios, { apiBaseUrl } from "@/services/axios";
+import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import axios, {apiBaseUrl} from "@/services/axios";
 import Cookies from "js-cookie";
-import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload, UpdateProfilePassword } from "@/Types/AuthType";
-import { RootState } from "@/Redux/Store";
+import {AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload, UpdateProfilePassword} from "@/Types/AuthType";
+import {RootState} from "@/Redux/Store";
 
-export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: string }>("auth/login", async (data, { rejectWithValue }) => {
-        try {
-            const response = await axios.post(`${apiBaseUrl}/auth/login`, data);
-            Cookies.set("cinolu_token", JSON.stringify(response.data));
-            return response.data;
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
-            return rejectWithValue(errorMessage);
-        }
-    });
+export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, {
+    rejectValue: string
+}>("auth/login", async (data, {rejectWithValue}) => {
+    try {
+        const response = await axios.post(`${apiBaseUrl}/auth/login`, data);
+        Cookies.set("cinolu_token", JSON.stringify(response.data));
+        return response.data;
+    } catch (error: any) {
+        const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
+        return rejectWithValue(errorMessage);
+    }
+});
 
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>("auth/logout", async (_, thunkAPI) => {
-        try {
-            await axios.post(`${apiBaseUrl}/auth/logout`, {});
-            Cookies.remove("cinolu_token");
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la déconnexion";
-            return thunkAPI.rejectWithValue(errorMessage);
-        }
-    });
+    try {
+        await axios.post(`${apiBaseUrl}/auth/logout`, {});
+        Cookies.remove("cinolu_token");
+    } catch (error: any) {
+        const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la déconnexion";
+        return thunkAPI.rejectWithValue(errorMessage);
+    }
+});
 
-export const checkAuth = createAsyncThunk<AuthResponse | null, void, { rejectValue: string }>("auth/checkAuth", async (_, { rejectWithValue }) => {
+export const checkAuth = createAsyncThunk<AuthResponse | null, void, {
+    rejectValue: string
+}>("auth/checkAuth", async (_, {rejectWithValue}) => {
     try {
         const token = Cookies.get("cinolu_token");
         if (token) {
@@ -40,22 +44,30 @@ export const checkAuth = createAsyncThunk<AuthResponse | null, void, { rejectVal
     }
 });
 
-export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, { rejectValue: string }>("auth/updateProfile", async (profileData, { rejectWithValue }) => {
+export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, {
+    rejectValue: string
+}>("auth/updateProfile", async (profileData, {rejectWithValue}) => {
     try {
         const response = await axios.patch(`${apiBaseUrl}/auth/profile`, profileData);
         return response.data;
     } catch (error: any) {
-        const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
+        const errorMessage = error.response?.data?.message?.map((err: {
+            message: string
+        }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
         return rejectWithValue(errorMessage);
     }
 });
 
-export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePassword, { rejectValue: string }>("auth/updatePassword", async (passwordData, { rejectWithValue }) => {
+export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePassword, {
+    rejectValue: string
+}>("auth/updatePassword", async (passwordData, {rejectWithValue}) => {
     try {
         const response = await axios.patch(`${apiBaseUrl}/auth/update-password`, passwordData);
         return response.data;
     } catch (error: any) {
-        const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du mot de passe";
+        const errorMessage = error.response?.data?.message?.map((err: {
+            message: string
+        }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du mot de passe";
         return rejectWithValue(errorMessage);
     }
 });
@@ -164,7 +176,7 @@ const authSlice = createSlice({
     },
 });
 
-export const { setAuthenticated, setUser } = authSlice.actions;
+export const {setAuthenticated, setUser} = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
 export const selectIsAuthenticated = (state: RootState) => state.auth.isAuthenticated;

@@ -20,7 +20,6 @@ const StaticBackdropModal = () => {
           <CommonModal backdrop="static"  modalBodyClassName="social-profile text-start" isOpen={staticModal} toggle={staticModalToggle}>
             <div className="modal-toggle-wrapper">
               <h3>{MofiLogin}</h3>
-              <p>Fill in your information below to continue.</p>
               <StaticForm staticModalToggle={staticModalToggle} />
             </div>
           </CommonModal>
