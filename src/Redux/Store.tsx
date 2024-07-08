@@ -14,6 +14,8 @@ import MembersSlice from "./Reducers/userSlice/MembersSlice";
 import PartnersSlice from "./Reducers/userSlice/PartnersSlice";
 import InternetUsersSlice from "./Reducers/userSlice/InternetUsersSlice";
 import ProjectSlice from "./Reducers/projectSlice/projectSlice";
+import CategorySlice from "./Reducers/projectSlice/projectCategorySlice";
+import StatusSlice from "./Reducers/projectSlice/projectStatusSlice";
 
 
 const Store = configureStore({
@@ -28,6 +30,8 @@ const Store = configureStore({
     product: ProductSlice,
 
     project : ProjectSlice,
+    projectCategory: CategorySlice,
+    projectStatus: StatusSlice,
 
     userAdmin: UserAdminSlice,
     userCoach: UserCoachSlice,

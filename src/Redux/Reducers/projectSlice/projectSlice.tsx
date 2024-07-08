@@ -1,11 +1,11 @@
 import { InboxEmailData } from '@/Data/Application/Projects';
 import { InitialStateType } from '@/Types/Projects/ProjectsType';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios, {apiBaseUrl} from "@/services/axios";
 
 
 const initialState: InitialStateType = {
     modal : false,
-    composeEmail : false,
     modalCreateCategory: false,
     faIcon :false,
     page : false,
@@ -13,6 +13,11 @@ const initialState: InitialStateType = {
     inboxEmail : InboxEmailData,
     emailValidation: false,
 };
+
+export const fetchCategory = createAsyncThunk("", async () => {
+    const response = await axios.get(`${apiBaseUrl}/categories`);
+    return response.data;
+});
 
 const ProjectSlice = createSlice({
 
@@ -23,10 +28,6 @@ const ProjectSlice = createSlice({
 
     setModal:(state,action)=>{
         state.modal = action.payload;
-    },
-
-    setComposeEmail : (state,action)=>{
-        state.composeEmail = action.payload;
     },
 
     setModalCreateCategory : (state, action) => {
@@ -79,8 +80,9 @@ const ProjectSlice = createSlice({
         state.inboxEmail = [emailTemp, ...state.inboxEmail];
       },
   }
+
 });
 
-export const {setModal,setComposeEmail,setModalCreateCategory,setPage,handleEnvelope,handleInterview,removeItems,addToFavorites,removeFromFavorite,setEmailValidation,addNewEmail} = ProjectSlice.actions;
+export const {setModal,setModalCreateCategory,setPage,handleEnvelope,handleInterview,removeItems,addToFavorites,removeFromFavorite,setEmailValidation,addNewEmail} = ProjectSlice.actions;
 
 export default ProjectSlice.reducer;

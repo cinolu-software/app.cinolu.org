@@ -1,6 +1,18 @@
+
+export interface Category {
+    id: number;
+    name: string;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface CreateCategory{
+    name: string;
+}
+
+
 export interface InitialStateType {
     modal: boolean;
-    composeEmail: boolean;
     modalCreateCategory : boolean;
     faIcon: boolean;
     interviewEmail: boolean;
@@ -8,6 +20,13 @@ export interface InitialStateType {
     inboxEmail: InboxEmailType[];
     emailValidation: boolean;
 }
+
+export interface InitialStateCategoryType {
+    categoriesData : Category[];
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null
+}
+
 
 export interface InboxEmailType {
     id: number;
@@ -215,11 +234,13 @@ export interface TabContentProp{
 interface ItemsArrays {
     item: string;
 }
+
 interface ArrayType {
     btnColor: string;
     btnText: string;
     items: ItemsArrays[];
 }
+
 export interface SplitButtonDropdownProp {
     item: ArrayType;
 }
