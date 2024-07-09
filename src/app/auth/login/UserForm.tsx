@@ -12,6 +12,7 @@ import { login, selectStatusLogin, selectErrorLogin } from "@/Redux/Reducers/Aut
 import { AppDispatch } from "@/Redux/Store";
 
 const UserForm = () => {
+
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,6 +22,7 @@ const UserForm = () => {
   const router = useRouter();
 
   useEffect(() => {
+
     if (loginStatus === 'succeeded') {
       toast.success(
           <p className="text-white tx-16 mb-0">{"Connexion effectuée avec succès"}</p>,
@@ -32,9 +34,8 @@ const UserForm = () => {
             theme: "colored",
           }
       );
-      setTimeout(() => {
+
         router.push('/dashboard');
-      }, 1000);
     }
     if (loginStatus === 'failed') {
       toast.error(
@@ -48,8 +49,8 @@ const UserForm = () => {
           }
       );
 
-      console.log(loginErrors)
     }
+
   }, [loginStatus, loginErrors, router]);
 
   const formSubmitHandle = async (e: React.FormEvent) => {

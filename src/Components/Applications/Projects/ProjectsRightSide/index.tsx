@@ -13,6 +13,7 @@ import AddLabelModal from "./AddLabelModal";
 import InterviewMail from "./InterviewMail";
 import { useAppSelector } from "@/Redux/Hooks";
 import { LetterBoxNavContentType } from "@/Types/Projects/ProjectsType";
+import {ToastContainer} from "react-toastify";
 
 const ProjectRightSide: React.FC<LetterBoxNavContentType> = ({ navId }) => {
 
@@ -35,6 +36,7 @@ const ProjectRightSide: React.FC<LetterBoxNavContentType> = ({ navId }) => {
             <SupportContent />
             <AddLabelModal />
           </TabContent>
+          <ToastContainer/>
         </Card>
         <InterviewMail />
       </div>

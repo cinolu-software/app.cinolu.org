@@ -18,7 +18,7 @@ const ProjectsLeftSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) =>
         <CardBody>
           <div className="email-app-sidebar">
             <Button color="primary" className="emailbox" onClick={()=>dispatch(setModalCreateCategory(!modalCreateCategory))} >
-              <i className="fa fa-plus"/>{'Ajouter une Cathégorie'}
+              <i className="fa fa-plus"/>{'Ajouter une Catégorie'}
             </Button>
             <ProjectsNavMenu navId={navId} setNavId={setNavId} />
           </div>

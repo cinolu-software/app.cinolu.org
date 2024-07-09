@@ -11,7 +11,7 @@ const ProjectSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
   return (
     <Col xxl="3" xl="4" className="box-col-12">
       <div className="md-sidebar">
-        <Button color="primary" className="md-sidebar-toggle" href={Href} onClick={() => setOpen(!open)}>{EmailFilter}</Button>
+        <Button color="primary" className="md-sidebar-toggle" href={Href} onClick={() => setOpen(!open)}>{"Catégorie"}</Button>
         <div className={`md-sidebar-aside job-left-aside custom-scrollbar ${open ? "open" : ""}`}>
           <ProjectsLeftSidebar navId={navId} setNavId={setNavId} />
         </div>

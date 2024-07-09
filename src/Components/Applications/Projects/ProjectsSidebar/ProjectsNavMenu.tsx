@@ -22,7 +22,7 @@ const ProjectsNavMenu: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
           </NavLink>
         </NavItem>
       ))}
-      {/*<AddLabel />*/}
+
     </Nav>
   );
 
