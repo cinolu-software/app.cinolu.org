@@ -17,23 +17,7 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
         await dispatch(createCategory(category));
-
-        if (categoryStatus === 'succeeded') {
-            toast.success(
-                <p className="text-white tx-16 mb-0">{"Catégorie créée avec succès"}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
-            staticModalToggle();
-        }
-
         if(categoryStatus === 'failed'){
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création de la catégorie"}</p>,
@@ -46,7 +30,6 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
                 }
             );
         }
-
     };
 
     return (

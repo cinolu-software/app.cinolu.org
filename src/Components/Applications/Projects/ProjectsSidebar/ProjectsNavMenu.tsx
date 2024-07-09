@@ -1,17 +1,36 @@
+import {useEffect} from "react";
 import SVG from "@/CommonComponent/SVG";
 import { LetterBoxSidebar } from "@/Data/Application/Projects";
 import { useAppSelector } from "@/Redux/Hooks";
 import { Badge, Nav, NavItem, NavLink } from "reactstrap";
-import { LetterBoxNavType } from "@/Types/Projects/ProjectsType";
+import { ProjectBoxNavType } from "@/Types/Projects/ProjectsType";
+import {selectTransformedCategoryData, selectCategoryStatus, selectOriginalCategoryData, fetchCategory} from "@/Redux/Reducers/projectSlice/projectCategorySlice";
+import {useSelector, useDispatch} from "react-redux";
 
-const ProjectsNavMenu: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
+
+const ProjectsNavMenu: React.FC<ProjectBoxNavType> = ({ navId, setNavId }) => {
 
   const {inboxEmail} = useAppSelector((state)=>state.letterBox);
+
+  const transformedCategoryData = useSelector(selectTransformedCategoryData);
+  const dispatch = useDispatch();
+
+  const status = useSelector(selectCategoryStatus);
+
   let starBadges = inboxEmail.filter((data)=> data.star === true && 1);
 
+  useEffect(()=>{
+    if(status === 'idle'){
+      dispatch(fetchCategory())
+    }
+  }, [])
+
+  console.log(transformedCategoryData)
+
   return (
+
     <Nav pills tabs className="main-menu email-category border-0">
-      {LetterBoxSidebar.map((data, i) => (
+      {transformedCategoryData.map((data, i) => (
         <NavItem key={i}>
           <NavLink className={`border-0 ${navId === data.id ? "active" : ""}`} onClick={() => setNavId(data.id)}>
             <SVG className={`stroke-icon ${data.color ? `stroke-${data.color}` : ""}`} iconId={data.icon} />
@@ -22,7 +41,6 @@ const ProjectsNavMenu: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
           </NavLink>
         </NavItem>
       ))}
-
     </Nav>
   );
 

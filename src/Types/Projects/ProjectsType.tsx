@@ -5,7 +5,13 @@ export interface Category {
     created_at: string;
     updated_at: string;
 }
-
+export interface TransformedCategory {
+    title: string;
+    icon: string;
+    id: string;
+    badge: boolean;
+    color: string;
+}
 export interface CreateCategory{
     name: string;
 }
@@ -22,10 +28,28 @@ export interface InitialStateType {
 }
 
 export interface InitialStateCategoryType {
-    categoriesData : Category[];
+    originalCategoriesData: Category[];
+    transformedCategoriesData: TransformedCategory[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null
 }
+
+export interface ProjectBoxNavType {
+    navId: string;
+    setNavId: (key: string) => void;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export interface InboxEmailType {
@@ -59,11 +83,6 @@ export interface EmailSubInputType {
 export interface CommonDataType {
     data: InboxEmailType;
     ids: number;
-}
-
-export interface LetterBoxNavType {
-    navId: string;
-    setNavId: (key: string) => void;
 }
 
 export interface LetterBoxNavContentType {
