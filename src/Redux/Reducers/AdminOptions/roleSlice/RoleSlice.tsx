@@ -7,7 +7,8 @@ const initialState: InitialStateRoleType = {
     originalRoleData: [],
     transformedRoleData: [],
     status: 'idle',
-    error: null
+    error: null,
+    isOpenModalCreateRole: false
 }
 
 const transformRole = (role: RoleType[]): TransformedRoleType[] => {
@@ -44,7 +45,11 @@ export const createRole = createAsyncThunk<RoleType, {name: string}>(
 const RoleSlice = createSlice({
     name: "roles",
     initialState,
-    reducers: {},
+    reducers: {
+        setModalCreateRole: (state, action) => {
+            state.isOpenModalCreateRole = action.payload;
+        }
+    },
     extraReducers: (builder)=>{
         builder
             .addCase(fetchRole.pending, (state)=>{
@@ -66,5 +71,7 @@ const RoleSlice = createSlice({
 export const selectRoleStatus = (state: RootState) => state.role.status;
 export const selectOriginalRoles = (state: RootState) => state.role.originalRoleData;
 export const selectTransformedRoles = (state: RootState) => state.role.transformedRoleData;
+export const selectErreur = (state: RootState) => state.role.error;
+export const {setModalCreateRole} = RoleSlice.actions;
 
 export default RoleSlice.reducer;

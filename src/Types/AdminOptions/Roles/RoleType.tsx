@@ -14,12 +14,13 @@ export interface InitialStateRoleType {
     originalRoleData: RoleType[];
     transformedRoleData: TransformedRoleType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    error: string | null
+    error: string | null,
+    isOpenModalCreateRole: boolean;
 }
 
-
-
-
+export interface CreateRole {
+    name: string;
+}
 
 export interface RoleListTableColumnType{
     image: string;
@@ -32,3 +33,6 @@ export interface RoleListTableNameType{
     image: string;
 }
 
+export interface StaticModalToggleProp {
+    staticModalToggle: () => void;
+}

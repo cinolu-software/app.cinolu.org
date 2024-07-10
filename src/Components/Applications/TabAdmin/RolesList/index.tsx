@@ -8,6 +8,7 @@ import { RoleHeader } from "./RoleList";
 import {useSelector, useDispatch} from "react-redux";
 import {selectRoleStatus, fetchRole, selectTransformedRoles} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 import {RoleListTableDataColumn} from "@/Data/Application/RolesData";
+import CreateRoleModal from "@/Components/Applications/TabAdmin/RolesList/CreateRoleModal";
 
 
 const RoleListContainer = () => {
@@ -36,6 +37,7 @@ const RoleListContainer = () => {
 
   return (
     <Container fluid>
+      <CreateRoleModal/>
       <Row>
         <Col sm="12">
           <Card>

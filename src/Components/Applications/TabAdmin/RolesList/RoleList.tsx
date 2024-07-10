@@ -1,20 +1,21 @@
-import { AddProduct } from "@/Constant";
+import {Button} from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFilterToggle } from "@/Redux/Reducers/userSlice/CoachSlice";
-import Link from "next/link";
-import { Filter } from "react-feather";
+import {setModalCreateRole} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+
+
 
 export const RoleHeader = () => {
-  
-  const { filterToggle } = useAppSelector((state) => state.product);
+
   const dispatch = useAppDispatch();
+  const {isOpenModalCreateRole} = useAppSelector((state) => state.role);
+
 
   return (
     <div>
-      <Link className="btn btn-primary" href={`/ecommerce/add_product`}>
+      <Button className="btn btn-primary" onClick={()=>dispatch(setModalCreateRole(!isOpenModalCreateRole))}>
         <i className="fa fa-plus" />
         Ajouter un rôle
-      </Link>
+      </Button>
     </div>
   );
 

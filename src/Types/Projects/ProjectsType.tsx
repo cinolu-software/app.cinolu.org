@@ -52,6 +52,8 @@ export interface ProjectBoxNavType {
 
 
 
+
+
 export interface InboxEmailType {
     id: number;
     image?: string;
