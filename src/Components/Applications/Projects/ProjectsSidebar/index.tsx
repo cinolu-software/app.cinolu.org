@@ -2,9 +2,9 @@ import { Button, Col } from "reactstrap";
 import { EmailFilter, Href } from "@/Constant";
 import { useState } from "react";
 import ProjectsLeftSidebar from "./ProjectsLeftSidebar";
-import { LetterBoxNavType } from "@/Types/Projects/ProjectsType";
+import { ProjectBoxNavType } from "@/Types/Projects/ProjectsType";
 
-const ProjectSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
+const ProjectSidebar: React.FC<ProjectBoxNavType> = ({ navId, setNavId }) => {
 
   const [open, setOpen] = useState(false);
 

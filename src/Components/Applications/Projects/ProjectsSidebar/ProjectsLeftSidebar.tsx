@@ -2,9 +2,9 @@ import { Button, Card, CardBody } from "reactstrap";
 import ProjectsNavMenu from "./ProjectsNavMenu";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalCreateCategory } from "@/Redux/Reducers/projectSlice/projectSlice";
-import { LetterBoxNavType } from "@/Types/Projects/ProjectsType";
+import { ProjectBoxNavType } from "@/Types/Projects/ProjectsType";
 
-const ProjectsLeftSidebar: React.FC<LetterBoxNavType> = ({ navId, setNavId }) => {
+const ProjectsLeftSidebar: React.FC<ProjectBoxNavType> = ({ navId, setNavId }) => {
 
   const {modalCreateCategory} = useAppSelector((state)=>state.project);
 

@@ -1,25 +1,38 @@
-import { SearchTableButton } from "@/Constant";
-import { ProductListTableData, ProductListTableDataColumn } from "@/Data/Application/UsersData/Partners";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
+
+
+import { AppDispatch } from "@/Redux/Store";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { CollapseFilterData } from "./CollapseFilterData";
 import { RoleHeader } from "./RoleList";
+import {useSelector, useDispatch} from "react-redux";
+import {selectRoleStatus, fetchRole, selectTransformedRoles} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+import {RoleListTableDataColumn} from "@/Data/Application/RolesData";
+
 
 const RoleListContainer = () => {
 
   const [filterText, setFilterText] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+  const status = useSelector(selectRoleStatus);
+  const transformedRoles = useSelector(selectTransformedRoles);
 
-  const filteredItems = ProductListTableData.filter((item) => item.category && item.category.toLowerCase().includes(filterText.toLowerCase()));
 
   const subHeaderComponentMemo = useMemo(() => {
     return (
       <div className="dataTables_filter d-flex align-items-center">
-        <Label className="me-2">{SearchTableButton}:</Label>
+        <Label className="me-2">{"Chercher"}:</Label>
         <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
       </div>
     );
   }, [filterText]);
+
+  useEffect(() => {
+    if(status === 'idle'){
+      dispatch(fetchRole())
+    }
+  }, []);
+
 
   return (
     <Container fluid>
@@ -32,7 +45,7 @@ const RoleListContainer = () => {
               </div>
               <div className="list-product">
                 <div className="table-responsive">
-                  <DataTable className="theme-scrollbar" data={filteredItems} columns={ProductListTableDataColumn} striped highlightOnHover pagination selectableRows subHeader subHeaderComponent={subHeaderComponentMemo} />
+                  <DataTable className="theme-scrollbar" data={transformedRoles} columns={RoleListTableDataColumn} striped highlightOnHover pagination selectableRows subHeader subHeaderComponent={subHeaderComponentMemo} />
                 </div>
               </div>
             </CardBody>

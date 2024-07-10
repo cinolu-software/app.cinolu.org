@@ -14,7 +14,7 @@ const transformRole = (role: RoleType[]): TransformedRoleType[] => {
     return role.map(r=>({
         id: r.id,
         name: r.name,
-        image: "",
+        image: "product_list/product-categories/phone.png",
         created_at: r.created_at,
         updated_at: r.updated_at,
     }));
@@ -41,7 +41,7 @@ export const createRole = createAsyncThunk<RoleType, {name: string}>(
 );
 
 
-const roleSlice = createSlice({
+const RoleSlice = createSlice({
     name: "roles",
     initialState,
     reducers: {},
@@ -63,4 +63,8 @@ const roleSlice = createSlice({
     }
 });
 
-// export const selectRoleStatus = (state: RootState) => state.
+export const selectRoleStatus = (state: RootState) => state.role.status;
+export const selectOriginalRoles = (state: RootState) => state.role.originalRoleData;
+export const selectTransformedRoles = (state: RootState) => state.role.transformedRoleData;
+
+export default RoleSlice.reducer;

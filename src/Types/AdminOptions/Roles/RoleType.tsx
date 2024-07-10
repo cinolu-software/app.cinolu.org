@@ -17,3 +17,18 @@ export interface InitialStateRoleType {
     error: string | null
 }
 
+
+
+
+
+export interface RoleListTableColumnType{
+    image: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+}
+export interface RoleListTableNameType{
+    name: string;
+    image: string;
+}
+

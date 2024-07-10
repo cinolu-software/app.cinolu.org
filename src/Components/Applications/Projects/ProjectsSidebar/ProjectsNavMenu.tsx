@@ -6,6 +6,7 @@ import { Badge, Nav, NavItem, NavLink } from "reactstrap";
 import { ProjectBoxNavType } from "@/Types/Projects/ProjectsType";
 import {selectTransformedCategoryData, selectCategoryStatus, selectOriginalCategoryData, fetchCategory} from "@/Redux/Reducers/projectSlice/projectCategorySlice";
 import {useSelector, useDispatch} from "react-redux";
+import {AppDispatch} from "@/Redux/Store";
 
 
 const ProjectsNavMenu: React.FC<ProjectBoxNavType> = ({ navId, setNavId }) => {
@@ -13,7 +14,7 @@ const ProjectsNavMenu: React.FC<ProjectBoxNavType> = ({ navId, setNavId }) => {
   const {inboxEmail} = useAppSelector((state)=>state.letterBox);
 
   const transformedCategoryData = useSelector(selectTransformedCategoryData);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const status = useSelector(selectCategoryStatus);
 
@@ -24,8 +25,6 @@ const ProjectsNavMenu: React.FC<ProjectBoxNavType> = ({ navId, setNavId }) => {
       dispatch(fetchCategory())
     }
   }, [])
-
-  console.log(inboxEmail)
 
   return (
 
