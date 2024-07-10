@@ -25,7 +25,7 @@ const ProjectsNavMenu: React.FC<ProjectBoxNavType> = ({ navId, setNavId }) => {
     }
   }, [])
 
-  console.log(transformedCategoryData)
+  console.log(inboxEmail)
 
   return (
 

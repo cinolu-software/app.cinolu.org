@@ -69,6 +69,16 @@ export const MenuList: MenuItem [] | undefined = [
         path: "/projects"
 
       },
+      {
+        title: "Rôle",
+        id: 3,
+        icon: "user",
+        type: "link",
+        lanClass: "lan-6",
+        active: false,
+        path: "/roles"
+
+      },
     ],
   }
 ];
