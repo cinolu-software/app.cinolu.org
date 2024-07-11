@@ -20,6 +20,7 @@ const RoleListTableName: React.FC<RoleListTableNameType> = ({image, name}) => {
             <p>{name}</p>
         </div>
     )
+
 }
 
 const RoleListTableAction: React.FC<{role: RoleType}>=({role})=>{

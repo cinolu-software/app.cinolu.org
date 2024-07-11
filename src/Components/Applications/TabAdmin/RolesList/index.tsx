@@ -9,6 +9,7 @@ import {selectRoleStatus, fetchRole, selectTransformedRoles} from "@/Redux/Reduc
 import {RoleListTableDataColumn} from "@/Data/Application/RolesData";
 import CreateRoleModal from "@/Components/Applications/TabAdmin/RolesList/CreateRoleModal";
 import UpdateRoleModal from "@/Components/Applications/TabAdmin/RolesList/UpdateRoleModal";
+import DeleteRoleModal from "@/Components/Applications/TabAdmin/RolesList/DeleteRoleModal";
 
 
 const RoleListContainer = () => {
@@ -39,6 +40,7 @@ const RoleListContainer = () => {
     <Container fluid>
       <CreateRoleModal/>
       <UpdateRoleModal/>
+      <DeleteRoleModal/>
       <Row>
         <Col sm="12">
           <Card>
@@ -48,7 +50,7 @@ const RoleListContainer = () => {
               </div>
               <div className="list-product">
                 <div className="table-responsive">
-                  <DataTable className="theme-scrollbar" data={transformedRoles} columns={RoleListTableDataColumn} striped highlightOnHover pagination selectableRows subHeader subHeaderComponent={subHeaderComponentMemo} />
+                  <DataTable className="theme-scrollbar" data={transformedRoles} columns={RoleListTableDataColumn} striped highlightOnHover pagination  subHeader subHeaderComponent={subHeaderComponentMemo} />
                 </div>
               </div>
             </CardBody>
