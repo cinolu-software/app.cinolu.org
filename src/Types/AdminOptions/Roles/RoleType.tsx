@@ -16,6 +16,9 @@ export interface InitialStateRoleType {
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null,
     isOpenModalCreateRole: boolean;
+    isOpenModalEditRole: boolean;
+    isOpenModalDeleteRole: boolean;
+    selectedRole: {} | null;
 }
 
 export interface CreateRole {

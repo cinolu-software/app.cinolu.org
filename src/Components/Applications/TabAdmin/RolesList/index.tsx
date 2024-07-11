@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useEffect } from "react";
 
-
 import { AppDispatch } from "@/Redux/Store";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
@@ -9,6 +8,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {selectRoleStatus, fetchRole, selectTransformedRoles} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 import {RoleListTableDataColumn} from "@/Data/Application/RolesData";
 import CreateRoleModal from "@/Components/Applications/TabAdmin/RolesList/CreateRoleModal";
+import UpdateRoleModal from "@/Components/Applications/TabAdmin/RolesList/UpdateRoleModal";
 
 
 const RoleListContainer = () => {
@@ -38,6 +38,7 @@ const RoleListContainer = () => {
   return (
     <Container fluid>
       <CreateRoleModal/>
+      <UpdateRoleModal/>
       <Row>
         <Col sm="12">
           <Card>
