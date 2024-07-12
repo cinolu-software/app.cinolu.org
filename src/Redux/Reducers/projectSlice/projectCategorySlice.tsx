@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-
 import axios, { apiBaseUrl } from "@/services/axios";
 import { InitialStateCategoryType, Category, TransformedCategory  } from "@/Types/Projects/ProjectsType";
 import {RootState} from "@/Redux/Store";

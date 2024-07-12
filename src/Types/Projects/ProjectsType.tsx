@@ -5,6 +5,7 @@ export interface Category {
     created_at: string;
     updated_at: string;
 }
+
 export interface TransformedCategory {
     title: string;
     icon: string;
@@ -12,6 +13,7 @@ export interface TransformedCategory {
     badge: boolean;
     color: string;
 }
+
 export interface CreateCategory{
     name: string;
 }
