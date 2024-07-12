@@ -24,8 +24,8 @@ const RoleListTableName: React.FC<RoleListTableNameType> = ({image, name}) => {
 }
 
 const RoleListTableAction: React.FC<{role: RoleType}>=({role})=>{
-    const dispatch = useDispatch();
 
+    const dispatch = useDispatch();
     const handleEdit = () => {
         dispatch(setModalEditRole({isOpen: true, role}));
     }

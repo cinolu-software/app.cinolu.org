@@ -4,6 +4,8 @@ export interface RoleType {
     name: string;
     created_at: string;
     updated_at: string;
+    selectedRole: {};
+    row: any;
 }
 
 export interface TransformedRoleType extends RoleType {

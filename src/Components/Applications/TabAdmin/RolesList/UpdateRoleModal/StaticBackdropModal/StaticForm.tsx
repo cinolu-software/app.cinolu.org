@@ -1,28 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Label, Row } from 'reactstrap';
-import {createRole, selectRoleStatus, selectErreur} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
-import {CreateRole, StaticModalToggleProp} from "@/Types/AdminOptions/Roles/RoleType";
+import { createRole, updateRole, selectRoleStatus, selectErreur } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+import {StaticModalToggleProp, RoleType, CreateRole} from "@/Types/AdminOptions/Roles/RoleType";
 import { RootState } from '@/Redux/Store';
-import {Flip, toast} from "react-toastify";
-import {useSelector, useDispatch} from "react-redux";
-import {AppDispatch} from "@/Redux/Store";
+import { Flip, toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "@/Redux/Store";
+import {useAppSelector} from "@/Redux/Hooks";
+import { setModalEditRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 
 
-export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle }) => {
+
+interface StaticFormProps extends StaticModalToggleProp {
+    staticModalToggle: any;
+    selectedRole: RoleType ;
+}
+
+export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selectedRole }) => {
 
     const dispatch = useDispatch<AppDispatch>();
-    const categoryStatus = useSelector(selectRoleStatus);
-    const categoryError = useSelector(selectErreur);
+    const roleStatus = useSelector(selectRoleStatus);
+    const roleError = useSelector(selectErreur);
+    const [roleName, setRoleName] = useState<string>(selectedRole?.name);
+    const { isOpenModalEditRole,  } = useAppSelector((state) => state.role);
 
-    const [role, setRole] = useState<CreateRole>({ name: '' });
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        await dispatch(createRole(role));
 
-        if(categoryStatus === 'failed'){
+        e.preventDefault();
+
+        await dispatch(updateRole({id: selectedRole?.id, name: roleName}));
+
+        if (roleStatus === 'failed') {
             toast.error(
-                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création de la catégorie"}</p>,
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du rôle"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -32,6 +43,9 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
                 }
             );
         }
+
+        dispatch(setModalEditRole({ isOpen: false, role: null }))
+
     };
 
     return (
@@ -47,18 +61,17 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
                             name="category"
                             type="text"
                             placeholder="Entrer le nom du rôle"
-                            value={role.name}
-                            onChange={(e) => setRole({ name: e.target.value })}
+                            value={roleName}
+                            onChange={(e)=>setRoleName(e.target.value)}
                         />
                     </Col>
 
                     <Col xs="12">
                         <Button color="primary" type="submit">
-                            {"Créer"}
+                            {"Mettre à jour"}
                         </Button>
                     </Col>
                 </Row>
-
             </form>
         </>
     );
