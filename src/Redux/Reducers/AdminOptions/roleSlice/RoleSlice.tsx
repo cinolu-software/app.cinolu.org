@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios, { apiBaseUrl } from "@/services/axios";
-import { InitialStateRoleType, TransformedRoleType, RoleType } from "@/Types/AdminOptions/Roles/RoleType";
+import { InitialStateRoleType, TransformedRoleType, RoleType, CreateRole } from "@/Types/AdminOptions/Roles/RoleType";
 import { RootState } from "@/Redux/Store";
 
 const initialState: InitialStateRoleType = {
@@ -14,11 +14,11 @@ const initialState: InitialStateRoleType = {
     selectedRole: null,
 };
 
-const transformRole = (role: RoleType[]): TransformedRoleType[] => {
-    return role.map(r => ({
+const transformRole = (roles: RoleType[]): TransformedRoleType[] => {
+    return roles.map(r => ({
         id: r.id,
         name: r.name,
-        image: "product_list/product-categories/phone.png",
+        image: "admin/roles/user_role.png",
         created_at: r.created_at,
         updated_at: r.updated_at,
     }));
@@ -33,7 +33,7 @@ export const fetchRole = createAsyncThunk<{ original: RoleType[], transformed: T
     }
 );
 
-export const createRole = createAsyncThunk<RoleType, { name: string }>(
+export const createRole = createAsyncThunk<RoleType, CreateRole>(
     'roles/createRole', async (newRole, { rejectWithValue }) => {
         try {
             const response = await axios.post<{ data: RoleType }>(`${apiBaseUrl}/roles`, newRole);
@@ -107,7 +107,7 @@ const RoleSlice = createSlice({
                 state.transformedRoleData.push({
                     id: action.payload.id,
                     name: action.payload.name,
-                    image: "product_list/product-categories/phone.png",
+                    image: "admin/roles/user_role.png",
                     created_at: action.payload.created_at,
                     updated_at: action.payload.updated_at,
                 });
@@ -128,7 +128,7 @@ const RoleSlice = createSlice({
                     state.transformedRoleData[index] = {
                         id: action.payload.id,
                         name: action.payload.name,
-                        image: "product_list/product-categories/phone.png",
+                        image: "admin/roles/user_role.png",
                         created_at: action.payload.created_at,
                         updated_at: action.payload.updated_at,
                     };

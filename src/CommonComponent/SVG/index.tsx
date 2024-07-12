@@ -13,13 +13,11 @@ interface SvgType {
 }
 
 const SVG = ({ iconId, className, style }: SvgType) => {
-
   return (
     <svg className={className} style={style}>
       <use href={`/assets/svg/icon-sprite.svg#${iconId}`}></use>
     </svg>
   );
-
 };
 
 export default SVG;

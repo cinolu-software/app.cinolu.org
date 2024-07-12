@@ -63,21 +63,23 @@ export const MenuList: MenuItem [] | undefined = [
         title: "Projets",
         id: 3,
         icon: "file",
-        type: "link",
+        type: "sub",
         lanClass: "lan-6",
         active: false,
-        path: "/projects"
-
+        children: [
+          {path: "/projects", title: "Projects", type: "link", lanClass: "lan-4"},
+          {path: "/projects/status", title: "Status", type: "link", lanClass: "lan-5"},
+          {path: "/projects/category", title: "Catégorie", type: "link", lanClass: "lan-5"},
+        ]
       },
       {
         title: "Rôle",
         id: 3,
-        icon: "user",
+        icon: "file",
         type: "link",
         lanClass: "lan-6",
         active: false,
         path: "/roles"
-
       },
     ],
   }
