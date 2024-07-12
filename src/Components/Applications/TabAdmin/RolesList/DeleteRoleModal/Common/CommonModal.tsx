@@ -15,12 +15,7 @@ const CommonModal:React.FC<CommonModalType> = ({backdrop, centered, size, isOpen
         </div>
       )}
       <ModalBody className={modalBodyClassName ? modalBodyClassName : ""}>{children}</ModalBody>
-      {(title || fullTitle) && (
-        <ModalFooter>
-          <Button color="secondary" onClick={toggle}>{Close}</Button>
-          <Button color="primary">{SaveChanges}</Button>
-        </ModalFooter>
-      )}
+
     </Modal>
   );
 };

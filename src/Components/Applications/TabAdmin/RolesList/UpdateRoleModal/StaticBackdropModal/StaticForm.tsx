@@ -9,8 +9,6 @@ import { AppDispatch } from "@/Redux/Store";
 import {useAppSelector} from "@/Redux/Hooks";
 import { setModalEditRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 
-
-
 interface StaticFormProps extends StaticModalToggleProp {
     staticModalToggle: any;
     selectedRole: RoleType ;
