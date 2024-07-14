@@ -18,7 +18,6 @@ export interface CreateCategory{
     name: string;
 }
 
-
 export interface InitialStateType {
     modal: boolean;
     modalCreateCategory : boolean;
