@@ -1,28 +1,25 @@
 import React, { useState } from 'react';
 import { Button, Col, Label, Row } from 'reactstrap';
-import {createRole, selectRoleStatus, selectErreur, setModalCreateRole} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
-import {CreateRole, StaticModalToggleProp} from "@/Types/AdminOptions/Roles/RoleType";
+import { createCategory, selectCategoryStatus, selectCategoryError, setModalCreateCategory } from "@/Redux/Reducers/projectSlice/projectCategorySlice";
+import { StaticModalToggleProp, CreateCategoryType } from "@/Types/Projects/category/CategoryType";
 import { RootState } from '@/Redux/Store';
-import {Flip, toast} from "react-toastify";
-import {useSelector, useDispatch} from "react-redux";
-import {AppDispatch} from "@/Redux/Store";
-import {useAppSelector} from "@/Redux/Hooks";
-
+import { Flip, toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch } from "@/Redux/Store";
+import { useAppSelector } from "@/Redux/Hooks";
 
 export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle }) => {
-
     const dispatch = useDispatch<AppDispatch>();
-    const categoryStatus = useSelector(selectRoleStatus);
-    const categoryError = useSelector(selectErreur);
-    const {isOpenModalCreateRole} = useAppSelector((state) => state.role);
-    const [role, setRole] = useState<CreateRole>({ name: '' });
+    const categoryStatus = useSelector(selectCategoryStatus);
+    const categoryError = useSelector(selectCategoryError);
+    const [category, setCategory] = useState<CreateCategoryType>({ name: '' });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await dispatch(createRole(role));
-        dispatch(setModalCreateRole(false))
+        await dispatch(createCategory(category));
+        dispatch(setModalCreateCategory({ isOpen: false }));
 
-        if(categoryStatus === 'failed'){
+        if (categoryStatus === 'failed') {
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création de la catégorie"}</p>,
                 {
@@ -42,15 +39,15 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
                 <Row className="g-3">
                     <Col md="12">
                         <Label className="mb-2" check>
-                            {"Nom du Rôle"}
+                            {"Nom de la Catégorie"}
                         </Label>
                         <input
                             className="form-control mb-4"
                             name="category"
                             type="text"
-                            placeholder="Entrer le nom du rôle"
-                            value={role.name}
-                            onChange={(e) => setRole({ name: e.target.value })}
+                            placeholder="Entrer le nom de la catégorie"
+                            value={category.name}
+                            onChange={(e) => setCategory({ name: e.target.value })}
                         />
                     </Col>
 
@@ -60,7 +57,6 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
                         </Button>
                     </Col>
                 </Row>
-
             </form>
         </>
     );

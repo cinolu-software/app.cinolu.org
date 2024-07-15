@@ -76,19 +76,19 @@ export const deleteCategory = createAsyncThunk<number, number>(
 const CategorySlice = createSlice({
     name: "categories",
     initialState,
-    reducers: {
-        setModalCreateCategory: (state, action: PayloadAction<boolean>) => {
-            state.isOpenModalCreateCategory = action.payload;
+        reducers: {
+            setModalCreateCategory: (state, action: PayloadAction<{ isOpen: boolean }>) => {
+                state.isOpenModalCreateCategory = action.payload.isOpen;
+            },
+            setModalEditCategory: (state, action: PayloadAction<{ isOpen: boolean, category: CategoryType | null }>) => {
+                state.isOpenModalEditCategory = action.payload.isOpen;
+                state.selectedCategories = action.payload.category;
+            },
+            setModalDeleteCategory: (state, action: PayloadAction<{ isOpen: boolean, category: CategoryType | null }>) => {
+                state.isOpenModalDeleteCategory = action.payload.isOpen;
+                state.selectedCategories = action.payload.category;
+            },
         },
-        setModalEditCategory: (state, action: PayloadAction<{ isOpen: boolean, category: CategoryType | null }>) => {
-            state.isOpenModalEditCategory = action.payload.isOpen;
-            state.selectedCategories = action.payload.category;
-        },
-        setModalDeleteCategory: (state, action: PayloadAction<{ isOpen: boolean, category: CategoryType | null }>) => {
-            state.isOpenModalDeleteCategory = action.payload.isOpen;
-            state.selectedCategories = action.payload.category;
-        },
-    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchCategory.pending, (state) => {

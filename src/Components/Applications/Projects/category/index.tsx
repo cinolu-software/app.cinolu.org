@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { AppDispatch } from "@/Redux/Store";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { RoleHeader } from "./CategoryList";
+import { CategoryHeader } from "./CategoryList";
 import {useSelector, useDispatch} from "react-redux";
 import {selectCategoryStatus, fetchCategory, selectTransformedCategoryData} from "@/Redux/Reducers/projectSlice/projectCategorySlice";
 import {CategoryListTableDataColumn} from "@/Data/Application/Projects/ProjectsCategory"
@@ -46,7 +46,7 @@ const CategoryListContainer = () => {
           <Card>
             <CardBody>
               <div className="list-product-header">
-                <RoleHeader />
+                <CategoryHeader />
               </div>
               <div className="list-product">
                 <div className="table-responsive">

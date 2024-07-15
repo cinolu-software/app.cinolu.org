@@ -1,30 +1,33 @@
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {setModalCreateRole} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+import React from 'react';
+import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import { setModalCreateCategory } from "@/Redux/Reducers/projectSlice/projectCategorySlice";
 import { Button, Col } from "reactstrap";
 import CommonModal from "./Common/CommonModal";
 import { StaticForm } from "./StaticBackdropModal/StaticForm";
-import { CommonMofiModalTitle } from "./Common/CommonMofiModalTitle";
-
 
 const CreateCategoryModal = () => {
-
-    const {isOpenModalCreateRole} = useAppSelector((state)=> state.role)
+    const { isOpenModalCreateCategory } = useAppSelector((state) => state.categories);
     const dispatch = useAppDispatch();
-
 
     return (
         <>
             <Col xl="4" md="6" className="custom-alert text-center">
-                <CommonModal centered modalBodyClassName="social-profile text-start" isOpen={isOpenModalCreateRole} toggle={()=>dispatch(setModalCreateRole(false))}>
+                <CommonModal
+                    centered
+                    modalBodyClassName="social-profile text-start"
+                    isOpen={isOpenModalCreateCategory}
+                    toggle={() => dispatch(setModalCreateCategory({ isOpen: false }))}
+                >
                     <div className="modal-toggle-wrapper">
-                        <h3 className={"mb-4"}>{"Ajouter un Rôle"}</h3>
-                        <StaticForm staticModalToggle={()=>dispatch(setModalCreateRole(false))} />
+                        <h3 className={"mb-4"}>{"Ajouter une Catégorie"}</h3>
+                        <StaticForm staticModalToggle={() => dispatch(setModalCreateCategory({ isOpen: false }))} />
                     </div>
                 </CommonModal>
             </Col>
         </>
     );
-}
+};
 
 export default CreateCategoryModal;
+
 
