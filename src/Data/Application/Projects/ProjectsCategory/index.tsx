@@ -13,6 +13,7 @@ const CategoriesListTableName: React.FC<CategoryListTableNameType> = ({image, na
             <div className="light-product-box bg-img-cover">
                 <RatioImage className="img-fluid" src={`${ImagePath}/${image}`} alt="image" />
             </div>
+            <p>{name}</p>
         </div>
     )
 }
