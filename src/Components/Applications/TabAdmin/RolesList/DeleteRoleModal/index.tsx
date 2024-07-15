@@ -1,8 +1,5 @@
-import { useState } from "react";
-import CommonCardHeader from "./CommonCardHeader";
-import {CenteredModals, Close, ImagePath, SaveChanges, SomethingWentWrong, VerticallyCentered} from "@/Constant";
-import { CenteredModalList } from "@/Data/Uikits/modal";
-import {Button, Card, CardBody, Col, ModalFooter} from "reactstrap";
+import { ImagePath} from "@/Constant";
+import {Button, CardBody, Col, } from "reactstrap";
 import CommonModal from "./Common/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalDeleteRole, deleteRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
@@ -12,10 +9,9 @@ const CenteredModal = () => {
     const dispatch = useAppDispatch();
     const { isOpenModalDeleteRole, selectedRole, originalRoleData } = useAppSelector((state) => state.role);
 
-    const selectedRoleData = originalRoleData.find((item) => item.id == selectedRole);
+    const selectedRoleData = originalRoleData.find((item) => item.id == selectedRole?.id);
 
     const handleDelete = () => {
-
         if (selectedRoleData) {
             dispatch(deleteRole(selectedRoleData.id));
             dispatch(setModalDeleteRole({ isOpen: false, role: null }));
@@ -39,8 +35,6 @@ const CenteredModal = () => {
                             <Button color="danger" onClick={handleDelete}>{"Supprimer"}</Button>
                         </div>
                     </div>
-
-
                 </CommonModal>
             </CardBody>
         </Col>
