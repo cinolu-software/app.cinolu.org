@@ -1,23 +1,23 @@
 import React, { useMemo, useState, useEffect } from "react";
-
 import { AppDispatch } from "@/Redux/Store";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { RoleHeader } from "./CategoryList";
 import {useSelector, useDispatch} from "react-redux";
-import {selectRoleStatus, fetchRole, selectTransformedRoles} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
-import {RoleListTableDataColumn} from "@/Data/Application/RolesData";
-import CreateRoleModal from "@/Components/Applications/TabAdmin/RolesList/CreateRoleModal";
-import UpdateRoleModal from "@/Components/Applications/TabAdmin/RolesList/UpdateRoleModal";
-import DeleteRoleModal from "@/Components/Applications/TabAdmin/RolesList/DeleteRoleModal";
+import {selectCategoryStatus, fetchCategory, selectTransformedCategoryData} from "@/Redux/Reducers/projectSlice/projectCategorySlice";
+import {CategoryListTableDataColumn} from "@/Data/Application/Projects/ProjectsCategory"
+import CreateCategoryModal from "./CreateCategoryModal";
+import UpdateCategoryModal from "./UpdateCategoryModal";
+import DeleteCategoryModal from "./DeleteCategoryModal";
 
 
 const CategoryListContainer = () => {
 
   const [filterText, setFilterText] = useState("");
   const dispatch = useDispatch<AppDispatch>();
-  const status = useSelector(selectRoleStatus);
-  const transformedRoles = useSelector(selectTransformedRoles);
+
+  const status = useSelector(selectCategoryStatus);
+  const transformedCategories = useSelector(selectTransformedCategoryData);
 
 
   const subHeaderComponentMemo = useMemo(() => {
@@ -31,16 +31,16 @@ const CategoryListContainer = () => {
 
   useEffect(() => {
     if(status === 'idle'){
-      dispatch(fetchRole())
+      dispatch(fetchCategory())
     }
   }, []);
 
 
   return (
     <Container fluid>
-      <CreateRoleModal/>
-      <UpdateRoleModal/>
-      <DeleteRoleModal/>
+      <CreateCategoryModal/>
+      <UpdateCategoryModal/>
+      <DeleteCategoryModal/>
       <Row>
         <Col sm="12">
           <Card>
@@ -50,7 +50,7 @@ const CategoryListContainer = () => {
               </div>
               <div className="list-product">
                 <div className="table-responsive">
-                  <DataTable className="theme-scrollbar" data={transformedRoles} columns={RoleListTableDataColumn} striped highlightOnHover pagination  subHeader subHeaderComponent={subHeaderComponentMemo} />
+                  <DataTable className="theme-scrollbar" data={transformedCategories} columns={CategoryListTableDataColumn} striped highlightOnHover pagination  subHeader subHeaderComponent={subHeaderComponentMemo} />
                 </div>
               </div>
             </CardBody>

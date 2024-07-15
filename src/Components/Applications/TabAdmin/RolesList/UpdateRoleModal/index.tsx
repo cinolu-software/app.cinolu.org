@@ -10,7 +10,7 @@ const UpdateRoleModal = () => {
     const { isOpenModalEditRole, selectedRole, transformedRoleData } = useAppSelector((state) => state.role);
     const dispatch = useAppDispatch();
 
-    const selectedRoleData = transformedRoleData.find((item) => item.id === selectedRole);
+    const selectedRoleData = transformedRoleData.find((item) => item.id === selectedRole?.id);
 
 
     return (

@@ -16,7 +16,7 @@ const initialState: InitialStateCategoriesType = {
 
 const transformCategories = (categories: CategoryType[]): TransformedCategoriesType[] => {
     return categories.map(category => ({
-        id: category.id.toString(),
+        id: category.id,
         name: category.name,
         icon: "draft",
         badge: true,
@@ -112,7 +112,7 @@ const CategorySlice = createSlice({
                 state.status = 'succeeded';
                 state.originalCategoriesData.push(action.payload);
                 state.transformedCategoriesData.push({
-                    id: action.payload.id.toString(),
+                    id: action.payload.id,
                     name: action.payload.name,
                     icon: "draft",
                     badge: true,
@@ -136,7 +136,7 @@ const CategorySlice = createSlice({
                 if (index !== -1) {
                     state.originalCategoriesData[index] = action.payload;
                     state.transformedCategoriesData[index] = {
-                        id: action.payload.id.toString(),
+                        id: action.payload.id,
                         name: action.payload.name,
                         icon: "draft",
                         badge: true,
@@ -158,7 +158,7 @@ const CategorySlice = createSlice({
             .addCase(deleteCategory.fulfilled, (state, action: PayloadAction<number>) => {
                 state.status = 'succeeded';
                 state.originalCategoriesData = state.originalCategoriesData.filter(category => category.id !== action.payload);
-                state.transformedCategoriesData = state.transformedCategoriesData.filter(category => category.id !== action.payload.toString());
+                state.transformedCategoriesData = state.transformedCategoriesData.filter(category => category.id !== action.payload);
             })
             .addCase(deleteCategory.rejected, (state, action) => {
                 state.status = 'failed';

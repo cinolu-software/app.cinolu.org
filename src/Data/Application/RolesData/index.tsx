@@ -1,17 +1,11 @@
-import {Button} from "reactstrap";
-import { RoleListTableColumnType, RoleListTableNameType} from "@/Types/AdminOptions/Roles/RoleType";
+import { Button } from "reactstrap";
+import { RoleListTableColumnType, RoleListTableNameType, RoleType } from "@/Types/AdminOptions/Roles/RoleType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
-import SVG from "@/CommonComponent/SVG";
-import Link from "next/link";
-import {RoleType} from "@/Types/AdminOptions/Roles/RoleType";
-import {useAppDispatch} from "@/Redux/Hooks";
-import {useDispatch} from "react-redux";
-import {setModalEditRole, setModalDeleteRole} from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+import { useDispatch } from "react-redux";
+import { setModalEditRole, setModalDeleteRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 
-
-const RoleListTableName: React.FC<RoleListTableNameType> = ({image, name}) => {
-
+const RoleListTableName: React.FC<RoleListTableNameType> = ({ image, name }) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -19,19 +13,19 @@ const RoleListTableName: React.FC<RoleListTableNameType> = ({image, name}) => {
             </div>
             <p>{name}</p>
         </div>
-    )
+    );
+};
 
-}
-
-const RoleListTableAction: React.FC<{role: RoleType}>=({role})=>{
-
+const RoleListTableAction: React.FC<{ role: RoleType }> = ({ role }) => {
     const dispatch = useDispatch();
+
     const handleEdit = () => {
-        dispatch(setModalEditRole({isOpen: true, role}));
-    }
+        dispatch(setModalEditRole({ isOpen: true, role }));
+    };
+
     const handleDelete = () => {
-        dispatch(setModalDeleteRole({isOpen: true, role}));
-    }
+        dispatch(setModalDeleteRole({ isOpen: true, role }));
+    };
 
     return (
         <div className="product-action">
@@ -39,10 +33,9 @@ const RoleListTableAction: React.FC<{role: RoleType}>=({role})=>{
             <Button size={"sm"} color={"danger"} onClick={handleDelete}>Supprimer</Button>
         </div>
     );
-}
+};
 
 export const RoleListTableDataColumn = [
-
     {
         name: "Nom",
         cell: (row: RoleListTableColumnType) => <RoleListTableName image={row.image} name={row.name} />,
@@ -60,7 +53,7 @@ export const RoleListTableDataColumn = [
         sortable: true,
     },
     {
-        name : "Action",
-        cell: (row: RoleListTableColumnType) => <RoleListTableAction role={row.id} />,
+        name: "Action",
+        cell: (row: RoleListTableColumnType) => <RoleListTableAction role={row} />,
     }
-]
+];

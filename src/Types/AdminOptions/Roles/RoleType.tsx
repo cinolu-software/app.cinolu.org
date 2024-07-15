@@ -29,6 +29,7 @@ export interface CreateRole {
 }
 
 export interface RoleListTableColumnType {
+    id : number;
     image: string;
     name: string;
     created_at: string;

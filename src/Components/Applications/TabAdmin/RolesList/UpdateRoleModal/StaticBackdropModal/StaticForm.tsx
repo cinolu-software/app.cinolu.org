@@ -24,9 +24,7 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
 
 
     const handleSubmit = async (e: React.FormEvent) => {
-
         e.preventDefault();
-
         await dispatch(updateRole({id: selectedRole?.id, name: roleName}));
 
         if (roleStatus === 'failed') {
@@ -41,9 +39,7 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
                 }
             );
         }
-
         dispatch(setModalEditRole({ isOpen: false, role: null }))
-
     };
 
     return (

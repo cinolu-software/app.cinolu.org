@@ -1,25 +1,25 @@
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalEditRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+import {setModalEditCategory} from "@/Redux/Reducers/projectSlice/projectCategorySlice"
 import { Button, Col } from "reactstrap";
 import CommonModal from "./Common/CommonModal";
 import { StaticForm } from "./StaticBackdropModal/StaticForm";
 import { CommonMofiModalTitle } from "./Common/CommonMofiModalTitle";
 
-const UpdateRoleModal = () => {
+const UpdateCategoryModal = () => {
 
-    const { isOpenModalEditRole, selectedRole, transformedRoleData } = useAppSelector((state) => state.role);
+    const { isOpenModalEditCategory, selectedCategories, transformedCategoriesData } = useAppSelector((state) => state.categories);
     const dispatch = useAppDispatch();
 
-    const selectedRoleData = transformedRoleData.find((item) => item.id === selectedRole);
-
+    const selectedCategoryData = transformedCategoriesData.find((item) => item.id === selectedCategories?.id);
 
     return (
         <>
             <Col xl="4" md="6" className="custom-alert text-center">
-                <CommonModal centered modalBodyClassName="social-profile text-start" isOpen={isOpenModalEditRole} toggle={() => dispatch(setModalEditRole({ isOpen: false, role: null }))}>
+                <CommonModal centered modalBodyClassName="social-profile text-start" isOpen={isOpenModalEditCategory} toggle={() => dispatch(setModalEditRole({ isOpen: false, role: null }))}>
                     <div className="modal-toggle-wrapper">
                         <h3 className={"mb-4"}>{"Modifier le Rôle"}</h3>
-                        <StaticForm staticModalToggle={() => dispatch(setModalEditRole({ isOpen: false, role: null }))} selectedRole={selectedRoleData} />
+                        <StaticForm staticModalToggle={() => dispatch(setModalEditCategory({ isOpen: false, category: null }))} selectedCategory={selectedCategoryData} />
                     </div>
                 </CommonModal>
             </Col>
@@ -27,6 +27,6 @@ const UpdateRoleModal = () => {
     );
 }
 
-export default UpdateRoleModal;
+export default UpdateCategoryModal;
 
 

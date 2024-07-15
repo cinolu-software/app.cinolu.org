@@ -1,12 +1,12 @@
 export interface CategoryType {
-    id: number;
+    id : number;
     name: string;
     created_at: string;
     updated_at: string;
 }
 
 export interface TransformedCategoriesType{
-    id: string;
+    id: number;
     name: string;
     image: string;
     icon: string;
@@ -32,6 +32,7 @@ export interface CreateCategoryType {
 }
 
 export interface CategoryListTableColumnType {
+    id: number;
     image: string;
     name: string;
     created_at: string;
@@ -41,6 +42,10 @@ export interface CategoryListTableColumnType {
 export interface CategoryListTableNameType {
     name: string;
     image: string;
+}
+
+export interface StaticModalToggleProp {
+    staticModalToggle: () => void;
 }
 
 
