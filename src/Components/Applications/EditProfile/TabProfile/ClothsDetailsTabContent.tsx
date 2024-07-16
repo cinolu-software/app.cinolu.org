@@ -22,14 +22,6 @@ const ProfilTabContent :React.FC<ProfileTabContentProp> = ({ activeTab }) => {
       <TabPane tabId={3}>
         <p className="mb-0 m-t-20"> {Description4}</p>
       </TabPane>
-      <TabPane tabId={4}>
-        <p className="mb-0 m-t-20">
-          Product Dimensions : 18 x 18 x 4 cm <br />
-          Date First Available : 31 March 2023 <br />
-          Manufacturer : Tee Stores <br />
-          Item part number : TS-WT721-XS-WHITE <br />
-        </p>
-      </TabPane>
     </TabContent>
   );
 };

@@ -68,7 +68,6 @@ const MyProfile = () => {
         };
 
         await dispatch(updateProfile(payload)).unwrap();
-
     };
 
     return (

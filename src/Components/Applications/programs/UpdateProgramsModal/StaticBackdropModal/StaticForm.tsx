@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Col, Label, Row } from 'reactstrap';
-import { updateProgram, selectProgramStatus, selectProgramError, setModalEditProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { updateProgram, selectProgramStatus, selectProgramError } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Flip, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/Redux/Store";
@@ -85,7 +85,7 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
                         <input
                             className="form-control mb-4"
                             name="start_at"
-                            type="text"
+                            type="date"
                             placeholder="Entrer la date de début"
                             value={program.start_at}
                             onChange={(e) => setProgram({ ...program, start_at: e.target.value })}
@@ -98,7 +98,7 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
                         <input
                             className="form-control mb-4"
                             name="end_at"
-                            type="text"
+                            type="date"
                             placeholder="Entrer la date de fin"
                             value={program.end_at}
                             onChange={(e) => setProgram({ ...program, end_at: e.target.value })}
@@ -114,6 +114,5 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
         </>
     );
 };
-
 
 

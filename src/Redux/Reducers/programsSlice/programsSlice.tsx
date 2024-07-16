@@ -56,6 +56,23 @@ export const updateProgram = createAsyncThunk<ProgramsType, ProgramsType>(
     }
 );
 
+export const uploadProgramImage = createAsyncThunk<void, { programId: number, imageFile: File }>(
+    'programs/uploadProgramImage',
+    async ({ programId, imageFile }, { rejectWithValue }) => {
+        const formData = new FormData();
+        formData.append('attachment', imageFile);
+        try {
+            await axios.post(`${apiBaseUrl}/programs/attachment/${programId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+        } catch (err: any) {
+            return rejectWithValue(err.response.data);
+        }
+    }
+);
+
 export const deleteProgram = createAsyncThunk<number, number>(
     'programs/deleteProgram',
     async (programId, { rejectWithValue }) => {
@@ -113,7 +130,7 @@ const ProgramSlice = createSlice({
             })
             .addCase(createProgram.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload as string || 'Something went wrong';
+                state.error = action.error.message || 'Something went wrong';
             })
             .addCase(updateProgram.pending, (state) => {
                 state.status = 'loading';
@@ -132,7 +149,18 @@ const ProgramSlice = createSlice({
             })
             .addCase(updateProgram.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload as string || 'Something went wrong';
+                state.error = action.error.message || 'Something went wrong';
+            })
+            .addCase(uploadProgramImage.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(uploadProgramImage.fulfilled, (state) => {
+                state.status = 'succeeded';
+            })
+            .addCase(uploadProgramImage.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Something went wrong';
             })
             .addCase(deleteProgram.pending, (state) => {
                 state.status = 'loading';
@@ -145,15 +173,16 @@ const ProgramSlice = createSlice({
             })
             .addCase(deleteProgram.rejected, (state, action) => {
                 state.status = 'failed';
-                state.error = action.payload as string || 'Something went wrong';
+                state.error = action.error.message || 'Something went wrong';
             });
-    },
+    }
 });
 
+export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram } = ProgramSlice.actions;
 export const selectProgramStatus = (state: RootState) => state.programs.status;
 export const selectOriginalProgramData = (state: RootState) => state.programs.originalProgramsData;
 export const selectTransformedProgramData = (state: RootState) => state.programs.transformedProgramsData;
 export const selectProgramError = (state: RootState) => state.programs.error;
-export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram } = ProgramSlice.actions;
 
 export default ProgramSlice.reducer;
+
