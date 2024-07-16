@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from "reactstrap";
 import { ProgramsListTableColumnType, ProgramsListTableNameType, ProgramsType } from "@/Types/Programs/ProgramsType";
 import RatioImage from "@/CommonComponent/RatioImage";
@@ -7,8 +8,8 @@ import { setModalDeleteProgram, setModalEditProgram } from "@/Redux/Reducers/pro
 
 const ProgramsListTableName: React.FC<ProgramsListTableNameType> = ({ image, name }) => {
     return (
-        <div className="program-names my-2">
-            <div className="light-program-box bg-img-cover">
+        <div className="product-names my-2">
+            <div className="light-product-box bg-img-cover">
                 <RatioImage className="img-fluid" src={`${ImagePath}/${image}`} alt="image" />
             </div>
             <p>{name}</p>
@@ -28,7 +29,7 @@ const ProgramsListTableAction: React.FC<{ program: ProgramsType }> = ({ program 
     };
 
     return (
-        <div className="program-action">
+        <div className="product-action">
             <Button size={"sm"} onClick={handleEdit}>Modifier</Button>
             <Button size={"sm"} color={"danger"} onClick={handleDelete}>Supprimer</Button>
         </div>
@@ -45,6 +46,13 @@ export const ProgramsListTableDataColumn = [
         grow: 2,
     },
     {
+        name: "Description",
+        selector: (row: ProgramsListTableColumnType) => (
+            <div>{row.description}</div>
+        ),
+        sortable: false,
+    },
+    {
         name: "Date de début",
         selector: (row: ProgramsListTableColumnType) => `${row.start_at}`,
         sortable: true,
@@ -52,16 +60,6 @@ export const ProgramsListTableDataColumn = [
     {
         name: "Date de fin",
         selector: (row: ProgramsListTableColumnType) => `${row.end_at}`,
-        sortable: true,
-    },
-    {
-        name: "Date de création",
-        selector: (row: ProgramsListTableColumnType) => `${row.created_at}`,
-        sortable: true,
-    },
-    {
-        name: "Date de modification",
-        selector: (row: ProgramsListTableColumnType) => `${row.updated_at}`,
         sortable: true,
     },
     {

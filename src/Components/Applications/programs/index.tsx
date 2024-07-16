@@ -11,6 +11,7 @@ import UpdateProgramsModal from "./UpdateProgramsModal";
 import DeleteProgramsModal from "./DeleteProgramsModal";
 
 const ProgramsListContainer = () => {
+
   const [filterText, setFilterText] = useState("");
   const dispatch = useDispatch<AppDispatch>();
 
@@ -45,7 +46,7 @@ const ProgramsListContainer = () => {
           <Col sm="12">
             <Card>
               <CardBody>
-                <div className="list-program-header">
+                <div className="list-product-header">
                   <ProgramsHeader />
                 </div>
                 <div className="list-program">

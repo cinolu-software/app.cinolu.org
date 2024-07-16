@@ -1,11 +1,10 @@
+"use client";
+
+import ProgramsListContainer from "@/Components/Applications/programs/"
 
 const Programs = () => {
 
-    return (
-        <>
-            <h1>Programmes</h1>
-        </>
-    )
+    return (<ProgramsListContainer/>)
 }
 
 export default Programs;

@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
 import { Button, Col, Label, Row } from 'reactstrap';
-import { updateCategory, selectCategoryStatus, selectCategoryError, setModalEditCategory } from "@/Redux/Reducers/projectSlice/projectCategorySlice";
-import { StaticModalToggleProp, CategoryType } from "@/Types/Projects/category/CategoryType";
+import { updateProgram, selectProgramStatus, selectProgramError, setModalEditProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Flip, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/Redux/Store";
+import { AppDispatch } from "@/Redux/Store";
+import { ProgramsType } from "@/Types/Programs/ProgramsType";
 
-interface StaticFormProps extends StaticModalToggleProp {
-    selectedCategory: CategoryType | undefined;
+interface StaticFormProps {
+    selectedProgram: ProgramsType | undefined;
+    staticModalToggle: () => void;
 }
 
-export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selectedCategory }) => {
+export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selectedProgram }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const categoryStatus = useSelector(selectCategoryStatus);
-    const statusError = useSelector(selectCategoryError);
-    const [categoryName, setCategoryName] = useState<string>(selectedCategory?.name || "");
+    const programStatus = useSelector(selectProgramStatus);
+    const programError = useSelector(selectProgramError);
+    const [program, setProgram] = useState<ProgramsType>({
+        id: selectedProgram?.id || 0,
+        name: selectedProgram?.name || '',
+        description: selectedProgram?.description || '',
+        start_at: selectedProgram?.start_at || '',
+        end_at: selectedProgram?.end_at || '',
+        created_at: selectedProgram?.created_at || '',
+        updated_at: selectedProgram?.updated_at || '',
+        image: selectedProgram?.image || ''
+    });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (selectedCategory) {
-            await dispatch(updateCategory({ id: selectedCategory.id, name: categoryName }));
-            if (categoryStatus === 'failed') {
+        try {
+            await dispatch(updateProgram(program));
+            if (programStatus === 'failed') {
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour du programme"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -34,6 +44,8 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
             } else {
                 staticModalToggle();
             }
+        } catch (error) {
+            console.error('Erreur lors de la mise à jour du programme : ', error);
         }
     };
 
@@ -43,15 +55,53 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
                 <Row className="g-3">
                     <Col md="12">
                         <Label className="mb-2" check>
-                            {"Nom de la Catégorie"}
+                            {"Nom du Programme"}
                         </Label>
                         <input
                             className="form-control mb-4"
-                            name="category"
+                            name="name"
                             type="text"
-                            placeholder="Entrer le nom de la catégorie"
-                            value={categoryName}
-                            onChange={(e) => setCategoryName(e.target.value)}
+                            placeholder="Entrer le nom du programme"
+                            value={program.name}
+                            onChange={(e) => setProgram({ ...program, name: e.target.value })}
+                        />
+                    </Col>
+                    <Col md="12">
+                        <Label className="mb-2" check>
+                            {"Description du Programme"}
+                        </Label>
+                        <textarea
+                            className="form-control mb-4"
+                            name="description"
+                            placeholder="Entrer la description du programme"
+                            value={program.description}
+                            onChange={(e) => setProgram({ ...program, description: e.target.value })}
+                        />
+                    </Col>
+                    <Col md="6">
+                        <Label className="mb-2" check>
+                            {"Date de Début"}
+                        </Label>
+                        <input
+                            className="form-control mb-4"
+                            name="start_at"
+                            type="text"
+                            placeholder="Entrer la date de début"
+                            value={program.start_at}
+                            onChange={(e) => setProgram({ ...program, start_at: e.target.value })}
+                        />
+                    </Col>
+                    <Col md="6">
+                        <Label className="mb-2" check>
+                            {"Date de Fin"}
+                        </Label>
+                        <input
+                            className="form-control mb-4"
+                            name="end_at"
+                            type="text"
+                            placeholder="Entrer la date de fin"
+                            value={program.end_at}
+                            onChange={(e) => setProgram({ ...program, end_at: e.target.value })}
                         />
                     </Col>
                     <Col xs="12">
@@ -64,7 +114,6 @@ export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selec
         </>
     );
 };
-
 
 
 

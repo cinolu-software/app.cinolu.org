@@ -1,15 +1,15 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalEditCategory } from "@/Redux/Reducers/projectSlice/projectCategorySlice";
+import { setModalEditProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Col } from "reactstrap";
 import CommonModal from "./Common/CommonModal";
 import { StaticForm } from "./StaticBackdropModal/StaticForm";
 
 const UpdateProgramsModal = () => {
-    const { isOpenModalEditCategory, selectedCategories, transformedCategoriesData } = useAppSelector((state) => state.categories);
+    const { isOpenModalEditProgram, selectedProgram, transformedProgramsData } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
 
-    const selectedCategoryData = transformedCategoriesData.find((item) => item.id === selectedCategories?.id);
+    const selectedProgramData = transformedProgramsData.find((item) => item.id === selectedProgram?.id);
 
     return (
         <>
@@ -17,12 +17,12 @@ const UpdateProgramsModal = () => {
                 <CommonModal
                     centered
                     modalBodyClassName="social-profile text-start"
-                    isOpen={isOpenModalEditCategory}
-                    toggle={() => dispatch(setModalEditCategory({ isOpen: false, category: null }))}
+                    isOpen={isOpenModalEditProgram}
+                    toggle={() => dispatch(setModalEditProgram({ isOpen: false, program: null }))}
                 >
                     <div className="modal-toggle-wrapper">
-                        <h3 className={"mb-4"}>{"Modifier la Catégorie"}</h3>
-                        <StaticForm staticModalToggle={() => dispatch(setModalEditCategory({ isOpen: false, category: null }))} selectedCategory={selectedCategoryData} />
+                        <h3 className={"mb-4"}>{"Modifier le Programme"}</h3>
+                        <StaticForm staticModalToggle={() => dispatch(setModalEditProgram({ isOpen: false, program: null }))} selectedProgram={selectedProgramData} />
                     </div>
                 </CommonModal>
             </Col>
@@ -31,6 +31,7 @@ const UpdateProgramsModal = () => {
 }
 
 export default UpdateProgramsModal;
+
 
 
 

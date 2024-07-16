@@ -17,7 +17,7 @@ export interface TransformedProgramsType {
     end_at: string;
     created_at: string;
     updated_at: string;
-    image: string; // Ajout de la propriété image
+    image: string;
 }
 
 export interface InitialStateProgramsType {
