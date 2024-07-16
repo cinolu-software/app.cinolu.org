@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalCreateCategory } from "@/Redux/Reducers/projectSlice/projectCategorySlice";
 
 export const CategoryHeader = () => {
+
     const dispatch = useAppDispatch();
     const { isOpenModalCreateCategory } = useAppSelector((state) => state.categories);
 

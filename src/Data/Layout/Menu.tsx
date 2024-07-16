@@ -54,10 +54,13 @@ export const MenuList: MenuItem [] | undefined = [
         title: "Programmes",
         id: 2,
         icon: "builders",
-        type: "link",
+        type: "sub",
         lanClass: "lan-6",
         active: false,
-        path: "/programs",
+        children: [
+            { path: "/programs/details", title: "détails", type: "link", lanClass: "lan-5" },
+            { path: "/programs", title: "programmes", type: "link", lanClass: "lan-6" },
+        ]
       },
       {
         title: "Projets",

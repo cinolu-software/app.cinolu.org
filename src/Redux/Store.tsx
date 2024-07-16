@@ -19,6 +19,8 @@ import StatusSlice from "./Reducers/projectSlice/projectStatusSlice";
 import RoleSlice from "./Reducers/AdminOptions/roleSlice/RoleSlice";
 import projectCategorySlice from "./Reducers/projectSlice/projectCategorySlice";
 
+import ProgramSlice from "./Reducers/programsSlice/programsSlice"
+
 
 const Store = configureStore({
 
@@ -35,6 +37,8 @@ const Store = configureStore({
     projectCategory: CategorySlice,
     projectStatus: StatusSlice,
     categories: projectCategorySlice,
+
+    programs: ProgramSlice,
 
     userAdmin: UserAdminSlice,
     userCoach: UserCoachSlice,
