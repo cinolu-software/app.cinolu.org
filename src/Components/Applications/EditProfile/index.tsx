@@ -5,6 +5,7 @@ import EditProfileForm from "./EditProfiles/EditProfileForm";
 import { toast, ToastContainer, Flip } from "react-toastify";
 
 const EditProfileContainer = () => {
+
   return (
     <Container fluid>
       <div className="edit-profile">
@@ -12,10 +13,12 @@ const EditProfileContainer = () => {
           <MyProfile/>
           <EditProfileForm />
         </Row>
+          <ToastContainer />
       </div>
-        <ToastContainer />
+
     </Container>
   );
+
 };
 
 export default EditProfileContainer;

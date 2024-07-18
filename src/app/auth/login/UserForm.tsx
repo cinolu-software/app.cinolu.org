@@ -8,7 +8,7 @@ import imageOne from "../../../../public/assets/images/logo/logo.png";
 import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
 import UserSocialApp from "./UserSocialApp";
 import { useDispatch, useSelector } from "react-redux";
-import { login, selectStatusLogin, selectErrorLogin } from "@/Redux/Reducers/AuthSlice";
+import { login, selectStatus, selectError } from "@/Redux/Reducers/AuthSlice";
 import { AppDispatch } from "@/Redux/Store";
 
 const UserForm = () => {
@@ -17,50 +17,48 @@ const UserForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch<AppDispatch>();
-  const loginStatus = useSelector(selectStatusLogin);
-  const loginErrors = useSelector(selectErrorLogin);
+  const loginStatus = useSelector(selectStatus);
+  const loginErrors = useSelector(selectError);
   const router = useRouter();
 
-  useEffect(() => {
+  const toastMessages = () => {
+      if (loginStatus === 'succeeded') {
+          toast.success(
+              <p className="text-white tx-16 mb-0">{"Connexion effectuée avec succès"}</p>,
+              {
+                  autoClose: 5000,
+                  position: toast.POSITION.TOP_CENTER,
+                  hideProgressBar: false,
+                  transition: Flip,
+                  theme: "colored",
+              }
+          );
 
-    if (loginStatus === 'succeeded') {
-      toast.success(
-          <p className="text-white tx-16 mb-0">{"Connexion effectuée avec succès"}</p>,
-          {
-            autoClose: 5000,
-            position: toast.POSITION.TOP_CENTER,
-            hideProgressBar: false,
-            transition: Flip,
-            theme: "colored",
-          }
-      );
+          router.push('/dashboard');
+      }
+      if (loginStatus === 'failed') {
+          toast.error(
+              <p className="text-white tx-16 mb-0">{`${loginErrors}`}</p>,
+              {
+                  autoClose: 5000,
+                  position: toast.POSITION.TOP_CENTER,
+                  hideProgressBar: false,
+                  transition: Flip,
+                  theme: "colored",
+              }
+          );
 
-        router.push('/dashboard');
-    }
-    if (loginStatus === 'failed') {
-      toast.error(
-          <p className="text-white tx-16 mb-0">{`${loginErrors}`}</p>,
-          {
-            autoClose: 5000,
-            position: toast.POSITION.TOP_CENTER,
-            hideProgressBar: false,
-            transition: Flip,
-            theme: "colored",
-          }
-      );
-
-    }
-
-  }, [loginStatus, loginErrors, router]);
+      }
+  }
 
   const formSubmitHandle = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const payload = {
       email: email,
       password: password,
     };
     await dispatch(login(payload));
+    toastMessages();
   };
 
   return (
@@ -105,6 +103,7 @@ const UserForm = () => {
         </div>
       </div>
   );
+
 };
 
 export default UserForm;

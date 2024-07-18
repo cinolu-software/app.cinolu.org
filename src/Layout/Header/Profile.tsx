@@ -7,10 +7,11 @@ import { LogOut } from "react-feather";
 import {checkAuth, selectAuth, logout} from "@/Redux/Reducers/AuthSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {imageBaseUrl} from "@/services/axios";
+import {AppDispatch} from "@/Redux/Store";
 
 export const Profile = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
     const auth = useSelector(selectAuth);
 

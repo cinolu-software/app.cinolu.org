@@ -1,32 +1,25 @@
 import { useState, useEffect } from "react";
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
-import { MyProfiles, Save } from "@/Constant";
+import { MyProfiles } from "@/Constant";
 import { UserFormHead } from "./UserFormHead";
 import CommonUserFormGroup from "../Common/CommonUserFormGroup";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import { selectAuth, selectErrorUpdateProfile, updateProfile, selectStatusUpdateProfile } from "@/Redux/Reducers/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Flip, toast } from "react-toastify";
+import { selectAuth, updateProfile, selectError, selectStatus } from "@/Redux/Reducers/AuthSlice";
 import { UpdateProfilePayload } from "@/Types/AuthType";
+import { AppDispatch } from "@/Redux/Store";
 
 const MyProfile = () => {
 
-    const dispatch = useDispatch();
-    const auth = useSelector(selectAuth);
-
-    const [newName, setNewName] = useState(auth?.user?.name);
-    const [newFirstName, setNewFirstName] = useState(auth?.user?.first_name);
-    const [newLastName, setNewLastName] = useState(auth?.user?.last_name);
-    const [newEmail, setNewEmail] = useState(auth?.user?.email);
-    const [newPhoneNumber, setNewPhoneNumber] = useState(auth?.user?.phone_number);
-    const [newAddress, setNewAddress] = useState(auth?.user?.address);
-
-    const statusUpdate = useSelector(selectStatusUpdateProfile);
-    const updateError = useSelector(selectErrorUpdateProfile);
+    const dispatch = useDispatch<AppDispatch>();
+    const { user } = useSelector(selectAuth);
+    const statusUpdate = useSelector(selectStatus);
+    const updateError = useSelector(selectError);
+    const [isToast, setIsToast] = useState(true);
 
     useEffect(() => {
-
-        if (statusUpdate === 'succeeded') {
+        if (statusUpdate === "succeeded" && !isToast) {
             toast.success(
                 <p className="text-white tx-16 mb-0">{"Mise à jour effectuée avec succès"}</p>,
                 {
@@ -37,11 +30,9 @@ const MyProfile = () => {
                     theme: "colored",
                 }
             );
-        }
-
-        if (statusUpdate === 'failed') {
+        } else if (statusUpdate === "failed" && !isToast) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{`${updateError}`}</p>,
+                <p className="text-white tx-16 mb-0">{updateError}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -51,23 +42,17 @@ const MyProfile = () => {
                 }
             );
         }
-
-    }, [statusUpdate, updateError]);
+    }, [statusUpdate, updateError, isToast]);
 
     const handleProfileUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault();
 
-        const payload: UpdateProfilePayload = {
-            name: newName || '',
-            first_name: newFirstName || '',
-            last_name: newLastName || '',
-            email: newEmail || '',
-            phone_number: newPhoneNumber || '',
-            address:  newAddress || '',
-        };
-
+        const formData = new FormData(e.target as HTMLFormElement);
+        const payload = Object.fromEntries(formData.entries()) as unknown as UpdateProfilePayload;
         await dispatch(updateProfile(payload)).unwrap();
+
+        setIsToast(false)
     };
 
     return (
@@ -77,12 +62,12 @@ const MyProfile = () => {
                 <CardBody>
                     <Form onSubmit={handleProfileUpdate}>
                         <UserFormHead />
-                        <CommonUserFormGroup type="text" title="Nom" placeholder="nom" defaultValue={`${auth?.user?.name}`} onChange={(e) => setNewName(e.target.value)} />
-                        <CommonUserFormGroup type="text" title="Post-nom" placeholder="post-nom" defaultValue={`${auth?.user?.first_name}`} onChange={(e) => setNewFirstName(e.target.value)} />
-                        <CommonUserFormGroup type="text" title="Prénom" placeholder="prénom" defaultValue={`${auth?.user?.last_name}`} onChange={(e) => setNewLastName(e.target.value)} />
-                        <CommonUserFormGroup type="email" title="Address Email" placeholder="adresse e-mail" defaultValue={`${auth?.user?.email}`} onChange={(e) => setNewEmail(e.target.value)} />
-                        <CommonUserFormGroup type="text" title="Num Tel" placeholder="Numéro de téléphone" defaultValue={`${auth?.user?.phone_number}`} onChange={(e) => setNewPhoneNumber(e.target.value)} />
-                        <CommonUserFormGroup type="text" title="Adresse" placeholder="adresse physique" defaultValue={`${auth?.user?.address}`} onChange={(e) => setNewAddress(e.target.value)} />
+                        <CommonUserFormGroup type="text" title="Nom" placeholder="Nom" defaultValue={user?.name} name="name" />
+                        <CommonUserFormGroup type="text" title="Post-nom" placeholder="Post-nom" defaultValue={user?.first_name} name="first_name" />
+                        <CommonUserFormGroup type="text" title="Prénom" placeholder="Prénom" defaultValue={user?.last_name} name="last_name" />
+                        <CommonUserFormGroup type="email" title="Adresse Email" placeholder="Adresse e-mail" defaultValue={user?.email} name="email" />
+                        <CommonUserFormGroup type="text" title="Numéro de Téléphone" placeholder="Numéro de téléphone" defaultValue={user?.phone_number} name="phone_number" />
+                        <CommonUserFormGroup type="text" title="Adresse" placeholder="Adresse physique" defaultValue={user?.address} name="address" />
                         <div className="form-footer"><Button block color="primary">{"Enregistrer"}</Button></div>
                     </Form>
                 </CardBody>
@@ -92,4 +77,6 @@ const MyProfile = () => {
 };
 
 export default MyProfile;
+
+
 

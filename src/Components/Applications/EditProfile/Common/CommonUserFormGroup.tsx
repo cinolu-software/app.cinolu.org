@@ -3,14 +3,14 @@ import { FormGroup, Input, Label } from "reactstrap";
 import React from "react";
 
 interface CommonUserFormGroupProps extends CommonUserFormGroupType {
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    name : string
 }
 
-const CommonUserFormGroup: React.FC<CommonUserFormGroupProps> = ({ type, title, placeholder, defaultValue, row, onChange }) => {
+const CommonUserFormGroup: React.FC<CommonUserFormGroupProps> = ({ type, title, placeholder, defaultValue, name }) => {
     return (
         <FormGroup>
             <Label check>{title}</Label>
-            <Input type={type} placeholder={placeholder} defaultValue={defaultValue} rows={row} autoComplete="" onChange={onChange} />
+            <Input type={type} placeholder={placeholder} defaultValue={defaultValue}  autoComplete="off" name={name} />
         </FormGroup>
     );
 };

@@ -5,11 +5,11 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 
+
 const ImagePreview = () => {
 
   const [files, setFiles] = useState([]);
 
-  console.log(files);
 
   return (
     <Col lg="12">

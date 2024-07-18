@@ -1,7 +1,8 @@
 import { Col, Nav, NavItem, NavLink } from "reactstrap";
 import { Href } from "@/Constant";
-import { useState } from "react";
+import React, { useState } from "react";
 import ClothsDetailsTabContent from "./ClothsDetailsTabContent";
+import {ToastContainer} from "react-toastify";
 
 const ClothsDetails = () => {
 

@@ -1,8 +1,5 @@
 import { ChangeEvent } from "react";
 
-
-
-
 export interface Role{
   id: number;
   name: string;
@@ -44,8 +41,9 @@ export interface User {
 }
 
 export interface AuthResponse {
-  data: User | undefined;
+  data: User;
 }
+
 
 export interface ApiError {
   property: string;
@@ -84,19 +82,8 @@ export interface ProfileImageData {
 export interface AuthState {
 
   user : User | null;
-  statusLogin: 'idle' | 'loading' | 'succeeded' | 'failed';
-  statusLogout: 'idle' | 'loading' | 'succeeded' | 'failed';
-  statusCheckAuth : 'idle' | 'loading' | 'succeeded' | 'failed';
-  statusUpdateProfile : 'idle' | 'loading' | 'succeeded' | 'failed';
-  statusUpdatePassword : 'idle' | 'loading' | 'succeeded' | 'failed';
-
-  errorLogin: string | null;
-  errorLogout: string | null;
-  errorCheckAuth: string | null;
-  errorUpdateProfile: string | null;
-  errorUpdatePassword: string | null;
-
-
+  statusAuth : 'idle' | 'loading' | 'succeeded' | 'failed';
+  errorAuth: string | null;
   isAuthenticated: boolean;
 }
 
