@@ -26,7 +26,8 @@ const UpdatePassWord = () => {
 
         const { old_password, password, password_confirm } = formValues;
 
-        if (old_password && password && password_confirm) {
+        if (old_password && password && password_confirm)
+        {
             await dispatch(updatePassword(formValues)).unwrap()
                 .then(()=>{
                     toast.success(
@@ -53,7 +54,9 @@ const UpdatePassWord = () => {
                     );
                 })
             ;
-        } else {
+        }
+        else
+        {
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Please fill in all fields."}</p>,
                 {

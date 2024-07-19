@@ -17,39 +17,7 @@ const UserForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch<AppDispatch>();
-  const loginStatus = useSelector(selectStatus);
-  const loginErrors = useSelector(selectError);
   const router = useRouter();
-
-  const toastMessages = () => {
-      if (loginStatus === 'succeeded') {
-          toast.success(
-              <p className="text-white tx-16 mb-0">{"Connexion effectuée avec succès"}</p>,
-              {
-                  autoClose: 5000,
-                  position: toast.POSITION.TOP_CENTER,
-                  hideProgressBar: false,
-                  transition: Flip,
-                  theme: "colored",
-              }
-          );
-
-          router.push('/dashboard');
-      }
-      if (loginStatus === 'failed') {
-          toast.error(
-              <p className="text-white tx-16 mb-0">{`${loginErrors}`}</p>,
-              {
-                  autoClose: 5000,
-                  position: toast.POSITION.TOP_CENTER,
-                  hideProgressBar: false,
-                  transition: Flip,
-                  theme: "colored",
-              }
-          );
-
-      }
-  }
 
   const formSubmitHandle = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,8 +25,34 @@ const UserForm = () => {
       email: email,
       password: password,
     };
-    await dispatch(login(payload));
-    toastMessages();
+    await dispatch(login(payload)).unwrap()
+        .then(()=>{
+            toast.success(
+                <p className="text-white tx-16 mb-0">{"Connexion effectuée avec succès"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+
+            router.push('/dashboard');
+        })
+        .catch((error)=>{
+            toast.error(
+                <p className="text-white tx-16 mb-0">{error}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+        })
+
   };
 
   return (
