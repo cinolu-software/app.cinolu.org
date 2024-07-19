@@ -2,6 +2,7 @@ import { Href, Logout } from "@/Constant";
 import {useEffect} from "react";
 import { UserProfileData } from "@/Data/Layout";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { LogOut } from "react-feather";
 import {checkAuth, selectAuth, logout} from "@/Redux/Reducers/AuthSlice";
@@ -13,7 +14,9 @@ export const Profile = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
-    const auth = useSelector(selectAuth);
+    const  {user} = useSelector(selectAuth);
+
+    console.log(user);
 
     useEffect(() => {
         dispatch(checkAuth());
@@ -27,11 +30,11 @@ export const Profile = () => {
   return (
     <li className="profile-nav onhover-dropdown px-0 py-0">
       <div className="d-flex profile-media align-items-center">
-        <img className="img-30 rounded-circle" src={`${imageBaseUrl}/profiles/${auth?.user?.profile}`} alt="profile utilisateur" />
+        <img className="img-30 rounded-circle" src={user?.profile ? `${imageBaseUrl}/profiles/${user?.profile}` : `/assets/images/avtar/avatar.jpg`} alt="profile utilisateur"  />
         <div className="flex-grow-1">
-          <span>{`${auth?.user?.first_name}-${auth?.user?.name}`}</span>
+          <span>{`${user?.first_name}-${user?.name}`}</span>
           <p className="mb-0 font-outfit">
-              {`${auth?.user?.roles[0].name}`} <i className="fa fa-angle-down"></i>
+              {`${user?.roles[0].name}`} <i className="fa fa-angle-down"></i>
           </p>
         </div>
       </div>

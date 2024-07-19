@@ -16,33 +16,7 @@ const MyProfile = () => {
     const { user } = useSelector(selectAuth);
     const statusUpdate = useSelector(selectStatus);
     const updateError = useSelector(selectError);
-    const [isToast, setIsToast] = useState(true);
 
-    useEffect(() => {
-        if (statusUpdate === "succeeded" && !isToast) {
-            toast.success(
-                <p className="text-white tx-16 mb-0">{"Mise à jour effectuée avec succès"}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
-        } else if (statusUpdate === "failed" && !isToast) {
-            toast.error(
-                <p className="text-white tx-16 mb-0">{updateError}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
-        }
-    }, [statusUpdate, updateError, isToast]);
 
     const handleProfileUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -50,9 +24,32 @@ const MyProfile = () => {
 
         const formData = new FormData(e.target as HTMLFormElement);
         const payload = Object.fromEntries(formData.entries()) as unknown as UpdateProfilePayload;
-        await dispatch(updateProfile(payload)).unwrap();
-
-        setIsToast(false)
+        await dispatch(updateProfile(payload)).unwrap()
+            .then(() => {
+                toast.success(
+                    <p className="text-white tx-16 mb-0">{"Mise à jour effectuée avec succès"}</p>,
+                    {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        hideProgressBar: false,
+                        transition: Flip,
+                        theme: "colored",
+                    }
+                );
+            })
+            .catch((error)=>{
+                toast.error(
+                    <p className="text-white tx-16 mb-0">{updateError}</p>,
+                    {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        hideProgressBar: false,
+                        transition: Flip,
+                        theme: "colored",
+                    }
+                );
+            })
+        ;
     };
 
     return (

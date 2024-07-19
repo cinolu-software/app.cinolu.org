@@ -12,7 +12,7 @@ export const UserFormHead = () => {
     <Row className="mb-2">
       <div className="profile-title">
         <div className="d-flex">
-          <img className="img-70 rounded-circle" alt="" src={`${imageBaseUrl}/profiles/${user?.profile}`} />
+          <img className="img-70 rounded-circle" alt="" src={user?.profile ? `${imageBaseUrl}/profiles/${user?.profile}` : `/assets/images/avtar/avatar.jpg`} />
           <div className="flex-grow-1">
             <h4 className="mb-1 text-uppercase">
               {`${user?.name}-${user?.first_name}`}

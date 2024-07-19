@@ -7,46 +7,15 @@ import { UpdateProfilePassword } from "@/Types/AuthType";
 import { AppDispatch } from "@/Redux/Store";
 
 const UpdatePassWord = () => {
+
     const dispatch = useDispatch<AppDispatch>();
-    const statusUpdate = useSelector(selectStatus);
     const updateError = useSelector(selectError);
-    const [isToast, setIsToast] = useState(true);
-    const [isSubmitting, setIsSubmitting] = useState(false);
     const [formValues, setFormValues] = useState<UpdateProfilePassword>({
         old_password: '',
         password: '',
         password_confirm: ''
     });
 
-    useEffect(() => {
-        if (!isToast) {
-            if (statusUpdate === 'succeeded') {
-                toast.success(
-                    <p className="text-white tx-16 mb-0">{"Mise à jour du mot de passe effectuée avec succès"}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            } else if (statusUpdate === 'failed') {
-                toast.error(
-                    <p className="text-white tx-16 mb-0">{updateError}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            }
-            setIsToast(true);
-            setIsSubmitting(false);
-        }
-    }, [statusUpdate, updateError, isToast]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -54,13 +23,36 @@ const UpdatePassWord = () => {
     };
 
     const handlePasswordUpdate = async () => {
-        setIsSubmitting(true);
 
         const { old_password, password, password_confirm } = formValues;
 
         if (old_password && password && password_confirm) {
-            setIsToast(false);
-            await dispatch(updatePassword(formValues)).unwrap();
+            await dispatch(updatePassword(formValues)).unwrap()
+                .then(()=>{
+                    toast.success(
+                        <p className="text-white tx-16 mb-0">{"Mise à jour du mot de passe effectuée avec succès"}</p>,
+                        {
+                            autoClose: 5000,
+                            position: toast.POSITION.TOP_CENTER,
+                            hideProgressBar: false,
+                            transition: Flip,
+                            theme: "colored",
+                        }
+                    );
+                })
+                .catch(()=>{
+                    toast.error(
+                        <p className="text-white tx-16 mb-0">{updateError}</p>,
+                        {
+                            autoClose: 5000,
+                            position: toast.POSITION.TOP_CENTER,
+                            hideProgressBar: false,
+                            transition: Flip,
+                            theme: "colored",
+                        }
+                    );
+                })
+            ;
         } else {
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Please fill in all fields."}</p>,
@@ -72,7 +64,6 @@ const UpdatePassWord = () => {
                     theme: "colored",
                 }
             );
-            setIsSubmitting(false);
         }
     };
 
@@ -114,7 +105,7 @@ const UpdatePassWord = () => {
                         />
                     </Col>
                     <Col sm="12">
-                        <Button block color="primary" onClick={handlePasswordUpdate} disabled={isSubmitting}>{"Modifier le mot de passe"}</Button>
+                        <Button block color="primary" onClick={handlePasswordUpdate} >{"Modifier le mot de passe"}</Button>
                     </Col>
                 </Row>
             </Form>
@@ -123,3 +114,4 @@ const UpdatePassWord = () => {
 };
 
 export default UpdatePassWord;
+

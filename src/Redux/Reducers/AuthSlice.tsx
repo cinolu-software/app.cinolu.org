@@ -15,6 +15,7 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
     }
 });
 
+
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>("auth/logout", async (_, thunkAPI) => {
     try {
         await axios.post(`${apiBaseUrl}/auth/logout`, {});
@@ -75,6 +76,7 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
                 'Content-Type': 'multipart/form-data'
             }
         });
+        Cookies.set("cinolu_token", JSON.stringify(response.data));
         return response.data;
     } catch (error: any) {
         const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la mise à jour de l'image de profil";
