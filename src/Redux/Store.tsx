@@ -8,18 +8,18 @@ import LetterBoxSlice from "./Reducers/LetterBoxSlice";
 import ContactSlice from "./Reducers/ContactSlice";
 import ProductSlice from "./Reducers/ProductSlice";
 
-import UserAdminSlice from "./Reducers/userSlice/AdminSlice";
-import UserCoachSlice from "./Reducers/userSlice/CoachSlice";
-import MembersSlice from "./Reducers/userSlice/MembersSlice";
-import PartnersSlice from "./Reducers/userSlice/PartnersSlice";
-import InternetUsersSlice from "./Reducers/userSlice/InternetUsersSlice";
 import ProjectSlice from "./Reducers/projectSlice/projectSlice";
 import CategorySlice from "./Reducers/projectSlice/projectCategorySlice";
 import StatusSlice from "./Reducers/projectSlice/projectStatusSlice";
 import RoleSlice from "./Reducers/AdminOptions/roleSlice/RoleSlice";
 import projectCategorySlice from "./Reducers/projectSlice/projectCategorySlice";
 
-import ProgramSlice from "./Reducers/programsSlice/programsSlice"
+import UsersSlice from "./Reducers/userSlice/UserSlice";
+
+import ProgramSlice from "./Reducers/programsSlice/programsSlice";
+
+import FilterSlice from "./Reducers/FilterSlice";
+import CartSlice from "./Reducers/CartSlice";
 
 
 const Store = configureStore({
@@ -40,14 +40,12 @@ const Store = configureStore({
 
     programs: ProgramSlice,
 
-    userAdmin: UserAdminSlice,
-    userCoach: UserCoachSlice,
-    userMembers: MembersSlice,
-    partners: PartnersSlice,
-    internetUsers: InternetUsersSlice,
+    users : UsersSlice,
 
     role: RoleSlice,
 
+    filterData: FilterSlice,
+    cartData: CartSlice,
     auth: AuthSlice,
 
 

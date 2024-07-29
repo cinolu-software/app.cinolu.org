@@ -27,6 +27,7 @@ const ProductSlice = createSlice({
     });
   },
 });
+
 export const { setFilterToggle } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

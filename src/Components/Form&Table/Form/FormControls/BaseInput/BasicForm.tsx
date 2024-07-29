@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+
 import { Button, Col, Form, Input, Label, Row } from "reactstrap";
 import {  updatePassword } from "@/Redux/Reducers/AuthSlice";
 import { useDispatch,  } from "react-redux";
@@ -9,12 +9,8 @@ import { AppDispatch } from "@/Redux/Store";
 const BasicForm = () => {
     const dispatch = useDispatch<AppDispatch>();
 
-
-
     const handlePasswordUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-
         e.preventDefault();
-
         const formData = new FormData(e.target as HTMLFormElement);
         const payload = Object.fromEntries(formData.entries()) as unknown as UpdateProfilePassword;
         await dispatch(updatePassword(payload)).unwrap()

@@ -25,13 +25,16 @@ const transformRole = (roles: RoleType[]): TransformedRoleType[] => {
 };
 
 export const fetchRole = createAsyncThunk<{ original: RoleType[], transformed: TransformedRoleType[] }>(
+
     'roles/fetchRole', async () => {
         const response = await axios.get<{ data: RoleType[] }>(`${apiBaseUrl}/roles`);
         const originalRoles = response.data.data;
         const transformedRoles = transformRole(originalRoles);
         return { original: originalRoles, transformed: transformedRoles };
     }
+
 );
+
 
 export const createRole = createAsyncThunk<RoleType, CreateRole>(
     'roles/createRole', async (newRole, { rejectWithValue }) => {

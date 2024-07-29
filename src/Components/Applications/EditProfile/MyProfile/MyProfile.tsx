@@ -6,7 +6,7 @@ import CommonUserFormGroup from "../Common/CommonUserFormGroup";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { Flip, toast } from "react-toastify";
-import { selectAuth, updateProfile, selectError, selectStatus } from "@/Redux/Reducers/AuthSlice";
+import { selectAuth, updateProfile } from "@/Redux/Reducers/AuthSlice";
 import { UpdateProfilePayload } from "@/Types/AuthType";
 import { AppDispatch } from "@/Redux/Store";
 
@@ -14,14 +14,10 @@ const MyProfile = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { user } = useSelector(selectAuth);
-    const statusUpdate = useSelector(selectStatus);
-    const updateError = useSelector(selectError);
 
 
     const handleProfileUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
-
         e.preventDefault();
-
         const formData = new FormData(e.target as HTMLFormElement);
         const payload = Object.fromEntries(formData.entries()) as unknown as UpdateProfilePayload;
         await dispatch(updateProfile(payload)).unwrap()
@@ -38,8 +34,9 @@ const MyProfile = () => {
                 );
             })
             .catch((error)=>{
+
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{updateError}</p>,
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
