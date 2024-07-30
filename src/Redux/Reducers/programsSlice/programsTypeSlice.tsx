@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios, { apiBaseUrl } from "@/services/axios";
-import {InitialStateProgramsTypeType, ProgramsTypeType, CreateProgramTypeType, TransformedProgramsTypeType} from "@/Types/Programs/ProgramsTypeType"
+import { InitialStateProgramsTypeType, ProgramsTypeType, CreateProgramTypeType, TransformedProgramsTypeType } from "@/Types/Programs/ProgramsTypeType";
 import { RootState } from "@/Redux/Store";
 
 const initialState: InitialStateProgramsTypeType = {
@@ -21,8 +21,8 @@ const transformProgramsType = (types: ProgramsTypeType[]): TransformedProgramsTy
     }));
 };
 
-export const fetchProgramsType = createAsyncThunk<{ original: ProgramsTypeType[], transformed: TransformedProgramsTypeType[] }>(
-    'programs/fetchProgramstype',
+export const fetchProgramsType = createAsyncThunk(
+    'programs/fetchProgramsType',
     async () => {
         const response = await axios.get<{ data: ProgramsTypeType[] }>(`${apiBaseUrl}/types`);
         const originalProgramsTypes = response.data.data;
@@ -31,11 +31,10 @@ export const fetchProgramsType = createAsyncThunk<{ original: ProgramsTypeType[]
     }
 );
 
-export const createProgramType = createAsyncThunk<ProgramsTypeType, CreateProgramTypeType>(
+export const createProgramType = createAsyncThunk(
     'programs/createProgramType',
-    async (newProgramType, { rejectWithValue }) => {
+    async (newProgramType: CreateProgramTypeType, { rejectWithValue }) => {
         try {
-            newProgramType.image = "admin/roles/user_role.png";
             const response = await axios.post<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types`, newProgramType);
             return response.data.data;
         } catch (err: any) {
@@ -44,9 +43,9 @@ export const createProgramType = createAsyncThunk<ProgramsTypeType, CreateProgra
     }
 );
 
-export const updateProgramType = createAsyncThunk<ProgramsTypeType, ProgramsTypeType>(
+export const updateProgramType = createAsyncThunk(
     'programs/updateProgramType',
-    async (updatedProgramType, { rejectWithValue }) => {
+    async (updatedProgramType: ProgramsTypeType, { rejectWithValue }) => {
         try {
             const response = await axios.patch<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types/${updatedProgramType.id}`, updatedProgramType);
             return response.data.data;
@@ -56,10 +55,9 @@ export const updateProgramType = createAsyncThunk<ProgramsTypeType, ProgramsType
     }
 );
 
-
-export const deleteProgramType = createAsyncThunk<number, number>(
-    'programs/deleteProgramTypes',
-    async (programTypeId, { rejectWithValue }) => {
+export const deleteProgramType = createAsyncThunk(
+    'programs/deleteProgramType',
+    async (programTypeId: number, { rejectWithValue }) => {
         try {
             await axios.delete(`${apiBaseUrl}/types/${programTypeId}`);
             return programTypeId;
@@ -73,7 +71,7 @@ const ProgramsTypeSlice = createSlice({
     name: "programs",
     initialState,
     reducers: {
-        setModalCreateProgramTypes: (state, action: PayloadAction<{isOpen: boolean}>) => {
+        setModalCreateProgramTypes: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateProgramType = action.payload.isOpen;
         },
         setModalEditProgramTypes: (state, action: PayloadAction<{ isOpen: boolean, programType: ProgramsTypeType | null }>) => {
@@ -85,7 +83,6 @@ const ProgramsTypeSlice = createSlice({
             state.selectedProgramType = action.payload.programType;
         },
     },
-
     extraReducers: (builder) => {
         builder
             .addCase(fetchProgramsType.pending, (state) => {
@@ -136,7 +133,6 @@ const ProgramsTypeSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })
-
             .addCase(deleteProgramType.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
@@ -153,10 +149,10 @@ const ProgramsTypeSlice = createSlice({
     }
 });
 
-export const { setModalCreateProgramTypes, setModalEditProgramTypes , setModalDeleteProgramTypes } = ProgramsTypeSlice.actions;
-export const selectProgramStatus = (state: RootState) => state.programs.status;
-export const selectOriginalProgramData = (state: RootState) => state.programs.originalProgramsData;
-export const selectTransformedProgramData = (state: RootState) => state.programs.transformedProgramsData;
-export const selectProgramError = (state: RootState) => state.programs.error;
+export const { setModalCreateProgramTypes, setModalEditProgramTypes, setModalDeleteProgramTypes } = ProgramsTypeSlice.actions;
+export const selectProgramTypeStatus = (state: RootState) => state.programsType.status;
+export const selectOriginalProgramData = (state: RootState) => state.programsType.originalTypeProgramsData;
+export const selectTransformedProgramDataType = (state: RootState) => state.programsType.transformedProgramsData;
+export const selectProgramError = (state: RootState) => state.programsType.error;
 
 export default ProgramsTypeSlice.reducer;

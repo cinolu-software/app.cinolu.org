@@ -18,6 +18,7 @@ const ProgramsListTableName: React.FC<ProgramsListTableNameType> = ({ image, nam
 };
 
 const ProgramsListTableAction: React.FC<{ program: ProgramsType }> = ({ program }) => {
+
     const dispatch = useDispatch();
 
     const handleEdit = () => {
@@ -34,6 +35,7 @@ const ProgramsListTableAction: React.FC<{ program: ProgramsType }> = ({ program 
             <Button size={"sm"} color={"danger"} onClick={handleDelete}>Supprimer</Button>
         </div>
     );
+
 };
 
 export const ProgramsListTableDataColumn = [

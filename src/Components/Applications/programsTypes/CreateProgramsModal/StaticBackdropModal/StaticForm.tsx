@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { Button, Col, Label, Row } from 'reactstrap';
-import { createProgram, selectProgramStatus, selectProgramError, setModalCreateProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { StaticModalToggleProp, CreateProgramType } from "@/Types/Programs/ProgramsType";
+import { createProgramType, selectProgramTypeStatus, selectProgramError, setModalCreateProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import {  CreateProgramTypeType, StaticModalToggleProp } from "@/Types/Programs/ProgramsTypeType";
 import { RootState } from '@/Redux/Store';
 import { Flip, toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch } from "@/Redux/Store";
-import { useAppSelector } from "@/Redux/Hooks";
 
-export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle }) => {
+export const StaticForm: React.FC<StaticModalToggleProp> = () => {
+
     const dispatch = useDispatch<AppDispatch>();
-    const programStatus = useSelector(selectProgramStatus);
+    const programStatus = useSelector(selectProgramTypeStatus);
     const programError = useSelector(selectProgramError);
-    const [program, setProgram] = useState<CreateProgramType>({ name: '', description: '', start_at: '', end_at: '' });
+    const [program, setProgram] = useState<CreateProgramTypeType>({ name: '', description: '' });
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await dispatch(createProgram(program));
-        dispatch(setModalCreateProgram({ isOpen: false }));
+        await dispatch(createProgramType(program));
+        dispatch(setModalCreateProgramTypes({ isOpen: false }));
 
         if (programStatus === 'failed') {
             toast.error(
@@ -61,32 +61,6 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
                             placeholder="Entrer la description du programme"
                             value={program.description}
                             onChange={(e) => setProgram({ ...program, description: e.target.value })}
-                        />
-                    </Col>
-
-                    <Col md="6">
-                        <Label className="mb-2" check>
-                            {"Date de début"}
-                        </Label>
-                        <input
-                            className="form-control mb-4"
-                            name="start_at"
-                            type="date"
-                            value={program.start_at}
-                            onChange={(e) => setProgram({ ...program, start_at: e.target.value })}
-                        />
-                    </Col>
-
-                    <Col md="6">
-                        <Label className="mb-2" check>
-                            {"Date de fin"}
-                        </Label>
-                        <input
-                            className="form-control mb-4"
-                            name="end_at"
-                            type="date"
-                            value={program.end_at}
-                            onChange={(e) => setProgram({ ...program, end_at: e.target.value })}
                         />
                     </Col>
 

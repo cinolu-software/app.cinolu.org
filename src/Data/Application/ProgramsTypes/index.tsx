@@ -1,16 +1,13 @@
 import React from 'react';
 import { Button } from "reactstrap";
-import { ProgramListTableColumnTypeType, ProgramsListTypeTableColumnNameTypeType, ProgramsTypeType} from "@/Types/Programs/ProgramsTypeType";
-
+import { ProgramsListTypeTableColumnType, ProgramsTypeType} from "@/Types/Programs/ProgramsTypeType";
 import RatioImage from "@/CommonComponent/RatioImage";
-
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
-import { setModalDeleteProgram, setModalEditProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setModalDeleteProgramTypes, setModalEditProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 
-
-const ProgramsListTableName: React.FC<ProgramsListTypeTableColumnNameTypeType> = ({ image, name }) => {
+const ProgramsListTableName: React.FC<{ image?: string; name: string }> = ({ image, name }) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -21,29 +18,28 @@ const ProgramsListTableName: React.FC<ProgramsListTypeTableColumnNameTypeType> =
     );
 };
 
-const ProgramsListTableAction: React.FC<{ program: ProgramsTypeType }> = ({ ProgramsTypeType }) => {
+const ProgramsListTableAction: React.FC<{ programType: ProgramsTypeType }> = ({ programType }) => {
+
     const dispatch = useDispatch();
 
     const handleEdit = () => {
-        dispatch(setModalEditProgram({ isOpen: true, program }));
+        dispatch(setModalEditProgramTypes({ isOpen: true, programType }));
     };
 
     const handleDelete = () => {
-        dispatch(setModalDeleteProgram({ isOpen: true, program }));
+        dispatch(setModalDeleteProgramTypes({ isOpen: true, programType }));
     };
 
-    return (
-        <div className="product-action">
+    return (<div className="product-action">
             <Button size={"sm"} onClick={handleEdit}>Modifier</Button>
             <Button size={"sm"} color={"danger"} onClick={handleDelete}>Supprimer</Button>
-        </div>
-    );
+        </div>);
 };
 
 export const ProgramsListTableDataColumn = [
     {
         name: "Nom",
-        cell: (row: ProgramListTableColumnTypeType) => (
+        cell: (row: ProgramsListTypeTableColumnType) => (
             <ProgramsListTableName image={row.image || "default_program_image.png"} name={row.name} />
         ),
         sortable: true,
@@ -51,14 +47,13 @@ export const ProgramsListTableDataColumn = [
     },
     {
         name: "Description",
-        selector: (row: ProgramListTableColumnTypeType) => (
+        selector: (row: ProgramsListTypeTableColumnType) => (
             <div>{row.description}</div>
         ),
         sortable: false,
     },
-
     {
         name: "Action",
-        cell: (row: ProgramListTableColumnTypeType) => <ProgramsListTableAction program={row} />,
+        cell: (row: ProgramsListTypeTableColumnType) => <ProgramsListTableAction programType={row} />,
     },
 ];

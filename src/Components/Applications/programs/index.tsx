@@ -1,20 +1,22 @@
 import React, { useMemo, useState, useEffect } from "react";
 import { AppDispatch } from "@/Redux/Store";
-import DataTable from "react-data-table-component";
+import DataTable, {TableColumn} from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { ProgramsHeader } from "./ProgramsList";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProgramStatus, fetchPrograms, selectTransformedProgramData } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
+import {ProgramsListTableColumnType} from "@/Types/Programs/ProgramsType";
+
 import CreateProgramsModal from "./CreateProgramsModal";
 import UpdateProgramsModal from "./UpdateProgramsModal";
 import DeleteProgramsModal from "./DeleteProgramsModal";
+
 
 const ProgramsListContainer = () => {
 
   const [filterText, setFilterText] = useState("");
   const dispatch = useDispatch<AppDispatch>();
-
   const status = useSelector(selectProgramStatus);
   const transformedPrograms = useSelector(selectTransformedProgramData);
 
@@ -54,7 +56,7 @@ const ProgramsListContainer = () => {
                     <DataTable
                         className="theme-scrollbar"
                         data={filteredPrograms}
-                        columns={ProgramsListTableDataColumn}
+                        columns={ProgramsListTableDataColumn as TableColumn<ProgramsListTableColumnType>}
                         striped
                         highlightOnHover
                         pagination

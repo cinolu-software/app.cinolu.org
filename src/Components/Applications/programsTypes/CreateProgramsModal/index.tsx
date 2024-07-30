@@ -1,12 +1,13 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalCreateProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { Button, Col } from "reactstrap";
+import {setModalCreateProgramTypes} from "@/Redux/Reducers/programsSlice/programsTypeSlice"
+import { Col } from "reactstrap";
 import CommonModal from "./Common/CommonModal";
 import { StaticForm } from "./StaticBackdropModal/StaticForm";
 
 const CreateProgramTypesModal = () => {
-    const { isOpenModalCreateProgram } = useAppSelector((state) => state.programs);
+
+    const { isOpenModalCreateProgramType } = useAppSelector((state) => state.programsType);
     const dispatch = useAppDispatch();
 
     return (
@@ -15,12 +16,12 @@ const CreateProgramTypesModal = () => {
                 <CommonModal
                     centered
                     modalBodyClassName="social-profile text-start"
-                    isOpen={isOpenModalCreateProgram}
-                    toggle={() => dispatch(setModalCreateProgram({ isOpen: false }))}
+                    isOpen={isOpenModalCreateProgramType}
+                    toggle={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))}
                 >
                     <div className="modal-toggle-wrapper">
-                        <h3 className={"mb-4"}>{"Ajouter un Programme"}</h3>
-                        <StaticForm staticModalToggle={() => dispatch(setModalCreateProgram({ isOpen: false }))} />
+                        <h3 className={"mb-4"}>{"Ajouter un Type de Program"}</h3>
+                        <StaticForm staticModalToggle={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))} />
                     </div>
                 </CommonModal>
             </Col>

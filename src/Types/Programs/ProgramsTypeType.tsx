@@ -1,4 +1,5 @@
-export interface ProgramsTypeType{
+// Types/Programs/ProgramsTypeType.ts
+export interface ProgramsTypeType {
     id: number;
     name: string;
     description: string;
@@ -7,7 +8,7 @@ export interface ProgramsTypeType{
     image?: string;
 }
 
-export interface TransformedProgramsTypeType{
+export interface TransformedProgramsTypeType {
     id: number;
     name: string;
     description: string;
@@ -16,7 +17,7 @@ export interface TransformedProgramsTypeType{
     image: string;
 }
 
-export interface InitialStateProgramsTypeType{
+export interface InitialStateProgramsTypeType {
     originalTypeProgramsData: ProgramsTypeType[];
     transformedProgramsData: TransformedProgramsTypeType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -27,25 +28,14 @@ export interface InitialStateProgramsTypeType{
     selectedProgramType: ProgramsTypeType | null;
 }
 
-export interface CreateProgramTypeType{
+export interface CreateProgramTypeType {
     name: string;
     description: string;
-    image?: string
+    image?: string;
 }
 
-export interface ProgramListTableColumnTypeType{
-    name: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
-}
-
-export interface StaticModalToggleProp{
+export interface StaticModalToggleProp {
     staticModalToggle: () => void;
 }
 
 export interface ProgramsListTypeTableColumnType extends ProgramsTypeType {}
-
-export interface ProgramsListTypeTableColumnNameTypeType  {
-
-}

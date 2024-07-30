@@ -5,7 +5,7 @@ import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { ProgramsHeader } from "./ProgramsList";
 import { useSelector, useDispatch } from "react-redux";
 import { selectProgramStatus, fetchPrograms, selectTransformedProgramData } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
+import { ProgramsListTableDataColumn } from "@/Data/Application/ProgramsTypes";
 import CreateProgramsModal from "./CreateProgramsModal";
 import UpdateProgramsModal from "./UpdateProgramsModal";
 import DeleteProgramsModal from "./DeleteProgramsModal";
