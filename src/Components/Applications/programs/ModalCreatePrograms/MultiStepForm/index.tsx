@@ -1,7 +1,6 @@
 import React from "react";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
-import ProductBody from "./ProductBody";
-
+import ProgramBody from "./ProgramBody"
 const AddProgramContainer = () => {
 
   return (
@@ -12,7 +11,7 @@ const AddProgramContainer = () => {
             <h5>{"Formulaire d'ajout de programme"}</h5>
           </CardHeader>
           <CardBody>
-            <ProductBody />
+            <ProgramBody />
           </CardBody>
         </Card>
       </Col>

@@ -4,6 +4,7 @@ import { useAppDispatch } from "@/Redux/Hooks";
 import { setFormValue } from "@/Redux/Reducers/AddProductSlice";
 
 const TabOne = () => {
+
   const dispatch = useAppDispatch()
   
   return (

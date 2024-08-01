@@ -20,8 +20,7 @@ const ProductOne = () => {
           </Col>
           <Col xs="12">
             <div className="custom-input">
-              <Input className={formValue.userName !== "" ? "valid" : "is-invalid"} type="text" required name="userName" 
-              onChange={(e)=>dispatch(setFormValue({name:"userName",value:e.target.value}))}/>
+              <Input className={formValue.userName !== "" ? "valid" : "is-invalid"} type="text" required name="userName" onChange={(e)=>dispatch(setFormValue({name:"userName",value:e.target.value}))}/>
             </div>
           </Col>
           <FormEditors />

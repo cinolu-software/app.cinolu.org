@@ -4,6 +4,7 @@ import SimpleMdeReact from "react-simplemde-editor";
 import { Add, Cancel, CategoryName, CreateNewCategoryHeading, Href } from "@/Constant";
 
 const CreateNewCategory = () => {
+
   const mdeEditorText = `Enter your messages...`;
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
