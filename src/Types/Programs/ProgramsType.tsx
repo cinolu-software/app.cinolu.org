@@ -1,3 +1,8 @@
+export interface Requirement {
+    name: string;
+    description: string;
+}
+
 export interface ProgramsType {
     id: number;
     name: string;
@@ -7,6 +12,8 @@ export interface ProgramsType {
     created_at: string;
     updated_at: string;
     image?: string;
+    types: number[];
+    requirements: Requirement[];
 }
 
 export interface TransformedProgramsType {
@@ -18,6 +25,8 @@ export interface TransformedProgramsType {
     created_at: string;
     updated_at: string;
     image: string;
+    types: number[];
+    requirements: Requirement[];
 }
 
 export interface InitialStateProgramsType {
@@ -37,6 +46,8 @@ export interface CreateProgramType {
     start_at: string;
     end_at: string;
     image?: string;
+    types: number[];
+    requirements: Requirement[];
 }
 
 export interface ProgramListTableColumnType {

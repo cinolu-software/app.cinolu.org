@@ -6,11 +6,11 @@ import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { ProgramsTypesHeader } from "./ProgramsList";
 import { useSelector, useDispatch } from "react-redux";
 import { selectOriginalProgramData,selectProgramTypeStatus, fetchProgramsType, selectTransformedProgramDataType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
-import CreateProgramsModal from "./CreateProgramsModal";
-import UpdateProgramsModal from "./UpdateProgramsModal";
 import DeleteProgramsModal from "./DeleteProgramsModal";
 import { ProgramsListTableDataColumn } from "@/Data/Application/ProgramsTypes";
 import { ProgramsListTypeTableColumnType } from "@/Types/Programs/ProgramsTypeType";
+import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";
+import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType"
 
 
 const ProgramsTypesListContainer: React.FC = () => {
@@ -47,9 +47,9 @@ const ProgramsTypesListContainer: React.FC = () => {
 
     return (
         <Container fluid>
-            <CreateProgramsModal />
-            <UpdateProgramsModal />
+            <UpdateProgramTypeModal />
             <DeleteProgramsModal />
+            <ModalCreateProgramType/>
             <Row>
                 <Col sm="12">
                     <Card>

@@ -1,10 +1,10 @@
 // Types/Programs/ProgramsTypeType.ts
 export interface ProgramsTypeType {
-    id: number;
-    name: string;
-    description: string;
-    created_at: string;
-    updated_at: string;
+    id?: number;
+    name?: string;
+    description?: string;
+    created_at?: string;
+    updated_at?: string;
     image?: string;
 }
 

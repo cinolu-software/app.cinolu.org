@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
 import { MyProfiles } from "@/Constant";
 import { UserFormHead } from "./UserFormHead";
@@ -14,7 +14,6 @@ const MyProfile = () => {
 
     const dispatch = useDispatch<AppDispatch>();
     const { user } = useSelector(selectAuth);
-
 
     const handleProfileUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

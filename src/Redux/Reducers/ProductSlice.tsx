@@ -17,14 +17,19 @@ const ProductSlice = createSlice({
   name: "ProductSlice",
   initialState,
   reducers: {
+
     setFilterToggle: (state) => {
       state.filterToggle = !state.filterToggle;
     },
+
   },
+
   extraReducers: (builder) => {
+
     builder.addCase(fetchProductApiData.fulfilled, (state, action) => {
       state.productItem = action.payload;
     });
+    
   },
 });
 

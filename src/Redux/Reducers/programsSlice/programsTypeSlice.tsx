@@ -17,7 +17,7 @@ const initialState: InitialStateProgramsTypeType = {
 const transformProgramsType = (types: ProgramsTypeType[]): TransformedProgramsTypeType[] => {
     return types.map(type => ({
         ...type,
-        image: "admin/roles/user_role.png"
+        image : "programs/types/typeProgram.png"
     }));
 };
 
@@ -107,7 +107,7 @@ const ProgramsTypeSlice = createSlice({
                 state.originalTypeProgramsData.push(action.payload);
                 state.transformedProgramsData.push({
                     ...action.payload,
-                    image: "admin/roles/user_role.png"
+                    image: "programs/types/typeProgram.png"
                 });
             })
             .addCase(createProgramType.rejected, (state, action) => {
@@ -125,7 +125,7 @@ const ProgramsTypeSlice = createSlice({
                     state.originalTypeProgramsData[index] = action.payload;
                     state.transformedProgramsData[index] = {
                         ...action.payload,
-                        image: "admin/roles/user_role.png"
+                        image: "programs/types/typeProgram.png"
                     };
                 }
             })

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Col, Label, Row } from 'reactstrap';
-import { updateProgram, selectProgramStatus, selectProgramError } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { updateProgram, selectProgramStatus,  } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Flip, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch } from "@/Redux/Store";
@@ -14,7 +14,6 @@ interface StaticFormProps {
 export const StaticForm: React.FC<StaticFormProps> = ({ staticModalToggle, selectedProgram }) => {
     const dispatch = useDispatch<AppDispatch>();
     const programStatus = useSelector(selectProgramStatus);
-    const programError = useSelector(selectProgramError);
     const [program, setProgram] = useState<ProgramsType>({
         id: selectedProgram?.id || 0,
         name: selectedProgram?.name || '',

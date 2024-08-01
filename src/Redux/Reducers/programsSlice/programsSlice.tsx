@@ -17,7 +17,7 @@ const initialState: InitialStateProgramsType = {
 const transformPrograms = (programs: ProgramsType[]): TransformedProgramsType[] => {
     return programs.map(program => ({
         ...program,
-        image: "admin/roles/user_role.png"
+        image: program.image || "programs/programs.png"
     }));
 };
 
@@ -35,7 +35,7 @@ export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>(
     'programs/createProgram',
     async (newProgram, { rejectWithValue }) => {
         try {
-            newProgram.image = "admin/roles/user_role.png";
+            newProgram.image = newProgram.image || "admin/roles/user_role.png";
             const response = await axios.post<{ data: ProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
             return response.data.data;
         } catch (err: any) {
@@ -125,7 +125,7 @@ const ProgramSlice = createSlice({
                 state.originalProgramsData.push(action.payload);
                 state.transformedProgramsData.push({
                     ...action.payload,
-                    image: "admin/roles/user_role.png"
+                    image: action.payload.image || "admin/roles/user_role.png"
                 });
             })
             .addCase(createProgram.rejected, (state, action) => {
@@ -143,7 +143,7 @@ const ProgramSlice = createSlice({
                     state.originalProgramsData[index] = action.payload;
                     state.transformedProgramsData[index] = {
                         ...action.payload,
-                        image: "admin/roles/user_role.png"
+                        image: action.payload.image || "admin/roles/user_role.png"
                     };
                 }
             })
@@ -182,7 +182,9 @@ export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram
 export const selectProgramStatus = (state: RootState) => state.programs.status;
 export const selectOriginalProgramData = (state: RootState) => state.programs.originalProgramsData;
 export const selectTransformedProgramData = (state: RootState) => state.programs.transformedProgramsData;
-export const selectProgramError = (state: RootState) => state.programs.error;
+export const selectIsOpenModalCreateProgram = (state: RootState) => state.programs.isOpenModalCreateProgram;
+export const selectIsOpenModalEditProgram = (state: RootState) => state.programs.isOpenModalEditProgram;
+export const selectIsOpenModalDeleteProgram = (state: RootState) => state.programs.isOpenModalDeleteProgram;
+export const selectSelectedProgram = (state: RootState) => state.programs.selectedProgram;
 
 export default ProgramSlice.reducer;
-

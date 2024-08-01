@@ -52,8 +52,7 @@ export const MenuList: MenuItem [] | undefined = [
                 children: [
                     // {path: "/programs/details", title: "détails", type: "link", lanClass: "lan-5"},
                     {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
-                    {path: "/programs/programTypes", title: "types", type: "link", lanClass: "lan-6"},
-                    {path: "/programs/programRequirements", title: "requirements", type: "link", lanClass: "lan-6"},
+                    {path: "/programs/programTypes", title: "types de programmes", type: "link", lanClass: "lan-6"},
                 ]
             },
             // {
@@ -69,15 +68,15 @@ export const MenuList: MenuItem [] | undefined = [
             //         {path: "/projects/category", title: "Catégorie", type: "link", lanClass: "lan-5"},
             //     ]
             // },
-            // {
-            //     title: "Rôle",
-            //     id: 3,
-            //     icon: "file",
-            //     type: "link",
-            //     lanClass: "lan-6",
-            //     active: false,
-            //     path: "/roles"
-            // },
+            {
+                title: "Rôle",
+                id: 3,
+                icon: "file",
+                type: "link",
+                lanClass: "lan-6",
+                active: false,
+                path: "/roles"
+            },
         ],
     }
 ];

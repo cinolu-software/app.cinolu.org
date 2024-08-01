@@ -1,20 +1,20 @@
 import React from 'react';
-import { ImagePath } from "@/Constant";
-import { Button, CardBody, Col } from "reactstrap";
+import {ImagePath} from "@/Constant";
+import {Button, CardBody, Col} from "reactstrap";
 import CommonModal from "./Common/CommonModal";
-import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import {setModalDeleteProgramTypes, deleteProgramType} from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 const DeleteProgramModal = () => {
-    const dispatch = useAppDispatch();
-    const { isOpenModalDeleteProgram, selectedProgram, originalProgramsData } = useAppSelector((state) => state.programs);
 
-    const selectedProgramData = originalProgramsData.find((item) => item.id === selectedProgram?.id);
+    const dispatch = useAppDispatch();
+    const {isOpenModalDeleteProgramType, selectedProgramType, originalTypeProgramsData} = useAppSelector((state) => state.programsType);
+    const selectedProgramData = originalTypeProgramsData.find((item) => item.id === selectedProgramType?.id);
 
     const handleDelete = () => {
         if (selectedProgramData) {
-            dispatch(deleteProgram(selectedProgramData.id));
-            dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
+            dispatch(deleteProgramType(selectedProgramData.id));
+            dispatch(setModalDeleteProgramTypes({isOpen: false, programType: null}));
         }
     };
 
@@ -23,29 +23,30 @@ const DeleteProgramModal = () => {
             <CardBody className="badge-spacing">
                 <CommonModal
                     centered
-                    isOpen={isOpenModalDeleteProgram}
-                    toggle={() => dispatch(setModalDeleteProgram({ isOpen: false, program: null }))}
-                    title="Supprimer le programme"
+                    isOpen={isOpenModalDeleteProgramType}
+                    toggle={() => dispatch(setModalDeleteProgramTypes({isOpen: false, programType: null}))}
+                    title="Supprimer le Type "
                 >
                     <div className="modal-toggle-wrapper">
                         <ul className="modal-img">
                             <li className="text-center">
-                                <img src={`${ImagePath}/gif/danger.gif`} alt="danger" />
+                                <img src={`${ImagePath}/gif/danger.gif`} alt="danger"/>
                             </li>
                         </ul>
                         <h4 className="text-center pb-2">
-                            Êtes-vous sûr de vouloir supprimer ce programme ?
+                            Êtes-vous sûr de vouloir supprimer ce type ?
                         </h4>
                         {selectedProgramData && (
                             <p className="text-center">
-                                Vous êtes sur le point de supprimer ce programme : <strong>{selectedProgramData.name}</strong>
+                                Vous êtes sur le point de supprimer ce type
+                                : <strong>{selectedProgramData.name}</strong>
                             </p>
                         )}
                         <div className="d-flex justify-content-center mt-5">
                             <Button
                                 color="secondary"
                                 className="me-2"
-                                onClick={() => dispatch(setModalDeleteProgram({ isOpen: false, program: null }))}
+                                onClick={() => dispatch(setModalDeleteProgramTypes({isOpen: false, programType: null}))}
                             >
                                 {"Fermer"}
                             </Button>
