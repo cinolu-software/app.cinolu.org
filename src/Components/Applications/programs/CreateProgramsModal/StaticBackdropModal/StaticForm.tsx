@@ -41,6 +41,8 @@ export const StaticForm: React.FC<StaticModalToggleProp> = ({ staticModalToggle 
         }
     };
 
+    //create a fun
+
     const handleAddRequirement = () => {
         if (newRequirement.name && newRequirement.description) {
             setProgram({

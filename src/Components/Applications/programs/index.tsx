@@ -40,9 +40,11 @@ const ProgramsListContainer = () => {
 
   return (
       <Container fluid>
+
         <ModalCreatePrograms />
         <UpdateProgramsModal />
         <DeleteProgramsModal />
+
         <Row>
           <Col sm="12">
             <Card>
@@ -52,16 +54,7 @@ const ProgramsListContainer = () => {
                 </div>
                 <div className="list-program">
                   <div className="table-responsive">
-                    <DataTable
-                        className="theme-scrollbar"
-                        data={filteredPrograms}
-                        columns={ProgramsListTableDataColumn as TableColumn<ProgramsListTableColumnType>}
-                        striped
-                        highlightOnHover
-                        pagination
-                        subHeader
-                        subHeaderComponent={subHeaderComponentMemo}
-                    />
+                    <DataTable className="theme-scrollbar" data={filteredPrograms} columns={ProgramsListTableDataColumn as TableColumn<ProgramsListTableColumnType>} striped highlightOnHover pagination subHeader subHeaderComponent={subHeaderComponentMemo}/>
                   </div>
                 </div>
               </CardBody>

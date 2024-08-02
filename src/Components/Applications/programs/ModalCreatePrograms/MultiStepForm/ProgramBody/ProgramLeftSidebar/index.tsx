@@ -1,12 +1,14 @@
 import SVG from "@/CommonComponent/SVG";
-import { AddProductNav, AddProgram } from "@/Data/Application/Ecommerce";
+import { AddProgram } from "@/Data/Application/Ecommerce";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setNavId } from "@/Redux/Reducers/AddProductSlice";
+
+import {setNavId} from "@/Redux/Reducers/programsSlice/programsSlice"
 import { Col, Nav, NavItem, NavLink } from "reactstrap";
 
 const ProgramLeftSidebar = () => {
 
-    const {navId} = useAppSelector((state) => state.addProduct)
+
+    const {navId} = useAppSelector((state)=>state.programs)
     const dispatch = useAppDispatch()
 
     return (

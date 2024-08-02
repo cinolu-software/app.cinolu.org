@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axios, { apiBaseUrl } from "@/services/axios";
-import { InitialStateProgramsType, ProgramsType, CreateProgramType, TransformedProgramsType } from "@/Types/Programs/ProgramsType";
+import { InitialStateProgramsType, ProgramsType, CreateProgramType, TransformedProgramsType, FormValueType } from "@/Types/Programs/ProgramsType";
 import { RootState } from "@/Redux/Store";
 
 const initialState: InitialStateProgramsType = {
@@ -11,8 +11,19 @@ const initialState: InitialStateProgramsType = {
     isOpenModalCreateProgram: false,
     isOpenModalEditProgram: false,
     isOpenModalDeleteProgram: false,
-    selectedProgram: null
+    selectedProgram: null,
+    navId: 1,
+    tabId: 1,
+    formValue: {
+        name: "",
+        description: "",
+        start_at: "",
+        end_at: "",
+        types: [],
+        requirements: [{ name: "", description: "" }]
+    }
 };
+
 
 const transformPrograms = (programs: ProgramsType[]): TransformedProgramsType[] => {
     return programs.map(program => ({
@@ -21,9 +32,7 @@ const transformPrograms = (programs: ProgramsType[]): TransformedProgramsType[] 
     }));
 };
 
-export const fetchPrograms = createAsyncThunk<{ original: ProgramsType[], transformed: TransformedProgramsType[] }>(
-    'programs/fetchPrograms',
-    async () => {
+export const fetchPrograms = createAsyncThunk<{ original: ProgramsType[], transformed: TransformedProgramsType[] }>('programs/fetchPrograms', async () => {
         const response = await axios.get<{ data: ProgramsType[] }>(`${apiBaseUrl}/programs`);
         const originalPrograms = response.data.data;
         const transformedPrograms = transformPrograms(originalPrograms);
@@ -31,9 +40,7 @@ export const fetchPrograms = createAsyncThunk<{ original: ProgramsType[], transf
     }
 );
 
-export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>(
-    'programs/createProgram',
-    async (newProgram, { rejectWithValue }) => {
+export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>('programs/createProgram', async (newProgram, { rejectWithValue }) => {
         try {
             newProgram.image = newProgram.image || "admin/roles/user_role.png";
             const response = await axios.post<{ data: ProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
@@ -44,9 +51,7 @@ export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>(
     }
 );
 
-export const updateProgram = createAsyncThunk<ProgramsType, ProgramsType>(
-    'programs/updateProgram',
-    async (updatedProgram, { rejectWithValue }) => {
+export const updateProgram = createAsyncThunk<ProgramsType, ProgramsType>('programs/updateProgram', async (updatedProgram, { rejectWithValue }) => {
         try {
             const response = await axios.patch<{ data: ProgramsType }>(`${apiBaseUrl}/programs/${updatedProgram.id}`, updatedProgram);
             return response.data.data;
@@ -56,9 +61,7 @@ export const updateProgram = createAsyncThunk<ProgramsType, ProgramsType>(
     }
 );
 
-export const uploadProgramImage = createAsyncThunk<void, { programId: number, imageFile: File }>(
-    'programs/uploadProgramImage',
-    async ({ programId, imageFile }, { rejectWithValue }) => {
+export const uploadProgramImage = createAsyncThunk<void, { programId: number, imageFile: File }>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
         const formData = new FormData();
         formData.append('attachment', imageFile);
         try {
@@ -73,9 +76,7 @@ export const uploadProgramImage = createAsyncThunk<void, { programId: number, im
     }
 );
 
-export const deleteProgram = createAsyncThunk<number, number>(
-    'programs/deleteProgram',
-    async (programId, { rejectWithValue }) => {
+export const deleteProgram = createAsyncThunk<number, number>('programs/deleteProgram', async (programId, { rejectWithValue }) => {
         try {
             await axios.delete(`${apiBaseUrl}/programs/${programId}`);
             return programId;
@@ -89,7 +90,7 @@ const ProgramSlice = createSlice({
     name: "programs",
     initialState,
     reducers: {
-        setModalCreateProgram: (state, action: PayloadAction<{isOpen: boolean}>) => {
+        setModalCreateProgram: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateProgram = action.payload.isOpen;
         },
         setModalEditProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ProgramsType | null }>) => {
@@ -100,6 +101,17 @@ const ProgramSlice = createSlice({
             state.isOpenModalDeleteProgram = action.payload.isOpen;
             state.selectedProgram = action.payload.program;
         },
+        setNavId: (state, action) => {
+            state.navId = action.payload;
+        },
+        setTabId: (state, action) => {
+            state.tabId = action.payload;
+        },
+        setFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
+            if (state.formValue) {
+                state.formValue[action.payload.field] = action.payload.value;
+            }
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -178,7 +190,7 @@ const ProgramSlice = createSlice({
     }
 });
 
-export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram } = ProgramSlice.actions;
+export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setFormValue, setTabId, setNavId } = ProgramSlice.actions;
 export const selectProgramStatus = (state: RootState) => state.programs.status;
 export const selectOriginalProgramData = (state: RootState) => state.programs.originalProgramsData;
 export const selectTransformedProgramData = (state: RootState) => state.programs.transformedProgramsData;

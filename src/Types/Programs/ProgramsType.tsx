@@ -16,6 +16,15 @@ export interface ProgramsType {
     requirements: Requirement[];
 }
 
+export interface FormValueType {
+    name: string;
+    description: string;
+    start_at: string;
+    end_at: string;
+    types: number [];
+    requirements: Requirement[];
+}
+
 export interface TransformedProgramsType {
     id: number;
     name: string;
@@ -38,6 +47,9 @@ export interface InitialStateProgramsType {
     isOpenModalEditProgram: boolean;
     isOpenModalDeleteProgram: boolean;
     selectedProgram: ProgramsType | null;
+    navId: number;
+    tabId: number;
+    formValue: FormValueType | null;
 }
 
 export interface CreateProgramType {
