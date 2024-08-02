@@ -1036,7 +1036,7 @@ export const AddProgram = [
   {
     id: 4,
     icon: "pricing",
-    title: "Requirements",
+    title: "Exigence",
     detail: "Requirements"
   },
 ]

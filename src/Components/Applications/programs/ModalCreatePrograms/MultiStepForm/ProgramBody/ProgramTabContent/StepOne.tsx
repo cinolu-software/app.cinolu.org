@@ -1,22 +1,36 @@
+import {useCallback, useMemo} from "react";
 import { Col, Form, Input, Label, Row } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import SimpleMdeReact from "react-simplemde-editor";
 
-const FormEditors = ({ onChangeDescription }: { onChangeDescription: (value: string) => void }) => {
-    const mdeEditorText = `Entrer la description du programme...`;
+
+const FormEditors = ({ description, onChangeDescription }: { description: string, onChangeDescription: (value: string) => void }) => {
+
+    const autofocusNoSpellcheckerOptions = useMemo(()=>{
+        return{
+            autofocus: true,
+            spellChecker: false,
+        }
+
+    }, []);
 
     return (
         <Col xs="12">
             <div id="editor2">
-                <SimpleMdeReact id="editor_container" value={mdeEditorText} onChange={onChangeDescription} options={{ autofocus: false, spellChecker: true }} />
+                <SimpleMdeReact
+                    id="editor_container"
+                    value={description}
+                    onChange={onChangeDescription}
+                    options={autofocusNoSpellcheckerOptions}
+                />
             </div>
-
         </Col>
     );
 };
 
 const StepOne = () => {
+
     const { formValue } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
 
@@ -24,9 +38,9 @@ const StepOne = () => {
         dispatch(setFormValue({ field: 'name', value: e.target.value }));
     };
 
-    const handleDescriptionChange = (value: string) => {
+    const handleDescriptionChange = useCallback((value: string) => {
         dispatch(setFormValue({ field: 'description', value }));
-    };
+    }, []);
 
     return (
         <div className="sidebar-body">
@@ -47,7 +61,7 @@ const StepOne = () => {
                             />
                         </div>
                     </Col>
-                    <FormEditors onChangeDescription={handleDescriptionChange} />
+                    <FormEditors description={formValue?.description || ''} onChangeDescription={handleDescriptionChange} />
                 </Row>
             </Form>
         </div>

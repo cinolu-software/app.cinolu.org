@@ -9,7 +9,7 @@ import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
 import {ProgramsListTableColumnType} from "@/Types/Programs/ProgramsType";
 import UpdateProgramsModal from "./UpdateProgramsModal";
 import DeleteProgramsModal from "./DeleteProgramsModal";
-import ModalCreatePrograms from "./ModalCreatePrograms"
+import ModalCreatePrograms from "./ModalCreatePrograms";
 
 
 const ProgramsListContainer = () => {

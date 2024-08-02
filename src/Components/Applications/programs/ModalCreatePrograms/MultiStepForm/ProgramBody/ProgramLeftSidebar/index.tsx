@@ -7,12 +7,11 @@ import { Col, Nav, NavItem, NavLink } from "reactstrap";
 
 const ProgramLeftSidebar = () => {
 
-
     const {navId} = useAppSelector((state)=>state.programs)
     const dispatch = useAppDispatch()
 
     return (
-        <Col xxl="3" xl="4" className="box-col-4e sidebar-left-wrapper mb-2 add-product-tab">
+        <Col xxl="4" xl="4" className="box-col-4e sidebar-left-wrapper mb-2 add-product-tab">
             <Nav pills className="sidebar-left-icons border-0" tabs>
                 {AddProgram.map((data, i) => (
                     <NavItem key={i}>
@@ -24,7 +23,7 @@ const ProgramLeftSidebar = () => {
                             </div>
                             <div className="product-tab-content">
                                 <h5>{data.title}</h5>
-                                <p>{data.detail}</p>
+                                {/*<p>{data.detail}</p>*/}
                             </div>
                         </NavLink>
                     </NavItem>
