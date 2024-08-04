@@ -1,11 +1,16 @@
-// StepOne.tsx
 import React, { useCallback, useMemo } from 'react';
 import { Col, Form, Input, Label, Row } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import SimpleMdeReact from 'react-simplemde-editor';
 
-const FormEditors = ({ description, onChangeDescription }: { description: string; onChangeDescription: (value: string) => void }) => {
+
+type FormEditorsProps = {
+    description: string;
+    onChangeDescription: (value: string) => void;
+};
+
+const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescription }) => {
     const autofocusNoSpellcheckerOptions = useMemo(() => {
         return {
             autofocus: true,
@@ -18,7 +23,7 @@ const FormEditors = ({ description, onChangeDescription }: { description: string
     );
 };
 
-const StepOne = () => {
+const StepOne: React.FC = () => {
     const dispatch = useAppDispatch();
     const { formValue } = useAppSelector((state) => state.programs);
 
@@ -32,6 +37,8 @@ const StepOne = () => {
     const onChangeDescription = useCallback((value: string) => {
         handleChange("description", value);
     }, [handleChange]);
+
+    console.log("StepOne", formValue);
 
     return (
         <Form className="theme-form theme-form-2 mega-form">
@@ -57,6 +64,7 @@ const StepOne = () => {
 };
 
 export default StepOne;
+
 
 
 

@@ -3,6 +3,7 @@ import axios, { apiBaseUrl } from "@/services/axios";
 import { InitialStateProgramsType, ProgramsType, CreateProgramType, TransformedProgramsType, FormValueType } from "@/Types/Programs/ProgramsType";
 import { RootState } from "@/Redux/Store";
 
+
 const initialState: InitialStateProgramsType = {
     originalProgramsData: [],
     transformedProgramsData: [],
@@ -26,6 +27,7 @@ const initialState: InitialStateProgramsType = {
 
 
 const transformFormValue = (formValue: Partial<FormValueType>, existingProgram: ProgramsType): Partial<ProgramsType> => {
+
     const transformedProgram: Partial<ProgramsType> = {};
 
     if (formValue.name !== undefined && formValue.name !== existingProgram.name) {
@@ -77,9 +79,7 @@ export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>('
     }
 );
 
-export const updateProgram = createAsyncThunk<ProgramsType, { formValue: Partial<FormValueType>, programId: number }>(
-    'programs/updateProgram',
-    async ({ formValue, programId }, { getState, rejectWithValue }) => {
+export const updateProgram = createAsyncThunk<ProgramsType, { formValue: Partial<FormValueType>, programId: number }>('programs/updateProgram', async ({ formValue, programId }, { getState, rejectWithValue }) => {
         const state = getState() as RootState;
         const existingProgram = state.programs.originalProgramsData.find(program => program.id === programId);
 
@@ -97,7 +97,6 @@ export const updateProgram = createAsyncThunk<ProgramsType, { formValue: Partial
         }
     }
 );
-
 
 export const uploadProgramImage = createAsyncThunk<void, { programId: number, imageFile: File }>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
         const formData = new FormData();
@@ -123,10 +122,6 @@ export const deleteProgram = createAsyncThunk<number, number>('programs/deletePr
         }
     }
 );
-
-
-
-
 
 const ProgramSlice = createSlice({
     name: "programs",
