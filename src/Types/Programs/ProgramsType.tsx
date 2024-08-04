@@ -21,7 +21,7 @@ export interface FormValueType {
     description: string;
     start_at: string;
     end_at: string;
-    types: number [];
+    types: string [];
     requirements: Requirement[];
 }
 

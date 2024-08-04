@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { Col, Form, Label, Row, Input } from "reactstrap";
+import { Col, Form, Input, Label, Row } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
-import {fetchProgramsType} from "@/Redux/Reducers/programsSlice/programsTypeSlice"
+import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 
 const StepThree = () => {
@@ -18,7 +18,12 @@ const StepThree = () => {
     }, [dispatch, status]);
 
     const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setFormValue({ field: 'type', value: e.target.value }));
+        const selectedTypeId = e.target.value;
+        const updatedTypes = formValue.types.includes(selectedTypeId)
+            ? formValue.types.filter(id => id !== selectedTypeId)
+            : [...formValue.types, selectedTypeId];
+
+        dispatch(setFormValue({ field: 'types', value: updatedTypes }));
     };
 
     return (
@@ -32,13 +37,13 @@ const StepThree = () => {
                         <div className="custom-input">
                             <Input
                                 type="select"
-                                name="type"
-                                value={formValue?.type || ""}
+                                name="types"
+                                value={formValue?.types || []}
                                 onChange={handleTypeChange}
-                                className={formValue?.type !== "" ? "valid" : "is-invalid"}
+                                className={formValue?.types.length > 0 ? "valid" : "is-invalid"}
+                                multiple
                                 required
                             >
-                                <option value="" disabled>Choisir un type</option>
                                 {transformedProgramsData.map((type: { id: string, name: string }) => (
                                     <option key={type.id} value={type.id}>{type.name}</option>
                                 ))}

@@ -8,7 +8,7 @@ import { useAppSelector } from "@/Redux/Hooks";
 
 const ProgramTabContent = () => {
 
-    const {navId} = useAppSelector((state)=> state.programs)
+    const {navId} = useAppSelector((state)=> state.programs);
 
     return (
         <>

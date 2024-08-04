@@ -19,7 +19,7 @@ const StepFour: React.FC = () => {
         if (newRequirement.name && newRequirement.description) {
             const updatedRequirements = [...requirements, newRequirement];
             setRequirements(updatedRequirements);
-            dispatch(setFormValue({ ...formValue, requirements: updatedRequirements }));
+            dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
             setNewRequirement({ name: '', description: '' });
         }
     };
@@ -27,7 +27,7 @@ const StepFour: React.FC = () => {
     const handleRemoveRequirement = (index: number) => {
         const updatedRequirements = requirements.filter((_, i) => i !== index);
         setRequirements(updatedRequirements);
-        dispatch(setFormValue({ ...formValue, requirements: updatedRequirements }));
+        dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
     };
 
     return (
@@ -93,3 +93,4 @@ const StepFour: React.FC = () => {
 };
 
 export default StepFour;
+

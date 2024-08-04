@@ -4,23 +4,39 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalCreateProgram, createProgram, setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import AddProgramContainer from "./MultiStepForm";
 import { toast, Flip } from "react-toastify";
+import { RootState } from "@/Redux/Store";
+import { FormValueType, Requirement } from "@/Types/Programs/ProgramsType";
 
 const ModalCreatePrograms = () => {
+
     const dispatch = useAppDispatch();
-    const { isOpenModalCreateProgram, formValue, programStatus } = useAppSelector(state => state.programs);
+    const { isOpenModalCreateProgram, formValue } = useAppSelector((state: RootState) => state.programs);
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
-        const validateForm = () => {
-            return formValue.name && formValue.description && formValue.start_at && formValue.end_at && formValue.types.length > 0 && formValue.requirements.length > 0;
+        const validateForm = (): any => {
+            return formValue && formValue.name && formValue.description && formValue.start_at && formValue.end_at && formValue.types.length > 0 && formValue.requirements.length > 0;
         };
+
         setIsFormValid(validateForm());
+
     }, [formValue]);
 
     const handleSubmit = async () => {
+
         if (isFormValid) {
-            await dispatch(createProgram(formValue));
-            if (programStatus === 'failed') {
+
+            const filteredRequirements : Requirement[] = formValue?.requirements.filter(req => req.name && req.description);
+
+            const programData : FormValueType = {
+                ...formValue,
+                requirements: filteredRequirements
+            };
+
+            try {
+                await dispatch(createProgram(programData)).unwrap();
+                dispatch(setModalCreateProgram({ isOpen: false }));
+            } catch (error) {
                 toast.error(
                     <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du programme"}</p>,
                     {
@@ -31,8 +47,6 @@ const ModalCreatePrograms = () => {
                         theme: "colored",
                     }
                 );
-            } else {
-                dispatch(setModalCreateProgram({ isOpen: false }));
             }
         } else {
             toast.error(
@@ -48,8 +62,6 @@ const ModalCreatePrograms = () => {
         }
     };
 
-    console.log(formValue)
-
     return (
         <Col xs="12">
             <Modal isOpen={isOpenModalCreateProgram} toggle={() => dispatch(setModalCreateProgram({ isOpen: false }))} size="xl">
@@ -64,7 +76,7 @@ const ModalCreatePrograms = () => {
                     <Button color="light" onClick={() => dispatch(setModalCreateProgram({ isOpen: false }))}>
                         {"Annuler"}
                     </Button>
-                    <Button color="primary" onClick={handleSubmit} >
+                    <Button color="primary" onClick={handleSubmit}>
                         {"Créer"}
                     </Button>
                 </ModalFooter>
@@ -74,4 +86,3 @@ const ModalCreatePrograms = () => {
 };
 
 export default ModalCreatePrograms;
-

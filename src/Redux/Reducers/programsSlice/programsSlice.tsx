@@ -20,7 +20,7 @@ const initialState: InitialStateProgramsType = {
         start_at: "",
         end_at: "",
         types: [],
-        requirements: [{ name: "", description: "" }]
+        requirements: []
     }
 };
 
@@ -40,7 +40,9 @@ export const fetchPrograms = createAsyncThunk<{ original: ProgramsType[], transf
     }
 );
 
-export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>('programs/createProgram', async (newProgram, { rejectWithValue }) => {
+export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>(
+    'programs/createProgram',
+    async (newProgram, { rejectWithValue }) => {
         try {
             newProgram.image = newProgram.image || "admin/roles/user_role.png";
             const response = await axios.post<{ data: ProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
@@ -51,7 +53,9 @@ export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>('
     }
 );
 
-export const updateProgram = createAsyncThunk<ProgramsType, ProgramsType>('programs/updateProgram', async (updatedProgram, { rejectWithValue }) => {
+export const updateProgram = createAsyncThunk<ProgramsType, ProgramsType>(
+    'programs/updateProgram',
+    async (updatedProgram, { rejectWithValue }) => {
         try {
             const response = await axios.patch<{ data: ProgramsType }>(`${apiBaseUrl}/programs/${updatedProgram.id}`, updatedProgram);
             return response.data.data;
