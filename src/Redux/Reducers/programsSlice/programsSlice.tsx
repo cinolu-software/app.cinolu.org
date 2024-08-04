@@ -25,6 +25,32 @@ const initialState: InitialStateProgramsType = {
 };
 
 
+const transformFormValue = (formValue: Partial<FormValueType>, existingProgram: ProgramsType): Partial<ProgramsType> => {
+    const transformedProgram: Partial<ProgramsType> = {};
+
+    if (formValue.name !== undefined && formValue.name !== existingProgram.name) {
+        transformedProgram.name = formValue.name;
+    }
+    if (formValue.description !== undefined && formValue.description !== existingProgram.description) {
+        transformedProgram.description = formValue.description;
+    }
+    if (formValue.start_at !== undefined && formValue.start_at !== existingProgram.start_at) {
+        transformedProgram.start_at = formValue.start_at;
+    }
+    if (formValue.end_at !== undefined && formValue.end_at !== existingProgram.end_at) {
+        transformedProgram.end_at = formValue.end_at;
+    }
+    if (formValue.types !== undefined && formValue.types !== existingProgram.types) {
+        transformedProgram.types = formValue.types;
+    }
+    if (formValue.requirements !== undefined && formValue.requirements !== existingProgram.requirements) {
+        transformedProgram.requirements = formValue.requirements;
+    }
+
+    return transformedProgram;
+};
+
+
 const transformPrograms = (programs: ProgramsType[]): TransformedProgramsType[] => {
     return programs.map(program => ({
         ...program,
@@ -40,9 +66,7 @@ export const fetchPrograms = createAsyncThunk<{ original: ProgramsType[], transf
     }
 );
 
-export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>(
-    'programs/createProgram',
-    async (newProgram, { rejectWithValue }) => {
+export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>('programs/createProgram', async (newProgram, { rejectWithValue }) => {
         try {
             newProgram.image = newProgram.image || "admin/roles/user_role.png";
             const response = await axios.post<{ data: ProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
@@ -53,17 +77,27 @@ export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>(
     }
 );
 
-export const updateProgram = createAsyncThunk<ProgramsType, ProgramsType>(
+export const updateProgram = createAsyncThunk<ProgramsType, { formValue: Partial<FormValueType>, programId: number }>(
     'programs/updateProgram',
-    async (updatedProgram, { rejectWithValue }) => {
+    async ({ formValue, programId }, { getState, rejectWithValue }) => {
+        const state = getState() as RootState;
+        const existingProgram = state.programs.originalProgramsData.find(program => program.id === programId);
+
+        if (!existingProgram) {
+            return rejectWithValue('Program not found');
+        }
+
+        const transformedProgram = transformFormValue(formValue, existingProgram);
+
         try {
-            const response = await axios.patch<{ data: ProgramsType }>(`${apiBaseUrl}/programs/${updatedProgram.id}`, updatedProgram);
+            const response = await axios.patch<{ data: ProgramsType }>(`${apiBaseUrl}/programs/${programId}`, transformedProgram);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
         }
     }
 );
+
 
 export const uploadProgramImage = createAsyncThunk<void, { programId: number, imageFile: File }>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
         const formData = new FormData();
@@ -90,6 +124,10 @@ export const deleteProgram = createAsyncThunk<number, number>('programs/deletePr
     }
 );
 
+
+
+
+
 const ProgramSlice = createSlice({
     name: "programs",
     initialState,
@@ -115,6 +153,18 @@ const ProgramSlice = createSlice({
             if (state.formValue) {
                 state.formValue[action.payload.field] = action.payload.value;
             }
+        },
+        updateFormValue: (state, action: PayloadAction<ProgramsType>) => {
+            state.formValue = {
+                id: action.payload.id,
+                name: action.payload.name,
+                description: action.payload.description,
+                start_at: action.payload.start_at,
+                end_at: action.payload.end_at,
+                types: action.payload.types,
+                requirements: action.payload.requirements,
+                image: action.payload.image || "default_program_image.png"
+            };
         }
     },
     extraReducers: (builder) => {

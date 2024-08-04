@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectProgramStatus, fetchPrograms, selectTransformedProgramData } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
 import {ProgramsListTableColumnType} from "@/Types/Programs/ProgramsType";
-import UpdateProgramsModal from "./UpdateProgramsModal";
 import DeleteProgramsModal from "./DeleteProgramsModal";
 import ModalCreatePrograms from "./ModalCreatePrograms";
+import ModalUpdatePrograms from "./ModalUpdatePrograms"
 
 
 const ProgramsListContainer = () => {
@@ -40,11 +40,9 @@ const ProgramsListContainer = () => {
 
   return (
       <Container fluid>
-
+        <ModalUpdatePrograms/>
         <ModalCreatePrograms />
-        <UpdateProgramsModal />
         <DeleteProgramsModal />
-
         <Row>
           <Col sm="12">
             <Card>
