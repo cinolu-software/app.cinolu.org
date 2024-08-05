@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button, Col, Modal, ModalBody, ModalFooter } from "reactstrap";
+import React from "react";
+import { Button, Col, Modal, ModalBody} from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { RootState } from "@/Redux/Store";
 import {setModalEditProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
@@ -9,7 +9,7 @@ import BorderTabs from "./BorderTabs/";
 const ModalUpdatePrograms = () => {
 
     const dispatch = useAppDispatch();
-    const { isOpenModalEditProgram, formValue } = useAppSelector((state: RootState) => state.programs);
+    const { isOpenModalEditProgram } = useAppSelector((state: RootState) => state.programs);
 
     return (
         <Col xs="12">

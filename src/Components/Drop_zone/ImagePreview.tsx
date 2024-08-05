@@ -19,7 +19,6 @@ const ImagePreview = () => {
 
     const handleUpdateProfileImage = () => {
 
-
         if (files.length === 0) {
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Veuillez sélectionner une image."}</p>,

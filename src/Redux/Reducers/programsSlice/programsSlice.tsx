@@ -98,7 +98,7 @@ export const updateProgram = createAsyncThunk<ProgramsType, { formValue: Partial
     }
 );
 
-export const uploadProgramImage = createAsyncThunk<void, { programId: number, imageFile: File }>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
+export const uploadProgramImage = createAsyncThunk<void, { programId: number | undefined, imageFile: File }>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
         const formData = new FormData();
         formData.append('attachment', imageFile);
         try {

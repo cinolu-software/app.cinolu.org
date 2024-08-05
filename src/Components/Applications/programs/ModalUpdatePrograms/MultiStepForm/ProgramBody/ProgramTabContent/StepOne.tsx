@@ -24,6 +24,7 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
 };
 
 const StepOne: React.FC = () => {
+
     const dispatch = useAppDispatch();
     const { formValue } = useAppSelector((state) => state.programs);
 
@@ -38,7 +39,7 @@ const StepOne: React.FC = () => {
         handleChange("description", value);
     }, [handleChange]);
 
-    console.log("StepOne", formValue);
+
 
     return (
         <Form className="theme-form theme-form-2 mega-form">
