@@ -30,6 +30,7 @@ const ModalCreatePrograms = () => {
 
     const handleSubmit = async () => {
         if (isFormValid && formValue) {
+            // @ts-ignore
             const filteredRequirements: Requirement[] = (formValue.requirements || []).map(req => ({
                 name: req,
                 description: ''

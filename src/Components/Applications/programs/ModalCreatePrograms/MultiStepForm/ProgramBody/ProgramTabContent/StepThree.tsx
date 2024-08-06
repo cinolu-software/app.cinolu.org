@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Col, Form, Input, Label, Row } from "reactstrap";
+import { Col, Form, Label, Row } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
@@ -15,18 +15,17 @@ const StepThree = () => {
         }
     }, [dispatch, status]);
 
-    const handleTypeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         if (!formValue) return;
 
-        const selectedTypeId = e.target.value;
+        const selectedTypeId = parseInt(e.target.value, 10);
+
         const updatedTypes = formValue.types.includes(selectedTypeId)
             ? formValue.types.filter(id => id !== selectedTypeId)
             : [...formValue.types, selectedTypeId];
 
         dispatch(setFormValue({ field: 'types', value: JSON.stringify(updatedTypes) }));
     };
-
-    console.log(transformedProgramsData)
 
     return (
         <div className="sidebar-body">
@@ -37,10 +36,9 @@ const StepThree = () => {
                     </Col>
                     <Col xs="12">
                         <div className="custom-input">
-                            <Input
-                                type="select"
+                            <select
                                 name="types"
-                                value={formValue?.types || []}
+                                value={formValue?.types.map(String)}
                                 onChange={handleTypeChange}
                                 className={(formValue?.types && formValue.types.length > 0) ? "valid" : "is-invalid"}
                                 multiple
@@ -49,7 +47,7 @@ const StepThree = () => {
                                 {transformedProgramsData.map((type) => (
                                     <option key={type.id} value={type.id}>{type.name}</option>
                                 ))}
-                            </Input>
+                            </select>
                         </div>
                     </Col>
                 </Row>
