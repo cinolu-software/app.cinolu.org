@@ -1,38 +1,37 @@
-import {useCallback, useMemo} from "react";
-import { Col, Form, Input, Label, Row } from "reactstrap";
-import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
-import SimpleMdeReact from "react-simplemde-editor";
+import React, { useCallback, useMemo } from 'react';
+import { Col, Form, Input, Label, Row } from 'reactstrap';
+import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
+import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
+import SimpleMdeReact from 'react-simplemde-editor';
+import { selectSelectedProgram } from '@/Redux/Reducers/programsSlice/programsSlice';
 
+type FormEditorsProps = {
+    description: string | undefined;
+    onChangeDescription: (value: string) => void;
+};
 
-const FormEditors = ({ description, onChangeDescription }: { description: string, onChangeDescription: (value: string) => void }) => {
-
-    const autofocusNoSpellcheckerOptions = useMemo(()=>{
-        return{
+const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescription }) => {
+    const autofocusNoSpellcheckerOptions = useMemo(() => {
+        return {
             autofocus: true,
             spellChecker: false,
-        }
-
+        };
     }, []);
 
     return (
-        <Col xs="12">
-            <div id="editor2">
-                <SimpleMdeReact
-                    id="editor_container"
-                    value={description}
-                    onChange={onChangeDescription}
-                    options={autofocusNoSpellcheckerOptions}
-                />
-            </div>
-        </Col>
+        <SimpleMdeReact
+            id="editor_container"
+            value={description}
+            onChange={onChangeDescription}
+            options={autofocusNoSpellcheckerOptions}
+        />
     );
 };
 
-const StepOne = () => {
-
-    const { formValue } = useAppSelector((state) => state.programs);
+const StepOne: React.FC = () => {
     const dispatch = useAppDispatch();
+    const { formValue } = useAppSelector((state) => state.programs);
+    const selectedProgram = useAppSelector(selectSelectedProgram);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setFormValue({ field: 'name', value: e.target.value }));
@@ -40,35 +39,32 @@ const StepOne = () => {
 
     const handleDescriptionChange = useCallback((value: string) => {
         dispatch(setFormValue({ field: 'description', value }));
-    }, []);
+    }, [dispatch]);
 
     return (
-        <div className="sidebar-body">
-            <Form>
-                <Row className="g-2">
-                    <Col xs="12">
-                        <Label className="m-0" check>{"Nom du programme"} <span className="txt-danger"> *</span></Label>
-                    </Col>
-                    <Col xs="12">
-                        <div className="custom-input">
-                            <Input
-                                className={formValue?.name !== "" ? "valid" : "is-invalid"}
-                                type="text"
-                                required
-                                name="name"
-                                value={formValue?.name || ""}
-                                onChange={handleNameChange}
-                            />
-                        </div>
-                    </Col>
-                    <FormEditors description={formValue?.description || ''} onChangeDescription={handleDescriptionChange} />
-                </Row>
-            </Form>
-        </div>
+        <Form className="theme-form theme-form-2 mega-form">
+            <Row className="g-2">
+                <Col xs="12">
+                    <Label className="col-form-label">{"Nom du programme"}</Label>
+                    <Input
+                        className={formValue?.name !== "" ? "valid" : "is-invalid"}
+                        type="text"
+                        required
+                        name="name"
+                        value={formValue?.name || selectedProgram?.name || ""}
+                        onChange={handleNameChange}
+                    />
+                </Col>
+                <Col xs="12">
+                    <Label className="col-form-label">{"Description du programme"}</Label>
+                    <FormEditors
+                        description={formValue?.description || selectedProgram?.description || ''}
+                        onChangeDescription={handleDescriptionChange}
+                    />
+                </Col>
+            </Row>
+        </Form>
     );
 };
 
 export default StepOne;
-
-
-

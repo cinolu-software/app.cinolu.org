@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import SimpleMdeReact from "react-simplemde-editor";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
@@ -7,14 +7,26 @@ import { Flip, toast } from "react-toastify";
 import { CreateProgramTypeType } from "@/Types/Programs/ProgramsTypeType";
 
 const CreateNewType = () => {
-
     const dispatch = useAppDispatch();
     const isOpenModalCreateProgramType = useAppSelector(state => state.programsType.isOpenModalCreateProgramType);
     const [program, setProgram] = useState<CreateProgramTypeType>({ name: '', description: '' });
 
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setProgram(prevProgram => ({ ...prevProgram, name: e.target.value }));
+    };
+
+    const handleDescriptionChange = useCallback((value: string) => {
+        setProgram(prevProgram => ({ ...prevProgram, description: value }));
+    }, []);
+
+    const autofocusNoSpellcheckerOptions = useMemo(() => ({
+        autofocus: true,
+        spellChecker: false,
+    }), []);
+
     const handleSubmit = async () => {
         await dispatch(createProgramType(program)).unwrap()
-            .then(()=>{
+            .then(() => {
                 dispatch(setModalCreateProgramTypes({ isOpen: false }));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
@@ -27,7 +39,7 @@ const CreateNewType = () => {
                     }
                 );
             })
-            .catch((error)=>{
+            .catch((error) => {
                 toast.error(
                     <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
                     {
@@ -58,15 +70,15 @@ const CreateNewType = () => {
                             id="programName"
                             type="text"
                             value={program.name}
-                            onChange={(e) => setProgram({ ...program, name: e.target.value })}
+                            onChange={handleNameChange}
                             required
                         />
                         <div id="editor3" className="mt-2">
                             <SimpleMdeReact
                                 id="editor_container"
                                 value={program.description}
-                                onChange={(value) => setProgram({ ...program, description: value })}
-                                options={{ autofocus: true, spellChecker: false }}
+                                onChange={handleDescriptionChange}
+                                options={autofocusNoSpellcheckerOptions}
                             />
                         </div>
                     </div>
@@ -85,4 +97,3 @@ const CreateNewType = () => {
 };
 
 export default CreateNewType;
-
