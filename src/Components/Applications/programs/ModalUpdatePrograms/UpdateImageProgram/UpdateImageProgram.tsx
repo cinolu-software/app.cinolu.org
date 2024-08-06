@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, Col, Row, Button } from "reactstrap";
+import { Col, Row, Button } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";

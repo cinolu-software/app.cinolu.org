@@ -1,6 +1,5 @@
-// Types/Programs/ProgramsTypeType.ts
 export interface ProgramsTypeType {
-    id?: number;
+    id: number; // Assurez-vous que id est obligatoire
     name?: string;
     description?: string;
     created_at?: string;

@@ -3,14 +3,15 @@ import { Col, Form, Input, Label, Row } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import SimpleMdeReact from 'react-simplemde-editor';
+import {selectSelectedProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
 
 
 type FormEditorsProps = {
-    description: string;
-    onChangeDescription: (value: string) => void;
+    description: string | undefined;
+    // onChangeDescription: (value: string) => void;
 };
 
-const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescription }) => {
+const FormEditors: React.FC<FormEditorsProps> = ({ description }) => {
     const autofocusNoSpellcheckerOptions = useMemo(() => {
         return {
             autofocus: true,
@@ -19,7 +20,7 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
     }, []);
 
     return (
-        <SimpleMdeReact value={description} onChange={onChangeDescription} options={autofocusNoSpellcheckerOptions} />
+        <SimpleMdeReact value={description}  options={autofocusNoSpellcheckerOptions} />
     );
 };
 
@@ -27,17 +28,20 @@ const StepOne: React.FC = () => {
 
     const dispatch = useAppDispatch();
     const { formValue } = useAppSelector((state) => state.programs);
+    const selectedProgram = useAppSelector(selectSelectedProgram);
 
-    const handleChange = useCallback(
-        (field: keyof typeof formValue, value: any) => {
-            dispatch(setFormValue({ field, value }));
-        },
-        [dispatch]
-    );
-
-    const onChangeDescription = useCallback((value: string) => {
-        handleChange("description", value);
-    }, [handleChange]);
+    // const handleChange = useCallback(
+    //     (field: keyof typeof formValue, value: any) => {
+    //         dispatch(setFormValue({ field, value }));
+    //     },
+    //     [dispatch]
+    // );
+    //
+    // const onChangeDescription = useCallback((value: string) => {
+    //     handleChange("description", value);
+    // }, [handleChange]);
+    //
+    // console.log(selectedProgram)
 
 
 
@@ -49,15 +53,15 @@ const StepOne: React.FC = () => {
                     <Input
                         className="form-control"
                         type="text"
-                        value={formValue.name}
-                        onChange={(e) => handleChange('name', e.target.value)}
+                        value={selectedProgram?.name}
+                        // onChange={(e) => handleChange('name', e.target.value)}
                     />
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <Label className="col-form-label">{"Description du programme"}</Label>
-                    <FormEditors description={formValue.description} onChangeDescription={onChangeDescription} />
+                    <FormEditors description={selectedProgram?.description}  />
                 </Col>
             </Row>
         </Form>

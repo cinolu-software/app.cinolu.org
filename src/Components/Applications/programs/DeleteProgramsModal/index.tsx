@@ -12,7 +12,7 @@ const DeleteProgramModal = () => {
     const selectedProgramData = originalProgramsData.find((item) => item.id === selectedProgram?.id);
 
     const handleDelete = () => {
-        if (selectedProgramData) {
+        if (selectedProgramData && selectedProgramData.id !== undefined) {
             dispatch(deleteProgram(selectedProgramData.id));
             dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
         }
@@ -61,4 +61,5 @@ const DeleteProgramModal = () => {
 };
 
 export default DeleteProgramModal;
+
 

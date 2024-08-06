@@ -14,7 +14,6 @@ import projectCategorySlice from "./Reducers/projectSlice/projectCategorySlice";
 import UsersSlice from "./Reducers/userSlice/UserSlice";
 import ProgramSlice from "./Reducers/programsSlice/programsSlice";
 import ProgramsTypeSlice from "./Reducers/programsSlice/programsTypeSlice";
-import ProgramsRequirementSlice from "./Reducers/programsSlice/programsRequirementSlice";
 import FilterSlice from "./Reducers/FilterSlice";
 import CartSlice from "./Reducers/CartSlice";
 import AddProductSlice from "./Reducers/AddProductSlice";
@@ -34,7 +33,6 @@ const Store = configureStore({
     categories: projectCategorySlice,
     programs: ProgramSlice,
     programsType: ProgramsTypeSlice,
-    programsRequirement: ProgramsRequirementSlice,
     users : UsersSlice,
     role: RoleSlice,
     filterData: FilterSlice,

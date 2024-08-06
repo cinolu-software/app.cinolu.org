@@ -7,12 +7,17 @@ import { Flip, toast } from "react-toastify";
 import { ProgramsTypeType } from "@/Types/Programs/ProgramsTypeType";
 
 const UpdateProgramTypeModal = () => {
-
     const dispatch = useAppDispatch();
     const { selectedProgramType, isOpenModalEditProgramType } = useAppSelector((state) => state.programsType);
+
+
     const [programType, setProgramType] = useState<ProgramsTypeType>({
+        id: selectedProgramType?.id || 0,
         name: selectedProgramType?.name || '',
-        description: selectedProgramType?.description || ''
+        description: selectedProgramType?.description || '',
+        created_at: selectedProgramType?.created_at || '',
+        updated_at: selectedProgramType?.updated_at || '',
+        image: selectedProgramType?.image || ''
     });
 
     const nameRef = useRef(selectedProgramType?.name || '');
@@ -20,8 +25,12 @@ const UpdateProgramTypeModal = () => {
 
     useEffect(() => {
         setProgramType({
+            id: selectedProgramType?.id || 0,
             name: selectedProgramType?.name || '',
-            description: selectedProgramType?.description || ''
+            description: selectedProgramType?.description || '',
+            created_at: selectedProgramType?.created_at || '',
+            updated_at: selectedProgramType?.updated_at || '',
+            image: selectedProgramType?.image || ''
         });
         nameRef.current = selectedProgramType?.name || '';
         descriptionRef.current = selectedProgramType?.description || '';
@@ -108,7 +117,7 @@ const UpdateProgramTypeModal = () => {
             </Modal>
         </Col>
     );
-
 };
+
 
 export default UpdateProgramTypeModal;

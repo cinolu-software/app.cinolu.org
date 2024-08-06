@@ -1,36 +1,47 @@
 import React, { useEffect, useState } from "react";
 import { Button, Col, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalCreateProgram, createProgram, setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setModalCreateProgram, createProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
 import AddProgramContainer from "./MultiStepForm";
 import { toast, Flip } from "react-toastify";
 import { RootState } from "@/Redux/Store";
-import { FormValueType, Requirement } from "@/Types/Programs/ProgramsType";
+import { FormValueType, Requirement, CreateProgramType } from "@/Types/Programs/ProgramsType";
 
 const ModalCreatePrograms = () => {
-
     const dispatch = useAppDispatch();
     const { isOpenModalCreateProgram, formValue } = useAppSelector((state: RootState) => state.programs);
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
-        const validateForm = (): any => {
-            return formValue && formValue.name && formValue.description && formValue.start_at && formValue.end_at && formValue.types.length > 0 && formValue.requirements.length > 0;
+        const validateForm = (): boolean => {
+            return !!(
+                formValue &&
+                formValue.name &&
+                formValue.description &&
+                formValue.start_at &&
+                formValue.end_at &&
+                formValue.types.length > 0 &&
+                formValue.requirements.length > 0
+            );
         };
 
         setIsFormValid(validateForm());
-
     }, [formValue]);
 
     const handleSubmit = async () => {
+        if (isFormValid && formValue) {
+            const filteredRequirements: Requirement[] = (formValue.requirements || []).map(req => ({
+                name: req,
+                description: ''
+            })).filter(req => req.name && req.description);
 
-        if (isFormValid) {
 
-            const filteredRequirements : Requirement[] = formValue?.requirements.filter(req => req.name && req.description);
+            const typesAsStrings: string[] = formValue.types.map(type => type.toString());
 
-            const programData : FormValueType = {
+            const programData: CreateProgramType = {
                 ...formValue,
-                requirements: filteredRequirements
+                types: typesAsStrings,
+                requirements: filteredRequirements,
             };
 
             try {

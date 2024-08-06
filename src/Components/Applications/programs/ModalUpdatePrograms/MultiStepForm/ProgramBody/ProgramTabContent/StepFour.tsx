@@ -5,22 +5,34 @@ import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import { Requirement } from '@/Types/Programs/ProgramsType';
 
 const StepFour: React.FC = () => {
-
     const dispatch = useAppDispatch();
     const formValue = useAppSelector((state) => state.programs.formValue);
 
     const [newRequirement, setNewRequirement] = useState<Requirement>({ name: '', description: '' });
-    const [requirements, setRequirements] = useState<Requirement[]>(formValue?.requirements || []);
+
+    const parseRequirements = (requirements: any): Requirement[] => {
+        if (Array.isArray(requirements)) {
+            return requirements.map(req => {
+                if (typeof req === 'string') {
+                    return JSON.parse(req) as Requirement;
+                }
+                return req as Requirement;
+            });
+        }
+        return [];
+    };
+
+    const [requirements, setRequirements] = useState<Requirement[]>(parseRequirements(formValue?.requirements));
 
     useEffect(() => {
-        setRequirements(formValue?.requirements || []);
+        setRequirements(parseRequirements(formValue?.requirements));
     }, [formValue]);
 
     const handleAddRequirement = () => {
         if (newRequirement.name && newRequirement.description) {
             const updatedRequirements = [...requirements, newRequirement];
             setRequirements(updatedRequirements);
-            dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
+            dispatch(setFormValue({ field: 'requirements', value: JSON.stringify(updatedRequirements) }));
             setNewRequirement({ name: '', description: '' });
         }
     };
@@ -28,7 +40,7 @@ const StepFour: React.FC = () => {
     const handleRemoveRequirement = (index: number) => {
         const updatedRequirements = requirements.filter((_, i) => i !== index);
         setRequirements(updatedRequirements);
-        dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
+        dispatch(setFormValue({ field: 'requirements', value: JSON.stringify(updatedRequirements) }));
     };
 
     return (
@@ -94,4 +106,6 @@ const StepFour: React.FC = () => {
 };
 
 export default StepFour;
+
+
 

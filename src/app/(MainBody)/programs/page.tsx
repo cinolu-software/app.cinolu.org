@@ -1,10 +1,16 @@
 "use client";
 
-import ProgramsListContainer from "@/Components/Applications/programs/"
+import dynamic from 'next/dynamic';
+
+
+const ProgramsListContainer = dynamic(() => import('@/Components/Applications/programs/'), {
+    ssr: false
+});
 
 const Programs = () => {
-
-    return (<ProgramsListContainer/>)
-}
+    return (
+        <ProgramsListContainer />
+    );
+};
 
 export default Programs;

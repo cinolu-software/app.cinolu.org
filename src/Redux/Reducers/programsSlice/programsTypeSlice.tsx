@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios, { apiBaseUrl } from "@/services/axios";
+import axios from "axios";
+import { apiBaseUrl } from "@/services/axios";
 import { InitialStateProgramsTypeType, ProgramsTypeType, CreateProgramTypeType, TransformedProgramsTypeType } from "@/Types/Programs/ProgramsTypeType";
 import { RootState } from "@/Redux/Store";
 
@@ -15,11 +16,21 @@ const initialState: InitialStateProgramsTypeType = {
 };
 
 const transformProgramsType = (types: ProgramsTypeType[]): TransformedProgramsTypeType[] => {
-    return types.map(type => ({
-        ...type,
-        image : "programs/types/typeProgram.png"
-    }));
+    return types.map(type => {
+        if (type.id === undefined) {
+            throw new Error("Program type must have an id");
+        }
+        return {
+            id: type.id,
+            name: type.name || "",
+            description: type.description || "",
+            created_at: type.created_at || "",
+            updated_at: type.updated_at || "",
+            image: "programs/types/typeProgram.png"
+        };
+    });
 };
+
 
 export const fetchProgramsType = createAsyncThunk(
     'programs/fetchProgramsType',
@@ -105,8 +116,17 @@ const ProgramsTypeSlice = createSlice({
             .addCase(createProgramType.fulfilled, (state, action: PayloadAction<ProgramsTypeType>) => {
                 state.status = 'succeeded';
                 state.originalTypeProgramsData.push(action.payload);
+
+                if (action.payload.id === undefined) {
+                    throw new Error("New program type must have an id");
+                }
+
                 state.transformedProgramsData.push({
-                    ...action.payload,
+                    id: action.payload.id,
+                    name: action.payload.name || "",
+                    description: action.payload.description || "",
+                    created_at: action.payload.created_at || "",
+                    updated_at: action.payload.updated_at || "",
                     image: "programs/types/typeProgram.png"
                 });
             })
@@ -123,6 +143,7 @@ const ProgramsTypeSlice = createSlice({
                 const index = state.originalTypeProgramsData.findIndex(program => program.id === action.payload.id);
                 if (index !== -1) {
                     state.originalTypeProgramsData[index] = action.payload;
+                    // @ts-ignore
                     state.transformedProgramsData[index] = {
                         ...action.payload,
                         image: "programs/types/typeProgram.png"

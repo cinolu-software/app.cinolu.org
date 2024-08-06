@@ -1,12 +1,13 @@
 import React from 'react';
 import { Button } from "reactstrap";
-import { ProgramsListTableColumnType, ProgramsListTableNameType, ProgramsType } from "@/Types/Programs/ProgramsType";
+import { ProgramListTableColumnType, ProgramsType } from "@/Types/Programs/ProgramsType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
 import { setModalDeleteProgram, setModalEditProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { TableColumn } from "react-data-table-component";
 
-const ProgramsListTableName: React.FC<ProgramsListTableNameType> = ({ image, name }) => {
+const ProgramsListTableName: React.FC<{image: string, name: string}> = ({ image, name }) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -17,7 +18,7 @@ const ProgramsListTableName: React.FC<ProgramsListTableNameType> = ({ image, nam
     );
 };
 
-const ProgramsListTableAction: React.FC<{ program: ProgramsType }> = ({ program }) => {
+const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
 
     const dispatch = useDispatch();
 
@@ -38,10 +39,10 @@ const ProgramsListTableAction: React.FC<{ program: ProgramsType }> = ({ program 
 
 };
 
-export const ProgramsListTableDataColumn = [
+export const ProgramsListTableDataColumn: TableColumn<ProgramListTableColumnType>[] = [
     {
         name: "Nom",
-        cell: (row: ProgramsListTableColumnType) => (
+        cell: (row: ProgramListTableColumnType) => (
             <ProgramsListTableName image={row.image || "default_program_image.png"} name={row.name} />
         ),
         sortable: true,
@@ -49,24 +50,22 @@ export const ProgramsListTableDataColumn = [
     },
     {
         name: "Description",
-        selector: (row: ProgramsListTableColumnType) => (
-            <div>{row.description}</div>
-        ),
+        selector: (row: ProgramListTableColumnType) => row.description,
         sortable: false,
     },
     {
         name: "Date de début",
-        selector: (row: ProgramsListTableColumnType) => `${row.start_at}`,
+        selector: (row: ProgramListTableColumnType) => row.start_at,
         sortable: true,
     },
     {
         name: "Date de fin",
-        selector: (row: ProgramsListTableColumnType) => `${row.end_at}`,
+        selector: (row: ProgramListTableColumnType) => row.end_at,
         sortable: true,
     },
     {
         name: "Action",
-        cell: (row: ProgramsListTableColumnType) => <ProgramsListTableAction program={row} />,
+        cell: (row: ProgramListTableColumnType) => <ProgramsListTableAction program={row} />,
     },
 ];
 

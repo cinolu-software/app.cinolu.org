@@ -3,27 +3,29 @@ export interface Requirement {
     description: string;
 }
 
-export interface ProgramsType {
+export type ProgramsType = {
     id: number;
     name: string;
     description: string;
     start_at: string;
     end_at: string;
+    types: string[];
+    requirements: string[];
+    image?: string;
     created_at: string;
     updated_at: string;
-    image?: string;
-    types: number[];
-    requirements: Requirement[];
-}
+};
 
-export interface FormValueType {
+export type FormValueType = {
+    id?: number;
     name: string;
     description: string;
     start_at: string;
     end_at: string;
-    types: string [];
-    requirements: Requirement[];
-}
+    types: string[];
+    requirements: string[];
+    image?: string | undefined;
+};
 
 export interface TransformedProgramsType {
     id: number;
@@ -34,8 +36,8 @@ export interface TransformedProgramsType {
     created_at: string;
     updated_at: string;
     image: string;
-    types: number[];
-    requirements: Requirement[];
+    types: string[];
+    requirements: any;
 }
 
 export interface InitialStateProgramsType {
@@ -58,7 +60,7 @@ export interface CreateProgramType {
     start_at: string;
     end_at: string;
     image?: string;
-    types: number[];
+    types: string[];
     requirements: Requirement[];
 }
 
@@ -70,22 +72,7 @@ export interface ProgramListTableColumnType {
     end_at: string;
     created_at: string;
     updated_at: string;
-}
-
-export interface ProgramListTableNameType {
-    name: string;
-    description: string;
-    start_at: string;
-    end_at: string;
-}
-
-export interface StaticModalToggleProp {
-    staticModalToggle: () => void;
-}
-
-export interface ProgramsListTableColumnType extends ProgramsType {}
-
-export interface ProgramsListTableNameType {
-    image: string;
-    name: string;
+    types: string[];
+    requirements: Requirement[];
+    image?: string;
 }
