@@ -31,7 +31,6 @@ const transformProgramsType = (types: ProgramsTypeType[]): TransformedProgramsTy
     });
 };
 
-
 export const fetchProgramsType = createAsyncThunk(
     'programs/fetchProgramsType',
     async () => {
