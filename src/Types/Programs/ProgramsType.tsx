@@ -3,14 +3,15 @@ export interface Requirement {
     description: string;
 }
 
+
 export type ProgramsType = {
     id: number;
     name: string;
     description: string;
     start_at: string;
     end_at: string;
-    types: string[];
-    requirements: string[];
+    types: number[];  // Modifié pour être un tableau de nombres
+    requirements: Requirement[];  // Assurez-vous que requirements est un tableau d'objets Requirement
     image?: string;
     created_at: string;
     updated_at: string;
@@ -22,8 +23,8 @@ export type FormValueType = {
     description: string;
     start_at: string;
     end_at: string;
-    types: string[];
-    requirements: string[];
+    types: number[];  // Modifié pour être un tableau de nombres
+    requirements: Requirement[];  // Assurez-vous que requirements est un tableau d'objets Requirement
     image?: string | undefined;
 };
 

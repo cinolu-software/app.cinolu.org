@@ -73,6 +73,8 @@ const ModalCreatePrograms = () => {
         }
     };
 
+    console.log("=======>>>", formValue);
+
     return (
         <Col xs="12">
             <Modal isOpen={isOpenModalCreateProgram} toggle={() => dispatch(setModalCreateProgram({ isOpen: false }))} size="xl">

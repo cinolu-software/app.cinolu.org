@@ -26,6 +26,8 @@ const StepThree = () => {
         dispatch(setFormValue({ field: 'types', value: JSON.stringify(updatedTypes) }));
     };
 
+    console.log(transformedProgramsData)
+
     return (
         <div className="sidebar-body">
             <Form>

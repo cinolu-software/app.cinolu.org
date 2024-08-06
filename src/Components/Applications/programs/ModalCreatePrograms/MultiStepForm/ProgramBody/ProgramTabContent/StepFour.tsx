@@ -9,16 +9,19 @@ const StepFour: React.FC = () => {
     const formValue = useAppSelector((state) => state.programs.formValue);
 
     const [newRequirement, setNewRequirement] = useState<Requirement>({ name: '', description: '' });
+
     const [requirements, setRequirements] = useState<Requirement[]>(
+        // @ts-ignore
         Array.isArray(formValue?.requirements)
-            ? formValue.requirements.map(req => typeof req === 'string' ? JSON.parse(req) : req)
+            ? formValue.requirements
             : []
     );
 
     useEffect(() => {
         setRequirements(
+            // @ts-ignore
             Array.isArray(formValue?.requirements)
-                ? formValue.requirements.map(req => typeof req === 'string' ? JSON.parse(req) : req)
+                ? formValue.requirements
                 : []
         );
     }, [formValue]);
@@ -27,7 +30,7 @@ const StepFour: React.FC = () => {
         if (newRequirement.name && newRequirement.description) {
             const updatedRequirements = [...requirements, newRequirement];
             setRequirements(updatedRequirements);
-            dispatch(setFormValue({ field: 'requirements', value: JSON.stringify(updatedRequirements) }));
+            dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
             setNewRequirement({ name: '', description: '' });
         }
     };
@@ -35,7 +38,7 @@ const StepFour: React.FC = () => {
     const handleRemoveRequirement = (index: number) => {
         const updatedRequirements = requirements.filter((_, i) => i !== index);
         setRequirements(updatedRequirements);
-        dispatch(setFormValue({ field: 'requirements', value: JSON.stringify(updatedRequirements) }));
+        dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
     };
 
     return (

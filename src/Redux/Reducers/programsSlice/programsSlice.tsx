@@ -3,8 +3,6 @@ import axios, { apiBaseUrl } from "@/services/axios";
 import { InitialStateProgramsType, ProgramsType, CreateProgramType, TransformedProgramsType, FormValueType } from "@/Types/Programs/ProgramsType";
 import { RootState } from "@/Redux/Store";
 
-
-
 const initialState: InitialStateProgramsType = {
     originalProgramsData: [],
     transformedProgramsData: [],
@@ -27,13 +25,14 @@ const initialState: InitialStateProgramsType = {
 };
 
 const transformPrograms = (programs: ProgramsType[]): TransformedProgramsType[] => {
+    // @ts-ignore
     return programs.map(program => ({
         ...program,
         image: program.image || "admin/roles/user_role.png"
     }));
 };
 
-export const fetchPrograms = createAsyncThunk<{ original: ProgramsType[], transformed: TransformedProgramsType[] }>(
+export const fetchPrograms = createAsyncThunk(
     'programs/fetchPrograms',
     async () => {
         const response = await axios.get<{ data: ProgramsType[] }>(`${apiBaseUrl}/programs`);
@@ -47,8 +46,12 @@ export const createProgram = createAsyncThunk<ProgramsType, CreateProgramType>(
     'programs/createProgram',
     async (newProgram, { rejectWithValue }) => {
         try {
-            newProgram.image = newProgram.image || "admin/roles/user_role.png";
-            const response = await axios.post<{ data: ProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
+            const formattedProgram = {
+                ...newProgram,
+                types: newProgram.types.map(type => parseInt(type)),
+                image: newProgram.image || "admin/roles/user_role.png"
+            };
+            const response = await axios.post<{ data: ProgramsType }>(`${apiBaseUrl}/programs`, formattedProgram);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
@@ -72,10 +75,11 @@ export const updateProgram = createAsyncThunk<ProgramsType, { formValue: Partial
             description: formValue.description || existingProgram.description,
             start_at: formValue.start_at || existingProgram.start_at,
             end_at: formValue.end_at || existingProgram.end_at,
-            types: formValue.types || existingProgram.types,
+            types: formValue.types ? formValue.types.map(type => parseInt(String(type))) : existingProgram.types,
             requirements: formValue.requirements || existingProgram.requirements,
             image: formValue.image || existingProgram.image
         };
+
         try {
             const response = await axios.patch<{ data: ProgramsType }>(`${apiBaseUrl}/programs/${programId}`, transformedProgram);
             return response.data.data;
@@ -135,20 +139,22 @@ const ProgramSlice = createSlice({
         setTabId: (state, action: PayloadAction<number>) => {
             state.tabId = action.payload;
         },
-        setFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: string }>) => {
-            if (state.formValue) {
+        setFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
+            if (action.payload.field === 'types' && typeof action.payload.value === 'string') {
+                // @ts-ignore
+                state.formValue.types = JSON.parse(action.payload.value).map((type: string) => parseInt(type));
+            } else {
                 // @ts-ignore
                 state.formValue[action.payload.field] = action.payload.value;
             }
         },
         updateFormValue: (state, action: PayloadAction<ProgramsType>) => {
             state.formValue = {
-                id: action.payload.id,
                 name: action.payload.name,
                 description: action.payload.description,
                 start_at: action.payload.start_at,
                 end_at: action.payload.end_at,
-                types: action.payload.types,
+                types: action.payload.types.map(type => parseInt(String(type))),
                 requirements: action.payload.requirements,
                 image: action.payload.image || "default_program_image.png"
             };
@@ -176,7 +182,9 @@ const ProgramSlice = createSlice({
             .addCase(createProgram.fulfilled, (state, action: PayloadAction<ProgramsType>) => {
                 state.status = 'succeeded';
                 state.originalProgramsData.push(action.payload);
+                // @ts-ignore
                 state.transformedProgramsData.push({
+
                     ...action.payload,
                     image: action.payload.image || "admin/roles/user_role.png"
                 });
@@ -194,6 +202,7 @@ const ProgramSlice = createSlice({
                 const index = state.originalProgramsData.findIndex(program => program.id === action.payload.id);
                 if (index !== -1) {
                     state.originalProgramsData[index] = action.payload;
+                    // @ts-ignore
                     state.transformedProgramsData[index] = {
                         ...action.payload,
                         image: action.payload.image || "admin/roles/user_role.png"
@@ -231,7 +240,17 @@ const ProgramSlice = createSlice({
     }
 });
 
-export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setFormValue, setTabId, setNavId } = ProgramSlice.actions;
+export const {
+    setModalCreateProgram,
+    setModalEditProgram,
+    setModalDeleteProgram,
+    setNavId,
+    setTabId,
+    setFormValue,
+    updateFormValue
+} = ProgramSlice.actions;
+
+
 export const selectProgramStatus = (state: RootState) => state.programs.status;
 export const selectOriginalProgramData = (state: RootState) => state.programs.originalProgramsData;
 export const selectTransformedProgramData = (state: RootState) => state.programs.transformedProgramsData;

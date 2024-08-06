@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios from "axios";
-import { apiBaseUrl } from "@/services/axios";
+import axios, { apiBaseUrl } from "@/services/axios";
 import { InitialStateProgramsTypeType, ProgramsTypeType, CreateProgramTypeType, TransformedProgramsTypeType } from "@/Types/Programs/ProgramsTypeType";
 import { RootState } from "@/Redux/Store";
 
