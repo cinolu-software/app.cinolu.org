@@ -37,29 +37,38 @@ const initialState: InitialStateProgramsType = {
         types: [],
 
         requirements: []
+    },
+    EditFormValue:{
+        name: "",
+
+        description: "",
+
+        start_at: "",
+
+        end_at: "",
+
+        types: [],
+
+        requirements: []
+
     }
 };
 
 const transformPrograms = (programs: ReceiveProgramsType[]): ReceiveProgramsType[] => {
-
     return programs.map((program) => {
-
         if (program.attachments.length > 0) {
-
             const image = program.attachments[0].name;
             if (image) {
-
                 return {
                     ...program,
-                    image: `${imageBaseUrl}/${image}`
-                }
+                    image: `${imageBaseUrl}/attachments/${image}`
+                };
             }
         }
         return {
             ...program,
             image: "/assets/images/programs/programs.png"
-        }
-
+        };
     });
 };
 
@@ -71,7 +80,7 @@ export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async ()
 
         const transformedPrograms = transformPrograms(originalPrograms);
 
-        return { original: originalPrograms, transformed: transformedPrograms };
+        return { original: transformedPrograms };
 
     }
 );
@@ -111,6 +120,22 @@ export const uploadProgramImage = createAsyncThunk<void, { programId: number, im
     }
 );
 
+export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: number, updatedProgram: CreateProgramType }, { rejectValue: any }>('programs/updateProgram', async ({ programId, updatedProgram }, thunkAPI) => {
+
+        try {
+            const response = await axios.put<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/${programId}`, updatedProgram);
+
+            return response.data.data;
+
+        } catch (err: any) {
+
+            return thunkAPI.rejectWithValue(err.response.data);
+
+        }
+
+    }
+);
+
 const ProgramSlice = createSlice({
 
     name: "programs",
@@ -125,7 +150,7 @@ const ProgramSlice = createSlice({
 
         },
 
-        setModalEditProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType }>) => {
+        setModalEditProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType | null }>) => {
 
             state.isOpenModalEditProgram = action.payload.isOpen;
 
@@ -167,6 +192,20 @@ const ProgramSlice = createSlice({
 
             }
         },
+        setEditFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
+
+            if (action.payload.field === 'types' && typeof action.payload.value === 'string') {
+
+                //@ts-ignore
+                state.EditFormValue.types = JSON.parse(action.payload.value).map((type: string) => parseInt(type));
+
+            } else {
+
+                //@ts-ignore
+                state.EditFormValue[action.payload.field] = action.payload.value;
+
+            }
+        }
 
     },
     extraReducers: (builder) => {
@@ -242,10 +281,41 @@ const ProgramSlice = createSlice({
             })
 
 
+            .addCase(updateProgram.pending, (state) => {
+
+                state.status = 'loading';
+
+                state.error = null;
+
+            })
+            .addCase(updateProgram.fulfilled, (state, action: PayloadAction<ReceiveProgramsType>) => {
+
+                state.status = 'succeeded';
+
+                const updatedProgram = action.payload;
+
+                const existingProgram = state.originalProgramsData.find((program) => program.id === updatedProgram.id);
+
+                if (existingProgram) {
+
+                    Object.assign(existingProgram, updatedProgram);
+
+                }
+
+            })
+            .addCase(updateProgram.rejected, (state, action) => {
+
+                state.status = 'failed';
+
+                state.error = action.error.message || 'Something went wrong';
+
+            });
+
+
     }
 });
 
-export const {setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setNavId, setTabId, setFormValue,} = ProgramSlice.actions;
+export const {setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setNavId, setTabId, setFormValue, setEditFormValue} = ProgramSlice.actions;
 
 export const selectSelectedProgram = (state: RootState) => state.programs.selectedProgram;
 

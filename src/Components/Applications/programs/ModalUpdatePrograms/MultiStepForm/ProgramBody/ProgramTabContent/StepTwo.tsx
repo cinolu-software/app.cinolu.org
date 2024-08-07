@@ -1,18 +1,18 @@
 import { Col, Form, Input, Label, Row } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setEditFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 
 const StepTwo = () => {
 
-    const { formValue } = useAppSelector((state) => state.programs);
+    const { EditFormValue } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
 
     const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setFormValue({ field: 'start_at', value: e.target.value }));
+        dispatch(setEditFormValue({ field: 'start_at', value: e.target.value }));
     };
 
     const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setFormValue({ field: 'end_at', value: e.target.value }));
+        dispatch(setEditFormValue({ field: 'end_at', value: e.target.value }));
     };
 
     return (
@@ -25,11 +25,11 @@ const StepTwo = () => {
                     <Col xs="12">
                         <div className="custom-input">
                             <Input
-                                className={formValue?.start_at !== "" ? "valid" : "is-invalid"}
+                                className={EditFormValue?.start_at !== "" ? "valid" : "is-invalid"}
                                 type="date"
                                 required
                                 name="start_at"
-                                value={formValue?.start_at || ""}
+                                value={EditFormValue?.start_at || ""}
                                 onChange={handleStartDateChange}
                             />
                         </div>
@@ -40,11 +40,11 @@ const StepTwo = () => {
                     <Col xs="12">
                         <div className="custom-input">
                             <Input
-                                className={formValue?.end_at !== "" ? "valid" : "is-invalid"}
+                                className={EditFormValue?.end_at !== "" ? "valid" : "is-invalid"}
                                 type="date"
                                 required
                                 name="end_at"
-                                value={formValue?.end_at || ""}
+                                value={EditFormValue?.end_at || ""}
                                 onChange={handleEndDateChange}
                             />
                         </div>

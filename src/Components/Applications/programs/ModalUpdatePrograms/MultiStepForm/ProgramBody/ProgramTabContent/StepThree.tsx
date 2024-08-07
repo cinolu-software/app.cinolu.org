@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Col, Form, Label, Row } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {setEditFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 const StepThree = () => {
     const dispatch = useAppDispatch();
-    const { formValue } = useAppSelector((state) => state.programs);
+    const { EditFormValue } = useAppSelector((state) => state.programs);
     const { transformedProgramsData, status } = useAppSelector((state) => state.programsType);
 
     useEffect(() => {
@@ -16,14 +16,16 @@ const StepThree = () => {
     }, [dispatch, status]);
 
     const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        if (!formValue) return;
+
+        if (!EditFormValue) return;
 
         const selectedTypeId = parseInt(e.target.value, 10);
-        const updatedTypes = formValue.types.includes(selectedTypeId)
-            ? formValue.types.filter(id => id !== selectedTypeId)
-            : [...formValue.types, selectedTypeId];
 
-        dispatch(setFormValue({ field: 'types', value: updatedTypes }));
+        const updatedTypes = EditFormValue.types.includes(selectedTypeId)
+            ? EditFormValue.types.filter(id => id !== selectedTypeId)
+            : [...EditFormValue.types, selectedTypeId];
+
+        dispatch(setEditFormValue({ field: 'types', value: JSON.stringify(updatedTypes) }));
     };
 
     return (
@@ -37,9 +39,9 @@ const StepThree = () => {
                         <div className="custom-input">
                             <select
                                 name="types"
-                                value={formValue?.types.map(String) || []}
+                                value={EditFormValue?.types.map(String) || []}
                                 onChange={handleTypeChange}
-                                className={(formValue?.types?.length || 0) > 0 ? "valid" : "is-invalid"}
+                                className={(EditFormValue?.types?.length || 0) > 0 ? "valid" : "is-invalid"}
                                 multiple
                                 required
                             >

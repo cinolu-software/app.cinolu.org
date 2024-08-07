@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Button, Col, Label, Row, Table } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
-import { Requirement } from '@/Types/Programs/ProgramsType';
+import { RequirementType } from '@/Types/Programs/ProgramsType';
 
 const StepFour: React.FC = () => {
     const dispatch = useAppDispatch();
     const formValue = useAppSelector((state) => state.programs.formValue);
 
-    const [newRequirement, setNewRequirement] = useState<Requirement>({ name: '', description: '' });
+    const [newRequirement, setNewRequirement] = useState<RequirementType>({ name: '', description: '' });
 
-    const [requirements, setRequirements] = useState<Requirement[]>(
+    const [requirements, setRequirements] = useState<RequirementType[]>(
         // @ts-ignore
         Array.isArray(formValue?.requirements)
             ? formValue.requirements

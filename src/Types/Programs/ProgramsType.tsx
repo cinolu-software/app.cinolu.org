@@ -1,5 +1,5 @@
 export type RequirementType = {
-    id: number;
+    id?: number;
     name: string;
     description: string;
 }
@@ -60,6 +60,7 @@ export interface InitialStateProgramsType {
     navId: number;
     tabId: number;
     formValue: FormValueType | null;
+    EditFormValue: FormValueType | null;
 }
 
 
