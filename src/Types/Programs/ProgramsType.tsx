@@ -1,79 +1,66 @@
-export interface Requirement {
+export type RequirementType = {
+    id: number;
     name: string;
     description: string;
 }
 
+export type AttachmentType = {
+    id: number;
+    name: string;
+    created_at: string;
+    updated_at: string;
+}
 
-export type ProgramsType = {
+export type DataType = {
+    id: number;
+    name: string;
+    description: string;
+}
+
+export interface CreateProgramType  {
+    name: string;
+    description: string;
+    start_at: string;
+    end_at: string;
+    types: number[];
+    requirements: RequirementType[];
+}
+
+export interface ReceiveProgramsType {
     id: number;
     name: string;
     description: string;
     start_at: string;
     end_at: string;
-    types: number[];  // Modifié pour être un tableau de nombres
-    requirements: Requirement[];  // Assurez-vous que requirements est un tableau d'objets Requirement
-    image?: string;
-    created_at: string;
-    updated_at: string;
-};
-
-export type FormValueType = {
-    id?: number;
-    name: string;
-    description: string;
-    start_at: string;
-    end_at: string;
-    types: number[];  // Modifié pour être un tableau de nombres
-    requirements: Requirement[];  // Assurez-vous que requirements est un tableau d'objets Requirement
-    image?: string | undefined;
-};
-
-export interface TransformedProgramsType {
-    id: number;
-    name: string;
-    description: string;
-    start_at: string;
-    end_at: string;
-    created_at: string;
-    updated_at: string;
     image: string;
-    types: string[];
-    requirements: any;
+    attachments: AttachmentType[];
+    types: DataType[];
+    requirements?: RequirementType[];
+    created_at: string;
+    updated_at: string
+}
+
+export interface FormValueType  {
+    name: string;
+    description: string;
+    start_at: string;
+    end_at: string;
+    types: number[];
+    requirements: RequirementType[];
 }
 
 export interface InitialStateProgramsType {
-    originalProgramsData: ProgramsType[];
-    transformedProgramsData: TransformedProgramsType[];
+    originalProgramsData: ReceiveProgramsType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     isOpenModalCreateProgram: boolean;
     isOpenModalEditProgram: boolean;
     isOpenModalDeleteProgram: boolean;
-    selectedProgram: ProgramsType | null;
+    selectedProgram: ReceiveProgramsType | null;
     navId: number;
     tabId: number;
     formValue: FormValueType | null;
 }
 
-export interface CreateProgramType {
-    name: string;
-    description: string;
-    start_at: string;
-    end_at: string;
-    image?: string;
-    types: string[];
-    requirements: Requirement[];
-}
 
-export interface ProgramListTableColumnType {
-    id: number;
-    name: string;
-    description: string;
-    start_at: string;
-    end_at: string;
-    created_at: string;
-    updated_at: string;
-    types: string[];
-    requirements: Requirement[];
-    image?: string;
-}
+

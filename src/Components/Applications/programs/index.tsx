@@ -1,28 +1,43 @@
 import React, { useMemo, useState, useEffect } from "react";
-import { AppDispatch } from "@/Redux/Store";
+
 import DataTable from "react-data-table-component";
+
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
+
 import { ProgramsHeader } from "./ProgramsList";
-import { useSelector, useDispatch } from "react-redux";
-import { selectProgramStatus, fetchPrograms, selectTransformedProgramData } from "@/Redux/Reducers/programsSlice/programsSlice";
+
+import {  fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
+
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
+
 import DeleteProgramsModal from "./DeleteProgramsModal";
+
 import ModalCreatePrograms from "./ModalCreatePrograms";
+
 import ModalUpdatePrograms from "./ModalUpdatePrograms";
 
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+
+import {RootState} from "@/Redux/Store";
+
 const ProgramsListContainer = () => {
+
     const [filterText, setFilterText] = useState("");
-    const dispatch = useDispatch<AppDispatch>();
-    const status = useSelector(selectProgramStatus);
-    const transformedPrograms = useSelector(selectTransformedProgramData);
+
+    const dispatch = useAppDispatch();
+
+    const {status, originalProgramsData} = useAppSelector((state: RootState) => state.programs)
+
 
     const subHeaderComponentMemo = useMemo(() => {
+
         return (
             <div className="dataTables_filter d-flex align-items-center">
                 <Label className="me-2">{"Chercher"}:</Label>
                 <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
             </div>
         );
+
     }, [filterText]);
 
     useEffect(() => {
@@ -31,14 +46,9 @@ const ProgramsListContainer = () => {
         }
     }, [status, dispatch]);
 
-    const filteredPrograms = transformedPrograms
-        .filter(program =>
-            program.name.toLowerCase().includes(filterText.toLowerCase())
-        )
-        .map(program => ({
-            ...program,
-            types: program.types.map(String)
-        }));
+    console.log(originalProgramsData, "originalProgramsData");
+
+
 
     return (
         <Container fluid>
@@ -56,7 +66,7 @@ const ProgramsListContainer = () => {
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={filteredPrograms}
+                                        data={originalProgramsData}
                                         columns={ProgramsListTableDataColumn}
                                         striped
                                         highlightOnHover

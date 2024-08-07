@@ -5,8 +5,11 @@ import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 const StepThree = () => {
+
     const dispatch = useAppDispatch();
+
     const { formValue } = useAppSelector((state) => state.programs);
+
     const { transformedProgramsData, status } = useAppSelector((state) => state.programsType);
 
     useEffect(() => {
@@ -16,6 +19,7 @@ const StepThree = () => {
     }, [dispatch, status]);
 
     const handleTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+
         if (!formValue) return;
 
         const selectedTypeId = parseInt(e.target.value, 10);

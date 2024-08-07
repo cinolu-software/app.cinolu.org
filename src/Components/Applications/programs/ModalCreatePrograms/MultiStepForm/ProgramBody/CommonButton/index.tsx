@@ -38,7 +38,7 @@ const CommonButton = () => {
             )}
             <Button color="transparent" className="ms-2" onClick={handleFormValue}>
                 <div className="d-flex align-items-center gap-sm-2 gap-1">
-                    {navId === 3 ? "Submit" : "Suivant"}
+                    { "Suivant"}
                     <SVG iconId="front-arrow" />
                 </div>
             </Button>

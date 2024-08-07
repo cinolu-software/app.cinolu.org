@@ -5,48 +5,36 @@ import { setModalCreateProgram, createProgram } from "@/Redux/Reducers/programsS
 import AddProgramContainer from "./MultiStepForm";
 import { toast, Flip } from "react-toastify";
 import { RootState } from "@/Redux/Store";
-import { FormValueType, Requirement, CreateProgramType } from "@/Types/Programs/ProgramsType";
+
+
 
 const ModalCreatePrograms = () => {
+
     const dispatch = useAppDispatch();
+
     const { isOpenModalCreateProgram, formValue } = useAppSelector((state: RootState) => state.programs);
+
     const [isFormValid, setIsFormValid] = useState(false);
 
     useEffect(() => {
+
         const validateForm = (): boolean => {
-            return !!(
-                formValue &&
-                formValue.name &&
-                formValue.description &&
-                formValue.start_at &&
-                formValue.end_at &&
-                formValue.types.length > 0 &&
-                formValue.requirements.length > 0
-            );
+
+            return !!( formValue && formValue.name && formValue.description && formValue.start_at && formValue.end_at && formValue.types.length > 0 && formValue.requirements.length > 0);
         };
 
         setIsFormValid(validateForm());
+
     }, [formValue]);
 
+
+
     const handleSubmit = async () => {
+
         if (isFormValid && formValue) {
-            // @ts-ignore
-            const filteredRequirements: Requirement[] = (formValue.requirements || []).map(req => ({
-                name: req,
-                description: ''
-            })).filter(req => req.name && req.description);
-
-
-            const typesAsStrings: string[] = formValue.types.map(type => type.toString());
-
-            const programData: CreateProgramType = {
-                ...formValue,
-                types: typesAsStrings,
-                requirements: filteredRequirements,
-            };
 
             try {
-                await dispatch(createProgram(programData)).unwrap();
+                await dispatch(createProgram(formValue)).unwrap();
                 dispatch(setModalCreateProgram({ isOpen: false }));
             } catch (error) {
                 toast.error(
@@ -74,7 +62,6 @@ const ModalCreatePrograms = () => {
         }
     };
 
-    console.log("=======>>>", formValue);
 
     return (
         <Col xs="12">
