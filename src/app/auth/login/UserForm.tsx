@@ -1,13 +1,13 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import imageOne from "../../../../public/assets/images/logo/logo.png";
 import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectStatus, selectError } from "@/Redux/Reducers/AuthSlice";
+import { useDispatch } from "react-redux";
+import { login } from "@/Redux/Reducers/AuthSlice";
 import { AppDispatch } from "@/Redux/Store";
 
 const FormulaireUtilisateur = () => {
@@ -38,6 +38,7 @@ const FormulaireUtilisateur = () => {
                 );
 
                 router.push('/dashboard');
+
             })
             .catch((error)=>{
                 toast.error(
@@ -51,7 +52,6 @@ const FormulaireUtilisateur = () => {
                     }
                 );
             })
-
     };
 
     return (
@@ -64,16 +64,16 @@ const FormulaireUtilisateur = () => {
             </div>
             <div className="login-main">
                 <Form className="theme-form" onSubmit={gererSoumissionFormulaire}>
-                    <h4>{"Connexion"}</h4>
+                    <h4 className={'mb-4'}>{"Connexion"}</h4>
 
                     <FormGroup>
                         <Label className="col-form-label">{"Adresse e-mail"}</Label>
-                        <Input type="email" onChange={(event) => setEmail(event.target.value)} placeholder="" />
+                        <Input type="email" onChange={(event) => setEmail(event.target.value)} placeholder=""  />
                     </FormGroup>
                     <FormGroup>
                         <Label className="col-form-label">{"Mot de passe"}</Label>
                         <div className="position-relative">
-                            <Input type={montrer ? "text" : "password"} onChange={(event) => setMotDePasse(event.target.value)} placeholder="" />
+                            <Input type={montrer ? "text" : "password"} onChange={(event) => setMotDePasse(event.target.value)} placeholder=""  />
                             <div className="show-hide" onClick={() => setMontrer(!montrer)}><span className="show"> </span></div>
                         </div>
                     </FormGroup>

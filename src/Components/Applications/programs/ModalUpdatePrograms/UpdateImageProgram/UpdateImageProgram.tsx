@@ -3,10 +3,9 @@ import { Col, Row, Button } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import { useDispatch, useSelector } from "react-redux";
 import { toast, Flip } from "react-toastify";
-import { uploadProgramImage, selectSelectedProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { AppDispatch } from "@/Redux/Store";
+import { uploadProgramImage } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
@@ -14,8 +13,10 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview);
 const UpdateImageProgram: React.FC = () => {
 
     const [files, setFiles] = useState<any[]>([]);
-    const dispatch = useDispatch<AppDispatch>();
-    const selectedProgram = useSelector(selectSelectedProgram);
+    const dispatch = useAppDispatch();
+    const {selectedProgram} = useAppSelector((state)=> state.programs);
+
+
 
     const handleUpdateProgramImage = async () => {
         if (files.length === 0) {

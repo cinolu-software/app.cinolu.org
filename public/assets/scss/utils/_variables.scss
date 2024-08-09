@@ -1,87 +1,92 @@
-// General variables
-$theme-font-color: #9B9B9B;
-$theme-body-font-color: #3D434A;
+
+
+
+$theme-font-color: #2B6442;
+$theme-body-font-color: #15803D;
 $theme-body-sub-title-color: $theme-font-color;
-$body-color: #f8f8f8;
+$body-color: #D0DDD5;
 $main-body-color: #F4F7F9;
 
-// Theme colors variables
-$primary-color: #7A70BA;
-//$primary-color: red;
-$secondary-color: #48A3D7;
-$tertiary-color : #C95E9E;
-$success-color: #0DA759;
-$info-color : #16C7F9;
+
+$primary-color: #2B6442;
+$secondary-color: #15803D;
+$tertiary-color: #D0DDD5;
+
+$success-color: darken(#15803D, 10%);
+$info-color: lighten(#15803D, 10%);
 $warning-color: #D77748;
 $danger-color: #E44141;
-$light-color : #f4f4f4;
+$light-color: #F4F4F4;
 $badge-light-color: #52526c;
-$light-gray : rgba(#6A7185, 30%);
+$light-gray: rgba(#2B6442, 0.3);
 $light-widget-border: #EFEEFF;
-$light-semi-gray :#efefef;
-$font-gray-color: #6C757D;
-$dark-light :$theme-font-color;
-$dark-gray: #898989;
-$dark-color : #2c323f;
-$dark-color-light: #2c323fb8;
-$gray-60 : rgba(#6A7185, 0.30);
-$card-body-color : #f9f9fa;
+$light-semi-gray: #efefef;
+$font-gray-color: lighten(#2B6442, 30%);
+$dark-light: $theme-font-color;
+$dark-gray: darken(#2B6442, 20%);
+$dark-color: #2C323F;
+$dark-color-light: rgba(#2C323F, 0.72);
+$gray-60: rgba(#2B6442, 0.3);
+$card-body-color: #f9f9fa;
 $transparent-color: transparent;
-$auth-bg-color: #fafafa;
-$light : #fdfeff;
-$semi-dark :#59667a;
+$auth-bg-color: #FAFAFA;
+$light: #FDFFFE;
+$semi-dark: darken(#D0DDD5, 10%);
 $light-text: #999999;
-$light-paragraph: #8F8F8F;
-$light-background: #d7e2e9;
-$light-font: rgba(27, 49, 85, 0.4);
+$light-paragraph: lighten(#15803D, 20%);
+$light-background: lighten(#D0DDD5, 10%);
+$light-font: rgba(#2B6442, 0.4);
 $light-semi-font: $semi-dark;
 $light-chartist-grid-color: #f6f9fd;
-$pitch-color: #fe8a7d;
+$pitch-color: #FE8A7D;
 $color-scarpa: #4c5667;
 $color-fiord: #455a64;
-$black : #000;
+$black: #000;
 $white: #fff;
 $off-white: #F7F6FF;
-$theme-medium-color: #eae8ff;
+$theme-medium-color: #EAE8FF;
 $dropdown-border-color: #918E99;
-$light-primary: #E0DDFF;
-$light-secondary: #c7eaff;
-$light-tertiary: #fbd8ed;
-$light-success: #c8f9e1;
-$light-info: #d0f3fd;
-$light-warning: #fbdac9;
-$light-danger: #FEDDDB;
+$light-primary: lighten(#2B6442, 30%);
+$light-secondary: lighten(#15803D, 30%);
+$light-tertiary: lighten(#D0DDD5, 30%);
+$light-success: lighten(#0DA759, 20%);
+$light-info: lighten(#16C7F9, 20%);
+$light-warning: lighten(#D77748, 20%);
+$light-danger: lighten(#E44141, 20%);
 $light-white: #F9F9FB;
 $light-dark: #EAEBF2;
-$sidebar-color: #2A3650;
-$sidebar-font: #CBCCCE;
-$light-sidebar-bg: #374462;
-$header-light-bg: #F4F7F9;
-$card-header-color: #6A7185;
-$light-text-color: #8D8D8D;
+
+$sidebar-color: darken(#2B6442, 15%);
+$sidebar-font: lighten(#2B6442, 50%);
+
+$light-sidebar-bg: transparentize(#260101, 0.7);
+
+//$header-light-bg: lighten(#15803D, 10%);
+$header-light-bg: transparentize(#8FC1B5, 0.7);
+$card-header-color: darken(#2B6442, 30%);
+$light-text-color: lighten(#15803D, 20%);
 
 
-// gradient colors
 $gradient-primary: linear-gradient(26deg, var(--theme-default) 0%, #a26cf8 100%);
 $gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -13.9%, var(--theme-default) 79.68%);
 
-//social colors
+
 $fb: #50598e;
 $twitter: #6fa2d8;
 $google-plus: #c64e40;
 $linkedin: #0077B5;
 
-// soical table 
+
 $fb-color: #2F84F4;
 $insta-color: #FC971E;
 $pintrest-color: $secondary-color;
 $twitter-color: #57B9F6;
 $youtube-color: #F42F2F;
 
-//error input color start
+
 $light-body-bg-color: #fafdff;
 
-//fonts
+
 $font-outfit: 'Outfit', sans-serif;
 $font-serif: sans-serif;
 $landing-cursive: 'Caveat', cursive;

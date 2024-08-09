@@ -100,7 +100,7 @@ export const createProgram = createAsyncThunk<ReceiveProgramsType, CreateProgram
 );
 
 
-export const uploadProgramImage = createAsyncThunk<void, { programId: number, imageFile: File }, {rejectValue: any}>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
+export const uploadProgramImage = createAsyncThunk<void, { programId: number | undefined, imageFile: File }, {rejectValue: any}>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
 
         const formData = new FormData();
 
