@@ -33,7 +33,7 @@ const StepThree = () => {
                     <div>
 
                         <h5 className="mb-2">
-                            {'Cliquer'} <span className="txt-primary">{'le type de programme'}</span>
+                            {'Sélectionner'} <span className="txt-primary">{'le type de programme'}</span>
                         </h5>
                         <p className="text-muted mb-2">Cliquer sur les types de programme qui correspondent à vos besoins.</p>
                     </div>
