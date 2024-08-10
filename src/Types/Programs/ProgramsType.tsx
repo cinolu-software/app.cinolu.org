@@ -56,6 +56,7 @@ export interface InitialStateProgramsType {
     isOpenModalCreateProgram: boolean;
     isOpenModalEditProgram: boolean;
     isOpenModalDeleteProgram: boolean;
+    filterToggle: boolean;
     selectedProgram: ReceiveProgramsType | null;
     navId: number;
     tabId: number;

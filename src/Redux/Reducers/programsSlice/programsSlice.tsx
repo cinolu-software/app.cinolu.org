@@ -18,6 +18,8 @@ const initialState: InitialStateProgramsType = {
 
     isOpenModalDeleteProgram: false,
 
+    filterToggle: false,
+
     selectedProgram: null,
 
     navId: 1,
@@ -205,6 +207,9 @@ const ProgramSlice = createSlice({
                 state.EditFormValue[action.payload.field] = action.payload.value;
 
             }
+        },
+        setFilterToggle: (state) => {
+            state.filterToggle = !state.filterToggle;
         }
 
     },
@@ -315,7 +320,7 @@ const ProgramSlice = createSlice({
     }
 });
 
-export const {setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setNavId, setTabId, setFormValue, setEditFormValue} = ProgramSlice.actions;
+export const {setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setNavId, setTabId, setFormValue, setEditFormValue, setFilterToggle} = ProgramSlice.actions;
 
 export const selectSelectedProgram = (state: RootState) => state.programs.selectedProgram;
 

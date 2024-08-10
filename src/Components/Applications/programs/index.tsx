@@ -20,6 +20,12 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 
 import {RootState} from "@/Redux/Store";
 
+import {CollapseFilterData} from "./CollapseFilterData"
+
+
+
+
+
 const ProgramsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
@@ -46,8 +52,6 @@ const ProgramsListContainer = () => {
         }
     }, [status, dispatch]);
 
-    console.log(originalProgramsData, "originalProgramsData");
-
 
 
     return (
@@ -61,6 +65,7 @@ const ProgramsListContainer = () => {
                         <CardBody>
                             <div className="list-product-header">
                                 <ProgramsHeader />
+                                <CollapseFilterData/>
                             </div>
                             <div className="list-program">
                                 <div className="table-responsive">

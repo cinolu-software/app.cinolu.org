@@ -5,6 +5,7 @@ import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import Calendar from "react-calendar";
 
 const StepTwo = () => {
+
     const { formValue } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
 
@@ -20,6 +21,7 @@ const StepTwo = () => {
         setEndDate(value);
         dispatch(setFormValue({ field: 'end_at', value: value.toISOString().split("T")[0] }));
     };
+
 
     return (
         <div className="sidebar-body">

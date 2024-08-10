@@ -43,7 +43,7 @@ const StepThree = () => {
                                 <Input
                                     id={`type${type.id}`}
                                     type="checkbox"
-                                    checked={formValue.types.includes(type.id)}
+                                    checked={formValue?.types.includes(type.id)}
                                     onChange={() => handleTypeChange(type.id)}
                                 />
                                 <div className="custom--mega-checkbox">
