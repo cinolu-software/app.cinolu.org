@@ -20,7 +20,7 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 
 import {RootState} from "@/Redux/Store";
 
-import {CollapseFilterData} from "./CollapseFilterData"
+import {CollapseFilterData} from "./CollapseFilterData";
 
 
 
@@ -32,7 +32,9 @@ const ProgramsListContainer = () => {
 
     const dispatch = useAppDispatch();
 
-    const {status, originalProgramsData} = useAppSelector((state: RootState) => state.programs)
+    const {status, originalProgramsData} = useAppSelector((state: RootState) => state.programs);
+
+    const filteredItems = originalProgramsData.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -71,7 +73,7 @@ const ProgramsListContainer = () => {
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={originalProgramsData}
+                                        data={filteredItems}
                                         columns={ProgramsListTableDataColumn}
                                         striped
                                         highlightOnHover
