@@ -367,6 +367,7 @@ export const FiltersData = [
         name: "Price",
         options: ["56000.00", "19000.00", "10000.00", "15000.00", "99000.00"],
     },
+
 ];
 
 export const ProductListTableData = [
