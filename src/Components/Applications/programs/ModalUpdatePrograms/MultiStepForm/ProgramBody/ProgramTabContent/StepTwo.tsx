@@ -7,12 +7,16 @@ const StepTwo = () => {
     const { EditFormValue } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
 
-    const handleStartDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setEditFormValue({ field: 'start_at', value: e.target.value }));
+    const handleStartDateChange = (date: Date | null) => {
+        if (date) {
+            dispatch(setEditFormValue({ field: 'start_at', value: date.toISOString().split('T')[0] }));
+        }
     };
 
-    const handleEndDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setEditFormValue({ field: 'end_at', value: e.target.value }));
+    const handleEndDateChange = (date: Date | null) => {
+        if (date) {
+            dispatch(setEditFormValue({ field: 'end_at', value: date.toISOString().split('T')[0] }));
+        }
     };
 
     return (
@@ -30,7 +34,7 @@ const StepTwo = () => {
                                 required
                                 name="start_at"
                                 value={EditFormValue?.start_at || ""}
-                                onChange={handleStartDateChange}
+                                onChange={(e) => handleStartDateChange(new Date(e.target.value))}
                             />
                         </div>
                     </Col>
@@ -45,7 +49,7 @@ const StepTwo = () => {
                                 required
                                 name="end_at"
                                 value={EditFormValue?.end_at || ""}
-                                onChange={handleEndDateChange}
+                                onChange={(e) => handleEndDateChange(new Date(e.target.value))}
                             />
                         </div>
                     </Col>
@@ -56,4 +60,5 @@ const StepTwo = () => {
 };
 
 export default StepTwo;
+
 

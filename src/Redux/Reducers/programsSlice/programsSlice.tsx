@@ -160,7 +160,7 @@ const ProgramSlice = createSlice({
 
         },
 
-        setModalDeleteProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType }>) => {
+        setModalDeleteProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType | null }>) => {
 
             state.isOpenModalDeleteProgram = action.payload.isOpen;
 

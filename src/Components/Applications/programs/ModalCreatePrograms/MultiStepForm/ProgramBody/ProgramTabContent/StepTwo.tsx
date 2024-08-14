@@ -3,25 +3,29 @@ import { Col, Form, Label, Row, InputGroup, Card, CardBody } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import Calendar from "react-calendar";
+// @ts-ignore
+import { Value } from 'react-calendar/dist/cjs/shared/types';
 
 const StepTwo = () => {
-
     const { formValue } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
 
-    const [startDate, setStartDate] = useState<Date>(formValue?.start_at ? new Date(formValue.start_at) : new Date());
-    const [endDate, setEndDate] = useState<Date>(formValue?.end_at ? new Date(formValue.end_at) : new Date());
+    const [startDate, setStartDate] = useState<Date | null>(formValue?.start_at ? new Date(formValue.start_at) : null);
+    const [endDate, setEndDate] = useState<Date | null>(formValue?.end_at ? new Date(formValue.end_at) : null);
 
-    const handleStartDateChange = (value: Date) => {
-        setStartDate(value);
-        dispatch(setFormValue({ field: 'start_at', value: value.toISOString().split("T")[0] }));
+    const handleStartDateChange = (value: Value) => {
+        if (value instanceof Date) {
+            setStartDate(value);
+            dispatch(setFormValue({ field: 'start_at', value: value.toISOString().split("T")[0] }));
+        }
     };
 
-    const handleEndDateChange = (value: Date) => {
-        setEndDate(value);
-        dispatch(setFormValue({ field: 'end_at', value: value.toISOString().split("T")[0] }));
+    const handleEndDateChange = (value: Value) => {
+        if (value instanceof Date) {
+            setEndDate(value);
+            dispatch(setFormValue({ field: 'end_at', value: value.toISOString().split("T")[0] }));
+        }
     };
-
 
     return (
         <div className="sidebar-body">

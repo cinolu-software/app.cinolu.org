@@ -9,7 +9,6 @@ export const ProgramsHeader = () => {
     const dispatch = useAppDispatch();
     const {isOpenModalCreateProgram, filterToggle } = useAppSelector((state) => state.programs);
 
-
     return (
         <div>
             <div className={'light-box'} onClick={()=>dispatch(setFilterToggle())}>

@@ -3,7 +3,7 @@ import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col } from "reactstrap";
 import CommonModal from "./Common/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setModalDeleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
 
 const DeleteProgramModal = () => {
     const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ const DeleteProgramModal = () => {
 
     const handleDelete = () => {
         if (selectedProgramData && selectedProgramData.id !== undefined) {
-            dispatch(deleteProgram(selectedProgramData.id));
+            // dispatch(deleteProgramType(selectedProgramData.id));
             dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
         }
     };
