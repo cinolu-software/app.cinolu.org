@@ -125,11 +125,13 @@
         <path d="M16.1875 6.78125V1.96875" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round"/>
         <path d="M2.3363 16.581L6.65005 13.6847C7.3413 13.221 8.3388 13.2735 8.96005 13.8072L9.2488 14.061C9.9313 14.6472 11.0338 14.6472 11.7163 14.061L15.3563 10.9372C16.0388 10.351 17.1413 10.351 17.8238 10.9372L19.2501 12.1622" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+
     <symbol id="product-category" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M11.3838 2.55479L16.5463 4.84728C18.0338 5.50353 18.0338 6.58853 16.5463 7.24478L11.3838 9.53729C10.7976 9.79979 9.83508 9.79979 9.24883 9.53729L4.08633 7.24478C2.59883 6.58853 2.59883 5.50353 4.08633 4.84728L9.24883 2.55479C9.83508 2.29229 10.7976 2.29229 11.3838 2.55479Z" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M2.625 9.625C2.625 10.36 3.17625 11.2087 3.85 11.5062L9.79125 14.1488C10.2462 14.35 10.7625 14.35 11.2088 14.1488L17.15 11.5062C17.8238 11.2087 18.375 10.36 18.375 9.625" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M2.625 14C2.625 14.8138 3.10625 15.5487 3.85 15.8812L9.79125 18.5238C10.2462 18.725 10.7625 18.725 11.2088 18.5238L17.15 15.8812C17.8938 15.5487 18.375 14.8138 18.375 14" stroke-opacity="0.8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
+
     <symbol id="pricing" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
         <mask id="mask0_118_328" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="19" height="19">
         <path d="M19 0H0V19H19V0Z" fill="white"/>
@@ -175,7 +177,26 @@
         <path opacity="0.4" d="M2.9165 10H16.9415" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
 
+    <symbol id="info" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+    </symbol>
+    <symbol id="calendar" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+        <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+        <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+    </symbol>
+    <symbol id="type" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z"/>
+        <path d="M4 6.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5H7a.5.5 0 0 1 0 1H4.5a.5.5 0 0 1-.5-.5"/>
+    </symbol>
+    <symbol id="requirement" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+        <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0h13A1.5 1.5 0 0 1 16 1.5v2A1.5 1.5 0 0 1 14.5 5h-13A1.5 1.5 0 0 1 0 3.5zM1.5 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5z"/>
+        <path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5m10.823.323-.396-.396A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0M0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
+    </symbol>
+
 <!-- end -->
+
+
 <!-- list-product -->
     <symbol id="edit-content" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
         <path opacity="0.2" d="M18 18.834H3C2.65833 18.834 2.375 18.5507 2.375 18.209C2.375 17.8673 2.65833 17.584 3 17.584H18C18.3417 17.584 18.625 17.8673 18.625 18.209C18.625 18.5507 18.3417 18.834 18 18.834Z"/>

@@ -1017,25 +1017,26 @@ export const AddProductNav = [
 export const AddProgram = [
   {
     id: 1,
-    icon: "product-detail",
+    icon: "info",
     title: "Information du programme",
     detail:"Nom et Description",
   },
   {
     id: 2,
-    icon: "product-gallery",
+    icon: "calendar",
     title: "Durée du programme",
     detail: "date de début et de fin"
   },
   {
     id: 3,
-    icon: "product-category",
+    icon: "type",
     title: "Type de programme",
     detail: "Sélectionner le type de programme"
   },
   {
     id: 4,
-    icon: "pricing",
+    // icon: "pricing",
+    icon: "requirement",
     title: "Exigence",
     detail: "Requirements"
   },

@@ -26,6 +26,7 @@ const StepThree = () => {
         dispatch(setFormValue({ field: 'types', value: JSON.stringify(updatedTypes) }));
     };
 
+
     return (
         <Col>
 
