@@ -22,6 +22,8 @@ export const CollapseFilterData = () => {
         }));
     }, [transformedProgramsData]);
 
+
+
     return (
         <Collapse isOpen={filterToggle}>
             <Card className="shadow-none">

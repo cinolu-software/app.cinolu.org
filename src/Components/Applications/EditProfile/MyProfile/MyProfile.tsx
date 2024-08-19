@@ -19,6 +19,7 @@ const MyProfile = () => {
         e.preventDefault();
         const formData = new FormData(e.target as HTMLFormElement);
         const payload = Object.fromEntries(formData.entries()) as unknown as UpdateProfilePayload;
+        
         await dispatch(updateProfile(payload)).unwrap()
             .then(() => {
                 toast.success(
