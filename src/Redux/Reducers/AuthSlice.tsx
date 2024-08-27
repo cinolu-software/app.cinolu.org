@@ -8,8 +8,12 @@ import { RootState } from "@/Redux/Store";
 export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: string }>("auth/login", async (data, { rejectWithValue }) => {
     try {
         const response = await axios.post(`${apiBaseUrl}/auth/login`, data);
-        Cookies.set("cinolu_token", JSON.stringify(response.data));
-        return response.data;
+        if(response.data?.data?.roles[0].name !== "admin"){
+            return rejectWithValue("Vous n'êtes pas autorisé à accéder à cette interface");
+        }else {
+            Cookies.set("cinolu_token", JSON.stringify(response.data));
+            return response.data;
+        }
     } catch (error: any) {
         const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
         return rejectWithValue(errorMessage);

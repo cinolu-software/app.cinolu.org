@@ -16,8 +16,6 @@ export const Profile = () => {
     const router = useRouter();
     const  {user} = useSelector(selectAuth);
 
-    console.log(user);
-
     useEffect(() => {
         dispatch(checkAuth());
     }, [dispatch]);

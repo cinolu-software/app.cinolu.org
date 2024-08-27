@@ -79,8 +79,8 @@ export const getVisibleProducts = (data: ProductItemInterface[], { brand, color,
         CategoryMatch = true;
       }
 
-      const startPriceMatch = typeof value.min !== "number" || value.min <= product.price;
-      const endPriceMatch = typeof value.max !== "number" || product.price <= value.max;
+      const startPriceMatch = typeof value?.min !== "number" || value.min <= product.price;
+      const endPriceMatch = typeof value?.max !== "number" || product.price <= value.max;
 
       const searchByName = product.name.toLowerCase().indexOf(searchBy) > -1;
 

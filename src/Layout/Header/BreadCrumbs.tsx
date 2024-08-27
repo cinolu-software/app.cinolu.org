@@ -4,7 +4,6 @@ import { Home } from "react-feather";
 import { Breadcrumb, BreadcrumbItem, Col } from "reactstrap";
 
 export const BreadCrumbs = () => {
-
   const pathname = usePathname();
   
   const symbolRegex = /[!@#\$%\^&\*\(\)_\+\{\}\[\]:;"'<>,.?/\\|`~\-=]/g;

@@ -11,6 +11,7 @@ import { AppDispatch } from "@/Redux/Store";
 import { selectStatus } from "@/Redux/Reducers/AuthSlice";
 
 const FormulaireUtilisateur = () => {
+    
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
@@ -49,6 +50,8 @@ const FormulaireUtilisateur = () => {
     useEffect(() => {
         if(status === 'loading'){
             setLoading(true)
+        }else if(status === 'failed'){
+            setLoading(false)
         }
     }, [status]);
 
