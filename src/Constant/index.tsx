@@ -1949,3 +1949,10 @@ export const SKU= "SKU"
 export const StockAvailability= "Stock Availability"
 export const StockQuantity= "Stock Quantity"
 export const MdeEditorText = `Enter your messages...`;
+
+//Project
+export const AllPrograms = "Tous";
+export const CreateNewProgram = "Créer un Programme";
+export const DoingProgram = "En cour...";
+export const DoneProgram = "Terminé";
+

@@ -17,6 +17,7 @@ import ProgramsTypeSlice from "./Reducers/programsSlice/programsTypeSlice";
 import FilterSlice from "./Reducers/FilterSlice";
 import CartSlice from "./Reducers/CartSlice";
 import AddProductSlice from "./Reducers/AddProductSlice";
+import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
 
 const Store = configureStore({
 
@@ -39,6 +40,8 @@ const Store = configureStore({
     cartData: CartSlice,
     auth: AuthSlice,
     addProduct: AddProductSlice,
+
+    otherProgram : OtherSlice,
   },
   
 

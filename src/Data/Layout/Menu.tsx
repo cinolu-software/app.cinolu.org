@@ -2,9 +2,9 @@ import {MenuItem} from "@/Types/LayoutTypes";
 
 export const MenuList: MenuItem [] | undefined = [
     {
-        title: "General",
-        lanClass: "lan-1",
-        menucontent: "Dashboard",
+        title : "General",
+        lanClass : "lan-1",
+        menucontent : "Dashboard",
         Items: [
             {
                 path: "/dashboard",
@@ -34,14 +34,14 @@ export const MenuList: MenuItem [] | undefined = [
         lanClass: "lan-1",
         menucontent: "admin",
         Items: [
-            // {
-            //     title: "User",
-            //     id: 1,
-            //     icon: "user",
-            //     type: "link",
-            //     lanClass: "lan-3",
-            //     path: "/users",
-            // },
+            {
+                title: "User",
+                id: 1,
+                icon: "user",
+                type: "link",
+                lanClass: "lan-3",
+                path: "/users",
+            },
             {
                 title: "Programmes",
                 id: 2,
@@ -50,7 +50,7 @@ export const MenuList: MenuItem [] | undefined = [
                 lanClass: "lan-6",
                 active: false,
                 children: [
-                    // {path: "/programs/details", title: "détails", type: "link", lanClass: "lan-5"},
+                    {path: "/programs/other", title: "other", type: "link", lanClass: "lan-5"},
                     {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
                     {path: "/programs/programTypes", title: "types de programmes", type: "link", lanClass: "lan-6"},
                 ]

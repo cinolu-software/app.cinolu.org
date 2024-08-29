@@ -23,9 +23,6 @@ import {RootState} from "@/Redux/Store";
 import {CollapseFilterData} from "./CollapseFilterData";
 
 
-
-
-
 const ProgramsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
@@ -38,7 +35,6 @@ const ProgramsListContainer = () => {
 
 
     const subHeaderComponentMemo = useMemo(() => {
-
         return (
             <div className="dataTables_filter d-flex align-items-center">
                 <Label className="me-2">{"Chercher"}:</Label>
