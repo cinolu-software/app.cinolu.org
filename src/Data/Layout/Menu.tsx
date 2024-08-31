@@ -15,20 +15,6 @@ export const MenuList: MenuItem [] | undefined = [
             // {path: "/app/calendar", icon: "calendar", type: "link", title: "Calendar"},
         ]
     },
-    // {
-    //     title: "Hubs",
-    //     lanClass: "lan-1",
-    //     menucontent: "Hub",
-    //     Items: [
-    //         {
-    //             path: "/hubs/f360",
-    //             icon: "learning",
-    //             type: "link",
-    //             title: "F-360"
-    //         }
-    //
-    //     ]
-    // },
     {
         title: "Administration",
         lanClass: "lan-1",
@@ -38,9 +24,14 @@ export const MenuList: MenuItem [] | undefined = [
                 title: "User",
                 id: 1,
                 icon: "user",
-                type: "link",
+                type: "sub",
                 lanClass: "lan-3",
-                path: "/users",
+                active: false,
+                children: [
+                    {path: "/users/admins", title: "Admin", type: "link", lanClass: "lan-5"},
+                    {path: "/users/staff", title: "Staff", type: "link", lanClass: "lan-6"},
+                    {path: "/users/coach", title: "Coach", type: "link", lanClass: "lan-6"},
+                ]
             },
             {
                 title: "Programmes",
@@ -55,19 +46,6 @@ export const MenuList: MenuItem [] | undefined = [
                     {path: "/programs/programTypes", title: "types de programmes", type: "link", lanClass: "lan-6"},
                 ]
             },
-            // {
-            //     title: "Projets",
-            //     id: 3,
-            //     icon: "file",
-            //     type: "sub",
-            //     lanClass: "lan-6",
-            //     active: false,
-            //     children: [
-            //         {path: "/projects", title: "Projects", type: "link", lanClass: "lan-4"},
-            //         {path: "/projects/status", title: "Status", type: "link", lanClass: "lan-5"},
-            //         {path: "/projects/category", title: "Catégorie", type: "link", lanClass: "lan-5"},
-            //     ]
-            // },
             {
                 title: "Rôle",
                 id: 3,
@@ -76,6 +54,19 @@ export const MenuList: MenuItem [] | undefined = [
                 lanClass: "lan-6",
                 active: false,
                 path: "/roles"
+            },
+            {
+                title: "Notifications",
+                id: 4,
+                icon: "chat",
+                type: "sub",
+                lanClass: "lan-6",
+                active: false,
+                children: [
+                    {path: "/projects", title: "Projects", type: "link", lanClass: "lan-4"},
+                    {path: "/projects/status", title: "Status", type: "link", lanClass: "lan-5"},
+                    {path: "/projects/category", title: "Catégorie", type: "link", lanClass: "lan-5"},
+                ]
             },
         ],
     }
