@@ -9,7 +9,7 @@ const EducationContainer = () => {
     <Container fluid className="dashboard-4">
       <Row>
         <TotalStudents />
-        <StudyStatistics />
+        {/*<StudyStatistics />*/}
       </Row>
     </Container>
   );

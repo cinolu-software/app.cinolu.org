@@ -18,6 +18,7 @@ import FilterSlice from "./Reducers/FilterSlice";
 import CartSlice from "./Reducers/CartSlice";
 import AddProductSlice from "./Reducers/AddProductSlice";
 import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
+import NotificationSlice from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 
 const Store = configureStore({
 
@@ -42,6 +43,7 @@ const Store = configureStore({
     addProduct: AddProductSlice,
 
     otherProgram : OtherSlice,
+    notifications: NotificationSlice,
   },
   
 

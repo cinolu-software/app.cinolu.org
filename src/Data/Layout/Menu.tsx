@@ -59,14 +59,10 @@ export const MenuList: MenuItem [] | undefined = [
                 title: "Notifications",
                 id: 4,
                 icon: "chat",
-                type: "sub",
+                type: "link",
                 lanClass: "lan-6",
                 active: false,
-                children: [
-                    {path: "/projects", title: "Projects", type: "link", lanClass: "lan-4"},
-                    {path: "/projects/status", title: "Status", type: "link", lanClass: "lan-5"},
-                    {path: "/projects/category", title: "Catégorie", type: "link", lanClass: "lan-5"},
-                ]
+                path: '/notifications'
             },
         ],
     }

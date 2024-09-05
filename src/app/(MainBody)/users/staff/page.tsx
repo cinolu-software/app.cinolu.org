@@ -1,8 +1,11 @@
-import React from 'react'
+'use client';
 
-const Page = () => {
+import React from 'react'
+import UsersContainer from "@/Components/Applications/Users";
+
+const UsersStaffContainer = () => {
     return (
-        <div>Page</div>
+        <UsersContainer/>
     )
 }
-export default Page
+export default UsersStaffContainer
