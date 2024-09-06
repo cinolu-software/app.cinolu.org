@@ -15,10 +15,12 @@ const NotificationLeftSidebar : React.FC<NotificationBoxNavType> = ({ navId, set
         <div className={'email-left-aside'}>
             <Card>
                 <CardBody>
-                    <Button color={'primary'} className={'emailbox'} onClick={()=>dispatch(setComposeNotification(!composeNotification))} >
-                        <i className={'fa fa-plus'}/> {composeNotification}
-                    </Button>
-                    <NotificationNavMenu navId={navId} setNavId={setNavId} />
+                    <div className={'email-app-sidebar'}>
+                        <Button color={'primary'} className={'emailbox'} onClick={()=>dispatch(setComposeNotification(!composeNotification))} >
+                            <i className={'fa fa-plus'}/> {ComposeEmail}
+                        </Button>
+                        <NotificationNavMenu navId={navId} setNavId={setNavId} />
+                    </div>
                 </CardBody>
             </Card>
         </div>

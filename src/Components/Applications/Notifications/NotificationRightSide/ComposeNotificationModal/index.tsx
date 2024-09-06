@@ -46,7 +46,7 @@ const ComposeNotificationModal: React.FC = () => {
                                 <Label className="col-form-label" htmlFor="composeTo" check>To :</Label>
                             </Col>
                             <Col sm="10">
-                                <input className={`form-control ${notificationValidation && `${errors.userEmail ? "is-invalid":"is-valid"}`}`} type="email" {...register("userEmail", { required: true })} autoComplete="off"/>
+                                {/*<input className={`form-control ${notificationValidation && `${errors.userEmail ? "is-invalid":"is-valid"}`}`} type="email" {...register("userEmail", { required: true })} autoComplete="off"/>*/}
                                 <div className="add-bcc">
                                     <div className="d-flex gap-2">
                                         <Link className="btn" href={Href} onClick={()=>setCcShow(!ccShow)} > Cc</Link>

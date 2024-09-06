@@ -4,13 +4,13 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialState: InitialStateType = {
-    modal: false,
-    composeNotification: false,
-    faIcon: false,
-    page: false,
-    interviewNotification: false,
-    inboxNotification: InboxNotificationData,
-    notificationValidation: false
+    modal : false,
+    composeNotification : false,
+    faIcon : false,
+    page : false,
+    interviewNotification : false,
+    inboxNotification : InboxNotificationData,
+    notificationValidation : false
 };
 
 const NotificationBoxSlice = createSlice({
@@ -64,6 +64,6 @@ const NotificationBoxSlice = createSlice({
     }
 })
 
-export const { setModal, setComposeNotification, setPage, handleEnvelope, handleInterview, removeItems, removeFromFavorite, setNotificationValidation, addNewNotifaction } = NotificationBoxSlice.actions;
+export const { setModal, setComposeNotification, setPage, handleEnvelope, handleInterview, removeItems, addToFavorites, removeFromFavorite, setNotificationValidation, addNewNotifaction } = NotificationBoxSlice.actions;
 
 export default NotificationBoxSlice.reducer
