@@ -5,7 +5,9 @@ import { NotificationNavTabs} from "@/Data/Application/Notifications";
 import SVG from '@/CommonComponent/SVG';
 
 const EmailNavTab = () => {
-    const [navId, setNavId] = useState('pills-important-tab');
+
+    const [navId, setNavId] = useState('Individual');
+
 
     return (
         <Nav className={'email-tabs'} id={'email-content-tab'}>

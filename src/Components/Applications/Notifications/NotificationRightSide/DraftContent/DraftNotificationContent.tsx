@@ -8,6 +8,7 @@ import { Badge, Input, Label } from 'reactstrap';
 
 
 const DraftNotificationContent : React.FC<CommonDataType> = ({data, ids}) => {
+
     const {faIcon} = useAppSelector(state => state.notifications);
     const [fill,setFill] = useState(false)
     const dispatch = useAppDispatch()

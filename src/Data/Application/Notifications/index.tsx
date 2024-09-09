@@ -219,19 +219,19 @@ export const NotificationBoxSidebar = [
 
 export const NotificationNavTabs = [
     {
-        title: "Important",
+        title: "Individuel",
         icon: "mail",
-        id: "pills-important-tab",
+        id: "Individual",
     },
     {
-        title: "Social",
-        icon: "goal",
-        id: "pills-social-tab",
-    },
-    {
-        title: "Promotion",
+        title: "Groupe",
         icon: "tread",
-        id: "pills-promotion-tab",
+        id: "Group",
+    },
+    {
+        title: "Broadcast",
+        icon: "goal",
+        id: "Broadcast",
     },
 ];
 
