@@ -12,7 +12,7 @@ const NotificationBoxContainer = () => {
         <Container fluid>
             <div className="email-wrap email-main-wrapper">
                 <Row>
-                    <NotificationSidebar navId={navId} setNavId={setNavId} />
+                    {/*<NotificationSidebar navId={navId} setNavId={setNavId} />*/}
                     <NotificationRightSide navId={navId} />
                 </Row>
             </div>

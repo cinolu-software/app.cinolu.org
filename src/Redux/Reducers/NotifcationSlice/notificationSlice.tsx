@@ -27,7 +27,7 @@ const NotificationBoxSlice = createSlice({
             state.faIcon = action.payload
         },
         handleInterview: (state, action) => {
-            state.page = action.payload
+            state.interviewNotification = action.payload
         },
         setPage : (state, action) => {
             state.page = action.payload

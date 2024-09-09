@@ -11,7 +11,10 @@ const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
     const {faIcon} = useAppSelector(state => state.notifications);
     const dispatch = useAppDispatch();
 
-    const handleValue= ()=> dispatch(handleInterview(true))
+    const handleValue = ()=> {
+        dispatch(handleInterview(true))
+    }
+
     const handleRemoveEmail = (id:number) => {
         dispatch(removeItems(id));
     }
@@ -36,10 +39,10 @@ const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
             </div>
             <div className="inbox-message">
                 <div className="email-data" onClick={handleValue}>
-            <span>
-              {data.message}
-                <span>{data.subMessage}</span>
-            </span>
+                    <span>
+                      {data.message}
+                        <span>{data.subMessage}</span>
+                    </span>
                     <div className="inbox-width d-flex gap-2">
                         {data.badge &&
                             data.badge.map((item, i) => (

@@ -21,7 +21,7 @@ const NotificationRightSide: React.FC<NotificationBoxNavContentType> = ({ navId 
     const { interviewNotification } = useAppSelector(state => state.notifications);
 
     return (
-        <Col xxl="9" xl="8" className="box-col-12">
+        <Col xxl="12" xl="12" className="box-col-12">
             <div className="email-right-aside">
                 <Card className={`email-body email-list ${interviewNotification ? "hide" : "show"}`}>
                     <ComposeNotificationModal />

@@ -13,6 +13,8 @@ const InterviewNotification = () => {
         content: () => componentRef.current,
     });
 
+
+
     return (
         <Card className={`email-body email-read ${interviewNotification ? "show" : "hide"}`}>
             <InterviewNotificationHeader />
