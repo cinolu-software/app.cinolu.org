@@ -22,13 +22,13 @@ const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
     return (
         <>
             <div className="inbox-user">
-                <div className="form-check form-check-inline m-0">
-                    <Input className={`checkbox-${data.color}`} name="emailCheckbox" id={`emailCheckbox${ids}`} type="checkbox" />
-                    <Label check for={`emailCheckbox${ids}`} />
-                </div>
-                <div onClick={() => dispatch(addToFavorites(data))}>
-                    <SVG className={`important-mail ${data.star ? "active" : ""}`} iconId="fill-star"/>
-                </div>
+                {/*<div className="form-check form-check-inline m-0">*/}
+                {/*    <Input className={`checkbox-${data.color}`} name="emailCheckbox" id={`emailCheckbox${ids}`} type="checkbox" />*/}
+                {/*    <Label check for={`emailCheckbox${ids}`} />*/}
+                {/*</div>*/}
+                {/*<div onClick={() => dispatch(addToFavorites(data))}>*/}
+                {/*    <SVG className={`important-mail ${data.star ? "active" : ""}`} iconId="fill-star"/>*/}
+                {/*</div>*/}
                 <div className="rounded-border">
                     {data.image && <img src={`${ImagePath}/user/${data.image}`} alt="user" />}
                     {data.shortName && <div className={data.color === "success" ? "circle-success" : ""}>

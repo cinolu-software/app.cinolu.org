@@ -13,11 +13,11 @@ const NotificationBoxContainer = () => {
             <div className="email-wrap email-main-wrapper">
                 <Row>
                     {/*<NotificationSidebar navId={navId} setNavId={setNavId} />*/}
-                    <NotificationRightSide navId={navId} />
+                    <NotificationRightSide navId={navId}  />
                 </Row>
             </div>
         </Container>
-    )
+    );
 }
 
 export default NotificationBoxContainer;

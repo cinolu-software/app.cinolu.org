@@ -26,7 +26,7 @@ const NotificationRightSide: React.FC<NotificationBoxNavContentType> = ({ navId 
                 <Card className={`email-body email-list ${interviewNotification ? "hide" : "show"}`}>
                     <ComposeNotificationModal />
                     <NotificationHeader />
-                    <TabContent activeTab={navId} id="email-pills-tabContent">
+                    <TabContent activeTab={navId} id="notifications-pills-tabContent">
                         <InboxContent />
                         <SentContent />
                         <StarredContent />

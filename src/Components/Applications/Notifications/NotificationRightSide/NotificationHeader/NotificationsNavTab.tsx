@@ -4,13 +4,12 @@ import { useState } from 'react';
 import { NotificationNavTabs} from "@/Data/Application/Notifications";
 import SVG from '@/CommonComponent/SVG';
 
-const EmailNavTab = () => {
+const NotificationNavTab = () => {
 
-    const [navId, setNavId] = useState('Individual');
-
+    const [navId, setNavId] = useState('1');
 
     return (
-        <Nav className={'email-tabs'} id={'email-content-tab'}>
+        <Nav className={'email-tabs'} id={'notifications-pills-tabContent'}>
             {
                 NotificationNavTabs.map((data, i) => (
                     <NavItem key={i}>
@@ -25,4 +24,4 @@ const EmailNavTab = () => {
     )
 }
 
-export default EmailNavTab;
+export default NotificationNavTab;

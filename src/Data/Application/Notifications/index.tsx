@@ -221,17 +221,17 @@ export const NotificationNavTabs = [
     {
         title: "Individuel",
         icon: "mail",
-        id: "Individual",
+        id: "1",
     },
     {
         title: "Groupe",
         icon: "tread",
-        id: "Group",
+        id: "2",
     },
     {
         title: "Broadcast",
         icon: "goal",
-        id: "Broadcast",
+        id: "3",
     },
 ];
 
