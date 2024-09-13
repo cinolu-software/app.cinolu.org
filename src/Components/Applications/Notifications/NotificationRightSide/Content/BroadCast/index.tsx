@@ -13,7 +13,6 @@ import AddLabelModal from "../../AddLabelModal";
 const BroadCastContent = ({navId}) => {
 
   return (
-
     <TabContent activeTab={navId} id="notifications-pills-tabContent">
         <InboxContent />
         <SentContent />
@@ -25,7 +24,6 @@ const BroadCastContent = ({navId}) => {
         <SupportContent />
         <AddLabelModal />
     </TabContent>
-    
   )
 }
 

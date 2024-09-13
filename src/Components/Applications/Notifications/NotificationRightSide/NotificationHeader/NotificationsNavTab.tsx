@@ -1,14 +1,19 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 import { Href } from "@/Constant";
-import { useState } from 'react';
 import { NotificationNavTabs} from "@/Data/Application/Notifications";
 import SVG from '@/CommonComponent/SVG';
+import React from "react";
 
-const NotificationNavTab = () => {
+interface NotificationNavTabProps {
+    navId: string;
+    setNavId: React.Dispatch<React.SetStateAction<string>>;
+}
 
-    const [navId, setNavId] = useState('1');
+const NotificationNavTab: React.FC<NotificationNavTabProps> =  ({navId, setNavId}) => {
+
 
     return (
+        
         <Nav className={'email-tabs'} id={'notifications-pills-tabContent'}>
             {
                 NotificationNavTabs.map((data, i) => (

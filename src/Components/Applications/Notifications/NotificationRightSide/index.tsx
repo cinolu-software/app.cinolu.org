@@ -1,4 +1,4 @@
-import {Card, Col, TabContent} from "reactstrap";
+import {Card, Col, Nav, TabContent, TabPane, NavItem, NavLink} from "reactstrap";
 import NotificationHeader from "@/Components/Applications/Notifications/NotificationRightSide/NotificationHeader";
 import ComposeNotificationModal from "@/Components/Applications/Notifications/NotificationRightSide/ComposeNotificationModal";
 import SentContent from "@/Components/Applications/Notifications/NotificationRightSide/SentContent";
@@ -11,32 +11,36 @@ import SupportContent from "@/Components/Applications/Notifications/Notification
 import AddLabelModal from "@/Components/Applications/Notifications/NotificationRightSide/AddLabelModal";
 import InterviewNotification from "@/Components/Applications/Notifications/NotificationRightSide/InterviewNotification";
 import {useAppSelector} from "@/Redux/Hooks";
-import { NotificationBoxNavContentType} from "@/Types/Notifications/NotificationType";
-import React from "react";
+import {NotificationBoxNavContentType} from "@/Types/Notifications/NotificationType";
+import React, {useState} from "react";
 import DraftContent from "@/Components/Applications/Notifications/NotificationRightSide/DraftContent";
+import {NotificationNavTabs} from "@/Data/Application/Notifications";
+import SVG from '@/CommonComponent/SVG';
+import {Href} from "@/Constant";
 
 
-const NotificationRightSide: React.FC<NotificationBoxNavContentType> = ({ navId }) => {
+const NotificationRightSide: React.FC<NotificationBoxNavContentType> = () => {
 
-    const { interviewNotification } = useAppSelector(state => state.notifications);
+    const {interviewNotification} = useAppSelector(state => state.notifications);
+    const [navId, setNavId] = useState("1");
 
     return (
         <Col xxl="12" xl="12" className="box-col-12">
             <div className="email-right-aside">
                 <Card className={`email-body email-list ${interviewNotification ? "hide" : "show"}`}>
                     <ComposeNotificationModal />
-                    <NotificationHeader />
-                    <TabContent activeTab={navId} id="notifications-pills-tabContent">
-                        <InboxContent />
-                        <SentContent />
-                        <StarredContent />
-                        <DraftContent />
-                        <TrashContent />
-                        <WorkContent />
-                        <PrivateContent />
-                        <SupportContent />
-                        <AddLabelModal />
-                    </TabContent>
+                    <NotificationHeader navId={navId} setNavId={setNavId} />
+                    <TabContent  activeTab={navId} id="notifications-pills-tabContent">
+                       <InboxContent />
+                       <SentContent />
+                       <StarredContent />
+                       <DraftContent />
+                       <TrashContent />
+                       <WorkContent />
+                       <PrivateContent />
+                       <SupportContent />
+                       <AddLabelModal />
+                    </TabContent> 
                 </Card>
                 <InterviewNotification />
             </div>
