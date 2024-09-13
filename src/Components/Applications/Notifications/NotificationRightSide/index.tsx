@@ -34,12 +34,6 @@ const NotificationRightSide: React.FC<NotificationBoxNavContentType> = () => {
                        <InboxContent />
                        <SentContent />
                        <StarredContent />
-                       <DraftContent />
-                       <TrashContent />
-                       <WorkContent />
-                       <PrivateContent />
-                       <SupportContent />
-                       <AddLabelModal />
                     </TabContent> 
                 </Card>
                 <InterviewNotification />

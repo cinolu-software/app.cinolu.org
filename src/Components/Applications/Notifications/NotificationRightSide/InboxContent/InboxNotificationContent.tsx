@@ -1,4 +1,3 @@
-import SVG from '@/CommonComponent/SVG';
 import { ImagePath } from '@/Constant';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { addToFavorites , handleEnvelope, handleInterview, removeItems} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
@@ -42,7 +41,7 @@ const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
                                 <Badge color="" className={`badge-width badge-light-${item.color} text-${item.color === "light" ? "light-dark" : item.color }`} key={i}>{item.title}</Badge>
                             ))}
                     </div>
-                </div>
+              </div>
                 <div className="email-timing">
                     <span>{data.time}</span>
                 </div>
@@ -55,7 +54,6 @@ const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
             </div>
         </>
     );
-
 }
 
 export default InboxNotificationContent;

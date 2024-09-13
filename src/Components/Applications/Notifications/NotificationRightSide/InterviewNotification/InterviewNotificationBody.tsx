@@ -8,6 +8,8 @@ import UserFooter from './UserFooter';
 import UserNotificationBody from './UserNotificationBody'
 
 const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:NotificationPropsType, ref:LegacyRef<HTMLDivElement> | undefined) => {
+
+
     return (
         <div ref={ref} >
             <div className="mail-body-wrapper">
@@ -19,22 +21,8 @@ const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:Notificat
                             </div>
                             <div className="dropdown-subtitle">
                                 <p>Ronald Richards</p>
-                                <div className="onhover-dropdown">
-                                    <Button color="transparent" className="p-0 dropdown-button">
-                                        To me <ChevronDown/>
-                                    </Button>
-                                    <div className="inbox-security onhover-show-div">
-                                        <p>From: <span>pixelstrap &lt;pixelstrap3@gmail.com&gt;</span></p>
-                                        <p>to: <span>donut.horry@gmail.com</span></p>
-                                        <p>reply-to:<span>&lt;pixelstrap3@gmail.com&gt;</span></p>
-                                        <p>date: <span>Jun 13, 2023, 7:10 AM</span></p>
-                                        <p>subject: <span>Important Account Security Update</span></p>
-                                        <p>security: <span>standard encryption (TLS)</span></p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                        <InboxOption handlerPrintData={handlerPrintData}  />
                     </div>
                     <UserNotificationBody />
                     <UserFooter />

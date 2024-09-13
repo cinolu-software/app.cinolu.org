@@ -6,6 +6,7 @@ import { CommonDataType} from "@/Types/Notifications/NotificationType";
 import {useState} from "react";
 import { Badge, Input, Label} from "reactstrap";
 
+
 const SentNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
 
     const {faIcon} = useAppSelector((state)=>state.notifications);
@@ -16,13 +17,6 @@ const SentNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
     return (
         <>
             <div className="inbox-user">
-                <div className="form-check form-check-inline m-0">
-                    <Input className={`checkbox-${data.color}`} name="emailCheckbox" id={`emailCheckbox${ids}`} type="checkbox" />
-                    <Label check for={`emailCheckbox${ids}`} />
-                </div>
-                <div  onClick={() => setFill(!fill)}>
-                    <SVG className={`important-mail ${fill ? "active" : ""}`} iconId="fill-star"/>
-                </div>
                 <div className="rounded-border">
                     {data.image && <img src={`${ImagePath}/user/${data.image}`} alt="user" />}
                     {data.shortName && <div className={data.color === "success" ? "circle-success" : ""}>
@@ -33,10 +27,10 @@ const SentNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
             </div>
             <div className="inbox-message">
                 <div className="email-data" onClick={handleValue}>
-            <span>
-              {data.message}
-                <span>{data.subMessage}</span>
-            </span>
+                    <span>
+                      {data.message}
+                        <span>{data.subMessage}</span>
+                    </span>
                     <div className="inbox-width d-flex gap-2">
                         {data.badge &&
                             data.badge.map((item, i) => (

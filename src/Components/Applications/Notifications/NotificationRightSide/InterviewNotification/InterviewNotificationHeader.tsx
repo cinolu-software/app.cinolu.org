@@ -21,17 +21,7 @@ const InterviewNotificationHeader = () => {
                 <div className="light-square" onClick={() => dispatch(handleInterview(false))}>
                     <SVG className="btn-email" iconId="back-arrow" />
                 </div>
-                <span>{InterviewMail}</span>
-            </div>
-            <div className="mail-body1">
-                {NotificationHeader.map((data, i) => (
-                    <Fragment key={i}>
-                        <div className="light-square" id={`light-${data.icon}`} onClick={() => toggle(i)}>
-                            <SVG iconId={data.icon} className={data.className ? data.className : ""} />
-                        </div>
-                        <Tooltip placement="top" isOpen={openTooltip === i} target={`light-${data.icon}`} toggle={() => toggle(i)}>{data.tooltip}</Tooltip>
-                    </Fragment>
-                ))}
+                <span>Envoi de la notification</span>
             </div>
         </div>
     );
