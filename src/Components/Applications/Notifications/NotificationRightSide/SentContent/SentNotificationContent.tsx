@@ -3,7 +3,7 @@ import { ImagePath} from "@/Constant";
 import { useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import { handleEnvelope, handleInterview } from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import { CommonDataType} from "@/Types/Notifications/NotificationType";
-import {useState} from "react";
+import React, {useState} from "react";
 import { Badge, Input, Label} from "reactstrap";
 
 

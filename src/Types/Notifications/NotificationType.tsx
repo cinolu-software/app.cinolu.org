@@ -9,6 +9,7 @@ export interface InitialStateType {
 }
 
 export interface InboxNotificationType {
+    color: string;
     id: number;
     image?: string;
     shortName?: string;

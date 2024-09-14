@@ -17,10 +17,10 @@ const NotificationPagination = () => {
             <PaginationItem >
                 <PaginationLink href={Href} previous />
             </PaginationItem>
-            <PaginationItem active={!page ? true : false} onClick={()=>handlePagination(false)}>
+            <PaginationItem active={!page} onClick={()=>handlePagination(false)}>
                 <PaginationLink href={Href}>1</PaginationLink>
             </PaginationItem>
-            <PaginationItem active={page ? true : false} onClick={()=>handlePagination(true)}>
+            <PaginationItem active={!page} onClick={()=>handlePagination(true)}>
                 <PaginationLink href={Href}>2</PaginationLink>
             </PaginationItem>
             <PaginationItem>

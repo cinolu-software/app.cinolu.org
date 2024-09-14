@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import { Button, Form, FormGroup, Input, Label, Spinner } from "reactstrap";
 import imageOne from "../../../../public/assets/images/logo/logo.png";
@@ -11,23 +11,25 @@ import { AppDispatch } from "@/Redux/Store";
 import { selectStatus } from "@/Redux/Reducers/AuthSlice";
 
 const FormulaireUtilisateur = () => {
-    
+
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const status = useSelector(selectStatus);
+
+
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
         const email = formData.get('email') as string;
-        const motDePasse = formData.get('password') as string;
+        const password = formData.get('password') as string;
 
         const payload = {
             email: email,
-            password: motDePasse,
+            password: password,
         };
 
         try {
@@ -35,7 +37,7 @@ const FormulaireUtilisateur = () => {
             router.push('/dashboard');
         } catch (error) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{error}</p>,
+                <p className="text-white tx-16 mb-0">{error as string}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -48,13 +50,12 @@ const FormulaireUtilisateur = () => {
     };
 
     useEffect(() => {
-        if(status === 'loading'){
-            setLoading(true)
-        }else if(status === 'failed'){
-            setLoading(false)
+        if (status === 'loading') {
+            setLoading(true);
+        } else if (status === 'failed') {
+            setLoading(false);
         }
     }, [status]);
-
 
 
     return (
@@ -71,13 +72,15 @@ const FormulaireUtilisateur = () => {
 
                     <FormGroup>
                         <Label className="col-form-label">{"Adresse e-mail"}</Label>
-                        <Input type="email" placeholder="" name={'email'} />
+                        <Input type="email" placeholder="Votre email" name="email" required />
                     </FormGroup>
                     <FormGroup>
                         <Label className="col-form-label">{"Mot de passe"}</Label>
                         <div className="position-relative">
-                            <Input type={showPassword ? "text" : "password"} name={'password'} placeholder="" />
-                            <div className="show-hide" onClick={() => setShowPassword(!showPassword)}><span className="show"> </span></div>
+                            <Input type={showPassword ? "text" : "password"} name="password" placeholder="Votre mot de passe" required />
+                            <div className="show-hide" onClick={() => setShowPassword(!showPassword)}>
+                                <span className="show"> </span>
+                            </div>
                         </div>
                     </FormGroup>
                     <FormGroup className="mb-0">
@@ -99,3 +102,4 @@ const FormulaireUtilisateur = () => {
 };
 
 export default FormulaireUtilisateur;
+

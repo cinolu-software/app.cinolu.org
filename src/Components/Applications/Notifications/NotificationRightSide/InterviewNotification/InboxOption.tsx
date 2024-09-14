@@ -1,9 +1,9 @@
 import SVG from '@/CommonComponent/SVG';
 import {NotificationPropsType} from '@/Types/Notifications/NotificationType';
-import {useState} from "react";
+import React, {useState} from "react";
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap";
 
-const InboxOption :React.FC<NotificationPropsType> = ({handlerPrintData}) => {
+const InboxOption : React.FC<NotificationPropsType> = ({handlerPrintData}) => {
 
     const [fill,setFill] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false);

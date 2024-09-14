@@ -5,30 +5,42 @@ import Cookies from "js-cookie";
 import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload, UpdateProfilePassword } from "@/Types/AuthType";
 import { RootState } from "@/Redux/Store";
 
-export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: string }>("auth/login", async (data, { rejectWithValue }) => {
-    try {
-        const response = await axios.post(`${apiBaseUrl}/auth/login`, data);
-        if(response.data?.data?.roles.some((role: { name: string; }) => role.name === "admin")){
-            Cookies.set("cinolu_token", JSON.stringify(response.data));
+export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: string }>(
+    "auth/sign-in",
+    async (data, { rejectWithValue }) => {
+
+        try {
+            const response = await axios.post(`${apiBaseUrl}/auth/sign-in`, data);
+
+            // if (response.data?.roles.some((role: { name: string }) => role.name === "admin")) {
+            //     Cookies.set("cinolu_token", response.data.access_token, { expires: 7 });
+            //     return response.data;
+            // }
+            // return rejectWithValue("Vous n'êtes pas autorisé à accéder à cette interface");
+
+            Cookies.set("cinolu_token", response.data.access_token, { expires: 7 });
             return response.data;
+
+        } catch (error: any) {
+            const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
+            console.log(error);
+            return rejectWithValue(errorMessage);
         }
-        return rejectWithValue("Vous n'êtes pas autorisé à accéder à cette interface");
-    } catch (error: any) {
-        const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
-        return rejectWithValue(errorMessage);
     }
-});
+);
 
-
-export const logout = createAsyncThunk<void, void, { rejectValue: string }>("auth/logout", async (_, thunkAPI) => {
-    try {
-        await axios.post(`${apiBaseUrl}/auth/logout`, {});
-        Cookies.remove("cinolu_token");
-    } catch (error: any) {
-        const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la déconnexion";
-        return thunkAPI.rejectWithValue(errorMessage);
+export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
+    "auth/logout",
+    async (_, thunkAPI) => {
+        try {
+            Cookies.remove("access_token");
+            window.location.href = "/auth/login";
+        } catch (error: any) {
+            const errorMessage = "Une erreur est survenue lors de la déconnexion";
+            return thunkAPI.rejectWithValue(errorMessage);
+        }
     }
-});
+);
 
 export const checkAuth = createAsyncThunk<AuthResponse | null, void, { rejectValue: string }>("auth/checkAuth", async (_, { rejectWithValue }) => {
     try {

@@ -41,9 +41,8 @@ export interface User {
 }
 
 export interface AuthResponse {
-  data: User;
+  access_token: string;
 }
-
 
 export interface ApiError {
   property: string;
