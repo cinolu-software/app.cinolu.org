@@ -33,7 +33,7 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     "auth/logout",
     async (_, thunkAPI) => {
         try {
-            Cookies.remove("access_token");
+            Cookies.remove("cinolu_token");
             window.location.href = "/auth/login";
         } catch (error: any) {
             const errorMessage = "Une erreur est survenue lors de la déconnexion";
