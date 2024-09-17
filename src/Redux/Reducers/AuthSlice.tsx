@@ -1,29 +1,29 @@
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { apiBaseUrl } from "@/services/axios";
 import Cookies from "js-cookie";
-import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload, UpdateProfilePassword } from "@/Types/AuthType";
+import { AuthResponse, LoginSubmitProp, AuthState } from "@/Types/AuthType";
 import { RootState } from "@/Redux/Store";
+import axiosInstance from "@/services/axios";
+
 
 export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: string }>(
     "auth/sign-in",
     async (data, { rejectWithValue }) => {
-
         try {
-            const response = await axios.post(`${apiBaseUrl}/auth/sign-in`, data);
+            const response = await axiosInstance.post(`${apiBaseUrl}/auth/sign-in`, data);
+            const accessToken = response.data.access_token;
 
-            // if (response.data?.roles.some((role: { name: string }) => role.name === "admin")) {
-            //     Cookies.set("cinolu_token", response.data.access_token, { expires: 7 });
-            //     return response.data;
-            // }
-            // return rejectWithValue("Vous n'êtes pas autorisé à accéder à cette interface");
+            Cookies.set("cinolu_token", accessToken, { expires: 7 });
 
-            Cookies.set("cinolu_token", response.data.access_token, { expires: 7 });
-            return response.data;
+            const profileResponse = await axiosInstance.get('/auth/profile', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
 
+            return { access_token: accessToken, ...profileResponse.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
-            console.log(error);
             return rejectWithValue(errorMessage);
         }
     }
@@ -42,63 +42,6 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     }
 );
 
-export const checkAuth = createAsyncThunk<AuthResponse | null, void, { rejectValue: string }>("auth/checkAuth", async (_, { rejectWithValue }) => {
-    try {
-        const token = Cookies.get("cinolu_token");
-        if (token) {
-            const user = JSON.parse(token);
-            return user;
-        } else {
-            return null;
-        }
-    } catch (error: any) {
-        const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la vérification de l'authentification";
-        return rejectWithValue(errorMessage);
-    }
-});
-
-export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, { rejectValue: string }>("auth/updateProfile", async (profileData, { rejectWithValue }) => {
-    try {
-        const response = await axios.patch(`${apiBaseUrl}/auth/profile`, profileData);
-        Cookies.set("cinolu_token", JSON.stringify(response.data));
-        return response.data;
-    } catch (error: any) {
-        const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
-        return rejectWithValue(errorMessage);
-    }
-});
-
-export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePassword, { rejectValue: string }>("auth/updatePassword", async (passwordData, { rejectWithValue }) => {
-    try {
-        const response = await axios.patch(`${apiBaseUrl}/auth/update-password`, passwordData);
-        return response.data;
-    } catch (error: any) {
-        const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du mot de passe";
-        return rejectWithValue(errorMessage);
-    }
-});
-
-export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rejectValue: string }>("auth/updateProfileImage", async (formData, { rejectWithValue, getState }) => {
-    try {
-        const state = getState() as RootState;
-        const userId = state.auth.user?.id;
-
-        if (!userId) {
-            throw new Error("User not authenticated");
-        }
-
-        const response = await axios.post(`${apiBaseUrl}/users/image/${userId}`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-        Cookies.set("cinolu_token", JSON.stringify(response.data));
-        return response.data;
-    } catch (error: any) {
-        const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la mise à jour de l'image de profil";
-        return rejectWithValue(errorMessage);
-    }
-});
 
 const initialState: AuthState = {
     user: null,
@@ -113,12 +56,6 @@ const authSlice = createSlice({
     initialState,
 
     reducers: {
-        setAuthenticated: (state, action) => {
-            state.isAuthenticated = action.payload;
-        },
-        setUser: (state, action) => {
-            state.user = action.payload;
-        },
     },
     extraReducers: (builder) => {
         builder
@@ -128,14 +65,17 @@ const authSlice = createSlice({
             })
             .addCase(login.fulfilled, (state, action) => {
                 state.statusAuth = "succeeded";
-                state.user = action.payload.data;
                 state.isAuthenticated = true;
-                Cookies.set("cinolu_token", JSON.stringify(action.payload));
+
+                state.user = action.payload.data;
+                Cookies.set("cinolu_token", action.payload.access_token);
+                localStorage.setItem('user_profile', JSON.stringify(action.payload.data));
             })
             .addCase(login.rejected, (state, action) => {
                 state.statusAuth = "failed";
                 state.errorAuth = action.payload || "";
             })
+
             .addCase(logout.pending, (state) => {
                 state.statusAuth = "loading";
                 state.errorAuth = null;
@@ -149,66 +89,6 @@ const authSlice = createSlice({
                 state.statusAuth = "failed";
                 state.errorAuth = action.payload || "";
             })
-
-            .addCase(checkAuth.pending, (state) => {
-                state.statusAuth = "loading";
-                state.errorAuth = null;
-            })
-            .addCase(checkAuth.fulfilled, (state, action) => {
-                state.statusAuth = "succeeded";
-                if (action.payload) {
-                    state.user = action.payload.data;
-                    state.isAuthenticated = true;
-                } else {
-                    state.user = null;
-                    state.isAuthenticated = false;
-                }
-            })
-            .addCase(checkAuth.rejected, (state, action) => {
-                state.statusAuth = "failed";
-                state.errorAuth = action.payload || "";
-            })
-
-            .addCase(updateProfile.pending, (state) => {
-                state.statusAuth = "loading";
-                state.errorAuth = null;
-            })
-            .addCase(updateProfile.fulfilled, (state, action) => {
-                state.statusAuth = "succeeded";
-                state.user = action.payload.data;
-            })
-            .addCase(updateProfile.rejected, (state, action) => {
-                state.statusAuth = "failed";
-                state.errorAuth = action.payload || "";
-            })
-
-            .addCase(updatePassword.pending, (state) => {
-                state.statusAuth = "loading";
-                state.errorAuth = null;
-            })
-            .addCase(updatePassword.fulfilled, (state, action) => {
-                state.statusAuth = "succeeded";
-                state.user = action.payload.data;
-            })
-            .addCase(updatePassword.rejected, (state, action) => {
-                state.statusAuth = "failed";
-                state.errorAuth = action.payload || "";
-            })
-
-            .addCase(updateProfileImage.pending, (state) => {
-                state.statusAuth = "loading";
-                state.errorAuth = null;
-            })
-            .addCase(updateProfileImage.fulfilled, (state, action) => {
-                state.statusAuth = "succeeded";
-                if (state.user) {
-                    state.user.profile = action.payload.data.profile;
-                }
-            })
-            .addCase(updateProfileImage.rejected, (state, action) => {
-                state.statusAuth = "failed";
-                state.errorAuth = action.payload || "";
-            });
     },
 });
 

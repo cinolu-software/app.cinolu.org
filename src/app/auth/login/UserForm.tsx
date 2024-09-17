@@ -9,8 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/Redux/Reducers/AuthSlice";
 import { AppDispatch } from "@/Redux/Store";
 import { selectStatus } from "@/Redux/Reducers/AuthSlice";
+import axiosInstance from "@/services/axios";
+import Cookies from "js-cookie";
 
-const FormulaireUtilisateur = () => {
+
+
+
+const UserForm = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
@@ -19,8 +24,8 @@ const FormulaireUtilisateur = () => {
     const status = useSelector(selectStatus);
 
 
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+
         e.preventDefault();
 
         const formData = new FormData(e.target as HTMLFormElement);
@@ -35,6 +40,7 @@ const FormulaireUtilisateur = () => {
         try {
             await dispatch(login(payload)).unwrap();
             router.push('/dashboard');
+
         } catch (error) {
             toast.error(
                 <p className="text-white tx-16 mb-0">{error as string}</p>,
@@ -56,6 +62,7 @@ const FormulaireUtilisateur = () => {
             setLoading(false);
         }
     }, [status]);
+
 
 
     return (
@@ -101,5 +108,5 @@ const FormulaireUtilisateur = () => {
     );
 };
 
-export default FormulaireUtilisateur;
+export default UserForm;
 

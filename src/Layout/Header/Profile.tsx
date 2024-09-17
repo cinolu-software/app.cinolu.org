@@ -1,49 +1,68 @@
 import { Href, Logout } from "@/Constant";
-import {useEffect} from "react";
+import { useEffect, useState } from "react";
 import { UserProfileData } from "@/Data/Layout";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { LogOut } from "react-feather";
-import {checkAuth, selectAuth, logout} from "@/Redux/Reducers/AuthSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {imageBaseUrl} from "@/services/axios";
-import {AppDispatch} from "@/Redux/Store";
+import { selectAuth, logout } from "@/Redux/Reducers/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { imageBaseUrl } from "@/services/axios";
+import { AppDispatch } from "@/Redux/Store";
 
 export const Profile = () => {
-
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
-    const  {user} = useSelector(selectAuth);
+    const { user, isAuthenticated } = useSelector(selectAuth);
+
+    const [localUser, setLocalUser] = useState(user);
 
     useEffect(() => {
-        dispatch(checkAuth());
-    }, [dispatch]);
+        const storedUser = localStorage.getItem('user_profile');
+        if (storedUser) {
+            setLocalUser(JSON.parse(storedUser));
+        } else if (isAuthenticated && user) {
+            localStorage.setItem('user_profile', JSON.stringify(user));
+            setLocalUser(user);
+        }
+    }, [user, isAuthenticated]);
 
     const LogOutUser = async () => {
         await dispatch(logout());
+        localStorage.removeItem('user_profile');
         router.push("/auth/login");
     };
 
-  return (
-    <li className="profile-nav onhover-dropdown px-0 py-0">
-      <div className="d-flex profile-media align-items-center">
-        <img className="img-30 rounded-circle" src={user?.profile ? `${imageBaseUrl}/profiles/${user?.profile}` : `/assets/images/avtar/avatar.jpg`} alt="profile utilisateur"  />
-        <div className="flex-grow-1">
-          <span>{`${user?.first_name}-${user?.name}`}</span>
-          <p className="mb-0 font-outfit">
-              {`${user?.roles[0].name}`} <i className="fa fa-angle-down"></i>
-          </p>
-        </div>
-      </div>
-      <ul className="profile-dropdown onhover-show-div">
-        {UserProfileData.map((item, index) => (
-          <li key={index}>
-            <Link href={`/${item.link}`}>{item.icon}<span>{item.title} </span></Link>
-          </li>
-        ))}
-        <li onClick={LogOutUser}><Link href={Href} scroll={false} ><LogOut /><span>{Logout} </span></Link></li>
-      </ul>
-    </li>
-  );
+    return (
+        <li className="profile-nav onhover-dropdown px-0 py-0">
+            <div className="d-flex profile-media align-items-center">
+                <img
+                    className="img-30 rounded-circle"
+                    src={localUser?.profile ? `${imageBaseUrl}/profiles/${localUser?.profile}` : `/assets/images/avtar/avatar.jpg`}
+                    alt="profile utilisateur"
+                />
+                <div className="flex-grow-1">
+                    <span>{localUser ? `${localUser.name}` : 'Utilisateur'}</span>
+                    <p className="mb-0 font-outfit">
+                        {localUser?.roles?.[0]?.name || 'Utilisateur'} <i className="fa fa-angle-down"></i>
+                    </p>
+                </div>
+            </div>
+            <ul className="profile-dropdown onhover-show-div">
+                {UserProfileData.map((item, index) => (
+                    <li key={index}>
+                        <Link href={`/${item.link}`}>{item.icon}<span>{item.title} </span></Link>
+                    </li>
+                ))}
+                <li onClick={LogOutUser}>
+                    <Link href={Href} scroll={false}>
+                        <LogOut />
+                        <span>{Logout}</span>
+                    </Link>
+                </li>
+            </ul>
+        </li>
+    );
 };
+
+export default Profile;
+
