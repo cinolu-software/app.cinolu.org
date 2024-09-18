@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { apiBaseUrl } from "@/services/axios";
 import Cookies from "js-cookie";
-import { AuthResponse, LoginSubmitProp, AuthState } from "@/Types/AuthType";
+import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload } from "@/Types/AuthType";
 import { RootState } from "@/Redux/Store";
 import axiosInstance from "@/services/axios";
 
@@ -20,7 +20,6 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
                     Authorization: `Bearer ${accessToken}`
                 }
             });
-
             return { access_token: accessToken, ...profileResponse.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
@@ -43,6 +42,35 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
 );
 
 
+export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, { rejectValue: string }>(
+    "auth/updateProfile",
+    async (profileData, { rejectWithValue }) => {
+      try {
+        const accessToken = Cookies.get('cinolu_token');
+        
+        if (!accessToken) {
+          throw new Error("Token non disponible");
+        }
+  
+        const response = await axios.patch(`${apiBaseUrl}/auth/profile`, profileData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+  
+        Cookies.set("cinolu_token", accessToken);
+        localStorage.setItem("user_profile", JSON.stringify(response.data));
+  
+        return response.data;
+
+      } catch (error: any) {
+        const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
+        return rejectWithValue(errorMessage);
+      }
+    }
+);
+
+
 const initialState: AuthState = {
     user: null,
     statusAuth: "idle",
@@ -56,6 +84,13 @@ const authSlice = createSlice({
     initialState,
 
     reducers: {
+        loadUserFromStorage: (state) => {
+            const storedUser = localStorage.getItem('user_profile');
+            if (storedUser) {
+                state.user = JSON.parse(storedUser);
+                state.isAuthenticated = true;
+            }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -75,7 +110,6 @@ const authSlice = createSlice({
                 state.statusAuth = "failed";
                 state.errorAuth = action.payload || "";
             })
-
             .addCase(logout.pending, (state) => {
                 state.statusAuth = "loading";
                 state.errorAuth = null;
@@ -89,8 +123,23 @@ const authSlice = createSlice({
                 state.statusAuth = "failed";
                 state.errorAuth = action.payload || "";
             })
+
+            .addCase(updateProfile.pending, (state)=>{
+                state.statusAuth = 'loading';
+                state.errorAuth = null;
+            })
+            .addCase(updateProfile.fulfilled, (state, action)=>{
+                state.statusAuth = 'succeeded';
+                state.user = action.payload.data;
+            })
+            .addCase(updateProfile.rejected, (state, action)=>{
+                state.statusAuth = 'failed';
+                state.errorAuth = action.payload || ''
+            })
     },
 });
+
+export const { loadUserFromStorage } = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
 export const selectStatus = (state: RootState) => state.auth.statusAuth;

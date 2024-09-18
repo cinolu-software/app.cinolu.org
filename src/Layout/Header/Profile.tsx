@@ -4,12 +4,13 @@ import { UserProfileData } from "@/Data/Layout";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogOut } from "react-feather";
-import { selectAuth, logout } from "@/Redux/Reducers/AuthSlice";
+import { selectAuth, logout, loadUserFromStorage } from "@/Redux/Reducers/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { imageBaseUrl } from "@/services/axios";
 import { AppDispatch } from "@/Redux/Store";
 
 export const Profile = () => {
+
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
     const { user, isAuthenticated } = useSelector(selectAuth);
@@ -31,6 +32,10 @@ export const Profile = () => {
         localStorage.removeItem('user_profile');
         router.push("/auth/login");
     };
+
+    useEffect(() => {
+        dispatch(loadUserFromStorage());
+    }, [dispatch]);
 
     return (
         <li className="profile-nav onhover-dropdown px-0 py-0">

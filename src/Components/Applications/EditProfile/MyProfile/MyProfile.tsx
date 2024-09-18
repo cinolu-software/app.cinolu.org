@@ -13,40 +13,42 @@ import { AppDispatch } from "@/Redux/Store";
 const MyProfile = () => {
 
     const dispatch = useDispatch<AppDispatch>();
-    const { user } = useSelector(selectAuth);
+    const { user } = useSelector(selectAuth)
+
+    console.log("======> user information", user)
 
     const handleProfileUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+
         e.preventDefault();
+
         const formData = new FormData(e.target as HTMLFormElement);
         const payload = Object.fromEntries(formData.entries()) as unknown as UpdateProfilePayload;
         
         await dispatch(updateProfile(payload)).unwrap()
-            .then(() => {
-                toast.success(
-                    <p className="text-white tx-16 mb-0">{"Mise à jour effectuée avec succès"}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            })
-            .catch((error)=>{
-
-                toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour"}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            })
-        ;
+        .then(() => {
+            toast.success(
+                <p className="text-white tx-16 mb-0">{"Mise à jour effectuée avec succès"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+        })
+        .catch((error)=>{
+            toast.error(
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+        });
     };
 
     return (
