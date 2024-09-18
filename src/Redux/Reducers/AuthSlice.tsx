@@ -45,28 +45,30 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
 export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, { rejectValue: string }>(
     "auth/updateProfile",
     async (profileData, { rejectWithValue }) => {
-      try {
-        const accessToken = Cookies.get('cinolu_token');
-        
-        if (!accessToken) {
-          throw new Error("Token non disponible");
-        }
-  
-        const response = await axios.patch(`${apiBaseUrl}/auth/profile`, profileData, {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
-  
-        Cookies.set("cinolu_token", accessToken);
-        localStorage.setItem("user_profile", JSON.stringify(response.data));
-  
-        return response.data;
+        try {
+            const accessToken = Cookies.get('cinolu_token');
 
-      } catch (error: any) {
-        const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
-        return rejectWithValue(errorMessage);
-      }
+            if (!accessToken) {
+                throw new Error("Token non disponible");
+            }
+
+
+            const response = await axios.patch(`${apiBaseUrl}/auth/profile`, profileData, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+
+            localStorage.setItem("user_profile", JSON.stringify(response.data));
+
+
+            return response.data;
+
+        } catch (error: any) {
+            const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
+            return rejectWithValue(errorMessage);
+        }
     }
 );
 
@@ -128,14 +130,17 @@ const authSlice = createSlice({
                 state.statusAuth = 'loading';
                 state.errorAuth = null;
             })
-            .addCase(updateProfile.fulfilled, (state, action)=>{
+            .addCase(updateProfile.fulfilled, (state, action) => {
                 state.statusAuth = 'succeeded';
+
                 state.user = action.payload.data;
+
+                localStorage.setItem('user_profile', JSON.stringify(action.payload.data));
             })
-            .addCase(updateProfile.rejected, (state, action)=>{
+            .addCase(updateProfile.rejected, (state, action) => {
                 state.statusAuth = 'failed';
-                state.errorAuth = action.payload || ''
-            })
+                state.errorAuth = action.payload || '';
+            });
     },
 });
 
