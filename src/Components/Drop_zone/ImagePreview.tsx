@@ -73,7 +73,7 @@ const ImagePreview = () => {
                     allowMultiple={false}
                     maxFiles={1}
                     onupdatefiles={setFiles}
-                    labelIdle=' <span class="filepond--label-action text-danger text-decoration-none">Deposez</span>'
+                    labelIdle=' <span class="filepond--label-action text-danger text-decoration-none">Deposez le fichier ici</span>'
                 />
                 <Button color="primary" onClick={handleUpdateProfileImage}>
                     Mettre à jour l'image de profil

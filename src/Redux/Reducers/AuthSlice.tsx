@@ -73,6 +73,37 @@ export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload
 );
 
 
+export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rejectValue: string }>(
+    "auth/updateProfileImage",
+    async (formData, { rejectWithValue }) => {
+        try {
+            const accessToken = Cookies.get('cinolu_token');
+
+            if (!accessToken) {
+                throw new Error("Token non disponible");
+            }
+
+            const response = await axios.post(`${apiBaseUrl}/users/image-profile/`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+
+            localStorage.setItem("user_profile", JSON.stringify(response.data));
+
+            return response.data;
+        } catch (error: any) {
+            const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la mise à jour de l'image de profil";
+            return rejectWithValue(errorMessage);
+        }
+    }
+);
+
+
+
+
 const initialState: AuthState = {
     user: null,
     statusAuth: "idle",
@@ -140,7 +171,21 @@ const authSlice = createSlice({
             .addCase(updateProfile.rejected, (state, action) => {
                 state.statusAuth = 'failed';
                 state.errorAuth = action.payload || '';
+            })
+            .addCase(updateProfileImage.pending, (state) => {
+                state.statusAuth = 'loading';
+                state.errorAuth = null;
+            })
+            .addCase(updateProfileImage.fulfilled, (state, action) => {
+                state.statusAuth = 'succeeded';
+                state.user = action.payload.data;
+                localStorage.setItem('user_profile', JSON.stringify(action.payload.data));
+            })
+            .addCase(updateProfileImage.rejected, (state, action) => {
+                state.statusAuth = 'failed';
+                state.errorAuth = action.payload || '';
             });
+        ;
     },
 });
 

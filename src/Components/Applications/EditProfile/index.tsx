@@ -1,8 +1,8 @@
 import React from "react";
 import { Container, Row } from "reactstrap";
-import MyProfile from "./MyProfile/MyProfile";
-import EditProfileForm from "./EditProfiles/EditProfileForm";
+import EditProfileForm from "./EditProfileImageAndPassword/EditProfileForm";
 import { toast, ToastContainer, Flip } from "react-toastify";
+import UserProfileInfo from "./UserProfileInfo/UserProfileInfo";
 
 const EditProfileContainer = () => {
 
@@ -10,7 +10,7 @@ const EditProfileContainer = () => {
     <Container fluid>
       <div className="edit-profile">
         <Row>
-          <MyProfile/>
+          <UserProfileInfo/>
           <EditProfileForm />
         </Row>
           <ToastContainer />

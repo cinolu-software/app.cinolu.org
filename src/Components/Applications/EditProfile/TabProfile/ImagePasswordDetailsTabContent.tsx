@@ -4,7 +4,7 @@ import React from "react";
 import DropzoneContainer from "@/Components/Drop_zone";
 import UpdatePassWord from "./UpdatePassWord";
 
-const ProfilTabContent :React.FC<ProfileTabContentProp> = ({ activeTab }) => {
+const ImagePasswordDetailsTabContent :React.FC<ProfileTabContentProp> = ({ activeTab }) => {
 
   return (
     <TabContent activeTab={activeTab}>
@@ -18,4 +18,4 @@ const ProfilTabContent :React.FC<ProfileTabContentProp> = ({ activeTab }) => {
   );
 };
 
-export default ProfilTabContent;
+export default ImagePasswordDetailsTabContent;
