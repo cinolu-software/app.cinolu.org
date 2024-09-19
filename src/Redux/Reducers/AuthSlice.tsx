@@ -21,7 +21,7 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
                     Authorization: `Bearer ${accessToken}`
                 }
             });
-            return { access_token: accessToken, user: profileResponse.data };
+            return { access_token: accessToken, user: profileResponse.data.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
             return rejectWithValue(errorMessage);
