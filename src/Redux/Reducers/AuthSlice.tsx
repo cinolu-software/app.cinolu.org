@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { apiBaseUrl } from "@/services/axios";
 import Cookies from "js-cookie";
-import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload } from "@/Types/AuthType";
+import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload, UpdateProfilePassword } from "@/Types/AuthType";
 import { RootState } from "@/Redux/Store";
 import axiosInstance from "@/services/axios";
 
@@ -15,18 +15,20 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
 
             Cookies.set("cinolu_token", accessToken, { expires: 7 });
 
+
             const profileResponse = await axiosInstance.get('/auth/profile', {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 }
             });
-            return { access_token: accessToken, ...profileResponse.data };
+            return { access_token: accessToken, user: profileResponse.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
             return rejectWithValue(errorMessage);
         }
     }
 );
+
 
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     "auth/logout",
@@ -52,18 +54,15 @@ export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload
                 throw new Error("Token non disponible");
             }
 
-
             const response = await axios.patch(`${apiBaseUrl}/auth/profile`, profileData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
 
-
             localStorage.setItem("user_profile", JSON.stringify(response.data));
 
-
-            return response.data;
+            return { access_token: accessToken, user: response.data };
 
         } catch (error: any) {
             const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
@@ -90,10 +89,9 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
                 },
             });
 
-
             localStorage.setItem("user_profile", JSON.stringify(response.data));
 
-            return response.data;
+            return { access_token: accessToken, user: response.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la mise à jour de l'image de profil";
             return rejectWithValue(errorMessage);
@@ -102,6 +100,29 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
 );
 
 
+export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePassword, { rejectValue: string }>(
+    "auth/updatePassword",
+    async (passwordData, { rejectWithValue }) => {
+        try {
+            const accessToken = Cookies.get('cinolu_token');
+
+            if (!accessToken) {
+                throw new Error("Token non disponible");
+            }
+
+            const response = await axios.patch(`${apiBaseUrl}/auth/update-password`, passwordData, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+
+            return { access_token: accessToken, user: response.data };
+        } catch (error: any) {
+            const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du mot de passe";
+            return rejectWithValue(errorMessage);
+        }
+    }
+);
 
 
 const initialState: AuthState = {
@@ -111,8 +132,8 @@ const initialState: AuthState = {
     isAuthenticated: false,
 };
 
-const authSlice = createSlice({
 
+const authSlice = createSlice({
     name: "auth",
     initialState,
 
@@ -134,10 +155,9 @@ const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.statusAuth = "succeeded";
                 state.isAuthenticated = true;
-
-                state.user = action.payload.data;
+                state.user = action.payload.user;
                 Cookies.set("cinolu_token", action.payload.access_token);
-                localStorage.setItem('user_profile', JSON.stringify(action.payload.data));
+                localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(login.rejected, (state, action) => {
                 state.statusAuth = "failed";
@@ -156,17 +176,14 @@ const authSlice = createSlice({
                 state.statusAuth = "failed";
                 state.errorAuth = action.payload || "";
             })
-
-            .addCase(updateProfile.pending, (state)=>{
+            .addCase(updateProfile.pending, (state) => {
                 state.statusAuth = 'loading';
                 state.errorAuth = null;
             })
             .addCase(updateProfile.fulfilled, (state, action) => {
                 state.statusAuth = 'succeeded';
-
-                state.user = action.payload.data;
-
-                localStorage.setItem('user_profile', JSON.stringify(action.payload.data));
+                state.user = action.payload.user;
+                localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(updateProfile.rejected, (state, action) => {
                 state.statusAuth = 'failed';
@@ -178,14 +195,25 @@ const authSlice = createSlice({
             })
             .addCase(updateProfileImage.fulfilled, (state, action) => {
                 state.statusAuth = 'succeeded';
-                state.user = action.payload.data;
-                localStorage.setItem('user_profile', JSON.stringify(action.payload.data));
+                state.user = action.payload.user;
+                localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(updateProfileImage.rejected, (state, action) => {
                 state.statusAuth = 'failed';
                 state.errorAuth = action.payload || '';
+            })
+            .addCase(updatePassword.pending, (state) => {
+                state.statusAuth = 'loading';
+                state.errorAuth = null;
+            })
+            .addCase(updatePassword.fulfilled, (state, action) => {
+                state.statusAuth = 'succeeded';
+                state.user = action.payload.user;
+            })
+            .addCase(updatePassword.rejected, (state, action) => {
+                state.statusAuth = 'failed';
+                state.errorAuth = action.payload || '';
             });
-        ;
     },
 });
 
