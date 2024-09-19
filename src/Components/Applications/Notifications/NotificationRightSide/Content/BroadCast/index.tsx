@@ -10,7 +10,7 @@ import SupportContent from "../../SupportContent";
 import AddLabelModal from "../../AddLabelModal";
 
 
-const BroadCastContent = ({navId}) => {
+const BroadCastContent: React.FC<{navId: string}> = ({navId}) => {
 
   return (
     <TabContent activeTab={navId} id="notifications-pills-tabContent">
