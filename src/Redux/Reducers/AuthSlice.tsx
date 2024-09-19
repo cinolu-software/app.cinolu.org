@@ -60,9 +60,9 @@ export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload
                 },
             });
 
-            localStorage.setItem("user_profile", JSON.stringify(response.data));
+            localStorage.setItem("user_profile", JSON.stringify(response.data.data));
 
-            return { access_token: accessToken, user: response.data };
+            return { access_token: accessToken, user: response.data.data };
 
         } catch (error: any) {
             const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
@@ -89,9 +89,9 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
                 },
             });
 
-            localStorage.setItem("user_profile", JSON.stringify(response.data));
+            localStorage.setItem("user_profile", JSON.stringify(response.data.data));
 
-            return { access_token: accessToken, user: response.data };
+            return { access_token: accessToken, user: response.data.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la mise à jour de l'image de profil";
             return rejectWithValue(errorMessage);
@@ -116,7 +116,7 @@ export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePasswo
                 },
             });
 
-            return { access_token: accessToken, user: response.data };
+            return { access_token: accessToken, user: response.data.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du mot de passe";
             return rejectWithValue(errorMessage);

@@ -13,9 +13,8 @@ const EditProfileContainer = () => {
           <UserProfileInfo/>
           <EditProfileForm />
         </Row>
-          <ToastContainer />
+        <ToastContainer />
       </div>
-
     </Container>
   );
 
