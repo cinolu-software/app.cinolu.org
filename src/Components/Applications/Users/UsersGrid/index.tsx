@@ -10,8 +10,11 @@ import Image from "next/image";
 import { ImagePath } from "@/Constant";
 import RatioImage from "@/CommonComponent/RatioImage";
 
+
+
 const UsersGrid = () => {
-  const { productItem } = useAppSelector((state) => state.product);
+
+  const { productItem } = useAppSelector((state) => state.staff);
   const { listView, colClass } = useAppSelector((state) => state.filterData);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [dataId, setDataId] = useState<undefined | number>();

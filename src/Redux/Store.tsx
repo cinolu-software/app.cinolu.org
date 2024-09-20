@@ -19,6 +19,7 @@ import CartSlice from "./Reducers/CartSlice";
 import AddProductSlice from "./Reducers/AddProductSlice";
 import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
 import NotificationSlice from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
+import StaffSlice from "@/Redux/Reducers/StaffSlice/StaffSlice";
 
 const Store = configureStore({
 
@@ -41,6 +42,7 @@ const Store = configureStore({
     cartData: CartSlice,
     auth: AuthSlice,
     addProduct: AddProductSlice,
+    staff: StaffSlice,
 
     otherProgram : OtherSlice,
     notifications: NotificationSlice,
