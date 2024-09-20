@@ -6,6 +6,7 @@ import { Rating } from "react-simple-star-rating";
 export const ProductDetails :React.FC<ProductDetailsProp> = ({ item }) => {
   
   const { symbol } = useAppSelector((state) => state.product);
+
   return (
     <div className="product-details">
       {/*<Rating fillColor="#ffa800" initialValue={Math.random() * 5} size={17} />*/}
