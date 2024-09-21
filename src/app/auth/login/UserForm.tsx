@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/Redux/Reducers/AuthSlice";
 import { AppDispatch } from "@/Redux/Store";
 import { selectStatus } from "@/Redux/Reducers/AuthSlice";
-import axiosInstance from "@/services/axios";
-import Cookies from "js-cookie";
+
 
 
 
@@ -39,8 +38,6 @@ const UserForm = () => {
 
         try {
             await dispatch(login(payload)).unwrap();
-            router.push('/dashboard');
-
         } catch (error) {
             toast.error(
                 <p className="text-white tx-16 mb-0">{error as string}</p>,
@@ -56,12 +53,12 @@ const UserForm = () => {
     };
 
     useEffect(() => {
-        if (status === 'loading') {
-            setLoading(true);
+        if (status === 'succeeded') {
+            router.push('/dashboard');
         } else if (status === 'failed') {
             setLoading(false);
         }
-    }, [status]);
+    }, [status, router]);
 
 
 

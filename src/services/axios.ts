@@ -1,5 +1,4 @@
 import axios from "axios";
-
 // export const apiBaseUrl = "http://localhost:8000";
 // export const imageBaseUrl = "http://localhost:8000/uploads";
 
