@@ -31,9 +31,7 @@ const UsersGrid = () => {
                 <Card>
                   <div className="product-box">
                     <div className="product-img bg-img-cover">
-                      {/*{item.status !== "none" && <div className={`ribbon-index ${item.ribbonClassName}`}>{item.status}</div>}*/}
-                      <RatioImage className="img-fluid" src={`${ImagePath}/ecommerce/${item.image}`} alt="" />
-                      {/*<HoverButtons setDataId={setDataId} setOpenModal={setOpenModal} item={item} />*/}
+                      <RatioImage className={'img-fluid'} src={`${ImagePath}/ecommerce/${item.image}`} alt="" />
                     </div>
                     <ProductDetails item={item} />  
                   </div>

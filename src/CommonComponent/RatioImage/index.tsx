@@ -33,7 +33,7 @@ const RatioImage = (props: Component) => {
     }
   }, []);
 
-  return <img ref={bgImg} {...props} alt={alt} />;
+  return <img ref={bgImg} {...props} alt={alt}  />;
 };
 
 
