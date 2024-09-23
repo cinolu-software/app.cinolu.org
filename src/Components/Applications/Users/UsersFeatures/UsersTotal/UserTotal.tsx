@@ -8,6 +8,7 @@ import { useAppDispatch } from "@/Redux/Hooks";
 import { setIsFilter } from "@/Redux/Reducers/FilterSlice";
 
 const UserTotal = () => {
+
   const dispatch = useAppDispatch();
 
   return (
@@ -25,6 +26,6 @@ const UserTotal = () => {
       <Sorting />
     </Row>
   );
-};
 
+};
 export default UserTotal;

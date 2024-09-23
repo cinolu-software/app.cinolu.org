@@ -54,22 +54,22 @@ interface VariantsInterface {
 
 export interface StaffItemInterface {
     id: number;
-    image: string;
-    name: string;
-    note: string;
-    description: string;
-    discountPrice: string;
-    status: string;
-    price: number;
-    stock: string;
-    review: string;
-    category: string;
-    colors: string[];
-    size: string[];
-    tags: string[];
-    variants: VariantsInterface[];
+    image?: string;
+    name?: string;
+    note?: string;
+    description?: string;
+    discountPrice?: string;
+    status?: string;
+    price?: number;
+    stock?: string;
+    review?: string;
+    category?: string;
+    colors?: string[];
+    size?: string[];
+    tags?: string[];
+    variants?: VariantsInterface[];
     ribbonClassName?: string;
-    rating: number;
+    rating?: number;
 }
 
 export interface StaffSliceProp {
@@ -86,6 +86,7 @@ interface VariantsType {
     color: string;
     images: string;
 }
+
 export interface CartType {
     variants: VariantsType[];
     total?: any;

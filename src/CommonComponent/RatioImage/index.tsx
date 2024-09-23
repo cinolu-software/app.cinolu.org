@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+
 
 interface Component {
   className?: string;
@@ -8,6 +10,7 @@ interface Component {
 }
 
 const RatioImage = (props: Component) => {
+
   const { alt } = props;
   const bgImg = useRef<HTMLImageElement>(null);
 
@@ -35,6 +38,5 @@ const RatioImage = (props: Component) => {
 
   return <img ref={bgImg} {...props} alt={alt}  />;
 };
-
 
 export default RatioImage;

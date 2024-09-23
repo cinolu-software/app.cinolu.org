@@ -15,14 +15,12 @@ const UsersContainer = () => {
   },[])
 
   return (
-
     <Container fluid className={`product-wrapper ${sideBarOn ? "sidebaron" : ""}`}>
       <div className="product-grid">
         <UsersFeatures />
         <UsersGrid />
       </div>
     </Container>
-
   );
 };
 

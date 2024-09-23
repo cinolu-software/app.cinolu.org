@@ -54,22 +54,22 @@ interface VariantsInterface {
 
 export interface ProductItemInterface {
   id: number;
-  image: string;
-  name: string;
-  note: string;
-  description: string;
-  discountPrice: string;
-  status: string;
-  price: number;
-  stock: string;
-  review: string;
-  category: string;
-  colors: string[];
-  size: string[];
-  tags: string[];
-  variants: VariantsInterface[];
+  image?: string;
+  name?: string;
+  note?: string;
+  description?: string;
+  discountPrice?: string;
+  status?: string;
+  price?: number;
+  stock?: string;
+  review?: string;
+  category?: string;
+  colors?: string[];
+  size?: string[];
+  tags?: string[];
+  variants?: VariantsInterface[];
   ribbonClassName?: string;
-  rating: number;
+  rating?: number;
 }
 
 export interface ProductSliceProp {

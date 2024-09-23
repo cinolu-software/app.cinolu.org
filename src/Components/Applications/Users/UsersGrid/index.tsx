@@ -5,19 +5,16 @@ import { HoverButtons } from "./HoverButtons";
 import { ProductDetails } from "./ProductDetails";
 import { useAppSelector } from "@/Redux/Hooks";
 import { getVisibleProducts } from "@/utils/Ecommerce.service";
-import { ProductItemInterface } from "@/Types/EcommerceType";
-import Image from "next/image";
 import { ImagePath } from "@/Constant";
 import RatioImage from "@/CommonComponent/RatioImage";
-
-
+import {StaffItemInterface} from "@/Types/StaffTypes/StaffTypes";
 
 const UsersGrid = () => {
 
   const { productItem } = useAppSelector((state) => state.staff);
   const { listView, colClass } = useAppSelector((state) => state.filterData);
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const [dataId, setDataId] = useState<undefined | number>();
+  const [dataId] = useState<undefined | number>();
   const { filter } = useAppSelector((state) => state.filterData);
   const products = getVisibleProducts(productItem, filter);
 
@@ -25,7 +22,7 @@ const UsersGrid = () => {
     <div className={`product-wrapper-grid ${listView ? "list-view" : ""}`}>
       <Row className="gridRow">
         {products &&
-          products.map((item: ProductItemInterface, index: number) => {
+          products.map((item: StaffItemInterface, index: number) => {
             return (
               <div id="gridId" className={`${colClass} ${listView ? "col-xl-12" : ""}`} key={index}>
                 <Card>
@@ -43,5 +40,6 @@ const UsersGrid = () => {
       </Row>
     </div>
   );
+
 };
 export default UsersGrid;
