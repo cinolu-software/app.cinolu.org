@@ -16,13 +16,15 @@ const UsersGrid = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [dataId] = useState<undefined | number>();
   const { filter } = useAppSelector((state) => state.filterData);
+
   const products = getVisibleProducts(productItem, filter);
+
 
   return (
     <div className={`product-wrapper-grid ${listView ? "list-view" : ""}`}>
       <Row className="gridRow">
-        {products &&
-          products.map((item: StaffItemInterface, index: number) => {
+        {productItem &&
+            productItem.map((item: StaffItemInterface, index: number) => {
             return (
               <div id="gridId" className={`${colClass} ${listView ? "col-xl-12" : ""}`} key={index}>
                 <Card>

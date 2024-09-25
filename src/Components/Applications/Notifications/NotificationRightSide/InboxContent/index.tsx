@@ -6,7 +6,6 @@ import { TabPane } from "reactstrap";
 const InboxContent = () => {
 
     const { inboxNotification, page } = useAppSelector((state) => state.notifications);
-
     return (
         <TabPane tabId="1" >
             <div className="mail-body-wrapper">

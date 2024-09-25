@@ -1,6 +1,6 @@
 'use client'
 
-import React, {FunctionComponent, useEffect, useState,} from 'react'
+import React, {FunctionComponent, useEffect, useState,} from 'react';
 
 const Notifications = () => {
 
@@ -15,7 +15,7 @@ const Notifications = () => {
         })();
     }, []);
 
-
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
+
 export default Notifications

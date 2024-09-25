@@ -19,12 +19,12 @@ const NotificationRightSide: React.FC<NotificationBoxNavContentType> = () => {
         <Col xxl="12" xl="12" className="box-col-12">
             <div className="email-right-aside">
                 <Card className={`email-body email-list ${interviewNotification ? "hide" : "show"}`}>
-                    <ComposeNotificationModal />
+                    <ComposeNotificationModal/>
                     <NotificationHeader navId={navId} setNavId={setNavId} />
                     <TabContent  activeTab={navId} id="notifications-pills-tabContent">
                        <InboxContent />
                        <SentContent />
-                       <StarredContent />
+                       <StarredContent/>
                     </TabContent> 
                 </Card>
                 <InterviewNotification />

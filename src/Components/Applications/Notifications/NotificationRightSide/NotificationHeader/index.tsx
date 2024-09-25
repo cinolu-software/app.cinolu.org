@@ -7,6 +7,7 @@ interface NotificationHeaderProps {
 }
 
 const NotificationHeader: React.FC<NotificationHeaderProps> = ({navId, setNavId}) => {
+
     return (
         <div className="mail-header-wrapper">
             <div className="mail-header">
@@ -16,6 +17,7 @@ const NotificationHeader: React.FC<NotificationHeaderProps> = ({navId, setNavId}
             </div>
         </div>
     );
+
 };
 
 export default NotificationHeader;
