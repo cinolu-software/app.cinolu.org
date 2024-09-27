@@ -64,8 +64,8 @@ const UserProfileInfo = () => {
                     <Form onSubmit={handleProfileUpdate}>
                         <UserFormHead />
                         <CommonUserFormGroup type="text" title="Nom" placeholder="Nom" defaultValue={user?.name} name="name" />
-                        <CommonUserFormGroup type="text" title="Post-nom" placeholder="Post-nom" defaultValue={user?.first_name} name="first_name" />
-                        <CommonUserFormGroup type="text" title="Prénom" placeholder="Prénom" defaultValue={user?.last_name} name="last_name" />
+                        {/*<CommonUserFormGroup type="text" title="Post-nom" placeholder="Post-nom" defaultValue={user?.first_name} name="first_name" />*/}
+                        {/*<CommonUserFormGroup type="text" title="Prénom" placeholder="Prénom" defaultValue={user?.last_name} name="last_name" />*/}
                         <CommonUserFormGroup type="email" title="Adresse Email" placeholder="Adresse e-mail" defaultValue={user?.email} name="email" />
                         <CommonUserFormGroup type="text" title="Numéro de Téléphone" placeholder="Numéro de téléphone" defaultValue={user?.phone_number} name="phone_number" />
                         <CommonUserFormGroup type="text" title="Adresse" placeholder="Adresse physique" defaultValue={user?.address} name="address" />

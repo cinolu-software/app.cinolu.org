@@ -17,7 +17,6 @@ const EditProfileContainer = () => {
       </div>
     </Container>
   );
-
 };
 
 export default EditProfileContainer;

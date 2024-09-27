@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import {Card, Col, Nav, TabContent, TabPane, NavItem, NavLink} from "reactstrap";
 import NotificationHeader from "@/Components/Applications/Notifications/NotificationRightSide/NotificationHeader";
 import ComposeNotificationModal from "@/Components/Applications/Notifications/NotificationRightSide/ComposeNotificationModal";
@@ -7,12 +8,12 @@ import StarredContent from "@/Components/Applications/Notifications/Notification
 import InterviewNotification from "@/Components/Applications/Notifications/NotificationRightSide/InterviewNotification";
 import {useAppSelector} from "@/Redux/Hooks";
 import {NotificationBoxNavContentType} from "@/Types/Notifications/NotificationType";
-import React, {useState} from "react";
 
 
 const NotificationRightSide: React.FC<NotificationBoxNavContentType> = () => {
 
     const {interviewNotification} = useAppSelector(state => state.notifications);
+
     const [navId, setNavId] = useState("1");
 
     return (
@@ -31,6 +32,7 @@ const NotificationRightSide: React.FC<NotificationBoxNavContentType> = () => {
             </div>
         </Col>
     );
+
 }
 
 export default NotificationRightSide;

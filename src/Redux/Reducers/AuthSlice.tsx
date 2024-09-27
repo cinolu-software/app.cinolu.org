@@ -11,17 +11,13 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
     async (data, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post(`${apiBaseUrl}/auth/sign-in`, data);
-            const accessToken = response.data.access_token;
+            const user = JSON.stringify(response?.data?.data);
 
-            Cookies.set("cinolu_token", accessToken, { expires: 7 });
+            Cookies.set("cinolu_profile", user);
+            localStorage.setItem('user_profile', response?.data?.data);
 
+            return { user: response.data.data };
 
-            const profileResponse = await axiosInstance.get('/auth/profile', {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`
-                }
-            });
-            return { access_token: accessToken, user: profileResponse.data.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
             return rejectWithValue(errorMessage);
@@ -43,27 +39,14 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     }
 );
 
-
 export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, { rejectValue: string }>(
     "auth/updateProfile",
     async (profileData, { rejectWithValue }) => {
         try {
-            const accessToken = Cookies.get('cinolu_token');
-
-            if (!accessToken) {
-                throw new Error("Token non disponible");
-            }
-
-            const response = await axios.patch(`${apiBaseUrl}/auth/profile`, profileData, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            });
-
-            localStorage.setItem("user_profile", JSON.stringify(response.data.data));
-
-            return { access_token: accessToken, user: response.data.data };
-
+            const response = await axiosInstance.patch(`${apiBaseUrl}/auth/profile`, profileData);
+            const updatedProfile = response.data.data;
+            localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
+            return { user: updatedProfile };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
             return rejectWithValue(errorMessage);
@@ -71,27 +54,20 @@ export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload
     }
 );
 
-
 export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rejectValue: string }>(
     "auth/updateProfileImage",
     async (formData, { rejectWithValue }) => {
         try {
-            const accessToken = Cookies.get('cinolu_token');
-
-            if (!accessToken) {
-                throw new Error("Token non disponible");
-            }
 
             const response = await axios.post(`${apiBaseUrl}/users/image-profile/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${accessToken}`,
                 },
             });
 
             localStorage.setItem("user_profile", JSON.stringify(response.data.data));
 
-            return { access_token: accessToken, user: response.data.data };
+            return { user: response.data.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la mise à jour de l'image de profil";
             return rejectWithValue(errorMessage);
@@ -104,26 +80,14 @@ export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePasswo
     "auth/updatePassword",
     async (passwordData, { rejectWithValue }) => {
         try {
-            const accessToken = Cookies.get('cinolu_token');
-
-            if (!accessToken) {
-                throw new Error("Token non disponible");
-            }
-
-            const response = await axios.patch(`${apiBaseUrl}/auth/update-password`, passwordData, {
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                },
-            });
-
-            return { access_token: accessToken, user: response.data.data };
+            const response = await axios.patch(`${apiBaseUrl}/auth/update-password`, passwordData);
+            return { user: response.data.data };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du mot de passe";
             return rejectWithValue(errorMessage);
         }
     }
 );
-
 
 const initialState: AuthState = {
     user: null,
