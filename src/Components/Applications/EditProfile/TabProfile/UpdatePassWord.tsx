@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Button, Col, Form, Input, Label, Row } from "reactstrap";
 import { selectError, updatePassword, selectStatus } from "@/Redux/Reducers/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,18 @@ const UpdatePassWord = () => {
         password_confirm: ''
     });
 
+    const [showPassword, setShowPassword] = useState({
+        old_password: false,
+        password: false,
+        password_confirm: false,
+    });
+
+    const togglePasswordVisibility = (field: keyof typeof showPassword) => {
+        setShowPassword(prevState => ({
+            ...prevState,
+            [field]: !prevState[field],
+        }));
+    };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -23,13 +35,11 @@ const UpdatePassWord = () => {
     };
 
     const handlePasswordUpdate = async () => {
-
         const { old_password, password, password_confirm } = formValues;
 
-        if (old_password && password && password_confirm)
-        {
+        if (old_password && password && password_confirm) {
             await dispatch(updatePassword(formValues)).unwrap()
-                .then(()=>{
+                .then(() => {
                     toast.success(
                         <p className="text-white tx-16 mb-0">{"Mise à jour du mot de passe effectuée avec succès"}</p>,
                         {
@@ -41,7 +51,7 @@ const UpdatePassWord = () => {
                         }
                     );
                 })
-                .catch(()=>{
+                .catch(() => {
                     toast.error(
                         <p className="text-white tx-16 mb-0">{updateError}</p>,
                         {
@@ -52,11 +62,8 @@ const UpdatePassWord = () => {
                             theme: "colored",
                         }
                     );
-                })
-            ;
-        }
-        else
-        {
+                });
+        } else {
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Please fill in all fields."}</p>,
                 {
@@ -76,39 +83,57 @@ const UpdatePassWord = () => {
                 <Row className="g-3 ms-2">
                     <Col md="12">
                         <Label check>{"Ancien Mot de passe"}</Label>
-                        <Input
-                            type="password"
-                            placeholder="Ancien Mot de passe"
-                            name="old_password"
-                            value={formValues.old_password}
-                            onChange={handleInputChange}
-                            autoComplete="off"
-                        />
+                        <div className="position-relative">
+                            <Input
+                                type={showPassword.old_password ? "text" : "password"}
+                                placeholder="Ancien Mot de passe"
+                                name="old_password"
+                                value={formValues.old_password}
+                                onChange={handleInputChange}
+                                autoComplete="off"
+                            />
+                            <i
+                                className={`fa ${showPassword.old_password ? "fa-eye-slash" : "fa-eye"} position-absolute top-50 end-0 translate-middle-y me-3 cursor-pointer`}
+                                onClick={() => togglePasswordVisibility("old_password")}
+                            />
+                        </div>
                     </Col>
                     <Col md="12">
                         <Label check>{"Nouveau Mot de passe"}</Label>
-                        <Input
-                            type="password"
-                            placeholder="Nouveau Mot de passe"
-                            name="password"
-                            value={formValues.password}
-                            onChange={handleInputChange}
-                            autoComplete="off"
-                        />
+                        <div className="position-relative">
+                            <Input
+                                type={showPassword.password ? "text" : "password"}
+                                placeholder="Nouveau Mot de passe"
+                                name="password"
+                                value={formValues.password}
+                                onChange={handleInputChange}
+                                autoComplete="off"
+                            />
+                            <i
+                                className={`fa ${showPassword.password ? "fa-eye-slash" : "fa-eye"} position-absolute top-50 end-0 translate-middle-y me-3 cursor-pointer`}
+                                onClick={() => togglePasswordVisibility("password")}
+                            />
+                        </div>
                     </Col>
                     <Col md="12">
                         <Label check>{"Entrez à nouveau le Mot de passe"}</Label>
-                        <Input
-                            type="password"
-                            placeholder="Entrez à nouveau le Mot de passe"
-                            name="password_confirm"
-                            value={formValues.password_confirm}
-                            onChange={handleInputChange}
-                            autoComplete="off"
-                        />
+                        <div className="position-relative">
+                            <Input
+                                type={showPassword.password_confirm ? "text" : "password"}
+                                placeholder="Entrez à nouveau le Mot de passe"
+                                name="password_confirm"
+                                value={formValues.password_confirm}
+                                onChange={handleInputChange}
+                                autoComplete="off"
+                            />
+                            <i
+                                className={`fa ${showPassword.password_confirm ? "fa-eye-slash" : "fa-eye"} position-absolute top-50 end-0 translate-middle-y me-3 cursor-pointer`}
+                                onClick={() => togglePasswordVisibility("password_confirm")}
+                            />
+                        </div>
                     </Col>
                     <Col sm="12">
-                        <Button block color="primary" onClick={handlePasswordUpdate} >{"Modifier le mot de passe"}</Button>
+                        <Button block color="primary" onClick={handlePasswordUpdate}>{"Modifier le mot de passe"}</Button>
                     </Col>
                 </Row>
             </Form>

@@ -10,10 +10,6 @@ import { login } from "@/Redux/Reducers/AuthSlice";
 import { AppDispatch } from "@/Redux/Store";
 import { selectStatus } from "@/Redux/Reducers/AuthSlice";
 
-
-
-
-
 const UserForm = () => {
 
     const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +17,6 @@ const UserForm = () => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const status = useSelector(selectStatus);
-
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -60,8 +55,6 @@ const UserForm = () => {
         }
     }, [status, router]);
 
-
-
     return (
         <div>
             <div>
@@ -83,7 +76,7 @@ const UserForm = () => {
                         <div className="position-relative">
                             <Input type={showPassword ? "text" : "password"} name="password" placeholder="Votre mot de passe" required />
                             <div className="show-hide" onClick={() => setShowPassword(!showPassword)}>
-                                <span className="show"> </span>
+                                <i className={`fa ${showPassword ? 'fa-eye-slash' : 'fa-eye'} position-absolute top-50 end-0 translate-middle-y cursor-pointer`} />
                             </div>
                         </div>
                     </FormGroup>
@@ -106,4 +99,5 @@ const UserForm = () => {
 };
 
 export default UserForm;
+
 
