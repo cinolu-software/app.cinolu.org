@@ -47,7 +47,8 @@ export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload
             const updatedProfile = response.data.data;
             localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
             return { user: updatedProfile };
-        } catch (error: any) {
+        }
+        catch (error: any) {
             const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
             return rejectWithValue(errorMessage);
         }
@@ -68,7 +69,8 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
             localStorage.setItem("user_profile", JSON.stringify(response.data.data));
 
             return { user: response.data.data };
-        } catch (error: any) {
+        }
+        catch (error: any) {
             const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la mise à jour de l'image de profil";
             return rejectWithValue(errorMessage);
         }
@@ -100,7 +102,6 @@ const initialState: AuthState = {
 const authSlice = createSlice({
     name: "auth",
     initialState,
-
     reducers: {
         loadUserFromStorage: (state) => {
             const storedUser = localStorage.getItem('user_profile');
@@ -120,8 +121,6 @@ const authSlice = createSlice({
                 state.statusAuth = "succeeded";
                 state.isAuthenticated = true;
                 state.user = action.payload.user;
-                Cookies.set("cinolu_token", action.payload.access_token);
-                localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(login.rejected, (state, action) => {
                 state.statusAuth = "failed";
@@ -182,7 +181,6 @@ const authSlice = createSlice({
 });
 
 export const { loadUserFromStorage } = authSlice.actions;
-
 export const selectAuth = (state: RootState) => state.auth;
 export const selectStatus = (state: RootState) => state.auth.statusAuth;
 export const selectError = (state: RootState) => state.auth.errorAuth;
