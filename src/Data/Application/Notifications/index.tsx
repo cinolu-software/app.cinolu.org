@@ -1,7 +1,7 @@
 export const InboxNotificationData = [
     {
         id: 1,
-        image: "6.jpg",
+        image: "1.jpg",
         name: "Marvin McKinney",
         color: "primary",
         message: "New comments on MSR2023 draft presentation -",
@@ -17,7 +17,7 @@ export const InboxNotificationData = [
     },
     {
         id: 2,
-        image: "3.png",
+        image: "2.jpg",
         name: "Brooklyn Simmons",
         color: "primary",
         message: "Confirm your booking id -",
@@ -33,7 +33,8 @@ export const InboxNotificationData = [
     },
     {
         id: 3,
-        shortName: "EH",
+        // shortName: "EH",
+        image: "3.jpg",
         name: "Esther Howard",
         color: "primary",
         message: "Confirm your booking id -",
@@ -49,7 +50,8 @@ export const InboxNotificationData = [
     },
     {
         id: 4,
-        shortName: "CW",
+        // shortName: "CW",
+        image: "18.jpg",
         name: "Cameron Williamson",
         color: "primary",
         message: "Very fiction Link -",
@@ -59,7 +61,7 @@ export const InboxNotificationData = [
     },
     {
         id: 5,
-        image: "6.jpg",
+        image: "19.jpg",
         name: "Ronald Richards",
         color: "primary",
         message: "Confirm your booking id -",
@@ -75,7 +77,7 @@ export const InboxNotificationData = [
     },
     {
         id: 6,
-        image: "10.jpg",
+        image: "20.jpg",
         name: "Darlene Robertson",
         color: "primary",
         message: "Confirm your booking id -",

@@ -13,7 +13,6 @@ import {NotificationBoxNavContentType} from "@/Types/Notifications/NotificationT
 const NotificationRightSide: React.FC<NotificationBoxNavContentType> = () => {
 
     const {interviewNotification} = useAppSelector(state => state.notifications);
-
     const [navId, setNavId] = useState("1");
 
     return (

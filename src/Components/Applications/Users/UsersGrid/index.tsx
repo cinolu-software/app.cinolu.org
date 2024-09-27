@@ -4,7 +4,7 @@ import ProductModal from "./ProductModal";
 import { HoverButtons } from "./HoverButtons";
 import { ProductDetails } from "./ProductDetails";
 import { useAppSelector } from "@/Redux/Hooks";
-import { getVisibleProducts } from "@/utils/Ecommerce.service";
+// import { getVisibleProducts } from "@/utils/Ecommerce.service";
 import { ImagePath } from "@/Constant";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {StaffItemInterface} from "@/Types/StaffTypes/StaffTypes";
@@ -17,7 +17,7 @@ const UsersGrid = () => {
   const [dataId] = useState<undefined | number>();
   const { filter } = useAppSelector((state) => state.filterData);
 
-  const products = getVisibleProducts(productItem, filter);
+  // const products = getVisibleProducts(productItem, filter);
 
 
   return (
