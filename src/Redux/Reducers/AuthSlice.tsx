@@ -13,9 +13,8 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
             const response = await axiosInstance.post(`${apiBaseUrl}/auth/sign-in`, data);
             const user = JSON.stringify(response?.data?.data);
 
-            Cookies.set("cinolu_profile", user);
-            localStorage.setItem('user_profile', response?.data?.data);
-
+            Cookies.set("cinolu_token", user);
+            localStorage.setItem('user_profile', user);
             return { user: response.data.data };
 
         } catch (error: any) {
