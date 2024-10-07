@@ -13,9 +13,11 @@ const InboxContent = () => {
                 <ul>
                     {inboxNotification.map((data, i) => (
                         <li className={`inbox-data ${page ? i < 7 ? "hidden" : "" : i < 7 ? "" : "hidden" }`} key={i}>
-                            <InboxNotificationContent data={data} ids={i} />
+
                         </li>
                     ))}
+                    {/*<li className={`inbox-data`}></li>*/}
+                    {/*<InboxNotificationContent  />*/}
                 </ul>
                 <NotificationPagination />
             </div>

@@ -2,7 +2,7 @@ export const InboxNotificationData = [
     {
         id: 1,
         image: "1.jpg",
-        name: "Marvin McKinney",
+        name: "Berry Numbi",
         color: "primary",
         message: "New comments on MSR2023 draft presentation -",
         subMessage: "craft beer labore wes anderson cred nesciunt sapiente ea proident...",
@@ -18,7 +18,7 @@ export const InboxNotificationData = [
     {
         id: 2,
         image: "2.jpg",
-        name: "Brooklyn Simmons",
+        name: "Josué Nvangu",
         color: "primary",
         message: "Confirm your booking id -",
         subMessage: "Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.",
@@ -35,7 +35,7 @@ export const InboxNotificationData = [
         id: 3,
         // shortName: "EH",
         image: "3.jpg",
-        name: "Esther Howard",
+        name: "Lydia Saku",
         color: "primary",
         message: "Confirm your booking id -",
         subMessage: "craft beer labore wes anderson cred nesciunt sapiente ea proident...",
@@ -52,7 +52,7 @@ export const InboxNotificationData = [
         id: 4,
         // shortName: "CW",
         image: "18.jpg",
-        name: "Cameron Williamson",
+        name: "Rodriguez Monga",
         color: "primary",
         message: "Very fiction Link -",
         subMessage: "Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.",
@@ -62,7 +62,7 @@ export const InboxNotificationData = [
     {
         id: 5,
         image: "19.jpg",
-        name: "Ronald Richards",
+        name: "Joyce Mishika",
         color: "primary",
         message: "Confirm your booking id -",
         subMessage: "craft beer labore wes anderson cred nesciunt sapiente ea proident - Samsa was a travelling",
@@ -78,7 +78,7 @@ export const InboxNotificationData = [
     {
         id: 6,
         image: "20.jpg",
-        name: "Darlene Robertson",
+        name: "Megan Madia",
         color: "primary",
         message: "Confirm your booking id -",
         subMessage: "Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda ...",
@@ -93,8 +93,8 @@ export const InboxNotificationData = [
     },
     {
         id: 7,
-        image: "12.png",
-        name: "Jacob Jones",
+        image: "20.jpg",
+        name: "Megan Madia",
         color: "primary",
         message: "Welcome to our new office -",
         subMessage: "craft beer labore wes anderson cred nesciunt sapiente ea proident...",
@@ -225,16 +225,16 @@ export const NotificationNavTabs = [
         icon: "mail",
         id: "1",
     },
-    {
-        title: "Groupe",
-        icon: "tread",
-        id: "2",
-    },
-    {
-        title: "Broadcast",
-        icon: "goal",
-        id: "3",
-    },
+    // {
+    //     title: "Groupe",
+    //     icon: "tread",
+    //     id: "2",
+    // },
+    // {
+    //     title: "Broadcast",
+    //     icon: "goal",
+    //     id: "3",
+    // },
 ];
 
 export const DropMenuData = [

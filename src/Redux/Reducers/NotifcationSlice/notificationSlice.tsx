@@ -2,7 +2,6 @@ import {InboxNotificationData} from "@/Data/Application/Notifications";
 import {InitialStateType} from '@/Types/Notifications/NotificationType';
 import {createSlice} from "@reduxjs/toolkit";
 
-
 const initialState: InitialStateType = {
     modal : false,
     composeNotification : false,

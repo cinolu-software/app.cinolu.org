@@ -23,8 +23,8 @@ const NotificationRightSide: React.FC<NotificationBoxNavContentType> = () => {
                     <NotificationHeader navId={navId} setNavId={setNavId} />
                     <TabContent  activeTab={navId} id="notifications-pills-tabContent">
                        <InboxContent />
-                       <SentContent />
-                       <StarredContent/>
+                       {/*<SentContent />*/}
+                       {/*<StarredContent/>*/}
                     </TabContent> 
                 </Card>
                 <InterviewNotification />

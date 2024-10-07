@@ -18,4 +18,4 @@ const Notifications = () => {
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
 
-export default Notifications
+export default Notifications;

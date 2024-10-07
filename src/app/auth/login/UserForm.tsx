@@ -32,7 +32,9 @@ const UserForm = () => {
         };
 
         try {
+            setLoading(true);
             await dispatch(login(payload)).unwrap();
+            setLoading(false);
         } catch (error) {
             toast.error(
                 <p className="text-white tx-16 mb-0">{error as string}</p>,
