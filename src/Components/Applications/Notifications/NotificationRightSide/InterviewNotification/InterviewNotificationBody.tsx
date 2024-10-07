@@ -5,10 +5,9 @@ import { ChevronDown} from "react-feather";
 import { Button} from "reactstrap";
 import InboxOption from './InboxOption';
 import UserFooter from './UserFooter';
-import UserNotificationBody from './UserNotificationBody'
+import UserNotificationBody from './UserNotificationBody';
 
 const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:NotificationPropsType, ref:LegacyRef<HTMLDivElement> | undefined) => {
-
 
     return (
         <div ref={ref} >
@@ -33,6 +32,7 @@ const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:Notificat
             </div>
         </div>
     );
+    
 });
 
 export default InterviewNotificationBody

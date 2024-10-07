@@ -22,14 +22,6 @@ const InboxContent = () => {
     return (
         <TabPane tabId="1" >
             <div className="mail-body-wrapper">
-                {/* <ul>
-                    {inboxNotification.map((data, i) => (
-                        <li className={`inbox-data ${page ? i < 7 ? "hidden" : "" : i < 7 ? "" : "hidden" }`} key={i}>
-                            <InboxNotificationContent data={data} ids={i} />
-                        </li>
-                    ))}
-                </ul> */}
-
                 <ul>
                     {usersData?.map((user)=>(
                         <li className="inbox-data" key={user.id}>

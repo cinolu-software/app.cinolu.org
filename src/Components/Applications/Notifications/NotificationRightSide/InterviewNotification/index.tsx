@@ -6,6 +6,7 @@ import InterviewNotificationHeader from "./InterviewNotificationHeader";
 import InterviewNotificationBody from "./InterviewNotificationBody";
 
 const InterviewNotification = () => {
+    
     const { interviewNotification } = useAppSelector(state => state.notifications)
     const componentRef = useRef<HTMLDivElement | null>(null);
 
