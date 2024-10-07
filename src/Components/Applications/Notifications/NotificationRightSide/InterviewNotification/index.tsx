@@ -15,7 +15,6 @@ const InterviewNotification = () => {
     });
 
 
-
     return (
         <Card className={`email-body email-read ${interviewNotification ? "show" : "hide"}`}>
             <InterviewNotificationHeader />

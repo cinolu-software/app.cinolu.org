@@ -9,7 +9,8 @@ const initialState: InitialStateType = {
     page : false,
     interviewNotification : false,
     inboxNotification : InboxNotificationData,
-    notificationValidation : false
+    notificationValidation : false,
+    selectedUser: null
 };
 
 const NotificationBoxSlice = createSlice({
@@ -28,6 +29,10 @@ const NotificationBoxSlice = createSlice({
         handleInterview: (state, action) => {
             state.interviewNotification = action.payload
         },
+        setSelectedUser: (state, action) => {
+            state.selectedUser = action.payload;
+        }
+        ,
         setPage : (state, action) => {
             state.page = action.payload
         },
@@ -63,6 +68,6 @@ const NotificationBoxSlice = createSlice({
     }
 })
 
-export const { setModal, setComposeNotification, setPage, handleEnvelope, handleInterview, removeItems, addToFavorites, removeFromFavorite, setNotificationValidation, addNewNotifaction } = NotificationBoxSlice.actions;
+export const { setModal, setComposeNotification, setPage, handleEnvelope, handleInterview, removeItems, addToFavorites, removeFromFavorite, setNotificationValidation, addNewNotifaction, setSelectedUser } = NotificationBoxSlice.actions;
 
 export default NotificationBoxSlice.reducer

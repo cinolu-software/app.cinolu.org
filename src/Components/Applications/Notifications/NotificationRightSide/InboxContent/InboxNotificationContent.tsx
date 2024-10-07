@@ -3,7 +3,7 @@ import {useEffect} from "react";
 import {fetchUsers} from "@/Redux/Reducers/userSlice/UserSlice";
 import { ImagePath } from '@/Constant';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
-import { addToFavorites , handleEnvelope, handleInterview, removeItems} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
+import {  handleInterview, setSelectedUser} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import { CommonDataType} from "@/Types/Notifications/NotificationType";
 import { Badge } from "reactstrap";
 
@@ -13,11 +13,11 @@ const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
 
     const {faIcon} = useAppSelector(state => state.notifications);
     const dispatch = useAppDispatch();
-    const {usersData, status, error} = useAppSelector(state => state.users);
 
 
     const handleValue = ()=> {
-        dispatch(handleInterview(true))
+        dispatch(setSelectedUser(data));
+        dispatch(handleInterview(true));
     }
 
     return (
