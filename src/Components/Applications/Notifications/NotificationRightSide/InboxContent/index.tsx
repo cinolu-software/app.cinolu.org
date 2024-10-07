@@ -11,15 +11,16 @@ const InboxContent = () => {
         <TabPane tabId="1" >
             <div className="mail-body-wrapper">
                 <ul>
-                    {inboxNotification.map((data, i) => (
-                        <li className={`inbox-data ${page ? i < 7 ? "hidden" : "" : i < 7 ? "" : "hidden" }`} key={i}>
+                    {/*{inboxNotification.map((data, i) => (*/}
 
-                        </li>
-                    ))}
+                    {/*))}*/}
+                    <li className={`inbox-data `}>
+                        <InboxNotificationContent />
+                    </li>
                     {/*<li className={`inbox-data`}></li>*/}
                     {/*<InboxNotificationContent  />*/}
                 </ul>
-                <NotificationPagination />
+                <NotificationPagination/>
             </div>
         </TabPane>
     );
