@@ -5,21 +5,16 @@ import { ImagePath } from '@/Constant';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { addToFavorites , handleEnvelope, handleInterview, removeItems} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import { CommonDataType} from "@/Types/Notifications/NotificationType";
-import {Badge, Input, Label} from 'reactstrap';
 
 
 
-const InboxNotificationContent: React.FC<CommonDataType> = () => {
+const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
 
     const {faIcon} = useAppSelector(state => state.notifications);
     const dispatch = useAppDispatch();
     const {usersData, status, error} = useAppSelector(state => state.users);
 
-    useEffect(() => {
-        if (status === 'idle') {
-            dispatch(fetchUsers());
-        }
-    }, [status, dispatch]);
+
 
 
     const handleValue = ()=> {
@@ -30,25 +25,14 @@ const InboxNotificationContent: React.FC<CommonDataType> = () => {
         dispatch(removeItems(id));
     }
 
-    if (status === 'loading') {
-        return <div>Chargement des utilisateurs...</div>;
-    }
-
-    if (error) {
-        return <div>Erreur : {error}</div>;
-    }
-
     return (
         <>
-            {
-                usersData.map( user => (
-                    <div key={user.id} className={'inbox-user'}>
-                        <div className={'rouded-border'}>
-                            {<img  src={`${ImagePath}/user/20.jpg}`} alt={user.name}/>}
-                        </div>
-                    </div>
-                ))
-            }
+            <div className={'inbox-user'}>
+                <div className="rounded-border">
+                    {<img src={`${ImagePath}/user/20.jpg}`} alt={data.name}/>}
+                </div>
+                <p>{data.name}</p>
+            </div>
 
             {/*<div className="inbox-user">*/}
             {/*    <div className="rounded-border">*/}
