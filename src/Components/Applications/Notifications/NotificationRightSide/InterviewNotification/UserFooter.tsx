@@ -4,9 +4,11 @@ import DownloadLink from "react-download-link";
 import SimpleMdeReact from "react-simplemde-editor";
 
 const UserFooter = () => {
+
     const mdeEditorText = `Enter text in the area on the left. For more info, click the ? (help) icon in the menu.`;
 
     return (
+        
         <div className="user-footer">
             <div>
                 <SVG iconId="attchment" />
@@ -31,6 +33,7 @@ const UserFooter = () => {
             </div>
         </div>
     );
+
 };
 
 export default UserFooter;

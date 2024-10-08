@@ -7,12 +7,12 @@ import InboxOption from './InboxOption';
 import UserFooter from './UserFooter';
 import UserNotificationBody from './UserNotificationBody';
 import { useAppSelector } from '@/Redux/Hooks';
+import FormInterview from './FormInterview';
 
 const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:NotificationPropsType, ref:LegacyRef<HTMLDivElement> | undefined) => {
 
     const { selectedUser } = useAppSelector(state=>state.notifications);
 
-    console.log(selectedUser);
 
     return (
         <div ref={ref} >
@@ -28,8 +28,7 @@ const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:Notificat
                             </div>
                         </div>
                     </div>
-                    {/* <UserNotificationBody /> */}
-                    <UserFooter />
+                    <FormInterview/>
                     <div className="send-btn">
                         <Button color="primary">{Send}<i className="fa fa-paper-plane" /></Button>
                     </div>
