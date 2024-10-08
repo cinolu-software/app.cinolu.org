@@ -10,7 +10,12 @@ const initialState: InitialStateType = {
     interviewNotification : false,
     inboxNotification : InboxNotificationData,
     notificationValidation : false,
-    selectedUser: null
+    selectedUser: null,
+    formValue : {
+        title: "",
+        message: '',
+        attachment: ''
+    }
 };
 
 const NotificationBoxSlice = createSlice({
@@ -31,8 +36,10 @@ const NotificationBoxSlice = createSlice({
         },
         setSelectedUser: (state, action) => {
             state.selectedUser = action.payload;
-        }
-        ,
+        },
+        setFormValue: (state, action)=> {
+            state.formValue[action.payload.name] = action.payload.value;
+        },
         setPage : (state, action) => {
             state.page = action.payload
         },

@@ -8,7 +8,7 @@ import { useAppDispatch } from "@/Redux/Hooks";
 const InterviewAttachment = () => {
 
     const [files, setFiles] = useState<ExtFile[]>([]);
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     
     const updateFiles = (incomingFiles: ExtFile[]) => {
       setFiles(incomingFiles);
@@ -30,7 +30,6 @@ const InterviewAttachment = () => {
             <div className="dz-message needsclick">
               <SVG iconId="file-upload1" />
               <h5>{'Joindre un fichier'}</h5>
-              {/* <span className="note needsclick">Joindre un fichier</span> */}
             </div>
           )}
         </Dropzone>

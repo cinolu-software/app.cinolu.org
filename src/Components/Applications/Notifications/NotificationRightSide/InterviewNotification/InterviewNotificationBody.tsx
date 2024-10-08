@@ -13,7 +13,6 @@ const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:Notificat
 
     const { selectedUser } = useAppSelector(state=>state.notifications);
 
-
     return (
         <div ref={ref} >
             <div className="mail-body-wrapper">

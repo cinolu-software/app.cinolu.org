@@ -6,7 +6,8 @@ export interface InitialStateType {
     page?: boolean;
     inboxNotification: InboxNotificationType[];
     notificationValidation: boolean;
-    selectedUser: null;
+    selectedUser: any;
+    formValue: any;
 }
 
 export interface InboxNotificationType {
