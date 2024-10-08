@@ -1,6 +1,8 @@
 import {InboxNotificationData} from "@/Data/Application/Notifications";
 import {InitialStateType} from '@/Types/Notifications/NotificationType';
 import {createSlice} from "@reduxjs/toolkit";
+import { setTabId } from "../AddProductSlice";
+
 
 const initialState: InitialStateType = {
     modal : false,
@@ -15,7 +17,9 @@ const initialState: InitialStateType = {
         title: "",
         message: '',
         attachment: ''
-    }
+    },
+    navId: 1,
+    tabId: 1,
 };
 
 const NotificationBoxSlice = createSlice({
@@ -39,6 +43,12 @@ const NotificationBoxSlice = createSlice({
         },
         setFormValue: (state, action)=> {
             state.formValue[action.payload.name] = action.payload.value;
+        },
+        setNavId: (state, action)=>{
+            state.navId = action.payload;
+        },
+        setTabId: (state, action)=>{
+            state.tabId = action.payload;
         },
         setPage : (state, action) => {
             state.page = action.payload
@@ -75,6 +85,6 @@ const NotificationBoxSlice = createSlice({
     }
 })
 
-export const { setModal, setComposeNotification, setPage, handleEnvelope, handleInterview, removeItems, addToFavorites, removeFromFavorite, setNotificationValidation, addNewNotifaction, setSelectedUser } = NotificationBoxSlice.actions;
+export const { setModal, setComposeNotification, setPage, handleEnvelope, handleInterview, removeItems, addToFavorites, removeFromFavorite, setNotificationValidation, addNewNotifaction, setSelectedUser, setFormValue, setNavId } = NotificationBoxSlice.actions;
 
 export default NotificationBoxSlice.reducer

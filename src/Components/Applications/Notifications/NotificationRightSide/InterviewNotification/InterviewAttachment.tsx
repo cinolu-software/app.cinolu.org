@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Dropzone, ExtFile, FileMosaic } from "@dropzone-ui/react";
-import { setFormValue } from "@/Redux/Reducers/AddProductSlice";
+import {setFormValue} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import SVG from "@/CommonComponent/SVG";
 import { DragFilesHere } from "@/Constant";
 import { useAppDispatch } from "@/Redux/Hooks";
+
 
 const InterviewAttachment = () => {
 
@@ -21,7 +22,6 @@ const InterviewAttachment = () => {
   
     return (
       <div className="product-upload">
-        
         <Dropzone onChange={(files)=>updateFiles(files)} value={files} maxFiles={1} header={false} footer={false} minHeight="80px" name="fileName1">
           {files.map((file: ExtFile) => (
             <FileMosaic key={file.id} {...file} onDelete={removeFile} info={true} />

@@ -543,3 +543,24 @@ export const NotificationHeader = [
         tooltip: "Settings",
     },
 ];
+
+export const SendNotication = [
+    {
+        id: 1,
+        icon: "info",
+        title: "Information du programme",
+        detail:"Nom et Description",
+    },
+      {
+        id: 2,
+        icon: "calendar",
+        title: "Durée du programme",
+        detail: "date de début et de fin"
+      },
+      {
+        id: 3,
+        icon: "type",
+        title: "Type de programme",
+        detail: "Sélectionner le type de programme"
+      },
+]

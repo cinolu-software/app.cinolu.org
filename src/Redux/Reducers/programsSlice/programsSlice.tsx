@@ -171,7 +171,6 @@ const ProgramSlice = createSlice({
         setNavId: (state, action: PayloadAction<number>) => {
 
             state.navId = action.payload;
-
         },
 
         setTabId: (state, action: PayloadAction<number>) => {

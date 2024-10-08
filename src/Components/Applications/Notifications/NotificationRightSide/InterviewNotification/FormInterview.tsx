@@ -1,7 +1,4 @@
 import React from 'react'
-import SVG from "@/CommonComponent/SVG";
-import { ImagePath } from "@/Constant";
-import DownloadLink from "react-download-link";
 import SimpleMdeReact from "react-simplemde-editor";
 import InterviewAttachment from './InterviewAttachment';
 
