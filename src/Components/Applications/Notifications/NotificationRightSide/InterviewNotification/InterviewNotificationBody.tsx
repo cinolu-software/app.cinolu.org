@@ -28,11 +28,13 @@ const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:Notificat
                             </div>
                         </div>
                     </div>
-                    <NotificationStep/>
-                    <div className="send-btn">
-                        <Button color="primary">{Send}<i className="fa fa-paper-plane" /></Button>
-                    </div>
+                    {/*<div className="send-btn">*/}
+                    {/*    <Button color="primary">{Send}<i className="fa fa-paper-plane" /></Button>*/}
+                    {/*</div>*/}
                 </div>
+            </div>
+            <div className={'ms-3'}>
+                <NotificationStep/>
             </div>
         </div>
     );

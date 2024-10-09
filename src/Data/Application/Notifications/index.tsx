@@ -547,20 +547,20 @@ export const NotificationHeader = [
 export const SendNotication = [
     {
         id: 1,
-        icon: "info",
-        title: "Information du programme",
-        detail:"Nom et Description",
+        icon: "message",
+        title: "Créer la notification",
+        detail:"",
     },
       {
         id: 2,
-        icon: "calendar",
-        title: "Durée du programme",
-        detail: "date de début et de fin"
+        icon: "paperClip",
+        title: "Joindre un fichier",
+        detail: ""
       },
       {
         id: 3,
-        icon: "type",
-        title: "Type de programme",
-        detail: "Sélectionner le type de programme"
+        icon: "send",
+        title: "Envoyer la notification",
+        detail: ""
       },
 ]

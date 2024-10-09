@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import CommonButton from '../CommonButton';
 
 const StepThree = () => {
   return (
-    <div>StepThree</div>
+    <div>
+      
+    </div>
   )
 }
 

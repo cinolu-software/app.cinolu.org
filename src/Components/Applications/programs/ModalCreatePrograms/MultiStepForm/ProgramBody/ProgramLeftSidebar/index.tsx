@@ -23,7 +23,6 @@ const ProgramLeftSidebar = () => {
                             </div>
                             <div className="product-tab-content">
                                 <h5>{data.title}</h5>
-                                {/*<p>{data.detail}</p>*/}
                             </div>
                         </NavLink>
                     </NavItem>

@@ -18,6 +18,7 @@ const NotificationBoxContainer = () => {
             </div>
         </Container>
     );
+    
 }
 
 export default NotificationBoxContainer;

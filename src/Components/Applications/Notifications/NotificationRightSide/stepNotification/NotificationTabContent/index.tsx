@@ -29,7 +29,6 @@ const NotificationTabContent = () => {
 
         </Col>
 
-        <CommonButton />
     </>
   )
 }
