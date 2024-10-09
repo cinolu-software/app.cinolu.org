@@ -8,6 +8,7 @@ import UserFooter from './UserFooter';
 import UserNotificationBody from './UserNotificationBody';
 import { useAppSelector } from '@/Redux/Hooks';
 import FormInterview from './FormInterview';
+import NotificationStep from '../stepNotification';
 
 const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:NotificationPropsType, ref:LegacyRef<HTMLDivElement> | undefined) => {
 
@@ -27,7 +28,7 @@ const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:Notificat
                             </div>
                         </div>
                     </div>
-                    <FormInterview/>
+                    <NotificationStep/>
                     <div className="send-btn">
                         <Button color="primary">{Send}<i className="fa fa-paper-plane" /></Button>
                     </div>

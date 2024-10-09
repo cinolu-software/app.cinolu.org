@@ -14,9 +14,6 @@ const FormInterview = () => {
                     <SimpleMdeReact id="editor_container"  options={{ autofocus: true, spellChecker: false }} />
                 </div>
             </div>
-            <div className='my-3'>
-                <InterviewAttachment/>
-            </div>
         </div>
     );
 }

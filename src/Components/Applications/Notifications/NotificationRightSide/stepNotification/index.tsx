@@ -2,7 +2,7 @@ import { Row } from "reactstrap"
 import NotificationLeftSidebar from "./NotificationLeftSidebar";
 import NotificationTabContent from "./NotificationTabContent";
 
-const NotificationBody = () => {
+const NotificationStep = () => {
 
   return (
     <Row className="g-xl-5 g-3">
@@ -13,4 +13,4 @@ const NotificationBody = () => {
   
 }
 
-export default NotificationBody
+export default NotificationStep
