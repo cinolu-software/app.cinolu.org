@@ -10,6 +10,8 @@ export interface InitialStateType {
     tabId: number,
     selectedUser: any;
     formValue: any;
+    loading: boolean;
+    error: any;
 }
 
 export interface InboxNotificationType {

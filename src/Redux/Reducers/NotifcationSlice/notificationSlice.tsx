@@ -1,51 +1,72 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { InboxNotificationData } from "@/Data/Application/Notifications";
-import { InitialStateType } from '@/Types/Notifications/NotificationType';
+
+interface NotificationPayload {
+    title: string;
+    message: string;
+    recipients: string[];
+    attachment?: File | null;
+}
+
+interface NotificationResponse {
+    data: {
+        id: string;
+        title: string;
+        message: string;
+        recipients ?: Array<{ id: string }>;
+        sender: { id: string };
+        created_at: string;
+        updated_at: string;
+        is_read: boolean;
+        attachments?: Array<{ name: string; id: string }>;
+    };
+}
 
 
-export const createNotification = createAsyncThunk(
+export const createNotification = createAsyncThunk<NotificationResponse, NotificationPayload>(
     'NotificationBox/sendNotification',
-    async ({ title, message, recipients }, { rejectWithValue }) => {
+    async ({ title, message, recipients, attachment }, { rejectWithValue }) => {
         try {
-            const response = await axios.post('/notifications', {
+
+            const response = await axios.post<NotificationResponse>('/notifications', {
                 title,
                 message,
                 recipients
             });
-            return response.data;
-        } catch (error) {
+
+            const notificationData = response.data;
+            const notificationId = notificationData.data.id;
+
+
+            if (attachment) {
+                const formData = new FormData();
+                formData.append('attachment', attachment);
+
+                await axios.post(`/notifications/attachment/${notificationId}`, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+            }
+
+
+            await axios.post(`/notifications/send/${notificationId}`);
+
+            return notificationData;
+        } catch (error: any) {
             return rejectWithValue(error.response.data);
         }
     }
 );
 
 
-export const uploadAttachment = createAsyncThunk(
-    'NotificationBox/uploadAttachment',
-    async ({ notificationId, file }, { rejectWithValue }) => {
-        try {
-            const formData = new FormData();
-            formData.append('attachment', file);
-            const response = await axios.post(`/notifications/attachment/${notificationId}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response.data);
-        }
-    }
-);
-
-const initialState: InitialStateType = {
+const initialState = {
     modal: false,
     composeNotification: false,
     faIcon: false,
     page: false,
     interviewNotification: false,
-    inboxNotification: InboxNotificationData,
+    inboxNotification: [],
     notificationValidation: false,
     selectedUser: null,
     formValue: {
@@ -69,14 +90,11 @@ const NotificationBoxSlice = createSlice({
         setComposeNotification: (state, action) => {
             state.composeNotification = action.payload;
         },
-        handleEnvelope: (state, action) => {
-            state.faIcon = action.payload;
-        },
-        handleInterview: (state, action) => {
-            state.interviewNotification = action.payload;
-        },
         setSelectedUser: (state, action) => {
             state.selectedUser = action.payload;
+        },
+        handleInterview:(state, action)=>{
+            state.interviewNotification = action.payload
         },
         setFormValue: (state, action) => {
             state.formValue[action.payload.name] = action.payload.value;
@@ -86,39 +104,7 @@ const NotificationBoxSlice = createSlice({
         },
         setTabId: (state, action) => {
             state.tabId = action.payload;
-        },
-        setPage: (state, action) => {
-            state.page = action.payload;
-        },
-        removeItems: (state, action) => {
-            state.inboxNotification = state.inboxNotification?.filter((data) => data.id !== action.payload);
-        },
-        addToFavorites: (state, action) => {
-            state.inboxNotification = state.inboxNotification.map((item) =>
-                item.id === action.payload.id ? { ...item, star: true } : item
-            );
-        },
-        removeFromFavorite: (state, action) => {
-            state.inboxNotification = state.inboxNotification.map((data) =>
-                data.id === action.payload.id ? { ...data, star: false } : data
-            );
-        },
-        setNotificationValidation: (state, action) => {
-            state.notificationValidation = action.payload;
-        },
-        addNewNotifaction: (state, action) => {
-            const notificationTemp = {
-                id: state.inboxNotification.length + 1,
-                star: false,
-                image: "14.png",
-                color: "primary",
-                name: action.payload.userNotification,
-                message: action.payload.subject,
-                subMessage: "craft beer labore wes anderson cred nesciunt sapiente ea proident...",
-                time: '7:50 AM'
-            };
-            state.inboxNotification = [notificationTemp, ...state.inboxNotification];
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -128,21 +114,8 @@ const NotificationBoxSlice = createSlice({
             })
             .addCase(createNotification.fulfilled, (state, action) => {
                 state.loading = false;
-                // La notification a été envoyée avec succès
             })
             .addCase(createNotification.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload;
-            })
-            .addCase(uploadAttachment.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(uploadAttachment.fulfilled, (state, action) => {
-                state.loading = false;
-                // Le fichier joint a été envoyé avec succès
-            })
-            .addCase(uploadAttachment.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload;
             });
@@ -151,19 +124,12 @@ const NotificationBoxSlice = createSlice({
 
 export const {
     setModal,
-    setTabId,
-    setComposeNotification,
-    setPage,
-    handleEnvelope,
     handleInterview,
-    removeItems,
-    addToFavorites,
-    removeFromFavorite,
-    setNotificationValidation,
-    addNewNotifaction,
+    setComposeNotification,
     setSelectedUser,
     setFormValue,
-    setNavId
+    setNavId,
+    setTabId
 } = NotificationBoxSlice.actions;
 
 export default NotificationBoxSlice.reducer;

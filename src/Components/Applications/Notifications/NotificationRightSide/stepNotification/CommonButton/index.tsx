@@ -4,19 +4,19 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Button } from "reactstrap";
 import { setNavId } from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 
-const CommonButton = ({ onClick, disabled }) => {
+const CommonButton = () => {
 
-    const { navId, form } = useAppSelector((state) => state.notifications);
+    const { navId, formValue } = useAppSelector((state) => state.notifications);
     const dispatch = useAppDispatch();
 
 
-    const handleFormValue = () => {
-        if (navId === 1 && form.title && form.message) {
-            dispatch(setNavId(2));
-        } else if (navId === 2 && form.fileName1) {
-            dispatch(setNavId(3));
-        }
-    };
+    // const handleFormValue = () => {
+    //     if (navId === 1 && formValue.title && formValue.message) {
+    //         dispatch(setNavId(2));
+    //     } else if (navId === 2 && formValue.fileName1) {
+    //         dispatch(setNavId(3));
+    //     }
+    // };
 
 
     // const handlePrevious = () => {
@@ -37,7 +37,7 @@ const CommonButton = ({ onClick, disabled }) => {
             {/*    </Button>*/}
             {/*)}*/}
 
-            <Button color="primary" className="" disabled={disabled} onClick={onClick}>
+            <Button color="primary" className="" >
                 <div className="d-flex align-items-center gap-sm-2 gap-1">
                     {"Envoyer la notification"}
                     <SVG iconId="send-icon" />

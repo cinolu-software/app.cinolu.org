@@ -35,7 +35,6 @@ const InterviewNotificationBody = React.forwardRef(({handlerPrintData}:Notificat
             </div>
         </div>
     );
-    
 });
 
 export default InterviewNotificationBody

@@ -19,7 +19,6 @@ const InterviewAttachment = () => {
       setFiles(files.filter((x: ExtFile) => x.id !== id));
     };
 
-    console.log(files)
   
     return (
       <div className="product-upload ">
