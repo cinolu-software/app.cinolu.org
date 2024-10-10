@@ -28,9 +28,9 @@ export const MenuList: MenuItem [] | undefined = [
                 lanClass: "lan-3",
                 active: false,
                 children: [
-                    // {path: "/users/admins", title: "Admin", type: "link", lanClass: "lan-5"},
+                    {path: "/users/admins", title: "Admin", type: "link", lanClass: "lan-5"},
                     {path: "/users/staff", title: "Staff", type: "link", lanClass: "lan-6"},
-                    // {path: "/users/coach", title: "Coach", type: "link", lanClass: "lan-6"},
+                    {path: "/users/coach", title: "Coach", type: "link", lanClass: "lan-6"},
                 ]
             },
             {

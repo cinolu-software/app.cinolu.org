@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios, { apiBaseUrl } from "@/services/axios";
+import axiosInstance , { apiBaseUrl } from "@/services/axios";
 import { InitialStateRoleType, TransformedRoleType, RoleType, CreateRole } from "@/Types/AdminOptions/Roles/RoleType";
 import { RootState } from "@/Redux/Store";
 
@@ -27,7 +27,7 @@ const transformRole = (roles: RoleType[]): TransformedRoleType[] => {
 export const fetchRole = createAsyncThunk<{ original: RoleType[], transformed: TransformedRoleType[] }>(
 
     'roles/fetchRole', async () => {
-        const response = await axios.get<{ data: RoleType[] }>(`${apiBaseUrl}/roles`);
+        const response = await axiosInstance.get<{ data: RoleType[] }>(`${apiBaseUrl}/roles`);
         const originalRoles = response.data.data;
         const transformedRoles = transformRole(originalRoles);
         return { original: originalRoles, transformed: transformedRoles };
@@ -39,7 +39,7 @@ export const fetchRole = createAsyncThunk<{ original: RoleType[], transformed: T
 export const createRole = createAsyncThunk<RoleType, CreateRole>(
     'roles/createRole', async (newRole, { rejectWithValue }) => {
         try {
-            const response = await axios.post<{ data: RoleType }>(`${apiBaseUrl}/roles`, newRole);
+            const response = await axiosInstance.post<{ data: RoleType }>(`${apiBaseUrl}/roles`, newRole);
             return response.data.data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -50,7 +50,7 @@ export const createRole = createAsyncThunk<RoleType, CreateRole>(
 export const updateRole = createAsyncThunk<RoleType, { id: number, name: string }>(
     'roles/updateRole', async (updatedRole, { rejectWithValue }) => {
         try {
-            const response = await axios.patch<{ data: RoleType }>(`${apiBaseUrl}/roles/${updatedRole.id}`, { name: updatedRole.name });
+            const response = await axiosInstance.patch<{ data: RoleType }>(`${apiBaseUrl}/roles/${updatedRole.id}`, { name: updatedRole.name });
             return response.data.data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -61,7 +61,7 @@ export const updateRole = createAsyncThunk<RoleType, { id: number, name: string 
 export const deleteRole = createAsyncThunk<number, number>(
     'roles/deleteRole', async (roleId, { rejectWithValue }) => {
         try {
-            await axios.delete(`${apiBaseUrl}/roles/${roleId}`);
+            await axiosInstance.delete(`${apiBaseUrl}/roles/${roleId}`);
             return roleId;
         } catch (error: any) {
             return rejectWithValue(error.response.data);

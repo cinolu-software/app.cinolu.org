@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import axiosInstance, {apiBaseUrl} from "@/services/axios";
 
 interface NotificationPayload {
     title: string;
@@ -28,7 +28,7 @@ export const createNotification = createAsyncThunk<NotificationResponse, Notific
     async ({ title, message, recipients, attachment }, { rejectWithValue }) => {
         try {
 
-            const response = await axios.post<NotificationResponse>('/notifications', {
+            const response = await axiosInstance.post<NotificationResponse>('/notifications', {
                 title,
                 message,
                 recipients
@@ -42,15 +42,14 @@ export const createNotification = createAsyncThunk<NotificationResponse, Notific
                 const formData = new FormData();
                 formData.append('attachment', attachment);
 
-                await axios.post(`/notifications/attachment/${notificationId}`, formData, {
+                await axiosInstance.post(`/notifications/attachment/${notificationId}`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
             }
 
-
-            await axios.post(`/notifications/send/${notificationId}`);
+            await axiosInstance.post(`/notifications/send/${notificationId}`);
 
             return notificationData;
         } catch (error: any) {

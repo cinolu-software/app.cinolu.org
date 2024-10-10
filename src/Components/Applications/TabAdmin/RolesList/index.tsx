@@ -1,5 +1,4 @@
 import React, { useMemo, useState, useEffect } from "react";
-
 import { AppDispatch } from "@/Redux/Store";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
@@ -59,7 +58,6 @@ const RoleListContainer = () => {
       </Row>
     </Container>
   );
-
 };
 
 export default RoleListContainer;
