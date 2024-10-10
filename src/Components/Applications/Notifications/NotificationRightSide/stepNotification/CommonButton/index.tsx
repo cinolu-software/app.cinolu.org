@@ -1,48 +1,49 @@
+import React from 'react';
 import SVG from "@/CommonComponent/SVG";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setNavId, setTabId } from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import { Button } from "reactstrap";
+import { setNavId } from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 
-const CommonButton = () => {
-    
-    const { navId, formValue, tabId } = useAppSelector((state) => state.notifications);
+const CommonButton = ({ onClick, disabled }) => {
+
+    const { navId, form } = useAppSelector((state) => state.notifications);
     const dispatch = useAppDispatch();
 
+
     const handleFormValue = () => {
-        // if (navId === 1 && formValue?.name !== "" && formValue?.description) {
-        //     dispatch(setNavId(2));
-        // } else if (navId === 2 && formValue?.start_at !== "" && formValue?.end_at) {
-        //     dispatch(setNavId(3));
-        // } else if (navId === 3 && formValue?.types && formValue?.types.length > 0) {
-        //     dispatch(setNavId(4));
-        // }
+        if (navId === 1 && form.title && form.message) {
+            dispatch(setNavId(2));
+        } else if (navId === 2 && form.fileName1) {
+            dispatch(setNavId(3));
+        }
     };
 
-    const handlePrevious = () => {
-        // if (navId > 1) {
-        //     if (tabId > 1) {
-        //         dispatch(setTabId(tabId - 1));
-        //     } else {
-        //         dispatch(setNavId(navId - 1));
-        //     }
-        // }
-    };
+
+    // const handlePrevious = () => {
+    //     if (navId > 1) {
+    //         dispatch(setNavId(navId - 1));
+    //     }
+    // };
 
     return (
         <div className="product-buttons border-0">
-            {navId > 1 && (
-                <Button color="transparent" onClick={handlePrevious}>
-                    <div className="d-flex align-items-center gap-sm-2 gap-1">
-                        <SVG iconId="back-arrow" />{"Précedent"}
-                    </div>
-                </Button>
-            )}
-            <Button color="transparent" className="ms-2" onClick={handleFormValue}>
+
+            {/*{navId > 1 && (*/}
+            {/*    <Button color="transparent" onClick={handlePrevious}>*/}
+            {/*        <div className="d-flex align-items-center gap-sm-2 gap-1">*/}
+            {/*            <SVG iconId="back-arrow" />*/}
+            {/*            {"Précedent"}*/}
+            {/*        </div>*/}
+            {/*    </Button>*/}
+            {/*)}*/}
+
+            <Button color="primary" className="" disabled={disabled} onClick={onClick}>
                 <div className="d-flex align-items-center gap-sm-2 gap-1">
-                    { "Suivant"}
-                    <SVG iconId="front-arrow" />
+                    {"Envoyer la notification"}
+                    <SVG iconId="send-icon" />
                 </div>
             </Button>
+
         </div>
     );
 };

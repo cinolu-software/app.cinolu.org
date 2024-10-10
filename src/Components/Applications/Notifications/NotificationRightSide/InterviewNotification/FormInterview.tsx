@@ -1,21 +1,46 @@
-import React from 'react'
+import React from 'react';
 import SimpleMdeReact from "react-simplemde-editor";
-import InterviewAttachment from './InterviewAttachment';
+import {Input, Label, Row, Col, Button} from "reactstrap";
+import SVG from "@/CommonComponent/SVG";
 
-const FormInterview = () => {
-
-    return (
-        <div className="user-body">
-            <div>
-                <input className='form-control mb-4' />
-            </div>
-            <div className="">
-                <div id="editor">
-                    <SimpleMdeReact id="editor_container"  options={{ autofocus: true, spellChecker: false }} />
-                </div>
-            </div>
-        </div>
-    );
+interface FormInterviewProps{
+    onTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onMessageChange: (value: string) => void;
+    saveToRedux: () => void;
 }
 
-export default FormInterview
+const FormInterview: React.FC<FormInterviewProps> = ({ onTitleChange, onMessageChange, saveToRedux }) => {
+
+
+    return (
+        <div className="user-body card-wrapper border rounded-3 me-4 mb-4">
+            <Row>
+                <Col md='12'>
+                    <Label>Le titre de la notification</Label>
+                    <Input className='form-control mb-4' onChange={onTitleChange} />
+                </Col>
+            </Row>
+            <Row>
+                <Col md='12'>
+                    <Label>Message</Label>
+                    <SimpleMdeReact
+                        onChange={onMessageChange}
+                    />
+                </Col>
+
+                <Col md={'6'} >
+                    <Button color="primary" className="btn-square"onClick={saveToRedux}>
+                        <div className="d-flex align-items-center gap-sm-2 gap-1">
+                            {"Sauvegarder la notification"}
+                            <SVG iconId="send-icon" />
+                        </div>
+                    </Button>
+                </Col>
+            </Row>
+        </div>
+    );
+};
+
+export default FormInterview;
+
+

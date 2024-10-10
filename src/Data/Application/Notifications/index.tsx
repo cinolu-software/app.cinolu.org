@@ -225,16 +225,16 @@ export const NotificationNavTabs = [
         icon: "mail",
         id: "1",
     },
-    // {
-    //     title: "Groupe",
-    //     icon: "tread",
-    //     id: "2",
-    // },
-    // {
-    //     title: "Broadcast",
-    //     icon: "goal",
-    //     id: "3",
-    // },
+    {
+        title: "Groupe",
+        icon: "tread",
+        id: "2",
+    },
+    {
+        title: "Broadcast",
+        icon: "goal",
+        id: "3",
+    },
 ];
 
 export const DropMenuData = [
@@ -551,16 +551,16 @@ export const SendNotication = [
         title: "Créer la notification",
         detail:"",
     },
-      {
-        id: 2,
-        icon: "paperClip",
-        title: "Joindre un fichier",
-        detail: ""
-      },
-      {
-        id: 3,
-        icon: "send",
-        title: "Envoyer la notification",
-        detail: ""
-      },
+  {
+    id: 2,
+    icon: "paperClip",
+    title: "Joindre un fichier",
+    detail: ""
+  },
+  {
+    id: 3,
+    icon: "send",
+    title: "Envoyer la notification",
+    detail: ""
+  },
 ]
