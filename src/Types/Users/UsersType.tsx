@@ -21,4 +21,8 @@ export interface InitialStateUserType{
     usersData : UserType [];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error : string | null;
+    isOpenModalCreateUser: boolean;
+    isOpenModalEditUser: boolean;
+    isOpenModalDeleteUser: boolean;
+    selectedUser: any
 }

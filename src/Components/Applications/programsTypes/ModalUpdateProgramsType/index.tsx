@@ -9,8 +9,6 @@ import { ProgramsTypeType } from "@/Types/Programs/ProgramsTypeType";
 const UpdateProgramTypeModal = () => {
     const dispatch = useAppDispatch();
     const { selectedProgramType, isOpenModalEditProgramType } = useAppSelector((state) => state.programsType);
-
-
     const [programType, setProgramType] = useState<ProgramsTypeType>({
         id: selectedProgramType?.id || 0,
         name: selectedProgramType?.name || '',
@@ -19,7 +17,6 @@ const UpdateProgramTypeModal = () => {
         updated_at: selectedProgramType?.updated_at || '',
         image: selectedProgramType?.image || ''
     });
-
     const nameRef = useRef(selectedProgramType?.name || '');
     const descriptionRef = useRef(selectedProgramType?.description || '');
 
@@ -118,6 +115,5 @@ const UpdateProgramTypeModal = () => {
         </Col>
     );
 };
-
 
 export default UpdateProgramTypeModal;

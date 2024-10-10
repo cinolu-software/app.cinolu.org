@@ -8,6 +8,8 @@ import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { CollapseFilterData } from "./CollapseFilterData";
 import { AdminListFilterHeader } from "./AdminListFilterHeader";
 
+
+
 const AdminListContainer = () => {
 
   const [filterText, setFilterText] = useState("");
