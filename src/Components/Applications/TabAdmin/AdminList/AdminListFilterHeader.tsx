@@ -1,13 +1,15 @@
 import { AddProduct } from "@/Constant";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFilterToggle } from "@/Redux/Reducers/userSlice/AdminSlice";
-import Link from "next/link";
 import { Filter } from "react-feather";
+import {Button} from "reactstrap";
+import {setModalCreateUser} from "@/Redux/Reducers/userSlice/UserSlice";
 
 export const AdminListFilterHeader = () => {
   
-  const { filterToggle } = useAppSelector((state) => state.product);
+  const { filterToggle } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
+  const {isOpenModalCreateUser} = useAppSelector((state)=>state.users)
 
   return (
     <div>
@@ -17,10 +19,11 @@ export const AdminListFilterHeader = () => {
           <i className={`icon-close filter-close ${filterToggle ? "show" : "hide"}`} />
         </a>
       </div>
-      <Link className="btn btn-primary" href={`/ecommerce/add_product`}>
+      <Button className="btn btn-primary" onClick={()=>dispatch(setModalCreateUser({isOpen: !isOpenModalCreateUser}))}>
         <i className="fa fa-plus" />
-        {AddProduct}
-      </Link>
+        {"Ajouter un utilisateur"}
+      </Button>
     </div>
+
   );
 };

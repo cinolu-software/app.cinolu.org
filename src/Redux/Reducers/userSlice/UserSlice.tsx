@@ -5,6 +5,7 @@ import { UserType, InitialStateUserType } from "@/Types/Users/UsersType";
 const initialState: InitialStateUserType = {
   usersData: [],
   status: 'idle',
+  filterToggle: false,
   error: null,
   isOpenModalCreateUser: false,
   isOpenModalEditUser: false,
@@ -64,6 +65,9 @@ const UsersSlice = createSlice({
       if (action.payload.user) {
         state.selectedUser = action.payload.user;
       }
+    },
+    setFilterToggle: (state)=>{
+      state.filterToggle = !state.filterToggle;
     }
   },
   extraReducers: (builder) => {
@@ -109,5 +113,5 @@ const UsersSlice = createSlice({
   },
 });
 
-export const { setModalCreateUser, setModalEditUser, setModalDeleteUser } = UsersSlice.actions;
+export const { setModalCreateUser, setModalEditUser, setModalDeleteUser, setFilterToggle } = UsersSlice.actions;
 export default UsersSlice.reducer;

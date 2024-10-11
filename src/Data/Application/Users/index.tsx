@@ -6,7 +6,6 @@ import {useDispatch} from "react-redux";
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
 import {setModalEditUser, setModalDeleteUser} from "@/Redux/Reducers/userSlice/UserSlice";
 
-
 const UsersListTableName: React.FC<{image: string; name: string}> = ({image, name}) => {
   return (
       <div className={'product-names my-2'}>
@@ -42,23 +41,23 @@ export const UsersListTableDataColumn = [
   {
     name: "Nom",
     cell: (row: UsersListTableColumnType)=> (
-        <UsersListTableName image={"default_program_image.png"} name={row.name} />
+        <UsersListTableName image={"avtar/avatar.jpg"} name={row.name} />
     ),
     sortable: true,
     grow: 2
   },
-    {
-        name: "Email",
-        selector: (row: UsersListTableColumnType) => row.email,
-        sortable: true,
-        grow: 2
-    },
-    {
-        name: "Rôle",
-        selector: (row: UsersListTableColumnType) => row?.role,
-        sortable: true,
-        grow: 1
-    },
+  {
+      name: "Email",
+      selector: (row: UsersListTableColumnType) => row.email,
+      sortable: true,
+      grow: 2
+  },
+  {
+      name: "Rôle",
+      selector: (row: UsersListTableColumnType) => row?.role,
+      sortable: true,
+      grow: 1
+  },
   {
     name: "Actions",
     cell: (row: UsersListTableColumnType) => (
@@ -67,8 +66,6 @@ export const UsersListTableDataColumn = [
     grow: 2
   }
 ]
-
-
 
 // export const UserListTableColumn = [
 //   {

@@ -7,6 +7,7 @@ import { UserType } from "@/Types/Users/UsersType";
 import {UsersListTableColumnType} from "@/Types/Users/UsersType";
 import {UsersListTableDataColumn} from "@/Data/Application/Users";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
+import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/AdminList/AdminListFilterHeader";
 
 const AdminListContainer: React.FC = () => {
 
@@ -48,8 +49,9 @@ const AdminListContainer: React.FC = () => {
           <Col sm="12">
             <Card>
               <CardBody>
-                <div className="list-user-header">
+                <div className="list-product-header">
                   <h5>Liste des Utilisateurs</h5>
+                  <AdminListFilterHeader/>
                 </div>
                 <div className="list-user">
                   <div className="table-responsive">

@@ -20,6 +20,7 @@ export interface UserType {
 export interface InitialStateUserType{
     usersData : UserType [];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    filterToggle: boolean,
     error : string | null;
     isOpenModalCreateUser: boolean;
     isOpenModalEditUser: boolean;
