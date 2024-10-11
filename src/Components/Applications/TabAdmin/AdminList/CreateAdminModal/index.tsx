@@ -5,10 +5,11 @@ import { createUser } from "@/Redux/Reducers/userSlice/UserSlice";
 import { Flip, toast } from "react-toastify";
 
 const CreateNewUserModal = () => {
+
     const dispatch = useAppDispatch();
     const isOpenModalCreateUser = useAppSelector(state => state.users.isOpenModalCreateUser);
 
-    // Initialisation de l'état pour stocker les informations de l'utilisateur à créer
+
     const [user, setUser] = useState({
         email: '',
         first_name: '',
@@ -16,21 +17,21 @@ const CreateNewUserModal = () => {
         name: '',
         phone_number: '',
         address: '',
-        roles: [''] // Assumer qu'un tableau vide pour commencer
+        roles: ['']
     });
 
-    // Handlers pour les changements des différents champs
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setUser(prevUser => ({ ...prevUser, [name]: value }));
     };
 
     const handleRolesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const roles = e.target.value.split(','); // On suppose que les rôles sont séparés par des virgules
+        const roles = e.target.value.split(',');
         setUser(prevUser => ({ ...prevUser, roles }));
     };
 
-    // Soumission du formulaire de création d'utilisateur
+
     const handleSubmit = async () => {
         await dispatch(createUser(user)).unwrap()
             .then(() => {

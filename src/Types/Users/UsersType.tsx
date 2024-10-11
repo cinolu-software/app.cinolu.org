@@ -3,18 +3,18 @@
 export interface UserType {
     id : number;
     email: string;
-    first_name: string;
+    first_name ?: string;
+    last_name ?: string;
     name: string;
-    last_name: string;
     password: string;
     phone_number: string;
     address: string;
-    token: string;
     google_image: string;
     profile: string;
     verified_at: string;
     created_at: string;
-    updated_at: string
+    updated_at: string;
+    role: string;
 }
 
 export interface InitialStateUserType{
@@ -26,3 +26,21 @@ export interface InitialStateUserType{
     isOpenModalDeleteUser: boolean;
     selectedUser: any
 }
+
+export interface CreateUserType {
+    email: string;
+    first_name ?: string;
+    last_name ?: string;
+    name: string;
+    password: string;
+    phone_number: string;
+    address: string;
+    roles : string [];
+}
+
+export interface StaticModalToggleProp {
+    staticModalToggle: ()=>void;
+}
+
+export interface UsersListTableColumnType extends UserType {}
+

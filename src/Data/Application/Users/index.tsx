@@ -1,3 +1,102 @@
+import React from 'react';
+import {Button} from 'reactstrap';
+import RatioImage from "@/CommonComponent/RatioImage";
+import {ImagePath} from "@/Constant";
+import {useDispatch} from "react-redux";
+import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
+import {setModalEditUser, setModalDeleteUser} from "@/Redux/Reducers/userSlice/UserSlice";
+
+
+const UsersListTableName: React.FC<{image: string; name: string}> = ({image, name}) => {
+  return (
+      <div className={'product-names my-2'}>
+        <div className={'light-product-box bg-img-cover'}>
+          <RatioImage src={`${ImagePath}/${image}`} alt={'image'} />
+        </div>
+        <p>{name}</p>
+      </div>
+  )
+}
+
+const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
+
+  const dispatch = useDispatch();
+
+  const handleEdit = () => {
+    dispatch(setModalEditUser({isOpen: true, user}));
+  }
+
+  const handleDelete = () => {
+    dispatch(setModalDeleteUser({isOpen: true, user}));
+  }
+
+  return (
+      <div className={'product-action'}>
+        <Button color={'primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
+        <Button color={'danger'} onClick={handleDelete}>Supprimer</Button>
+      </div>
+  )
+}
+
+export const UsersListTableDataColumn = [
+  {
+    name: "Nom",
+    cell: (row: UsersListTableColumnType)=> (
+        <UsersListTableName image={"default_program_image.png"} name={row.name} />
+    ),
+    sortable: true,
+    grow: 2
+  },
+    {
+        name: "Email",
+        selector: (row: UsersListTableColumnType) => row.email,
+        sortable: true,
+        grow: 2
+    },
+    {
+        name: "Rôle",
+        selector: (row: UsersListTableColumnType) => row?.role,
+        sortable: true,
+        grow: 1
+    },
+  {
+    name: "Actions",
+    cell: (row: UsersListTableColumnType) => (
+        <UsersListTableAction user={row}/>
+    ),
+    grow: 2
+  }
+]
+
+
+
+// export const UserListTableColumn = [
+//   {
+//     name: "Nom",
+//     selector: (row: UserType) => row.name,
+//     sortable: true,
+//   },
+//   {
+//     name: "Email",
+//     selector: (row: UserType) => row.email,
+//     sortable: true,
+//   },
+//   {
+//     name: "Rôle",
+//     selector: (row: UserType) => row.role,
+//     sortable: true,
+//   },
+//   {
+//     name: "Actions",
+//     cell: (row: UserType) => (
+//         <div>
+//           <button className="btn btn-primary me-2">Modifier</button>
+//           <button className="btn btn-danger">Supprimer</button>
+//         </div>
+//     ),
+//   },
+// ]
+
 export const UserProfileData = [
   {
     iconClass: "envelope",

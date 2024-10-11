@@ -49,7 +49,7 @@ const UsersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    // Reducers pour gérer l'ouverture/fermeture des modals
+
     setModalCreateUser: (state, action: PayloadAction<{ isOpen: boolean }>) => {
       state.isOpenModalCreateUser = action.payload.isOpen;
     },

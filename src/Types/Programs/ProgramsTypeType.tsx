@@ -1,5 +1,5 @@
 export interface ProgramsTypeType {
-    id: number; // Assurez-vous que id est obligatoire
+    id: number; 
     name?: string;
     description?: string;
     created_at?: string;

@@ -10,17 +10,14 @@ import DeleteProgramsModal from "./DeleteProgramsModal";
 import { ProgramsListTableDataColumn } from "@/Data/Application/ProgramsTypes";
 import { ProgramsListTypeTableColumnType } from "@/Types/Programs/ProgramsTypeType";
 import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";
-import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType"
+import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType";
 
 
 const ProgramsTypesListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState("");
-
     const dispatch = useDispatch<AppDispatch>();
-
     const status = useSelector(selectProgramTypeStatus);
-
     const transformedPrograms = useSelector(selectTransformedProgramDataType);
     const data = useSelector(selectOriginalProgramData);
 

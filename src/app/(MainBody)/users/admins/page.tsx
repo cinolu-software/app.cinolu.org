@@ -1,9 +1,8 @@
 'use client';
+import AdminListContainer from "@/Components/Applications/TabAdmin/AdminList";
+import React from 'react';
 
-
-const Page = () => {
-    return (
-        <div>Page</div>
-    )
+const Users = () => {
+    return <AdminListContainer/>
 }
-export default Page
+export default Users;

@@ -10,13 +10,11 @@ export const ProgramsTypesHeader = () => {
 
 
     return (
-
         <div>
             <Button className="btn btn-primary" onClick={() => dispatch(setModalCreateProgramTypes({ isOpen : !isOpenModalCreateProgramType}))}>
                 <i className="fa fa-plus" />
                 Ajouter un Type de Programme
             </Button>
         </div>
-
     );
 };
