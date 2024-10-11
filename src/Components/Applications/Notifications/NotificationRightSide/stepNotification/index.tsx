@@ -6,8 +6,8 @@ const NotificationStep = () => {
 
   return (
     <Row className="g-xl-5 g-3">
-        <NotificationLeftSidebar/>
-        <NotificationTabContent/>
+        <NotificationLeftSidebar />
+        <NotificationTabContent />
     </Row>
   )
   

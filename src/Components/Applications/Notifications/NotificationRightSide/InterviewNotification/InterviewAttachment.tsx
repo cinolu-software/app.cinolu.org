@@ -1,42 +1,62 @@
 import { useState } from "react";
 import { Dropzone, ExtFile, FileMosaic } from "@dropzone-ui/react";
-import {setFormValue} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
+import { setFormValue } from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import SVG from "@/CommonComponent/SVG";
 import { useAppDispatch } from "@/Redux/Hooks";
 
-
 const InterviewAttachment = () => {
-
     const [files, setFiles] = useState<ExtFile[]>([]);
     const dispatch = useAppDispatch();
-    
+
     const updateFiles = (incomingFiles: ExtFile[]) => {
-      setFiles(incomingFiles);
-      dispatch(setFormValue({name:"attachment",value:incomingFiles[0].file?.name}))
+
+        setFiles(incomingFiles);
+
+        if (incomingFiles.length > 0) {
+            dispatch(setFormValue({ name: "attachment", value: incomingFiles[0].file }));
+        } else {
+            dispatch(setFormValue({ name: "attachment", value: null }));
+        }
     };
-  
+
     const removeFile = (id: string | number | undefined) => {
-      setFiles(files.filter((x: ExtFile) => x.id !== id));
+        setFiles(files.filter((x: ExtFile) => x.id !== id));
+        dispatch(setFormValue({ name: "attachment", value: null }));
     };
 
-  
-    return (
-      <div className="product-upload ">
-        <div className="mt-3 pe-4">
-          <Dropzone onChange={(files)=>updateFiles(files)} value={files} maxFiles={1} header={false} footer={false} minHeight="80px" name="fileName1">
-            {files.map((file: ExtFile) => (
-              <FileMosaic key={file.id} {...file} onDelete={removeFile} info={true} />
-            ))}
-            {files.length === 0 && (
-              <div className="dz-message needsclick">
-                <SVG iconId="file-upload1" />
-                <h5>{'Joindre un fichier'}</h5>
-              </div>
-            )}
-          </Dropzone>
-        </div>
-      </div>
-    );
-}
+    console.log("files===>",files);
 
-export default InterviewAttachment
+    return (
+        <div className="product-upload">
+            <div className="mt-3 pe-4">
+                <Dropzone
+                    onChange={(files) => updateFiles(files)}
+                    value={files}
+                    maxFiles={1}
+                    header={false}
+                    footer={false}
+                    minHeight="80px"
+                    name="fileName1"
+                >
+                    {files.map((file: ExtFile) => (
+                        <FileMosaic
+                            key={file.id}
+                            {...file}
+                            onDelete={removeFile}
+                            info={true}
+                        />
+                    ))}
+                    {files.length === 0 && (
+                        <div className="dz-message needsclick">
+                            <SVG iconId="file-upload1" />
+                            <h5>{'Joindre un fichier'}</h5>
+                        </div>
+                    )}
+                </Dropzone>
+
+            </div>
+        </div>
+    );
+};
+
+export default InterviewAttachment;

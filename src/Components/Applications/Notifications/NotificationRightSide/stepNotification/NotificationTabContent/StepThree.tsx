@@ -16,16 +16,17 @@ const StepThree: React.FC = () => {
   const isReadyToSend = title.trim() !== '' && message.trim() !== '';
 
   const handleSendNotification = () => {
-    
+
     if (isReadyToSend) {
       dispatch(createNotification({
         title,
         message,
-        recipients: [selectedUser?.id], 
-        attachment: attachment || null 
+        recipients: [selectedUser?.id],
+        attachment: attachment || null
       }));
     }
   };
+
 
   return (
     <div>
@@ -37,11 +38,6 @@ const StepThree: React.FC = () => {
             <>
               <CardText><strong>Titre :</strong> {title}</CardText>
               <CardText><strong>Message :</strong> {message}</CardText>
-              {attachment && (
-                <CardText>
-                  <strong>Pièce Jointe :</strong> {attachment}
-                </CardText>
-              )}
             </>
           ) : (
             <CardText className="text-muted">Veuillez remplir le titre et le message pour voir un aperçu.</CardText>

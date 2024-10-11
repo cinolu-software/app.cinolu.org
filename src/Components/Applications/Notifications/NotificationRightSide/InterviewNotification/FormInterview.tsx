@@ -29,7 +29,7 @@ const FormInterview: React.FC<FormInterviewProps> = ({ onTitleChange, onMessageC
                 </Col>
 
                 <Col md={'6'} >
-                    <Button color="primary" className="btn-square"onClick={saveToRedux}>
+                    <Button color="primary" className="btn-square" onClick={saveToRedux}>
                         <div className="d-flex align-items-center gap-sm-2 gap-1">
                             {"Sauvegarder la notification"}
                             <SVG iconId="send-icon" />
