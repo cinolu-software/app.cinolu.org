@@ -12,6 +12,17 @@ const initialState: InitialStateUserType = {
   isOpenModalEditUser: false,
   isOpenModalDeleteUser: false,
   selectedUser: null,
+  navId: 1,
+  tabId: 1,
+  formValue: {
+    email: "",
+    first_name: "",
+    last_name: "",
+    name: "",
+    phone_number: "",
+    address: "",
+    role: ""
+  }
 };
 
 
@@ -66,7 +77,17 @@ const UsersSlice = createSlice({
         state.selectedUser = action.payload.user;
       }
     },
+    setNavId:(state, action: PayloadAction<number>)=>{
+      state.navId = action.payload
+    },
+    setTabId:(state, action: PayloadAction<number>) =>{
+      state.tabId = action.payload;
+    }
+    ,
+    setFormValue: () => {
 
+    }
+    ,
     setModalDeleteUser: (state, action: PayloadAction<{ isOpen: boolean; user?: UserType | null }>) => {
       state.isOpenModalDeleteUser = action.payload.isOpen;
       if (action.payload.user) {

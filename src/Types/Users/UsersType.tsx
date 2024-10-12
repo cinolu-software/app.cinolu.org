@@ -24,6 +24,9 @@ export interface InitialStateUserType {
     isOpenModalEditUser: boolean;
     isOpenModalDeleteUser: boolean;
     selectedUser: UserType | null;
+    navId: number;
+    tabId: number;
+    formValue: any;
 }
 
 export interface CreateUserType {
