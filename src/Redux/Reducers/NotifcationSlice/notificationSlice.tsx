@@ -18,18 +18,15 @@ interface NotificationResponse {
         created_at: string;
         updated_at: string;
         is_read: boolean;
-        attachment?: Array<{ name: string; id: string }>;
+        attachment?: any;
     };
 }
-
-
-
 
 export const createNotification = createAsyncThunk<NotificationResponse, NotificationPayload>(
     'NotificationBox/sendNotification',
     async ({ title, message, recipients, attachment }, { rejectWithValue }) => {
         try {
-            // Envoie de la notification sans fichier
+
             const response = await axiosInstance.post<NotificationResponse>('/notifications', {
                 title,
                 message,
@@ -39,15 +36,10 @@ export const createNotification = createAsyncThunk<NotificationResponse, Notific
             const notificationData = response.data.data;
             const notificationId = notificationData.id;
 
-            // Vérification et envoi du fichier
             if (attachment && attachment instanceof File) {
                 const formData = new FormData();
                 formData.append('attachment', attachment);
 
-                console.log("formData===>", formData.get('attachment')); // Vérification du contenu
-                console.log(attachment, 'attachment');
-
-                // Envoie de l'attachement
                 await axiosInstance.post(`/notifications/attachment/${notificationId}`, formData, {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
@@ -55,10 +47,12 @@ export const createNotification = createAsyncThunk<NotificationResponse, Notific
                 console.error("L'attachment n'est pas un fichier valide");
             }
 
-            // Envoie de la notification
+
             await axiosInstance.post(`/notifications/send/${notificationId}`);
 
-            return notificationData;
+            return { data: notificationData };
+
+
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur s'est produite lors de l'envoi de la notification");
         }
@@ -66,8 +60,29 @@ export const createNotification = createAsyncThunk<NotificationResponse, Notific
 );
 
 
+interface FormValue {
+    title: string;
+    message: string;
+    attachment: File | null;
+}
 
-const initialState = {
+interface NotificationBoxState {
+    modal: boolean;
+    composeNotification: boolean;
+    faIcon: boolean;
+    page: boolean;
+    interviewNotification: boolean;
+    inboxNotification: any[];
+    notificationValidation: boolean;
+    selectedUser: any | null;
+    formValue: FormValue;
+    navId: number;
+    tabId: number;
+    loading: boolean;
+    error: string | null;
+}
+
+const initialState: NotificationBoxState = {
     modal: false,
     composeNotification: false,
     faIcon: false,
@@ -78,7 +93,7 @@ const initialState = {
     selectedUser: null,
     formValue: {
         title: "",
-        message: '',
+        message: "",
         attachment: null,
     },
     navId: 1,
@@ -100,10 +115,10 @@ const NotificationBoxSlice = createSlice({
         setSelectedUser: (state, action) => {
             state.selectedUser = action.payload;
         },
-        handleInterview:(state, action)=>{
+        handleInterview: (state, action) => {
             state.interviewNotification = action.payload;
         },
-        setFormValue: (state, action) => {
+        setFormValue: (state, action: { payload: { name: keyof FormValue, value: any } }) => {
             state.formValue[action.payload.name] = action.payload.value;
         },
         setNavId: (state, action) => {
@@ -124,7 +139,7 @@ const NotificationBoxSlice = createSlice({
             })
             .addCase(createNotification.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.payload as string;
             });
     },
 });
