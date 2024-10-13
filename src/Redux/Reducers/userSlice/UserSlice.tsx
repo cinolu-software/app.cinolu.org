@@ -84,9 +84,9 @@ const UsersSlice = createSlice({
       state.tabId = action.payload;
     }
     ,
-    setFormValue: () => {
-
-    }
+      setFormValue: (state, action: { payload: { name: keyof any, value: any } }) => {
+          state.formValue[action.payload.name] = action.payload.value;
+      }
     ,
     setModalDeleteUser: (state, action: PayloadAction<{ isOpen: boolean; user?: UserType | null }>) => {
       state.isOpenModalDeleteUser = action.payload.isOpen;
@@ -143,5 +143,5 @@ const UsersSlice = createSlice({
   },
 });
 
-export const { setModalCreateUser, setModalEditUser, setModalDeleteUser, setFilterToggle } = UsersSlice.actions;
+export const { setModalCreateUser, setModalEditUser, setModalDeleteUser, setFilterToggle, setNavId, setTabId, setFormValue } = UsersSlice.actions;
 export default UsersSlice.reducer;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
-import Select from 'react-select';  // Importer react-select
+import Select from 'react-select';
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { createUser } from "@/Redux/Reducers/userSlice/UserSlice";
 import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";

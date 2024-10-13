@@ -15,7 +15,7 @@ const ProgramLeftSidebar = () => {
             <Nav pills className="sidebar-left-icons border-0" tabs>
                 {AddProgram.map((data, i) => (
                     <NavItem key={i}>
-                        <NavLink className="border-0" active={navId === data.id ? true : false} onClick={()=>dispatch(setNavId(data.id))}>
+                        <NavLink className="border-0" active={navId === data.id} onClick={()=>dispatch(setNavId(data.id))}>
                             <div className="nav-rounded">
                                 <div className="product-icons">
                                     <SVG className="stroke-icon" iconId={data.icon} />
