@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import axios, { apiBaseUrl } from "@/services/axios";
+import axiosInstance , { apiBaseUrl } from "@/services/axios";
 import { InitialStateProgramsTypeType, ProgramsTypeType, CreateProgramTypeType, TransformedProgramsTypeType } from "@/Types/Programs/ProgramsTypeType";
 import { RootState } from "@/Redux/Store";
 
@@ -33,7 +33,7 @@ const transformProgramsType = (types: ProgramsTypeType[]): TransformedProgramsTy
 export const fetchProgramsType = createAsyncThunk(
     'programs/fetchProgramsType',
     async () => {
-        const response = await axios.get<{ data: ProgramsTypeType[] }>(`${apiBaseUrl}/types`);
+        const response = await axiosInstance.get<{ data: ProgramsTypeType[] }>(`${apiBaseUrl}/types`);
         const originalProgramsTypes = response.data.data;
         const transformedPrograms = transformProgramsType(originalProgramsTypes);
         return { original: originalProgramsTypes, transformed: transformedPrograms };
@@ -44,7 +44,7 @@ export const createProgramType = createAsyncThunk(
     'programs/createProgramType',
     async (newProgramType: CreateProgramTypeType, { rejectWithValue }) => {
         try {
-            const response = await axios.post<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types`, newProgramType);
+            const response = await axiosInstance.post<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types`, newProgramType);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
@@ -56,7 +56,7 @@ export const updateProgramType = createAsyncThunk(
     'programs/updateProgramType',
     async (updatedProgramType: ProgramsTypeType, { rejectWithValue }) => {
         try {
-            const response = await axios.patch<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types/${updatedProgramType.id}`, updatedProgramType);
+            const response = await axiosInstance.patch<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types/${updatedProgramType.id}`, updatedProgramType);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
@@ -66,9 +66,9 @@ export const updateProgramType = createAsyncThunk(
 
 export const deleteProgramType = createAsyncThunk(
     'programs/deleteProgramType',
-    async (programTypeId: number, { rejectWithValue }) => {
+    async (programTypeId: string, { rejectWithValue }) => {
         try {
-            await axios.delete(`${apiBaseUrl}/types/${programTypeId}`);
+            await axiosInstance.delete(`${apiBaseUrl}/types/${programTypeId}`);
             return programTypeId;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
@@ -156,7 +156,7 @@ const ProgramsTypeSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(deleteProgramType.fulfilled, (state, action: PayloadAction<number>) => {
+            .addCase(deleteProgramType.fulfilled, (state, action: PayloadAction<string>) => {
                 state.status = 'succeeded';
                 state.originalTypeProgramsData = state.originalTypeProgramsData.filter(program => program.id !== action.payload);
                 state.transformedProgramsData = state.transformedProgramsData.filter(program => program.id !== action.payload);

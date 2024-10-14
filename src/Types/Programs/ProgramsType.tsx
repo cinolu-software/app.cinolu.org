@@ -1,18 +1,18 @@
 export type RequirementType = {
-    id?: number;
+    id?: string;
     name: string;
     description: string;
 }
 
 export type AttachmentType = {
-    id: number;
+    id: string;
     name: string;
     created_at: string;
     updated_at: string;
 }
 
 export type DataType = {
-    id: number;
+    id: string;
     name: string;
     description: string;
 }
@@ -27,7 +27,7 @@ export interface CreateProgramType  {
 }
 
 export interface ReceiveProgramsType {
-    id: number;
+    id: string;
     name: string;
     description: string;
     start_at: string;
@@ -45,7 +45,7 @@ export interface FormValueType  {
     description: string;
     start_at: string;
     end_at: string;
-    types: number[];
+    types: string[];
     requirements: RequirementType[];
 }
 

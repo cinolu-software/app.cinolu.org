@@ -1,5 +1,5 @@
 export interface ProgramsTypeType {
-    id: number; 
+    id: string; 
     name?: string;
     description?: string;
     created_at?: string;
@@ -8,7 +8,7 @@ export interface ProgramsTypeType {
 }
 
 export interface TransformedProgramsTypeType {
-    id: number;
+    id: string;
     name: string;
     description: string;
     created_at: string;

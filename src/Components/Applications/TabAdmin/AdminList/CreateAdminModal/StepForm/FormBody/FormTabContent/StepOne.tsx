@@ -11,10 +11,9 @@ const StepOne = () => {
     return (
         <Row className={'g-2'}>
             <Col xs={'12'}>
-                <Form>
                     <Row>
                         <Col xs={'12'} md={'6'}>
-                            <Label className="col-form-label">{"Email"}</Label>
+                            <Label className="col-form-label">{"Nom"}</Label>
                             <Input
                                 className={formValue?.name !== "" ? "valid" : "is-invalid"}
                                 type="text"
@@ -46,10 +45,8 @@ const StepOne = () => {
                                 onChange={(e) => dispatch(setFormValue({name: 'last_name', value: e.target.value}))}
                             />
                         </Col>
-
                     </Row>
-
-                </Form>
+                {/*</Form>*/}
             </Col>
         </Row>
     )

@@ -21,7 +21,7 @@ const initialState: InitialStateUserType = {
     name: "",
     phone_number: "",
     address: "",
-    role: ""
+    roles: [],
   }
 };
 

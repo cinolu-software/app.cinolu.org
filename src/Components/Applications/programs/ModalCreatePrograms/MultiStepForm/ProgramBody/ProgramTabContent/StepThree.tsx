@@ -16,20 +16,19 @@ const StepThree = () => {
         }
     }, [dispatch, status]);
 
-    const handleTypeChange = (typeId: number) => {
+    const handleTypeChange = (typeId: string) => {
         if (!formValue) return;
 
         const updatedTypes = formValue.types.includes(typeId)
             ? formValue.types.filter(id => id !== typeId)
             : [...formValue.types, typeId];
 
-        dispatch(setFormValue({ field: 'types', value: JSON.stringify(updatedTypes) }));
+        dispatch(setFormValue({ field: 'types', value: updatedTypes }));
     };
 
 
     return (
         <Col>
-
                 <section className="main-upgrade">
                     <div>
 

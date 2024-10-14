@@ -44,7 +44,7 @@ export const ProgramsListTableDataColumn = [
             <ProgramsListTableName image={row.image ?? "default_program_image.png"} name={row.name || "Unnamed"} />
         ),
         sortable: true,
-        grow: 2,
+        grow: 1,
     },
     {
         name: "Description",
@@ -52,9 +52,11 @@ export const ProgramsListTableDataColumn = [
             <div>{row.description}</div>
         ),
         sortable: false,
+        grow: 1
     },
     {
         name: "Action",
         cell: (row: ProgramsListTypeTableColumnType) => <ProgramsListTableAction programType={row} />,
+        grow: 2
     },
 ];
