@@ -9,9 +9,6 @@ const CreateUser = () => {
         <Row>
             <Col>
                 <Card>
-                    <CardHeader>
-                        <h5>{"Formulaire de création d'un utilisateur"}</h5>
-                    </CardHeader>
                     <CardBody>
                         <FormBody/>
                     </CardBody>

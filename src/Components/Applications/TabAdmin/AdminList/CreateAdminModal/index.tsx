@@ -57,7 +57,7 @@ const ModalCreateUser = () => {
         <Col xs="12">
             <Modal isOpen={isOpenModalCreateUser} toggle={() => dispatch(setModalCreateUser({ isOpen: false }))} size="xl">
                 <div className="modal-header">
-                    <h1 className="modal-title fs-5">{"Ajouter un programme"}</h1>
+                    <h1 className="modal-title fs-5">{"Création d'un utilisateur"}</h1>
                     <Button close onClick={() => dispatch(setModalCreateUser({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">

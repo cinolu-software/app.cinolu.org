@@ -27,7 +27,7 @@ const Index = () => {
 
             </Col>
 
-            <CommonButton />
+            {/*<CommonButton />*/}
         </>
     );
 }

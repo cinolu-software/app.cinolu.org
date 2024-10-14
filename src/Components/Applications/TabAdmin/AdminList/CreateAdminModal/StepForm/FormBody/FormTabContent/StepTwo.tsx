@@ -11,41 +11,51 @@ const StepTwo = () => {
     return (
         <Row className={'g-2'}>
             <Col xs={'12'}>
-                <Row>
-                    <Col xs={'12'} md={'6'}>
-                        <Label className="col-form-label">{"Email"}</Label>
-                        <Input
-                            className={formValue?.email !== "" ? "valid" : "is-invalid"}
-                            type="email"
-                            required
-                            name="email"
-                            value={formValue?.email || ""}
-                            onChange={(e) => dispatch(setFormValue({name: 'email', value: e.target.value}))}
-                        />
-                    </Col>
-                    <Col xs={'12'} md={'6'}>
-                        <Label className="col-form-label">{"Numero de Téléphone"}</Label>
-                        <Input
-                            className={formValue?.phone_number !== "" ? "valid" : "is-invalid"}
-                            type="text"
-                            required
-                            name="phone_number"
-                            value={formValue?.phone_number || ""}
-                            onChange={(e) => dispatch(setFormValue({name: 'phone_number', value: e.target.value}))}
-                        />
-                    </Col>
-                    <Col xs={'12'} md={'6'}>
-                        <Label className="col-form-label">{"Adresse"}</Label>
-                        <Input
-                            className={formValue?.address !== "" ? "valid" : "is-invalid"}
-                            type="text"
-                            required
-                            name="address"
-                            value={formValue?.address || ""}
-                            onChange={(e) => dispatch(setFormValue({name: 'address', value: e.target.value}))}
-                        />
-                    </Col>
-                </Row>
+                
+
+                    <Row className=''>
+                        <Col >
+                            <Label className="col-form-label">{"Email"}</Label>
+                            <Input
+                                className={formValue?.email !== "" ? "valid" : "is-invalid"}
+                                type="email"
+                                required
+                                name="email"
+                                value={formValue?.email || ""}
+                                onChange={(e) => dispatch(setFormValue({name: 'email', value: e.target.value}))}
+                            />
+                        </Col>
+                    </Row>
+                    <Row className='mt-4'>
+                        <Col >
+                            <Label className="col-form-label">{"Numero de Téléphone"}</Label>
+                            <Input
+                                className={formValue?.phone_number !== "" ? "valid" : "is-invalid"}
+                                type="text"
+                                required
+                                name="phone_number"
+                                value={formValue?.phone_number || ""}
+                                onChange={(e) => dispatch(setFormValue({name: 'phone_number', value: e.target.value}))}
+                            />
+                        </Col>
+                    </Row>
+
+                    <Row className='mt-4'>
+                        <Col >
+                            <Label className="col-form-label">{"Adresse"}</Label>
+                            <Input
+                                className={formValue?.address !== "" ? "valid" : "is-invalid"}
+                                type="text"
+                                required
+                                name="address"
+                                value={formValue?.address || ""}
+                                onChange={(e) => dispatch(setFormValue({name: 'address', value: e.target.value}))}
+                            />
+                        </Col>
+                    </Row>
+                    
+
+                
             </Col>
         </Row>
     )

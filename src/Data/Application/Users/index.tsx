@@ -70,28 +70,21 @@ export const UsersListTableDataColumn = [
 export const AddUser = [
   {
     id: 1,
-    icon: "info",
-    title: "Information du programme",
-    detail:"Nom et Description",
+    icon: "user_info",
+    title: "Indetités de l'utilisateur",
+    detail:"Indetités de l'utilisateur",
   },
   {
     id: 2,
-    icon: "calendar",
-    title: "Durée du programme",
-    detail: "date de début et de fin"
+    icon: "user_contact",
+    title: "Contact de l'utilisateur",
+    detail: "Contact de l'utilisateur"
   },
   {
     id: 3,
-    icon: "type",
-    title: "Type de programme",
-    detail: "Sélectionner le type de programme"
-  },
-  {
-    id: 4,
-    // icon: "pricing",
-    icon: "requirement",
-    title: "Exigence",
-    detail: "Requirements"
+    icon: "user_role",
+    title: "Rôle de l'utilisateur",
+    detail: "Sélectionner le rôle de l'utilisateur"
   },
 ]
 
