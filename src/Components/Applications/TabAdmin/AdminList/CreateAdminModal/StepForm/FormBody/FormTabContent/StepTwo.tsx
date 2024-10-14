@@ -8,11 +8,11 @@ const StepTwo = () => {
     const dispatch = useAppDispatch();
     const {formValue} = useAppSelector((state) => state.users);
 
+
     return (
         <Row className={'g-2'}>
             <Col xs={'12'}>
                 
-
                     <Row className=''>
                         <Col >
                             <Label className="col-form-label">{"Email"}</Label>
@@ -26,6 +26,7 @@ const StepTwo = () => {
                             />
                         </Col>
                     </Row>
+
                     <Row className='mt-4'>
                         <Col >
                             <Label className="col-form-label">{"Numero de Téléphone"}</Label>
@@ -54,8 +55,6 @@ const StepTwo = () => {
                         </Col>
                     </Row>
                     
-
-                
             </Col>
         </Row>
     )

@@ -15,15 +15,14 @@ const ModalCreateUser = () => {
 
     useEffect(() => {
         const validateForm = () : boolean => {
-            return formValue.email !== "" && formValue.first_name !== "" && formValue.last_name !== "" && formValue.phone_number !== "" && formValue.address !== "" && formValue.roles.length > 0;
+            return (formValue.email !== "" && formValue.first_name !== "" && formValue.last_name !== "" && formValue.phone_number !== "" && formValue.address !== "" && formValue.roles.length > 0)
         }
         setIsFormValid(validateForm());
-    }, []);
+    }, [formValue]);
 
     const handleSubmit = async () => {
 
         if(isFormValid && formValue) {
-
             try{
                 await dispatch(createUser(formValue)).unwrap();
                 dispatch(setModalCreateUser({isOpen: false}));
@@ -52,6 +51,7 @@ const ModalCreateUser = () => {
             )
         }
     }
+
 
     return (
         <Col xs="12">

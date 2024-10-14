@@ -19,7 +19,6 @@ const ModalCreatePrograms = () => {
     useEffect(() => {
 
         const validateForm = (): boolean => {
-
             return !!( formValue && formValue.name && formValue.description && formValue.start_at && formValue.end_at && formValue.types.length > 0 && formValue.requirements.length > 0);
         };
 
