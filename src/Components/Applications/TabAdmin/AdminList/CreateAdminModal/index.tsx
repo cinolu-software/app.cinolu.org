@@ -24,8 +24,19 @@ const ModalCreateUser = () => {
 
         if(isFormValid && formValue) {
             try{
-                await dispatch(createUser(formValue)).unwrap();
+                await dispatch(createUser(formValue));
                 dispatch(setModalCreateUser({isOpen: false}));
+
+                toast.success(
+                    <p className="text-white tx-16 mb-0">{"Utilisateur créé avec succès"}</p>,
+                    {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        hideProgressBar: false,
+                        transition: Flip,
+                        theme: "colored",
+                    }
+                );
             }catch(error:any){
                 toast.error(
                     <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création de l'utilisateur"}</p>,

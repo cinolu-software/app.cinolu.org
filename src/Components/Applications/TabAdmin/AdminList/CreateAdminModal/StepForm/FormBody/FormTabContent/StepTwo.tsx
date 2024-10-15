@@ -12,7 +12,6 @@ const StepTwo = () => {
     return (
         <Row className={'g-2'}>
             <Col xs={'12'}>
-                
                     <Row className=''>
                         <Col >
                             <Label className="col-form-label">{"Email"}</Label>
@@ -54,7 +53,6 @@ const StepTwo = () => {
                             />
                         </Col>
                     </Row>
-                    
             </Col>
         </Row>
     )

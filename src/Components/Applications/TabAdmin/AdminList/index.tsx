@@ -8,6 +8,7 @@ import {UsersListTableColumnType} from "@/Types/Users/UsersType";
 import {UsersListTableDataColumn} from "@/Data/Application/Users";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/AdminList/AdminListFilterHeader";
+import DeleteAdminModal from "@/Components/Applications/TabAdmin/AdminList/DeleteAdminModal";
 
 const AdminListContainer: React.FC = () => {
 
@@ -45,6 +46,7 @@ const AdminListContainer: React.FC = () => {
   return (
       <Container fluid>
         <CreateNewUserModal />
+        <DeleteAdminModal/>
         <Row>
           <Col sm="12">
             <Card>
