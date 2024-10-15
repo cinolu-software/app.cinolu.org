@@ -17,7 +17,7 @@ export interface TransformedProgramsTypeType {
 }
 
 export interface InitialStateProgramsTypeType {
-    originalTypeProgramsData: ProgramsTypeType[];
+    originalTypeProgramsData: any;
     transformedProgramsData: TransformedProgramsTypeType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;

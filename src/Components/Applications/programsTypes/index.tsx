@@ -1,25 +1,26 @@
 import { TableColumn } from 'react-data-table-component';
 import React, { useMemo, useState, useEffect } from "react";
-import { AppDispatch } from "@/Redux/Store";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { ProgramsTypesHeader } from "./ProgramsList";
 import { useSelector, useDispatch } from "react-redux";
-import { selectOriginalProgramData,selectProgramTypeStatus, fetchProgramsType, selectTransformedProgramDataType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
-import DeleteProgramsModal from "./DeleteProgramsModal";
+import { selectOriginalProgramData,selectProgramTypeStatus, fetchProgramsType, selectTransformedProgramDataType, setModalDeleteProgramTypes, deleteProgramType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/ProgramsTypes";
 import { ProgramsListTypeTableColumnType } from "@/Types/Programs/ProgramsTypeType";
 import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";
 import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType";
+import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 
 
 const ProgramsTypesListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState("");
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch()
     const status = useSelector(selectProgramTypeStatus);
     const transformedPrograms = useSelector(selectTransformedProgramDataType);
     const data = useSelector(selectOriginalProgramData);
+    const {isOpenModalDeleteProgramType, selectedProgramType, originalTypeProgramsData} = useAppSelector(state => state.programsType)
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -45,7 +46,14 @@ const ProgramsTypesListContainer: React.FC = () => {
     return (
         <Container fluid>
             <UpdateProgramTypeModal />
-            <DeleteProgramsModal />
+            <DeleteEntityModal
+                isOpen={isOpenModalDeleteProgramType}
+                entityName="type de programme"
+                selectedEntity={selectedProgramType}
+                entities={originalTypeProgramsData}
+                setModalAction={setModalDeleteProgramTypes as any}
+                deleteEntityThunk={deleteProgramType}
+            />;
             <ModalCreateProgramType/>
             <Row>
                 <Col sm="12">

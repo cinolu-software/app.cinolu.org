@@ -1,21 +1,20 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { fetchUsers } from "@/Redux/Reducers/userSlice/UserSlice";
+import { fetchUsers, setModalDeleteUser, deleteUser } from "@/Redux/Reducers/userSlice/UserSlice";
 import CreateNewUserModal from "@/Components/Applications/TabAdmin/AdminList/CreateAdminModal";
 import { UserType } from "@/Types/Users/UsersType";
-import {UsersListTableColumnType} from "@/Types/Users/UsersType";
 import {UsersListTableDataColumn} from "@/Data/Application/Users";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/AdminList/AdminListFilterHeader";
-import DeleteAdminModal from "@/Components/Applications/TabAdmin/AdminList/DeleteAdminModal";
 import {CollapseFilterData} from "@/Components/Applications/TabAdmin/AdminList/CollapseFilterData";
+import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 
 const AdminListContainer: React.FC = () => {
 
   const [filterText, setFilterText] = useState("");
   const dispatch = useAppDispatch();
-  const {usersData, status} = useAppSelector((state) => state.users);
+  const {usersData, status, isOpenModalDeleteUser, selectedUser} = useAppSelector((state) => state.users);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -44,8 +43,15 @@ const AdminListContainer: React.FC = () => {
 
   return (
       <Container fluid>
-        <CreateNewUserModal />
-        <DeleteAdminModal/>
+          <CreateNewUserModal />
+          <DeleteEntityModal
+              isOpen={isOpenModalDeleteUser}
+              entityName="utilisateur"
+              selectedEntity={selectedUser}
+              entities={usersData}
+              setModalAction={setModalDeleteUser}
+              deleteEntityThunk={deleteUser}
+          />
         <Row>
           <Col sm="12">
             <Card>
