@@ -9,6 +9,7 @@ import {UsersListTableDataColumn} from "@/Data/Application/Users";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/AdminList/AdminListFilterHeader";
 import DeleteAdminModal from "@/Components/Applications/TabAdmin/AdminList/DeleteAdminModal";
+import {CollapseFilterData} from "@/Components/Applications/TabAdmin/AdminList/CollapseFilterData";
 
 const AdminListContainer: React.FC = () => {
 
@@ -22,12 +23,10 @@ const AdminListContainer: React.FC = () => {
     }
   }, [status, dispatch]);
 
-
   const filteredUsers = usersData.filter((user: UserType) =>
       user.name.toLowerCase().includes(filterText.toLowerCase()) ||
       user.email.toLowerCase().includes(filterText.toLowerCase())
   );
-
 
   const subHeaderComponentMemo = useMemo(() => {
     return (
@@ -54,6 +53,7 @@ const AdminListContainer: React.FC = () => {
                 <div className="list-product-header">
                   <h5>Liste des Utilisateurs</h5>
                   <AdminListFilterHeader/>
+                  <CollapseFilterData/>
                 </div>
                 <div className="list-user">
                   <div className="table-responsive">

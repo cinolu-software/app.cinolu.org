@@ -94,7 +94,6 @@ const UsersSlice = createSlice({
         state.selectedUser = action.payload.user;
       }
     },
-
     setFilterToggle: (state) => {
       state.filterToggle = !state.filterToggle;
     }

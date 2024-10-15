@@ -5,7 +5,7 @@ import { Card, CardBody, Col, Collapse, Input, Row } from "reactstrap";
 
 export const CollapseFilterData = () => {
 
-  const { filterToggle } = useAppSelector((state) => state.product);
+  const { filterToggle } = useAppSelector((state) => state.users);
 
   return (
     <Collapse isOpen={filterToggle}>
@@ -27,4 +27,5 @@ export const CollapseFilterData = () => {
       </Card>
     </Collapse>
   );
+
 };
