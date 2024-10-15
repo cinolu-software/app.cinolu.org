@@ -47,6 +47,19 @@ export const MenuList: MenuItem [] | undefined = [
                 ]
             },
             {
+                title: "Partenaires",
+                id: 2,
+                icon: "bonus-kit",
+                type: "sub",
+                lanClass: "lan-6",
+                active: false,
+                children: [
+                    {path: "/programs/other", title: "other", type: "link", lanClass: "lan-5"},
+                    {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
+                    {path: "/programs/programTypes", title: "types de programmes", type: "link", lanClass: "lan-6"},
+                ]
+            },
+            {
                 title: "Rôle",
                 id: 3,
                 icon: "file",

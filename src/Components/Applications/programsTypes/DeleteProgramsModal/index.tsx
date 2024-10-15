@@ -1,7 +1,7 @@
 import React from 'react';
 import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col } from "reactstrap";
-import CommonModal from "./Common/CommonModal";
+import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalDeleteProgramTypes, deleteProgramType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
