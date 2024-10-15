@@ -133,7 +133,7 @@ const UsersSlice = createSlice({
         })
         .addCase(deleteUser.fulfilled, (state, action: PayloadAction<string>) => {
           state.status = 'succeeded';
-          state.usersData = state.usersData.filter(user => user.id !== Number(action.payload));
+          state.usersData = state.usersData.filter(user => user.id !== action.payload);
 
         })
         .addCase(deleteUser.rejected, (state, action) => {

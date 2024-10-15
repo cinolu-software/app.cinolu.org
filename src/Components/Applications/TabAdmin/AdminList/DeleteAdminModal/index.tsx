@@ -7,10 +7,10 @@ import {setModalDeleteUser, deleteUser} from "@/Redux/Reducers/userSlice/UserSli
 import { toast, Flip} from 'react-toastify';
 
 const DeleteAdminModal = () => {
+
     const dispatch = useAppDispatch();
     const {isOpenModalDeleteUser, selectedUser, usersData} = useAppSelector(state => state.users);
     const selectedUserData = usersData.find(user => user.id === selectedUser?.id);
-
 
     const handleDelete = () => {
         if(selectedUserData && selectedUserData.id !== undefined) {
