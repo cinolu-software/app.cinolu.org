@@ -33,7 +33,7 @@ const ModalCreatePrograms = () => {
         if (isFormValid && formValue) {
 
             try {
-                await dispatch(createProgram(formValue)).unwrap();
+                await dispatch(createProgram(formValue));
                 dispatch(setModalCreateProgram({ isOpen: false }));
             } catch (error) {
                 toast.error(

@@ -60,7 +60,7 @@ export interface InitialStateProgramsType {
     selectedProgram: ReceiveProgramsType | null;
     navId: number;
     tabId: number;
-    formValue: FormValueType | null;
+    formValue: any
     EditFormValue: FormValueType | null;
 }
 

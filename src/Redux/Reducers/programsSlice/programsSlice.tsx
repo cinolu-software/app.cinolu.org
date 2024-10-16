@@ -139,72 +139,44 @@ export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: 
 );
 
 const ProgramSlice = createSlice({
-
     name: "programs",
-
     initialState,
-
     reducers: {
-
         setModalCreateProgram: (state, action: PayloadAction<{ isOpen: boolean }>) => {
-
             state.isOpenModalCreateProgram = action.payload.isOpen;
-
         },
-
         setModalEditProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType | null }>) => {
-
             state.isOpenModalEditProgram = action.payload.isOpen;
-
             state.selectedProgram = action.payload.program;
-
         },
-
         setModalDeleteProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType | null }>) => {
-
             state.isOpenModalDeleteProgram = action.payload.isOpen;
-
             state.selectedProgram = action.payload.program;
-
         },
-
         setNavId: (state, action: PayloadAction<number>) => {
-
             state.navId = action.payload;
         },
-
         setTabId: (state, action: PayloadAction<number>) => {
-
             state.tabId = action.payload;
-
         },
 
         setFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
 
             if (action.payload.field === 'types' && typeof action.payload.value === 'string') {
-
                 //@ts-ignore
                 state.formValue.types = JSON.parse(action.payload.value).map((type: string) => parseInt(type));
-
             } else {
-
                 //@ts-ignore
                 state.formValue[action.payload.field] = action.payload.value;
-
             }
         },
         setEditFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
-
             if (action.payload.field === 'types' && typeof action.payload.value === 'string') {
-
                 //@ts-ignore
                 state.EditFormValue.types = JSON.parse(action.payload.value).map((type: string) => parseInt(type));
-
             } else {
-
                 //@ts-ignore
                 state.EditFormValue[action.payload.field] = action.payload.value;
-
             }
         },
         setFilterToggle: (state) => {
@@ -217,49 +189,28 @@ const ProgramSlice = createSlice({
         builder
 
             .addCase(fetchPrograms.pending, (state) => {
-
                 state.status = 'loading';
-
                 state.error = null;
-
             })
             .addCase(fetchPrograms.fulfilled, (state, action: PayloadAction<{ original: ReceiveProgramsType[] }>) => {
-
                 state.status = 'succeeded';
-
                 state.originalProgramsData = action.payload.original;
-
             })
             .addCase(fetchPrograms.rejected, (state, action) => {
-
                 state.status = 'failed';
-
                 state.error = action.error.message || 'Something went wrong';
-
             })
-
-
-
             .addCase(createProgram.pending, (state) => {
-
                 state.status = 'loading';
-
                 state.error = null;
-
             })
             .addCase(createProgram.fulfilled, (state, action: PayloadAction<ReceiveProgramsType>) => {
-
                 state.status = 'succeeded';
-
                 state.originalProgramsData.push(action.payload);
-
             })
             .addCase(createProgram.rejected, (state, action) => {
-
                 state.status = 'failed';
-
                 state.error = action.error.message || 'Something went wrong';
-
             })
 
 

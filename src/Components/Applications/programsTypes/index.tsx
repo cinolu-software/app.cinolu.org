@@ -22,6 +22,7 @@ const ProgramsTypesListContainer: React.FC = () => {
     const data = useSelector(selectOriginalProgramData);
     const {isOpenModalDeleteProgramType, selectedProgramType, originalTypeProgramsData} = useAppSelector(state => state.programsType)
 
+
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -40,8 +41,6 @@ const ProgramsTypesListContainer: React.FC = () => {
     const filteredPrograms = transformedPrograms.filter(program =>
         program.name.toLowerCase().includes(filterText.toLowerCase())
     );
-
-
 
     return (
         <Container fluid>

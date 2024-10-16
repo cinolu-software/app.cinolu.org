@@ -37,7 +37,7 @@ export const MenuList: MenuItem [] | undefined = [
                 title: "Programmes",
                 id: 2,
                 icon: "builders",
-                type: "sub",
+                type: "link",
                 lanClass: "lan-6",
                 active: false,
                 children: [
@@ -54,10 +54,11 @@ export const MenuList: MenuItem [] | undefined = [
                 lanClass: "lan-6",
                 active: false,
                 children: [
-                    {path: "/programs/other", title: "other", type: "link", lanClass: "lan-5"},
-                    {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
-                    {path: "/programs/programTypes", title: "types de programmes", type: "link", lanClass: "lan-6"},
+                    {path: "/partners", title: "Liste", type: "link", lanClass: "lan-6"},
+                    {path: "/partners", title: "Type", type: "link", lanClass: "lan-6"},
                 ]
+
+
             },
             {
                 title: "Rôle",
