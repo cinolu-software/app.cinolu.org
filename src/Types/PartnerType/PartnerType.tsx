@@ -22,3 +22,10 @@ export interface InitialStatePatnerType {
     tabId: number;
     formValue: any
 }
+
+export interface CreatePartnerType {
+    name: string;
+    description: string;
+    profile: string;
+    partnership: string[]
+}

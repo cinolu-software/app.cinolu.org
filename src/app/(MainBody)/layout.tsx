@@ -17,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   const { layout } = useAppSelector((state) => state.themeCustomizer);
   const dispatch = useAppDispatch();
 
+  
   const compactSidebar = () => {
     let windowWidth = window.innerWidth;
     if (layout === "compact-wrapper") {

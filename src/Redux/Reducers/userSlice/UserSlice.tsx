@@ -35,7 +35,6 @@ export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     }
 );
 
-
 export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>>(
     'users/createUser',
     async (newUser, { rejectWithValue }) => {
@@ -47,7 +46,6 @@ export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
       }
     }
 );
-
 
 export const deleteUser = createAsyncThunk<string, string>(
     'users/deleteUser',
@@ -66,7 +64,6 @@ const UsersSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-
     setModalCreateUser: (state, action: PayloadAction<{ isOpen: boolean }>) => {
       state.isOpenModalCreateUser = action.payload.isOpen;
     },
