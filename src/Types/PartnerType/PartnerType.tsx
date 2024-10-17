@@ -29,3 +29,9 @@ export interface CreatePartnerType {
     profile: string;
     partnership: string[]
 }
+
+export interface StaticModalToggleProp {
+    staticModalToggle: () => boolean;
+}
+
+export interface PartnerListTableColumnType extends PartnerType {}

@@ -29,8 +29,8 @@ const PartnerShipListTableAction: React.FC<{partnerShip: PartnerShipType}> = ({p
 
     return (
         <div className="product-action">
-            <Button size={"sm"} onClick={handleEdit}>Modifier</Button>
-            <Button size={"sm"} color={"danger"} onClick={handleDelete}>Supprimer</Button>
+            <Button size={"sm"} color='outline-primary' onClick={handleEdit}>Modifier</Button>
+            <Button size={"sm"} color={"outline-danger"} onClick={handleDelete}>Supprimer</Button>
         </div>
     );
 }
@@ -38,12 +38,12 @@ const PartnerShipListTableAction: React.FC<{partnerShip: PartnerShipType}> = ({p
 export const PartnerShipListTableDataColumn = [
     {
         name: "Nom",
-        cell: (row: PartnerShipListTableColumnType) => <PartnerShipListTableName image={'"default_program_image.png"'} name={row.name}/>,
+        cell: (row: PartnerShipListTableColumnType) => <PartnerShipListTableName image={"programs/types/typeProgram.png"} name={row.name}/>,
         sortable: true,
-        grow: 1
+        grow: 3
     },
     {
-        name: "Action",
+        name: "Actions",
         cell: (row: PartnerShipListTableColumnType) => <PartnerShipListTableAction partnerShip={row}/>,
     }
 ]

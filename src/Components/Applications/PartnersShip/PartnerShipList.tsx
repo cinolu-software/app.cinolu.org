@@ -10,10 +10,12 @@ const PartnerShipList = () => {
 
     return (
         <div>
-            <Button className={'btn btn-primary'} onClick={()=> dispatch(setModalCreatePartnerShip({isOpen: !isOpenModalCreatePartnerShip}))}></Button>
-            <i className={'fa fa-plus'}/>
-            Ajouter un Partenariat
+            <Button className={'btn btn-primary'} onClick={()=> dispatch(setModalCreatePartnerShip({isOpen: !isOpenModalCreatePartnerShip}))}>
+                <i className={'fa fa-plus'}/>
+                Ajouter un Partenariat
+            </Button>
         </div>
     )
 }
+
 export default PartnerShipList
