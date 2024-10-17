@@ -55,7 +55,7 @@ export const MenuList: MenuItem [] | undefined = [
                 active: false,
                 children: [
                     {path: "/partners", title: "Liste", type: "link", lanClass: "lan-6"},
-                    {path: "/partners", title: "Type", type: "link", lanClass: "lan-6"},
+                    {path: "/partnerShip", title: "Type", type: "link", lanClass: "lan-6"},
                 ]
 
 

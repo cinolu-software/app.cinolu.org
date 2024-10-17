@@ -1,4 +1,5 @@
 "use client";
+
 import Footer from "@/Layout/Footer/Footer";
 import { SideBar } from "@/Layout/Sidebar/Sidebar";
 import ThemeCustomizer from "@/Layout/ThemeCustomizer";
