@@ -4,7 +4,7 @@ import {PartnerShipListTableColumnType, PartnerShipType} from "@/Types/PartnerSh
 import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {setModalCreatePartnerShip, setModalEditPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
+import {setModalDeletePartnerShip, setModalEditPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 
 const PartnerShipListTableName: React.FC<{image: string; name: string}>= ({image, name}) => {
     return (
@@ -24,7 +24,7 @@ const PartnerShipListTableAction: React.FC<{partnerShip: PartnerShipType}> = ({p
     }
 
     const handleDelete = () => {
-        dispatch(setModalEditPartnerShip({isOpen: true, partnerShip: partnerShip}))
+        dispatch(setModalDeletePartnerShip({isOpen: true, partnerShip: partnerShip}))
     }
 
     return (
