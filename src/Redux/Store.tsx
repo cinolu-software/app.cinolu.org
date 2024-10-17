@@ -20,6 +20,7 @@ import AddProductSlice from "./Reducers/AddProductSlice";
 import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
 import NotificationSlice from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import StaffSlice from "@/Redux/Reducers/StaffSlice/StaffSlice";
+import PartnerShipSlice from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 
 const Store = configureStore({
 
@@ -43,7 +44,7 @@ const Store = configureStore({
     auth: AuthSlice,
     addProduct: AddProductSlice,
     staff: StaffSlice,
-
+    partnerShip: PartnerShipSlice,
     otherProgram : OtherSlice,
     notifications: NotificationSlice,
   },
