@@ -28,4 +28,4 @@ export interface StaticModalToggleProp {
     staticModalToggle: boolean;
 }
 
-export interface PartnerShipListContainerProps extends PartnerShipType {}
+export interface PartnerShipListTableColumnType extends PartnerShipType {}
