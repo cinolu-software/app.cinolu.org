@@ -37,10 +37,6 @@ const ProgramsListContainer = () => {
 
     }, [status, dispatch]);
 
-    useEffect(() => {
-        console.log("====>", originalProgramsData)
-    }, []);
-
 
     return (
         <Container fluid>
@@ -55,7 +51,7 @@ const ProgramsListContainer = () => {
                                 <ProgramsHeader />
                                 <CollapseFilterData/>
                             </div>
-                            <div className="list-program">
+                            <div className="list-product">
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"

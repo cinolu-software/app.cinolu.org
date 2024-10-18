@@ -12,7 +12,6 @@ export const MenuList: MenuItem [] | undefined = [
                 type: "link",
                 title: "Dashboard"
             },
-            // {path: "/app/calendar", icon: "calendar", type: "link", title: "Calendar"},
         ]
     },
     {
@@ -29,7 +28,6 @@ export const MenuList: MenuItem [] | undefined = [
                 active: false,
                 children: [
                     {path: "/users/admins", title: "Admin", type: "link", lanClass: "lan-5"},
-                    {path: "/users/staff", title: "Staff", type: "link", lanClass: "lan-6"},
                     {path: "/users/coach", title: "Coach", type: "link", lanClass: "lan-6"},
                 ]
             },

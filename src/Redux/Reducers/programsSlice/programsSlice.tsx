@@ -78,7 +78,6 @@ export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async ()
 
         const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`);
         const originalPrograms = response.data.data.programs;
-
         // const transformedPrograms = transformPrograms(originalPrograms);
         return { original: originalPrograms };
     }

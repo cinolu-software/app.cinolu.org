@@ -65,26 +65,31 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
             <ProgramsListTableName image={'/assets/images/programs/programs.png'} name={row.name}/>
         ),
         sortable: true,
-        grow: 2,
+        grow: 1,
     },
     {
         name: "Description",
         selector: (row: ReceiveProgramsType) => row.description,
         sortable: false,
+        grow: 1
+
     },
     {
         name: "Date de début",
         selector: (row: ReceiveProgramsType) => row.start_at,
         sortable: true,
+        grow: 1
     },
     {
         name: "Date de fin",
         selector: (row: ReceiveProgramsType) => row.end_at,
         sortable: true,
+        grow: 1
     },
     {
         name: "Action",
         cell: (row: ReceiveProgramsType) => <ProgramsListTableAction program={row}/>,
+        grow: 1
     },
 ];
 

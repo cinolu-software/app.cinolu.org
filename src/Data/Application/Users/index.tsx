@@ -31,8 +31,8 @@ const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
 
   return (
       <div className={'product-action'}>
-        <Button color={'primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
-        <Button color={'danger'} onClick={handleDelete}>Supprimer</Button>
+        <Button color={'outline-primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
+        <Button color={'outline-danger'} onClick={handleDelete}>Supprimer</Button>
       </div>
   )
 }
