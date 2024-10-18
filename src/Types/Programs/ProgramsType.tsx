@@ -17,13 +17,14 @@ export type DataType = {
     description: string;
 }
 
-export interface CreateProgramType  {
+export interface CreateProgramType {
     name: string;
     description: string;
     start_at: string;
     end_at: string;
     types: number[];
     requirements: RequirementType[];
+    partners: string[];
 }
 
 export interface ReceiveProgramsType {
@@ -36,17 +37,19 @@ export interface ReceiveProgramsType {
     attachments: AttachmentType[];
     types: DataType[];
     requirements?: RequirementType[];
+    partners: string[];
     created_at: string;
-    updated_at: string
+    updated_at: string;
 }
 
-export interface FormValueType  {
+export interface FormValueType {
     name: string;
     description: string;
     start_at: string;
     end_at: string;
     types: string[];
     requirements: RequirementType[];
+    partners: string[];
 }
 
 export interface InitialStateProgramsType {
@@ -60,9 +63,6 @@ export interface InitialStateProgramsType {
     selectedProgram: ReceiveProgramsType | null;
     navId: number;
     tabId: number;
-    formValue: any
+    formValue: FormValueType;
     EditFormValue: FormValueType | null;
 }
-
-
-

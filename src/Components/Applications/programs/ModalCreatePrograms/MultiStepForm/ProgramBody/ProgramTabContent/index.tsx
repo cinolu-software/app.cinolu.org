@@ -15,7 +15,6 @@ const ProgramTabContent = () => {
             <Col xxl="8" xl="8" className="box-col-8 position-relative">
 
                 <TabContent activeTab={navId}>
-
                     <TabPane tabId={1}>
                         <StepOne />
                     </TabPane>
@@ -31,8 +30,7 @@ const ProgramTabContent = () => {
                 </TabContent>
 
             </Col>
-
-            <CommonButton />
+            {/*<CommonButton />*/}
         </>
     );
 };

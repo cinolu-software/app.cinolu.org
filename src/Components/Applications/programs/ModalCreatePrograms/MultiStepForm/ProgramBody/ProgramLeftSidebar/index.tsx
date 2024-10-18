@@ -1,6 +1,6 @@
 import SVG from "@/CommonComponent/SVG";
-import { AddProgram } from "@/Data/Application/Ecommerce";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import {AddProgram} from "@/Data/Application/Programs";
 
 import {setNavId} from "@/Redux/Reducers/programsSlice/programsSlice"
 import { Col, Nav, NavItem, NavLink } from "reactstrap";

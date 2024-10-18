@@ -9,9 +9,6 @@ const AddProgramContainer = () => {
     <Row>
       <Col >
         <Card>
-          <CardHeader>
-            <h5>{"Formulaire d'ajout de programme"}</h5>
-          </CardHeader>
           <CardBody>
             <ProgramBody />
           </CardBody>
