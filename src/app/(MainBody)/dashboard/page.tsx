@@ -10,7 +10,7 @@ const Education = () => {
     useEffect(()=>{
         (async () => {
             if (typeof window !== "undefined"){
-                const newClient = (await import ('@/Components/General/Dashboard/Education')).default;
+                const newClient = (await import ('@/Components/General/Dashboard/Dashboard')).default;
                 setClient(()=> newClient);
             }
         })();
