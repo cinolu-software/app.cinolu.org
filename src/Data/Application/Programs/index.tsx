@@ -62,7 +62,7 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     {
         name: "Nom",
         cell: (row: ReceiveProgramsType) => (
-            <ProgramsListTableName image={row.image} name={row.name}/>
+            <ProgramsListTableName image={'/assets/images/programs/programs.png'} name={row.name}/>
         ),
         sortable: true,
         grow: 2,

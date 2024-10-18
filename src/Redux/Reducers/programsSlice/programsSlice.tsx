@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import axios ,{apiBaseUrl, imageBaseUrl} from "@/services/axios";
+import axiosInstance ,{apiBaseUrl, imageBaseUrl} from "@/services/axios";
 import {CreateProgramType, FormValueType, InitialStateProgramsType, ReceiveProgramsType,} from "@/Types/Programs/ProgramsType";
 import {RootState} from "@/Redux/Store";
 
@@ -56,41 +56,38 @@ const initialState: InitialStateProgramsType = {
     }
 };
 
-const transformPrograms = (programs: ReceiveProgramsType[]): ReceiveProgramsType[] => {
-    return programs.map((program) => {
-        if (program.attachments.length > 0) {
-            const image = program.attachments[0].name;
-            if (image) {
-                return {
-                    ...program,
-                    image: `${imageBaseUrl}/attachments/${image}`
-                };
-            }
-        }
-        return {
-            ...program,
-            image: "/assets/images/programs/programs.png"
-        };
-    });
-};
+// const transformPrograms = (programs: ReceiveProgramsType[]): ReceiveProgramsType[] => {
+//     return programs.map((program) => {
+//         if (program.attachments.length > 0) {
+//             const image = program.attachments[0].name;
+//             if (image) {
+//                 return {
+//                     ...program,
+//                     image: `${imageBaseUrl}/attachments/${image}`
+//                 };
+//             }
+//         }
+//         return {
+//             ...program,
+//             image: "/assets/images/programs/programs.png"
+//         };
+//     });
+// };
 
 export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {
 
-        const response = await axios.get<{ data: ReceiveProgramsType[] }>(`${apiBaseUrl}/programs`);
+        const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`);
+        const originalPrograms = response.data.data.programs;
 
-        const originalPrograms = response.data.data;
-
-        const transformedPrograms = transformPrograms(originalPrograms);
-
-        return { original: transformedPrograms };
-
+        // const transformedPrograms = transformPrograms(originalPrograms);
+        return { original: originalPrograms };
     }
 );
 
 export const createProgram = createAsyncThunk<ReceiveProgramsType, CreateProgramType, { rejectValue: any }>('programs/createProgram', async (newProgram, thunkAPI) => {
 
     try {
-            const response = await axios.post<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
+            const response = await axiosInstance.post<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
 
             return response.data.data;
 
@@ -101,7 +98,6 @@ export const createProgram = createAsyncThunk<ReceiveProgramsType, CreateProgram
     }
 );
 
-
 export const uploadProgramImage = createAsyncThunk<void, { programId: number | undefined, imageFile: File }, {rejectValue: any}>('programs/uploadProgramImage', async ({ programId, imageFile }, { rejectWithValue }) => {
 
         const formData = new FormData();
@@ -109,7 +105,7 @@ export const uploadProgramImage = createAsyncThunk<void, { programId: number | u
         formData.append('attachment', imageFile);
 
         try {
-            await axios.post(`${apiBaseUrl}/programs/attachment/${programId}`, formData, {
+            await axiosInstance.post(`${apiBaseUrl}/programs/attachment/${programId}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -125,7 +121,7 @@ export const uploadProgramImage = createAsyncThunk<void, { programId: number | u
 export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: number, updatedProgram: CreateProgramType }, { rejectValue: any }>('programs/updateProgram', async ({ programId, updatedProgram }, thunkAPI) => {
 
         try {
-            const response = await axios.put<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/${programId}`, updatedProgram);
+            const response = await axiosInstance.put<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/${programId}`, updatedProgram);
 
             return response.data.data;
 

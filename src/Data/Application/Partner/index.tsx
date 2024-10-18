@@ -42,7 +42,7 @@ export const PartnerListTableDataColumn = [
         name: "Name",
         cell:(row: PartnerListTableColumnType) => <PartnerListTableName image={"programs/types/typeProgram.png"} name={row.name}/>,
         sortable: true,
-        grow: 1
+        grow: 3
     },
     {
         name: "Actions",

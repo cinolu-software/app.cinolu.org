@@ -1,36 +1,22 @@
 import React, { useMemo, useState, useEffect } from "react";
-
 import DataTable from "react-data-table-component";
-
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-
 import { ProgramsHeader } from "./ProgramsList";
-
 import {  fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
-
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
-
 import DeleteProgramsModal from "./DeleteProgramsModal";
-
 import ModalCreatePrograms from "./ModalCreatePrograms";
-
 import ModalUpdatePrograms from "./ModalUpdatePrograms";
-
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-
 import {RootState} from "@/Redux/Store";
-
 import {CollapseFilterData} from "./CollapseFilterData";
 
 
 const ProgramsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
-
     const dispatch = useAppDispatch();
-
     const {status, originalProgramsData} = useAppSelector((state: RootState) => state.programs);
-
     const filteredItems = originalProgramsData.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
 
@@ -48,8 +34,12 @@ const ProgramsListContainer = () => {
         if (status === "idle") {
             dispatch(fetchPrograms());
         }
+
     }, [status, dispatch]);
 
+    useEffect(() => {
+        console.log("====>", originalProgramsData)
+    }, []);
 
 
     return (

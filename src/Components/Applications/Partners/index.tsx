@@ -7,7 +7,7 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {PartnerListTableColumnType} from "@/Types/PartnerType/PartnerType";
 import {PartnerListTableDataColumn} from "@/Data/Application/Partner";
 import {setModalEditPartner, setModalDeletePartner, setModalCreatePartner, fetchPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
-import {fetchPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
+
 import PartnerShipList from "@/Components/Applications/PartnersShip/PartnerShipList";
 import {PartnerShipListTableDataColumn} from "@/Data/Application/PartnerShip";
 import {PartnerShipListTableColumnType} from "@/Types/PartnerShipTypes/PartnerShipType";
@@ -36,7 +36,7 @@ const PartnersListContainer = () => {
 
     useEffect(() => {
         if (status === "idle") {
-            dispatch(fetchPartnerShip());
+            dispatch(fetchPartner());
         }
     }, [status, dispatch]);
     const filteredPartner = partnerData.filter(partner =>
