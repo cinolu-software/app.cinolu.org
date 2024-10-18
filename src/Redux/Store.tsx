@@ -10,7 +10,6 @@ import ProgramsTypeSlice from "./Reducers/programsSlice/programsTypeSlice";
 import FilterSlice from "./Reducers/FilterSlice";
 import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
 import NotificationSlice from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
-import StaffSlice from "@/Redux/Reducers/StaffSlice/StaffSlice";
 import PartnerShipSlice from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 import PartnerSlice from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 
@@ -26,16 +25,13 @@ const Store = configureStore({
     role: RoleSlice,
     filterData: FilterSlice,
     auth: AuthSlice,
-    staff: StaffSlice,
     partnerShip: PartnerShipSlice,
     partner: PartnerSlice,
     otherProgram : OtherSlice,
     notifications: NotificationSlice,
   },
-  
 
   middleware: getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
-  
 });
 
 export default Store;
