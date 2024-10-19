@@ -36,11 +36,6 @@ const DeleteProgramModal = () => {
                         <h4 className="text-center pb-2">
                             Êtes-vous sûr de vouloir supprimer ce programme ?
                         </h4>
-                        {selectedProgramData && (
-                            <p className="text-center">
-                                Vous êtes sur le point de supprimer ce programme : <strong>{selectedProgramData.name}</strong>
-                            </p>
-                        )}
                         <div className="d-flex justify-content-center mt-5">
                             <Button
                                 color="secondary"
