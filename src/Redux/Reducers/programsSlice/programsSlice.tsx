@@ -68,6 +68,9 @@ const ProgramSlice = createSlice({
     name: "programs",
     initialState,
     reducers: {
+        setSelectedProgram: (state, action: PayloadAction<{program: ReceiveProgramsType | null}>) => {
+            state.selectedProgram = action.payload.program;
+        },
         setModalCreateProgram: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateProgram = action.payload.isOpen;
         },
@@ -152,6 +155,6 @@ const ProgramSlice = createSlice({
     }
 });
 
-export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setNavId, setTabId, setFormValue, setEditFormValue, setFilterToggle } = ProgramSlice.actions;
+export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, setNavId, setTabId, setFormValue, setEditFormValue, setFilterToggle, setSelectedProgram } = ProgramSlice.actions;
 export const selectSelectedProgram = (state: RootState) => state.programs.selectedProgram;
 export default ProgramSlice.reducer;

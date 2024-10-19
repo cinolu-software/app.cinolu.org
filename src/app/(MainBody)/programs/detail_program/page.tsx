@@ -2,7 +2,7 @@
 
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
-const EditProgram = () => {
+const DetailProgram = () => {
     const [MyAwesomeMap, setClient] = useState<FunctionComponent>();
 
     useEffect(() => {
@@ -17,4 +17,4 @@ const EditProgram = () => {
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
 
-export default EditProgram;
+export default DetailProgram;

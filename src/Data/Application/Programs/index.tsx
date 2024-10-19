@@ -1,17 +1,12 @@
 import React from 'react';
-
 import {ReceiveProgramsType} from "@/Types/Programs/ProgramsType";
-
 import RatioImage from "@/CommonComponent/RatioImage";
-
 import {useDispatch} from "react-redux";
-
-import {setModalDeleteProgram, setModalEditProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
-
+import {setModalDeleteProgram, setModalEditProgram, setSelectedProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
 import {TableColumn} from "react-data-table-component";
-
-import SVG from "@/CommonComponent/SVG";
 import {Button} from "reactstrap";
+import Link from 'next/link'
+import {useRouter} from "next/navigation";
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -30,33 +25,29 @@ const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image
 const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
 
     const dispatch = useDispatch();
+    const router = useRouter();
 
     const handleEdit = () => {
-        dispatch(setModalEditProgram({isOpen: true, program}));
+        // dispatch(setModalEditProgram({isOpen: true, program}));
+        dispatch(setSelectedProgram(program));
+        router.push('/programs/edit_program');
     };
 
     const handleDelete = () => {
         dispatch(setModalDeleteProgram({isOpen: true, program}));
     };
 
+    const handleDetail = () => {
+        dispatch(setSelectedProgram(program));
+        router.push('/programs/edit_program');
+    }
+
     return (
 
         <div className={"product-action"}>
-            {/*<div className={'row'}>*/}
-            {/*    <div className={'col'}>*/}
-            {/*         <span onClick={handleEdit}>*/}
-            {/*            <SVG iconId={"edit-content"}/>*/}
-            {/*         </span>*/}
-            {/*    </div>*/}
-            {/*    <div className={'col'}>*/}
-            {/*        <span onClick={handleDelete}>*/}
-            {/*            <SVG iconId={"trash1"}/>*/}
-            {/*        </span>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
             <div className={'product-action'}>
                 <Button color={'outline-primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
-                <Button color={'outline-dark'} className={'me-2'} onClick={handleEdit}>Détail</Button>
+                <Button color={'outline-dark'} className={'me-2'} onClick={handleDetail}>Détail</Button>
                 <Button color={'outline-danger'} onClick={handleDelete}>Supprimer</Button>
             </div>
         </div>
