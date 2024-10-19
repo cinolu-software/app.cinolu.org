@@ -18,7 +18,7 @@ const ProgramLeftSidebar = () => {
                         <NavLink className="border-0" active={navId === data.id} onClick={()=>dispatch(setNavId(data.id))}>
                             <div className="nav-rounded">
                                 <div className="product-icons">
-                                    <SVG className="stroke-icon" iconId={data.icon} />
+                                    {/*<SVG className="stroke-icon" iconId={data.icon} />*/}
                                 </div>
                             </div>
                             <div className="product-tab-content">

@@ -5,7 +5,6 @@ import { ProgramsHeader } from "./ProgramsList";
 import {  fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
 import DeleteProgramsModal from "./DeleteProgramsModal";
-import ModalCreatePrograms from "./ModalCreatePrograms";
 import ModalUpdatePrograms from "./ModalUpdatePrograms";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
@@ -41,7 +40,6 @@ const ProgramsListContainer = () => {
     return (
         <Container fluid>
             <ModalUpdatePrograms/>
-            <ModalCreatePrograms />
             <DeleteProgramsModal />
             <Row>
                 <Col sm="12">
