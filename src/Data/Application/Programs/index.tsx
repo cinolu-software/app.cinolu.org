@@ -96,33 +96,33 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
 export const AddProgram = [
     {
       id: 1,
-      icon: "info",
+      // icon: "info",
       title: "Information du programme",
       detail:"Nom et Description",
     },
     {
       id: 2,
-      icon: "calendar",
+      // icon: "calendar",
       title: "Durée du programme",
       detail: "date de début et de fin"
     },
     {
       id: 3,
-      icon: "type",
+      // icon: "type",
       title: "Type de programme",
       detail: "Sélectionner le type de programme"
     },
     {
       id: 4,
       // icon: "pricing",
-      icon: "requirement",
+      // icon: "requirement",
       title: "Exigence",
       detail: "Requirements"
     },
     {
         id: 5,
         // icon: "pricing",
-        icon: "partners",
+        // icon: "partners",
         title: "Partenaires",
         detail: "Partenaires"
       },

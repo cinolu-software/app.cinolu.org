@@ -3,6 +3,7 @@ import StepFour from "./StepFour";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import StepFive from "./StepFive";
 import CommonButton from "../CommonButton";
 import { useAppSelector } from "@/Redux/Hooks";
 
@@ -27,8 +28,10 @@ const ProgramTabContent = () => {
                     <TabPane tabId={4}>
                         <StepFour />
                     </TabPane>
+                    <TabPane tabId={5}>
+                        <StepFive />
+                    </TabPane>
                 </TabContent>
-
             </Col>
             {/*<CommonButton />*/}
         </>
