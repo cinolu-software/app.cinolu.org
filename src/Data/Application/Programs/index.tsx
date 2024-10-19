@@ -11,6 +11,7 @@ import {setModalDeleteProgram, setModalEditProgram} from "@/Redux/Reducers/progr
 import {TableColumn} from "react-data-table-component";
 
 import SVG from "@/CommonComponent/SVG";
+import {Button} from "reactstrap";
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -41,17 +42,22 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
     return (
 
         <div className={"product-action"}>
-            <div className={'row'}>
-                <div className={'col'}>
-                     <span onClick={handleEdit}>
-                        <SVG iconId={"edit-content"}/>
-                     </span>
-                </div>
-                <div className={'col'}>
-                    <span onClick={handleDelete}>
-                        <SVG iconId={"trash1"}/>
-                    </span>
-                </div>
+            {/*<div className={'row'}>*/}
+            {/*    <div className={'col'}>*/}
+            {/*         <span onClick={handleEdit}>*/}
+            {/*            <SVG iconId={"edit-content"}/>*/}
+            {/*         </span>*/}
+            {/*    </div>*/}
+            {/*    <div className={'col'}>*/}
+            {/*        <span onClick={handleDelete}>*/}
+            {/*            <SVG iconId={"trash1"}/>*/}
+            {/*        </span>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
+            <div className={'product-action'}>
+                <Button color={'outline-primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
+                <Button color={'outline-dark'} className={'me-2'} onClick={handleEdit}>Détail</Button>
+                <Button color={'outline-danger'} onClick={handleDelete}>Supprimer</Button>
             </div>
         </div>
     );
@@ -67,13 +73,13 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
         sortable: true,
         grow: 1,
     },
-    {
-        name: "Description",
-        selector: (row: ReceiveProgramsType) => row.description,
-        sortable: false,
-        grow: 1
-
-    },
+    // {
+    //     name: "Description",
+    //     selector: (row: ReceiveProgramsType) => row.description,
+    //     sortable: false,
+    //     grow: 1
+    //
+    // },
     {
         name: "Date de début",
         selector: (row: ReceiveProgramsType) => row.start_at,
@@ -89,7 +95,7 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     {
         name: "Action",
         cell: (row: ReceiveProgramsType) => <ProgramsListTableAction program={row}/>,
-        grow: 1
+        grow: 2
     },
 ];
 
