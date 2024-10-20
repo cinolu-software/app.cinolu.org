@@ -15,7 +15,7 @@ const ProgramsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {status, originalProgramsData} = useAppSelector((state: RootState) => state.programs);
+    const {status, originalProgramsData, selectedProgram} = useAppSelector((state: RootState) => state.programs);
     const filteredItems = originalProgramsData.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
 
@@ -35,6 +35,8 @@ const ProgramsListContainer = () => {
         }
 
     }, [status, dispatch]);
+
+
 
 
     return (

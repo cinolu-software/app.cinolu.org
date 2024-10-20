@@ -30,8 +30,7 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
 
 const StepOne: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { formValue } = useAppSelector((state) => state.programs);
-    const selectedProgram = useAppSelector(selectSelectedProgram);
+    const { formValue, selectedProgram } = useAppSelector((state) => state.programs);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setFormValue({ field: 'name', value: e.target.value }));
@@ -40,6 +39,8 @@ const StepOne: React.FC = () => {
     const handleDescriptionChange = useCallback((value: string) => {
         dispatch(setFormValue({ field: 'description', value }));
     }, [dispatch]);
+
+
 
     return (
         <Form className="theme-form theme-form-2 mega-form">

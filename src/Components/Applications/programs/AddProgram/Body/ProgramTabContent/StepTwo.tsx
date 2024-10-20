@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Col, Form, Label, Row, InputGroup, Card, CardBody } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
@@ -7,12 +7,24 @@ import Calendar from "react-calendar";
 import { Value } from 'react-calendar/dist/cjs/shared/types';
 
 const StepTwo = () => {
-
-    const { formValue } = useAppSelector((state) => state.programs);
+    const { formValue, selectedProgram } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
+
 
     const [startDate, setStartDate] = useState<Date | null>(formValue?.start_at ? new Date(formValue.start_at) : null);
     const [endDate, setEndDate] = useState<Date | null>(formValue?.end_at ? new Date(formValue.end_at) : null);
+
+
+    useEffect(() => {
+        if (selectedProgram) {
+            if (selectedProgram.start_at) {
+                setStartDate(new Date(selectedProgram.start_at));
+            }
+            if (selectedProgram.end_at) {
+                setEndDate(new Date(selectedProgram.end_at));
+            }
+        }
+    }, [selectedProgram]);
 
     const handleStartDateChange = (value: Value) => {
         if (value instanceof Date) {

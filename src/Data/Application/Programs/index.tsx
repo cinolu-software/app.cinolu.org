@@ -7,10 +7,10 @@ import {TableColumn} from "react-data-table-component";
 import {Button} from "reactstrap";
 import Link from 'next/link'
 import {useRouter} from "next/navigation";
+import {useAppSelector} from "@/Redux/Hooks";
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
-
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -19,7 +19,6 @@ const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image
             <p>{name}</p>
         </div>
     );
-
 };
 
 const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
@@ -28,8 +27,7 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
     const router = useRouter();
 
     const handleEdit = () => {
-        // dispatch(setModalEditProgram({isOpen: true, program}));
-        dispatch(setSelectedProgram(program));
+        dispatch(setSelectedProgram({ program }));
         router.push('/programs/edit_program');
     };
 
@@ -38,12 +36,11 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
     };
 
     const handleDetail = () => {
-        dispatch(setSelectedProgram(program));
-        router.push('/programs/edit_program');
+        dispatch(setSelectedProgram({ program }));
+        router.push('/programs/detail_program');
     }
 
     return (
-
         <div className={"product-action"}>
             <div className={'product-action'}>
                 <Button color={'outline-primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
