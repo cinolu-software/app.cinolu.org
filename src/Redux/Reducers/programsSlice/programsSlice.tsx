@@ -52,7 +52,7 @@ export const createProgram = createAsyncThunk<ReceiveProgramsType, CreateProgram
     }
 );
 
-export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: number, updatedProgram: CreateProgramType }, { rejectValue: any }>(
+export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: string, updatedProgram: any }, { rejectValue: any }>(
     'programs/updateProgram',
     async ({ programId, updatedProgram }, thunkAPI) => {
         try {

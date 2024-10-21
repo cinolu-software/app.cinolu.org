@@ -1,36 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Col, Label, Row, Table } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
-import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
+import { setEditFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import { RequirementType } from '@/Types/Programs/ProgramsType';
 
 const StepFour: React.FC = () => {
     const dispatch = useAppDispatch();
-    const formValue = useAppSelector((state) => state.programs.formValue);
+    const {EditFormValue} = useAppSelector((state) => state.programs);
+    
 
     const [newRequirement, setNewRequirement] = useState<RequirementType>({ name: '', description: '' });
 
     const [requirements, setRequirements] = useState<RequirementType[]>(
         // @ts-ignore
-        Array.isArray(formValue?.requirements)
-            ? formValue.requirements
+        Array.isArray(EditFormValue?.requirements)
+            ? EditFormValue.requirements
             : []
     );
 
     useEffect(() => {
         setRequirements(
             // @ts-ignore
-            Array.isArray(formValue?.requirements)
-                ? formValue.requirements
+            Array.isArray(EditFormValue?.requirements)
+                ? EditFormValue.requirements
                 : []
         );
-    }, [formValue]);
+    }, [EditFormValue]);
 
     const handleAddRequirement = () => {
         if (newRequirement.name && newRequirement.description) {
             const updatedRequirements = [...requirements, newRequirement];
             setRequirements(updatedRequirements);
-            dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
+            dispatch(setEditFormValue({ field: 'requirements', value: updatedRequirements }));
             setNewRequirement({ name: '', description: '' });
         }
     };
@@ -38,7 +39,7 @@ const StepFour: React.FC = () => {
     const handleRemoveRequirement = (index: number) => {
         const updatedRequirements = requirements.filter((_, i) => i !== index);
         setRequirements(updatedRequirements);
-        dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
+        dispatch(setEditFormValue({ field: 'requirements', value: updatedRequirements }));
     };
 
     return (

@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { Col, Form, Input, Label, Row } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
-import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
+import { setEditFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import SimpleMdeReact from 'react-simplemde-editor';
 import { selectSelectedProgram } from '@/Redux/Reducers/programsSlice/programsSlice';
 
@@ -30,14 +30,14 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
 
 const StepOne: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { formValue, selectedProgram } = useAppSelector((state) => state.programs);
+    const { EditFormValue, selectedProgram } = useAppSelector((state) => state.programs);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setFormValue({ field: 'name', value: e.target.value }));
+        dispatch(setEditFormValue({ field: 'name', value: e.target.value }));
     };
 
     const handleDescriptionChange = useCallback((value: string) => {
-        dispatch(setFormValue({ field: 'description', value }));
+        dispatch(setEditFormValue({ field: 'description', value }));
     }, [dispatch]);
 
 
@@ -48,18 +48,18 @@ const StepOne: React.FC = () => {
                 <Col xs="12">
                     <Label className="col-form-label">{"Nom du programme"}</Label>
                     <Input
-                        className={formValue?.name !== "" ? "valid" : "is-invalid"}
+                        className={EditFormValue?.name !== "" ? "valid" : "is-invalid"}
                         type="text"
                         required
                         name="name"
-                        value={formValue?.name || selectedProgram?.name || ""}
+                        value={EditFormValue?.name || selectedProgram?.name || ""}
                         onChange={handleNameChange}
                     />
                 </Col>
                 <Col xs="12">
                     <Label className="col-form-label">{"Description du programme"}</Label>
                     <FormEditors
-                        description={formValue?.description || selectedProgram?.description || ''}
+                        description={EditFormValue?.description || selectedProgram?.description || ''}
                         onChangeDescription={handleDescriptionChange}
                     />
                 </Col>

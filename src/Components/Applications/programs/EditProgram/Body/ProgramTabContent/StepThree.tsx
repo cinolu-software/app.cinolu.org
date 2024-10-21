@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Col, Row, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setEditFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 const StepThree = () => {
 
     const dispatch = useAppDispatch();
-    const { formValue } = useAppSelector((state) => state.programs);
+    const { EditFormValue } = useAppSelector((state) => state.programs);
     const { transformedProgramsData, status } = useAppSelector((state) => state.programsType);
 
     useEffect(() => {
@@ -17,13 +17,13 @@ const StepThree = () => {
     }, [dispatch, status]);
 
     const handleTypeChange = (typeId: string) => {
-        if (!formValue) return;
+        if (!EditFormValue) return;
 
-        const updatedTypes = formValue.types.includes(typeId)
-            ? formValue.types.filter(id => id !== typeId)
-            : [...formValue.types, typeId];
+        const updatedTypes = EditFormValue.types.includes(typeId)
+            ? EditFormValue.types.filter(id => id !== typeId)
+            : [...EditFormValue.types, typeId];
 
-        dispatch(setFormValue({ field: 'types', value: updatedTypes }));
+        dispatch(setEditFormValue({ field: 'types', value: updatedTypes }));
     };
 
 
@@ -43,7 +43,7 @@ const StepThree = () => {
                                 <Input
                                     id={`type${type.id}`}
                                     type="checkbox"
-                                    checked={formValue?.types.includes(type.id)}
+                                    checked={EditFormValue?.types.includes(type.id)}
                                     onChange={() => handleTypeChange(type.id)}
                                 />
                                 <div className="custom--mega-checkbox">

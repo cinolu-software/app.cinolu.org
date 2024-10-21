@@ -9,13 +9,11 @@ const StepThree = () => {
     const { formValue, selectedProgram } = useAppSelector((state) => state.programs);
     const { transformedProgramsData, status } = useAppSelector((state) => state.programsType);
 
-
     useEffect(() => {
         if (status === 'idle') {
             dispatch(fetchProgramsType());
         }
     }, [dispatch, status]);
-
 
     useEffect(() => {
         if (selectedProgram && selectedProgram.types.length > 0) {
@@ -24,7 +22,6 @@ const StepThree = () => {
         }
     }, [selectedProgram, dispatch]);
 
-    
     const handleTypeChange = (typeId: string) => {
         if (!formValue) return;
 
