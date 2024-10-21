@@ -15,10 +15,8 @@ const ProgramsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {status, originalProgramsData, selectedProgram} = useAppSelector((state: RootState) => state.programs);
+    const {status, originalProgramsData } = useAppSelector((state: RootState) => state.programs);
     const filteredItems = originalProgramsData.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
-
-
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -26,17 +24,13 @@ const ProgramsListContainer = () => {
                 <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
             </div>
         );
-
     }, [filterText]);
 
     useEffect(() => {
         if (status === "idle") {
             dispatch(fetchPrograms());
         }
-
     }, [status, dispatch]);
-
-
 
 
     return (

@@ -29,7 +29,9 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
 };
 
 const StepOne: React.FC = () => {
+
     const dispatch = useAppDispatch();
+
     const { EditFormValue, selectedProgram } = useAppSelector((state) => state.programs);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +54,7 @@ const StepOne: React.FC = () => {
                         type="text"
                         required
                         name="name"
-                        value={EditFormValue?.name || selectedProgram?.name || ""}
+                        value={EditFormValue?.name  || ''}
                         onChange={handleNameChange}
                     />
                 </Col>

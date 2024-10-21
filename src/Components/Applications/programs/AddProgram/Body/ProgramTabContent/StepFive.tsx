@@ -16,13 +16,12 @@ const StepFive = () => {
         }
     }, [dispatch, status]);
 
+
     const handlePartnerChange = (partnerId: string) => {
         if(!formValue) return;
-
         const updatedPatner = formValue.partners.includes(partnerId)
         ? formValue.partners.filter(id => id !== partnerId)
             : [...formValue.partners, partnerId];
-
         dispatch(setFormValue({field: 'partners', value: updatedPatner}))
     }
 

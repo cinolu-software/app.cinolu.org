@@ -6,7 +6,7 @@ import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSl
 
 const StepThree = () => {
     const dispatch = useAppDispatch();
-    const { formValue, selectedProgram } = useAppSelector((state) => state.programs);
+    const { formValue } = useAppSelector((state) => state.programs);
     const { transformedProgramsData, status } = useAppSelector((state) => state.programsType);
 
     useEffect(() => {
@@ -14,13 +14,6 @@ const StepThree = () => {
             dispatch(fetchProgramsType());
         }
     }, [dispatch, status]);
-
-    useEffect(() => {
-        if (selectedProgram && selectedProgram.types.length > 0) {
-            const selectedTypesIds = selectedProgram.types.map(type => type.id);
-            dispatch(setFormValue({ field: 'types', value: selectedTypesIds }));
-        }
-    }, [selectedProgram, dispatch]);
 
     const handleTypeChange = (typeId: string) => {
         if (!formValue) return;

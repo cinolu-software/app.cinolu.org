@@ -56,7 +56,7 @@ export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: 
     'programs/updateProgram',
     async ({ programId, updatedProgram }, thunkAPI) => {
         try {
-            const response = await axiosInstance.put<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/${programId}`, updatedProgram);
+            const response = await axiosInstance.patch<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/${programId}`, updatedProgram);
             return response.data.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);

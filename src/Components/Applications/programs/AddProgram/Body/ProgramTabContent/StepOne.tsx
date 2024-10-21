@@ -29,9 +29,9 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
 };
 
 const StepOne: React.FC = () => {
+
     const dispatch = useAppDispatch();
     const { formValue } = useAppSelector((state) => state.programs);
-    const selectedProgram = useAppSelector(selectSelectedProgram);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch(setFormValue({ field: 'name', value: e.target.value }));
@@ -40,6 +40,7 @@ const StepOne: React.FC = () => {
     const handleDescriptionChange = useCallback((value: string) => {
         dispatch(setFormValue({ field: 'description', value }));
     }, [dispatch]);
+
 
     return (
         <Form className="theme-form theme-form-2 mega-form">
@@ -51,16 +52,13 @@ const StepOne: React.FC = () => {
                         type="text"
                         required
                         name="name"
-                        value={formValue?.name || selectedProgram?.name || ""}
+                        value={formValue?.name  || ""}
                         onChange={handleNameChange}
                     />
                 </Col>
                 <Col xs="12">
                     <Label className="col-form-label">{"Description du programme"}</Label>
-                    <FormEditors
-                        description={formValue?.description || selectedProgram?.description || ''}
-                        onChangeDescription={handleDescriptionChange}
-                    />
+                    <FormEditors description={formValue?.description || ''} onChangeDescription={handleDescriptionChange}/>
                 </Col>
             </Row>
         </Form>
