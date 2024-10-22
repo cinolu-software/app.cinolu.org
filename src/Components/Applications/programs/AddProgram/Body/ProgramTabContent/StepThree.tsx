@@ -5,6 +5,7 @@ import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 const StepThree = () => {
+
     const dispatch = useAppDispatch();
     const { formValue } = useAppSelector((state) => state.programs);
     const { transformedProgramsData, status } = useAppSelector((state) => state.programsType);
@@ -19,7 +20,7 @@ const StepThree = () => {
         if (!formValue) return;
 
         const updatedTypes = formValue.types.includes(typeId)
-            ? formValue.types.filter(id => id !== typeId)
+            ? formValue.types.filter((id: string) => id !== typeId)
             : [...formValue.types, typeId];
 
         dispatch(setFormValue({ field: 'types', value: updatedTypes }));

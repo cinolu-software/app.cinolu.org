@@ -7,7 +7,7 @@ import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
 const StepFive = () => {
 
     const dispatch = useAppDispatch();
-    const {formValue, isOpenModalCreateProgram} = useAppSelector((state)=>state.programs);
+    const {formValue} = useAppSelector((state)=>state.programs);
     const {partnerData, status} = useAppSelector((state)=>state.partner);
 
     useEffect(() => {
