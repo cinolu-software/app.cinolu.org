@@ -64,6 +64,18 @@ export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: 
     }
 );
 
+export const deleteProgram = createAsyncThunk<{ id: string }, string, { rejectValue: any }>(
+    'programs/deleteProgram',
+    async (programId, thunkAPI) => {
+        try {
+            await axiosInstance.delete(`${apiBaseUrl}/programs/${programId}`);
+            return { id: programId };
+        } catch (err: any) {
+            return thunkAPI.rejectWithValue(err.response.data);
+        }
+    }
+);
+
 const ProgramSlice = createSlice({
     name: "programs",
     initialState,
@@ -149,6 +161,19 @@ const ProgramSlice = createSlice({
                 }
             })
             .addCase(updateProgram.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Something went wrong';
+            })
+            .addCase(deleteProgram.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(deleteProgram.fulfilled, (state, action: PayloadAction<{ id: string }>) => {
+                state.status = 'succeeded';
+                state.originalProgramsData = state.originalProgramsData.filter(
+                    (program) => program.id !== action.payload.id
+                );
+            })
+            .addCase(deleteProgram.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             });

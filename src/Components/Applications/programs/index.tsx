@@ -5,10 +5,10 @@ import { ProgramsHeader } from "./ProgramsList";
 import {  fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
 import DeleteProgramsModal from "./DeleteProgramsModal";
-import ModalUpdatePrograms from "./ModalUpdatePrograms";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
 import {CollapseFilterData} from "./CollapseFilterData";
+import { ToastContainer} from "react-toastify";
 
 
 const ProgramsListContainer = () => {
@@ -35,7 +35,6 @@ const ProgramsListContainer = () => {
 
     return (
         <Container fluid>
-            <ModalUpdatePrograms/>
             <DeleteProgramsModal />
             <Row>
                 <Col sm="12">
@@ -63,6 +62,7 @@ const ProgramsListContainer = () => {
                     </Card>
                 </Col>
             </Row>
+            <ToastContainer/>
         </Container>
     );
 };

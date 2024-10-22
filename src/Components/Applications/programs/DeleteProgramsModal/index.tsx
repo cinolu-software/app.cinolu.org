@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalDeleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { toast, ToastContainer, Flip } from "react-toastify";
 
 const DeleteProgramModal = () => {
 
@@ -12,9 +13,34 @@ const DeleteProgramModal = () => {
 
     const selectedProgramData = originalProgramsData.find((item) => item.id === selectedProgram?.id);
 
-    const handleDelete = () => {
+    const handleDelete = async () => {
+
         if (selectedProgramData && selectedProgramData.id !== undefined) {
-            dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
+            try {
+                await dispatch(deleteProgram(selectedProgramData.id)).unwrap();
+                dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
+                toast.success(
+                    <p className="text-white tx-16 mb-0">{"Suppression effectuée avec succès"}</p>,
+                    {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        hideProgressBar: false,
+                        transition: Flip,
+                        theme: "colored",
+                    }
+                );
+            } catch (error) {
+                toast.error(
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la suppression du programme"}</p>,
+                    {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        hideProgressBar: false,
+                        transition: Flip,
+                        theme: "colored",
+                    }
+                );
+            }
         }
     };
 
@@ -50,11 +76,13 @@ const DeleteProgramModal = () => {
                         </div>
                     </div>
                 </CommonModal>
+                <ToastContainer />
             </CardBody>
         </Col>
     );
 };
 
 export default DeleteProgramModal;
+
 
 
