@@ -80,8 +80,19 @@ const ProgramSlice = createSlice({
     name: "programs",
     initialState,
     reducers: {
-        setSelectedProgram: (state, action: PayloadAction<{program: ReceiveProgramsType | null}>) => {
+        setSelectedProgram: (state, action: PayloadAction<{ program: ReceiveProgramsType | null }>) => {
             state.selectedProgram = action.payload.program;
+            if (action.payload.program) {
+                state.EditFormValue = {
+                    name: action.payload.program.name,
+                    description: action.payload.program.description,
+                    start_at: action.payload.program.start_at,
+                    end_at: action.payload.program.end_at,
+                    types: action.payload.program.types || [],
+                    requirements: action.payload.program.requirements || [],
+                    partners: action.payload.program.partners || []
+                };
+            }
         },
         setModalCreateProgram: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateProgram = action.payload.isOpen;

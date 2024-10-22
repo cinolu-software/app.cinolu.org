@@ -47,7 +47,7 @@ export interface FormValueType {
     description: string;
     start_at: string;
     end_at: string;
-    types: string[];
+    types: any;
     requirements: RequirementType[];
     partners: string[];
 }
