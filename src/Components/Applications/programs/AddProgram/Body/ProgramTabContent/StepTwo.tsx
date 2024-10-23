@@ -11,22 +11,22 @@ const StepTwo = () => {
     const dispatch = useAppDispatch();
 
 
-    const [startDate, setStartDate] = useState<Date | null>(formValue?.start_at ? new Date(formValue.start_at) : null);
-    const [endDate, setEndDate] = useState<Date | null>(formValue?.end_at ? new Date(formValue.end_at) : null);
+    const [startDate, setStartDate] = useState<Date | null>(formValue?.started_at ? new Date(formValue.started_at) : null);
+    const [endDate, setEndDate] = useState<Date | null>(formValue?.ended_at ? new Date(formValue.ended_at) : null);
 
 
 
     const handleStartDateChange = (value: Value) => {
         if (value instanceof Date) {
             setStartDate(value);
-            dispatch(setFormValue({ field: 'start_at', value: value.toISOString().split("T")[0] }));
+            dispatch(setFormValue({ field: 'started_at', value: value.toISOString().split("T")[0] }));
         }
     };
 
     const handleEndDateChange = (value: Value) => {
         if (value instanceof Date) {
             setEndDate(value);
-            dispatch(setFormValue({ field: 'end_at', value: value.toISOString().split("T")[0] }));
+            dispatch(setFormValue({ field: 'ended_at', value: value.toISOString().split("T")[0] }));
         }
     };
 

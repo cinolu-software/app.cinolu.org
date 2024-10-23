@@ -70,13 +70,13 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     // },
     {
         name: "Date de début",
-        selector: (row: ReceiveProgramsType) => row.start_at,
+        selector: (row: ReceiveProgramsType) => row.started_at,
         sortable: true,
         grow: 1
     },
     {
         name: "Date de fin",
-        selector: (row: ReceiveProgramsType) => row.end_at,
+        selector: (row: ReceiveProgramsType) => row.ended_at,
         sortable: true,
         grow: 1
     },

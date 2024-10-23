@@ -17,8 +17,8 @@ const initialState: InitialStateProgramsType = {
     formValue: {
         name: "",
         description: "",
-        start_at: "",
-        end_at: "",
+        started_at: "",
+        ended_at: "",
         types: [],
         requirements: [],
         partners: []
@@ -26,8 +26,8 @@ const initialState: InitialStateProgramsType = {
     EditFormValue: {
         name: "",
         description: "",
-        start_at: "",
-        end_at: "",
+        started_at: "",
+        ended_at: "",
         types: [],
         requirements: [],
         partners: []
@@ -110,8 +110,8 @@ const ProgramSlice = createSlice({
                 state.EditFormValue = {
                     name: action.payload.program.name,
                     description: action.payload.program.description,
-                    start_at: action.payload.program.start_at,
-                    end_at: action.payload.program.end_at,
+                    started_at: action.payload.program.started_at,
+                    ended_at: action.payload.program.ended_at,
                     types: action.payload.program.types || [],
                     requirements: action.payload.program.requirements || [],
                     partners: action.payload.program.partners || []

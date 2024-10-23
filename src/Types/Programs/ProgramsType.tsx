@@ -20,8 +20,8 @@ export type DataType = {
 export interface CreateProgramType {
     name: string;
     description: string;
-    start_at: string;
-    end_at: string;
+    started_at: string;
+    ended_at: string;
     types: number[];
     requirements: RequirementType[];
     partners: string[];
@@ -31,8 +31,8 @@ export interface ReceiveProgramsType {
     id: string;
     name: string;
     description: string;
-    start_at: string;
-    end_at: string;
+    started_at: string;
+    ended_at: string;
     image: string;
     attachments: AttachmentType[];
     types: DataType[];
@@ -45,8 +45,8 @@ export interface ReceiveProgramsType {
 export interface FormValueType {
     name: string;
     description: string;
-    start_at: string;
-    end_at: string;
+    started_at: string;
+    ended_at: string;
     types: any;
     requirements: RequirementType[];
     partners: string[];

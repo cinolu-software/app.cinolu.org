@@ -13,11 +13,10 @@ import { FilePond, registerPlugin } from "react-filepond";
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ImagePreview = () => {
-    const dispatch = useAppDispatch();
 
+    const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
     const { selectedProgram } = useAppSelector(state => state.programs);
-
     const handleUpdateImage = () => {
         if (files.length === 0) {
             toast.error(
@@ -35,7 +34,6 @@ const ImagePreview = () => {
 
         if (selectedProgram) {
             const imageFile = files[0].file as File;
-
 
             dispatch(updateAttachmentProgramImage({ programId: selectedProgram.id, imageFile })).unwrap()
                 .then(() => {

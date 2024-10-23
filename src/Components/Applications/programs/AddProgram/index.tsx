@@ -47,8 +47,8 @@ const AddProgramContainer: React.FC = () => {
             const isValid =
                 formValue?.name &&
                 formValue?.description &&
-                formValue?.start_at &&
-                formValue?.end_at &&
+                formValue?.started_at &&
+                formValue?.ended_at &&
                 formValue?.types?.length > 0 &&
                 formValue?.requirements?.length > 0 &&
                 formValue?.partners?.length > 0;
