@@ -22,7 +22,7 @@ const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image
     );
 };
 
-const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
+const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
 
     const dispatch = useDispatch();
     const router = useRouter();
@@ -33,7 +33,7 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
     };
 
     const handleDelete = () => {
-        dispatch(setModalDeleteProgram({isOpen: true, program}));
+        dispatch(setModalDeleteProgram({ isOpen: true, program }));
     };
 
     const handleDetail = () => {
@@ -42,16 +42,28 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({program}) => {
     }
 
     return (
-        <div className={"product-action"}>
-            <div className={'product-action'}>
-                <Button color={'outline-primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
-                <Button color={'outline-dark'} className={'me-2'} onClick={handleDetail}>Détail</Button>
-                <Button color={'outline-danger'} onClick={handleDelete}>Supprimer</Button>
+        <div className="product-action w-100">
+            <div className="row w-100">
+                <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
+                    <Button color="outline-primary" className="w-100" onClick={handleEdit}>
+                        Modifier
+                    </Button>
+                </div>
+                <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
+                    <Button color="outline-dark" className="w-100" onClick={handleDetail}>
+                        Détail
+                    </Button>
+                </div>
+                <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
+                    <Button color="outline-danger" className="w-100" onClick={handleDelete}>
+                        Supprimer
+                    </Button>
+                </div>
             </div>
         </div>
     );
-
 };
+
 
 export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     {
@@ -82,7 +94,7 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
         grow: 1
     },
     {
-        name: "Action",
+        name: "Actions",
         cell: (row: ReceiveProgramsType) => <ProgramsListTableAction program={row}/>,
         grow: 2
     },
