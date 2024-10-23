@@ -3,7 +3,11 @@ import { FormGroup, Input, Label } from "reactstrap";
 import React from "react";
 
 interface CommonUserFormGroupProps extends CommonUserFormGroupType {
-    name : string
+    name : string,
+    defaultValue: string
+    placeholder: string
+    title: string
+    type: any
 }
 
 const CommonUserFormGroup: React.FC<CommonUserFormGroupProps> = ({ type, title, placeholder, defaultValue, name }) => {

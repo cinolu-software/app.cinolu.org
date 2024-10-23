@@ -1,82 +1,11 @@
-import React from 'react';
-import { Card, CardBody, CardHeader, CardFooter, Col, Container, Row } from "reactstrap";
-import Body from "@/Components/Applications/programs/EditProgram/Body";
+import {Card, CardBody, Col, Nav, NavItem, NavLink, Container, Row} from "reactstrap";
+import React, {useState} from 'react'
+import ProgramEditTabContent from "@/Components/Applications/programs/EditProgram/ProgramEditTabContent";
 import Link from "next/link";
-import { toast, ToastContainer, Flip } from "react-toastify";
-import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
-import { updateProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
 
-const EditProgramContainer = () => {
+const EditProgramTabs = () => {
 
-    const { EditFormValue, selectedProgram } = useAppSelector(state => state.programs);
-    const dispatch = useAppDispatch();
-
-
-    const cleanFormData = (formData: any, originalData: any) => {
-        const cleanedData: any = {};
-        for (const key in formData) {
-            if (Array.isArray(formData[key])) {
-
-                if (formData[key].length > 0) {
-                    cleanedData[key] = formData[key];
-                } else {
-
-                    cleanedData[key] = originalData[key];
-                }
-            } else if (formData[key] !== "" && formData[key] !== null && formData[key] !== undefined) {
-
-                cleanedData[key] = formData[key];
-            } else {
-
-                cleanedData[key] = originalData[key];
-            }
-        }
-        return cleanedData;
-    };
-
-    const handleEdit = async () => {
-        if (selectedProgram) {
-
-            const cleanedEditFormValue = cleanFormData(EditFormValue, selectedProgram);
-
-            try {
-
-                await dispatch(updateProgram({ programId: selectedProgram.id, updatedProgram: cleanedEditFormValue })).unwrap();
-                toast.success(
-                    <p className="text-white tx-16 mb-0">{"Modification apportée avec succès"}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            } catch (error) {
-                toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la modification du programme"}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            }
-        } else {
-            toast.warn(
-                <p className="text-white tx-16 mb-0">{"Aucun programme sélectionné pour la modification."}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
-        }
-    };
+    const [activeTab, setActiveTab] = useState('1');
 
     return (
         <Container fluid>
@@ -88,29 +17,34 @@ const EditProgramContainer = () => {
                 </Col>
             </Row>
             <Row>
-                <Col xs="12">
-                    <Card>
-                        <CardHeader>
-                            <h5>{'Modification du Programme'}</h5>
-                        </CardHeader>
-                        <CardBody>
-                            <Body />
-                        </CardBody>
-                        <CardFooter>
-                            <Row>
-                                <Col className={'d-flex justify-content-end'}>
-                                    <button className={'btn btn-primary'} onClick={handleEdit}>
-                                        <i className="bi bi-save"></i> Enregistrer
-                                    </button>
-                                </Col>
-                            </Row>
-                        </CardFooter>
-                    </Card>
-                </Col>
+                <Card>
+                    <CardBody>
+                        <Nav tabs>
+                            <NavItem>
+                                <NavItem>
+                                    <NavLink href='#' className={`txt-secondary ${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")}>
+                                        <i className="icofont icofont-files"></i>
+                                        <span>Détail du programme</span>
+                                    </NavLink>
+                                </NavItem>
+                            </NavItem>
+
+                            <NavItem>
+                                <NavItem>
+                                    <NavLink href='#' className={`txt-secondary ${activeTab === "2" ? "active" : ""}`}
+                                             onClick={() => setActiveTab("2")}>
+                                        <i className="fa fa-file-image-o"></i>
+                                        <span>Image de couverture</span>
+                                    </NavLink>
+                                </NavItem>
+                            </NavItem>
+                        </Nav>
+                        <ProgramEditTabContent activeTab={activeTab}/>
+                    </CardBody>
+                </Card>
             </Row>
-            <ToastContainer />
         </Container>
-    );
+    )
 }
 
-export default EditProgramContainer;
+export default EditProgramTabs;
