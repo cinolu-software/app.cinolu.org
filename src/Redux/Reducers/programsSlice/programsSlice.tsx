@@ -77,7 +77,7 @@ export const deleteProgram = createAsyncThunk<{ id: string }, string, { rejectVa
 );
 
 export const updateAttachmentProgramImage = createAsyncThunk<
-    { programId: string; imageUrl: string },
+    { programId: string ; imageUrl: string },
     { programId: string; imageFile: File },
     { rejectValue: any }
 >(
@@ -88,13 +88,12 @@ export const updateAttachmentProgramImage = createAsyncThunk<
             formData.append('thumb', imageFile);
 
 
-            const response = await axiosInstance.post<{ data: { imageUrl: string } }>(
+            const response = await axiosInstance.post<{ data: { image: string } }>(
                 `${apiBaseUrl}/programs/image/${programId}`,
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
-
-            return { programId, imageUrl: response.data.data.imageUrl };
+            return { programId, imageUrl: response.data.data.image };
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
         }
@@ -221,7 +220,7 @@ const ProgramSlice = createSlice({
                 state.status = 'succeeded';
                 const program = state.originalProgramsData.find((program) => program.id === action.payload.programId);
                 if (program) {
-                    program.thumb = action.payload.imageUrl;
+                    program.image = action.payload.imageUrl;
                 }
             })
             .addCase(updateAttachmentProgramImage.rejected, (state, action) => {

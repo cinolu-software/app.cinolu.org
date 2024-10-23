@@ -5,11 +5,18 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast, Flip } from "react-toastify";
-import {updateAttachmentProgramImage} from "@/Redux/Reducers/programsSlice/programsSlice";
+import { updateAttachmentProgramImage } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { CardBody, Col, Button } from "reactstrap";
+import { FilePond, registerPlugin } from "react-filepond";
+
+
+registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ImagePreview = () => {
     const dispatch = useAppDispatch();
-    const [files, setFiles] = useState([]);
+
+    const [files, setFiles] = useState<any[]>([]);
+    const { selectedProgram } = useAppSelector(state => state.programs);
 
     const handleUpdateImage = () => {
         if (files.length === 0) {
@@ -22,14 +29,16 @@ const ImagePreview = () => {
                     transition: Flip,
                     theme: "colored",
                 }
-            )
+            );
             return;
         }
-        const formData = new FormData()
-        formData.append('thumb', files[0]?.file)
-        dispatch(updateAttachmentProgramImage(formData)).unwrap()
-            .then(
-                () => {
+
+        if (selectedProgram) {
+            const imageFile = files[0].file as File;
+
+
+            dispatch(updateAttachmentProgramImage({ programId: selectedProgram.id, imageFile })).unwrap()
+                .then(() => {
                     toast.success(
                         <p className="text-white tx-16 mb-0">{'Ajout de l\'image de couverture effectué avec succès'}</p>,
                         {
@@ -39,9 +48,9 @@ const ImagePreview = () => {
                             transition: Flip,
                             theme: "colored",
                         }
-                    )
-                },
-                (err) => {
+                    );
+                })
+                .catch((err) => {
                     toast.error(
                         <p className="text-white tx-16 mb-0">{"Erreur survenue lors de l'ajout de l'image de couverture"}</p>,
                         {
@@ -51,10 +60,28 @@ const ImagePreview = () => {
                             transition: Flip,
                             theme: "colored",
                         }
-                    )
-                }
-            )
-    }
-}
+                    );
+                });
+        }
+    };
+
+    return (
+        <Col lg="12">
+            <CardBody>
+                <FilePond
+                    files={files}
+                    allowReorder={true}
+                    allowMultiple={false}
+                    maxFiles={1}
+                    onupdatefiles={setFiles}
+                    labelIdle='<span class="filepond--label-action text-danger text-decoration-none">Déposez le fichier ici</span>'
+                />
+                <Button color="primary" onClick={handleUpdateImage}>
+                    Mettre à jour l'image de couverture
+                </Button>
+            </CardBody>
+        </Col>
+    );
+};
 
 export default ImagePreview;
