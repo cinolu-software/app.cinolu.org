@@ -24,7 +24,6 @@ export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectVal
     }
 );
 
-
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     "auth/logout",
     async (_, thunkAPI) => {
@@ -75,7 +74,6 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
         }
     }
 );
-
 
 export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePassword, { rejectValue: string }>(
     "auth/updatePassword",

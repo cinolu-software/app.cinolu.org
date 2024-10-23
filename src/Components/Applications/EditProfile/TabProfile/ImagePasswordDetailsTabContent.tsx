@@ -1,10 +1,10 @@
-import { ProfileTabContentProp } from "@/Types/EcommerceType";
+
 import { TabContent, TabPane } from "reactstrap";
 import React from "react";
 import DropzoneContainer from "@/Components/Drop_zone";
 import UpdatePassWord from "./UpdatePassWord";
 
-const ImagePasswordDetailsTabContent :React.FC<ProfileTabContentProp> = ({ activeTab }) => {
+const ImagePasswordDetailsTabContent :React.FC<{ activeTab: string }> = ({ activeTab }) => {
 
   return (
     <TabContent activeTab={activeTab}>

@@ -76,6 +76,31 @@ export const deleteProgram = createAsyncThunk<{ id: string }, string, { rejectVa
     }
 );
 
+export const updateAttachmentProgramImage = createAsyncThunk<
+    { programId: string; imageUrl: string },
+    { programId: string; imageFile: File },
+    { rejectValue: any }
+>(
+    'programs/updateAttachmentProgramImage',
+    async ({ programId, imageFile }, thunkAPI) => {
+        try {
+            const formData = new FormData();
+            formData.append('thumb', imageFile);
+
+
+            const response = await axiosInstance.post<{ data: { imageUrl: string } }>(
+                `${apiBaseUrl}/programs/image/${programId}`,
+                formData,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+
+            return { programId, imageUrl: response.data.data.imageUrl };
+        } catch (err: any) {
+            return thunkAPI.rejectWithValue(err.response.data);
+        }
+    }
+);
+
 const ProgramSlice = createSlice({
     name: "programs",
     initialState,
@@ -185,6 +210,21 @@ const ProgramSlice = createSlice({
                 );
             })
             .addCase(deleteProgram.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Something went wrong';
+            })
+            .addCase(updateAttachmentProgramImage.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(updateAttachmentProgramImage.fulfilled, (state, action: PayloadAction<{ programId: string; imageUrl: string }>) => {
+                state.status = 'succeeded';
+                const program = state.originalProgramsData.find((program) => program.id === action.payload.programId);
+                if (program) {
+                    program.thumb = action.payload.imageUrl;
+                }
+            })
+            .addCase(updateAttachmentProgramImage.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             });
