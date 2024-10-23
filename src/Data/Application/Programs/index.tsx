@@ -8,6 +8,7 @@ import {Button} from "reactstrap";
 import Link from 'next/link'
 import {useRouter} from "next/navigation";
 import {useAppSelector} from "@/Redux/Hooks";
+import { imageBaseUrl } from "@/services/axios";
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -56,7 +57,7 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     {
         name: "Nom",
         cell: (row: ReceiveProgramsType) => (
-            <ProgramsListTableName image={'/assets/images/programs/programs.png'} name={row.name}/>
+            <ProgramsListTableName image={row?.image ? `${imageBaseUrl}/programs/${row.image}`: '/assets/images/programs/programs.png'} name={row.name}/>
         ),
         sortable: true,
         grow: 1,
