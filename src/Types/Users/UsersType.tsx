@@ -12,7 +12,7 @@ export interface UserType {
     verified_at: string;
     created_at: string;
     updated_at: string;
-    role: string;
+    roles: any [];
 }
 
 export interface InitialStateUserType {

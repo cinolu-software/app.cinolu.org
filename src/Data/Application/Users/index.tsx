@@ -5,6 +5,7 @@ import {ImagePath} from "@/Constant";
 import {useDispatch} from "react-redux";
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
 import {setModalEditUser, setModalDeleteUser} from "@/Redux/Reducers/userSlice/UserSlice";
+import {imageBaseUrl} from "@/services/axios";
 
 const UsersListTableName: React.FC<{image: string; name: string}> = ({image, name}) => {
   return (
@@ -49,7 +50,7 @@ export const UsersListTableDataColumn = [
   {
     name: "Nom",
     cell: (row: UsersListTableColumnType)=> (
-        <UsersListTableName image={"/assets/images/avtar/avatar.jpg"} name={row.name} />
+        <UsersListTableName image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"} name={row.name} />
     ),
     sortable: true,
     grow: 2
@@ -59,12 +60,6 @@ export const UsersListTableDataColumn = [
       selector: (row: UsersListTableColumnType) => row.email,
       sortable: true,
       grow: 2
-  },
-  {
-      name: "Rôle",
-      selector: (row: UsersListTableColumnType) => row?.role,
-      sortable: true,
-      grow: 1
   },
   {
     name: "Actions",

@@ -22,10 +22,12 @@ const AdminListContainer: React.FC = () => {
     }
   }, [status, dispatch]);
 
-  const filteredUsers = usersData.filter((user: UserType) =>
-      user.name.toLowerCase().includes(filterText.toLowerCase()) ||
-      user.email.toLowerCase().includes(filterText.toLowerCase())
-  );
+    const filteredUsers = usersData
+        .filter((user: UserType) =>
+            user?.roles?.some(role => role.name === 'admin') &&
+            (user.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                user.email.toLowerCase().includes(filterText.toLowerCase()))
+        );
 
   const subHeaderComponentMemo = useMemo(() => {
     return (
