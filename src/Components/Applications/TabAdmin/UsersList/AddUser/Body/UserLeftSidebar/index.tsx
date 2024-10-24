@@ -5,9 +5,7 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {setNavId} from "@/Redux/Reducers/userSlice/UserSlice";
 import { Col, Nav, NavItem, NavLink } from "reactstrap";
 
-
-
-const FormLeftSideBar = () => {
+const UserLeftSideBar = () => {
     const {navId} = useAppSelector((state)=>state.users)
     const dispatch = useAppDispatch()
 
@@ -33,4 +31,4 @@ const FormLeftSideBar = () => {
     );
 }
 
-export default FormLeftSideBar
+export default UserLeftSideBar

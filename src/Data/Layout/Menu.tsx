@@ -20,14 +20,14 @@ export const MenuList: MenuItem [] | undefined = [
         menucontent: "admin",
         Items: [
             {
-                title: "User",
+                title: "Users",
                 id: 1,
                 icon: "user",
                 type: "sub",
                 lanClass: "lan-3",
                 active: false,
                 children: [
-                    {path: "/users/admins", title: "Admin", type: "link", lanClass: "lan-5"},
+                    {path: "/users/list", title: "Liste", type: "link", lanClass: "lan-5"},
                     // {path: "/users/coach", title: "Coach", type: "link", lanClass: "lan-6"},
                 ]
             },

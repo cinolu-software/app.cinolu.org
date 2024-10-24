@@ -2,15 +2,14 @@ import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { fetchUsers, setModalDeleteUser, deleteUser } from "@/Redux/Reducers/userSlice/UserSlice";
-import CreateNewUserModal from "@/Components/Applications/TabAdmin/AdminList/CreateAdminModal";
 import { UserType } from "@/Types/Users/UsersType";
 import {UsersListTableDataColumn} from "@/Data/Application/Users";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
-import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/AdminList/AdminListFilterHeader";
-import {CollapseFilterData} from "@/Components/Applications/TabAdmin/AdminList/CollapseFilterData";
+import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/UsersList/AdminListFilterHeader";
+import {CollapseFilterData} from "@/Components/Applications/TabAdmin/UsersList/CollapseFilterData";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 
-const AdminListContainer: React.FC = () => {
+const UsersListContainer: React.FC = () => {
 
   const [filterText, setFilterText] = useState("");
   const dispatch = useAppDispatch();
@@ -45,7 +44,7 @@ const AdminListContainer: React.FC = () => {
 
   return (
       <Container fluid>
-          <CreateNewUserModal />
+
           <DeleteEntityModal
               isOpen={isOpenModalDeleteUser}
               entityName="utilisateur"
@@ -85,5 +84,5 @@ const AdminListContainer: React.FC = () => {
   );
 };
 
-export default AdminListContainer;
+export default UsersListContainer;
 

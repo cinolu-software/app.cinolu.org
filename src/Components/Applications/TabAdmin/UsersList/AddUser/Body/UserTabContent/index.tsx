@@ -2,10 +2,9 @@ import { Col, TabContent, TabPane } from "reactstrap";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
-import CommonButton from "../CommonButton";
 import { useAppSelector } from "@/Redux/Hooks";
 
-const Index = () => {
+const UserTabContent = () => {
 
     const {navId} = useAppSelector((state)=> state.users);
 
@@ -26,9 +25,7 @@ const Index = () => {
                 </TabContent>
 
             </Col>
-
-            {/*<CommonButton />*/}
         </>
     );
 }
-export default Index
+export default UserTabContent

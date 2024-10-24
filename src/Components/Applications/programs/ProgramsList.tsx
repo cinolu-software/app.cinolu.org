@@ -21,7 +21,6 @@ export const ProgramsHeader = () => {
             <Link
                 className="btn btn-primary"
                 href={'/programs/add_program'}
-                // onClick={() => dispatch(setModalCreateProgram({ isOpen : !isOpenModalCreateProgram}))}
             >
                 <i className="fa fa-plus" />
                 Ajouter un programme
