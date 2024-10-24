@@ -36,7 +36,7 @@ interface DataProp {
   percentage: string;
   detail: string;
   chartId: string;
-  chart: ApexCharts.ApexOptions;
+  chart: any;
 }
 export interface TotalSellsDetailsType {
   data: DataProp;

@@ -10,7 +10,7 @@ const CommonButton = () => {
     const handleFormValue = () => {
         if (navId === 1 && formValue?.name !== "" && formValue?.description) {
             dispatch(setNavId(2));
-        } else if (navId === 2 && formValue?.start_at !== "" && formValue?.end_at) {
+        } else if (navId === 2 && formValue?.started_at !== "" && formValue?.ended_at) {
             dispatch(setNavId(3));
         } else if (navId === 3 && formValue?.types && formValue?.types.length > 0) {
             dispatch(setNavId(4));

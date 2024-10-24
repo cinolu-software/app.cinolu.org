@@ -4,7 +4,6 @@ import { useState } from "react";
 import { StaticForm } from "./StaticForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import { MofiLogin, StaticBackdropModalBtn, StaticBackdropModals } from "@/Constant";
-import { StaticModalData } from "@/Data/Uikits/modal";
 
 const StaticBackdropModal = () => {
 
@@ -14,7 +13,7 @@ const StaticBackdropModal = () => {
   return (
     <Col xl="4">
       <Card>
-        <CommonCardHeader title={StaticBackdropModals} span={StaticModalData} />
+        <CommonCardHeader title={StaticBackdropModals}  />
         <CardBody>
           <Button color="primary" onClick={staticModalToggle}>{StaticBackdropModalBtn}</Button>
           <CommonModal backdrop="static"  modalBodyClassName="social-profile text-start" isOpen={staticModal} toggle={staticModalToggle}>

@@ -12,7 +12,6 @@ export const AdminListFilterHeader = () => {
   const {isOpenModalCreateUser} = useAppSelector((state)=>state.users);
 
   const handleFilterToggle = () => {
-    console.log("====> Header", filterToggle);
     dispatch(setFilterToggle());
   }
 

@@ -2,7 +2,13 @@ import { CardBody, Form } from "reactstrap";
 import { Dropzone,ExtFile,FileMosaic,FileMosaicProps,FullScreen,ImagePreview, } from "@dropzone-ui/react";
 import { useState } from "react";
 import CommonFileBody from "./CommonFileBody";
-import { CommonFileUploadProp } from "@/Types/ProjectType";
+
+
+interface CommonFileUploadProp {
+  maxFiles?: number;
+  multiple?: boolean;
+  body?: boolean;
+}
 
 const CommonFileUpload :React.FC<CommonFileUploadProp> = ({ maxFiles, multiple, body }) => {
   const BASE_URL = "https://www.myserver.com";

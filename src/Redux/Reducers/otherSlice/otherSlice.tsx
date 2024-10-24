@@ -1,8 +1,7 @@
 import { ProjectListData } from "@/Data/Application/other";
-import { ProjectType } from "@/Types/ProjectType";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: ProjectType = {
+const initialState: {activeTab: string, createdFormData: any} = {
     activeTab: "1",
     createdFormData: ProjectListData,
 };

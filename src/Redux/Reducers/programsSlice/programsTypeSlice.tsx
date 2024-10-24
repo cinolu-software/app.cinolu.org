@@ -138,7 +138,7 @@ const ProgramsTypeSlice = createSlice({
             })
             .addCase(updateProgramType.fulfilled, (state, action: PayloadAction<ProgramsTypeType>) => {
                 state.status = 'succeeded';
-                const index = state.originalTypeProgramsData.findIndex(program => program.id === action.payload.id);
+                const index = state.originalTypeProgramsData.findIndex((program: { id: string; }) => program.id === action.payload.id);
                 if (index !== -1) {
                     state.originalTypeProgramsData[index] = action.payload;
                     // @ts-ignore
@@ -158,7 +158,7 @@ const ProgramsTypeSlice = createSlice({
             })
             .addCase(deleteProgramType.fulfilled, (state, action: PayloadAction<string>) => {
                 state.status = 'succeeded';
-                state.originalTypeProgramsData = state.originalTypeProgramsData.filter(program => program.id !== action.payload);
+                state.originalTypeProgramsData = state.originalTypeProgramsData.filter((program: { id: string; }) => program.id !== action.payload);
                 state.transformedProgramsData = state.transformedProgramsData.filter(program => program.id !== action.payload);
             })
             .addCase(deleteProgramType.rejected, (state, action) => {

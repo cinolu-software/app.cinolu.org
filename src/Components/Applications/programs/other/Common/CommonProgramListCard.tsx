@@ -1,6 +1,24 @@
 import { Comment, Done, ImagePath, Issues, Resolved, DoneProgram } from "@/Constant";
-import { CommonProjectInterFace } from "@/Types/ProjectType";
+// import { CommonProjectInterFace } from "@/Types/ProjectType";
 import { Badge, Col, Progress, Row } from "reactstrap";
+
+export interface CommonProjectInterFace {
+    item: {
+        title: string;
+        badge: string;
+        image: string;
+        sites: string;
+        description: string;
+        issue: string;
+        resolved: string;
+        comment: string;
+        customers_img1: string;
+        customers_img2: string;
+        customers_img3: string;
+        like: number;
+        progress: number;
+    };
+}
 
 export const CommonProgramListCard :React.FC<CommonProjectInterFace> = ({ item }) => {
     return (

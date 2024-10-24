@@ -1,12 +1,12 @@
 import { AddProduct } from "@/Constant";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFilterToggle } from "@/Redux/Reducers/userSlice/CoachSlice";
+import { setFilterToggle } from '@/Redux/Reducers/PartnersSlice/partnerSlice'
 import Link from "next/link";
 import { Filter } from "react-feather";
 
 export const MembersListFilterHeader = () => {
   
-  const { filterToggle } = useAppSelector((state) => state.product);
+  const { filterToggle } = useAppSelector((state) => state.partner);
   const dispatch = useAppDispatch();
 
   return (
@@ -23,5 +23,4 @@ export const MembersListFilterHeader = () => {
       </Link>
     </div>
   );
-
 };

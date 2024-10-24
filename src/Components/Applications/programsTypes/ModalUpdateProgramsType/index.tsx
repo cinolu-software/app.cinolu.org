@@ -10,7 +10,7 @@ const UpdateProgramTypeModal = () => {
     const dispatch = useAppDispatch();
     const { selectedProgramType, isOpenModalEditProgramType } = useAppSelector((state) => state.programsType);
     const [programType, setProgramType] = useState<ProgramsTypeType>({
-        id: selectedProgramType?.id || 0,
+        id: selectedProgramType?.id || '',
         name: selectedProgramType?.name || '',
         description: selectedProgramType?.description || '',
         created_at: selectedProgramType?.created_at || '',
@@ -22,7 +22,7 @@ const UpdateProgramTypeModal = () => {
 
     useEffect(() => {
         setProgramType({
-            id: selectedProgramType?.id || 0,
+            id: selectedProgramType?.id || '',
             name: selectedProgramType?.name || '',
             description: selectedProgramType?.description || '',
             created_at: selectedProgramType?.created_at || '',
