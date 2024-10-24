@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { toast, ToastContainer, Flip } from "react-toastify";
+import { toast, ToastContainer, Flip, Theme } from "react-toastify";
 import { Button, Form, FormGroup, Input, Label, Spinner } from "reactstrap";
 import imageOne from "../../../../public/assets/images/logo/logo.png";
 import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
@@ -41,15 +41,15 @@ const UserForm = () => {
             setLoading(false);
         }
     };
-
     const displayToast = (message: string, type: "success" | "error") => {
         const toastOptions = {
             autoClose: 5000,
             position: toast.POSITION.TOP_CENTER,
             hideProgressBar: false,
             transition: Flip,
-            theme: "colored",
+            theme: 'colored' as Theme,
         };
+
         type === "success"
             ? toast.success(<p className="text-white tx-16 mb-0">{message}</p>, toastOptions)
             : toast.error(<p className="text-white tx-16 mb-0">{message}</p>, toastOptions);
