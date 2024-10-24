@@ -4,7 +4,7 @@ import React from "react";
 import DropzoneContainer from "@/Components/Drop_zone";
 import UpdatePassWord from "./UpdatePassWord";
 
-const ImagePasswordDetailsTabContent :React.FC<{ activeTab: string }> = ({ activeTab }) => {
+const ImagePasswordDetailsTabContent :React.FC<{ activeTab: any }> = ({ activeTab }) => {
 
   return (
     <TabContent activeTab={activeTab}>

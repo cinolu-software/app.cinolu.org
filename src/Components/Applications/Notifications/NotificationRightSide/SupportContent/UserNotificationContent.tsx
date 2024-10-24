@@ -2,7 +2,7 @@ import { Badge, Input, Label } from 'reactstrap';
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { CommonDataType} from "@/Types/Notifications/NotificationType";
-import { handleEnvelope, handleInterview} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
+import {  handleInterview} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import SVG from '@/CommonComponent/SVG';
 
 const UserNotificationContent : React.FC<CommonDataType> = ( { data,ids}) => {
@@ -45,10 +45,10 @@ const UserNotificationContent : React.FC<CommonDataType> = ( { data,ids}) => {
                     <span>{data.time}</span>
                 </div>
                 <div className="email-options">
-                    <i className={`fa fa-envelope-o envelope-1 ${!faIcon ? "show" : "hide"}`} onClick={() => dispatch(handleEnvelope(true))}/>
-                    <i className={`fa fa-envelope-open-o envelope-2 ${ faIcon ? "show" : "hide"}`} onClick={() => dispatch(handleEnvelope(false))} />
-                    <i className="fa fa-trash-o trash-3" />
-                    <i className="fa fa-print" />
+                    {/*<i className={`fa fa-envelope-o envelope-1 ${!faIcon ? "show" : "hide"}`} onClick={() => dispatch(handleEnvelope(true))}/>*/}
+                    {/*<i className={`fa fa-envelope-open-o envelope-2 ${ faIcon ? "show" : "hide"}`} onClick={() => dispatch(handleEnvelope(false))} />*/}
+                    {/*<i className="fa fa-trash-o trash-3" />*/}
+                    {/*<i className="fa fa-print" />*/}
                 </div>
             </div>
         </>

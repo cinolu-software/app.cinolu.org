@@ -1,10 +1,9 @@
-import { CommonUserFormGroupType } from "@/Types/UserType";
 import { FormGroup, Input, Label } from "reactstrap";
 import React from "react";
 
-interface CommonUserFormGroupProps extends CommonUserFormGroupType {
+interface CommonUserFormGroupProps  {
     name : string,
-    defaultValue: string
+    defaultValue: any,
     placeholder: string
     title: string
     type: any

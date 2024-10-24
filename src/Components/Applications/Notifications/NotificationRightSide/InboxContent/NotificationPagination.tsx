@@ -1,7 +1,7 @@
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { Href } from "@/Constant";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setPage} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
+// import { setPage} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 
 
 const NotificationPagination = () => {
@@ -9,7 +9,7 @@ const NotificationPagination = () => {
     const {page} = useAppSelector(state => state.notifications);
     const dispatch = useAppDispatch();
     const handlePagination = (value:boolean) => {
-        dispatch(setPage(value));
+        // dispatch(setPage(value));
     }
 
     return (

@@ -11,16 +11,16 @@ const StepTwo = () => {
     const { EditFormValue, selectedProgram } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
 
-    const [startDate, setStartDate] = useState<Date | null>(EditFormValue?.start_at ? new Date(EditFormValue.start_at) : null);
-    const [endDate, setEndDate] = useState<Date | null>(EditFormValue?.end_at ? new Date(EditFormValue.end_at) : null);
+    const [startDate, setStartDate] = useState<Date | null>(EditFormValue?.started_at ? new Date(EditFormValue.started_at) : null);
+    const [endDate, setEndDate] = useState<Date | null>(EditFormValue?.ended_at ? new Date(EditFormValue.ended_at) : null);
 
     useEffect(() => {
         if(selectedProgram){
-            if(selectedProgram.start_at){
-                setStartDate(new Date(selectedProgram.start_at));
+            if(selectedProgram.started_at){
+                setStartDate(new Date(selectedProgram.started_at));
             }
-            if(selectedProgram.end_at){
-                setEndDate(new Date(selectedProgram.end_at))
+            if(selectedProgram.ended_at){
+                setEndDate(new Date(selectedProgram.ended_at))
             }
         }
     }, [selectedProgram]);
@@ -28,14 +28,14 @@ const StepTwo = () => {
     const handleStartDateChange = (value: Value) => {
         if (value instanceof Date) {
             setStartDate(value);
-            dispatch(setEditFormValue({ field: 'start_at', value: value.toISOString().split("T")[0] }));
+            dispatch(setEditFormValue({ field: 'started_at', value: value.toISOString().split("T")[0] }));
         }
     };
 
     const handleEndDateChange = (value: Value) => {
         if (value instanceof Date) {
             setEndDate(value);
-            dispatch(setEditFormValue({ field: 'end_at', value: value.toISOString().split("T")[0] }));
+            dispatch(setEditFormValue({ field: 'ended_at', value: value.toISOString().split("T")[0] }));
         }
     };
 

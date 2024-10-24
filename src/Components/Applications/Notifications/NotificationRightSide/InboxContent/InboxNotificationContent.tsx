@@ -7,9 +7,13 @@ import {  handleInterview, setSelectedUser} from "@/Redux/Reducers/NotifcationSl
 import { CommonDataType} from "@/Types/Notifications/NotificationType";
 import { Badge } from "reactstrap";
 
+type InboxNotificationContentProps = {
+    data: any;
+    ids: any;
+}
 
 
-const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
+const InboxNotificationContent: React.FC<InboxNotificationContentProps> = ({data , ids}) => {
 
     const {faIcon} = useAppSelector(state => state.notifications);
     const dispatch = useAppDispatch();
@@ -28,7 +32,6 @@ const InboxNotificationContent: React.FC<CommonDataType> = ({data, ids}) => {
                 </div>
                 <p>{data.name}</p>
             </div>
-
 
             <div className="inbox-message">
                <div className="email-data" onClick={handleValue}>

@@ -29,7 +29,7 @@ const StepThree = () => {
         if (!EditFormValue) return;
 
         const updatedTypes = EditFormValue.types.includes(typeId)
-            ? EditFormValue.types.filter(id => id !== typeId)
+            ? EditFormValue.types.filter((id: string) => id !== typeId)
             : [...EditFormValue.types, typeId];
 
         dispatch(setEditFormValue({ field: 'types', value: updatedTypes }));
