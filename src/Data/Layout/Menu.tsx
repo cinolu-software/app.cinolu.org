@@ -39,7 +39,7 @@ export const MenuList: MenuItem [] | undefined = [
                 lanClass: "lan-6",
                 active: false,
                 children: [
-                    {path: "/programs/other", title: "other", type: "link", lanClass: "lan-5"},
+                    // {path: "/programs/other", title: "other", type: "link", lanClass: "lan-5"},
                     {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
                     {path: "/programs/programTypes", title: "types de programmes", type: "link", lanClass: "lan-6"},
                 ]
