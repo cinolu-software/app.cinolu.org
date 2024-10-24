@@ -45,7 +45,6 @@
 
 /*======= Page Header css ends  ======= */
 
-
 /**======Main Header css Start ======**/
 .offcanvas,
 .offcanvas-bookmark {
@@ -124,6 +123,23 @@
   }
 }
 
+.profile-img, .profile-info {
+  width: 50px;
+  max-width: 45px;
+  height: 45px;
+  object-fit: cover;
+  border: 1px solid #15803D;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-info {
+  width: 100px;
+  max-width: 100px;
+  height: 100px;
+}
 
 /**======Main Header css Ends ======**/
 

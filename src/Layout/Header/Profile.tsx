@@ -41,7 +41,7 @@ export const Profile = () => {
         <li className="profile-nav onhover-dropdown px-0 py-0">
             <div className="d-flex profile-media align-items-center">
                 <img
-                    className="img-30 rounded-circle"
+                    className="profile-img"
                     src={localUser?.profile ? `${imageBaseUrl}/profiles/${localUser?.profile}` : `/assets/images/avtar/avatar.jpg`}
                     alt="profile utilisateur"
                 />
@@ -60,12 +60,13 @@ export const Profile = () => {
                 ))}
                 <li onClick={LogOutUser}>
                     <Link href={Href} scroll={false}>
-                        <LogOut />
+                        <LogOut/>
                         <span>{Logout}</span>
                     </Link>
                 </li>
             </ul>
         </li>
+
     );
 };
 

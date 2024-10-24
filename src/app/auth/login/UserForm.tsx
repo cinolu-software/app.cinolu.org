@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast, ToastContainer, Flip, Theme } from "react-toastify";
 import { Button, Form, FormGroup, Input, Label, Spinner } from "reactstrap";
@@ -8,8 +7,10 @@ import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
 import { useDispatch, useSelector } from "react-redux";
 import { login, selectStatus } from "@/Redux/Reducers/AuthSlice";
 import { AppDispatch } from "@/Redux/Store";
+import {useRouter} from "next/navigation";
 
 const UserForm = () => {
+
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -34,13 +35,14 @@ const UserForm = () => {
         try {
             await dispatch(login(formData)).unwrap();
             displayToast("Connexion réussie", "success");
-            router.push('/dashboard');
+             router.push('/dashboard');
         } catch (error) {
             displayToast(error as string, "error");
         } finally {
             setLoading(false);
         }
     };
+
     const displayToast = (message: string, type: "success" | "error") => {
         const toastOptions = {
             autoClose: 5000,
@@ -49,7 +51,6 @@ const UserForm = () => {
             transition: Flip,
             theme: 'colored' as Theme,
         };
-
         type === "success"
             ? toast.success(<p className="text-white tx-16 mb-0">{message}</p>, toastOptions)
             : toast.error(<p className="text-white tx-16 mb-0">{message}</p>, toastOptions);
@@ -70,7 +71,6 @@ const UserForm = () => {
             <div className="login-main">
                 <Form className="theme-form" onSubmit={handleSubmit}>
                     <h4 className="mb-4">Connexion</h4>
-
                     <FormGroup>
                         <Label className="col-form-label">Adresse e-mail</Label>
                         <Input
@@ -82,7 +82,6 @@ const UserForm = () => {
                             required
                         />
                     </FormGroup>
-
                     <FormGroup>
                         <Label className="col-form-label">Mot de passe</Label>
                         <div className="position-relative">
@@ -99,7 +98,6 @@ const UserForm = () => {
                             </div>
                         </div>
                     </FormGroup>
-
                     <FormGroup className="mb-0">
                         <div className="checkbox p-0">
                             <Input id="checkbox1" type="checkbox" />

@@ -10,7 +10,7 @@ const UsersListTableName: React.FC<{image: string; name: string}> = ({image, nam
   return (
       <div className={'product-names my-2'}>
         <div className={'light-product-box bg-img-cover'}>
-          <RatioImage src={`${ImagePath}/${image}`} alt={'image'} />
+          <RatioImage src={`${image}`} alt={'image'} />
         </div>
         <p>{name}</p>
       </div>
@@ -20,19 +20,27 @@ const UsersListTableName: React.FC<{image: string; name: string}> = ({image, nam
 const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useDispatch();
-
   const handleEdit = () => {
     dispatch(setModalEditUser({isOpen: true, user}));
   }
-
   const handleDelete = () => {
     dispatch(setModalDeleteUser({isOpen: true, user}));
   }
 
   return (
-      <div className={'product-action'}>
-        <Button color={'outline-primary'} className={'me-2'} onClick={handleEdit}>Modifier</Button>
-        <Button color={'outline-danger'} onClick={handleDelete}>Supprimer</Button>
+      <div className={'product-action w-100'}>
+        <div className={'row w-100'}>
+          <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <Button color="outline-primary" className="w-100" onClick={handleEdit}>
+              Modifier
+            </Button>
+          </div>
+          <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
+            <Button color="outline-danger" className="w-100" onClick={handleDelete}>
+              Supprimer
+            </Button>
+          </div>
+        </div>
       </div>
   )
 }
@@ -41,7 +49,7 @@ export const UsersListTableDataColumn = [
   {
     name: "Nom",
     cell: (row: UsersListTableColumnType)=> (
-        <UsersListTableName image={"avtar/avatar.jpg"} name={row.name} />
+        <UsersListTableName image={"/assets/images/avtar/avatar.jpg"} name={row.name} />
     ),
     sortable: true,
     grow: 2

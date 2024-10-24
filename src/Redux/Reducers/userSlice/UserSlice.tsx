@@ -25,7 +25,6 @@ const initialState: InitialStateUserType = {
   }
 };
 
-
 export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchUsers',
     async () => {

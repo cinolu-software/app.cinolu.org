@@ -16,7 +16,7 @@ const initialState: InitialStatePatnerType = {
     formValue: []
 };
 
-// Fetch partners
+
 export const fetchPartner = createAsyncThunk<{ data: PartnerType[] }>(
     "partner/fetchPartner",
     async () => {
@@ -26,7 +26,7 @@ export const fetchPartner = createAsyncThunk<{ data: PartnerType[] }>(
     }
 );
 
-// Create partner
+
 export const createPartner = createAsyncThunk(
     "partner/createPartner",
     async (newPartner: PartnerType, { rejectWithValue }) => {
@@ -39,7 +39,7 @@ export const createPartner = createAsyncThunk(
     }
 );
 
-// Delete partner
+
 export const deletePartner = createAsyncThunk(
     "partner/deletePartner",
     async (id: string, { rejectWithValue }) => {
@@ -52,7 +52,7 @@ export const deletePartner = createAsyncThunk(
     }
 );
 
-// Update partner
+
 export const updatePartner = createAsyncThunk(
     "partner/updatePartner",
     async (partner: PartnerType, { rejectWithValue }) => {
@@ -98,7 +98,7 @@ const PartnerSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        // Fetch partners
+
         builder
             .addCase(fetchPartner.pending, (state) => {
                 state.status = "loading";
@@ -113,7 +113,7 @@ const PartnerSlice = createSlice({
                 state.error = action.error.message || "Erreur lors de la récupération des partenaires.";
             });
 
-        // Create partner
+
         builder
             .addCase(createPartner.pending, (state) => {
                 state.status = "loading";
@@ -128,7 +128,7 @@ const PartnerSlice = createSlice({
                 state.error = action.error.message || "Erreur lors de la création du partenaire.";
             });
 
-        // Delete partner
+
         builder
             .addCase(deletePartner.pending, (state) => {
                 state.status = "loading";
@@ -143,7 +143,6 @@ const PartnerSlice = createSlice({
                 state.error = action.error.message || "Erreur lors de la suppression du partenaire.";
             });
 
-        // Update partner
         builder
             .addCase(updatePartner.pending, (state) => {
                 state.status = "loading";

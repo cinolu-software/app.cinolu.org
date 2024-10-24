@@ -22,6 +22,7 @@ const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image
     );
 };
 
+
 const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
 
     const dispatch = useDispatch();
@@ -74,13 +75,6 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
         sortable: true,
         grow: 1,
     },
-    // {
-    //     name: "Description",
-    //     selector: (row: ReceiveProgramsType) => row.description,
-    //     sortable: false,
-    //     grow: 1
-    //
-    // },
     {
         name: "Date de début",
         selector: (row: ReceiveProgramsType) => row.started_at,
