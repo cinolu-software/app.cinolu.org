@@ -7,9 +7,13 @@ const initialState: InitialStateUserType = {
     usersData: [],
     coachsData: [],
     staffMemberData: [],
-    status: 'idle',
+    statusUsers: 'idle',
+    statusCoachs: 'idle',
+    statusStaff: 'idle',
     filterToggle: false,
-    error: null,
+    errorUsers: null,
+    errorCoachs: null,
+    errorStaff: null,
     isOpenModalCreateUser: false,
     isOpenModalEditUser: false,
     isOpenModalDeleteUser: false,
@@ -116,64 +120,64 @@ const UsersSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchUsers.pending, (state) => {
-                state.status = 'loading';
-                state.error = null;
+                state.statusUsers = 'loading';
+                state.errorUsers = null;
             })
             .addCase(fetchUsers.fulfilled, (state, action: PayloadAction<{ data: UserType[] }>) => {
-                state.status = 'succeeded';
+                state.statusUsers = 'succeeded';
                 state.usersData = action.payload.data;
             })
             .addCase(fetchUsers.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message || 'Une erreur est survenue lors de la récupération des utilisateurs.';
+                state.statusUsers = 'failed';
+                state.errorUsers = action.error.message || 'Une erreur est survenue lors de la récupération des utilisateurs.';
             })
 
             .addCase(fetchStaffMembers.pending, (state) => {
-                state.status = 'loading';
+                state.statusStaff = 'loading';
             })
             .addCase(fetchStaffMembers.fulfilled, (state, action: PayloadAction<{ data: StaffMemberType[] }>) => {
-                state.status = 'succeeded';
+                state.statusStaff = 'succeeded';
                 state.staffMemberData = action.payload.data;
             })
             .addCase(fetchStaffMembers.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message || 'Erreur lors de la récupération des membres du staff.';
+                state.statusStaff = 'failed';
+                state.errorStaff = action.error.message || 'Erreur lors de la récupération des membres du staff.';
             })
 
             .addCase(fetchCoaches.pending, (state) => {
-                state.status = 'loading';
+                state.statusCoachs = 'loading';
             })
             .addCase(fetchCoaches.fulfilled, (state, action: PayloadAction<{ data: UserType[] }>) => {
-                state.status = 'succeeded';
+                state.statusCoachs = 'succeeded';
                 state.coachsData = action.payload.data;
             })
             .addCase(fetchCoaches.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message || 'Erreur lors de la récupération des coachs.';
+                state.statusCoachs = 'failed';
+                state.errorCoachs = action.error.message || 'Erreur lors de la récupération des coachs.';
             })
 
             .addCase(createUser.pending, (state) => {
-                state.status = 'loading';
+                state.statusUsers = 'loading';
             })
             .addCase(createUser.fulfilled, (state, action: PayloadAction<{ data: UserType }>) => {
-                state.status = 'succeeded';
+                state.statusUsers = 'succeeded';
                 state.usersData.push(action.payload.data);
             })
             .addCase(createUser.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message || 'Une erreur est survenue lors de la création de l’utilisateur.';
+                state.statusUsers = 'failed';
+                state.errorUsers = action.error.message || 'Une erreur est survenue lors de la création de l’utilisateur.';
             })
 
             .addCase(deleteUser.pending, (state) => {
-                state.status = 'loading';
+                state.statusUsers = 'loading';
             })
             .addCase(deleteUser.fulfilled, (state, action: PayloadAction<string>) => {
-                state.status = 'succeeded';
+                state.statusUsers = 'succeeded';
                 state.usersData = state.usersData.filter(user => user.id !== action.payload);
             })
             .addCase(deleteUser.rejected, (state, action) => {
-                state.status = 'failed';
-                state.error = action.error.message || 'Une erreur est survenue lors de la suppression de l’utilisateur.';
+                state.statusUsers = 'failed';
+                state.errorUsers = action.error.message || 'Une erreur est survenue lors de la suppression de l’utilisateur.';
             });
     },
 });

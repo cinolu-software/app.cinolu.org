@@ -13,13 +13,13 @@ const UsersListContainer: React.FC = () => {
 
   const [filterText, setFilterText] = useState("");
   const dispatch = useAppDispatch();
-  const {usersData, status, isOpenModalDeleteUser, selectedUser} = useAppSelector((state) => state.users);
+  const {usersData, statusUsers, isOpenModalDeleteUser, selectedUser} = useAppSelector((state) => state.users);
 
   useEffect(() => {
-    if (status === 'idle') {
+    if (statusUsers === 'idle') {
       dispatch(fetchUsers());
     }
-  }, [status, dispatch]);
+  }, [statusUsers, dispatch]);
 
     const filteredUsers = usersData
         .filter((user: UserType) =>

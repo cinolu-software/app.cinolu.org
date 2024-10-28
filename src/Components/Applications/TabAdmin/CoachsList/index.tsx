@@ -10,15 +10,16 @@ import DeleteEntityModal from '@/CommonComponent/DeleteEntityModal';
 
 
 const CoachsListContainer = () =>{
+
     const [filterText, setFilterText] = useState('');
     const dispatch = useAppDispatch();
-    const {coachsData, status, isOpenModalDeleteUser, selectedUser} = useAppSelector(state => state.users)
+    const {coachsData, statusCoachs, isOpenModalDeleteUser, selectedUser} = useAppSelector(state => state.users)
 
     useEffect(() => {
-        if (status === 'idle') {
+        if (statusCoachs === 'idle') {
           dispatch(fetchCoaches());
         }
-      }, [status, dispatch]);
+      }, [statusCoachs, dispatch]);
     
     const filteredUsers = coachsData
     .filter((user: UserType) =>
@@ -38,6 +39,9 @@ const CoachsListContainer = () =>{
             </div>
         );
         }, [filterText]);
+
+    console.log("coachsData====>",coachsData)
+    console.log("statusCoachs ====>", statusCoachs)
     
     
       return (

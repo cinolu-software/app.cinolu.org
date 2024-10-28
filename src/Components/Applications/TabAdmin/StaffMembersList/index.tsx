@@ -10,15 +10,16 @@ import DeleteEntityModal from '@/CommonComponent/DeleteEntityModal';
 
 
 const StaffMembersListContainer = () =>{
+
     const [filterText, setFilterText] = useState('');
     const dispatch = useAppDispatch();
-    const {staffMemberData, status, isOpenModalDeleteUser, selectedUser} = useAppSelector(state => state.users)
+    const {staffMemberData, statusStaff, isOpenModalDeleteUser, selectedUser} = useAppSelector(state => state.users)
 
     useEffect(() => {
-        if (status === 'idle') {
+        if (statusStaff === 'idle') {
             dispatch(fetchStaffMembers());
         }
-    }, [status, dispatch]);
+    }, [statusStaff, dispatch]);
 
     const filteredUsers = staffMemberData
         .filter((user: UsersListTableColumnType) =>

@@ -23,9 +23,13 @@ export interface InitialStateUserType {
     usersData: UserType[];
     coachsData: CoachsType[];
     staffMemberData: StaffMemberType[];
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusUsers: 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusCoachs: 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusStaff: 'idle' | 'loading' | 'succeeded' | 'failed';
     filterToggle: boolean;
-    error: string | null;
+    errorUsers: string | null;
+    errorCoachs: string | null;
+    errorStaff: string | null;
     isOpenModalCreateUser: boolean;
     isOpenModalEditUser: boolean;
     isOpenModalDeleteUser: boolean;

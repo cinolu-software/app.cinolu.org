@@ -6,6 +6,8 @@ import {useDispatch} from "react-redux";
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
 import {setModalEditUser, setModalDeleteUser} from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
+import SVG from "@/CommonComponent/SVG";
+import Link from 'next/link'
 
 const UsersListTableName: React.FC<{image: string; name: string}> = ({image, name}) => {
   return (
@@ -21,6 +23,7 @@ const UsersListTableName: React.FC<{image: string; name: string}> = ({image, nam
 const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useDispatch();
+
   const handleEdit = () => {
     dispatch(setModalEditUser({isOpen: true, user}));
   }
@@ -29,17 +32,29 @@ const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
   }
 
   return (
-      <div className={'product-action w-100'}>
-        <div className={'row w-100'}>
-          <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
-            <Button color="outline-primary" className="w-100" onClick={handleEdit}>
-              Modifier
-            </Button>
+      <div className="product-action">
+        <div className={'row w-100 justify-content-center'}>
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="editTable"/>
+              </span>
+            </button>
           </div>
-          <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6">
-            <Button color="outline-danger" className="w-100" onClick={handleDelete}>
-              Supprimer
-            </Button>
+
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="moreTable"/>
+              </span>
+            </button>
+          </div>
+
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                    onClick={handleDelete}>
+              <SVG iconId="trashTable"/>
+            </button>
           </div>
         </div>
       </div>
@@ -49,8 +64,10 @@ const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
 export const UsersListTableDataColumn = [
   {
     name: "Nom",
-    cell: (row: UsersListTableColumnType)=> (
-        <UsersListTableName image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"} name={row.name} />
+    cell: (row: UsersListTableColumnType) => (
+        <UsersListTableName
+            image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"}
+            name={row.name}/>
     ),
     sortable: true,
     grow: 2
