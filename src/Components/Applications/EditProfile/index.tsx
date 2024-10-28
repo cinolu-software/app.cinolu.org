@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row } from "reactstrap";
+import { Container, Row , Col} from "reactstrap";
 import EditProfileForm from "./EditProfileImageAndPassword/EditProfileForm";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import UserProfileInfo from "./UserProfileInfo/UserProfileInfo";

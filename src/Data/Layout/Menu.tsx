@@ -28,7 +28,8 @@ export const MenuList: MenuItem [] | undefined = [
                 active: false,
                 children: [
                     {path: "/users/list", title: "Liste", type: "link", lanClass: "lan-5"},
-                    // {path: "/users/coach", title: "Coach", type: "link", lanClass: "lan-6"},
+                    {path: "/users/coachs", title: "Coachs", type: "link", lanClass: "lan-6"},
+                    {path: "/users/staffMembers", title: "Staff", type: "link", lanClass: "lan-6"},
                 ]
             },
             {
@@ -55,8 +56,6 @@ export const MenuList: MenuItem [] | undefined = [
                     {path: "/partners", title: "Liste", type: "link", lanClass: "lan-6"},
                     {path: "/partnerShip", title: "Type", type: "link", lanClass: "lan-6"},
                 ]
-
-
             },
             {
                 title: "Rôle",

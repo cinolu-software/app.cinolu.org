@@ -5,7 +5,7 @@ import { EditProfileFormBody } from "./EditProfileFormBody";
 const EditProfileForm = () => {
   
   return (
-    <Col xl="8">
+    <Col xl="7">
       <Form onSubmit={(event) => event.preventDefault()}>
         <Card>
           <EditProfileFormBody />

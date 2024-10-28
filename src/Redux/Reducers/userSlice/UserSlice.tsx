@@ -5,6 +5,8 @@ import { UserType, InitialStateUserType, StaffMemberType } from "@/Types/Users/U
 
 const initialState: InitialStateUserType = {
     usersData: [],
+    coachsData: [],
+    staffMemberData: [],
     status: 'idle',
     filterToggle: false,
     error: null,
@@ -126,26 +128,24 @@ const UsersSlice = createSlice({
                 state.error = action.error.message || 'Une erreur est survenue lors de la récupération des utilisateurs.';
             })
 
-            // Staff Members
             .addCase(fetchStaffMembers.pending, (state) => {
                 state.status = 'loading';
             })
             .addCase(fetchStaffMembers.fulfilled, (state, action: PayloadAction<{ data: StaffMemberType[] }>) => {
                 state.status = 'succeeded';
-                state.usersData = action.payload.data;
+                state.staffMemberData = action.payload.data;
             })
             .addCase(fetchStaffMembers.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Erreur lors de la récupération des membres du staff.';
             })
 
-            // Coaches
             .addCase(fetchCoaches.pending, (state) => {
                 state.status = 'loading';
             })
             .addCase(fetchCoaches.fulfilled, (state, action: PayloadAction<{ data: UserType[] }>) => {
                 state.status = 'succeeded';
-                state.usersData = action.payload.data;
+                state.coachsData = action.payload.data;
             })
             .addCase(fetchCoaches.rejected, (state, action) => {
                 state.status = 'failed';

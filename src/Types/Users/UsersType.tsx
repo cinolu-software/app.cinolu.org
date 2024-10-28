@@ -17,8 +17,12 @@ export interface UserType {
 
 export interface StaffMemberType extends UserType{}
 
+export interface CoachsType extends  UserType{}
+
 export interface InitialStateUserType {
     usersData: UserType[];
+    coachsData: CoachsType[];
+    staffMemberData: StaffMemberType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     filterToggle: boolean;
     error: string | null;

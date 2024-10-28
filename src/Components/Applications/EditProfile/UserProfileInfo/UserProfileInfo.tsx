@@ -57,7 +57,7 @@ const UserProfileInfo = () => {
     };
 
     return (
-        <Col xl="4">
+        <Col xl="5">
             <Card>
                 <CommonCardHeader title={MyProfiles} />
                 <CardBody>

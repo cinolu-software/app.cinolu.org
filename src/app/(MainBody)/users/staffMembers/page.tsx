@@ -9,7 +9,7 @@ export default function Home() {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/Partners")).default;
+                const newClient = (await import("@/Components/Applications/TabAdmin/StaffMembersList")).default;
                 setClient(() => newClient);
             }
         })();

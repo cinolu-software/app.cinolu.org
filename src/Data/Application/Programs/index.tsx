@@ -7,7 +7,6 @@ import {TableColumn} from "react-data-table-component";
 import {Button} from "reactstrap";
 import Link from 'next/link'
 import {useRouter} from "next/navigation";
-import {useAppSelector} from "@/Redux/Hooks";
 import { imageBaseUrl } from "@/services/axios";
 
 
@@ -57,7 +56,7 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
                 </div>
                 <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
                     <Button color="outline-danger" className="w-100" onClick={handleDelete}>
-                        Supprimer
+                        Suppri...
                     </Button>
                 </div>
             </div>
