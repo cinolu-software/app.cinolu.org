@@ -4,20 +4,20 @@ import { toast, ToastContainer, Flip, Theme } from "react-toastify";
 import { Button, Form, FormGroup, Input, Label, Spinner } from "reactstrap";
 import imageOne from "../../../../public/assets/images/logo/logo.png";
 import imageTwo from "../../../../public/assets/images/logo/logo_dark.png";
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectStatus } from "@/Redux/Reducers/AuthSlice";
-import { AppDispatch } from "@/Redux/Store";
+import { login } from "@/Redux/Reducers/AuthSlice";
 import {useRouter} from "next/navigation";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import {LoginSubmitProp} from "@/Types/AuthType";
 
 const UserForm = () => {
 
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [formData, setFormData] = useState<LoginSubmitProp>({ email: "", password: "" });
 
-    const dispatch = useDispatch<AppDispatch>();
+    const dispatch = useAppDispatch();
+    const { statusAuth, isAuthenticated } = useAppSelector(state => state.auth);
     const router = useRouter();
-    const status = useSelector(selectStatus);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -35,7 +35,7 @@ const UserForm = () => {
         try {
             await dispatch(login(formData)).unwrap();
             displayToast("Connexion réussie", "success");
-             router.push('/dashboard');
+            router.push('/dashboard');
         } catch (error) {
             displayToast(error as string, "error");
         } finally {
@@ -57,10 +57,13 @@ const UserForm = () => {
     };
 
     useEffect(() => {
-        if (status === "failed") {
+        if (statusAuth === "succeeded" && isAuthenticated) {
+            router.push('/dashboard');
+        } else if (statusAuth === "failed") {
             setLoading(false);
         }
-    }, [status]);
+    }, [statusAuth, isAuthenticated, router]);
+
 
     return (
         <div>
