@@ -23,6 +23,26 @@ const UserForm = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    //     e.preventDefault();
+    //
+    //     if (!formData.email || !formData.password) {
+    //         displayToast("Veuillez remplir tous les champs.", "error");
+    //         return;
+    //     }
+    //
+    //     setLoading(true);
+    //     try {
+    //         await dispatch(login(formData)).unwrap();
+    //         displayToast("Connexion réussie", "success");
+    //         router.push('/dashboard');
+    //     } catch (error) {
+    //         displayToast(error as string, "error");
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -36,12 +56,14 @@ const UserForm = () => {
             await dispatch(login(formData)).unwrap();
             displayToast("Connexion réussie", "success");
             router.push('/dashboard');
+            window.location.reload();
         } catch (error) {
             displayToast(error as string, "error");
         } finally {
             setLoading(false);
         }
     };
+
 
     const displayToast = (message: string, type: "success" | "error") => {
         const toastOptions = {
@@ -56,13 +78,14 @@ const UserForm = () => {
             : toast.error(<p className="text-white tx-16 mb-0">{message}</p>, toastOptions);
     };
 
-    useEffect(() => {
-        if (statusAuth === "succeeded" && isAuthenticated) {
-            router.push('/dashboard');
-        } else if (statusAuth === "failed") {
-            setLoading(false);
-        }
-    }, [statusAuth, isAuthenticated, router]);
+    // useEffect(() => {
+    //     if (statusAuth === "succeeded" && isAuthenticated) {
+    //         router.push('/dashboard');
+    //
+    //     } else if (statusAuth === "failed") {
+    //         setLoading(false);
+    //     }
+    // }, [statusAuth, isAuthenticated, router]);
 
 
     return (

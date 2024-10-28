@@ -15,6 +15,8 @@ export interface UserType {
     roles: any [];
 }
 
+export interface StaffMemberType extends UserType{}
+
 export interface InitialStateUserType {
     usersData: UserType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';

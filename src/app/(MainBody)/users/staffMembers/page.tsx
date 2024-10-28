@@ -2,13 +2,14 @@
 
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
-const ListUsers = () => {
+export default function Home() {
+
     const [MyAwesomeMap, setClient] = useState<FunctionComponent>();
 
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/TabAdmin/UsersList")).default;
+                const newClient = (await import("@/Components/Applications/Partners")).default;
                 setClient(() => newClient);
             }
         })();
@@ -16,5 +17,3 @@ const ListUsers = () => {
 
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
-
-export default ListUsers
