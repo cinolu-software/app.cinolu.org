@@ -19,7 +19,10 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
     const selectedEntityData = entities.find((item) => item.id === selectedEntity?.id);
 
     const handleDelete = () => {
+
         if (selectedEntityData && selectedEntityData.id !== undefined) {
+
+
             dispatch(deleteEntityThunk(selectedEntityData.id))
                 .then(() => {
                     toast.success(
@@ -51,6 +54,7 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
                     );
                 });
         }
+
     };
 
     return (
@@ -71,10 +75,10 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
                         <h4 className="text-center pb-2">
                             Êtes-vous sûr de vouloir supprimer {entityName} ?
                         </h4>
-                        {selectedEntityData && (
+                        {selectedEntity && (
                             <p className="text-center">
                                 Vous êtes sur le point de supprimer {entityName} :{' '}
-                                <strong>{selectedEntityData.name}</strong>
+                                <strong>{selectedEntity?.name}</strong>
                             </p>
                         )}
                         <div className="d-flex justify-content-center mt-5">

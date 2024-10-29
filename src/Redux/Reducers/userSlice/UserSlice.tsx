@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
-import { UserType, InitialStateUserType, StaffMemberType } from "@/Types/Users/UsersType";
+import { UserType, InitialStateUserType, StaffMemberType, CoachsType } from "@/Types/Users/UsersType";
 
 
 const initialState: InitialStateUserType = {
@@ -11,13 +11,20 @@ const initialState: InitialStateUserType = {
     statusCoachs: 'idle',
     statusStaff: 'idle',
     filterToggle: false,
+
     errorUsers: null,
     errorCoachs: null,
     errorStaff: null,
-    isOpenModalCreateUser: false,
-    isOpenModalEditUser: false,
+
     isOpenModalDeleteUser: false,
+    isOpenModalDeleteCoach: false,
+    isOpenModalDeleteStaffMember: false,
+
     selectedUser: null,
+    selectedCoach: null,
+    selectedStaffMember: null,
+
+
     navId: 1,
     tabId: 1,
     formValue: {
@@ -89,15 +96,7 @@ const UsersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        setModalCreateUser: (state, action: PayloadAction<{ isOpen: boolean }>) => {
-            state.isOpenModalCreateUser = action.payload.isOpen;
-        },
-        setModalEditUser: (state, action: PayloadAction<{ isOpen: boolean; user?: UserType | null }>) => {
-            state.isOpenModalEditUser = action.payload.isOpen;
-            if (action.payload.user) {
-                state.selectedUser = action.payload.user;
-            }
-        },
+    
         setNavId: (state, action: PayloadAction<number>) => {
             state.navId = action.payload;
         },
@@ -111,6 +110,18 @@ const UsersSlice = createSlice({
             state.isOpenModalDeleteUser = action.payload.isOpen;
             if (action.payload.user) {
                 state.selectedUser = action.payload.user;
+            }
+        },
+        setModalDeleteCoach: (state, action: PayloadAction<{ isOpen: boolean; user?: CoachsType | null }>) => {
+            state.isOpenModalDeleteCoach = action.payload.isOpen;
+            if (action.payload.user) {
+                state.selectedCoach = action.payload.user;
+            }
+        },
+        setModalDeleteStaffMember: (state, action: PayloadAction<{ isOpen: boolean; user?: StaffMemberType | null }>) => {
+            state.isOpenModalDeleteStaffMember = action.payload.isOpen;
+            if (action.payload.user) {
+                state.selectedStaffMember = action.payload.user;
             }
         },
         setFilterToggle: (state) => {
@@ -183,13 +194,13 @@ const UsersSlice = createSlice({
 });
 
 export const {
-    setModalCreateUser,
-    setModalEditUser,
     setModalDeleteUser,
     setFilterToggle,
     setNavId,
     setTabId,
-    setFormValue
+    setFormValue,
+    setModalDeleteCoach,
+    setModalDeleteStaffMember
 } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

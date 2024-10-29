@@ -1,9 +1,9 @@
 import React, {useMemo, useState, useEffect} from 'react';
 import DataTable from 'react-data-table-component';
 import {Card, CardBody, Col, Container, Input, Label, Row} from 'reactstrap';
-import {fetchStaffMembers, setModalDeleteUser, deleteUser} from '@/Redux/Reducers/userSlice/UserSlice';
+import {fetchStaffMembers, setModalDeleteStaffMember, deleteUser} from '@/Redux/Reducers/userSlice/UserSlice';
 import {StaffMemberType} from '@/Types/Users/UsersType';
-import {UsersListTableDataColumn} from "@/Data/Application/Users";
+import {StaffMemberListTableDataColumn} from "@/Data/Application/Users";
 import { UsersListTableColumnType } from '@/Types/Users/UsersType';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import DeleteEntityModal from '@/CommonComponent/DeleteEntityModal';
@@ -13,7 +13,7 @@ const StaffMembersListContainer = () =>{
 
     const [filterText, setFilterText] = useState('');
     const dispatch = useAppDispatch();
-    const {staffMemberData, statusStaff, isOpenModalDeleteUser, selectedUser} = useAppSelector(state => state.users)
+    const {staffMemberData, statusStaff, isOpenModalDeleteStaffMember, selectedStaffMember} = useAppSelector(state => state.users)
 
     useEffect(() => {
         if (statusStaff === 'idle') {
@@ -45,11 +45,11 @@ const StaffMembersListContainer = () =>{
         <Container fluid>
 
             <DeleteEntityModal
-                isOpen={isOpenModalDeleteUser}
+                isOpen={isOpenModalDeleteStaffMember}
                 entityName="utilisateur"
-                selectedEntity={selectedUser}
+                selectedEntity={selectedStaffMember}
                 entities={staffMemberData}
-                setModalAction={setModalDeleteUser}
+                setModalAction={setModalDeleteStaffMember}
                 deleteEntityThunk={deleteUser}
             />
             <Row>
@@ -64,7 +64,7 @@ const StaffMembersListContainer = () =>{
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredUsers}
-                                        columns={UsersListTableDataColumn}
+                                        columns={StaffMemberListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination

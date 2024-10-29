@@ -1,9 +1,9 @@
 import React, {useMemo, useState, useEffect} from 'react';
 import DataTable from 'react-data-table-component';
 import {Card, CardBody, Col, Container, Input, Label, Row} from 'reactstrap';
-import {fetchCoaches, setModalDeleteUser, deleteUser} from '@/Redux/Reducers/userSlice/UserSlice';
+import {fetchCoaches, setModalDeleteCoach, deleteUser} from '@/Redux/Reducers/userSlice/UserSlice';
 import {UserType} from '@/Types/Users/UsersType';
-import {UsersListTableDataColumn} from "@/Data/Application/Users";
+import {CoatchListTableDataColumn} from "@/Data/Application/Users";
 import { UsersListTableColumnType } from '@/Types/Users/UsersType';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import DeleteEntityModal from '@/CommonComponent/DeleteEntityModal';
@@ -13,7 +13,7 @@ const CoachsListContainer = () =>{
 
     const [filterText, setFilterText] = useState('');
     const dispatch = useAppDispatch();
-    const {coachsData, statusCoachs, isOpenModalDeleteUser, selectedUser} = useAppSelector(state => state.users)
+    const {coachsData, statusCoachs, isOpenModalDeleteCoach, selectedCoach} = useAppSelector(state => state.users)
 
     useEffect(() => {
         if (statusCoachs === 'idle') {
@@ -24,7 +24,7 @@ const CoachsListContainer = () =>{
     const filteredUsers = coachsData
     .filter((user: UserType) =>
         (user.name.toLowerCase().includes(filterText.toLowerCase()) ||
-            user.email.toLowerCase().includes(filterText.toLowerCase()))
+        user.email.toLowerCase().includes(filterText.toLowerCase()))
     );
     
     const subHeaderComponentMemo = useMemo(() => {
@@ -38,50 +38,44 @@ const CoachsListContainer = () =>{
               />
             </div>
         );
-        }, [filterText]);
+    }, [filterText]);
 
-    console.log("coachsData====>",coachsData)
-    console.log("statusCoachs ====>", statusCoachs)
-    
-    
       return (
           <Container fluid>
-    
+
               <DeleteEntityModal
-                  isOpen={isOpenModalDeleteUser}
+                  isOpen={isOpenModalDeleteCoach}
                   entityName="utilisateur"
-                  selectedEntity={selectedUser}
+                  selectedEntity={selectedCoach}
                   entities={coachsData}
-                  setModalAction={setModalDeleteUser}
+                  setModalAction={setModalDeleteCoach}
                   deleteEntityThunk={deleteUser}
               />
-            <Row>
-              <Col sm="12">
-                <Card>
-                  <CardBody>
-                    <div className="list-product-header">
-                      <h5>Liste des coachs</h5>
-                    </div>
-                    <div className="list-user">
-                      <div className="table-responsive">
-                        <DataTable
-                            className="theme-scrollbar"
-                            data={filteredUsers}
-                            columns={UsersListTableDataColumn}
-                            striped
-                            highlightOnHover
-                            pagination
-                            subHeader
-                            subHeaderComponent={subHeaderComponentMemo}
-                        />
-                      </div>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-      );
-}
 
+              <Row>
+                  <Col sm="12">
+                    <Card>
+                      <CardBody>
+                        <div className="list-product-header"><h5>Liste des coachs</h5></div>
+                        <div className="list-user">
+                          <div className="table-responsive">
+                            <DataTable
+                                className="theme-scrollbar"
+                                data={filteredUsers}
+                                columns={CoatchListTableDataColumn}
+                                striped
+                                highlightOnHover
+                                pagination
+                                subHeader
+                                subHeaderComponent={subHeaderComponentMemo}
+                            />
+                          </div>
+                        </div>
+                      </CardBody>
+                    </Card>
+                  </Col>
+                </Row>
+          </Container>
+    );
+}
 export default CoachsListContainer

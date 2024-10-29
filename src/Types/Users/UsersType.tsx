@@ -20,20 +20,28 @@ export interface StaffMemberType extends UserType{}
 export interface CoachsType extends  UserType{}
 
 export interface InitialStateUserType {
-    usersData: UserType[];
-    coachsData: CoachsType[];
-    staffMemberData: StaffMemberType[];
-    statusUsers: 'idle' | 'loading' | 'succeeded' | 'failed';
-    statusCoachs: 'idle' | 'loading' | 'succeeded' | 'failed';
-    statusStaff: 'idle' | 'loading' | 'succeeded' | 'failed';
+
+    usersData : UserType[];
+    coachsData : CoachsType[];
+    staffMemberData : StaffMemberType[];
+
+    statusUsers : 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusCoachs : 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusStaff : 'idle' | 'loading' | 'succeeded' | 'failed';
+
     filterToggle: boolean;
     errorUsers: string | null;
     errorCoachs: string | null;
     errorStaff: string | null;
-    isOpenModalCreateUser: boolean;
-    isOpenModalEditUser: boolean;
+
     isOpenModalDeleteUser: boolean;
+    isOpenModalDeleteCoach: boolean;
+    isOpenModalDeleteStaffMember: boolean;
+
     selectedUser: UserType | null;
+    selectedCoach: CoachsType | null;
+    selectedStaffMember: StaffMemberType | null
+
     navId: number;
     tabId: number;
     formValue: any;

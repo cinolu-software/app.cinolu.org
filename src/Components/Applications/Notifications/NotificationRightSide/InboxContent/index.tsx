@@ -8,16 +8,15 @@ import { fetchUsers } from "@/Redux/Reducers/userSlice/UserSlice";
 
 
 const InboxContent = () => {
-
-    const { inboxNotification, page } = useAppSelector((state) => state.notifications);
+    
     const dispatch = useAppDispatch();
-    const {usersData, status, error} = useAppSelector(state => state.users);
+    const {usersData, statusUsers, errorUsers} = useAppSelector(state => state.users);
 
     useEffect(() => {
-        if (status === 'idle') {
+        if (statusUsers === 'idle') {
             dispatch(fetchUsers());
         }
-    }, [status, dispatch]);
+    }, [statusUsers, dispatch]);
 
     return (
         <TabPane tabId="1" >

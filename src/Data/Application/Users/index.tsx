@@ -4,12 +4,12 @@ import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
 import {useDispatch} from "react-redux";
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
-import {setModalEditUser, setModalDeleteUser} from "@/Redux/Reducers/userSlice/UserSlice";
+import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember} from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
-import Link from 'next/link'
+import Link from 'next/link';
 
-const UsersListTableName: React.FC<{image: string; name: string}> = ({image, name}) => {
+const UsersListTableName : React.FC<{image: string; name: string}> = ({image, name}) => {
   return (
       <div className={'product-names my-2'}>
         <div className={'light-product-box bg-img-cover'}>
@@ -20,13 +20,14 @@ const UsersListTableName: React.FC<{image: string; name: string}> = ({image, nam
   )
 }
 
-const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
+const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useDispatch();
 
-  const handleEdit = () => {
-    dispatch(setModalEditUser({isOpen: true, user}));
-  }
+  // const handleEdit = () => {
+  //   dispatch(setModalEditUser({isOpen: true, user}));
+  // }
+
   const handleDelete = () => {
     dispatch(setModalDeleteUser({isOpen: true, user}));
   }
@@ -51,9 +52,84 @@ const UsersListTableAction: React.FC<{user: UserType}> = ({ user}) => {
           </div>
 
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
-                    onClick={handleDelete}>
-              <SVG iconId="trashTable"/>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
+              <SVG iconId="trashTable" />
+            </button>
+          </div>
+        </div>
+      </div>
+  )
+}
+
+const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
+
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(setModalDeleteCoach({isOpen: true, user}));
+  }
+
+
+  return (
+      <div className="product-action">
+        <div className={'row w-100 justify-content-center'}>
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="editTable"/>
+              </span>
+            </button>
+          </div>
+
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="moreTable"/>
+              </span>
+            </button>
+          </div>
+
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
+              <SVG iconId="trashTable" />
+            </button>
+          </div>
+        </div>
+      </div>
+  )
+}
+
+const StaffMemberListTableAction : React.FC<{user: UserType}> = ({ user}) => {
+
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(setModalDeleteStaffMember({isOpen: true, user}));
+  }
+
+
+  return (
+      <div className="product-action">
+        <div className={'row w-100 justify-content-center'}>
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="editTable"/>
+              </span>
+            </button>
+          </div>
+
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="moreTable"/>
+              </span>
+            </button>
+          </div>
+
+          <div className={'col-4'}>
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
+              <SVG iconId="trashTable" />
             </button>
           </div>
         </div>
@@ -85,7 +161,59 @@ export const UsersListTableDataColumn = [
     ),
     grow: 2
   }
-]
+];
+
+export const CoatchListTableDataColumn = [
+  {
+    name: "Nom",
+    cell: (row: UsersListTableColumnType) => (
+        <UsersListTableName
+            image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"}
+            name={row.name}/>
+    ),
+    sortable: true,
+    grow: 2
+  },
+  {
+      name: "Email",
+      selector: (row: UsersListTableColumnType) => row.email,
+      sortable: true,
+      grow: 2
+  },
+  {
+    name: "Actions",
+    cell: (row: UsersListTableColumnType) => (
+        <CoachListTableAction user={row}/>
+    ),
+    grow: 2
+  }
+];
+
+export const StaffMemberListTableDataColumn = [
+  {
+    name: "Nom",
+    cell: (row: UsersListTableColumnType) => (
+        <UsersListTableName
+            image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"}
+            name={row.name}/>
+    ),
+    sortable: true,
+    grow: 2
+  },
+  {
+      name: "Email",
+      selector: (row: UsersListTableColumnType) => row.email,
+      sortable: true,
+      grow: 2
+  },
+  {
+    name: "Actions",
+    cell: (row: UsersListTableColumnType) => (
+        <StaffMemberListTableAction user={row}/>
+    ),
+    grow: 2
+  }
+];
 
 export const AddUser = [
   {
