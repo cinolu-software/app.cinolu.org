@@ -8,6 +8,7 @@ import {Button} from "reactstrap";
 import Link from 'next/link'
 import {useRouter} from "next/navigation";
 import { imageBaseUrl } from "@/services/axios";
+import SVG from '@/CommonComponent/SVG';
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -42,26 +43,33 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
     }
 
     return (
-        <div className="product-action w-100">
-            <div className="row w-100">
-                <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
-                    <Button color="outline-primary" className="w-100" onClick={handleEdit}>
-                        Modifier
-                    </Button>
-                </div>
-                <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
-                    <Button color="outline-dark" className="w-100" onClick={handleDetail}>
-                        Détail
-                    </Button>
-                </div>
-                <div className="col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-4">
-                    <Button color="outline-danger" className="w-100" onClick={handleDelete}>
-                        Suppri...
-                    </Button>
-                </div>
+        <div className="product-action">
+          <div className={'row w-100 justify-content-center'}>
+            <div className={'col-4'}>
+              <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleEdit}>
+                <span>
+                  <SVG iconId="editTable"/>
+                </span>
+              </button>
             </div>
+  
+            <div className={'col-4'}>
+              <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDetail}>
+                <span>
+                  <SVG iconId="moreTable"/>
+                </span>
+              </button>
+            </div>
+  
+            <div className={'col-4'}>
+              <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
+                <SVG iconId="trashTable" />
+              </button>
+            </div>
+          </div>
         </div>
-    );
+    )
+
 };
 
 

@@ -24,10 +24,6 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useDispatch();
 
-  // const handleEdit = () => {
-  //   dispatch(setModalEditUser({isOpen: true, user}));
-  // }
-
   const handleDelete = () => {
     dispatch(setModalDeleteUser({isOpen: true, user}));
   }
