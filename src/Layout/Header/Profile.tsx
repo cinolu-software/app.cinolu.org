@@ -30,7 +30,8 @@ export const Profile = () => {
     const LogOutUser = async () => {
         await dispatch(logout());
         localStorage.removeItem('user_profile');
-        router.push("http://localhost:3000/");
+        // router.push("http://localhost:3000/");
+        router.push('https://cinolu.org/');
     };
 
     useEffect(() => {
