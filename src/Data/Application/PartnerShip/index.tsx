@@ -5,6 +5,7 @@ import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {setModalDeletePartnerShip, setModalEditPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
+import SVG from '@/CommonComponent/SVG';
 
 const PartnerShipListTableName: React.FC<{image: string; name: string}>= ({image, name}) => {
     return (
@@ -29,10 +30,31 @@ const PartnerShipListTableAction: React.FC<{partnerShip: PartnerShipType}> = ({p
 
     return (
         <div className="product-action">
-            <Button size={"sm"} color='outline-primary' onClick={handleEdit}>Modifier</Button>
-            <Button size={"sm"} color={"outline-danger"} onClick={handleDelete}>Supprimer</Button>
+            <div className={'row w-100 justify-content-center'}>
+                <div className={'col-4'}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="editTable"/>
+              </span>
+                    </button>
+                </div>
+
+                <div className={'col-4'}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="moreTable"/>
+              </span>
+                    </button>
+                </div>
+
+                <div className={'col-4'}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
+                        <SVG iconId="trashTable" />
+                    </button>
+                </div>
+            </div>
         </div>
-    );
+    )
 }
 
 export const PartnerShipListTableDataColumn = [

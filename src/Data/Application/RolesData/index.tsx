@@ -4,6 +4,7 @@ import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
 import { setModalEditRole, setModalDeleteRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+import SVG from "@/CommonComponent/SVG";
 
 const RoleListTableName: React.FC<RoleListTableNameType> = ({ image, name }) => {
     return (
@@ -28,17 +29,32 @@ const RoleListTableAction: React.FC<{ role: RoleType }> = ({ role }) => {
     };
 
     return (
-        <div className="product-action w-100">
-            <div className={'row w-100'}>
-                <div className={'col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6'}>
-                    <Button size={"sm"} onClick={handleEdit} color={'outline-primary'} className={'w-100'}>Modifier</Button>
+        <div className="product-action">
+            <div className={'row w-100 justify-content-center'}>
+                <div className={'col-4'}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="editTable"/>
+              </span>
+                    </button>
                 </div>
-                <div className={'col-12 col-md-12 col-lg-12 col-xl-12 col-xxl-6'}>
-                    <Button size={'sm'} color={'outline-danger'} className={'w-100'} onClick={handleDelete}>Supprimer</Button>
+
+                <div className={'col-4'}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+              <span>
+                <SVG iconId="moreTable"/>
+              </span>
+                    </button>
+                </div>
+
+                <div className={'col-4'}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
+                        <SVG iconId="trashTable" />
+                    </button>
                 </div>
             </div>
         </div>
-    );
+    )
 };
 
 export const RoleListTableDataColumn = [

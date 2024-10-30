@@ -17,4 +17,4 @@ const DetailUser = () => {
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
 
-export default DetailUser
+export default DetailUser 
