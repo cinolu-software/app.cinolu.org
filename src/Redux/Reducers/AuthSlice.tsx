@@ -1,35 +1,17 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios, { apiBaseUrl } from "@/services/axios";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import axios from "@/services/axios";
+import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import Cookies from "js-cookie";
-import { AuthResponse, LoginSubmitProp, AuthState, UpdateProfilePayload, UpdateProfilePassword } from "@/Types/AuthType";
-import { RootState } from "@/Redux/Store";
-import axiosInstance from "@/services/axios";
+import {AuthResponse, AuthState, LoginSubmitProp, UpdateProfilePassword, UpdateProfilePayload} from "@/Types/AuthType";
+import {RootState} from "@/Redux/Store";
 
-
-export const login = createAsyncThunk<AuthResponse, LoginSubmitProp, { rejectValue: string }>(
-    "auth/sign-in",
-    async (data, { rejectWithValue }) => {
-        try {
-            const response = await axiosInstance.post(`${apiBaseUrl}/auth/sign-in`, data);
-            const user = JSON.stringify(response?.data?.data);
-
-            Cookies.set("cinolu_token", user);
-            localStorage.setItem('user_profile', user);
-            return { user: response.data.data };
-
-        } catch (error: any) {
-            const errorMessage = error.response?.data?.message || "Une erreur est survenue lors de la connexion";
-            return rejectWithValue(errorMessage);
-        }
-    }
-);
 
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     "auth/logout",
     async (_, thunkAPI) => {
         try {
+            await axiosInstance.post(`${apiBaseUrl}/auth/sign-out`);
             Cookies.remove("cinolu_token");
-            window.location.href = "/auth/login";
         } catch (error: any) {
             const errorMessage = "Une erreur est survenue lors de la déconnexion";
             return thunkAPI.rejectWithValue(errorMessage);
@@ -88,6 +70,24 @@ export const updatePassword = createAsyncThunk<AuthResponse, UpdateProfilePasswo
     }
 );
 
+export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: string }>(
+    "auth/getProfile",
+    async (_, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.get(`/auth/profile`);
+            const user = response.data.data;
+            localStorage.setItem("user_profile", JSON.stringify(user));
+            Cookies.set("cinolu_token", user);
+
+            return { user };
+        } catch (error: any) {
+            const errorMessage = error.response?.data?.message || "Erreur lors de la récupération du profil utilisateur";
+            return rejectWithValue(errorMessage);
+        }
+    }
+);
+
+
 const initialState: AuthState = {
     user: null,
     statusAuth: "idle",
@@ -100,29 +100,18 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
+
         loadUserFromStorage: (state) => {
-            const storedUser = localStorage.getItem('user_profile');
+            const storedUser = localStorage.getItem("user_profile");
             if (storedUser) {
                 state.user = JSON.parse(storedUser);
                 state.isAuthenticated = true;
             }
         },
+
     },
     extraReducers: (builder) => {
         builder
-            .addCase(login.pending, (state) => {
-                state.statusAuth = "loading";
-                state.errorAuth = null;
-            })
-            .addCase(login.fulfilled, (state, action) => {
-                state.statusAuth = "succeeded";
-                state.isAuthenticated = true;
-                state.user = action.payload.user;
-            })
-            .addCase(login.rejected, (state, action) => {
-                state.statusAuth = "failed";
-                state.errorAuth = action.payload || "";
-            })
             .addCase(logout.pending, (state) => {
                 state.statusAuth = "loading";
                 state.errorAuth = null;
@@ -173,6 +162,19 @@ const authSlice = createSlice({
             .addCase(updatePassword.rejected, (state, action) => {
                 state.statusAuth = 'failed';
                 state.errorAuth = action.payload || '';
+            })
+            .addCase(getProfile.pending, (state) => {
+                state.statusAuth = "loading";
+                state.errorAuth = null;
+            })
+            .addCase(getProfile.fulfilled, (state, action) => {
+                state.statusAuth = "succeeded";
+                state.user = action.payload.user;
+                state.isAuthenticated = true;
+            })
+            .addCase(getProfile.rejected, (state, action) => {
+                state.statusAuth = "failed";
+                state.errorAuth = action.payload || "Impossible de récupérer le profil";
             });
     },
 });

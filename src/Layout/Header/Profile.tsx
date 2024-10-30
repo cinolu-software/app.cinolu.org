@@ -30,7 +30,7 @@ export const Profile = () => {
     const LogOutUser = async () => {
         await dispatch(logout());
         localStorage.removeItem('user_profile');
-        router.push("/auth/login");
+        router.push("http://localhost:3000/");
     };
 
     useEffect(() => {
@@ -66,7 +66,6 @@ export const Profile = () => {
                 </li>
             </ul>
         </li>
-
     );
 };
 

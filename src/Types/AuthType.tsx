@@ -5,6 +5,7 @@ export interface Role {
     name: string;
     created_at: string;
     updated_at: string;
+    deleted_at: string | null,
 }
 
 export interface UpdateProfilePayload {
@@ -79,7 +80,6 @@ export interface ProfileImageData {
 }
 
 export interface AuthState {
-
     user: User | null;
     statusAuth: 'idle' | 'loading' | 'succeeded' | 'failed';
     errorAuth: string | null;

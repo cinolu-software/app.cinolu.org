@@ -12,7 +12,6 @@ export const Header = () => {
   const { toggleSidebar } = useAppSelector((state) => state.layout);
   const dispatch = useAppDispatch();
 
-
   useEffect(() => {
     dispatch(headerResponsive());
   }, []);
