@@ -10,12 +10,13 @@ import { useEffect } from "react";
 const Menulist: React.FC<MenuListType> = ({ menu, setActiveMenu, activeMenu, level, className }) => {
 
   const { pinedMenu } = useAppSelector((state) => state.layout);
+
   const pathname = usePathname();
+
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation("common");
-  const { sidebarIconType } = useAppSelector((state) => state.themeCustomizer)
-
+  const { sidebarIconType } = useAppSelector((state) => state.themeCustomizer);
 
   const ActiveNavLinkUrl = (path?: string, active?: boolean) => {
     return pathname === path ? (active ? active : true) : "";
@@ -45,30 +46,31 @@ const Menulist: React.FC<MenuListType> = ({ menu, setActiveMenu, activeMenu, lev
   }, [])
 
   return (
-    <>
-      {menu?.map((item, index) => (
-        <li key={index} className={`${level === 0 ? "sidebar-list" : ""} ${pinedMenu.includes(item.title || "") ? "pined" : ""}  ${(item.children ? item.children.map((innerItem) => ActiveNavLinkUrl(innerItem.path)).includes(true) : ActiveNavLinkUrl(item.path)) || activeMenu[level] === item.title ? "active" : ""} `}>
-          {level === 0 && <i className="fa fa-thumb-tack" onClick={() => dispatch(handlePined(item.title))}></i>}
-          <Link
-            className={`${!className && level !== 2 ? "sidebar-link sidebar-title" : ""}  ${(item.children ? item.children.map((innerItem) => ActiveNavLinkUrl(innerItem.path)).includes(true) : ActiveNavLinkUrl(item.path)) || activeMenu[level] === item.title ? "active" : ""}`}
-            href={item?.path ? `${item.path}` : ""}
-            onClick={() => {
-              const temp = activeMenu;
-              temp[level] = item.title !== temp[level] && (item.title);
-              setActiveMenu([...temp]);
-            }}>
-            {item.icon && (<SVG className={`${sidebarIconType}-icon`} iconId={`${sidebarIconType}-${item.icon}`} />)}
-            <span className={item.lanClass && item.lanClass}>{t(item.title)}</span>
-            {item.children && (<div className="according-menu"><i className="fa fa-angle-right" /></div>)}
-          </Link>
-          {item.children && (
-            <ul className={`${level !== 0 ? "nav-sub-childmenu submenu-content" : "sidebar-submenu "}`}>
-              <Menulist menu={item.children} activeMenu={activeMenu} setActiveMenu={setActiveMenu} level={level + 1} className="sidebar-submenu" />
-            </ul>
-          )}
-        </li>
-      ))}
-    </>
+      <>
+        {menu?.map((item, index) => (
+            <li key={index} className={`${level === 0 ? "sidebar-list" : ""} ${pinedMenu.includes(item.title || "") ? "pined" : ""}  ${(item.children ? item.children.map((innerItem) => ActiveNavLinkUrl(innerItem.path)).includes(true) : ActiveNavLinkUrl(item.path)) || activeMenu[level] === item.title ? "active" : ""} `}>
+              {level === 0 && <i className="fa fa-thumb-tack" onClick={() => dispatch(handlePined(item.title))}></i>}
+              <Link
+                  className={`${!className && level !== 2 ? "sidebar-link sidebar-title" : ""}  ${(item.children ? item.children.map((innerItem) => ActiveNavLinkUrl(innerItem.path)).includes(true) : ActiveNavLinkUrl(item.path)) || activeMenu[level] === item.title ? "active" : ""}`}
+                  href={item?.path ? `${item.path}` : ""}
+                  onClick={() => {
+                    const temp = activeMenu;
+                    temp[level] = item.title !== temp[level] && (item.title);
+                    setActiveMenu([...temp]);
+                  }}>
+                {item.icon && (<SVG className={`${sidebarIconType}-icon`} iconId={`${sidebarIconType}-${item.icon}`} />)}
+                <span className={item.lanClass && item.lanClass}>{t(item.title)}</span>
+                {item.children && (<div className="according-menu"><i className="fa fa-angle-right" /></div>)}
+              </Link>
+
+              {item.children && (
+                  <ul className={`${level !== 0 ? "nav-sub-childmenu submenu-content" : "sidebar-submenu "}`}>
+                    <Menulist menu={item.children} activeMenu={activeMenu} setActiveMenu={setActiveMenu} level={level + 1} className="sidebar-submenu" />
+                  </ul>
+              )}
+            </li>
+        ))}
+      </>
   );
 };
 

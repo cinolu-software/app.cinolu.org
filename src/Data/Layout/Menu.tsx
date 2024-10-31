@@ -2,6 +2,7 @@ import {MenuItem} from "@/Types/LayoutTypes";
 
 export const MenuList: MenuItem [] | undefined = [
     {
+        id: 1,
         title : "General",
         lanClass : "lan-1",
         menucontent : "Dashboard",
@@ -10,11 +11,13 @@ export const MenuList: MenuItem [] | undefined = [
                 path: "/dashboard",
                 icon: "home",
                 type: "link",
-                title: "Dashboard"
+                title: "Dashboard",
             },
-        ]
+        ],
+        requiredRoles: ["admin", "coach", "staff"],
     },
     {
+        id: 2,
         title: "Administration",
         lanClass: "lan-1",
         menucontent: "admin",
@@ -24,12 +27,12 @@ export const MenuList: MenuItem [] | undefined = [
                 id: 1,
                 icon: "user",
                 type: "sub",
-                lanClass: "lan-3",
+                lanClass: "lan-1",
                 active: false,
                 children: [
-                    {path: "/users/list", title: "Liste", type: "link", lanClass: "lan-5"},
-                    {path: "/users/coachs", title: "Coachs", type: "link", lanClass: "lan-6"},
-                    {path: "/users/staffMembers", title: "Staff", type: "link", lanClass: "lan-6"},
+                    {path: "/users/admin/list", title: "Liste", type: "link", lanClass: "lan-5"},
+                    {path: "/users/admin/coachs", title: "Coachs", type: "link", lanClass: "lan-6"},
+                    {path: "/users/admin/staffMembers", title: "Staff", type: "link", lanClass: "lan-6"},
                 ]
             },
             {
@@ -37,7 +40,7 @@ export const MenuList: MenuItem [] | undefined = [
                 id: 2,
                 icon: "builders",
                 type: "link",
-                lanClass: "lan-6",
+                lanClass: "lan-1",
                 active: false,
                 children: [
                     {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
@@ -46,10 +49,10 @@ export const MenuList: MenuItem [] | undefined = [
             },
             {
                 title: "Partenaires",
-                id: 2,
+                id: 3,
                 icon: "bonus-kit",
                 type: "sub",
-                lanClass: "lan-6",
+                lanClass: "lan-1",
                 active: false,
                 children: [
                     {path: "/partners", title: "Liste", type: "link", lanClass: "lan-6"},
@@ -61,19 +64,20 @@ export const MenuList: MenuItem [] | undefined = [
                 id: 3,
                 icon: "file",
                 type: "link",
-                lanClass: "lan-6",
+                lanClass: "lan-1",
                 active: false,
-                path: "/roles"
+                path: "/roles",
             },
             {
                 title: "Notifications",
                 id: 4,
                 icon: "chat",
                 type: "link",
-                lanClass: "lan-6",
+                lanClass: "lan-1",
                 active: false,
-                path: '/notifications'
+                path: '/notifications',
             },
         ],
+        requiredRoles: ["admin"],
     }
 ];

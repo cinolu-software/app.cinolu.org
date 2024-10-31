@@ -8,7 +8,7 @@ const ListUsers = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/TabAdmin/UsersList")).default;
+                const newClient = (await import('@/Components/Applications/TabAdmin/UsersList')).default
                 setClient(() => newClient);
             }
         })();

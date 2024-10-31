@@ -17,6 +17,7 @@ const UserLogin = () => {
         dispatch(getProfile());
     }, [dispatch]);
 
+    
     useEffect(() => {
         if (statusAuth === "succeeded" && isAuthenticated && user) {
             router.push('/dashboard')
@@ -24,6 +25,7 @@ const UserLogin = () => {
             router.push("http://localhost:3000/");
         }
     }, [statusAuth, isAuthenticated, user, router]);
+
 
     return (
         <Container fluid className="p-0">
