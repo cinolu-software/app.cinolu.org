@@ -23,7 +23,7 @@ export const AdminListFilterHeader = () => {
       </div>
         <Link
             className="btn btn-primary"
-            href={'/users/add_user'}
+            href={'/users/admin/add_user'}
         >
             <i className="fa fa-plus" />
             Créer un utilisateur

@@ -22,11 +22,10 @@ const UsersListContainer: React.FC = () => {
   }, [statusUsers, dispatch]);
 
     const filteredUsers = usersData
-        .filter((user: UserType) =>
-            // user?.roles?.some(role => role.name === 'admin') &&
-            (user.name.toLowerCase().includes(filterText.toLowerCase()) ||
-                user.email.toLowerCase().includes(filterText.toLowerCase()))
-        );
+    .filter((user: UserType) =>
+        (user.name.toLowerCase().includes(filterText.toLowerCase()) ||
+            user.email.toLowerCase().includes(filterText.toLowerCase()))
+    );
 
   const subHeaderComponentMemo = useMemo(() => {
     return (
@@ -41,10 +40,8 @@ const UsersListContainer: React.FC = () => {
     );
   }, [filterText]);
 
-
   return (
       <Container fluid>
-
           <DeleteEntityModal
               isOpen={isOpenModalDeleteUser}
               entityName="utilisateur"

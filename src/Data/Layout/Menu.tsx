@@ -61,7 +61,7 @@ export const MenuList: MenuItem [] | undefined = [
             },
             {
                 title: "Rôle",
-                id: 3,
+                id: 4,
                 icon: "file",
                 type: "link",
                 lanClass: "lan-1",
@@ -70,7 +70,7 @@ export const MenuList: MenuItem [] | undefined = [
             },
             {
                 title: "Notifications",
-                id: 4,
+                id: 5,
                 icon: "chat",
                 type: "link",
                 lanClass: "lan-1",
@@ -79,5 +79,52 @@ export const MenuList: MenuItem [] | undefined = [
             },
         ],
         requiredRoles: ["admin"],
+    },
+    {
+        id: 3,
+        title: "Coach",
+        lanClass: "lan-1",
+        menucontent: "coach",
+        Items: [
+            {
+                title: "Coachés",
+                id: 1,
+                icon: "user",
+                type: "sub",
+                lanClass: "lan-1",
+                active: false,
+                children: [
+                    {path: "/users/admin/list", title: "Liste", type: "link", lanClass: "lan-5"},
+                ]
+            },
+            {
+                title: "Programmes",
+                id: 2,
+                icon: "builders",
+                type: "link",
+                lanClass: "lan-1",
+                active: false,
+                path: ''
+            },
+            {
+                title: "Rapports",
+                id: 3,
+                icon: "charts",
+                type: "link",
+                lanClass: "lan-1",
+                active: false,
+                path: ''
+            },
+            {
+                title: "Discutions",
+                id: 4,
+                icon: "chat",
+                type: "link",
+                lanClass: "lan-1",
+                active: false,
+                path: '/users/coach'
+            },
+        ],
+        requiredRoles: ["coach"],
     }
 ];

@@ -65,7 +65,7 @@ const CreateUser = () => {
         <Container fluid>
             <Row className={'mb-4'}>
                 <Col className={'d-flex justify-content-end'}>
-                    <Link href={'/users/list'} className={'btn btn-outline-primary'}>
+                    <Link href={'/users/admin/list'} className={'btn btn-outline-primary'}>
                         <i className="bi bi-arrow-left"></i>
                         Retour
                     </Link>
