@@ -52,7 +52,7 @@ export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
 export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     'users/fetchStaffMembers',
     async () => {
-        const response = await axiosInstance.get<{ data: StaffMemberType[] }>(`${apiBaseUrl}/users/staff-members`);
+        const response = await axiosInstance.get<{ data: StaffMemberType[] }>(`${apiBaseUrl}/users/staff`);
         return { data: response.data.data };
     }
 );
