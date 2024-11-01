@@ -5,12 +5,14 @@ import Link from "next/link"
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {createUser} from "@/Redux/Reducers/userSlice/UserSlice";
 import {toast, ToastContainer, Flip} from "react-toastify";
+import {useRouter} from "next/navigation";
 
 
 const CreateUser = () => {
 
     const [isFormValid, setIsFormValid] = useState<boolean>(false);
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
     const { formValue } = useAppSelector((state) => state.users);
 
@@ -28,6 +30,7 @@ const CreateUser = () => {
                         theme: "colored",
                     }
                 );
+                router.push('/users/admin/list');
             }catch (error) {
                 toast.error(
                     <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création de l'utilisateur"}</p>,

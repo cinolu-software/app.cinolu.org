@@ -74,7 +74,7 @@ export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
                     address: newUser.address,
                     roles: newUser.roles
                 });
-            
+
              return { data: response.data.data };
         } catch (error: any) {
             return rejectWithValue(error.response?.data || 'Une erreur est survenue lors de la création de l’utilisateur.');
