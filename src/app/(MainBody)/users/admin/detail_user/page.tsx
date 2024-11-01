@@ -8,7 +8,7 @@ const DetailUser = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/TabAdmin/UsersList/AddUser")).default;
+                const newClient = (await import("@/Components/Applications/TabAdmin/UsersList/UserDetail")).default;
                 setClient(() => newClient);
             }
         })();

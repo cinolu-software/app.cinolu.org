@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import {  handleInterview, setSelectedUser} from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import { CommonDataType} from "@/Types/Notifications/NotificationType";
 import { Badge } from "reactstrap";
+import {imageBaseUrl} from "@/services/axios";
 
 type InboxNotificationContentProps = {
     data: any;
@@ -28,7 +29,8 @@ const InboxNotificationContent: React.FC<InboxNotificationContentProps> = ({data
         <>
             <div className={'inbox-user'}>
                 <div className="rounded-border">
-                    {<img src={`${ImagePath}/user/20.jpg`} alt={data.name}/>}
+                    {/*{<img src={`${ImagePath}/user/20.jpg`} alt={data.name}/>}*/}
+                    <img src={data ? `${imageBaseUrl}/profiles/${data.profile}` : "/assets/images/avtar/avatar.jpg"} alt={'user profile'}/>
                 </div>
                 <p>{data.name}</p>
             </div>

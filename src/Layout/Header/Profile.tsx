@@ -30,8 +30,8 @@ export const Profile = () => {
     const LogOutUser = async () => {
         await dispatch(logout());
         localStorage.removeItem('user_profile');
-        // router.push("http://localhost:3000/");
-        router.push('https://cinolu.org/');
+        router.push("http://localhost:3000/");
+        // router.push('https://cinolu.org/');
     };
 
     useEffect(() => {
@@ -43,7 +43,7 @@ export const Profile = () => {
             <div className="d-flex profile-media align-items-center">
                 <img
                     className="profile-img"
-                    src={localUser?.profile ? `${imageBaseUrl}/profiles/${localUser?.profile}` : `/assets/images/avtar/avatar.jpg`}
+                    src={localUser?.profile ? `${imageBaseUrl}/profiles/${localUser?.profile}` : `@/assets/images/avtar/avatar.jpg`}
                     alt="profile utilisateur"
                 />
                 <div className="flex-grow-1">

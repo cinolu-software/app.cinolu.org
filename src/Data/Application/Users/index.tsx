@@ -4,10 +4,10 @@ import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
 import {useDispatch} from "react-redux";
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
-import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember} from "@/Redux/Reducers/userSlice/UserSlice";
+import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach} from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
-import Link from 'next/link';
+import {useRouter} from "next/navigation";
 
 const UsersListTableName : React.FC<{image: string; name: string}> = ({image, name}) => {
   return (
@@ -60,9 +60,15 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useDispatch();
+  const router = useRouter()
 
   const handleDelete = () => {
     dispatch(setModalDeleteCoach({isOpen: true, user}));
+  }
+
+  const handleViewDetail = () => {
+    dispatch(setSelectedCoach({coach: user}))
+    router.push('/users/admin/detail_user')
   }
 
 
@@ -70,7 +76,9 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
       <div className="product-action">
         <div className={'row w-100 justify-content-center'}>
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+            <button
+                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+            >
               <span>
                 <SVG iconId="editTable"/>
               </span>
@@ -78,7 +86,10 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
           </div>
 
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+            <button
+                onClick={handleViewDetail}
+                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+            >
               <span>
                 <SVG iconId="moreTable"/>
               </span>
@@ -86,8 +97,11 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
           </div>
 
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-              <SVG iconId="trashTable" />
+            <button
+                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                onClick={handleDelete}
+            >
+              <SVG iconId="trashTable"/>
             </button>
           </div>
         </div>
@@ -95,7 +109,7 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
   )
 }
 
-const StaffMemberListTableAction : React.FC<{user: UserType}> = ({ user}) => {
+const StaffMemberListTableAction: React.FC<{ user: UserType }> = ({user}) => {
 
   const dispatch = useDispatch();
 

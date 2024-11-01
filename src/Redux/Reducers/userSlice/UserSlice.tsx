@@ -129,6 +129,15 @@ const UsersSlice = createSlice({
         },
         setFilterToggle: (state) => {
             state.filterToggle = !state.filterToggle;
+        },
+        setSelectedUser: (state, action: PayloadAction<{user: UserType | null}>) => {
+            state.selectedUser = action.payload.user
+        },
+        setSelectedCoach: (state, action: PayloadAction<{coach: CoachsType}>) => {
+            state.selectedCoach = action.payload.coach
+        },
+        setSelectedStaffMember : (state, action: PayloadAction<{staffMember: StaffMemberType}>) => {
+            state.selectedStaffMember = action.payload.staffMember
         }
     },
     extraReducers: (builder) => {
@@ -203,7 +212,11 @@ export const {
     setTabId,
     setFormValue,
     setModalDeleteCoach,
-    setModalDeleteStaffMember
+    setModalDeleteStaffMember,
+    setSelectedStaffMember,
+    setSelectedCoach,
+    setSelectedUser
+
 } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

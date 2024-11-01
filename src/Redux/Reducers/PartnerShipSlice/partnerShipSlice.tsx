@@ -17,7 +17,7 @@ const initialState: InitialStatePartnerShipType = {
     formValues: []
 };
 
-// Fetch partnerships
+
 export const fetchPartnerShip = createAsyncThunk<{data: PartnerShipType[]}>(
     'partnerShip/fetchPartnerShip',
     async () => {
@@ -27,7 +27,7 @@ export const fetchPartnerShip = createAsyncThunk<{data: PartnerShipType[]}>(
     }
 );
 
-// Create partnership
+
 export const createPartnerShip = createAsyncThunk(
     'partnerShip/createPartnerShip',
     async (newPartnerShip: PartnerShipType, {rejectWithValue}) => {
@@ -40,7 +40,7 @@ export const createPartnerShip = createAsyncThunk(
     }
 );
 
-// Delete partnership
+
 export const deletePartnerShip = createAsyncThunk(
     'partnerShip/deletePartnerShip',
     async (id: string, {rejectWithValue}) => {
@@ -53,7 +53,7 @@ export const deletePartnerShip = createAsyncThunk(
     }
 );
 
-// Update partnership
+
 export const updatePartnerShip = createAsyncThunk(
     'partnerShip/updatePartnerShip',
     async (partnerShip: PartnerShipType, {rejectWithValue}) => {
