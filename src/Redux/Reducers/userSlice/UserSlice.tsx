@@ -66,8 +66,16 @@ export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
     'users/createUser',
     async (newUser, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post<{ data: UserType }>(`${apiBaseUrl}/auth/add-user`, newUser);
-            return { data: response.data.data };
+            const response = await axiosInstance.post<{ data: UserType }>(`${apiBaseUrl}/auth/add-user`,
+                {
+                    email: newUser.email,
+                    name:  `${newUser.last_name} ${newUser.name} ${newUser.first_name}`,
+                    phone_number: newUser.phone_number,
+                    address: newUser.address,
+                    roles: newUser.roles
+                });
+            
+             return { data: response.data.data };
         } catch (error: any) {
             return rejectWithValue(error.response?.data || 'Une erreur est survenue lors de la création de l’utilisateur.');
         }
