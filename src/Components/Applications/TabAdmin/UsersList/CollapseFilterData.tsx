@@ -1,6 +1,6 @@
+import React, {useEffect, useMemo} from 'react';
 import { FiltersData } from "@/Data/Application/UsersData/AdminData";
 import { useAppSelector } from "@/Redux/Hooks";
-import React from "react";
 import { Card, CardBody, Col, Collapse, Input, Row } from "reactstrap";
 
 export const CollapseFilterData = () => {

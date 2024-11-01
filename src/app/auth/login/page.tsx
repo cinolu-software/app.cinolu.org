@@ -20,8 +20,8 @@ const UserLogin = () => {
         if (statusAuth === "succeeded" && isAuthenticated && user) {
             router.push('/dashboard')
         } else if (statusAuth === "failed") {
-            router.push("http://localhost:3000/");
-            // router.push('https://cinolu.org/')
+            // router.push("http://localhost:3000/");
+            router.push('https://cinolu.org/')
         }
     }, [statusAuth, isAuthenticated, user, router]);
 
