@@ -24,7 +24,6 @@ const initialState: InitialStateUserType = {
     selectedCoach: null,
     selectedStaffMember: null,
 
-
     navId: 1,
     tabId: 1,
     formValue: {
@@ -38,7 +37,6 @@ const initialState: InitialStateUserType = {
     }
 };
 
-
 export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchUsers',
     async () => {
@@ -48,7 +46,6 @@ export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     }
 );
 
-
 export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     'users/fetchStaffMembers',
     async () => {
@@ -57,7 +54,6 @@ export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     }
 );
 
-
 export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchCoaches',
     async () => {
@@ -65,7 +61,6 @@ export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
         return { data: response.data.data };
     }
 );
-
 
 export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>>(
     'users/createUser',

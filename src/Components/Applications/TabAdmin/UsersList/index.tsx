@@ -14,18 +14,25 @@ const UsersListContainer: React.FC = () => {
   const [filterText, setFilterText] = useState("");
   const dispatch = useAppDispatch();
   const {usersData, statusUsers, isOpenModalDeleteUser, selectedUser} = useAppSelector((state) => state.users);
+  const [roleFilter, setRoleFilter] = useState<string>("");
 
-  useEffect(() => {
+    useEffect(() => {
     if (statusUsers === 'idle') {
       dispatch(fetchUsers());
     }
   }, [statusUsers, dispatch]);
 
-    const filteredUsers = usersData
-    .filter((user: UserType) =>
-        (user.name.toLowerCase().includes(filterText.toLowerCase()) ||
-            user.email.toLowerCase().includes(filterText.toLowerCase()))
-    );
+    const filteredUsers = usersData.filter((user: UserType) => {
+        const matchesText =
+            user.name.toLowerCase().includes(filterText.toLowerCase()) ||
+            user.email.toLowerCase().includes(filterText.toLowerCase());
+
+        const matchesRole = roleFilter
+            ? user.roles.some((role) => role.name === roleFilter)
+            : true;
+
+        return matchesText && matchesRole;
+    });
 
   const subHeaderComponentMemo = useMemo(() => {
     return (
@@ -57,7 +64,7 @@ const UsersListContainer: React.FC = () => {
                 <div className="list-product-header">
                   <h5>Liste des Utilisateurs</h5>
                   <AdminListFilterHeader/>
-                  <CollapseFilterData/>
+                  <CollapseFilterData setRoleFilter={setRoleFilter} />
                 </div>
                 <div className="list-user">
                   <div className="table-responsive">
@@ -79,6 +86,7 @@ const UsersListContainer: React.FC = () => {
         </Row>
       </Container>
   );
+
 };
 
 export default UsersListContainer;
