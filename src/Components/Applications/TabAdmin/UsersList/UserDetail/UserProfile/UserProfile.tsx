@@ -40,7 +40,7 @@ const UserProfile : React.FC<UserProfileAppCallBackType> = ({callback , user}) =
                             <div className="icon-wrapper">
                                 <Link href={Href}><i className="icofont icofont-pencil-alt-5" /></Link>
                             </div>
-                            <UserProfileIcon />
+                            {/*<UserProfileIcon />*/}
                         </div>
                         <div className="info market-tabs p-0">
                             <NavBarMain callback={callback}  user={user}/>

@@ -3,14 +3,14 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 
 
-const Education = () => {
+const AdminDashboard = () => {
 
     const [MyAwesomeMap, setClient] = useState<FunctionComponent>();
 
     useEffect(()=>{
         (async () => {
             if (typeof window !== "undefined"){
-                const newClient = (await import ('@/Components/General/Dashboard/Dashboard')).default;
+                const newClient = (await import ('@/Components/General/Dashboard/AdminDashboard')).default;
                 setClient(()=> newClient);
             }
         })();
@@ -19,4 +19,4 @@ const Education = () => {
     return MyAwesomeMap ? <MyAwesomeMap/> : "";
 }
 
-export default Education;
+export default AdminDashboard;

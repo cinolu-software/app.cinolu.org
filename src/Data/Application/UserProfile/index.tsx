@@ -3,23 +3,15 @@ import { MessageSquare, ThumbsUp, UserPlus } from "react-feather";
 export const UserProfileNavData = [
     {
         id: 1,
-        tittle: "Timeline",
+        tittle: "Profile",
     },
     {
         id: 2,
-        tittle: "About",
-    },
-    {
-        id: 5,
-        userProfile: true,
+        tittle: "Info",
     },
     {
         id: 3,
-        tittle: "Friends",
-    },
-    {
-        id: 4,
-        tittle: "Photos",
+        tittle: "Rôle",
     },
 ];
 

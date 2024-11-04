@@ -16,25 +16,15 @@ const NavBarMain : React.FC<UserProfileAppCallBackType> = ({callback, user}) => 
 
 
     return (
-        <Nav tabs className={'border-tab tabs-scoial'}>
+        <Nav tabs >
             {
                 UserProfileNavData.map((data, index) => (
                     <Fragment key={index}>
-                        {data.userProfile ? (
-                            <NavItem>
-                                <div className="user-designation" />
-                                <div className="title">
-                                    <a href={`/app/social_app`}>{user?.name}</a>
-                                </div>
-                                <div className="desc mt-2">{user?.roles[0]?.name}</div>
-                            </NavItem>
-                        ) : (
-                            <NavItem className="nav">
-                                <NavLink className={activeTab === data.id ? "active" : ""} onClick={() => tabHandler(data.id)}>
-                                    {data.tittle}
-                                </NavLink>
-                            </NavItem>
-                        )}
+                        <NavItem className="nav">
+                            <NavLink className={activeTab === data.id ? "active" : ""} onClick={() => tabHandler(data.id)}>
+                                {data.tittle}
+                            </NavLink>
+                        </NavItem>
                     </Fragment>
                 ))
             }
