@@ -1,50 +1,63 @@
-import {Href, ImagePath} from "@/Constant";
+import { Href, ImagePath } from "@/Constant";
 import { UserProfileAppCallBackType } from '@/Types/Users/Profile/UserProfileType';
 import Link from 'next/link';
-import {Card, Col, Row} from 'reactstrap';
-import NavBarMain from "./NavBarMain";
-import UserProfileIcon from "./UserProfileIcon";
-import {imageBaseUrl} from "@/services/axios";
-import {useAppSelector} from "@/Redux/Hooks";
-import React, {useEffect} from "react";
-import {useRouter} from "next/navigation";
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from "react";
+import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader } from "reactstrap";
+import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
 
-
-const UserProfile : React.FC<UserProfileAppCallBackType> = ({callback , user}) => {
-
-    const router = useRouter()
+const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
+    const router = useRouter();
+    const [basicTab, setBasicTab] = useState("1");
 
     useEffect(() => {
-        if(!user) router.push('/users/admin/coachs')
+        if (!user) router.push('/users/admin/coachs');
     }, []);
-
 
     return (
         <>
-            <Row className={'mb-4'}>
-                <Col className={'d-flex justify-content-end'}>
-                    <Link href={'/users/admin/coachs'} className={'btn btn-outline-primary'}>
-                        <i className="bi bi-arrow-left"></i>
-                        Retour
+            <Row className="mb-4">
+                <Col className="d-flex justify-content-end">
+                    <Link href="/users/admin/coachs" className='btn btn-outline-primary'>
+                        <i className="bi bi-arrow-left"></i> Retour
                     </Link>
                 </Col>
             </Row>
             <Row>
-                <Col sm="12" className="box-col-12">
-                    <Card className="hovercard text-center">
-                        <div className="cardheader socialheader" />
-                        <div className="user-image">
-                            <div className="avatar">
-                                <img alt="user" src={user?.profile ? `${imageBaseUrl}/profiles/${user?.profile}` : "/assets/images/avtar/avatar.jpg"} />
-                            </div>
-                            <div className="icon-wrapper">
-                                <Link href={Href}><i className="icofont icofont-pencil-alt-5" /></Link>
-                            </div>
-                            {/*<UserProfileIcon />*/}
-                        </div>
-                        <div className="info market-tabs p-0">
-                            <NavBarMain callback={callback}  user={user}/>
-                        </div>
+                <Col  className="mx-auto">
+                    <Card className="shadow-sm">
+                        <CardHeader className="text-center py-4">
+                            <img className="rounded-circle"
+                                 src={`${ImagePath}/avtar/11.jpg`}
+                                 alt="Profile Image"
+                                 width="150" height="150" />
+                            <h5 className="mt-3">{user?.name}</h5>
+                            <p className="text-muted">{user?.role}</p>
+                        </CardHeader>
+                        <CardBody>
+                            <Nav tabs justified>
+                                <NavItem>
+                                    <NavLink className={`txt-secondary ${basicTab === "1" ? "active" : ""}`}
+                                             onClick={() => setBasicTab("1")}>
+                                        <i className="icofont icofont-man-in-glasses"></i> Profil
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink className={`txt-secondary ${basicTab === "2" ? "active" : ""}`}
+                                             onClick={() => setBasicTab("2")}>
+                                        <i className="icofont icofont-ui-home"></i> Accueil
+                                    </NavLink>
+                                </NavItem>
+
+                                <NavItem>
+                                    <NavLink className={`txt-secondary ${basicTab === "3" ? "active" : ""}`}
+                                             onClick={() => setBasicTab("3")}>
+                                        <i className="icofont icofont-contacts"></i> Contact
+                                    </NavLink>
+                                </NavItem>
+                            </Nav>
+                            <UserProfilTabContent basicTab={basicTab} />
+                        </CardBody>
                     </Card>
                 </Col>
             </Row>
@@ -52,4 +65,4 @@ const UserProfile : React.FC<UserProfileAppCallBackType> = ({callback , user}) =
     );
 }
 
-export default UserProfile
+export default UserProfile;

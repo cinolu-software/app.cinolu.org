@@ -2,6 +2,7 @@ import React, {useCallback, useState} from "react";
 import {Container} from "reactstrap";
 import UserProfile from './UserProfile/UserProfile';
 import {useAppSelector} from "@/Redux/Hooks";
+import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
 
 
 const UserDetailContainer = () => {
@@ -18,6 +19,7 @@ const UserDetailContainer = () => {
         <Container fluid>
             <div className="user-profile social-app-profile">
                 <UserProfile callback={callback} user={selectedCoach}/>
+                <UserProfilTabContent activeTab={activeTab}/>
             </div>
         </Container>
     );
