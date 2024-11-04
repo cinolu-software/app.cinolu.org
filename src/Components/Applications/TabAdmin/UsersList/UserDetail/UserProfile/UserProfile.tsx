@@ -45,16 +45,16 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                 <NavItem>
                                     <NavLink className={`txt-secondary ${basicTab === "2" ? "active" : ""}`}
                                              onClick={() => setBasicTab("2")}>
-                                        <i className="icofont icofont-ui-home"></i> Accueil
+                                        <i className="icofont icofont-book-alt"></i> Modifier
                                     </NavLink>
                                 </NavItem>
 
-                                <NavItem>
-                                    <NavLink className={`txt-secondary ${basicTab === "3" ? "active" : ""}`}
-                                             onClick={() => setBasicTab("3")}>
-                                        <i className="icofont icofont-contacts"></i> Contact
-                                    </NavLink>
-                                </NavItem>
+                                {/*<NavItem>*/}
+                                {/*    <NavLink className={`txt-secondary ${basicTab === "3" ? "active" : ""}`}*/}
+                                {/*             onClick={() => setBasicTab("3")}>*/}
+                                {/*        <i className="icofont icofont-contacts"></i> Contact*/}
+                                {/*    </NavLink>*/}
+                                {/*</NavItem>*/}
                             </Nav>
                             <UserProfilTabContent basicTab={basicTab} />
                         </CardBody>
