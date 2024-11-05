@@ -6,8 +6,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader, Button,  } from "reactstrap";
 import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
 
-// import { EmailAddress, ImagePath } from "@/Constant";
-// import { TabContent, TabPane, Row, Col, Card, CardBody } from "reactstrap";
+
 
 const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
 
@@ -35,7 +34,7 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                 <Col className="mx-auto">
                     <Card className="shadow-sm">
                         <CardHeader className="text-center py-5 position-relative bg-gradient shadow-sm rounded-top">
-                            <div className="position-relative d-inline-block">
+                            <div className="position-relative d-inline-block ">
                                 <img
                                     className="rounded-circle border border-3 border-light shadow-lg"
                                     src={`${ImagePath}/avtar/11.jpg`}
@@ -44,13 +43,14 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                     style={{ objectFit: 'cover' }}
                                 />
 
-                                <span className="position-absolute bottom-0 end-0 translate-middle p-2 bg-light border border-light rounded-circle mt-2">
+                                {/*<span className="position-absolute bottom-0 end-0 translate-middle p-2 bg-light border border-light rounded-circle mt-2">*/}
+                                <span className="position-absolute " style={{bottom: -10, left: 25}}>
                                     <button
                                         className="btn btn-link"
                                         onClick={handleEditClick}
                                         aria-label="Éditer le profil"
                                     >
-                                        <div className="icon-wrapper">
+                                        <div className="icon-wrapper text-light">
                                             <Link href={Href}><i className="icofont icofont-pencil-alt-5"/></Link>
                                         </div>
                                     </button>
@@ -83,7 +83,7 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                         className={`txt-secondary ${basicTab === "2" ? "active" : ""}`}
                                         onClick={() => setBasicTab("2")}
                                     >
-                                        <i className="icofont icofont-book-alt"></i> Modifier
+                                        <i className="icofont icofont-chart-line"></i> Expériences
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
@@ -91,7 +91,7 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                         className={`txt-secondary ${basicTab === "3" ? "active" : ""}`}
                                         onClick={() => setBasicTab("3")}
                                     >
-                                        <i className="icofont icofont-book-alt"></i> Expertise
+                                        <i className="icofont icofont-id-card"></i> Contact
                                     </NavLink>
                                 </NavItem>
                             </Nav>
