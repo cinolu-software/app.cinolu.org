@@ -1,37 +1,68 @@
 import { EmailAddress, ImagePath } from "@/Constant";
-import { Input, Label, TabContent, TabPane } from "reactstrap";
+import { TabContent, TabPane, Row, Col, Card, CardBody } from "reactstrap";
 
-
-
-const UserProfilTabContent: React.FC<{basicTab: any}> = ({basicTab}) => {
-
+const UserProfilTabContent: React.FC<{ basicTab: any, user: any }> = ({ basicTab, user }) => {
 
     return (
-        <TabContent activeTab={basicTab}>
-            <TabPane tabId="1">
-                <p className="pt-3"> Not limited to any states, boundaries. All over India providing cutting-edge design and website development services for over 12 years. We provide end to end digital solutions, right from designing your website/application development: Domain, Web Hosting, Email Hosting Registration, Search Engine Optimization and other Internet Marketing, Renewal of Services timely and effectively.</p>
-            </TabPane>
-            <TabPane tabId="2">
-                <div className="pt-3 mb-0">
-                    <div className="flex-space flex-wrap align-items-center">
-                        <img className="tab-img" src={`${ImagePath}/avtar/7.jpg`} alt="profile"/>
-                        <ul className="d-flex flex-column gap-1">
-                            <li><strong>Visit Us:  </strong> 278 Green Avenue Oakland, CA 94612</li>
-                            <li><strong>Mail Us:</strong> MichaelMMcGowan@teleworm.us</li>
-                            <li><strong>Contact Number: </strong> 510-767-0025</li>
-                        </ul>
+        <TabContent activeTab={basicTab} className="mt-5">
+
+            <TabPane tabId="1" className="main-content-body">
+                <div className="mb-4">
+                    <h4 className="section-title mb-3">BIOGRAPHIE</h4>
+                    <p className="bio-text">
+                        Bonjour, je suis Marie Curie, une scientifique passionnée et pionnière dans les domaines de la physique et de la chimie. Originaire de Pologne, j'ai consacré ma vie à l'étude des éléments radioactifs et à la recherche scientifique pour faire avancer notre compréhension de la matière. Mon travail m'a menée à la découverte de deux éléments, le polonium et le radium, et m'a permis de devenir la première femme à recevoir un prix Nobel, puis la première personne à en recevoir deux dans des disciplines différentes : la physique et la chimie.
+                    </p>
+                    <p className="bio-text">
+                        Tout au long de ma carrière, j'ai été profondément engagée dans la recherche et la transmission de la connaissance. En tant que professeure à l'Université de Paris, j'ai eu l'honneur de former de nombreux étudiants et de partager mes découvertes avec eux. J'ai fondé l'Institut du Radium, qui est aujourd'hui reconnu comme l'un des centres de recherche les plus importants en physique et en chimie. Mon travail a ouvert la voie à des avancées majeures dans la médecine et la recherche sur le cancer, permettant l'usage des rayonnements pour traiter les maladies.
+                    </p>
+                </div>
+                <div className="border-top pt-4">
+                    <h6 className="section-subtitle mb-3">Statistiques</h6>
+                    <div className="statistics">
+                        <span className="stat-item">Projets : <b>50</b></span>
+                        <span className="stat-item">Followers : <b>800</b></span>
+                        <span className="stat-item">Following : <b>100</b></span>
                     </div>
                 </div>
             </TabPane>
+
+            <TabPane tabId="2">
+
+                        <div className="experience-section mb-4">
+                            <h5 className="section-subtitle mb-3">Expérience</h5>
+                            <div className="experience-item mb-3">
+                                <h6 className="experience-title text-primary">Chercheuse en Physique</h6>
+                                <p className="company-name">Institut du Radium</p>
+                                <p className="date-range"><b>1906</b> - <b>1934</b></p>
+                                <p className="experience-description text-muted">Conduite de recherches innovantes sur la radioactivité.</p>
+                            </div>
+                        </div>
+                        <div className="border-top pt-4">
+                            <h6 className="section-subtitle mb-3">Compétences</h6>
+                            <p className="skills-list">Physique, Chimie, Recherche scientifique, Enseignement</p>
+                        </div>
+
+            </TabPane>
+
             <TabPane tabId="3">
-                <div>
-                    <p className="pt-3">Us Technology offers web &amp; mobile development solutions for all industry verticals.Include a short form using fields that'll help your business understand who's contacting them. </p>
-                    <Label check htmlFor="exampleFormControlone">{EmailAddress}</Label>
-                    <Input id="exampleFormControlone" type="email" placeholder="youremail@gmail.com" />
-                </div>
+
+                        <h6 className="section-subtitle mb-3">Contact</h6>
+                        <div className="contact-info d-flex flex-column">
+                            <div className="contact-item">
+                                <i className="bi bi-phone icon-style"></i> +33 1 23 45 67 89
+                            </div>
+                            <div className="contact-item">
+                                <i className="bi bi-envelope icon-style"></i> marie.curie@example.com
+                            </div>
+                            <div className="contact-item">
+                                <i className="bi bi-geo-alt icon-style"></i> Paris, France
+                            </div>
+                        </div>
+
             </TabPane>
         </TabContent>
+
     );
-}
+};
 
 export default UserProfilTabContent;

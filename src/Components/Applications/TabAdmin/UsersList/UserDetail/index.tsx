@@ -14,12 +14,11 @@ const UserDetailContainer = () => {
     }, []);
 
 
-
     return (
         <Container fluid>
             <div className="user-profile social-app-profile">
                 <UserProfile callback={callback} user={selectedCoach}/>
-                <UserProfilTabContent activeTab={activeTab}/>
+                <UserProfilTabContent basicTab={activeTab}  user={selectedCoach}/>
             </div>
         </Container>
     );
