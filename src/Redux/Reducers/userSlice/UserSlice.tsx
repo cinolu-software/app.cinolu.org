@@ -84,7 +84,7 @@ export const updateUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
     'users/updateUser',
     async (user, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.put<{ data: UserType }>(`${apiBaseUrl}/users/${user.id}`, user);
+            const response = await axiosInstance.patch<{ data: UserType }>(`${apiBaseUrl}/users/${user.id}`, user);
             return { data: response.data.data };
         } catch (error: any) {
             return rejectWithValue(error.response?.data || 'Une erreur est survenue lors de la mise à jour de l’utilisateur.');

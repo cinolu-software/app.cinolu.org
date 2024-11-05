@@ -7,11 +7,11 @@ import { toast, ToastContainer, Flip } from "react-toastify";
 import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 
 const UpdateCoachModal = () => {
-
     const dispatch = useAppDispatch();
     const { isOpenModalUpdateCoach, selectedCoach } = useAppSelector(state => state.users);
     const { originalRoleData, status } = useAppSelector(state => state.role);
-    const [selectedRoles, setSelectedRoles] = useState<string[]>(selectedCoach?.roles || []);
+
+    const [selectedRoles, setSelectedRoles] = useState<string[]>(selectedCoach?.roles.map((role: any) => role.id) || []);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -27,7 +27,6 @@ const UpdateCoachModal = () => {
 
     const handleSubmit = async () => {
         if (!selectedCoach) return;
-
         try {
             await dispatch(updateUser({ id: selectedCoach.id, roles: selectedRoles })).unwrap();
             toast.success("Rôle(s) mis à jour avec succès !", { transition: Flip });
@@ -36,8 +35,6 @@ const UpdateCoachModal = () => {
             toast.error("Une erreur est survenue lors de la mise à jour.");
         }
     };
-
-    console.log(isOpenModalUpdateCoach)
 
     return (
         <Col xl="4">
@@ -70,8 +67,8 @@ const UpdateCoachModal = () => {
                                 </div>
                             ))}
                         </div>
-                        <Button color="primary" onClick={handleSubmit}>Mettre à jour</Button>
                     </section>
+                    <Button color="primary" className="w-100 mt-4" onClick={handleSubmit}>Mettre à jour</Button>
                 </CommonModal>
                 <ToastContainer />
             </CardBody>
