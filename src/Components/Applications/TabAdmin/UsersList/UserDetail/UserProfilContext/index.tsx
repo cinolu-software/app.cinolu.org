@@ -27,38 +27,34 @@ const UserProfilTabContent: React.FC<{ basicTab: any, user: any }> = ({ basicTab
             </TabPane>
 
             <TabPane tabId="2">
-
-                        <div className="experience-section mb-4">
-                            <h5 className="section-subtitle mb-3">Expérience</h5>
-                            <div className="experience-item mb-3">
-                                <h6 className="experience-title text-primary">Chercheuse en Physique</h6>
-                                <p className="company-name">Institut du Radium</p>
-                                <p className="date-range"><b>1906</b> - <b>1934</b></p>
-                                <p className="experience-description text-muted">Conduite de recherches innovantes sur la radioactivité.</p>
-                            </div>
-                        </div>
-                        <div className="border-top pt-4">
-                            <h6 className="section-subtitle mb-3">Compétences</h6>
-                            <p className="skills-list">Physique, Chimie, Recherche scientifique, Enseignement</p>
-                        </div>
-
+                <div className="experience-section mb-4">
+                    <h5 className="section-subtitle mb-3">Expérience</h5>
+                    <div className="experience-item mb-3">
+                        <h6 className="experience-title text-primary">Chercheuse en Physique</h6>
+                        <p className="company-name">Institut du Radium</p>
+                        <p className="date-range"><b>1906</b> - <b>1934</b></p>
+                        <p className="experience-description text-muted">Conduite de recherches innovantes sur la radioactivité.</p>
+                    </div>
+                </div>
+                <div className="border-top pt-4">
+                    <h6 className="section-subtitle mb-3">Compétences</h6>
+                    <p className="skills-list">Physique, Chimie, Recherche scientifique, Enseignement</p>
+                </div>
             </TabPane>
 
             <TabPane tabId="3">
-
-                        <h6 className="section-subtitle mb-3">Contact</h6>
-                        <div className="contact-info d-flex flex-column">
-                            <div className="contact-item">
-                                <i className="bi bi-phone icon-style"></i> +33 1 23 45 67 89
-                            </div>
-                            <div className="contact-item">
-                                <i className="bi bi-envelope icon-style"></i> marie.curie@example.com
-                            </div>
-                            <div className="contact-item">
-                                <i className="bi bi-geo-alt icon-style"></i> Paris, France
-                            </div>
-                        </div>
-
+                <h6 className="section-subtitle mb-3">Contact</h6>
+                <div className="contact-info d-flex flex-column">
+                    <div className="contact-item">
+                        <i className="bi bi-phone icon-style"></i> +33 1 23 45 67 89
+                    </div>
+                    <div className="contact-item">
+                        <i className="bi bi-envelope icon-style"></i> marie.curie@example.com
+                    </div>
+                    <div className="contact-item">
+                        <i className="bi bi-geo-alt icon-style"></i> Paris, France
+                    </div>
+                </div>
             </TabPane>
         </TabContent>
 

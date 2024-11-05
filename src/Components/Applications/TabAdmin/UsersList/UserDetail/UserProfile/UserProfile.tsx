@@ -6,13 +6,21 @@ import React, { useEffect, useState } from "react";
 import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader, Button,  } from "reactstrap";
 import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
 
+// import { EmailAddress, ImagePath } from "@/Constant";
+// import { TabContent, TabPane, Row, Col, Card, CardBody } from "reactstrap";
+
 const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
+
     const router = useRouter();
     const [basicTab, setBasicTab] = useState("1");
 
     useEffect(() => {
         if (!user) router.push('/users/admin/coachs');
     }, []);
+
+    const handleEditClick = () => {
+        console.log("Édition du profil");
+    };
 
     return (
         <>
@@ -24,7 +32,7 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                 </Col>
             </Row>
             <Row>
-                <Col  className="mx-auto">
+                <Col className="mx-auto">
                     <Card className="shadow-sm">
                         <CardHeader className="text-center py-5 position-relative bg-gradient shadow-sm rounded-top">
                             <div className="position-relative d-inline-block">
@@ -36,8 +44,16 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                     style={{ objectFit: 'cover' }}
                                 />
 
-                                <span className="position-absolute bottom-0 end-0 translate-middle p-2 bg-success border border-light rounded-circle">
-                                    <span className="visually-hidden">En ligne</span>
+                                <span className="position-absolute bottom-0 end-0 translate-middle p-2 bg-light border border-light rounded-circle mt-2">
+                                    <button
+                                        className="btn btn-link"
+                                        onClick={handleEditClick}
+                                        aria-label="Éditer le profil"
+                                    >
+                                        <div className="icon-wrapper">
+                                            <Link href={Href}><i className="icofont icofont-pencil-alt-5"/></Link>
+                                        </div>
+                                    </button>
                                 </span>
                             </div>
                             <h5 className="mt-3 text-uppercase font-weight-bold" style={{ color: '#343a40', letterSpacing: '1px' }}>
@@ -55,24 +71,29 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                         <CardBody>
                             <Nav tabs justified>
                                 <NavItem>
-                                    <NavLink className={`txt-secondary ${basicTab === "1" ? "active" : ""}`}
-                                             onClick={() => setBasicTab("1")}>
-                                        <i className="icofont icofont-man-in-glasses"></i> Biographie
+                                    <NavLink
+                                        className={`txt-secondary ${basicTab === "1" ? "active" : ""}`}
+                                        onClick={() => setBasicTab("1")}
+                                    >
+                                        <i className="icofont icofont-man-in-glasses"></i> Profil
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className={`txt-secondary ${basicTab === "2" ? "active" : ""}`}
-                                             onClick={() => setBasicTab("2")}>
-                                        <i className="icofont icofont-book-alt"></i> Expérience
+                                    <NavLink
+                                        className={`txt-secondary ${basicTab === "2" ? "active" : ""}`}
+                                        onClick={() => setBasicTab("2")}
+                                    >
+                                        <i className="icofont icofont-book-alt"></i> Modifier
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink className={`txt-secondary ${basicTab === "3" ? "active" : ""}`}
-                                             onClick={() => setBasicTab("3")}>
-                                        <i className="icofont icofont-book-alt"></i> Contact
+                                    <NavLink
+                                        className={`txt-secondary ${basicTab === "3" ? "active" : ""}`}
+                                        onClick={() => setBasicTab("3")}
+                                    >
+                                        <i className="icofont icofont-book-alt"></i> Expertise
                                     </NavLink>
                                 </NavItem>
-
                             </Nav>
                             <UserProfilTabContent basicTab={basicTab} user={user} />
                         </CardBody>
@@ -84,3 +105,4 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
 }
 
 export default UserProfile;
+
