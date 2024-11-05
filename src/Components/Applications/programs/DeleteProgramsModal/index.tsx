@@ -10,11 +10,9 @@ const DeleteProgramModal = () => {
 
     const dispatch = useAppDispatch();
     const { isOpenModalDeleteProgram, selectedProgram, originalProgramsData } = useAppSelector((state) => state.programs);
-
     const selectedProgramData = originalProgramsData.find((item) => item.id === selectedProgram?.id);
 
     const handleDelete = async () => {
-
         if (selectedProgramData && selectedProgramData.id !== undefined) {
             try {
                 await dispatch(deleteProgram(selectedProgramData.id)).unwrap();

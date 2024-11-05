@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
 import { UserType, InitialStateUserType, StaffMemberType, CoachsType } from "@/Types/Users/UsersType";
 
-
 const initialState: InitialStateUserType = {
     usersData: [],
     coachsData: [],
@@ -11,19 +10,16 @@ const initialState: InitialStateUserType = {
     statusCoachs: 'idle',
     statusStaff: 'idle',
     filterToggle: false,
-
     errorUsers: null,
     errorCoachs: null,
     errorStaff: null,
-
     isOpenModalDeleteUser: false,
     isOpenModalDeleteCoach: false,
     isOpenModalDeleteStaffMember: false,
-
+    isOpenModalUpdateCoach: false,
     selectedUser: null,
     selectedCoach: null,
     selectedStaffMember: null,
-
     navId: 1,
     tabId: 1,
     formValue: {
@@ -37,15 +33,16 @@ const initialState: InitialStateUserType = {
     }
 };
 
+// Thunk pour récupérer les utilisateurs
 export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchUsers',
     async () => {
         const response = await axiosInstance.get<{ data: UserType[] }>(`${apiBaseUrl}/users`);
-        const users = response.data.data;
-        return { data: users };
+        return { data: response.data.data };
     }
 );
 
+// Thunk pour récupérer les membres du staff
 export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     'users/fetchStaffMembers',
     async () => {
@@ -54,6 +51,7 @@ export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     }
 );
 
+// Thunk pour récupérer les coachs
 export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchCoaches',
     async () => {
@@ -62,27 +60,39 @@ export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
     }
 );
 
+// Thunk pour créer un utilisateur
 export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>>(
     'users/createUser',
     async (newUser, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post<{ data: UserType }>(`${apiBaseUrl}/auth/add-user`,
-                {
-                    email: newUser.email,
-                    name:  `${newUser.last_name} ${newUser.name} ${newUser.first_name}`,
-                    phone_number: newUser.phone_number,
-                    address: newUser.address,
-                    roles: newUser.roles
-                });
-
-             return { data: response.data.data };
+            const response = await axiosInstance.post<{ data: UserType }>(`${apiBaseUrl}/auth/add-user`, {
+                email: newUser.email,
+                name: `${newUser.last_name} ${newUser.name} ${newUser.first_name}`,
+                phone_number: newUser.phone_number,
+                address: newUser.address,
+                roles: newUser.roles
+            });
+            return { data: response.data.data };
         } catch (error: any) {
             return rejectWithValue(error.response?.data || 'Une erreur est survenue lors de la création de l’utilisateur.');
         }
     }
 );
 
+// Thunk pour mettre à jour un utilisateur
+export const updateUser = createAsyncThunk<{ data: UserType }, Partial<UserType>>(
+    'users/updateUser',
+    async (user, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.put<{ data: UserType }>(`${apiBaseUrl}/users/${user.id}`, user);
+            return { data: response.data.data };
+        } catch (error: any) {
+            return rejectWithValue(error.response?.data || 'Une erreur est survenue lors de la mise à jour de l’utilisateur.');
+        }
+    }
+);
 
+// Thunk pour supprimer un utilisateur
 export const deleteUser = createAsyncThunk<string, string>(
     'users/deleteUser',
     async (userId, { rejectWithValue }) => {
@@ -99,7 +109,6 @@ const UsersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-    
         setNavId: (state, action: PayloadAction<number>) => {
             state.navId = action.payload;
         },
@@ -127,17 +136,23 @@ const UsersSlice = createSlice({
                 state.selectedStaffMember = action.payload.user;
             }
         },
+        setModalUpdateCoach: (state, action: PayloadAction<{isOpen: boolean; user?: CoachsType | null}>) => {
+            state.isOpenModalUpdateCoach = action.payload.isOpen;
+            if(action.payload.user) {
+                state.selectedCoach = action.payload.user;
+            }
+        },
         setFilterToggle: (state) => {
             state.filterToggle = !state.filterToggle;
         },
         setSelectedUser: (state, action: PayloadAction<{user: UserType | null}>) => {
-            state.selectedUser = action.payload.user
+            state.selectedUser = action.payload.user;
         },
         setSelectedCoach: (state, action: PayloadAction<{coach: CoachsType}>) => {
-            state.selectedCoach = action.payload.coach
+            state.selectedCoach = action.payload.coach;
         },
         setSelectedStaffMember : (state, action: PayloadAction<{staffMember: StaffMemberType}>) => {
-            state.selectedStaffMember = action.payload.staffMember
+            state.selectedStaffMember = action.payload.staffMember;
         }
     },
     extraReducers: (builder) => {
@@ -152,9 +167,8 @@ const UsersSlice = createSlice({
             })
             .addCase(fetchUsers.rejected, (state, action) => {
                 state.statusUsers = 'failed';
-                state.errorUsers = action.error.message || 'Une erreur est survenue lors de la récupération des utilisateurs.';
+                state.errorUsers = action.error.message || 'Erreur lors de la récupération des utilisateurs.';
             })
-
             .addCase(fetchStaffMembers.pending, (state) => {
                 state.statusStaff = 'loading';
             })
@@ -166,7 +180,6 @@ const UsersSlice = createSlice({
                 state.statusStaff = 'failed';
                 state.errorStaff = action.error.message || 'Erreur lors de la récupération des membres du staff.';
             })
-
             .addCase(fetchCoaches.pending, (state) => {
                 state.statusCoachs = 'loading';
             })
@@ -178,7 +191,6 @@ const UsersSlice = createSlice({
                 state.statusCoachs = 'failed';
                 state.errorCoachs = action.error.message || 'Erreur lors de la récupération des coachs.';
             })
-
             .addCase(createUser.pending, (state) => {
                 state.statusUsers = 'loading';
             })
@@ -188,19 +200,33 @@ const UsersSlice = createSlice({
             })
             .addCase(createUser.rejected, (state, action) => {
                 state.statusUsers = 'failed';
-                state.errorUsers = action.error.message || 'Une erreur est survenue lors de la création de l’utilisateur.';
+                state.errorUsers = action.error.message || 'Erreur lors de la création de l’utilisateur.';
             })
-
+            .addCase(updateUser.pending, (state) => {
+                state.statusUsers = 'loading';
+            })
+            .addCase(updateUser.fulfilled, (state, action: PayloadAction<{ data: UserType }>) => {
+                state.statusUsers = 'succeeded';
+                const updatedUser = action.payload.data;
+                const index = state.usersData.findIndex((user) => user.id === updatedUser.id);
+                if (index !== -1) {
+                    state.usersData[index] = updatedUser;
+                }
+            })
+            .addCase(updateUser.rejected, (state, action) => {
+                state.statusUsers = 'failed';
+                state.errorUsers = action.error.message || 'Erreur lors de la mise à jour de l’utilisateur.';
+            })
             .addCase(deleteUser.pending, (state) => {
                 state.statusUsers = 'loading';
             })
             .addCase(deleteUser.fulfilled, (state, action: PayloadAction<string>) => {
                 state.statusUsers = 'succeeded';
-                state.usersData = state.usersData.filter(user => user.id !== action.payload);
+                state.usersData = state.usersData.filter((user) => user.id !== action.payload);
             })
             .addCase(deleteUser.rejected, (state, action) => {
                 state.statusUsers = 'failed';
-                state.errorUsers = action.error.message || 'Une erreur est survenue lors de la suppression de l’utilisateur.';
+                state.errorUsers = action.error.message || 'Erreur lors de la suppression de l’utilisateur.';
             });
     },
 });
@@ -213,10 +239,10 @@ export const {
     setFormValue,
     setModalDeleteCoach,
     setModalDeleteStaffMember,
+    setModalUpdateCoach,
     setSelectedStaffMember,
     setSelectedCoach,
-    setSelectedUser
-
+    setSelectedUser,
 } = UsersSlice.actions;
 
 export default UsersSlice.reducer;

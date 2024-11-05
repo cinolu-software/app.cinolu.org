@@ -24,8 +24,6 @@ const StepThree = () => {
         dispatch(setFormValue({name: 'roles', value: updateRole}));
     }
 
-
-
     return (
         <Col>
             <section className={'main-upgrade'}>

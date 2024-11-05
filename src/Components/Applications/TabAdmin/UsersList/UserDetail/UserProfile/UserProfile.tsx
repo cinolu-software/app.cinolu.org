@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from "react";
 import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader, Button,  } from "reactstrap";
 import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
+import {setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 
 
 
@@ -12,14 +14,12 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
 
     const router = useRouter();
     const [basicTab, setBasicTab] = useState("1");
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         if (!user) router.push('/users/admin/coachs');
     }, []);
 
-    const handleEditClick = () => {
-        console.log("Édition du profil");
-    };
 
     return (
         <>
@@ -42,19 +42,6 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                     width="120" height="120"
                                     style={{ objectFit: 'cover' }}
                                 />
-
-                                {/*<span className="position-absolute bottom-0 end-0 translate-middle p-2 bg-light border border-light rounded-circle mt-2">*/}
-                                <span className="position-absolute " style={{bottom: -10, left: 25}}>
-                                    <button
-                                        className="btn btn-link"
-                                        onClick={handleEditClick}
-                                        aria-label="Éditer le profil"
-                                    >
-                                        <div className="icon-wrapper text-light">
-                                            <Link href={Href}><i className="icofont icofont-pencil-alt-5"/></Link>
-                                        </div>
-                                    </button>
-                                </span>
                             </div>
                             <h5 className="mt-3 text-uppercase font-weight-bold" style={{ color: '#343a40', letterSpacing: '1px' }}>
                                 {user?.name}
@@ -67,6 +54,13 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                 <span className="border border-light rounded-pill" style={{ width: '40px' }}></span>
                             </div>
 
+                            <Button
+                                color="primary" outline className="mt-3 rounded-pill shadow-sm"
+                                style={{ padding: '5px 20px' }}
+                                onClick={()=>dispatch(setModalUpdateCoach({isOpen: true, user}))}
+                            >
+                                Modifier le rôle
+                            </Button>
                         </CardHeader>
                         <CardBody>
                             <Nav tabs justified>

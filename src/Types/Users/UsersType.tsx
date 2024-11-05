@@ -37,6 +37,7 @@ export interface InitialStateUserType {
     isOpenModalDeleteUser: boolean;
     isOpenModalDeleteCoach: boolean;
     isOpenModalDeleteStaffMember: boolean;
+    isOpenModalUpdateCoach: boolean;
 
     selectedUser: UserType | null;
     selectedCoach: CoachsType | null;
