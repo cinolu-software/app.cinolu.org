@@ -43,16 +43,15 @@ const UserProfilTabContent: React.FC<{ basicTab: any, user: any }> = ({ basicTab
             </TabPane>
 
             <TabPane tabId="3">
-                <h6 className="section-subtitle mb-3">Contact</h6>
                 <div className="contact-info d-flex flex-column">
                     <div className="contact-item">
-                        <i className="bi bi-phone icon-style"></i> +33 1 23 45 67 89
+                        <i className="icofont icofont-ui-call"></i> {user?.phone_number}
                     </div>
                     <div className="contact-item">
-                        <i className="bi bi-envelope icon-style"></i> marie.curie@example.com
+                        <i className="icofont icofont-ui-email"></i> {user?.email}
                     </div>
                     <div className="contact-item">
-                        <i className="bi bi-geo-alt icon-style"></i> Paris, France
+                        <i className="icofont icofont-map"></i> {user?.address}
                     </div>
                 </div>
             </TabPane>

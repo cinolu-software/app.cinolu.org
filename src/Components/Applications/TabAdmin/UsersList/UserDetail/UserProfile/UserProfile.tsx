@@ -7,6 +7,7 @@ import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader, Button,  }
 import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
 import {setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import {imageBaseUrl} from "@/services/axios";
 
 
 
@@ -37,7 +38,7 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                             <div className="position-relative d-inline-block ">
                                 <img
                                     className="rounded-circle border border-3 border-light shadow-lg"
-                                    src={`${ImagePath}/avtar/11.jpg`}
+                                    src={user?.profile ? `${imageBaseUrl}/profiles/user.profile` : `${ImagePath}/avtar/avatar.jpg` }
                                     alt="Profile Image"
                                     width="120" height="120"
                                     style={{ objectFit: 'cover' }}

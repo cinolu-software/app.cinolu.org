@@ -5,13 +5,14 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalUpdateCoach, updateUser } from "@/Redux/Reducers/userSlice/UserSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
+import {TransformedRoleType} from "@/Types/AdminOptions/Roles/RoleType";
 
 const UpdateCoachModal = () => {
     const dispatch = useAppDispatch();
     const { isOpenModalUpdateCoach, selectedCoach } = useAppSelector(state => state.users);
     const { originalRoleData, status } = useAppSelector(state => state.role);
 
-    const [selectedRoles, setSelectedRoles] = useState<string[]>(selectedCoach?.roles.map((role: any) => role.id) || []);
+    const [selectedRoles, setSelectedRoles] = useState<string[]>(selectedCoach?.roles.map((role: TransformedRoleType) => role.id) || []);
 
     useEffect(() => {
         if (status === 'idle') {

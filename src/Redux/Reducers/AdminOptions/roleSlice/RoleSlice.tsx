@@ -47,7 +47,7 @@ export const createRole = createAsyncThunk<RoleType, CreateRole>(
     }
 );
 
-export const updateRole = createAsyncThunk<RoleType, { id: number, name: string }>(
+export const updateRole = createAsyncThunk<RoleType, { id: string, name: string }>(
     'roles/updateRole', async (updatedRole, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.patch<{ data: RoleType }>(`${apiBaseUrl}/roles/${updatedRole.id}`, { name: updatedRole.name });
@@ -58,7 +58,7 @@ export const updateRole = createAsyncThunk<RoleType, { id: number, name: string 
     }
 );
 
-export const deleteRole = createAsyncThunk<number, number>(
+export const deleteRole = createAsyncThunk<string, any>(
     'roles/deleteRole', async (roleId, { rejectWithValue }) => {
         try {
             await axiosInstance.delete(`${apiBaseUrl}/roles/${roleId}`);
@@ -145,7 +145,7 @@ const RoleSlice = createSlice({
                 state.status = "loading";
                 state.error = null;
             })
-            .addCase(deleteRole.fulfilled, (state, action: PayloadAction<number>) => {
+            .addCase(deleteRole.fulfilled, (state, action: PayloadAction<string>) => {
                 state.status = 'succeeded';
                 state.originalRoleData = state.originalRoleData.filter(role => role.id !== action.payload);
                 state.transformedRoleData = state.transformedRoleData.filter(role => role.id !== action.payload);

@@ -1,14 +1,14 @@
 export interface RoleType {
-    id: number;
+    id: string;
     name: string;
     created_at: string;
     updated_at: string;
 }
 
 export interface TransformedRoleType {
-    id: number;
+    id: string;
     name: string;
-    image: string;
+    image?: string;
     created_at: string;
     updated_at: string;
 }
