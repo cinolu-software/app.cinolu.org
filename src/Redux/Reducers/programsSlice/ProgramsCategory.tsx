@@ -100,5 +100,20 @@ const ProgramCategory = createSlice({
                     existingCategory.name = newCategory.name;
                 }
             })
-})
+    }
+
+});
+
+export const {
+    toggleFilter,
+    openModalCreateCategory,
+    closeModalCreateCategory,
+    openModalEditCategory,
+    closeModalEditCategory,
+    openModalDeleteCategory,
+    closeModalDeleteCategory
+} = ProgramCategory.actions;
+
+export default ProgramCategory.reducer
+
 
