@@ -7,10 +7,10 @@ const ProgramsTypesListContainer = dynamic(() => import('@/Components/Applicatio
     ssr: false
 });
 
-const ProgramsType = () => {
+const ProgramsCategory = () => {
     return (
         <ProgramsTypesListContainer />
     );
 };
 
-export default ProgramsType;
+export default ProgramsCategory;

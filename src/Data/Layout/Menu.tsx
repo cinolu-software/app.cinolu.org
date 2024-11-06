@@ -45,6 +45,7 @@ export const MenuList: MenuItem [] | undefined = [
                 children: [
                     {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
                     {path: "/programs/programTypes", title: "types", type: "link", lanClass: "lan-6"},
+                    {path: "/programs/programTypes", title: "catégorie", type: "link", lanClass: "lan-6"},
                 ]
             },
             {
