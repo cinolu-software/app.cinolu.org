@@ -4,7 +4,7 @@ import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
-import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
+import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setModalUpdateCoach, setSelectedUser} from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
 import {useRouter} from "next/navigation";
@@ -23,9 +23,15 @@ const UsersListTableName : React.FC<{image: string; name: string}> = ({image, na
 const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const handleDelete = () => {
     dispatch(setModalDeleteUser({isOpen: true, user}));
+  }
+
+  const handleViewDetail = () => {
+    dispatch(setSelectedUser({user}))
+    router.push('/users/admin/coachs/detail_coach')
   }
 
   return (
@@ -40,7 +46,10 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
           </div>
 
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+            <button
+                onClick={handleViewDetail}
+                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+            >
               <span>
                 <SVG iconId="moreTable"/>
               </span>

@@ -1,20 +1,17 @@
-import { Href, ImagePath } from "@/Constant";
-import { UserProfileAppCallBackType } from '@/Types/Users/Profile/UserProfileType';
+import { ImagePath } from "@/Constant";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from "react";
-import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader, Button,  } from "reactstrap";
-import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
+import React, { useEffect } from "react";
+import { Card, Row, Col, CardHeader, Button,  } from "reactstrap";
 import {setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
 import {useAppDispatch} from "@/Redux/Hooks";
 import {imageBaseUrl} from "@/services/axios";
 
 
 
-const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
+const UserProfile: React.FC<{user: any}> = ({ user }) => {
 
     const router = useRouter();
-    const [basicTab, setBasicTab] = useState("1");
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -63,35 +60,7 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
                                 Modifier le rôle
                             </Button>
                         </CardHeader>
-                        <CardBody>
-                            <Nav tabs justified>
-                                <NavItem>
-                                    <NavLink
-                                        className={`txt-secondary ${basicTab === "1" ? "active" : ""}`}
-                                        onClick={() => setBasicTab("1")}
-                                    >
-                                        <i className="icofont icofont-man-in-glasses"></i> Profil
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink
-                                        className={`txt-secondary ${basicTab === "2" ? "active" : ""}`}
-                                        onClick={() => setBasicTab("2")}
-                                    >
-                                        <i className="icofont icofont-chart-line"></i> Expériences
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink
-                                        className={`txt-secondary ${basicTab === "3" ? "active" : ""}`}
-                                        onClick={() => setBasicTab("3")}
-                                    >
-                                        <i className="icofont icofont-id-card"></i> Contact
-                                    </NavLink>
-                                </NavItem>
-                            </Nav>
-                            <UserProfilTabContent basicTab={basicTab} user={user} />
-                        </CardBody>
+
                     </Card>
                 </Col>
             </Row>
