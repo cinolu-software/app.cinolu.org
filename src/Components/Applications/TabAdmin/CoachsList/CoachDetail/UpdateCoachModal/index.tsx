@@ -37,10 +37,6 @@ const UpdateCoachModal = () => {
         }
     };
 
-    useEffect(() => {
-
-    }, [selectedCoach]);
-
     return (
         <Col xl="4">
             <CardBody className="badge-spacing">

@@ -11,7 +11,7 @@ import {imageBaseUrl} from "@/services/axios";
 
 
 
-const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
+const CoachProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
 
     const router = useRouter();
     const [basicTab, setBasicTab] = useState("1");
@@ -99,5 +99,5 @@ const UserProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) =
     );
 }
 
-export default UserProfile;
+export default CoachProfile;
 

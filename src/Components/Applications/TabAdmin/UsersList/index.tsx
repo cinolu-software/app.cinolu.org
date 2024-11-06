@@ -9,6 +9,8 @@ import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/UsersLis
 import {CollapseFilterData} from "@/Components/Applications/TabAdmin/UsersList/CollapseFilterData";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 
+
+
 const UsersListContainer: React.FC = () => {
 
   const [filterText, setFilterText] = useState("");
@@ -57,6 +59,7 @@ const UsersListContainer: React.FC = () => {
               setModalAction={setModalDeleteUser}
               deleteEntityThunk={deleteUser}
           />
+
         <Row>
           <Col sm="12">
             <Card>

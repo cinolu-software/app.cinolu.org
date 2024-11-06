@@ -2,9 +2,9 @@ import React from 'react';
 import {Button} from 'reactstrap';
 import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
-import {useDispatch} from "react-redux";
+import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
-import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach} from "@/Redux/Reducers/userSlice/UserSlice";
+import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
 import {useRouter} from "next/navigation";
@@ -22,7 +22,7 @@ const UsersListTableName : React.FC<{image: string; name: string}> = ({image, na
 
 const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleDelete = () => {
     dispatch(setModalDeleteUser({isOpen: true, user}));
@@ -59,8 +59,9 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
 const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
-  const dispatch = useDispatch();
-  const router = useRouter()
+  const dispatch = useAppDispatch();
+  const {isOpenModalUpdateCoach} = useAppSelector(state=>state.users)
+  const router = useRouter();
 
   const handleDelete = () => {
     dispatch(setModalDeleteCoach({isOpen: true, user}));
@@ -68,7 +69,12 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const handleViewDetail = () => {
     dispatch(setSelectedCoach({coach: user}))
-    router.push('/users/admin/detail_user')
+    router.push('/users/admin/coachs/detail_coach')
+  }
+
+  const handleModifiedCoach = () => {
+    dispatch(setModalUpdateCoach({isOpen: true, user}))
+    console.log("C'est bon", user)
   }
 
 
@@ -78,6 +84,7 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
           <div className={'col-4'}>
             <button
                 style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                onClick={handleModifiedCoach}
             >
               <span>
                 <SVG iconId="editTable"/>
@@ -111,7 +118,7 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
 const StaffMemberListTableAction: React.FC<{ user: UserType }> = ({user}) => {
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleDelete = () => {
     dispatch(setModalDeleteStaffMember({isOpen: true, user}));
