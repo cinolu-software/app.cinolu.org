@@ -1,6 +1,10 @@
 import {createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import {ProgramsCategoryType, InitialStateCategoryType} from '@/Types/Programs/ProgramsCategoryType';
+import {
+    ProgramsCategoryType,
+    InitialStateCategoryType,
+    CreateCategoryType, UpdateCategoryType
+} from '@/Types/Programs/ProgramsCategoryType';
 
 const initialState: InitialStateCategoryType = {
     programsCategoryData: [],
@@ -19,12 +23,12 @@ export const fetchCategory = createAsyncThunk('programsCategory/fetchCategory', 
     return response.data;
 });
 
-export const createCategory = createAsyncThunk('programsCategory/createCategory', async (category: ProgramsCategoryType) => {
+export const createCategory = createAsyncThunk('programsCategory/createCategory', async (category: CreateCategoryType) => {
     const response = await axiosInstance.post(`${apiBaseUrl}/programs/category`, category);
     return response.data;
 });
 
-export const updateCategory = createAsyncThunk('programsCategory/updateCategory', async (category: ProgramsCategoryType) => {
+export const updateCategory = createAsyncThunk('programsCategory/updateCategory', async (category: UpdateCategoryType) => {
     const response = await axiosInstance.put(`${apiBaseUrl}/programs/category/${category.id}`, category);
     return response.data;
 });
@@ -35,35 +39,25 @@ export const deleteCategory = createAsyncThunk('programsCategory/deleteCategory'
 });
 
 
-const ProgramCategory = createSlice({
+const ProgramCategorySlice = createSlice({
     name: 'programsCategory',
     initialState,
     reducers: {
         toggleFilter: (state) => {
             state.filterToggle = !state.filterToggle;
         },
-        openModalCreateCategory: (state) => {
-            state.isOpenModalCreateCategory = true;
+        setModalCreateCategory: (state, action: PayloadAction<{ isOpen: boolean }>) => {
+            state.isOpenModalCreateCategory = action.payload.isOpen;
         },
-        closeModalCreateCategory: (state) => {
-            state.isOpenModalCreateCategory = false;
+        setModalEditCategory: (state, action: PayloadAction<{ isOpen: boolean, programCategory: any }>) => {
+            state.isOpenModalEditCategory = action.payload.isOpen;
+            state.selectedCategory = action.payload.programCategory;
         },
-        openModalEditCategory: (state, action: PayloadAction<ProgramsCategoryType>) => {
-            state.isOpenModalEditCategory = true;
-            state.selectedCategory = action.payload;
-        },
-        closeModalEditCategory: (state) => {
-            state.isOpenModalEditCategory = false;
-            state.selectedCategory = null;
-        },
-        openModalDeleteCategory: (state, action: PayloadAction<ProgramsCategoryType>) => {
-            state.isOpenModalDeleteCategory = true;
-            state.selectedCategory = action.payload;
-        },
-        closeModalDeleteCategory: (state) => {
-            state.isOpenModalDeleteCategory = false;
-            state.selectedCategory = null;
-        },
+        setModalDeleteCategory: (state, action: PayloadAction<{ isOpen: boolean, programCategory: any }>) => {
+            state.isOpenModalDeleteCategory = action.payload.isOpen;
+            state.selectedCategory = action.payload.programCategory;
+        }
+
     },
     extraReducers: (builder) => {
         builder
@@ -106,14 +100,11 @@ const ProgramCategory = createSlice({
 
 export const {
     toggleFilter,
-    openModalCreateCategory,
-    closeModalCreateCategory,
-    openModalEditCategory,
-    closeModalEditCategory,
-    openModalDeleteCategory,
-    closeModalDeleteCategory
-} = ProgramCategory.actions;
+    setModalCreateCategory,
+    setModalEditCategory,
+    setModalDeleteCategory
+} = ProgramCategorySlice.actions;
 
-export default ProgramCategory.reducer
+export default ProgramCategorySlice.reducer
 
 

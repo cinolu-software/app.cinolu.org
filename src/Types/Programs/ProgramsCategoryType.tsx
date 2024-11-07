@@ -27,6 +27,11 @@ export interface CreateCategoryType {
     name: string;
 }
 
+export interface UpdateCategoryType {
+    id: string;
+    name: string;
+}
+
 export interface StaticModalToggleProp{
     staticModalToggle: () => void;
 }

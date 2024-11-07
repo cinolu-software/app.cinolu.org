@@ -12,6 +12,7 @@ import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
 import NotificationSlice from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import PartnerShipSlice from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 import PartnerSlice from "@/Redux/Reducers/PartnersSlice/partnerSlice";
+import ProgramCategorySlice from "@/Redux/Reducers/programsSlice/ProgramsCategory"
 
 const Store = configureStore({
 
@@ -29,6 +30,7 @@ const Store = configureStore({
     partner: PartnerSlice,
     otherProgram : OtherSlice,
     notifications: NotificationSlice,
+    programCategory: ProgramCategorySlice
   },
 
   middleware: getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
