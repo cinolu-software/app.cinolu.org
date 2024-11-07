@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 
 
-const ProgramsTypesListContainer = dynamic(() => import('@/Components/Applications/programsTypes'), {
+const ProgramsTypesListContainer = dynamic(() => import('@/Components/Applications/programsCategory'), {
     ssr: false
 });
 
