@@ -19,27 +19,28 @@ const initialState: InitialStateCategoryType = {
 };
 
 export const fetchCategory = createAsyncThunk('programsCategory/fetchCategory', async () => {
-    const response = await axiosInstance.get(`${apiBaseUrl}/programs/category`);
+    const response = await axiosInstance.get(`${apiBaseUrl}/categories`);
     return response.data;
 });
 
 export const createCategory = createAsyncThunk('programsCategory/createCategory', async (category: CreateCategoryType) => {
-    const response = await axiosInstance.post(`${apiBaseUrl}/programs/category`, category);
+    const response = await axiosInstance.post(`${apiBaseUrl}/categories`, category);
     return response.data;
 });
 
 export const updateCategory = createAsyncThunk('programsCategory/updateCategory', async (category: UpdateCategoryType) => {
-    const response = await axiosInstance.put(`${apiBaseUrl}/programs/category/${category.id}`, category);
+    const response = await axiosInstance.put(`${apiBaseUrl}/categories/${category.id}`, category);
     return response.data;
 });
 
 export const deleteCategory = createAsyncThunk('programsCategory/deleteCategory', async (id: number) => {
-    await axiosInstance.delete(`${apiBaseUrl}/programs/category/${id}`);
+    await axiosInstance.delete(`${apiBaseUrl}/categories/${id}`);
     return id;
 });
 
 
 const ProgramCategorySlice = createSlice({
+
     name: 'programsCategory',
     initialState,
     reducers: {
@@ -57,7 +58,6 @@ const ProgramCategorySlice = createSlice({
             state.isOpenModalDeleteCategory = action.payload.isOpen;
             state.selectedCategory = action.payload.programCategory;
         }
-
     },
     extraReducers: (builder) => {
         builder

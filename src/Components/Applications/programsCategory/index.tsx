@@ -6,13 +6,17 @@ import ModalCreateProgramCategory from "@/Components/Applications/programsCatego
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {fetchCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
 import {ProgramsCategoryListTableDataColumn} from "@/Data/Application/ProgramsCategory";
+import {ProgramCategoryHeader} from "@/Components/Applications/programsCategory/ProgramCategoryHeader";
+import {CategoryListTableColumnType} from "@/Types/Programs/ProgramsCategoryType";
+
 
 const ProgramsCategoryListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState('');
-    const dispatch = useAppDispatch();
-    const {status, isOpenModalCreateCategory, selectedCategory, programsCategoryData} = useAppSelector(state => state.programCategory);
 
+    const dispatch = useAppDispatch();
+
+    const {status, isOpenModalCreateCategory, selectedCategory, programsCategoryData} = useAppSelector(state => state.programCategory);
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -30,8 +34,9 @@ const ProgramsCategoryListContainer: React.FC = () => {
     }, [status, dispatch]);
 
 
-    const filteredProgramCategory = programsCategoryData.filter(programCategory => programCategory.name.toLowerCase().includes(filterText.toLowerCase()))
-
+    // const filteredProgramCategory = programsCategoryData
+    //     .filter(programCategory => programCategory.name.toLowerCase()
+    //     .includes(filterText.toLowerCase()));
 
 
     return (
@@ -42,14 +47,14 @@ const ProgramsCategoryListContainer: React.FC = () => {
                     <Card>
                         <CardBody>
                             <div className="list-product-header">
-
+                                <ProgramCategoryHeader />
                             </div>
                             <div className="list-program">
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={filteredProgramCategory}
-                                        columns={ ProgramsCategoryListTableDataColumn}
+                                        data={programsCategoryData}
+                                        columns={ ProgramsCategoryListTableDataColumn as TableColumn<CategoryListTableColumnType>[]}
                                         striped
                                         highlightOnHover
                                         pagination

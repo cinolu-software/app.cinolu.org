@@ -11,7 +11,6 @@ type FormEditorsProps = {
 };
 
 const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescription }) => {
-
     const autofocusNoSpellcheckerOptions = useMemo(() => {
         return {
             autofocus: true,
@@ -41,6 +40,7 @@ const StepOne: React.FC = () => {
     const handleDescriptionChange = useCallback((value: string) => {
         dispatch(setFormValue({ field: 'description', value }));
     }, [dispatch]);
+
 
     return (
         <Form className="theme-form theme-form-2 mega-form">
