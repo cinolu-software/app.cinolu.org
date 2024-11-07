@@ -22,7 +22,6 @@ const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image
     );
 };
 
-
 const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
 
     const dispatch = useDispatch();
@@ -71,7 +70,6 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
     )
 
 };
-
 
 export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     {
@@ -134,5 +132,13 @@ export const AddProgram = [
         title: "Partenaires",
         detail: "Partenaires"
       },
-  ]
+  ];
+
+export const NumberWizardData = [
+    {
+        text: "Fill up your details and proceed next steps.",
+    },
+];
+
+
 

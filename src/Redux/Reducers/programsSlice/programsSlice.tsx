@@ -31,7 +31,7 @@ const initialState: InitialStateProgramsType = {
         types: [],
         requirements: [],
         partners: []
-    }
+    },
 };
 
 export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {

@@ -1,3 +1,8 @@
+import { CleaveOptions } from "cleave.js/options";
+import { FormikErrors } from "formik";
+import { ChangeEvent, RefObject } from "react";
+import { InputType } from "reactstrap/types/lib/Input";
+
 
 export interface ProgramsCategoryType {
     id: string;
@@ -27,3 +32,4 @@ export interface StaticModalToggleProp{
 }
 
 export interface CategoryListTableColumnType extends ProgramsCategoryType {}
+

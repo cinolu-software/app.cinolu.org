@@ -1,3 +1,5 @@
+import {ChangeEvent} from "react";
+
 export type RequirementType = {
     id?: string;
     name: string;
@@ -66,3 +68,34 @@ export interface InitialStateProgramsType {
     formValue: FormValueType;
     EditFormValue: FormValueType | null;
 }
+
+export type StepperHorizontalPropsType = {
+    level: number;
+};
+
+interface BasicInputFormValueInterFace {
+    email: string;
+    firstName: string;
+    password: string;
+    confirmPassword: string;
+    agreeTerms: boolean;
+    placeHolderName: string;
+    cardNumber: string;
+    expiration: string;
+    cvvNumber: string;
+    uploadDocumentation: string;
+    informationCheckBox: boolean;
+    linkedInLink: string;
+    gitHubLink: string;
+    giveFeedBack: string;
+    state: string;
+    agreeConditions: boolean;
+}
+
+export type NumberingWizardPropsType = {
+    getUserData: (event: ChangeEvent<HTMLInputElement>) => void;
+    basicInputFormValue: BasicInputFormValueInterFace;
+    level?: number;
+};
+
+
