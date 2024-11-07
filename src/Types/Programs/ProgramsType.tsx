@@ -67,6 +67,9 @@ export interface InitialStateProgramsType {
     tabId: number;
     formValue: FormValueType;
     EditFormValue: FormValueType | null;
+    numberLevel: number,
+    basicInputFormValue: BasicInputFormValueInterFace;
+    showFinish: boolean;
 }
 
 export type StepperHorizontalPropsType = {

@@ -1,12 +1,17 @@
+import React from "react";
+import {Container, Row} from "reactstrap";
+import NumberingWizard from "@/Components/Applications/programs/AddProgramNew/NumberingWizard";
 
 
 
 const AddProgramNewContainer = () => {
 
     return (
-        <div>
-            AddProgramNewContainer
-        </div>
+        <Container fluid>
+            <Row>
+                <NumberingWizard/>
+            </Row>
+        </Container>
     )
 }
 
