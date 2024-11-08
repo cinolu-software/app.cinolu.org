@@ -12,9 +12,11 @@ import StepThree from "@/Components/Applications/programs/AddProgramNew/Numberin
 import StepFour from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFour";
 import StepFive from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFive";
 import StepSix from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepSix";
+import {FormValueType} from "@/Types/Programs/ProgramsType";
 
 
 const NumberingWizard = () => {
+
     const { numberLevel, formValue, showFinish } = useAppSelector(state => state.programs);
     const dispatch = useAppDispatch();
 
@@ -22,24 +24,44 @@ const NumberingWizard = () => {
         if (typeof event === "string") {
             dispatch(setNewFormValue({ field: "description", value: event }));
         } else {
-            const { name, value } = event.target;
-            dispatch(setNewFormValue({ field: name as keyof typeof formValue, value }));
+            const { name, value, type, checked, files } = event.target;
+
+            let newValue: any;
+
+            switch (type) {
+                case "checkbox":
+                    newValue = checked;
+                    break;
+                case "file":
+                    newValue = files ? files[0].name : "";
+                    break;
+
+                default:
+                    newValue = value;
+                    break;
+            }
+
+            dispatch(setNewFormValue({ field: name as keyof FormValueType, value: newValue }));
         }
     };
 
     const renderStep = () => {
+
         switch (numberLevel) {
+
             case 1: return <StepOne formValue={formValue} getUserData={getUserData} />;
-            case 2: return <StepTwo />;
+            case 2: return <StepTwo formValue={formValue} getUserData={getUserData} />;
             case 3: return <StepThree />;
             case 4: return <StepFour />;
             case 5: return <StepFive />;
             case 6: return <StepSix />;
+
             case 7: return (
                 <Form className="stepper-four g-3 needs-validation" noValidate>
                     <FinishForm />
                 </Form>
             );
+
             default: return null;
         }
     };

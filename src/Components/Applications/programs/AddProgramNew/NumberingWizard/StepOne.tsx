@@ -1,15 +1,8 @@
-import React, { useCallback, useMemo, ChangeEvent } from 'react';
+import React, { useMemo, ChangeEvent } from 'react';
 import { Col, Form, Input, Label, Row } from 'reactstrap';
-import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
-import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import SimpleMdeReact from 'react-simplemde-editor';
-import { selectSelectedProgram } from '@/Redux/Reducers/programsSlice/programsSlice';
-import {StepOnePropsType} from "@/Types/Programs/ProgramsType";
+import {StepPropsType, FormEditorsProps} from "@/Types/Programs/ProgramsType";
 
-type FormEditorsProps = {
-    description: string | undefined;
-    onChangeDescription: (value: string) => void;
-};
 
 const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescription }) => {
     const options = useMemo(() => ({
@@ -31,8 +24,10 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
     );
 };
 
-const StepOne: React.FC<StepOnePropsType> = ({ formValue, getUserData }) => {
+const StepOne: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
+
     const { name, description } = formValue;
+
     return (
         <Form className="theme-form theme-form-2 mega-form">
             <Row className="g-2 mx-5">
@@ -43,7 +38,7 @@ const StepOne: React.FC<StepOnePropsType> = ({ formValue, getUserData }) => {
                         type="text"
                         required
                         name="name"
-                        value={name || ""}
+                        value={name}
                         onChange={getUserData}
                     />
                 </Col>

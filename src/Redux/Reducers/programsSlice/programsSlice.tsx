@@ -44,6 +44,7 @@ const initialState: InitialStateProgramsType = {
     showFinish:false
 };
 
+
 const ShowError = () => {
     return toast.error(
         <p className="text-white tx-16 mb-0">{"Veuillez remplir tous les champs"}</p>,
@@ -107,16 +108,18 @@ export const updateAttachmentProgramImage = createAsyncThunk<
     'programs/updateAttachmentProgramImage',
     async ({ programId, imageFile }, thunkAPI) => {
         try {
+
             const formData = new FormData();
             formData.append('thumb', imageFile);
-
 
             const response = await axiosInstance.post<{ data: { image: string } }>(
                 `${apiBaseUrl}/programs/image/${programId}`,
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
+
             return { programId, imageUrl: response.data.data.image };
+
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
         }
@@ -126,10 +129,36 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 
 const validateStep = (state: InitialStateProgramsType) => {
     const { name, description, started_at, ended_at, types } = state.formValue;
-    if (!name || !description || !started_at || !ended_at || types.length === 0) {
-        ShowError();
-        return false;
+
+    switch (state.numberLevel) {
+        case 1:
+
+            if (!name || !description) {
+                ShowError();
+                return false;
+            }
+            break;
+
+        case 2:
+
+            if (!name || !description || !started_at || !ended_at) {
+                ShowError();
+                return false;
+            }
+            break;
+
+        case 3:
+
+            if (!name || !description || !started_at || !ended_at || types.length === 0) {
+                ShowError();
+                return false;
+            }
+            break;
+
+        default:
+            break;
     }
+
     return true;
 };
 
@@ -186,10 +215,26 @@ const ProgramSlice = createSlice({
                 //@ts-ignore
                 state.EditFormValue[action.payload.field] = action.payload.value;
             }
+        },setNewFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
+            const { field, value } = action.payload;
+
+            if (field === 'types' && typeof value === 'string') {
+                state.formValue.types = JSON.parse(value).map((type: string) => parseInt(type));
+            }
+
+            else if ((field === 'requirements' || field === 'partners') && typeof value === 'string') {
+                state.formValue[field] = JSON.parse(value);
+            }
+
+            else if (field === 'started_at' || field === 'ended_at') {
+                state.formValue[field] = new Date(value).toISOString().split("T")[0];
+            }
+
+            else {
+                state.formValue[field] = value;
+            }
         },
-        setNewFormValue: (state, action) => {
-            state.formValue = action.payload
-        },
+
         setFilterToggle: (state) => {
             state.filterToggle = !state.filterToggle;
         },
@@ -197,7 +242,6 @@ const ProgramSlice = createSlice({
             state.showFinish = action.payload
         },
         handleBackButton: (state) => {
-
             if (state.numberLevel > 1) {
                 state.numberLevel--;
             }
@@ -205,13 +249,9 @@ const ProgramSlice = createSlice({
         handleNextButton: (state) => {
             const isValid = validateStep(state);
             if (isValid) {
-
                 if (state.numberLevel < 7) {
-
                     state.numberLevel++;
-
                 } else {
-
                     state.showFinish = true;
                 }
             }
