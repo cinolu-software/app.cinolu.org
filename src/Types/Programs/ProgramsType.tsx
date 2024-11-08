@@ -102,4 +102,9 @@ export type NumberingWizardPropsType = {
     level?: number;
 };
 
+export interface StepOnePropsType {
+    formValue: FormValueType;
+    getUserData: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
 

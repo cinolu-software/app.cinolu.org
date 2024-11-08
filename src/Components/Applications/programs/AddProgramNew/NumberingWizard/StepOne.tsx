@@ -1,9 +1,10 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, ChangeEvent } from 'react';
 import { Col, Form, Input, Label, Row } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import SimpleMdeReact from 'react-simplemde-editor';
 import { selectSelectedProgram } from '@/Redux/Reducers/programsSlice/programsSlice';
+import {StepOnePropsType} from "@/Types/Programs/ProgramsType";
 
 type FormEditorsProps = {
     description: string | undefined;
@@ -11,54 +12,44 @@ type FormEditorsProps = {
 };
 
 const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescription }) => {
-    const autofocusNoSpellcheckerOptions = useMemo(() => {
-        return {
-            autofocus: true,
-            spellChecker: false,
-        };
-    }, []);
+    const options = useMemo(() => ({
+        autofocus: true,
+        spellChecker: false,
+    }), []);
+
+    const handleEditorChange = (value: string) => {
+        onChangeDescription(value);
+    };
 
     return (
         <SimpleMdeReact
             id="editor_container"
             value={description}
-            onChange={onChangeDescription}
-            options={autofocusNoSpellcheckerOptions}
+            onChange={handleEditorChange}
+            options={options}
         />
     );
 };
 
-const StepOne: React.FC = () => {
-
-    const dispatch = useAppDispatch();
-    const { formValue } = useAppSelector((state) => state.programs);
-
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setFormValue({ field: 'name', value: e.target.value }));
-    };
-
-    const handleDescriptionChange = useCallback((value: string) => {
-        dispatch(setFormValue({ field: 'description', value }));
-    }, [dispatch]);
-
-
+const StepOne: React.FC<StepOnePropsType> = ({ formValue, getUserData }) => {
+    const { name, description } = formValue;
     return (
         <Form className="theme-form theme-form-2 mega-form">
-            <Row className="g-2">
+            <Row className="g-2 mx-5">
                 <Col xs="12">
                     <Label className="col-form-label">{"Nom du programme"}</Label>
                     <Input
-                        className={formValue?.name !== "" ? "valid" : "is-invalid"}
+                        className={name !== "" ? "valid" : "is-invalid"}
                         type="text"
                         required
                         name="name"
-                        value={formValue?.name  || ""}
-                        onChange={handleNameChange}
+                        value={name || ""}
+                        onChange={getUserData}
                     />
                 </Col>
                 <Col xs="12">
                     <Label className="col-form-label">{"Description du programme"}</Label>
-                    <FormEditors description={formValue?.description || ''} onChangeDescription={handleDescriptionChange}/>
+                    <FormEditors description={description || ''} onChangeDescription={(value) => getUserData({ target: { name: "description", value } } as ChangeEvent<HTMLInputElement>)} />
                 </Col>
             </Row>
         </Form>

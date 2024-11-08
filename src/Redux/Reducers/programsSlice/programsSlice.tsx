@@ -7,7 +7,8 @@ import {
     ReceiveProgramsType
 } from "@/Types/Programs/ProgramsType";
 import {RootState} from "@/Redux/Store";
-import {toast} from "react-toastify";
+import {toast, ToastContainer, Flip} from "react-toastify";
+import React from "react";
 
 const initialState: InitialStateProgramsType = {
     originalProgramsData: [],
@@ -44,7 +45,16 @@ const initialState: InitialStateProgramsType = {
 };
 
 const ShowError = () => {
-    return toast.error("Please fill all field after press next button");
+    return toast.error(
+        <p className="text-white tx-16 mb-0">{"Veuillez remplir tous les champs"}</p>,
+        {
+            autoClose: 5000,
+            position: toast.POSITION.TOP_CENTER,
+            hideProgressBar: false,
+            transition: Flip,
+            theme: "colored",
+        }
+    );
 };
 
 export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {
@@ -113,6 +123,17 @@ export const updateAttachmentProgramImage = createAsyncThunk<
     }
 );
 
+
+const validateStep = (state: InitialStateProgramsType) => {
+    const { name, description, started_at, ended_at, types } = state.formValue;
+    if (!name || !description || !started_at || !ended_at || types.length === 0) {
+        ShowError();
+        return false;
+    }
+    return true;
+};
+
+
 const ProgramSlice = createSlice({
     name: "programs",
     initialState,
@@ -177,9 +198,23 @@ const ProgramSlice = createSlice({
         },
         handleBackButton: (state) => {
 
+            if (state.numberLevel > 1) {
+                state.numberLevel--;
+            }
         },
         handleNextButton: (state) => {
+            const isValid = validateStep(state);
+            if (isValid) {
 
+                if (state.numberLevel < 7) {
+
+                    state.numberLevel++;
+
+                } else {
+
+                    state.showFinish = true;
+                }
+            }
         },
     },
     extraReducers: (builder) => {
