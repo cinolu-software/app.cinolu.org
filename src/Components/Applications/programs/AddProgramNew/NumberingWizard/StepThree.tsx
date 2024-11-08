@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Col, Row, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 const StepThree = () => {
@@ -23,7 +23,7 @@ const StepThree = () => {
             ? formValue.types.filter((id: string) => id !== typeId)
             : [...formValue.types, typeId];
 
-        dispatch(setFormValue({ field: 'types', value: updatedTypes }));
+        dispatch(setNewFormValue({ field: 'types', value: updatedTypes }));
     };
 
     return (
