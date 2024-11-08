@@ -57,7 +57,7 @@ export const ProgramsCategoryListTableDataColumn = [
     {
         name: "Nom",
         cell: (row: ProgramsListTypeTableColumnType) => (
-            <ProgramsCategoryListTableName image={row.image ?? "default_program_image.png"} name={row.name || "Unnamed"} />
+            <ProgramsCategoryListTableName image={'programs/programs.png'} name={row.name || "Unnamed"} />
         ),
         sortable: true,
         grow: 2,

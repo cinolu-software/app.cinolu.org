@@ -1,8 +1,9 @@
 import {StepperHorizontalPropsType} from "@/Types/Programs/ProgramsType";
+import React from "react";
 
 
 const StepperHorizontal :React.FC<StepperHorizontalPropsType>= ({ level }) => {
-    const StepperHorizontalData = ["Info", "Durée", "Type", "Catégorie","Exigence(s)", "Partenaire(s)"];
+    const StepperHorizontalData = ["Basic Info", "Cart Info", "Feedback", "Finish"];
 
     return (
         <div className="stepper-horizontal theme-scrollbar">

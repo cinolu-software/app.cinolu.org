@@ -20,7 +20,7 @@ const initialState: InitialStateCategoryType = {
 
 export const fetchCategory = createAsyncThunk('programsCategory/fetchCategory', async () => {
     const response = await axiosInstance.get(`${apiBaseUrl}/categories`);
-    return response.data;
+    return response.data.data;
 });
 
 export const createCategory = createAsyncThunk('programsCategory/createCategory', async (category: CreateCategoryType) => {

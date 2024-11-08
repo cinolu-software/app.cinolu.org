@@ -7,7 +7,6 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {fetchCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
 import {ProgramsCategoryListTableDataColumn} from "@/Data/Application/ProgramsCategory";
 import {ProgramCategoryHeader} from "@/Components/Applications/programsCategory/ProgramCategoryHeader";
-import {CategoryListTableColumnType} from "@/Types/Programs/ProgramsCategoryType";
 
 
 const ProgramsCategoryListContainer: React.FC = () => {
@@ -34,9 +33,7 @@ const ProgramsCategoryListContainer: React.FC = () => {
     }, [status, dispatch]);
 
 
-    // const filteredProgramCategory = programsCategoryData
-    //     .filter(programCategory => programCategory.name.toLowerCase()
-    //     .includes(filterText.toLowerCase()));
+    const filteredProgramCategory = programsCategoryData?.filter(programCategory => programCategory.name.toLowerCase()?.includes(filterText.toLowerCase()));
 
 
     return (
@@ -53,8 +50,8 @@ const ProgramsCategoryListContainer: React.FC = () => {
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={programsCategoryData}
-                                        columns={ ProgramsCategoryListTableDataColumn as TableColumn<CategoryListTableColumnType>[]}
+                                        data={filteredProgramCategory}
+                                        columns={ ProgramsCategoryListTableDataColumn }
                                         striped
                                         highlightOnHover
                                         pagination

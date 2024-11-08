@@ -3,6 +3,7 @@ import { AgreeToTermsAndConditions, MofiMail, ConfirmPassword, Email, EnterConfi
 import {NumberingWizardPropsType} from "@/Types/Programs/ProgramsType";
 
 const BasicInfoForm: React.FC<NumberingWizardPropsType> = ({ basicInputFormValue, getUserData }) => {
+
     const { email, firstName, password, confirmPassword, agreeTerms } = basicInputFormValue;
 
     return (

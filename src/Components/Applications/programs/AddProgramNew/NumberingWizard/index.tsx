@@ -1,24 +1,42 @@
 import {ChangeEvent} from "react";
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
-import BasicInfoForm from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/BasicInfoForm";
-import CartInfoForm from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/CartInfoForm";
-import FeedbackForm from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/FeedbackForm";
 import FinishForm from "@/Components/Applications/programs/AddProgramNew/Common/FinishForm";
 import StepperHorizontal from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepperHorizontal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import {NumberWizardData} from "@/Data/Application/Programs";
-import { Back, NumberingWizardHeading } from "@/Constant"
-import {handleBackButton, handleNextButton, setBasicInputFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
+import { Back } from "@/Constant"
+import {handleBackButton, handleNextButton, setF} from "@/Redux/Reducers/programsSlice/programsSlice";
 import StepOne from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepOne";
 import StepTwo from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepTwo";
+import StepThree from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepThree";
+import StepFour from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFour";
+import StepFive from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFive";
+import StepSix from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepSix";
+
 
 const NumberingWizard = () => {
 
-    const {numberLevel, basicInputFormValue, showFinish} = useAppSelector(state=>state.programs);
+    const {numberLevel, formValue, showFinish} = useAppSelector(state=>state.programs);
     const dispatch = useAppDispatch();
 
+    const getUserData = (event: ChangeEvent<HTMLInputElement>) => {
+        const name = event.target.name;
+        const value = name === "agreeTerms" || name === "informationCheckBox" || (name === "agreeConditions") ? event.target.checked : (name === "uploadDocumentation") ? event.target.files && event.target.files[0].name : event.target.value;
+        dispatch(setBasicInputFormValue({ ...formValue, [name]: value }));
+    };
 
+    const renderStep = () => {
+        switch (numberLevel) {
+            case 1: return <StepOne />;
+            case 2: return <StepTwo />;
+            case 3: return <StepThree />;
+            case 4: return <StepFour />;
+            case 5: return <StepFive />;
+            case 6: return <StepSix />;
+            case 7: return <Form className="stepper-four g-3 needs-validation" noValidate><FinishForm /></Form>
+            default: return null;
+        }
+    };
 
     return (
         <Col >
@@ -27,12 +45,7 @@ const NumberingWizard = () => {
                 <CardBody className="basic-wizard important-validation">
                     <StepperHorizontal level={numberLevel} />
                     <div id="msform">
-                        {/*{numberLevel === 1 && <BasicInfoForm getUserData={getUserData} basicInputFormValue={basicInputFormValue} />}*/}
-                        {numberLevel === 1 && <StepOne />}
-                        {numberLevel === 2 &&  <StepTwo />}
-                        {/*{numberLevel === 2 && <CartInfoForm getUserData={getUserData} basicInputFormValue={basicInputFormValue} />}*/}
-                        {/*{numberLevel === 3 && <FeedbackForm getUserData={getUserData} basicInputFormValue={basicInputFormValue} />}*/}
-                        {numberLevel === 4 && <Form className="stepper-four g-3 needs-validation" noValidate><FinishForm /></Form>}
+                        {renderStep()}
                     </div>
                     <div className="wizard-footer d-flex gap-2 justify-content-end">
                         {numberLevel > 1 && (

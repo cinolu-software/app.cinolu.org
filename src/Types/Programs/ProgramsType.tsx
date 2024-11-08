@@ -24,7 +24,8 @@ export interface CreateProgramType {
     description: string;
     started_at: string;
     ended_at: string;
-    types: number[];
+    types: string[];
+    categories:  string[];
     requirements: RequirementType[];
     partners: string[];
 }
@@ -50,6 +51,7 @@ export interface FormValueType {
     started_at: string;
     ended_at: string;
     types: any;
+    categories: any;
     requirements: RequirementType[];
     partners: string[];
 }
@@ -66,9 +68,8 @@ export interface InitialStateProgramsType {
     navId: number;
     tabId: number;
     formValue: FormValueType;
-    EditFormValue: FormValueType | null;
+    EditFormValue: any | null;
     numberLevel: number,
-    basicInputFormValue: BasicInputFormValueInterFace;
     showFinish: boolean;
 }
 
