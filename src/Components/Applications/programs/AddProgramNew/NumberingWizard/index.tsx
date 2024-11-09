@@ -1,22 +1,20 @@
-import {ChangeEvent} from "react";
+import { ChangeEvent } from "react";
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
 import FinishForm from "@/Components/Applications/programs/AddProgramNew/Common/FinishForm";
 import StepperHorizontal from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepperHorizontal";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import { Back } from "@/Constant"
-import {handleBackButton, handleNextButton, setNewFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
+import { Back } from "@/Constant";
+import { handleBackButton, handleNextButton, setNewFormValue, createProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
 import StepOne from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepOne";
 import StepTwo from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepTwo";
 import StepThree from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepThree";
 import StepFour from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFour";
 import StepFive from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFive";
 import StepSix from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepSix";
-import {FormValueType} from "@/Types/Programs/ProgramsType";
-
+import { FormValueType } from "@/Types/Programs/ProgramsType";
 
 const NumberingWizard = () => {
-
     const { numberLevel, formValue, showFinish } = useAppSelector(state => state.programs);
     const dispatch = useAppDispatch();
 
@@ -35,7 +33,6 @@ const NumberingWizard = () => {
                 case "file":
                     newValue = files ? files[0].name : "";
                     break;
-
                 default:
                     newValue = value;
                     break;
@@ -45,23 +42,26 @@ const NumberingWizard = () => {
         }
     };
 
+    const handleCreateProgram = () => {
+        dispatch(createProgram(formValue));
+    };
+
     const renderStep = () => {
-
         switch (numberLevel) {
-
             case 1: return <StepOne formValue={formValue} getUserData={getUserData} />;
             case 2: return <StepTwo formValue={formValue} getUserData={getUserData} />;
-            case 3: return <StepThree  formValue={formValue} getUserData={getUserData}/>;
+            case 3: return <StepThree formValue={formValue} getUserData={getUserData} />;
             case 4: return <StepFour formValue={formValue} getUserData={getUserData} />;
             case 5: return <StepFive formValue={formValue} getUserData={getUserData} />;
             case 6: return <StepSix formValue={formValue} getUserData={getUserData} />;
-
             case 7: return (
                 <Form className="stepper-four g-3 needs-validation" noValidate>
-                    <FinishForm />
+                    <FinishForm
+                        isComplete={showFinish}
+                        onCreateProgram={handleCreateProgram}
+                    />
                 </Form>
             );
-
             default: return null;
         }
     };
@@ -99,4 +99,4 @@ const NumberingWizard = () => {
     );
 };
 
-export default NumberingWizard
+export default NumberingWizard;
