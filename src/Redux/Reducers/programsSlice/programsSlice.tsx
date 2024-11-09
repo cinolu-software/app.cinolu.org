@@ -129,7 +129,6 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 
 const validateStep = (state: InitialStateProgramsType) => {
     const { name, description, started_at, ended_at, types, categories, partners, requirements } = state.formValue;
-
     switch (state.numberLevel) {
         case 1:
             if (!name || !description) {
@@ -169,11 +168,7 @@ const validateStep = (state: InitialStateProgramsType) => {
                 return false;
             }
             break;
-
-        default:
-            break;
     }
-
     return true;
 };
 
@@ -266,7 +261,7 @@ const ProgramSlice = createSlice({
             if (isValid) {
                 if (state.numberLevel < 7) {
                     state.numberLevel++;
-                } else {
+                } else if( state.numberLevel === 7) {
                     state.showFinish = true;
                 }
             }

@@ -1,21 +1,22 @@
-import { ChangeEvent } from "react";
-import { Button, Card, CardBody, Col, Form } from "reactstrap";
+import React, {ChangeEvent} from "react";
+import {Button, Card, CardBody, Col, Form} from "reactstrap";
 import FinishForm from "@/Components/Applications/programs/AddProgramNew/Common/FinishForm";
 import StepperHorizontal from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepperHorizontal";
-import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import { Back } from "@/Constant";
-import { handleBackButton, handleNextButton, setNewFormValue, createProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {Back} from "@/Constant";
+import {createProgram, handleBackButton, handleNextButton, setNewFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
 import StepOne from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepOne";
 import StepTwo from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepTwo";
 import StepThree from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepThree";
 import StepFour from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFour";
 import StepFive from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFive";
 import StepSix from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepSix";
-import { FormValueType } from "@/Types/Programs/ProgramsType";
+import {FormValueType} from "@/Types/Programs/ProgramsType";
+import {Flip, toast} from "react-toastify";
 
 const NumberingWizard = () => {
-    const { numberLevel, formValue, showFinish } = useAppSelector(state => state.programs);
+    const {numberLevel, formValue, showFinish,} = useAppSelector(state => state.programs);
     const dispatch = useAppDispatch();
 
     const getUserData = (event: ChangeEvent<HTMLInputElement> | string) => {
@@ -43,7 +44,32 @@ const NumberingWizard = () => {
     };
 
     const handleCreateProgram = () => {
-        dispatch(createProgram(formValue));
+
+        try {
+            dispatch(createProgram(formValue));
+            toast.success(
+                <p className="text-white tx-16 mb-0">{"Programme créé avec succès"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+        } catch (error) {
+            toast.error(
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du programme"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+        }
+
     };
 
     const renderStep = () => {
@@ -57,7 +83,7 @@ const NumberingWizard = () => {
             case 7: return (
                 <Form className="stepper-four g-3 needs-validation" noValidate>
                     <FinishForm
-                        isComplete={showFinish}
+                        isComplete={true}
                         onCreateProgram={handleCreateProgram}
                     />
                 </Form>
