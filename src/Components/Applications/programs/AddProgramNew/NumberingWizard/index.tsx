@@ -51,8 +51,8 @@ const NumberingWizard = () => {
 
             case 1: return <StepOne formValue={formValue} getUserData={getUserData} />;
             case 2: return <StepTwo formValue={formValue} getUserData={getUserData} />;
-            case 3: return <StepThree />;
-            case 4: return <StepFour />;
+            case 3: return <StepThree  formValue={formValue} getUserData={getUserData}/>;
+            case 4: return <StepFour formValue={formValue} getUserData={getUserData} />;
             case 5: return <StepFive />;
             case 6: return <StepSix />;
 
