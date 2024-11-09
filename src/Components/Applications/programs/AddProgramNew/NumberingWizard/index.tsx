@@ -53,8 +53,8 @@ const NumberingWizard = () => {
             case 2: return <StepTwo formValue={formValue} getUserData={getUserData} />;
             case 3: return <StepThree  formValue={formValue} getUserData={getUserData}/>;
             case 4: return <StepFour formValue={formValue} getUserData={getUserData} />;
-            case 5: return <StepFive />;
-            case 6: return <StepSix />;
+            case 5: return <StepFive formValue={formValue} getUserData={getUserData} />;
+            case 6: return <StepSix formValue={formValue} getUserData={getUserData} />;
 
             case 7: return (
                 <Form className="stepper-four g-3 needs-validation" noValidate>

@@ -128,35 +128,36 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 
 
 const validateStep = (state: InitialStateProgramsType) => {
-    const { name, description, started_at, ended_at, types, categories } = state.formValue;
+    const { name, description, started_at, ended_at, types, categories, partners } = state.formValue;
 
     switch (state.numberLevel) {
         case 1:
-
             if (!name || !description) {
                 ShowError();
                 return false;
             }
             break;
-
         case 2:
-
             if (!name || !description || !started_at || !ended_at) {
                 ShowError();
                 return false;
             }
             break;
-
         case 3:
-
             if (!name || !description || !started_at || !ended_at || types.length === 0) {
                 ShowError();
                 return false;
             }
             break;
         case 4 :
-            console.log(categories)
             if (!name || !description || !started_at || !ended_at || types.length === 0 || categories.length === 0) {
+                ShowError();
+                return false;
+            }
+            break;
+
+        case 5 :
+            if (!name || !description || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
                 ShowError();
                 return false;
             }

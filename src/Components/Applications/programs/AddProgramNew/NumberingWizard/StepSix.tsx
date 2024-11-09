@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Col, Label, Row, Table } from 'reactstrap';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
-import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
+import { setNewFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import { RequirementType } from '@/Types/Programs/ProgramsType';
+import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
-const StepSix: React.FC = () => {
+const StepSix: React.FC<StepPropsType> = ({formValue, getUserData}) => {
 
     const dispatch = useAppDispatch();
-    const formValue = useAppSelector((state) => state.programs.formValue);
 
     const [newRequirement, setNewRequirement] = useState<RequirementType>({ name: '', description: '' });
 
@@ -32,7 +32,7 @@ const StepSix: React.FC = () => {
         if (newRequirement.name && newRequirement.description) {
             const updatedRequirements = [...requirements, newRequirement];
             setRequirements(updatedRequirements);
-            dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
+            dispatch(setNewFormValue({ field: 'requirements', value: updatedRequirements }));
             setNewRequirement({ name: '', description: '' });
         }
     };
@@ -40,12 +40,11 @@ const StepSix: React.FC = () => {
     const handleRemoveRequirement = (index: number) => {
         const updatedRequirements = requirements.filter((_, i) => i !== index);
         setRequirements(updatedRequirements);
-        dispatch(setFormValue({ field: 'requirements', value: updatedRequirements }));
+        dispatch(setNewFormValue({ field: 'requirements', value: updatedRequirements }));
     };
 
     return (
         <div>
-            <h3>Ajouter une exigence</h3>
             <Row>
                 <Col md="5">
                     <Label className="mb-2" check>
@@ -79,7 +78,7 @@ const StepSix: React.FC = () => {
                     </Button>
                 </Col>
             </Row>
-            <Table striped className="mt-3">
+            <Table  className="mt-3">
                 <thead>
                 <tr>
                     <th>Nom de l'exigence</th>

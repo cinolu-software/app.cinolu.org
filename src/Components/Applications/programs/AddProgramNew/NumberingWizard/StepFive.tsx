@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {Col, Row, Input} from "reactstrap";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
-import { setFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
+import { setNewFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
+import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
 
 
-const StepFive = () => {
+const StepFive : React.FC<StepPropsType> = ({ formValue, getUserData }) => {
 
     const dispatch = useAppDispatch();
-    const {formValue} = useAppSelector((state)=>state.programs);
     const {partnerData, status} = useAppSelector((state)=>state.partner);
 
     useEffect(() => {
@@ -24,7 +24,7 @@ const StepFive = () => {
         const updatedPatner = formValue.partners.includes(partnerId)
             ? formValue.partners.filter(id => id !== partnerId)
             : [...formValue.partners, partnerId];
-        dispatch(setFormValue({field: 'partners', value: updatedPatner}))
+        dispatch(setNewFormValue({field: 'partners', value: updatedPatner}))
     }
 
 

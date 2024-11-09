@@ -22,7 +22,6 @@ const StepFour: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
             ? formValue.categories.filter((id: string) => id !== categoryId)
             : [...formValue.categories, categoryId];
 
-        console.log("Updated Categories:", updatedCategories);
         dispatch(setNewFormValue({ field: "categories", value: updatedCategories }));
     };
 
