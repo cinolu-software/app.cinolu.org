@@ -8,6 +8,8 @@ import { selectAuth, logout, loadUserFromStorage } from "@/Redux/Reducers/AuthSl
 import { useDispatch, useSelector } from "react-redux";
 import { imageBaseUrl } from "@/services/axios";
 import { AppDispatch } from "@/Redux/Store";
+import {ImagePath} from "@/Constant";
+
 
 export const Profile = () => {
 
@@ -30,20 +32,20 @@ export const Profile = () => {
     const LogOutUser = async () => {
         await dispatch(logout());
         localStorage.removeItem('user_profile');
-        router.push("http://localhost:3000/");
-        // router.push('https://cinolu.org/');
+        router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string)
     };
 
     useEffect(() => {
         dispatch(loadUserFromStorage());
     }, [dispatch]);
 
+
     return (
         <li className="profile-nav onhover-dropdown px-0 py-0">
             <div className="d-flex profile-media align-items-center">
                 <img
                     className="profile-img"
-                    src={localUser?.profile ? `${imageBaseUrl}/profiles/${localUser?.profile}` : `@/assets/images/avtar/avatar.jpg`}
+                    src={localUser?.profile ? `${imageBaseUrl}/profiles/${localUser?.profile}` : `${ImagePath}/avtar/avatar.jpg`}
                     alt="profile utilisateur"
                 />
                 <div className="flex-grow-1">

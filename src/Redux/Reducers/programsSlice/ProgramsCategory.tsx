@@ -19,22 +19,22 @@ const initialState: InitialStateCategoryType = {
 };
 
 export const fetchCategory = createAsyncThunk('programsCategory/fetchCategory', async () => {
-    const response = await axiosInstance.get(`${apiBaseUrl}/categories`);
+    const response = await axiosInstance.get(`${apiBaseUrl}/program-categories`);
     return response.data.data;
 });
 
 export const createCategory = createAsyncThunk('programsCategory/createCategory', async (category: CreateCategoryType) => {
-    const response = await axiosInstance.post(`${apiBaseUrl}/categories`, category);
+    const response = await axiosInstance.post(`${apiBaseUrl}/program-categories`, category);
     return response.data;
 });
 
 export const updateCategory = createAsyncThunk('programsCategory/updateCategory', async (category: UpdateCategoryType) => {
-    const response = await axiosInstance.put(`${apiBaseUrl}/categories/${category.id}`, category);
+    const response = await axiosInstance.put(`${apiBaseUrl}/program-categories/${category.id}`, category);
     return response.data;
 });
 
 export const deleteCategory = createAsyncThunk('programsCategory/deleteCategory', async (id: number) => {
-    await axiosInstance.delete(`${apiBaseUrl}/categories/${id}`);
+    await axiosInstance.delete(`${apiBaseUrl}/program-categories/${id}`);
     return id;
 });
 

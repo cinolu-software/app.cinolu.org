@@ -3,19 +3,27 @@ import { ImagePath } from "@/Constant";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { handleResponsiveToggle, setToggleSidebar } from "@/Redux/Reducers/LayoutSlice";
 import Link from "next/link";
+import {useRouter} from "next/navigation";
+
 
 export const LogoWrapper = () => {
+
   const dispatch = useAppDispatch();
+  const router = useRouter();
   
   const { sidebarIconType } = useAppSelector((state) => state.themeCustomizer);
   const { toggleSidebar } = useAppSelector((state) => state.layout);
 
+  const goBackToLoginPage = () => {
+    router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string)
+  }
+
   return (
     <>
       <div className="logo-wrapper">
-        <Link href={`/dashboard`}>
+        <button className={'btn btn-link'} onClick={goBackToLoginPage}>
           <img className="img-fluid" src={`${ImagePath}/logo/logo_light.png`} alt="" />
-        </Link>
+        </button>
         <div className="back-btn" onClick={() => dispatch(handleResponsiveToggle())}>
           <i className="fa fa-angle-left"></i>
         </div>

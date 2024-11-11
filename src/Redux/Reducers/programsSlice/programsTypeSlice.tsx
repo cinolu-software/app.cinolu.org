@@ -33,7 +33,7 @@ const transformProgramsType = (types: ProgramsTypeType[]): TransformedProgramsTy
 export const fetchProgramsType = createAsyncThunk(
     'programs/fetchProgramsType',
     async () => {
-        const response = await axiosInstance.get<{ data: ProgramsTypeType[] }>(`${apiBaseUrl}/types`);
+        const response = await axiosInstance.get<{ data: ProgramsTypeType[] }>(`${apiBaseUrl}/program-types`);
         const originalProgramsTypes = response.data.data;
         const transformedPrograms = transformProgramsType(originalProgramsTypes);
         return { original: originalProgramsTypes, transformed: transformedPrograms };
@@ -44,7 +44,7 @@ export const createProgramType = createAsyncThunk(
     'programs/createProgramType',
     async (newProgramType: CreateProgramTypeType, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types`, newProgramType);
+            const response = await axiosInstance.post<{ data: ProgramsTypeType }>(`${apiBaseUrl}/program-types`, newProgramType);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
@@ -56,7 +56,7 @@ export const updateProgramType = createAsyncThunk(
     'programs/updateProgramType',
     async (updatedProgramType: ProgramsTypeType, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.patch<{ data: ProgramsTypeType }>(`${apiBaseUrl}/types/${updatedProgramType.id}`, updatedProgramType);
+            const response = await axiosInstance.patch<{ data: ProgramsTypeType }>(`${apiBaseUrl}/program-types/${updatedProgramType.id}`, updatedProgramType);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
@@ -68,7 +68,7 @@ export const deleteProgramType = createAsyncThunk(
     'programs/deleteProgramType',
     async (programTypeId: string, { rejectWithValue }) => {
         try {
-            await axiosInstance.delete(`${apiBaseUrl}/types/${programTypeId}`);
+            await axiosInstance.delete(`${apiBaseUrl}/program-types/${programTypeId}`);
             return programTypeId;
         } catch (err: any) {
             return rejectWithValue(err.response.data);

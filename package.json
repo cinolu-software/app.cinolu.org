@@ -20,6 +20,7 @@
     "@fullcalendar/react": "^6.1.9",
     "@fullcalendar/timegrid": "^6.1.9",
     "@fullcalendar/web-component": "^6.1.9",
+    "@next/env": "^15.0.3",
     "@react-google-maps/api": "^2.19.2",
     "@reactour/tour": "^3.5.0",
     "@reduxjs/toolkit": "^1.9.5",

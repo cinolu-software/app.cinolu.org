@@ -1,9 +1,6 @@
 import axios from "axios";
-export const apiBaseUrl = "http://localhost:8000";
-export const imageBaseUrl = "http://localhost:8000/uploads";
-
-// export const apiBaseUrl = "https://api.cinolu.org";
-// export const imageBaseUrl = "https://api.cinolu.org/uploads";
+export const apiBaseUrl = process.env.NEXT_PUBLIC_HOST;
+export const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGE_BASE_URL
 
 const axiosInstance = axios.create({
     baseURL: apiBaseUrl,

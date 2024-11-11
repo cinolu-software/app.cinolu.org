@@ -41,6 +41,9 @@ importers:
       '@fullcalendar/web-component':
         specifier: ^6.1.9
         version: 6.1.14(@fullcalendar/core@6.1.14)
+      '@next/env':
+        specifier: ^15.0.3
+        version: 15.0.3
       '@react-google-maps/api':
         specifier: ^2.19.2
         version: 2.19.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1038,6 +1041,9 @@ packages:
 
   '@next/env@14.2.4':
     resolution: {integrity: sha512-3EtkY5VDkuV2+lNmKlbkibIJxcO4oIHEhBWne6PaAp+76J9KoSsGvNikp6ivzAT8dhhBMYrm6op2pS1ApG0Hzg==}
+
+  '@next/env@15.0.3':
+    resolution: {integrity: sha512-t9Xy32pjNOvVn2AS+Utt6VmyrshbpfUMhIjFO60gI58deSo/KgLOp31XZ4O+kY/Is8WAGYwA5gR7kOb1eORDBA==}
 
   '@next/eslint-plugin-next@14.2.4':
     resolution: {integrity: sha512-svSFxW9f3xDaZA3idQmlFw7SusOuWTpDTAeBlO3AEPDltrraV+lqs7mAc6A27YdnpQVVIA3sODqUAAHdWhVWsA==}
@@ -3889,6 +3895,11 @@ snapshots:
       '@ckeditor/ckeditor5-paste-from-office': 41.4.2
       '@ckeditor/ckeditor5-table': 41.4.2
       '@ckeditor/ckeditor5-typing': 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-build-multi-root@41.4.2':
     dependencies:
@@ -4028,6 +4039,11 @@ snapshots:
     dependencies:
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-editor-multi-root@41.4.2':
     dependencies:
@@ -4291,6 +4307,11 @@ snapshots:
   '@ckeditor/ckeditor5-remove-format@41.4.2':
     dependencies:
       ckeditor5: 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-restricted-editing@41.4.2':
     dependencies:
@@ -4752,6 +4773,8 @@ snapshots:
   '@kurkle/color@0.3.2': {}
 
   '@next/env@14.2.4': {}
+
+  '@next/env@15.0.3': {}
 
   '@next/eslint-plugin-next@14.2.4':
     dependencies:
