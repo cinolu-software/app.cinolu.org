@@ -34,7 +34,6 @@
     --fc-button-hover-border-color: var(--theme-default);
 
     --bs-heading-color: #14532D;
-
     // rating
     --normal: #14532D;
     --normal-shadow: #14532D;
@@ -138,18 +137,15 @@ body.dark-only.box-layout {
     --bs-heading-color: rgba(255, 255, 255, 0.9);
 }
 
-
-
 @import "base/reset";
 @import "base/typography";
-
 @import "components/user_profil";
 @import "components/according";
 @import "components/alert";
 @import "components/avatars";
 @import "components/badge";
 @import "components/bookmark";
-@import "components/breadcrumb";
+@import "components/breadcrumb"; 
 @import "components/basic-card";
 @import "components/builders";
 @import "components/buttons";

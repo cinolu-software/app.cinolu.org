@@ -30,7 +30,9 @@
   transform: translateY(-50%);
   left: 43px;
   border-radius: 100%;
-  background: rgba($sidebar-font, 0.57);
+
+  //Modif background color pin ===>
+   background: #687A36;
 
   [dir="rtl"] & {
     left: unset;
