@@ -3,6 +3,7 @@ import { setFilterToggle } from "@/Redux/Reducers/userSlice/UserSlice";
 import { Filter } from "react-feather";
 import Link from 'next/link';
 import React from "react";
+import AddButton from "@/CommonComponent/AddButton";
 
 export const AdminListFilterHeader = () => {
   
@@ -21,13 +22,7 @@ export const AdminListFilterHeader = () => {
           <i className={`icon-close filter-close ${filterToggle ? "show" : "hide"}`} />
         </a>
       </div>
-        <Link
-            className="btn btn-primary"
-            href={'/users/admin/add_user'}
-        >
-            <i className="fa fa-plus" />
-            Créer un utilisateur
-        </Link>
+        <AddButton link={'/users/admin/add_user'} name={'Créer un utilisateur'} />
     </div>
 
   );

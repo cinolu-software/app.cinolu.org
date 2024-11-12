@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {setModalCreateCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
+import AddWithModalButton from "@/CommonComponent/AddWithModalButton";
 
 export const ProgramCategoryHeader = () => {
 
@@ -10,12 +10,7 @@ export const ProgramCategoryHeader = () => {
 
 
     return (
-        <div>
-            <Button className="btn btn-primary" onClick={() => dispatch(setModalCreateCategory({ isOpen : !isOpenModalCreateCategory}))}>
-                <i className="fa fa-plus" />
-                <span className={'ms-2'} >Ajouter une Catégorie</span>
-            </Button>
-        </div>
+        <AddWithModalButton buttonText={'Ajouter une Catégorie'} onClick={() => dispatch(setModalCreateCategory({ isOpen : !isOpenModalCreateCategory}))} />
     );
 
 };
