@@ -1,14 +1,13 @@
 import React from "react";
-import { Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalCreateProgram, setFilterToggle } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setFilterToggle } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Filter } from "react-feather";
 import Link from 'next/link';
 
 export const ProgramsHeader = () => {
 
     const dispatch = useAppDispatch();
-    const {isOpenModalCreateProgram, filterToggle } = useAppSelector((state) => state.programs);
+    const {filterToggle } = useAppSelector((state) => state.programs);
 
     return (
         <div>
@@ -19,8 +18,8 @@ export const ProgramsHeader = () => {
                 </a>
             </div>
             <Link
-                className="btn btn-primary"
-                href={'/programs/add_program'}
+                className="btn btn-outline-primary"
+                href={'/programs/new'}
             >
                 <i className="fa fa-plus" />
                 Ajouter un programme

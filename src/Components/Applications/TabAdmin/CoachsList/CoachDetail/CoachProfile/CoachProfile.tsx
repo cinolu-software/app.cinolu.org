@@ -38,7 +38,7 @@ const CoachProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) 
                             <div className="position-relative d-inline-block ">
                                 <img
                                     className="rounded-circle border border-3 border-light shadow-lg"
-                                    src={user?.profile ? `${imageBaseUrl}/profiles/user.profile` : `${ImagePath}/avtar/avatar.jpg` }
+                                    src={user?.profile ? `${imageBaseUrl}/profiles/${user.profile}` : `${ImagePath}/avtar/avatar.jpg` }
                                     alt="Profile Image"
                                     width="120" height="120"
                                     style={{ objectFit: 'cover' }}
