@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ReceiveProgramsType} from "@/Types/Programs/ProgramsType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useDispatch} from "react-redux";
-import {setModalDeleteProgram, setModalEditProgram, setSelectedProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {setModalDeleteProgram, setSelectedProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
 import {TableColumn} from "react-data-table-component";
-import {Button} from "reactstrap";
-import Link from 'next/link'
 import {useRouter} from "next/navigation";
-import { imageBaseUrl } from "@/services/axios";
+import {imageBaseUrl} from "@/services/axios";
 import SVG from '@/CommonComponent/SVG';
+import {Spinner} from 'reactstrap'
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -27,47 +26,64 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
     const dispatch = useDispatch();
     const router = useRouter();
 
-    const handleEdit = () => {
-        dispatch(setSelectedProgram({ program }));
+    const [loadingEdit, setLoadingEdit] = useState(false);
+    const [loadingDetail, setLoadingDetail] = useState(false);
+    const [loadingDelete, setLoadingDelete] = useState(false);
+
+    const handleEdit = async () => {
+        setLoadingEdit(true);
         router.push('/programs/edit_program');
+        dispatch(setSelectedProgram({ program }));
     };
 
-    const handleDelete = () => {
+    const handleDetail = async () => {
+        setLoadingDetail(true);
+        router.push('/programs/detail_program');
+        dispatch(setSelectedProgram({program}));
+    };
+
+    const handleDelete = async () => {
+        setLoadingDelete(true);
         dispatch(setModalDeleteProgram({ isOpen: true, program }));
     };
 
-    const handleDetail = () => {
-        dispatch(setSelectedProgram({ program }));
-        router.push('/programs/detail_program');
-    }
+
 
     return (
         <div className="product-action">
-          <div className={'row w-100 justify-content-center'}>
-            <div className={'col-4'}>
-              <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleEdit}>
-                <span>
-                  <SVG iconId="editTable"/>
-                </span>
-              </button>
+            <div className="row w-100 justify-content-center">
+                <div className="col-4">
+                    <button
+                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                        onClick={handleEdit}
+                        disabled={loadingEdit}
+                    >
+                        {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
+                    </button>
+                </div>
+
+                <div className="col-4">
+                    <button
+                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                        onClick={handleDetail}
+                        disabled={loadingDetail}
+                    >
+                        {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
+                    </button>
+                </div>
+
+                <div className="col-4">
+                    <button
+                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                        onClick={handleDelete}
+                        disabled={loadingDelete}
+                    >
+                        {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
+                    </button>
+                </div>
             </div>
-  
-            <div className={'col-4'}>
-              <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDetail}>
-                <span>
-                  <SVG iconId="moreTable"/>
-                </span>
-              </button>
-            </div>
-  
-            <div className={'col-4'}>
-              <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-                <SVG iconId="trashTable" />
-              </button>
-            </div>
-          </div>
         </div>
-    )
+    );
 
 };
 

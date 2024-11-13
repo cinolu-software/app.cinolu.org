@@ -5,11 +5,13 @@ import Body from './Body'
 import { toast, ToastContainer, Flip } from "react-toastify";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { updateProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {useRouter} from "next/navigation";
 
 const EditProgramContainer = () => {
 
     const { EditFormValue, selectedProgram } = useAppSelector(state => state.programs);
     const dispatch = useAppDispatch();
+    const router = useRouter()
 
 
     const cleanFormData = (formData: any, originalData: any) => {
@@ -52,6 +54,7 @@ const EditProgramContainer = () => {
                         theme: "colored",
                     }
                 );
+                router.push('/programs');
             } catch (error) {
                 toast.error(
                     <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la modification du programme"}</p>,
@@ -89,7 +92,7 @@ const EditProgramContainer = () => {
                         <div className={'mt-4'}>
                             <Row>
                                 <Col className={'d-flex justify-content-end'}>
-                                    <button className={'btn btn-primary'} onClick={handleEdit}>
+                                    <button className={'btn btn-outline-primary'} onClick={handleEdit}>
                                         <i className="bi bi-save"></i> Enregistrer
                                     </button>
                                 </Col>

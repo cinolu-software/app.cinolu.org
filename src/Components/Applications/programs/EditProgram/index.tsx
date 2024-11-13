@@ -2,6 +2,7 @@ import {Card, CardBody, Col, Nav, NavItem, NavLink, Container, Row} from "reacts
 import React, {useState} from 'react'
 import ProgramEditTabContent from "@/Components/Applications/programs/EditProgram/ProgramEditTabContent";
 import Link from "next/link";
+import BackButton from "@/CommonComponent/BackButton";
 
 const EditProgramTabs = () => {
 
@@ -9,13 +10,7 @@ const EditProgramTabs = () => {
 
     return (
         <Container fluid>
-            <Row className={'mb-4'}>
-                <Col className={'d-flex justify-content-end'}>
-                    <Link href={'/programs'} className={'btn btn-outline-primary'}>
-                        <i className="bi bi-arrow-left"></i> Retour
-                    </Link>
-                </Col>
-            </Row>
+            <BackButton link={'/programs'}/>
             <Row>
                 <Card>
                     <CardBody>

@@ -6,6 +6,7 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {createUser} from "@/Redux/Reducers/userSlice/UserSlice";
 import {toast, ToastContainer, Flip} from "react-toastify";
 import {useRouter} from "next/navigation";
+import BackButton from "@/CommonComponent/BackButton";
 
 
 const CreateUser = () => {
@@ -66,14 +67,7 @@ const CreateUser = () => {
     return (
 
         <Container fluid>
-            <Row className={'mb-4'}>
-                <Col className={'d-flex justify-content-end'}>
-                    <Link href={'/users/admin/list'} className={'btn btn-outline-primary'}>
-                        <i className="bi bi-arrow-left"></i>
-                        Retour
-                    </Link>
-                </Col>
-            </Row>
+            <BackButton link={"/users/admin/list"}/>
             <Row>
                 <Col>
                     <Card>

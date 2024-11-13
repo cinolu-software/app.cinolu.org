@@ -8,6 +8,7 @@ import { toast, Flip } from "react-toastify";
 import { updateAttachmentProgramImage } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { CardBody, Col, Button } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
+import {useRouter} from "next/navigation";
 
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
@@ -17,6 +18,8 @@ const ImagePreview = () => {
     const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
     const { selectedProgram } = useAppSelector(state => state.programs);
+    const router = useRouter()
+
     const handleUpdateImage = () => {
         if (files.length === 0) {
             toast.error(
@@ -47,6 +50,7 @@ const ImagePreview = () => {
                             theme: "colored",
                         }
                     );
+                    router.push(`/programs`);
                 })
                 .catch((err) => {
                     toast.error(
@@ -63,6 +67,7 @@ const ImagePreview = () => {
         }
     };
 
+
     return (
         <Col lg="12">
             <CardBody>
@@ -74,9 +79,9 @@ const ImagePreview = () => {
                     onupdatefiles={setFiles}
                     labelIdle='<span class="filepond--label-action text-danger text-decoration-none">Déposez le fichier ici</span>'
                 />
-                <Button color="primary" onClick={handleUpdateImage}>
+                <button className="btn btn-outline-primary" onClick={handleUpdateImage}>
                     Mettre à jour l'image de couverture
-                </Button>
+                </button>
             </CardBody>
         </Col>
     );

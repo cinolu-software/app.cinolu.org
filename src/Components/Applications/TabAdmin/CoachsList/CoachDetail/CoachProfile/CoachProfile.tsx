@@ -1,6 +1,5 @@
-import { Href, ImagePath } from "@/Constant";
+import {  ImagePath } from "@/Constant";
 import { UserProfileAppCallBackType } from '@/Types/Users/Profile/UserProfileType';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from "react";
 import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader, Button,  } from "reactstrap";
@@ -8,7 +7,7 @@ import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/U
 import {setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
 import {useAppDispatch} from "@/Redux/Hooks";
 import {imageBaseUrl} from "@/services/axios";
-
+import BackButton from "@/CommonComponent/BackButton";
 
 
 const CoachProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
@@ -24,13 +23,7 @@ const CoachProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) 
 
     return (
         <>
-            <Row className="mb-4">
-                <Col className="d-flex justify-content-end">
-                    <Link href="/users/admin/coachs" className='btn btn-outline-primary'>
-                        <i className="bi bi-arrow-left"></i> Retour
-                    </Link>
-                </Col>
-            </Row>
+            <BackButton link={"/users/admin/coachs"}/>
             <Row>
                 <Col className="mx-auto">
                     <Card className="shadow-sm">
