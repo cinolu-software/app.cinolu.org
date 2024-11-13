@@ -47,7 +47,7 @@ const ProgramsListTableAction: React.FC<{ programType: ProgramsTypeType }> = ({ 
                 </span>
               </button>
             </div>
-  
+
             <div className={'col-6'}>
               <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
                 <SVG iconId="trashTable" />
@@ -56,7 +56,6 @@ const ProgramsListTableAction: React.FC<{ programType: ProgramsTypeType }> = ({ 
           </div>
         </div>
     )
-
 };
 
 export const ProgramsListTableDataColumn = [
@@ -66,7 +65,7 @@ export const ProgramsListTableDataColumn = [
             <ProgramsListTableName image={row.image ?? "default_program_image.png"} name={row.name || "Unnamed"} />
         ),
         sortable: true,
-        grow: 2,
+        grow: 3,
     },
     // {
     //     name: "Description",
@@ -79,6 +78,6 @@ export const ProgramsListTableDataColumn = [
     {
         name: "Action",
         cell: (row: ProgramsListTypeTableColumnType) => <ProgramsListTableAction programType={row} />,
-        grow: 2
+        grow: 1
     },
 ];

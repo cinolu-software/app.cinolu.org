@@ -40,7 +40,6 @@ export const deleteCategory = createAsyncThunk('programsCategory/deleteCategory'
 
 
 const ProgramCategorySlice = createSlice({
-
     name: 'programsCategory',
     initialState,
     reducers: {

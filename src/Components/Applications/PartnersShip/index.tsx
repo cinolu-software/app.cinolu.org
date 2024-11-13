@@ -12,14 +12,8 @@ const PartnersShipListContainer = () => {
 
     const [filterText, setFilterText] = useState('');
     const dispatch = useAppDispatch();
-    const {
-            status,
-            partnerShipData,
-            isOpenModalCreatePartnerShip,
-            isOpenModalDeletePartnerShip,
-            selectedPartnerShip,
-            isOpenModalEditPartnerShip
-        } = useAppSelector(state => state.partnerShip);
+
+    const {status, partnerShipData, isOpenModalCreatePartnerShip, isOpenModalDeletePartnerShip, selectedPartnerShip, isOpenModalEditPartnerShip} = useAppSelector(state => state.partnerShip);
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -42,7 +36,6 @@ const PartnersShipListContainer = () => {
 
     return (
         <Container fluid>
-
             <Row>
                 <Col sm="12">
                     <Card>

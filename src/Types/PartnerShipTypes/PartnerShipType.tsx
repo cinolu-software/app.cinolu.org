@@ -5,6 +5,10 @@ export interface PartnerShipType {
     updated_at: string;
 }
 
+export interface createPartnerShipType {
+    name: string
+}
+
 export interface InitialStatePartnerShipType{
     partnerShipData: PartnerShipType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';

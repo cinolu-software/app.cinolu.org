@@ -60,11 +60,11 @@ export const ProgramsCategoryListTableDataColumn = [
             <ProgramsCategoryListTableName image={'programs/programs.png'} name={row.name || "Unnamed"} />
         ),
         sortable: true,
-        grow: 2,
+        grow: 3,
     },
     {
         name: "Action",
         cell: (row: ProgramsListTypeTableColumnType) => <ProgramsCategoryListTableAction programCategoryType={row} />,
-        grow: 2
+        grow: 1
     },
 ];

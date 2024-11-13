@@ -2,30 +2,24 @@ import React, {useState} from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
-import {createCategory, setModalCreateCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
-import { CreateCategoryType } from '@/Types/Programs/ProgramsCategoryType'
+import { createPartnerShip, setModalCreatePartnerShip } from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 
-const CreateNewProgramCategory = () => {
+
+const ModalCreatePartnerShip = () => {
 
     const dispatch = useAppDispatch();
-    const {isOpenModalCreateCategory} = useAppSelector(state => state.programCategory);
-    const [category, setCategory] = useState<CreateCategoryType>({
-        name: ''
-    });
+    const {isOpenModalCreatePartnerShip} = useAppSelector(state => state.partnerShip);
+    const [namePartnerShip, setNamePartnerShip] = useState('');
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCategory({
-            ...category,
-            name: e.target.value
-        });
+        setNamePartnerShip(e.target.value);
     }
 
-    const handleCreateCategory = async () => {
-        await dispatch(createCategory(category)).unwrap()
-            .then(() => {
-                dispatch(setModalCreateCategory({ isOpen: false }));
+    const handleCreateCreatePartnerShip = async () => {
+        await dispatch(createPartnerShip({name: namePartnerShip})).unwrap()
+            .then(()=> {
                 toast.success(
-                    <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Type de partenariat créé avec succès"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -34,10 +28,9 @@ const CreateNewProgramCategory = () => {
                         theme: "colored",
                     }
                 );
-            })
-            .catch((error) => {
+            }).catch((error) => {
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de partenariat"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -47,14 +40,15 @@ const CreateNewProgramCategory = () => {
                     }
                 );
             })
+        dispatch(createPartnerShip({name: namePartnerShip}));
     }
 
     return (
         <Col xs="12">
-            <Modal isOpen={isOpenModalCreateCategory} toggle={() => dispatch(setModalCreateCategory({ isOpen: false }))} size="lg">
+            <Modal isOpen={isOpenModalCreatePartnerShip} toggle={() => dispatch(setModalCreatePartnerShip({ isOpen: false }))} size="lg">
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">{"Ajouter une catégorie de programme"}</h1>
-                    <Button close onClick={() => dispatch(setModalCreateCategory({ isOpen: false }))} />
+                    <Button close onClick={() => dispatch(setModalCreatePartnerShip({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-category">
@@ -65,23 +59,23 @@ const CreateNewProgramCategory = () => {
                             className="m-0"
                             id="programName"
                             type="text"
-                            value={category.name}
+                            value={namePartnerShip}
                             onChange={handleNameChange}
                             required
                         />
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateCategory({ isOpen: false }))}>
+                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreatePartnerShip({ isOpen: false }))}>
                         {"Annuler"}
                     </button>
-                    <button className={'btn btn-outline-primary'} onClick={handleCreateCategory}>
+                    <button className={'btn btn-outline-primary'} onClick={handleCreateCreatePartnerShip}>
                         {"Créer"}
                     </button>
                 </ModalFooter>
             </Modal>
         </Col>
-    );
+    )
 }
 
-export default CreateNewProgramCategory
+export default ModalCreatePartnerShip;

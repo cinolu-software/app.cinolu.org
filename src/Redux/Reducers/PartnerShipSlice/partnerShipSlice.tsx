@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
-import { PartnerShipType, InitialStatePartnerShipType } from "@/Types/PartnerShipTypes/PartnerShipType";
+import { PartnerShipType, InitialStatePartnerShipType, createPartnerShipType } from "@/Types/PartnerShipTypes/PartnerShipType";
 
 const initialState: InitialStatePartnerShipType = {
     partnerShipData: [],
@@ -17,7 +17,6 @@ const initialState: InitialStatePartnerShipType = {
     formValues: []
 };
 
-
 export const fetchPartnerShip = createAsyncThunk<{data: PartnerShipType[]}>(
     'partnerShip/fetchPartnerShip',
     async () => {
@@ -27,19 +26,17 @@ export const fetchPartnerShip = createAsyncThunk<{data: PartnerShipType[]}>(
     }
 );
 
-
 export const createPartnerShip = createAsyncThunk(
     'partnerShip/createPartnerShip',
-    async (newPartnerShip: PartnerShipType, {rejectWithValue}) => {
+    async (newPartnerShip : createPartnerShipType, {rejectWithValue}) => {
         try {
-            const response = await axiosInstance.post<{data: PartnerShipType}>(`${apiBaseUrl}/partnerships`, newPartnerShip);
+            const response = await axiosInstance.post<{ data : createPartnerShipType }>(`${apiBaseUrl}/partnerships`, newPartnerShip);
             return {data: response.data.data};
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la création du partenariat.");
         }
     }
 );
-
 
 export const deletePartnerShip = createAsyncThunk(
     'partnerShip/deletePartnerShip',
@@ -52,7 +49,6 @@ export const deletePartnerShip = createAsyncThunk(
         }
     }
 );
-
 
 export const updatePartnerShip = createAsyncThunk(
     'partnerShip/updatePartnerShip',
@@ -120,7 +116,7 @@ const PartnerShipSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(createPartnerShip.fulfilled, (state, action: PayloadAction<{ data: PartnerShipType }>) => {
+            .addCase(createPartnerShip.fulfilled, (state, action: PayloadAction<{ data: any }>) => {
                 state.status = 'succeeded';
                 state.partnerShipData.push(action.payload.data);
             })
