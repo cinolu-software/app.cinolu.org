@@ -1,13 +1,11 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
-import SimpleMdeReact from "react-simplemde-editor";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { createProgramType, setModalCreateProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 import { Flip, toast } from "react-toastify";
 import { CreateProgramTypeType } from "@/Types/Programs/ProgramsTypeType";
 
 const CreateNewType = () => {
-
     const dispatch = useAppDispatch();
     const isOpenModalCreateProgramType = useAppSelector(state => state.programsType.isOpenModalCreateProgramType);
     const [program, setProgram] = useState<CreateProgramTypeType>({ name: '', description: '' });
@@ -16,14 +14,9 @@ const CreateNewType = () => {
         setProgram(prevProgram => ({ ...prevProgram, name: e.target.value }));
     };
 
-    const handleDescriptionChange = useCallback((value: string) => {
-        setProgram(prevProgram => ({ ...prevProgram, description: value }));
-    }, []);
-
-    const autofocusNoSpellcheckerOptions = useMemo(() => ({
-        autofocus: true,
-        spellChecker: false,
-    }), []);
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setProgram(prevProgram => ({ ...prevProgram, description: e.target.value }));
+    };
 
     const handleSubmit = async () => {
         await dispatch(createProgramType(program)).unwrap()
@@ -51,7 +44,7 @@ const CreateNewType = () => {
                         theme: "colored",
                     }
                 );
-            })
+            });
     };
 
     return (
@@ -74,23 +67,25 @@ const CreateNewType = () => {
                             onChange={handleNameChange}
                             required
                         />
-                        <div id="editor3" className="mt-2">
-                            <SimpleMdeReact
-                                id="editor_container"
-                                value={program.description}
-                                onChange={handleDescriptionChange}
-                                options={autofocusNoSpellcheckerOptions}
-                            />
-                        </div>
+                        <Label for="programDescription" className="mt-2" check>
+                            Description du type de programme
+                        </Label>
+                        <textarea
+                            id="programDescription"
+                            className="form-control"
+                            rows={5}
+                            value={program.description}
+                            onChange={handleDescriptionChange}
+                        />
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="light" onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))}>
+                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))}>
                         {"Annuler"}
-                    </Button>
-                    <Button color="primary" onClick={handleSubmit}>
+                    </button>
+                    <button className={'btn btn-outline-primary'} onClick={handleSubmit}>
                         {"Créer"}
-                    </Button>
+                    </button>
                 </ModalFooter>
             </Modal>
         </Col>
