@@ -11,6 +11,7 @@ import { AppDispatch } from "@/Redux/Store";
 import {ImagePath} from "@/Constant";
 
 
+
 export const Profile = () => {
 
     const dispatch = useDispatch<AppDispatch>();
@@ -51,7 +52,10 @@ export const Profile = () => {
                 <div className="flex-grow-1">
                     <span>{localUser ? `${localUser.name}` : 'Utilisateur'}</span>
                     <p className="mb-0 font-outfit">
-                        {localUser?.roles?.[0]?.name || 'Utilisateur'} <i className="fa fa-angle-down"></i>
+                        {localUser?.roles?.map((role) => (
+                            <span>{role}</span>
+                        ))}
+                        <i className="ms-2 fa fa-angle-down"></i>
                     </p>
                 </div>
             </div>

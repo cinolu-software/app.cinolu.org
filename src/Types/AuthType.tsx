@@ -38,7 +38,7 @@ export interface User {
     verified_at?: string;
     created_at?: string;
     updated_at?: string;
-    roles?: Role[];
+    roles?: string[];
 }
 
 export interface AuthResponse {

@@ -13,7 +13,7 @@ const SidebarMenuList = () => {
 
 
   const userProfile = JSON.parse(localStorage.getItem("user_profile") || "{}");
-  const userRoles = userProfile.roles?.map((role: { name: string }) => role.name) || [];
+  const userRoles = userProfile.roles?.map((role:string) => role) || [];
 
 
   const hasAccess = (requiredRoles?: string[]) => {

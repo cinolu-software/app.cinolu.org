@@ -32,7 +32,8 @@ export const createPartnerShip = createAsyncThunk(
         try {
             const response = await axiosInstance.post<{ data : createPartnerShipType }>(`${apiBaseUrl}/partnerships`, newPartnerShip);
             return {data: response.data.data};
-        } catch (error: any) {
+        }
+        catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la création du partenariat.");
         }
     }
@@ -44,7 +45,8 @@ export const deletePartnerShip = createAsyncThunk(
         try {
             await axiosInstance.delete(`${apiBaseUrl}/partnerships/${id}`);
             return id;
-        } catch (error: any) {
+        }
+        catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la suppression du partenariat.");
         }
     }
@@ -95,7 +97,6 @@ const PartnerShipSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-
         builder
             .addCase(fetchPartnerShip.pending, (state) => {
                 state.status = 'loading';
@@ -109,8 +110,6 @@ const PartnerShipSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message || "Erreur lors de la récupération des partenariats.";
             });
-
-
         builder
             .addCase(createPartnerShip.pending, (state) => {
                 state.status = 'loading';
@@ -124,8 +123,6 @@ const PartnerShipSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message || "Erreur lors de la création du partenariat.";
             });
-
-
         builder
             .addCase(deletePartnerShip.pending, (state) => {
                 state.status = 'loading';
@@ -139,8 +136,6 @@ const PartnerShipSlice = createSlice({
                 state.status = 'failed';
                 state.error = action.error.message || "Erreur lors de la suppression du partenariat.";
             });
-
-
         builder
             .addCase(updatePartnerShip.pending, (state) => {
                 state.status = 'loading';
@@ -165,9 +160,6 @@ export const {
     setModalEditPartnerShip,
     setModalDeletePartnerShip,
     setNavId,
-    setTabId,
-    setFormValue,
-    setFilterToggle
 } = PartnerShipSlice.actions;
 
 export default PartnerShipSlice.reducer;

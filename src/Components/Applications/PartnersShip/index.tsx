@@ -6,14 +6,15 @@ import PartnerShipList from "@/Components/Applications/PartnersShip/PartnerShipL
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {PartnerShipListTableColumnType} from "@/Types/PartnerShipTypes/PartnerShipType";
 import {PartnerShipListTableDataColumn} from "@/Data/Application/PartnerShip";
-import {deletePartnerShip, setModalEditPartnerShip, setModalCreatePartnerShip, fetchPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
+import { fetchPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
+import ModalCreatePartnerShip from "@/Components/Applications/PartnersShip/ModalCreatePartnerShip";
 
 const PartnersShipListContainer = () => {
 
     const [filterText, setFilterText] = useState('');
     const dispatch = useAppDispatch();
 
-    const {status, partnerShipData, isOpenModalCreatePartnerShip, isOpenModalDeletePartnerShip, selectedPartnerShip, isOpenModalEditPartnerShip} = useAppSelector(state => state.partnerShip);
+    const {status, partnerShipData } = useAppSelector(state => state.partnerShip);
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -42,6 +43,7 @@ const PartnersShipListContainer = () => {
                         <CardBody>
                             <div className="list-product-header">
                                 <PartnerShipList />
+                                <ModalCreatePartnerShip/>
                             </div>
                             <div className="list-program">
                                 <div className="table-responsive">

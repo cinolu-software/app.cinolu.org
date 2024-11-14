@@ -22,31 +22,31 @@ const CreateNewProgramCategory = () => {
 
     const handleCreateCategory = async () => {
         await dispatch(createCategory(category)).unwrap()
-            .then(() => {
-                dispatch(setModalCreateCategory({ isOpen: false }));
-                toast.success(
-                    <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            })
-            .catch((error) => {
-                toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
-                    {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        hideProgressBar: false,
-                        transition: Flip,
-                        theme: "colored",
-                    }
-                );
-            })
+        .then(() => {
+            dispatch(setModalCreateCategory({ isOpen: false }));
+            toast.success(
+                <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+        })
+        .catch(() => {
+            toast.error(
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
+        })
     }
 
     return (

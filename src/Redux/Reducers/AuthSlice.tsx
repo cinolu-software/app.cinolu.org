@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "@/services/axios";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import Cookies from "js-cookie";
-import {AuthResponse, AuthState, LoginSubmitProp, UpdateProfilePassword, UpdateProfilePayload} from "@/Types/AuthType";
+import {AuthResponse, AuthState, UpdateProfilePassword, UpdateProfilePayload} from "@/Types/AuthType";
 import {RootState} from "@/Redux/Store";
 
 
@@ -78,7 +78,6 @@ export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: st
             const user = response.data.data;
             localStorage.setItem("user_profile", JSON.stringify(user));
             Cookies.set("cinolu_token", user);
-
             return { user };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Erreur lors de la récupération du profil utilisateur";
