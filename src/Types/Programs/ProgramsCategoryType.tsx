@@ -20,7 +20,7 @@ export interface InitialStateCategoryType{
     isOpenModalDeleteCategory: boolean;
     selectedCategory: ProgramsCategoryType | null;
     loading: boolean;
-    error: string;
+    error: string | null;
 }
 
 export interface CreateCategoryType {

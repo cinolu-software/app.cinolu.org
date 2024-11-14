@@ -52,7 +52,7 @@ const ProgramsTypesListContainer: React.FC = () => {
                 entities={originalTypeProgramsData}
                 setModalAction={setModalDeleteProgramTypes as any}
                 deleteEntityThunk={deleteProgramType}
-            />;
+            />
             <ModalCreateProgramType/>
             <Row>
                 <Col sm="12">

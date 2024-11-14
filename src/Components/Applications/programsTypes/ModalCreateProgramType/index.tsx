@@ -6,6 +6,7 @@ import { Flip, toast } from "react-toastify";
 import { CreateProgramTypeType } from "@/Types/Programs/ProgramsTypeType";
 
 const CreateNewType = () => {
+
     const dispatch = useAppDispatch();
     const isOpenModalCreateProgramType = useAppSelector(state => state.programsType.isOpenModalCreateProgramType);
     const [program, setProgram] = useState<CreateProgramTypeType>({ name: '', description: '' });

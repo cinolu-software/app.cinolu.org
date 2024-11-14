@@ -3,10 +3,12 @@ import {TableColumn} from "react-data-table-component";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import ModalCreateProgramCategory from "@/Components/Applications/programsCategory/ModalCreateProgramCategory";
+import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {fetchCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
+import {fetchCategory, deleteCategory, setModalDeleteCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
 import {ProgramsCategoryListTableDataColumn} from "@/Data/Application/ProgramsCategory";
 import {ProgramCategoryHeader} from "@/Components/Applications/programsCategory/ProgramCategoryHeader";
+
 
 
 const ProgramsCategoryListContainer: React.FC = () => {
@@ -15,7 +17,7 @@ const ProgramsCategoryListContainer: React.FC = () => {
 
     const dispatch = useAppDispatch();
 
-    const {status, isOpenModalCreateCategory, selectedCategory, programsCategoryData} = useAppSelector(state => state.programCategory);
+    const {status, isOpenModalDeleteCategory, selectedCategory, programsCategoryData, } = useAppSelector(state => state.programCategory);
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -39,6 +41,14 @@ const ProgramsCategoryListContainer: React.FC = () => {
     return (
         <Container fluid>
             <ModalCreateProgramCategory />
+            <DeleteEntityModal
+                isOpen={isOpenModalDeleteCategory}
+                entityName={'Catégorie de programme'}
+                selectedEntity={selectedCategory}
+                entities={programsCategoryData}
+                deleteEntityThunk={deleteCategory}
+                setModalAction={setModalDeleteCategory as any}
+            />
             <Row>
                 <Col sm="12">
                     <Card>

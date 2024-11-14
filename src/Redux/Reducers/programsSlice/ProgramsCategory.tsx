@@ -33,7 +33,7 @@ export const updateCategory = createAsyncThunk('programsCategory/updateCategory'
     return response.data;
 });
 
-export const deleteCategory = createAsyncThunk('programsCategory/deleteCategory', async (id: number) => {
+export const deleteCategory = createAsyncThunk('programsCategory/deleteCategory', async (id: string) => {
     await axiosInstance.delete(`${apiBaseUrl}/program-categories/${id}`);
     return id;
 });
@@ -93,6 +93,18 @@ const ProgramCategorySlice = createSlice({
                     existingCategory.name = newCategory.name;
                 }
             })
+            .addCase(deleteCategory.pending, (state) => {
+                state.status = 'loading';
+                state.error = null
+            })
+            .addCase(deleteCategory.fulfilled, (state, action: PayloadAction<string>)=>{
+                state.status = 'succeeded';
+                state.programsCategoryData = state.programsCategoryData.filter((program: {id : string}) => program.id !== action.payload)
+            })
+            .addCase(deleteCategory.rejected, (state) => {
+                state.status = 'failed';
+                state.error = 'Something went wrong';
+            });
     }
 
 });
