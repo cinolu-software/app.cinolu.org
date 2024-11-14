@@ -86,7 +86,7 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
                             >
                                 Fermer
                             </button>
-                            <button className={'btn btn-outline-primary'} onClick={handleDelete}>
+                            <button className={'btn btn-outline-danger'} onClick={handleDelete}>
                                 Supprimer
                             </button>
                         </div>

@@ -36,7 +36,7 @@ const ProgramsCategoryListContainer: React.FC = () => {
     }, [status, dispatch]);
 
 
-    const filteredProgramCategory = programsCategoryData?.filter(programCategory => programCategory.name.toLowerCase()?.includes(filterText.toLowerCase()));
+    const filteredProgramCategory = programsCategoryData?.filter(programCategory => programCategory.name?.toLowerCase()?.includes(filterText.toLowerCase()));
 
 
     return (

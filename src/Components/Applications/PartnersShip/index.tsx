@@ -6,15 +6,18 @@ import PartnerShipList from "@/Components/Applications/PartnersShip/PartnerShipL
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {PartnerShipListTableColumnType} from "@/Types/PartnerShipTypes/PartnerShipType";
 import {PartnerShipListTableDataColumn} from "@/Data/Application/PartnerShip";
-import { fetchPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
+import { fetchPartnerShip, deletePartnerShip, setModalDeletePartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 import ModalCreatePartnerShip from "@/Components/Applications/PartnersShip/ModalCreatePartnerShip";
+import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
+import UpdateProgramPartnerShip from "@/Components/Applications/PartnersShip/ModalUpdatePartnerShip";
+
 
 const PartnersShipListContainer = () => {
 
     const [filterText, setFilterText] = useState('');
     const dispatch = useAppDispatch();
 
-    const {status, partnerShipData } = useAppSelector(state => state.partnerShip);
+    const {status, partnerShipData, isOpenModalEditPartnerShip, selectedPartnerShip, isOpenModalDeletePartnerShip} = useAppSelector(state => state.partnerShip);
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -35,8 +38,17 @@ const PartnersShipListContainer = () => {
         partnerShip.name.toLowerCase().includes(filterText.toLowerCase())
     );
 
+
     return (
         <Container fluid>
+            <DeleteEntityModal
+                isOpen={isOpenModalDeletePartnerShip}
+                entityName={'type de partenariat'}
+                selectedEntity={selectedPartnerShip}
+                entities={partnerShipData}
+                setModalAction={setModalDeletePartnerShip}
+                deleteEntityThunk={deletePartnerShip}
+                />
             <Row>
                 <Col sm="12">
                     <Card>
@@ -44,6 +56,7 @@ const PartnersShipListContainer = () => {
                             <div className="list-product-header">
                                 <PartnerShipList />
                                 <ModalCreatePartnerShip/>
+                                <UpdateProgramPartnerShip/>
                             </div>
                             <div className="list-program">
                                 <div className="table-responsive">

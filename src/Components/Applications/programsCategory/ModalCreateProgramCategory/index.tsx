@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
@@ -9,16 +9,9 @@ const CreateNewProgramCategory = () => {
 
     const dispatch = useAppDispatch();
     const {isOpenModalCreateCategory} = useAppSelector(state => state.programCategory);
-    const [category, setCategory] = useState<CreateCategoryType>({
-        name: ''
-    });
+    const [category, setCategory] = useState<CreateCategoryType>({name: ''});
 
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setCategory({
-            ...category,
-            name: e.target.value
-        });
-    }
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {setCategory({name: e.target.value})}
 
     const handleCreateCategory = async () => {
         await dispatch(createCategory(category)).unwrap()

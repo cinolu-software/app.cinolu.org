@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
-import { PartnerShipType, InitialStatePartnerShipType, createPartnerShipType } from "@/Types/PartnerShipTypes/PartnerShipType";
+import { PartnerShipType, InitialStatePartnerShipType, createPartnerShipType, UpdatePartnerShip } from "@/Types/PartnerShipTypes/PartnerShipType";
 
 const initialState: InitialStatePartnerShipType = {
     partnerShipData: [],
@@ -52,11 +52,12 @@ export const deletePartnerShip = createAsyncThunk(
     }
 );
 
+
 export const updatePartnerShip = createAsyncThunk(
     'partnerShip/updatePartnerShip',
     async (partnerShip: PartnerShipType, {rejectWithValue}) => {
         try {
-            const response = await axiosInstance.put<{data: PartnerShipType}>(`${apiBaseUrl}/partnerships/${partnerShip.id}`, partnerShip);
+            const response = await axiosInstance.patch<{data: UpdatePartnerShip}>(`${apiBaseUrl}/partnerships/${partnerShip.id}`, partnerShip);
             return {data: response.data.data};
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la modification du partenariat.");
@@ -141,7 +142,7 @@ const PartnerShipSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(updatePartnerShip.fulfilled, (state, action: PayloadAction<{ data: PartnerShipType }>) => {
+            .addCase(updatePartnerShip.fulfilled, (state, action: PayloadAction<{ data: any }>) => {
                 state.status = 'succeeded';
                 const updatedPartnerShipIndex = state.partnerShipData.findIndex(partnerShip => partnerShip.id === action.payload.data.id);
                 if (updatedPartnerShipIndex >= 0) {

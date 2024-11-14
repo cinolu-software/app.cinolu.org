@@ -40,7 +40,7 @@ const ModalCreatePartnerShip = () => {
                     }
                 );
             })
-        dispatch(createPartnerShip({name: namePartnerShip}));
+        dispatch(setModalCreatePartnerShip({isOpen: false, }));
     }
 
     return (

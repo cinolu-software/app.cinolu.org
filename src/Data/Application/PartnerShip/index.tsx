@@ -1,9 +1,8 @@
 import React from 'react';
-import {Button} from "reactstrap";
 import {PartnerShipListTableColumnType, PartnerShipType} from "@/Types/PartnerShipTypes/PartnerShipType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import {useAppDispatch} from "@/Redux/Hooks";
 import {setModalDeletePartnerShip, setModalEditPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 import SVG from '@/CommonComponent/SVG';
 
@@ -26,28 +25,21 @@ const PartnerShipListTableAction: React.FC<{partnerShip: PartnerShipType}> = ({p
 
     const handleDelete = () => {
         dispatch(setModalDeletePartnerShip({isOpen: true, partnerShip: partnerShip}))
+        console.log('dans le bon!')
     }
 
     return (
         <div className="product-action">
             <div className={'row w-100 justify-content-center'}>
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
-              <span>
-                <SVG iconId="editTable"/>
-              </span>
+                <div className={'col-6'}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleEdit}>
+                      <span>
+                        <SVG iconId="editTable"/>
+                      </span>
                     </button>
                 </div>
 
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
-              <span>
-                <SVG iconId="moreTable"/>
-              </span>
-                    </button>
-                </div>
-
-                <div className={'col-4'}>
+                <div className={'col-6'}>
                     <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
                         <SVG iconId="trashTable" />
                     </button>
