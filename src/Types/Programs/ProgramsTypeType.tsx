@@ -7,6 +7,12 @@ export interface ProgramsTypeType {
     image?: string;
 }
 
+export interface UpdateTypeType {
+    id: string | undefined;
+    name : string | undefined;
+    description: string | undefined
+}
+
 export interface TransformedProgramsTypeType {
     id: string;
     name: string;

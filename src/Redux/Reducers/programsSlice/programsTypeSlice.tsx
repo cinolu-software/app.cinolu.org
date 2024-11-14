@@ -1,6 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axiosInstance , { apiBaseUrl } from "@/services/axios";
-import { InitialStateProgramsTypeType, ProgramsTypeType, CreateProgramTypeType, TransformedProgramsTypeType } from "@/Types/Programs/ProgramsTypeType";
+import {
+    InitialStateProgramsTypeType,
+    ProgramsTypeType,
+    CreateProgramTypeType,
+    TransformedProgramsTypeType,
+    UpdateTypeType
+} from "@/Types/Programs/ProgramsTypeType";
 import { RootState } from "@/Redux/Store";
 
 const initialState: InitialStateProgramsTypeType = {
@@ -54,9 +60,9 @@ export const createProgramType = createAsyncThunk(
 
 export const updateProgramType = createAsyncThunk(
     'programs/updateProgramType',
-    async (updatedProgramType: ProgramsTypeType, { rejectWithValue }) => {
+    async (updatedProgramType: UpdateTypeType, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.patch<{ data: ProgramsTypeType }>(`${apiBaseUrl}/program-types/${updatedProgramType.id}`, updatedProgramType);
+            const response = await axiosInstance.patch<{ data: UpdateTypeType }>(`${apiBaseUrl}/program-types/${updatedProgramType.id}`, updatedProgramType);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
