@@ -48,7 +48,7 @@ const PartnersShipListContainer = () => {
                 entities={partnerShipData}
                 setModalAction={setModalDeletePartnerShip}
                 deleteEntityThunk={deletePartnerShip}
-                />
+            />
             <Row>
                 <Col sm="12">
                     <Card>

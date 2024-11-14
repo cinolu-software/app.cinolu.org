@@ -61,10 +61,22 @@ const PartnerListTableAction: React.FC<{partner: PartnerType}> = ({partner}) =>{
 
 export const PartnerListTableDataColumn = [
     {
-        name: "Name",
+        name: "Partenaire",
         cell:(row: PartnerListTableColumnType) => <PartnerListTableName image={"programs/types/typeProgram.png"} name={row.name}/>,
         sortable: true,
-        grow: 3
+        grow: 1
+    },
+    {
+        name: "Description",
+        cell:(row: PartnerListTableColumnType) => <div>{row.description}</div>,
+        sortable: true,
+        grow: 1
+    },
+    {
+        name: "Website link",
+        cell:(row: PartnerListTableColumnType) => <div>{row.website_link}</div>,
+        sortable: true,
+        grow: 1
     },
     {
         name: "Actions",

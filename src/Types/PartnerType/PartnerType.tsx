@@ -1,10 +1,18 @@
-
+export interface PartnerShipType {
+    id: string;
+    name: string;
+    created_at?: string;
+    updated_at?: string;
+    deleted_at?: string;
+}
 
 export interface PartnerType{
     id: string;
     name: string;
     description: string;
     profile: string;
+    website_link: string;
+    partnerships: PartnerShipType[];
     created_at: string;
     updated_at: string;
 }
