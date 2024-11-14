@@ -142,9 +142,9 @@ const ProgramsTypeSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(updateProgramType.fulfilled, (state, action: PayloadAction<ProgramsTypeType>) => {
+            .addCase(updateProgramType.fulfilled, (state, action: PayloadAction<UpdateTypeType>) => {
                 state.status = 'succeeded';
-                const index = state.originalTypeProgramsData.findIndex((program: { id: string; }) => program.id === action.payload.id);
+                const index = state.originalTypeProgramsData.findIndex((program: { id: string }) => program.id === action.payload.id);
                 if (index !== -1) {
                     state.originalTypeProgramsData[index] = action.payload;
                     // @ts-ignore

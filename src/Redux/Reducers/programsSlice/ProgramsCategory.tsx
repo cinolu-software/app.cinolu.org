@@ -29,8 +29,8 @@ export const createCategory = createAsyncThunk('programsCategory/createCategory'
 });
 
 export const updateCategory = createAsyncThunk('programsCategory/updateCategory', async (category: UpdateCategoryType) => {
-    const response = await axiosInstance.put(`${apiBaseUrl}/program-categories/${category.id}`, category);
-    return response.data;
+    const response = await axiosInstance.patch(`${apiBaseUrl}/program-categories/${category.id}`, category);
+    return response.data.data;
 });
 
 export const deleteCategory = createAsyncThunk('programsCategory/deleteCategory', async (id: string) => {
@@ -85,12 +85,24 @@ const ProgramCategorySlice = createSlice({
             .addCase(updateCategory.pending, (state) => {
                 state.loading = true;
             })
-            .addCase(updateCategory.fulfilled, (state, action) => {
+            .addCase(updateCategory.fulfilled, (state, action: PayloadAction<UpdateCategoryType>) => {
                 state.loading = false;
-                const newCategory = action.payload;
-                const existingCategory = state.programsCategoryData.find(category => category.id === newCategory.id);
-                if (existingCategory) {
-                    existingCategory.name = newCategory.name;
+                state.status = 'succeeded';
+                const { id, name, created_at, updated_at } = action.payload;
+
+
+                if (id) {
+                    const index = state.programsCategoryData.findIndex((program) => program.id === id);
+
+                    if (index !== -1) {
+                        state.programsCategoryData[index] = {
+                            ...state.programsCategoryData[index],
+                            ...(name !== null && { name }),
+                            ...(created_at && { created_at }),
+                            ...(updated_at && { updated_at }),
+                        };
+
+                    }
                 }
             })
             .addCase(deleteCategory.pending, (state) => {

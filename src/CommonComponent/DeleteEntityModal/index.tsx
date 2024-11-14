@@ -21,8 +21,6 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
     const handleDelete = () => {
 
         if (selectedEntityData && selectedEntityData.id !== undefined) {
-
-
             dispatch(deleteEntityThunk(selectedEntityData.id))
                 .then(() => {
                     toast.success(
@@ -54,7 +52,6 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
                     );
                 });
         }
-
     };
 
     return (

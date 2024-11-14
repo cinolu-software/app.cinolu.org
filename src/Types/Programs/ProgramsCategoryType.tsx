@@ -5,10 +5,10 @@ import { InputType } from "reactstrap/types/lib/Input";
 
 
 export interface ProgramsCategoryType {
-    id: string;
+    id: string ;
     name: string;
-    created_at: string;
-    updated_at: string;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface InitialStateCategoryType{
@@ -28,8 +28,10 @@ export interface CreateCategoryType {
 }
 
 export interface UpdateCategoryType {
-    id: string;
-    name: string;
+    id: string ;
+    name: string | null;
+    created_at?: string;
+    updated_at?: string;
 }
 
 export interface StaticModalToggleProp{
