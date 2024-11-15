@@ -74,10 +74,10 @@ const NumberingWizard = () => {
     return (
         <Col>
             <Card className="height-equal">
-                <CommonCardHeader title="Ajout de Programme" />
+                <CommonCardHeader title="Ajout du partenaire" />
                 <CardBody className="basic-wizard important-validation">
                     <StepperHorizontal level={numberLevel} />
-                    <div id="msform">
+                    <div id="msform" className={'mx-5'}>
                         {renderStep()}
                     </div>
                     <div className="wizard-footer d-flex gap-2 justify-content-end mt-4 me-5">

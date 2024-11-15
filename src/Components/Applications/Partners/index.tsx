@@ -7,10 +7,9 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {PartnerListTableColumnType} from "@/Types/PartnerType/PartnerType";
 import {PartnerListTableDataColumn} from "@/Data/Application/Partner";
 import {setModalEditPartner, setModalDeletePartner, setModalCreatePartner, fetchPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
+import PartnerList from "@/Components/Applications/Partners/PartnerList";
 
-import PartnerShipList from "@/Components/Applications/PartnersShip/PartnerShipList";
-import {PartnerShipListTableDataColumn} from "@/Data/Application/PartnerShip";
-import {PartnerShipListTableColumnType} from "@/Types/PartnerShipTypes/PartnerShipType";
+
 
 const PartnersListContainer = () => {
     const [filterText, setFilterText] = useState('');
@@ -53,7 +52,7 @@ const PartnersListContainer = () => {
                     <Card>
                         <CardBody>
                             <div className="list-product-header">
-                                <PartnerShipList />
+                                <PartnerList />
                             </div>
                             <div className="list-program">
                                 <div className="table-responsive">

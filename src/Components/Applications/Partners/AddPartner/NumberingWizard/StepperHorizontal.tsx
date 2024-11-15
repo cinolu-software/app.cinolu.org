@@ -4,7 +4,7 @@ import React from "react";
 const StepperHorizontal: React.FC<StepperHorizontalPropsType> = ({ level }) => {
     const StepperHorizontalData = [
         "Informations de base",
-        "Contact",
+        "Web Site",
         "Partenariat",
     ];
 
