@@ -1,9 +1,8 @@
 import React from 'react';
-import {Button} from "reactstrap";
 import {PartnerListTableColumnType, PartnerType} from "@/Types/PartnerType/PartnerType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import {useAppDispatch} from "@/Redux/Hooks";
 import {setModalDeletePartner, setModalEditPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 import SVG from '@/CommonComponent/SVG';
 
@@ -35,20 +34,18 @@ const PartnerListTableAction: React.FC<{partner: PartnerType}> = ({partner}) =>{
             <div className={'row w-100 justify-content-center'}>
                 <div className={'col-4'}>
                     <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
-              <span>
-                <SVG iconId="editTable"/>
-              </span>
+                      <span>
+                        <SVG iconId="editTable"/>
+                      </span>
                     </button>
                 </div>
-
                 <div className={'col-4'}>
                     <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
-              <span>
-                <SVG iconId="moreTable"/>
-              </span>
+                      <span>
+                        <SVG iconId="moreTable"/>
+                      </span>
                     </button>
                 </div>
-
                 <div className={'col-4'}>
                     <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
                         <SVG iconId="trashTable" />

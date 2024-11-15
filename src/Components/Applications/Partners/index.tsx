@@ -43,7 +43,7 @@ const PartnersListContainer = () => {
         partner.name.toLowerCase().includes(filterText.toLowerCase())
     );
 
-    console.log(partnerData)
+
 
     return (
         <Container fluid>

@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import {Button, Card, CardBody, Col, Form} from "reactstrap";
-import FinishForm from "@/Components/Applications/programs/AddProgramNew/Common/FinishForm";
+import FinishForm from "@/CommonComponent/FinishForm";
 import StepperHorizontal from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepperHorizontal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
@@ -85,6 +85,7 @@ const NumberingWizard = () => {
                     <FinishForm
                         isComplete={true}
                         onCreateProgram={handleCreateProgram}
+                        textButton='Créer le Programme'
                     />
                 </Form>
             );

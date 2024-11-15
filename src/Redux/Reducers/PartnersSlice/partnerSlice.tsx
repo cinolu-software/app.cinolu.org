@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
-import { PartnerType, InitialStatePatnerType } from "@/Types/PartnerType/PartnerType";
+import { PartnerType, InitialStatePatnerType, FormValuePartnerType } from "@/Types/PartnerType/PartnerType";
+import {ShowError} from "@/utils/MultiStepForm.service";
+
 
 const initialState: InitialStatePatnerType = {
     partnerData: [],
@@ -13,7 +15,20 @@ const initialState: InitialStatePatnerType = {
     selectedPartner: null,
     navId: 0,
     tabId: 0,
-    formValue: []
+    formValue: {
+        name: '',
+        description: '',
+        website_link: '',
+        partnership: []
+    },
+    EditFormValue: {
+        name: '',
+        description: '',
+        website_link: '',
+        partnership: []
+    },
+    numberLevel: 1,
+    showFinish: false
 };
 
 
@@ -65,10 +80,47 @@ export const updatePartner = createAsyncThunk(
     }
 );
 
+const validateStep = (state: InitialStatePatnerType) => {
+    const {name, partnership, description, website_link} = state.formValue;
+    switch(state.numberLevel){
+        case 1:
+            if(!name || !description){
+                ShowError();
+                return false;
+            }
+            break;
+        case 2:
+            if(!name || !description || !website_link){
+                ShowError();
+                return false
+            }
+            break
+        case 3:
+            if(!name || !description || !website_link || partnership.length === 0 ){
+                ShowError();
+                return false
+            }
+            break
+    }
+    return true;
+};
+
+
 const PartnerSlice = createSlice({
     name: "partner",
     initialState,
     reducers: {
+        setSelectedPartner: (state, action: PayloadAction<{ partner: any | null}>) => {
+            state.selectedPartner = action.payload.partner;
+            if(action.payload.partner){
+                state.EditFormValue = {
+                    name: action.payload.partner.name,
+                    description: action.payload.partner.description,
+                    website_link: action.payload.partner.website_link,
+                    partnership: action.payload.partner.partnership || []
+                };
+            }
+        },
         setModalCreatePartner: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreatePartner = action.payload.isOpen;
         },
@@ -90,8 +142,29 @@ const PartnerSlice = createSlice({
         setTabId: (state, action: PayloadAction<number>) => {
             state.tabId = action.payload;
         },
-        setFormValue: (state, action: { payload: { name: keyof any; value: any } }) => {
-            state.formValue[action.payload.name] = action.payload.value;
+        setFormValue: (state, action: PayloadAction<{field: keyof FormValuePartnerType, value: any}>) => {
+            const {field, value} = action.payload;
+            if(field === 'partnership' && typeof value === 'string'){
+                state.formValue[field] = JSON.parse(value)
+            }else{
+                state.formValue[field] = value
+            }
+        },
+        setShowFinish: (state, action) => {
+          state.showFinish = action.payload
+        },
+        handleBackButton: (state)=> {
+            if(state.numberLevel > 1) state.numberLevel--;
+        },
+        handleNextButton: (state)=>{
+            const isValid = validateStep(state);
+            if (isValid) {
+                if (state.numberLevel < 7) {
+                    state.numberLevel++;
+                } else if( state.numberLevel === 7) {
+                    state.showFinish = true;
+                }
+            }
         },
         setFilterToggle: (state) => {
             state.filterToggle = !state.filterToggle;
@@ -169,7 +242,11 @@ export const {
     setNavId,
     setTabId,
     setFormValue,
-    setFilterToggle
+    setFilterToggle,
+    setShowFinish,
+    handleBackButton,
+    handleNextButton,
+    setSelectedPartner
 } = PartnerSlice.actions;
 
 export default PartnerSlice.reducer;

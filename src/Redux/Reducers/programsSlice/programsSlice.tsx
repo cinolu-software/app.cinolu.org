@@ -7,7 +7,7 @@ import {
     ReceiveProgramsType
 } from "@/Types/Programs/ProgramsType";
 import {RootState} from "@/Redux/Store";
-import {toast, ToastContainer, Flip} from "react-toastify";
+import {ShowError} from "@/utils/MultiStepForm.service";
 import React from "react";
 
 
@@ -45,19 +45,6 @@ const initialState: InitialStateProgramsType = {
     showFinish:false
 };
 
-
-const ShowError = () => {
-    return toast.error(
-        <p className="text-white tx-16 mb-0">{"Veuillez remplir tous les champs"}</p>,
-        {
-            autoClose: 5000,
-            position: toast.POSITION.TOP_CENTER,
-            hideProgressBar: false,
-            transition: Flip,
-            theme: "colored",
-        }
-    );
-};
 
 export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {
     const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`);

@@ -17,6 +17,15 @@ export interface PartnerType{
     updated_at: string;
 }
 
+export interface CreatePartner {
+    name: string;
+    description: string;
+    website_link: string;
+    partnership: string[];
+}
+
+export interface FormValuePartnerType extends CreatePartner{}
+
 export interface InitialStatePatnerType {
     partnerData: PartnerType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -28,7 +37,10 @@ export interface InitialStatePatnerType {
     selectedPartner: PartnerType | null;
     navId: number;
     tabId: number;
-    formValue: any
+    formValue: FormValuePartnerType;
+    EditFormValue: FormValuePartnerType;
+    numberLevel: number;
+    showFinish: boolean
 }
 
 export interface CreatePartnerType {

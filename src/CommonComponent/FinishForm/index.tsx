@@ -5,11 +5,12 @@ import React from "react";
 interface FinishFormProps {
     isComplete: boolean;
     onCreateProgram: () => void;
+    textButton: string
 }
 
 
 
-const FinishForm: React.FC<FinishFormProps> = ({ isComplete, onCreateProgram }) => {
+const FinishForm: React.FC<FinishFormProps> = ({ isComplete, onCreateProgram, textButton }) => {
 
     return (
         <Row>
@@ -19,7 +20,7 @@ const FinishForm: React.FC<FinishFormProps> = ({ isComplete, onCreateProgram }) 
 
                     {isComplete && (
                         <Button color="primary" onClick={onCreateProgram} className="mt-3">
-                            Créer le Programme
+                            {textButton}
                         </Button>
                     )}
                 </div>
