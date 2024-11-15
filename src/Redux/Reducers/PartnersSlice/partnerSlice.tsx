@@ -44,7 +44,7 @@ export const fetchPartner = createAsyncThunk<{ data: PartnerType[] }>(
 
 export const createPartner = createAsyncThunk(
     "partner/createPartner",
-    async (newPartner: PartnerType, { rejectWithValue }) => {
+    async (newPartner: any, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post<{ data: PartnerType }>(`${apiBaseUrl}/partners`, newPartner);
             return { data: response.data.data };

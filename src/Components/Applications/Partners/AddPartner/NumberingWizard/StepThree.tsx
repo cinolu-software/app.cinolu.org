@@ -17,8 +17,8 @@ const StepThree = () => {
                             <Input
                                 id={`type${partnerShip.id}`}
                                 type="checkbox"
-                                checked={partnerShip.id}
-                                onChange={() => handleTypeChange(partnerShip.id)}
+                                // checked={partnerShip.id}
+                                // onChange={() => handleTypeChange(partnerShip.id)}
                             />
                             <div className="custom--mega-checkbox">
                                 <ul>
