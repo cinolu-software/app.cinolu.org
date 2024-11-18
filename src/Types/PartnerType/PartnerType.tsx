@@ -1,3 +1,5 @@
+import {ChangeEvent} from "react";
+
 export interface PartnerShipType {
     id: string;
     name: string;
@@ -21,7 +23,7 @@ export interface CreatePartner {
     name: string;
     description: string;
     website_link: string;
-    partnership: string[];
+    partnerships: any;
 }
 
 export interface FormValuePartnerType extends CreatePartner{}
@@ -37,10 +39,15 @@ export interface InitialStatePatnerType {
     selectedPartner: PartnerType | null;
     navId: number;
     tabId: number;
-    formValue: FormValuePartnerType;
-    EditFormValue: FormValuePartnerType;
+    formValue: any;
+    EditFormValue: any;
     numberLevel: number;
     showFinish: boolean
+}
+
+export interface StepProps {
+    formValue: FormValuePartnerType;
+    getPartnerData: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface CreatePartnerType {

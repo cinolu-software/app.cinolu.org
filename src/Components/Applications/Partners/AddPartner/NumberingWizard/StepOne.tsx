@@ -1,7 +1,12 @@
 import React, {useMemo, ChangeEvent} from 'react'
 import {Button, Col, Form, Input, Label, Modal, ModalBody, ModalFooter, Row} from 'reactstrap';
+import {StepProps} from "@/Types/PartnerType/PartnerType";
+import {setFormValue} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 
-const StepOne = () => {
+
+const StepOne: React.FC<StepProps> = ({formValue, getPartnerData}) => {
+
+    const {name, description} = formValue
 
     return (
         <Col xs="12">
@@ -13,8 +18,9 @@ const StepOne = () => {
                     className="m-0"
                     id="programName"
                     type="text"
-                    // value={}
-                    // onChange={}
+                    name="name"
+                    value={name}
+                    onChange={getPartnerData}
                     required
                 />
             </div>
@@ -26,9 +32,10 @@ const StepOne = () => {
                 <textarea
                     id="programDescription"
                     className="form-control"
+                    name="description"
                     rows={5}
-                    // value={}
-                    // onChange={}
+                    value={description}
+                    onChange={getPartnerData}
                 />
             </div>
         </Col>

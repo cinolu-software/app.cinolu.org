@@ -10,24 +10,31 @@ import StepOne from "@/Components/Applications/Partners/AddPartner/NumberingWiza
 import StepTwo from "@/Components/Applications/Partners/AddPartner/NumberingWizard/StepTwo";
 import StepThree from "@/Components/Applications/Partners/AddPartner/NumberingWizard/StepThree";
 import {Flip, toast} from "react-toastify";
+import {useRouter} from "next/navigation";
+
 
 const NumberingWizard = () => {
 
     const {numberLevel, formValue, showFinish} = useAppSelector(state => state.partner);
     const dispatch = useAppDispatch();
+    const router = useRouter()
 
-    const getPartnerData = (event: ChangeEvent<HTMLInputElement> | string) => {
-        if(typeof event === 'string') {
+    const getPartnerData = (event: any) => {
+        const { name, value, type, checked } = event.target;
+        dispatch(
+            setFormValue({
+                field: name,
+                value: type === "checkbox" ? checked : value,
+            })
+        );
+    };
 
-        }
-    }
 
     const handleCreatePartner = () => {
-
         try {
             dispatch(createPartner(formValue));
             toast.success(
-                <p className="text-white tx-16 mb-0">{"Programme créé avec succès"}</p>,
+                <p className="text-white tx-16 mb-0">{"Partenaire créé avec succès"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -36,9 +43,11 @@ const NumberingWizard = () => {
                     theme: "colored",
                 }
             );
+            router.push('/partners')
+
         } catch (error) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du programme"}</p>,
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du partenaire"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -48,28 +57,33 @@ const NumberingWizard = () => {
                 }
             );
         }
-
     };
 
     const renderStep = () => {
-
         switch (numberLevel) {
-            case 1: return <StepOne/>
-            case 2: return <StepTwo/>
-            case 3: return <StepThree/>
-            case 4: return (
-                <Form className="stepper-four g-3 needs-validation" noValidate>
-                    <FinishForm
-                        isComplete={true}
-                        onCreateProgram={handleCreatePartner}
-                        textButton='Créer le partenaire'
-                    />
-                </Form>
-            );
-            default: return null;
+            case 1:
+                return <StepOne formValue={formValue} getPartnerData={getPartnerData} />;
+            case 2:
+                return <StepTwo formValue={formValue} getPartnerData={getPartnerData} />;
+            case 3:
+                return <StepThree formValue={formValue} getPartnerData={getPartnerData} />;
+            case 4:
+                return (
+                    <Form className="stepper-four g-3 needs-validation" noValidate>
+                        <FinishForm
+                            isComplete={true}
+                            onCreateProgram={handleCreatePartner}
+                            textButton="Créer le partenaire"
+                        />
+                    </Form>
+                );
+            default:
+                return null;
         }
+    };
 
-    }
+    console.log("====>", formValue)
+
 
     return (
         <Col>
@@ -102,7 +116,6 @@ const NumberingWizard = () => {
             </Card>
         </Col>
     );
-
 }
 
 export default NumberingWizard

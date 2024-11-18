@@ -1,7 +1,11 @@
 import React from 'react'
 import {Col, Input, Label} from "reactstrap";
+import {StepProps} from "@/Types/PartnerType/PartnerType";
 
-const StepTwo = () => {
+const StepTwo: React.FC<StepProps> = ({formValue ,getPartnerData}) => {
+
+    const {website_link} = formValue
+
     return (
         <Col xs="12">
 
@@ -11,10 +15,11 @@ const StepTwo = () => {
                 </Label>
                 <Input
                     className="m-0"
-                    id="programName"
+                    id="websiteLink"
                     type="text"
-                    // value={}
-                    // onChange={}
+                    name="website_link"
+                    value={website_link}
+                    onChange={getPartnerData}
                     required
                 />
             </div>

@@ -1,35 +1,52 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Col, Input, Label} from "reactstrap";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {fetchPartnerShip} from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
+import {StepProps} from "@/Types/PartnerType/PartnerType";
+import {setFormValue} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 
-const StepThree = () => {
+const StepThree : React.FC<StepProps> = ({formValue , getPartnerData}) => {
+
 
     const dispatch = useAppDispatch();
-    const {status, partnerShipData} = useAppSelector(state=>state.partnerShip)
+    const {status, partnerShipData} = useAppSelector(state=>state.partnerShip);
+    useEffect(() => {
+        if(status === 'idle'){
+            dispatch(fetchPartnerShip());
+        }
+    }, [dispatch]);
 
     return (
         <Col xs="12">
-            <div>
+            <section className={'main-upgrade'}>
                 <div className="variation-box">
-                    {partnerShipData.map(partnerShip => (
-                        <div className="selection-box" key={partnerShip.id}>
-                            <Input
-                                id={`type${partnerShip.id}`}
-                                type="checkbox"
-                                // checked={partnerShip.id}
-                                // onChange={() => handleTypeChange(partnerShip.id)}
-                            />
-                            <div className="custom--mega-checkbox">
-                                <ul>
-                                    <li>{partnerShip.name}</li>
-                                </ul>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
+                        {partnerShipData.map(partnerships => (
+                            <div className="selection-box" key={partnerships.id}>
+                                <Input
+                                    id={`type${partnerships.id}`}
+                                    type="checkbox"
+                                    name="partnership"
+                                    value={JSON.stringify(partnerships)}
+                                    onChange={(e) =>
+                                        dispatch(
+                                            setFormValue({
+                                                field : 'partnerships',
+                                                value : e.target.checked
+                                                    ? [...formValue.partnerships, partnerships]
+                                                    : formValue.partnerships.filter((p: { id: string; }) => p.id !== partnerships.id),
+                                            })
+                                        )
+                                    }
+                                />
+                                <div className="custom--mega-checkbox">
+                                    <ul>
+                                        <li>{partnerships.name}</li>
+                                    </ul>
+                                </div>
+                            </div>))}
 
+                </div>
+            </section>
         </Col>
     )
 }

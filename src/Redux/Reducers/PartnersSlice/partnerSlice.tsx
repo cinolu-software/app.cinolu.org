@@ -3,7 +3,6 @@ import axiosInstance, { apiBaseUrl } from "@/services/axios";
 import { PartnerType, InitialStatePatnerType, FormValuePartnerType } from "@/Types/PartnerType/PartnerType";
 import {ShowError} from "@/utils/MultiStepForm.service";
 
-
 const initialState: InitialStatePatnerType = {
     partnerData: [],
     status: "idle",
@@ -19,18 +18,17 @@ const initialState: InitialStatePatnerType = {
         name: '',
         description: '',
         website_link: '',
-        partnership: []
+        partnerships: []
     },
     EditFormValue: {
         name: '',
         description: '',
         website_link: '',
-        partnership: []
+        partnerships: []
     },
     numberLevel: 1,
     showFinish: false
 };
-
 
 export const fetchPartner = createAsyncThunk<{ data: PartnerType[] }>(
     "partner/fetchPartner",
@@ -40,7 +38,6 @@ export const fetchPartner = createAsyncThunk<{ data: PartnerType[] }>(
         return { data: partnerData };
     }
 );
-
 
 export const createPartner = createAsyncThunk(
     "partner/createPartner",
@@ -54,7 +51,6 @@ export const createPartner = createAsyncThunk(
     }
 );
 
-
 export const deletePartner = createAsyncThunk(
     "partner/deletePartner",
     async (id: string, { rejectWithValue }) => {
@@ -66,7 +62,6 @@ export const deletePartner = createAsyncThunk(
         }
     }
 );
-
 
 export const updatePartner = createAsyncThunk(
     "partner/updatePartner",
@@ -81,7 +76,7 @@ export const updatePartner = createAsyncThunk(
 );
 
 const validateStep = (state: InitialStatePatnerType) => {
-    const {name, partnership, description, website_link} = state.formValue;
+    const {name, partnerships, description, website_link} = state.formValue;
     switch(state.numberLevel){
         case 1:
             if(!name || !description){
@@ -96,7 +91,7 @@ const validateStep = (state: InitialStatePatnerType) => {
             }
             break
         case 3:
-            if(!name || !description || !website_link || partnership.length === 0 ){
+            if(!name || !description || !website_link || partnerships.length === 0 ){
                 ShowError();
                 return false
             }
@@ -104,7 +99,6 @@ const validateStep = (state: InitialStatePatnerType) => {
     }
     return true;
 };
-
 
 const PartnerSlice = createSlice({
     name: "partner",
@@ -117,7 +111,7 @@ const PartnerSlice = createSlice({
                     name: action.payload.partner.name,
                     description: action.payload.partner.description,
                     website_link: action.payload.partner.website_link,
-                    partnership: action.payload.partner.partnership || []
+                    partnerships: action.payload.partner.partnership || []
                 };
             }
         },
@@ -142,13 +136,15 @@ const PartnerSlice = createSlice({
         setTabId: (state, action: PayloadAction<number>) => {
             state.tabId = action.payload;
         },
-        setFormValue: (state, action: PayloadAction<{field: keyof FormValuePartnerType, value: any}>) => {
+        setFormValue: (state, action: PayloadAction<{field: keyof any, value: string}>) => {
             const {field, value} = action.payload;
-            if(field === 'partnership' && typeof value === 'string'){
-                state.formValue[field] = JSON.parse(value)
-            }else{
-                state.formValue[field] = value
-            }
+
+            state.formValue[field] = value
+
+            // if(field === 'partnerships'){
+            // }else{
+            //     state.formValue[field] = value
+            // }
         },
         setShowFinish: (state, action) => {
           state.showFinish = action.payload
@@ -250,4 +246,3 @@ export const {
 } = PartnerSlice.actions;
 
 export default PartnerSlice.reducer;
-
