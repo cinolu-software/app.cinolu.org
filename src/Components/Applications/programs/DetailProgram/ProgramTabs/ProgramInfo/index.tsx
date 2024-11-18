@@ -6,7 +6,7 @@ import {
     AccordionHeader,
     AccordionItem,
 } from 'reactstrap';
-import { Layers, ChevronDown, User, Tag, FileText, Calendar } from 'react-feather';
+import { Layers, ChevronDown, User, Tag, FileText, Calendar, Home } from 'react-feather';
 
 const ProgramInfo = () => {
     return (
@@ -99,6 +99,42 @@ const ProgramInfo = () => {
                                         <ChevronDown className="svg-color text-success" />
                                     </AccordionHeader>
                                     <AccordionBody accordionId="5">
+                                        <p className={'text-success'}>
+                                            or "Allow this page to install an unsigned ActiveX Control? Doing so from
+                                            untrusted sources may harm your computer."
+                                            (Both phrased as conditions that may cause future problems.)
+                                        </p>
+                                    </AccordionBody>
+                                </AccordionItem>
+
+                                <AccordionItem className={'bg-light'}>
+                                    <AccordionHeader
+                                        targetId="6"
+                                        className="gap-2 bg-light-primary text-primary accordion-header"
+                                    >
+                                        <Home className="svg-wrapper text-success" />
+                                        <span className="text-success ms-2 fw-bold">Catégorie de programme</span>
+                                        <ChevronDown className="svg-color text-success" />
+                                    </AccordionHeader>
+                                    <AccordionBody accordionId="6">
+                                        <p className={'text-success'}>
+                                            or "Allow this page to install an unsigned ActiveX Control? Doing so from
+                                            untrusted sources may harm your computer."
+                                            (Both phrased as conditions that may cause future problems.)
+                                        </p>
+                                    </AccordionBody>
+                                </AccordionItem>
+
+                                <AccordionItem className={'bg-light'}>
+                                    <AccordionHeader
+                                        targetId="7"
+                                        className="gap-2 bg-light-primary text-primary accordion-header"
+                                    >
+                                        <Home className="svg-wrapper text-success" />
+                                        <span className="text-success ms-2 fw-bold">Catégorie de programme</span>
+                                        <ChevronDown className="svg-color text-success" />
+                                    </AccordionHeader>
+                                    <AccordionBody accordionId="7">
                                         <p className={'text-success'}>
                                             or "Allow this page to install an unsigned ActiveX Control? Doing so from
                                             untrusted sources may harm your computer."
