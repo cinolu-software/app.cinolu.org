@@ -10,7 +10,7 @@ interface ProgramNavTabProps {
 
 const ProgramNavTabs = [
     {
-        title: "Individuel",
+        title: "Informations",
         icon: "mail",
         id: "1",
     },
