@@ -1,19 +1,37 @@
 import React from 'react';
-import {ChevronDown} from "react-feather";
-import { AccordionHeader, AccordionItem, AccordionBody} from "reactstrap";
+import { ChevronDown } from 'react-feather';
+import { AccordionHeader, AccordionItem, AccordionBody } from 'reactstrap';
 
-
-const ProgramInfoAccordionItem : React.FC<{item: any}> = ({item}) => {
-    return (
-        <AccordionItem className={item.accordionItemClass}>
-            <AccordionHeader targetId={item.id} className={item.accordionHeaderClass}>
-                {item.iconWithTitle && item.iconWithTitle}
-                <span className={item.spanClass}>{item.accordionHeading}</span>
-                {item.icon && <ChevronDown className={`svg-color ${item.spanClass}`} />}
-            </AccordionHeader>
-            <AccordionBody accordionId={item.id}>{item.bodyText}</AccordionBody>
-        </AccordionItem>
-    );
+interface ProgramInfoAccordionItemProps {
+    id: string;
+    Icon: React.ReactNode; // Accepte des instances JSX directement
+    title: string;
+    ContentComponent?: React.ComponentType<any>; // Plus flexible
+    children?: React.ReactNode;
 }
 
-export default ProgramInfoAccordionItem
+const ProgramInfoAccordionItem: React.FC<ProgramInfoAccordionItemProps> = ({
+                                                                               id,
+                                                                               Icon,
+                                                                               title,
+                                                                               ContentComponent,
+                                                                               children,
+                                                                           }) => {
+    return (
+        <AccordionItem className="bg-light">
+            <AccordionHeader
+                targetId={id}
+                className="gap-2 bg-light-primary text-primary accordion-header"
+            >
+                {Icon} {/* Rend directement l'icône */}
+                <span className="text-success ms-2 fw-bold">{title}</span>
+                <ChevronDown className="svg-color text-success" />
+            </AccordionHeader>
+            <AccordionBody accordionId={id}>
+                {ContentComponent ? <ContentComponent /> : children}
+            </AccordionBody>
+        </AccordionItem>
+    );
+};
+
+export default ProgramInfoAccordionItem;
