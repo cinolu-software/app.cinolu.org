@@ -24,8 +24,8 @@ export interface CreateProgramType {
     description: string;
     started_at: string;
     ended_at: string;
-    types: string[];
-    categories:  string[];
+    types?: string[];
+    categories?:  string[];
     requirements: RequirementType[];
     partners: string[];
 }
@@ -38,8 +38,10 @@ export interface ReceiveProgramsType {
     ended_at: string;
     image: string;
     attachments: AttachmentType[];
-    types: DataType[];
+    types?: DataType[];
+    categories?: any;
     requirements?: RequirementType[];
+    targeted_audience: string
     partners: string[];
     created_at: string;
     updated_at: string;
@@ -50,8 +52,8 @@ export interface FormValueType {
     description: string;
     started_at: string;
     ended_at: string;
-    types: any;
-    categories: any;
+    types?: any;
+    categories?: any;
     requirements: RequirementType[];
     partners: string[];
 }
@@ -64,7 +66,7 @@ export interface InitialStateProgramsType {
     isOpenModalEditProgram: boolean;
     isOpenModalDeleteProgram: boolean;
     filterToggle: boolean;
-    selectedProgram: ReceiveProgramsType | null;
+    selectedProgram?: ReceiveProgramsType | null | undefined;
     navId: number;
     tabId: number;
     formValue: FormValueType;

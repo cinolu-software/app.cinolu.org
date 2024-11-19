@@ -11,17 +11,17 @@ interface ProgramNavTabProps {
 const ProgramNavTabs = [
     {
         title: "Informations",
-        icon: "mail",
+        icon: "info_program",
         id: "1",
     },
     {
-        title: "Groupe",
-        icon: "tread",
+        title: "Phases",
+        icon: "program_phase",
         id: "2",
     },
     {
-        title: "Broadcast",
-        icon: "goal",
+        title: "Rapports",
+        icon: "program_report",
         id: "3",
     },
 ];

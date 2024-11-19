@@ -1,16 +1,13 @@
 import React from 'react';
 import {TabPane, UncontrolledAccordion} from 'reactstrap';
 import {Calendar, FileText, Home, Layers, Tag, User} from 'react-feather';
-import ProgramInfoAccordionItem
-    from '@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramInfo/ProgramInfoAccordionItem';
+import ProgramInfoAccordionItem from '@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramInfo/ProgramInfoAccordionItem';
 import {useAppSelector} from "@/Redux/Hooks";
 import {calculateDuration} from "@/utils";
 
 const ProgramInfo = () => {
 
     const {selectedProgram} = useAppSelector(state=>state.programs);
-
-    console.log("selectedProgram", selectedProgram);
 
     return (
         <TabPane tabId="1">
@@ -96,7 +93,7 @@ const ProgramInfo = () => {
                                     title="Type de programme"
                                 >
                                     <div className="program-info text-success">
-                                        {selectedProgram?.types?.length > 0 ? (
+                                        {selectedProgram?.types && selectedProgram.types.length > 0 ? (
                                             selectedProgram.types.map((type: any) => (
                                                 <div className="info-row" key={type.id}>
                                                     <span className="value">{type.name}</span>
@@ -116,7 +113,7 @@ const ProgramInfo = () => {
                                     title="Catégorie de programme"
                                 >
                                     <div className="program-info text-success">
-                                        {selectedProgram?.categories?.length > 0 ? (
+                                        {selectedProgram?.categories && selectedProgram.categories.length > 0 ? (
                                             selectedProgram.categories.map((category: any) => (
                                                 <div className="info-row" key={category.id}>
                                                     <span className="value">{category.name}</span>
@@ -129,6 +126,7 @@ const ProgramInfo = () => {
                                         )}
                                     </div>
                                 </ProgramInfoAccordionItem>
+
                             </UncontrolledAccordion>
                         </div>
                     </div>

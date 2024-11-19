@@ -4,9 +4,9 @@ import { AccordionHeader, AccordionItem, AccordionBody } from 'reactstrap';
 
 interface ProgramInfoAccordionItemProps {
     id: string;
-    Icon: React.ReactNode; // Accepte des instances JSX directement
+    Icon: React.ReactNode;
     title: string;
-    ContentComponent?: React.ComponentType<any>; // Plus flexible
+    ContentComponent?: React.ComponentType<any>;
     children?: React.ReactNode;
 }
 
