@@ -34,3 +34,96 @@
 //  }
 //}
 
+
+.program-info {
+  background-color: #f9f9f9;
+  border: 1px solid #28a745;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+
+    .label {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .value {
+      color: #6c757d;
+    }
+  }
+}
+
+.program-duration {
+  .date-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+
+    .label {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .value {
+      color: #6c757d;
+    }
+  }
+
+  .duration-info {
+    margin-top: 10px;
+
+    .label {
+      font-weight: bold;
+      color: #28a745;
+    }
+
+    .value {
+      color: #6c757d;
+    }
+  }
+}
+
+.program-name {
+  background-color: #f9f9f9;
+  border: 1px solid #28a745;
+  padding: 15px;
+  border-radius: 8px;
+
+  h5 {
+    margin: 0;
+    color: #28a745;
+    font-weight: bold;
+  }
+}
+
+
+.program-description {
+  background-color: #f9f9f9;
+  border: 1px solid #28a745;
+  padding: 15px;
+  border-radius: 8px;
+
+  p {
+    margin: 0;
+    color: #6c757d;
+  }
+}
+
+
+.svg-wrapper {
+  width: 24px;
+  height: 24px;
+  color: #28a745;
+
+  &.text-success {
+    color: #28a745;
+  }
+}
+
+
+
