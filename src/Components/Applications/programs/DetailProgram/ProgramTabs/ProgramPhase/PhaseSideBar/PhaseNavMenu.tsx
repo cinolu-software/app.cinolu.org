@@ -16,10 +16,9 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({navId, setNavId}) => {
                         className={navId === phase.id ? "active" : ""}
                         onClick={() => setNavId(phase.id)}
                     >
-                        <SVG className={`stroke-icon ${phase.color ? `stroke-${phase.color}` : ""}`} iconId={phase.icon} />
-                        <div>
+                        <i className="fa fa-road text-white"></i>
+                        <div className={'text-white'}>
                             {phase.title}
-                            {phase.badge && <Badge color="danger" pill className="ml-2">3</Badge>}
                         </div>
                     </NavLink>
                 </NavItem>
