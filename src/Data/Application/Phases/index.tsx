@@ -49,17 +49,22 @@ export const PhasesSidebar = [
 export const PhasesNavTabs = [
     {
         title: "Détails",
-        icon: "mail",
-        id: "pills-important-tab",
+        icon: "info_phase",
+        id: "1",
     },
     {
         title: "Exigences",
-        icon: "goal",
-        id: "pills-social-tab",
+        icon: "requirement_phase",
+        id: "2",
     },
     {
         title: "Documents",
-        icon: "tread",
-        id: "pills-promotion-tab",
+        icon: "document_phase",
+        id: "3",
+    },
+    {
+        title: "Audience",
+        icon: "audience_phase",
+        id: "4",
     },
 ];
