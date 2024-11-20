@@ -1,27 +1,23 @@
 import React from "react";
 import {Card, CardBody} from "reactstrap";
 import PhaseNavMenu from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar/PhaseNavMenu";
-
-interface PhaseLeftSidebarProps {
-    navId: string;
-    setNavId: (id: string) => void;
-}
+import {PhaseLeftSidebarProps} from "@/Types/Programs/PhasesType";
 
 const PhaseLeftSidebar : React.FC<PhaseLeftSidebarProps> = ({navId, setNavId}) => {
 
 
     return (
-        <div className={'email-left-aside'}>
-            <Card>
-                <CardBody>
+        <div className={'my-5 bg-light-primary rounded'}>
+            <div>
+                <div>
                     <div className={'email-app-sidebar'}>
                         <button className={'btn btn-outline-primary emailbox'}>
                             <i className={'fa fa-plus'} /> Ajouter une phase
                         </button>
-                        <PhaseNavMenu navId={navId} setNav={setNavId} />
+                        <PhaseNavMenu navId={navId} setNavId={setNavId} />
                     </div>
-                </CardBody>
-            </Card>
+                </div>
+            </div>
         </div>
     )
 }

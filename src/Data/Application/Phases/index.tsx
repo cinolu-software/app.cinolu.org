@@ -45,3 +45,21 @@ export const PhasesSidebar = [
         color: "success",
     },
 ];
+
+export const PhasesNavTabs = [
+    {
+        title: "Important",
+        icon: "mail",
+        id: "pills-important-tab",
+    },
+    {
+        title: "Social",
+        icon: "goal",
+        id: "pills-social-tab",
+    },
+    {
+        title: "Promotion",
+        icon: "tread",
+        id: "pills-promotion-tab",
+    },
+];

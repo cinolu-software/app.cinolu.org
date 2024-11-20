@@ -3,13 +3,9 @@ import React from "react";
 import {useAppSelector} from "@/Redux/Hooks";
 import {PhasesSidebar} from "@/Data/Application/Phases";
 import SVG from "@/CommonComponent/SVG";
+import {PhaseNavMenuProps} from "@/Types/Programs/PhasesType";
 
-interface PhaseNavMenuProps {
-    navId: string;
-    setNav: (id: string) => void;
-}
-
-const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({navId, setNav}) => {
+const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({navId, setNavId}) => {
 
 
     return(
@@ -18,7 +14,7 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({navId, setNav}) => {
                 <NavItem key={index}>
                     <NavLink
                         className={navId === phase.id ? "active" : ""}
-                        onClick={() => setNav(phase.id)}
+                        onClick={() => setNavId(phase.id)}
                     >
                         <SVG className={`stroke-icon ${phase.color ? `stroke-${phase.color}` : ""}`} iconId={phase.icon} />
                         <div>
