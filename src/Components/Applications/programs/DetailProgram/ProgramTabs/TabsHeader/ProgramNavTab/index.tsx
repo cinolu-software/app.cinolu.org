@@ -15,7 +15,7 @@ const ProgramNavTabs = [
         id: "1",
     },
     {
-        title: "Phases",
+        title: "Phases du programme",
         icon: "program_phase",
         id: "2",
     },
@@ -28,7 +28,7 @@ const ProgramNavTabs = [
 
 const ProgramNavTab : React.FC<ProgramNavTabProps> = ({navId, setNavId}) => {
 
-    return(
+    return (
         <Nav className={'email-tabs'} id={'program-pills-tabContent'}>
             {
                 ProgramNavTabs.map((data, i) => (

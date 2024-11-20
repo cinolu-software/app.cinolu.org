@@ -29,7 +29,7 @@ const InboxNotificationContent: React.FC<InboxNotificationContentProps> = ({data
         <>
             <div className={'inbox-user'}>
                 <div className="rounded-border">
-                    {/*{<img src={`${ImagePath}/user/20.jpg`} alt={data.name}/>}*/}
+                    {/* {<img src={`${ImagePath}/user/20.jpg`} alt={data.name}/>} */}
                     <img src={data ? `${imageBaseUrl}/profiles/${data.profile}` : "/assets/images/avtar/avatar.jpg"} alt={'user profile'}/>
                 </div>
                 <p>{data.name}</p>
