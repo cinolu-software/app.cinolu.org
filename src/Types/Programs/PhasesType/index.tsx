@@ -10,3 +10,26 @@ export interface PhaseLeftSidebarProps extends Props {}
 export interface PhaseRightSideProps {
     navId: string;
 }
+
+export interface ProgramPhaseType {
+    name : string;
+    description: string;
+    started_at: string;
+    ended_at: string;
+    program: string
+}
+
+export interface CreateProgramPhaseTy extends  ProgramPhaseType{}
+
+export interface  FormValue extends ProgramPhaseType{}
+
+export interface InitialStateProgramPhaseType{
+    ProgramDataPhase: ProgramPhaseType [];
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    error: string | null;
+    formValue : FormValue;
+    isOpenModalCreateProgramPhase: boolean;
+    isOpenModalEditProgramPhase: boolean;
+    isOpenModalDeleteProgramPhase: boolean;
+    selectedProgramPhase: ProgramPhaseType | null
+}

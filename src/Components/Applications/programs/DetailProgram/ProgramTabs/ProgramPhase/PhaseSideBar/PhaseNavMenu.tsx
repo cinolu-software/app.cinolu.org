@@ -16,8 +16,8 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({navId, setNavId}) => {
                         className={navId === phase.id ? "active" : ""}
                         onClick={() => setNavId(phase.id)}
                     >
-                        <i className="fa fa-road text-white"></i>
-                        <div className={'text-white'}>
+                        {/*<i className="fa fa-road text-white"></i>*/}
+                        <div >
                             {phase.title}
                         </div>
                     </NavLink>
