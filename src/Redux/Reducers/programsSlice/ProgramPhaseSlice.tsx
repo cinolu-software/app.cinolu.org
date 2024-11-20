@@ -37,6 +37,9 @@ const ProgramPhaseSlice = createSlice({
     name: 'programsPhase',
     initialState,
     reducers: {
+        setSelectedProgramPhase : (state, action: PayloadAction<any> | null)=>{
+            state.selectedProgramPhase = action?.payload.programPhase;
+        },
         setModalcreateProgramPhase: (state, action: PayloadAction<{isOpen: boolean}>) => {
             state.isOpenModalCreateProgramPhase = action.payload.isOpen;
         },
@@ -63,7 +66,22 @@ const ProgramPhaseSlice = createSlice({
                 state.status = 'loading';
                 state.error = null;
             })
+            .addCase(createProgramPhase.pending, (state)=>{
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(createProgramPhase.fulfilled, (state, action: PayloadAction<any>)=>{
+                state.status = 'succeeded';
+                state.ProgramDataPhase.push(action.payload);
+            })
+            .addCase(createProgramPhase.rejected, (state)=>{
+                state.status = 'failed';
+                state.error= "Something went wrong"
+            })
     }
 });
 
+export const {setModalcreateProgramPhase, setModalEditProgramPhase, setModalDeleteProgramPhase, setSelectedProgramPhase} = ProgramPhaseSlice.actions
+
+export default ProgramPhaseSlice.reducer;
 
