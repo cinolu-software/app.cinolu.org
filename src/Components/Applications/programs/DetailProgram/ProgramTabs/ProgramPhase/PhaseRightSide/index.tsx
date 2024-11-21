@@ -14,7 +14,6 @@ const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
         <Col xxl="9" xl="9" className="box-col-12 my-5 bg-light-primary rounded">
             <div className="email-right-aside">
                 <div className="email-body email-list">
-
                     <RightSideHeader tabId={tabId} setTabId={setTabId} />
                     <TabContent activeTab={tabId} id="phases-content-tab">
                         <PhaseDetails navId={navId}/>

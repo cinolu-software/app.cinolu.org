@@ -1,10 +1,11 @@
-import { useAppSelector } from "@/Redux/Hooks";
 import { TabPane, Button, Form, FormGroup, Input, Label, Row, Col, Spinner } from "reactstrap";
 import React, { useState, useEffect } from "react";
+import {updateProgramPhase} from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 
 const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
+    const dispatch = useAppDispatch();
     const { programData } = useAppSelector((state) => state.programs);
-
     const [formFields, setFormFields] = useState<any[]>([]);
     const [newField, setNewField] = useState({
         label: "",
@@ -12,12 +13,10 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
         required: false,
         type: "text",
     });
-
     const [isLoading, setIsLoading] = useState(true);
-
+    const [isSaving, setIsSaving] = useState(false);
 
     const phase = programData.phases.find((phase: { id: string }) => phase.id === navId);
-
 
     useEffect(() => {
         setIsLoading(true);
@@ -42,6 +41,31 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
         setFormFields(updatedFields);
     };
 
+    const handleDeleteField = (index: number) => {
+        const updatedFields = [...formFields];
+        updatedFields.splice(index, 1);
+        setFormFields(updatedFields);
+    };
+
+    const handleSavePhase = async () => {
+        if (!phase) return;
+
+        setIsSaving(true);
+        try {
+            const updatedPhase = {
+                ...phase,
+                form: { ...phase.form, inputs: formFields },
+            };
+            await dispatch(updateProgramPhase({ id: phase.id, data: updatedPhase }));
+            alert("Phase mise à jour avec succès !");
+        } catch (error) {
+            console.error("Erreur lors de la mise à jour :", error);
+            alert("Une erreur est survenue lors de la mise à jour.");
+        } finally {
+            setIsSaving(false);
+        }
+    };
+
     if (!phase) {
         return (
             <TabPane tabId="form-tab">
@@ -54,7 +78,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
         <TabPane tabId="form-tab">
             <div className="p-3 my-5 bg-white pt-3 text-success">
                 <div>
-                    <h4 className={'ms-4 pb-3 border-bottom'}>
+                    <h4 className="ms-4 pb-3 border-bottom">
                         Générateur de formulaire pour la phase : {phase.name}
                     </h4>
                 </div>
@@ -67,21 +91,19 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                     <div>
                         <Form>
                             <div className="mb-4 ms-4 mt-3">
-                                <div className={'mb-4'}>
-                                    <h4 className={'pb-3 border-bottom'}>Champs existants</h4>
-                                </div>
+                                <h4 className="pb-3 border-bottom">Champs existants</h4>
                                 {formFields.length > 0 ? (
                                     formFields.map((field, index) => (
                                         <Row key={field.name || index} className="mb-3 align-items-center">
                                             <Col md="3">
                                                 <Input
+                                                    bsSize="sm"
                                                     type="text"
                                                     value={field.label}
                                                     onChange={(e) =>
                                                         handleFieldChange(index, "label", e.target.value)
                                                     }
                                                     placeholder="Label"
-                                                    className="form-control-lg text-sm"
                                                 />
                                             </Col>
                                             <Col md="3">
@@ -92,17 +114,17 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                                         handleFieldChange(index, "name", e.target.value)
                                                     }
                                                     placeholder="Nom"
-                                                    className="form-control-lg"
+                                                    bsSize="sm"
                                                 />
                                             </Col>
                                             <Col md="2">
                                                 <Input
+                                                    bsSize="sm"
                                                     type="select"
                                                     value={field.type}
                                                     onChange={(e) =>
                                                         handleFieldChange(index, "type", e.target.value)
                                                     }
-                                                    className="form-control-lg"
                                                 >
                                                     <option value="text">Texte</option>
                                                     <option value="textarea">Textarea</option>
@@ -128,17 +150,24 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                                     </Label>
                                                 </FormGroup>
                                             </Col>
+                                            <Col md="2">
+                                                <Button
+                                                    color="danger"
+                                                    size="sm"
+                                                    onClick={() => handleDeleteField(index)}
+                                                >
+                                                    Supprimer
+                                                </Button>
+                                            </Col>
                                         </Row>
                                     ))
                                 ) : (
-                                    <p className={'mt-3'}>Aucun champ existant pour cette phase.</p>
+                                    <p>Aucun champ existant pour cette phase.</p>
                                 )}
                             </div>
 
                             <div className="mb-4">
-                                <div className={'border-bottom mb-4 p-3'}>
-                                    <h4>Ajouter un nouveau champ</h4>
-                                </div>
+                                <h4>Ajouter un nouveau champ</h4>
                                 <Row className="mb-3 align-items-center">
                                     <Col md="3">
                                         <Input
@@ -148,7 +177,6 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                                 setNewField({ ...newField, label: e.target.value })
                                             }
                                             placeholder="Label"
-                                            className="form-control-lg"
                                         />
                                     </Col>
                                     <Col md="3">
@@ -159,7 +187,6 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                                 setNewField({ ...newField, name: e.target.value })
                                             }
                                             placeholder="Nom"
-                                            className="form-control-lg"
                                         />
                                     </Col>
                                     <Col md="2">
@@ -169,7 +196,6 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                             onChange={(e) =>
                                                 setNewField({ ...newField, type: e.target.value })
                                             }
-                                            className="form-control-lg"
                                         >
                                             <option value="text">Texte</option>
                                             <option value="textarea">Textarea</option>
@@ -195,11 +221,21 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                         </FormGroup>
                                     </Col>
                                     <Col md="2">
-                                        <Button color="success" onClick={handleAddField} className="btn-lg">
+                                        <Button color="success" onClick={handleAddField}>
                                             Ajouter
                                         </Button>
                                     </Col>
                                 </Row>
+                            </div>
+
+                            <div className="text-end">
+                                <Button
+                                    color="primary"
+                                    onClick={handleSavePhase}
+                                    disabled={isSaving}
+                                >
+                                    {isSaving ? "Sauvegarde..." : "Sauvegarder la phase"}
+                                </Button>
                             </div>
                         </Form>
                     </div>
@@ -210,5 +246,3 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
 };
 
 export default PhaseForm;
-
-

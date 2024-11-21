@@ -8,7 +8,7 @@ import {
 } from "@/Types/Programs/ProgramsType";
 import {RootState} from "@/Redux/Store";
 import {ShowError} from "@/utils/MultiStepForm.service";
-import React from "react";
+
 
 
 const initialState: InitialStateProgramsType = {
@@ -62,7 +62,6 @@ export const fetchProgramById = createAsyncThunk<
         const response = await axiosInstance.get<{ data: ReceiveProgramsType }>(
             `${apiBaseUrl}/programs/${programId}`
         );
-        console.log("========>", response)
         return response.data.data;
     } catch (err: any) {
         return thunkAPI.rejectWithValue(err.response.data);

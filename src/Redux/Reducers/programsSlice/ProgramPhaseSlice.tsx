@@ -16,7 +16,7 @@ const initialState: InitialStateProgramPhaseType = {
         started_at: '',
         ended_at: '',
         program: ''
-    }
+    },
 }
 
 export const fetchProgramPhase = createAsyncThunk('programs/fetchProgramPhase', async () => {
@@ -32,6 +32,21 @@ export const createProgramPhase = createAsyncThunk('programs/createProgramPhase'
         return "Erreur survenue lors de la création de la phase"
     }
 })
+
+export const updateProgramPhase = createAsyncThunk(
+    'programs/updateProgramPhase',
+    async (updatedProgramPhase: ProgramPhaseType, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.put<{ data: ProgramPhaseType }>(
+                `${apiBaseUrl}/program-phases/${updatedProgramPhase.id}`,
+                updatedProgramPhase
+            );
+            return response.data.data;
+        } catch (err: any) {
+            return rejectWithValue("Erreur survenue lors de la mise à jour de la phase");
+        }
+    }
+);
 
 const ProgramPhaseSlice = createSlice({
     name: 'programsPhase',
@@ -90,6 +105,23 @@ const ProgramPhaseSlice = createSlice({
                 state.status = 'failed';
                 state.error= "Something went wrong"
             })
+            .addCase(updateProgramPhase.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(updateProgramPhase.fulfilled, (state, action: PayloadAction<any>) => {
+                state.status = 'succeeded';
+                const index = state.ProgramDataPhase.findIndex(
+                    (phase) => phase.id === action.payload.id
+                );
+                if (index !== -1) {
+                    state.ProgramDataPhase[index] = action.payload;
+                }
+            })
+            .addCase(updateProgramPhase.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload as string;
+            });
     }
 });
 

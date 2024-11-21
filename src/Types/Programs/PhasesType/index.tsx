@@ -19,8 +19,13 @@ export interface FormValue {
     program: string;
 }
 
+export interface FormEditValue extends FormValue{
+    form : string;
+}
+
 
 export interface ProgramPhaseType {
+    id?: string;
     name : string;
     description: string;
     started_at: string;
