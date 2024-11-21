@@ -2,6 +2,7 @@ import { TabPane, Button, Form, FormGroup, Input, Label, Row, Col, Spinner } fro
 import React, { useState, useEffect } from "react";
 import {updateProgramPhase} from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import { Flip, toast } from "react-toastify";
 
 const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
 
@@ -58,10 +59,27 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                 form: { ...phase.form, inputs: formFields },
             };
             await dispatch(updateProgramPhase(updatedPhase));
-            alert("Phase mise à jour avec succès !");
+            toast.success(
+                <p className="text-white tx-16 mb-0">{"Phase mise à jour avec succès !"}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
         } catch (error) {
-            console.error("Erreur lors de la mise à jour :", error);
-            alert("Une erreur est survenue lors de la mise à jour.");
+            toast.error(
+                <p className="text-white tx-16 mb-0">{"Une erreur est survenue lors de la mise à jour."}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
         } finally {
             setIsSaving(false);
         }

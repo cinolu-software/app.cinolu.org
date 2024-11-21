@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import {InitialStateProgramPhaseType, ProgramPhaseType, CreateProgramPhaseType} from "@/Types/Programs/PhasesType";
+import {InitialStateProgramPhaseType, ProgramPhaseType, CreateProgramPhaseType, FormValue} from "@/Types/Programs/PhasesType";
 
 const initialState: InitialStateProgramPhaseType = {
     ProgramDataPhase: [],
@@ -67,8 +67,15 @@ const ProgramPhaseSlice = createSlice({
             state.selectedProgramPhase = action.payload.programPhase;
         },
         setFormValue: (state, action: PayloadAction<{ field: keyof FormValue, value: string }>) => {
-            state.formValue[action.payload.field] = action.payload.value;
+            const { field, value } = action.payload;
+
+            if (field in state.formValue) {
+                state.formValue[field as keyof FormValue] = value;
+            } else {
+                console.warn(`Le champ ${field} n'existe pas dans formValue.`);
+            }
         },
+
         resetFormValue: (state) => {
             state.formValue = {
                 name: '',
