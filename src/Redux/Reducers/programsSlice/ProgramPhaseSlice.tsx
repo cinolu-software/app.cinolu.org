@@ -35,9 +35,9 @@ export const createProgramPhase = createAsyncThunk('programs/createProgramPhase'
 
 export const updateProgramPhase = createAsyncThunk(
     'programs/updateProgramPhase',
-    async (updatedProgramPhase: ProgramPhaseType, { rejectWithValue }) => {
+    async (updatedProgramPhase: any, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.put<{ data: ProgramPhaseType }>(
+            const response = await axiosInstance.patch<{ data: ProgramPhaseType }>(
                 `${apiBaseUrl}/program-phases/${updatedProgramPhase.id}`,
                 updatedProgramPhase
             );

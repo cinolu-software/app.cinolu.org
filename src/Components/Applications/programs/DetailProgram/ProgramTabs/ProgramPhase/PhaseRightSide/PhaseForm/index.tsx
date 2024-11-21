@@ -4,6 +4,7 @@ import {updateProgramPhase} from "@/Redux/Reducers/programsSlice/ProgramPhaseSli
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 
 const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
+
     const dispatch = useAppDispatch();
     const { programData } = useAppSelector((state) => state.programs);
     const [formFields, setFormFields] = useState<any[]>([]);
@@ -56,7 +57,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                 ...phase,
                 form: { ...phase.form, inputs: formFields },
             };
-            await dispatch(updateProgramPhase({ id: phase.id, data: updatedPhase }));
+            await dispatch(updateProgramPhase(updatedPhase));
             alert("Phase mise à jour avec succès !");
         } catch (error) {
             console.error("Erreur lors de la mise à jour :", error);
