@@ -20,6 +20,7 @@ const initialState: InitialStateProgramsType = {
     isOpenModalDeleteProgram: false,
     filterToggle: false,
     selectedProgram: null,
+    programData: null,
     navId: 1,
     tabId: 1,
     formValue: {
@@ -50,6 +51,22 @@ export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async ()
     const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`);
     const originalPrograms = response.data.data.programs;
     return { original: originalPrograms };
+});
+
+export const fetchProgramById = createAsyncThunk<
+    ReceiveProgramsType,
+    string,
+    { rejectValue: any }
+>('programs/fetchProgramById', async (programId, thunkAPI) => {
+    try {
+        const response = await axiosInstance.get<{ data: ReceiveProgramsType }>(
+            `${apiBaseUrl}/programs/${programId}`
+        );
+        console.log("========>", response)
+        return response.data.data;
+    } catch (err: any) {
+        return thunkAPI.rejectWithValue(err.response.data);
+    }
 });
 
 export const createProgram = createAsyncThunk<ReceiveProgramsType, CreateProgramType, { rejectValue: any }>(
@@ -322,6 +339,17 @@ const ProgramSlice = createSlice({
                 }
             })
             .addCase(updateAttachmentProgramImage.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Something went wrong';
+            })
+            .addCase(fetchProgramById.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchProgramById.fulfilled, (state, action: PayloadAction<ReceiveProgramsType>) => {
+                state.status = 'succeeded';
+                state.programData = action.payload;
+            })
+            .addCase(fetchProgramById.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             });

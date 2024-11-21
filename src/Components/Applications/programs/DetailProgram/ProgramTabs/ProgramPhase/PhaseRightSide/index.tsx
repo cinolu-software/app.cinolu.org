@@ -6,7 +6,7 @@ import RightSideHeader from "@/Components/Applications/programs/DetailProgram/Pr
 const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
 
     return(
-        <Col xxl={'9'} xl={'8'} className={'box-col-12 my-5 bg-light-primary rounded'}>
+        <Col xxl={'9'} xl={'9'} className={'box-col-12 my-5 bg-light-primary rounded'}>
             <div className={'email-right-aside'}>
                 <div className={`email-body email-list`}>
                     <RightSideHeader/>

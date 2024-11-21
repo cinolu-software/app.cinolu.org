@@ -7,7 +7,8 @@ import {calculateDuration} from "@/utils";
 
 const ProgramInfo = () => {
 
-    const {selectedProgram} = useAppSelector(state=>state.programs);
+    const {programData} = useAppSelector(state=>state.programs);
+
 
     return (
         <TabPane tabId="1">
@@ -24,7 +25,7 @@ const ProgramInfo = () => {
                                     <div className="program-info text-success">
                                         <div className="info-row">
                                             <span className="value">
-                                                {selectedProgram?.name || "Nom non spécifié"}
+                                                {programData?.name || "Nom non spécifié"}
                                             </span>
                                         </div>
                                     </div>
@@ -38,7 +39,7 @@ const ProgramInfo = () => {
                                     <div className="program-info text-success">
                                         <div className="info-row">
                                             <span className="value">
-                                                {selectedProgram?.description || "Description non spécifiée"}
+                                                {programData?.description || "Description non spécifiée"}
                                             </span>
                                         </div>
                                     </div>
@@ -53,20 +54,20 @@ const ProgramInfo = () => {
                                         <div className="date-info">
                                             <span className="label">Lancement :</span>
                                             <span className="value">
-                                                {selectedProgram?.started_at || "Non spécifié"}
+                                                {programData?.started_at || "Non spécifié"}
                                             </span>
                                         </div>
                                         <div className="date-info">
                                             <span className="label">Fin :</span>
                                             <span className="value">
-                                                {selectedProgram?.ended_at || "Non spécifié"}
+                                                {programData?.ended_at || "Non spécifié"}
                                             </span>
                                         </div>
                                         <div className="duration-info">
                                             <span className="label">Durée :</span>
                                             <span className="value">
-                                                {selectedProgram?.started_at && selectedProgram?.ended_at
-                                                    ? calculateDuration(selectedProgram.started_at, selectedProgram.ended_at)
+                                                {programData?.started_at && programData?.ended_at
+                                                    ? calculateDuration(programData.started_at, programData.ended_at)
                                                     : "Non spécifiée"}
                                             </span>
                                         </div>
@@ -81,7 +82,7 @@ const ProgramInfo = () => {
                                     <div className="program-info text-success">
                                         <div className="info-row">
                                             <span className="value">
-                                                {selectedProgram?.targeted_audience || "Audience non spécifiée"}
+                                                {programData?.targeted_audience || "Audience non spécifiée"}
                                             </span>
                                         </div>
                                     </div>
@@ -93,8 +94,8 @@ const ProgramInfo = () => {
                                     title="Type de programme"
                                 >
                                     <div className="program-info text-success">
-                                        {selectedProgram?.types && selectedProgram.types.length > 0 ? (
-                                            selectedProgram.types.map((type: any) => (
+                                        {programData?.types && programData.types.length > 0 ? (
+                                            programData.types.map((type: any) => (
                                                 <div className="info-row" key={type.id}>
                                                     <span className="value">{type.name}</span>
                                                 </div>
@@ -113,8 +114,8 @@ const ProgramInfo = () => {
                                     title="Catégorie de programme"
                                 >
                                     <div className="program-info text-success">
-                                        {selectedProgram?.categories && selectedProgram.categories.length > 0 ? (
-                                            selectedProgram.categories.map((category: any) => (
+                                        {programData?.categories && programData.categories.length > 0 ? (
+                                            programData.categories.map((category: any) => (
                                                 <div className="info-row" key={category.id}>
                                                     <span className="value">{category.name}</span>
                                                 </div>
