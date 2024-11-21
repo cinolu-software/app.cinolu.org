@@ -1,12 +1,11 @@
 import React from "react";
-import { TabPane, Card, CardBody, CardHeader, Badge, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
+import { TabPane, Badge, Row, Col } from "reactstrap";
 import { useAppSelector } from "@/Redux/Hooks";
 
 const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
     const { programData } = useAppSelector((state) => state.programs);
 
-    // Récupérer la phase correspondante
-    const phase = programData.phases.find((phase) => phase.id === navId);
+    const phase = programData.phases.find((phase: { id: string; }) => phase.id === navId);
 
     if (!phase) {
         return (
@@ -44,48 +43,6 @@ const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
                 </div>
             </div>
 
-            {phase.form?.iputs?.length > 0 && (
-                <Card className="mb-4">
-                    <CardHeader className="bg-secondary text-white">
-                        <h4>Formulaire</h4>
-                    </CardHeader>
-                    <CardBody>
-                        <ListGroup>
-                            {phase.form.iputs.map((input, index) => (
-                                <ListGroupItem key={index} className="d-flex justify-content-between align-items-start">
-                                    <div>
-                                        <strong>{input.label}</strong>
-                                        <p className="mb-1 text-muted">
-                                            Type : {input.type}, Nom : {input.name}
-                                        </p>
-                                    </div>
-                                    <Badge color={input.required ? "success" : "warning"} pill>
-                                        {input.required ? "Requis" : "Optionnel"}
-                                    </Badge>
-                                </ListGroupItem>
-                            ))}
-                        </ListGroup>
-                    </CardBody>
-                </Card>
-            )}
-
-            {phase.requirements?.length > 0 && (
-                <Card>
-                    <CardHeader className="bg-info text-white">
-                        <h4>Exigences</h4>
-                    </CardHeader>
-                    <CardBody>
-                        <ListGroup>
-                            {phase.requirements.map((requirement) => (
-                                <ListGroupItem key={requirement.id}>
-                                    <h5>{requirement.name}</h5>
-                                    <p className="mb-0 text-muted">{requirement.description}</p>
-                                </ListGroupItem>
-                            ))}
-                        </ListGroup>
-                    </CardBody>
-                </Card>
-            )}
         </TabPane>
     );
 };
