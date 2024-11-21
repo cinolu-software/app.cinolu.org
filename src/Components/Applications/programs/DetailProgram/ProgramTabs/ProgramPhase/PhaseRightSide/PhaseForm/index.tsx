@@ -92,7 +92,9 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                     <div>
                         <Form>
                             <div className="mb-4 ms-4 mt-3">
-                                <h4 className="pb-3 border-bottom">Champs existants</h4>
+                                <div className={'mb-4'}>
+                                    <h5 className="pb-3 border-bottom">Champs existants</h5>
+                                </div>
                                 {formFields.length > 0 ? (
                                     formFields.map((field, index) => (
                                         <Row key={field.name || index} className="mb-3 align-items-center">
@@ -152,13 +154,11 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                                 </FormGroup>
                                             </Col>
                                             <Col md="2">
-                                                <Button
-                                                    color="danger"
-                                                    size="sm"
+                                                <button className={'btn btn-outline-danger btn-sm'}
                                                     onClick={() => handleDeleteField(index)}
                                                 >
                                                     Supprimer
-                                                </Button>
+                                                </button>
                                             </Col>
                                         </Row>
                                     ))
@@ -167,17 +167,22 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                 )}
                             </div>
 
-                            <div className="mb-4">
-                                <h4>Ajouter un nouveau champ</h4>
-                                <Row className="mb-3 align-items-center">
+                            <div className="mb-4 ">
+                                <div className={'mb-4'}>
+                                    <h5 className="ms-4 pb-3 border-bottom">
+                                        Ajouter un nouveau champ
+                                    </h5>
+                                </div>
+                                <Row className="mb-3 align-items-center ms-3">
                                     <Col md="3">
                                         <Input
                                             type="text"
                                             value={newField.label}
                                             onChange={(e) =>
-                                                setNewField({ ...newField, label: e.target.value })
+                                                setNewField({...newField, label: e.target.value})
                                             }
                                             placeholder="Label"
+                                            bsSize="sm"
                                         />
                                     </Col>
                                     <Col md="3">
@@ -185,9 +190,10 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                             type="text"
                                             value={newField.name}
                                             onChange={(e) =>
-                                                setNewField({ ...newField, name: e.target.value })
+                                                setNewField({...newField, name: e.target.value})
                                             }
                                             placeholder="Nom"
+                                            bsSize="sm"
                                         />
                                     </Col>
                                     <Col md="2">
@@ -195,8 +201,9 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                             type="select"
                                             value={newField.type}
                                             onChange={(e) =>
-                                                setNewField({ ...newField, type: e.target.value })
+                                                setNewField({...newField, type: e.target.value})
                                             }
+                                            bsSize="sm"
                                         >
                                             <option value="text">Texte</option>
                                             <option value="textarea">Textarea</option>
@@ -222,21 +229,21 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                         </FormGroup>
                                     </Col>
                                     <Col md="2">
-                                        <Button color="success" onClick={handleAddField}>
+                                        <button className={'btn btn-outline-primary btn-sm'} onClick={handleAddField}>
                                             Ajouter
-                                        </Button>
+                                        </button>
                                     </Col>
                                 </Row>
                             </div>
 
-                            <div className="text-end">
-                                <Button
-                                    color="primary"
+                            <div className="text-start ms-4 mt-5">
+                                <button
+                                    className={'btn btn-outline-primary btn-sm'}
                                     onClick={handleSavePhase}
                                     disabled={isSaving}
                                 >
                                     {isSaving ? "Sauvegarde..." : "Sauvegarder la phase"}
-                                </Button>
+                                </button>
                             </div>
                         </Form>
                     </div>
