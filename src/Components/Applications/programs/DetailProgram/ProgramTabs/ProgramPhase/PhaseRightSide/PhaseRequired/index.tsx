@@ -10,7 +10,7 @@ interface Requirement {
     description: string;
 }
 
-const PhaseRequirements: React.FC<{ navId: string }> = ({ navId }) => {
+const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     const dispatch = useAppDispatch();
     const { programData } = useAppSelector((state) => state.programs);
 
@@ -90,14 +90,19 @@ const PhaseRequirements: React.FC<{ navId: string }> = ({ navId }) => {
     if (!phase) {
         return (
             <TabPane tabId="requirement-tab">
-                <h5>Aucune phase active trouvée.</h5>
+                <div className="text-center my-4 bg-white">
+                    <div className={'pb-5 pt-2'}>
+                        <h1>Aucune phase trouvée</h1>
+                        <p>Veuillez sélectionner une phase valide pour afficher ses exigences.</p>
+                    </div>
+                </div>
             </TabPane>
         );
     }
 
     return (
         <TabPane tabId={'requirement-tab'}>
-            <Card className="shadow-sm">
+            <div className="p-3 my-5 bg-white pt-3 text-success">
                 <CardBody>
                     <h5 className="mb-4">Exigences pour la phase : {phase.name}</h5>
                     {isLoading ? (
@@ -153,16 +158,16 @@ const PhaseRequirements: React.FC<{ navId: string }> = ({ navId }) => {
                             </Button>
                         </Form>
                     )}
-                    <div className="d-flex justify-content-end mt-4">
+                    <div className="d-flex justify-content-start mt-4">
                         <Button color="success" onClick={handleSave} disabled={isSaving}>
                             {isSaving ? "Sauvegarde..." : "Sauvegarder les Changements"}
                         </Button>
                     </div>
                 </CardBody>
-            </Card>
+            </div>
         </TabPane>
     );
 };
 
-export default PhaseRequirements;
+export default PhaseRequired;
 

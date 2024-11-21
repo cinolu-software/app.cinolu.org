@@ -18,9 +18,9 @@ const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
                 <div className="email-body email-list">
                     <RightSideHeader tabId={tabId} setTabId={setTabId} />
                     <TabContent activeTab={tabId} id="phases-content-tab">
-                        <PhaseDetails navId={navId}/>
+                        <PhaseDetails navId={navId} />
                         <PhaseForm navId={navId} />
-                        <PhaseRequired navId={navId}/>
+                        <PhaseRequired navId={navId }/>
                     </TabContent>
                 </div>
             </div>
