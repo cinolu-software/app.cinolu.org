@@ -23,7 +23,7 @@ const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
     return (
         <TabPane tabId="details-tab">
             <div className="mb-4 bg-white mt-5 ps-5">
-                <div className=" text-light-primary pt-4 pb-2 border-bottom">
+                <div className=" text-success pt-4 pb-2 border-bottom">
                     <h4 className="mb-0">{phase.name}</h4>
                 </div>
                 <div className={'pt-3 pb-4'}>
@@ -42,7 +42,6 @@ const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
                     </Row>
                 </div>
             </div>
-
         </TabPane>
     );
 };
