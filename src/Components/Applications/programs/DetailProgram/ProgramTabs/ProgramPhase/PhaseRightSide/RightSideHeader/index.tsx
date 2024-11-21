@@ -1,18 +1,23 @@
-import {Input, Label} from 'reactstrap';
-import RightDropDown from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/RightSideHeader/RightDropDown";
+import React from "react";
 import RightSideNavTab from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/RightSideHeader/RightSideNavTab";
 
-const RightSideHeader = () => {
+
+interface RightSideHeaderProps {
+    tabId: string;
+    setTabId: (id: string) => void;
+}
+
+const RightSideHeader: React.FC<RightSideHeaderProps> = ({ tabId, setTabId }) => {
     return (
         <div className="mail-header-wrapper">
             <div className="mail-header">
                 <div className="form-check form-check-inline m-0">
-                    <Label className="form-check-label" for="emailCheckbox1" />
-                    <RightSideNavTab />
+                    {/* Passez tabId et setTabId au composant enfant */}
+                    <RightSideNavTab tabId={tabId} setTabId={setTabId} />
                 </div>
             </div>
         </div>
     );
-}
+};
 
 export default RightSideHeader;
