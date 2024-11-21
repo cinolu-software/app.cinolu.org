@@ -88,7 +88,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
     if (!phase) {
         return (
             <TabPane tabId="form-tab">
-                <h1>Aucune phase trouvée</h1>
+                <h5>Aucune phase active trouvée.</h5>
             </TabPane>
         );
     }

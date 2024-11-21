@@ -4,6 +4,8 @@ import {PhaseRightSideProps} from "@/Types/Programs/PhasesType";
 import RightSideHeader from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/RightSideHeader";
 import PhaseDetails from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseDetails";
 import PhaseForm from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseForm";
+import PhaseRequired from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseRequired";
+
 
 
 const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
@@ -18,6 +20,7 @@ const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
                     <TabContent activeTab={tabId} id="phases-content-tab">
                         <PhaseDetails navId={navId}/>
                         <PhaseForm navId={navId} />
+                        <PhaseRequired navId={navId}/>
                     </TabContent>
                 </div>
             </div>
