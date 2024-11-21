@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import {InitialStateProgramPhaseType, ProgramPhaseType, CreateProgramPhaseTy} from "@/Types/Programs/PhasesType";
+import {InitialStateProgramPhaseType, ProgramPhaseType, CreateProgramPhaseType} from "@/Types/Programs/PhasesType";
 
 const initialState: InitialStateProgramPhaseType = {
     ProgramDataPhase: [],
@@ -21,10 +21,10 @@ const initialState: InitialStateProgramPhaseType = {
 
 export const fetchProgramPhase = createAsyncThunk('programs/fetchProgramPhase', async () => {
     const response = await axiosInstance.get<{data: ProgramPhaseType[]}>(`${apiBaseUrl}/program-phases`);
-    return {data : response}
+    return {data : response.data.data}
 });
 
-export const createProgramPhase = createAsyncThunk('programs/createProgramPhase', async(newProgramPhase: CreateProgramPhaseTy)=>{
+export const createProgramPhase = createAsyncThunk('programs/createProgramPhase', async(newProgramPhase: CreateProgramPhaseType)=>{
     try{
         const response = await axiosInstance.post<{data: ProgramPhaseType}>(`${apiBaseUrl}/program-phases`, newProgramPhase);
         return response.data.data;
@@ -50,7 +50,19 @@ const ProgramPhaseSlice = createSlice({
         setModalDeleteProgramPhase: (state, action: PayloadAction<{isOpen: boolean, programPhase: ProgramPhaseType | null}>) => {
             state.isOpenModalEditProgramPhase = action.payload.isOpen;
             state.selectedProgramPhase = action.payload.programPhase;
-        }
+        },
+        setFormValue: (state, action: PayloadAction<{ field: keyof FormValue, value: string }>) => {
+            state.formValue[action.payload.field] = action.payload.value;
+        },
+        resetFormValue: (state) => {
+            state.formValue = {
+                name: '',
+                description: '',
+                started_at: '',
+                ended_at: '',
+                program: '',
+            };
+        },
     },
     extraReducers: (builder) => {
         builder

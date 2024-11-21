@@ -11,6 +11,15 @@ export interface PhaseRightSideProps {
     navId: string;
 }
 
+export interface FormValue {
+    name: string;
+    description: string;
+    started_at: string;
+    ended_at: string;
+    program: string;
+}
+
+
 export interface ProgramPhaseType {
     name : string;
     description: string;
@@ -19,7 +28,7 @@ export interface ProgramPhaseType {
     program: string
 }
 
-export interface CreateProgramPhaseTy extends  ProgramPhaseType{}
+export interface CreateProgramPhaseType extends  ProgramPhaseType{}
 
 export interface  FormValue extends ProgramPhaseType{}
 

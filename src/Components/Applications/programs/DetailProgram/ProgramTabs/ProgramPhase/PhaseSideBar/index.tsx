@@ -10,7 +10,6 @@ const PhaseSideBar: React.FC<PhaseSideBarProps> = ({navId, setNavId}) => {
     return (
         <Col xxl={'3'} xl={'4'} className={'box-col-12'}>
             <div className="md-sidebar">
-                <Button color="primary" className="md-sidebar-toggle" >{''}</Button>
                 <div className={`md-sidebar-aside job-left-aside custom-scrollbar`}>
                     <PhaseLeftSidebar navId={navId} setNavId={setNavId}/>
                 </div>
