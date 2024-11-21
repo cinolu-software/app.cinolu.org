@@ -7,7 +7,7 @@ import { setModalcreateProgramPhase, createProgramPhase } from "@/Redux/Reducers
 const CreateNewPhase = () => {
     const dispatch = useAppDispatch();
     const { isOpenModalCreateProgramPhase, formValue } = useAppSelector(state => state.programPhase);
-    const { selectedProgram } = useAppSelector(state => state.programs);
+    const { programData } = useAppSelector(state => state.programs);
 
     const handleInputChange = (field: keyof typeof formValue, value: string) => {
         dispatch({
@@ -24,7 +24,7 @@ const CreateNewPhase = () => {
             return;
         }
 
-        if (!selectedProgram?.id) {
+        if (!programData?.id) {
             toast.error("Aucun programme sélectionné", {
                 transition: Flip,
             });
@@ -33,7 +33,7 @@ const CreateNewPhase = () => {
 
         const newPhase = {
             ...formValue,
-            program: selectedProgram.id,
+            program: programData.id,
         };
 
         try {
@@ -45,8 +45,6 @@ const CreateNewPhase = () => {
         }
     };
 
-
-
     return (
         <Col xs="12">
             <Modal
@@ -57,7 +55,7 @@ const CreateNewPhase = () => {
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">
                         Ajouter une phase au programme{" "}
-                        <Badge className="bg-brown">{selectedProgram?.name || "Programme non spécifié"}</Badge>
+                        <Badge className="bg-brown">{programData?.name || "Programme non spécifié"}</Badge>
                     </h1>
                     <Button close onClick={() => dispatch(setModalcreateProgramPhase({ isOpen: false }))} />
                 </div>

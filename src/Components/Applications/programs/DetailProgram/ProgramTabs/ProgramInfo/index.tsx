@@ -1,6 +1,6 @@
 import React from 'react';
 import {TabPane, UncontrolledAccordion} from 'reactstrap';
-import {Calendar, FileText, Home, Layers, Tag, User} from 'react-feather';
+import {Calendar, FileText, Home, Layers, Tag, User, Users} from 'react-feather';
 import ProgramInfoAccordionItem from '@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramInfo/ProgramInfoAccordionItem';
 import {useAppSelector} from "@/Redux/Hooks";
 import {calculateDuration} from "@/utils";
@@ -8,7 +8,6 @@ import {calculateDuration} from "@/utils";
 const ProgramInfo = () => {
 
     const {programData} = useAppSelector(state=>state.programs);
-
 
     return (
         <TabPane tabId="1">
@@ -127,6 +126,54 @@ const ProgramInfo = () => {
                                         )}
                                     </div>
                                 </ProgramInfoAccordionItem>
+                                <ProgramInfoAccordionItem
+                                    id="7"
+                                    Icon={<Users className="svg-wrapper text-success" />}
+                                    title="Partenaires"
+                                >
+                                    <div className="program-info text-success">
+                                        {programData?.partners && programData.partners.length > 0 ? (
+                                            programData.partners.map((partner: any) => (
+                                                <div className="partner-info mb-4" key={partner.id}>
+                                                    <div className="info-row">
+                                                        <strong>Nom :</strong> <span className="value">{partner.name || "Non spécifié"}</span>
+                                                    </div>
+                                                    <div className="info-row">
+                                                        <strong>Description :</strong> <span className="value">{partner.description || "Non spécifiée"}</span>
+                                                    </div>
+                                                    <div className="info-row">
+                                                        <strong>Site web :</strong>{" "}
+                                                        {partner.website_link ? (
+                                                            <a
+                                                                href={partner.website_link}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                                className="value text-decoration-underline text-primary"
+                                                            >
+                                                                {partner.website_link}
+                                                            </a>
+                                                        ) : (
+                                                            <span className="value">Non spécifié</span>
+                                                        )}
+                                                    </div>
+                                                    <div className="info-row">
+                                                        <strong>Date de création :</strong>{" "}
+                                                        <span className="value">{new Date(partner.created_at).toLocaleDateString() || "Non spécifiée"}</span>
+                                                    </div>
+                                                    <div className="info-row">
+                                                        <strong>Dernière mise à jour :</strong>{" "}
+                                                        <span className="value">{new Date(partner.updated_at).toLocaleDateString() || "Non spécifiée"}</span>
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="info-row">
+                                                <span className="value">Aucun partenaire spécifié</span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </ProgramInfoAccordionItem>
+
 
                             </UncontrolledAccordion>
                         </div>
