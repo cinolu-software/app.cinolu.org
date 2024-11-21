@@ -4,6 +4,7 @@ import { useAppSelector } from "@/Redux/Hooks";
 import { PhaseNavMenuProps } from "@/Types/Programs/PhasesType";
 
 const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
+
     const { programData } = useAppSelector(state => state.programs);
 
     const phases = programData?.phases || [];

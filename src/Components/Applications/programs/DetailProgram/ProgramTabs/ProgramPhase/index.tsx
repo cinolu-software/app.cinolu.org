@@ -14,7 +14,7 @@ const ProgramPhase = () => {
                 <div className={'email-wrap email-main-wrapper'}>
                     <Row>
                         <CreatePhaseModal/>
-                        <PhaseSideBar navId={activeTab} setNavId={setActiveTab}/>
+                        <PhaseSideBar navId={activeTab} setNavId={setActiveTab} />
                         <PhaseRightSide navId={activeTab}/>
                     </Row>
                 </div>

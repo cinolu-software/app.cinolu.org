@@ -17,7 +17,7 @@ const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
 
                     <RightSideHeader tabId={tabId} setTabId={setTabId} />
                     <TabContent activeTab={tabId} id="phases-content-tab">
-                        <PhaseDetails />
+                        <PhaseDetails navId={navId}/>
                         <PhaseForm />
                     </TabContent>
                 </div>

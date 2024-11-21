@@ -5,8 +5,6 @@ import {PhaseSideBarProps} from "@/Types/Programs/PhasesType";
 
 const PhaseSideBar: React.FC<PhaseSideBarProps> = ({navId, setNavId}) => {
 
-    const [show, setShow] = useState(false);
-
     return (
         <Col xxl={'3'} xl={'3'} className={''}>
             <div className="md-sidebar">
