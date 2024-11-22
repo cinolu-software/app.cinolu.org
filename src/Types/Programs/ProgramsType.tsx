@@ -22,11 +22,11 @@ export type DataType = {
 export interface CreateProgramType {
     name: string;
     description: string;
+    targeted_audience: string;
     started_at: string;
     ended_at: string;
     types?: string[];
     categories?:  string[];
-    requirements: RequirementType[];
     partners: string[];
 }
 
@@ -34,14 +34,13 @@ export interface ReceiveProgramsType {
     id: string;
     name: string;
     description: string;
+    targeted_audience: string;
     started_at: string;
     ended_at: string;
     image: string;
     attachments: AttachmentType[];
     types?: DataType[];
     categories?: any;
-    requirements?: RequirementType[];
-    targeted_audience: string
     partners: string[];
     created_at: string;
     updated_at: string;
@@ -50,11 +49,11 @@ export interface ReceiveProgramsType {
 export interface FormValueType {
     name: string;
     description: string;
+    targeted_audience: string;
     started_at: string;
     ended_at: string;
     types?: any;
     categories?: any;
-    requirements: RequirementType[];
     partners: string[];
 }
 

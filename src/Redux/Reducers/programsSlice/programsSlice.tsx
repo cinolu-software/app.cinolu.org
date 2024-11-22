@@ -26,16 +26,17 @@ const initialState: InitialStateProgramsType = {
     formValue: {
         name: "",
         description: "",
+        targeted_audience: '',
         started_at: "",
         ended_at: "",
         types: [],
         categories: [],
-        requirements: [],
         partners: []
     },
     EditFormValue: {
         name: "",
         description: "",
+        targeted_audience: '',
         started_at: "",
         ended_at: "",
         types: [],
@@ -132,45 +133,39 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 
 
 const validateStep = (state: InitialStateProgramsType) => {
-    const { name, description, started_at, ended_at, types, categories, partners, requirements } = state.formValue;
+    const { name, description, started_at, ended_at, types, categories, partners, targeted_audience } = state.formValue;
     switch (state.numberLevel) {
         case 1:
-            if (!name || !description) {
+            if (!name || !description || !targeted_audience) {
                 ShowError();
                 return false;
             }
             break;
         case 2:
-            if (!name || !description || !started_at || !ended_at) {
+            if (!name || !description || !targeted_audience || !started_at || !ended_at) {
                 ShowError();
                 return false;
             }
             break;
         case 3:
-            if (!name || !description || !started_at || !ended_at || types.length === 0) {
+            if (!name || !description || !targeted_audience || !started_at || !ended_at || types.length === 0) {
                 ShowError();
                 return false;
             }
             break;
         case 4 :
-            if (!name || !description || !started_at || !ended_at || types.length === 0 || categories.length === 0) {
+            if (!name || !description || !targeted_audience || !started_at || !ended_at || types.length === 0 || categories.length === 0) {
                 ShowError();
                 return false;
             }
             break;
 
         case 5 :
-            if (!name || !description || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
+            if (!name || !description || !targeted_audience || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
                 ShowError();
                 return false;
             }
-            break;
 
-        case 6:
-            if (!name || !description || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0 || requirements.length === 0) {
-                ShowError();
-                return false;
-            }
             break;
     }
     return true;
@@ -187,10 +182,11 @@ const ProgramSlice = createSlice({
                 state.EditFormValue = {
                     name: action.payload.program.name,
                     description: action.payload.program.description,
+                    targeted_audience: action.payload.program.targeted_audience,
                     started_at: action.payload.program.started_at,
                     ended_at: action.payload.program.ended_at,
                     types: action.payload.program.types || [],
-                    requirements: action.payload.program.requirements || [],
+                    categories: action.payload.program.categories || [],
                     partners: action.payload.program.partners || []
                 };
             }
@@ -236,10 +232,6 @@ const ProgramSlice = createSlice({
                 state.formValue.types = JSON.parse(value).map((type: string) => parseInt(type));
             }
 
-            else if ((field === 'requirements' || field === 'partners') && typeof value === 'string') {
-                state.formValue[field] = JSON.parse(value);
-            }
-
             else if (field === 'started_at' || field === 'ended_at') {
                 state.formValue[field] = new Date(value).toISOString().split("T")[0];
             }
@@ -263,9 +255,9 @@ const ProgramSlice = createSlice({
         handleNextButton: (state) => {
             const isValid = validateStep(state);
             if (isValid) {
-                if (state.numberLevel < 7) {
+                if (state.numberLevel < 6) {
                     state.numberLevel++;
-                } else if( state.numberLevel === 7) {
+                } else if( state.numberLevel === 6) {
                     state.showFinish = true;
                 }
             }

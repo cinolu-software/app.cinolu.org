@@ -11,11 +11,11 @@ import StepTwo from "@/Components/Applications/programs/AddProgramNew/NumberingW
 import StepThree from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepThree";
 import StepFour from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFour";
 import StepFive from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFive";
-import StepSix from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepSix";
 import {FormValueType} from "@/Types/Programs/ProgramsType";
 import {Flip, toast} from "react-toastify";
 
 const NumberingWizard = () => {
+
     const {numberLevel, formValue, showFinish,} = useAppSelector(state => state.programs);
     const dispatch = useAppDispatch();
 
@@ -79,8 +79,7 @@ const NumberingWizard = () => {
             case 3: return <StepThree formValue={formValue} getUserData={getUserData} />;
             case 4: return <StepFour formValue={formValue} getUserData={getUserData} />;
             case 5: return <StepFive formValue={formValue} getUserData={getUserData} />;
-            case 6: return <StepSix formValue={formValue} getUserData={getUserData} />;
-            case 7: return (
+            case 6: return (
                 <Form className="stepper-four g-3 needs-validation" noValidate>
                     <FinishForm
                         isComplete={true}

@@ -26,7 +26,7 @@ const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescript
 
 const StepOne: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
 
-    const { name, description } = formValue;
+    const { name, description, targeted_audience } = formValue;
 
     return (
         <Form className="theme-form theme-form-2 mega-form">
@@ -39,6 +39,17 @@ const StepOne: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
                         required
                         name="name"
                         value={name}
+                        onChange={getUserData}
+                    />
+                </Col>
+                <Col xs="12">
+                    <Label className="col-form-label">{"Audience ciblée"}</Label>
+                    <Input
+                        className={targeted_audience !== "" ? "valid" : "is-invalid"}
+                        type="text"
+                        required
+                        name="targeted_audience"
+                        value={targeted_audience}
                         onChange={getUserData}
                     />
                 </Col>
