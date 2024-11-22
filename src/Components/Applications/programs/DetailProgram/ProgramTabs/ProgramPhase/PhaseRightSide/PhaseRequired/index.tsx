@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Card, CardBody, Button, Form, FormGroup, Label, Input, Row, Col, Spinner, TabPane } from "reactstrap";
+import { CardBody, Button, Form, FormGroup, Label, Input, Row, Col, Spinner, TabPane } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { updateProgramPhase } from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
 import { Flip, toast } from "react-toastify";
+import {
+    createRequirement,
+    updateRequirement,
+    deleteRequirement,
+} from "@/Redux/Reducers/programsSlice/ProgramRequiredSlice";
 
 interface Requirement {
-    id: string;
+    id?: string;
     name: string;
     description: string;
+    phase: string;
 }
 
 const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
@@ -18,80 +23,98 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
 
-
     const phase = programData.phases.find((phase: { id: string }) => phase.id === navId);
 
     useEffect(() => {
         setIsLoading(true);
         if (phase?.requirements) {
-            setRequirements(phase.requirements);
+
+            // @ts-ignore
+            const sanitizedRequirements = phase.requirements.map(({ name, description, id }) => ({
+                name,
+                description,
+                id,
+            }));
+            setRequirements(sanitizedRequirements);
         } else {
             setRequirements([]);
         }
         setIsLoading(false);
     }, [phase]);
 
+
     const handleAddRequirement = () => {
         const newRequirement: Requirement = {
-            id: Date.now().toString(),
             name: "",
             description: "",
+            phase: phase?.id || "",
         };
         setRequirements([...requirements, newRequirement]);
     };
 
-    const handleEditRequirement = (id: string, key: keyof Requirement, value: string) => {
+
+    const handleEditRequirement = (index: number, key: keyof Requirement, value: string) => {
         setRequirements((prev) =>
-            prev.map((req) => (req.id === id ? { ...req, [key]: value } : req))
+            prev.map((req, i) => (i === index ? { ...req, [key]: value } : req))
         );
     };
 
-    const handleDeleteRequirement = (id: string) => {
-        setRequirements((prev) => prev.filter((req) => req.id !== id));
+    const handleDeleteRequirement = async (id?: string, index?: number) => {
+        if (id) {
+            try {
+                await dispatch(deleteRequirement(id)).unwrap();
+                toast.success("Exigence supprimée avec succès !");
+            } catch (error) {
+                toast.error("Échec de la suppression de l'exigence.");
+            }
+        }
+        setRequirements((prev) => prev.filter((_, i) => i !== index));
     };
 
     const handleSave = async () => {
         if (!phase) return;
 
         setIsSaving(true);
-        try {
-            const updatedPhase = {
-                ...phase,
-                requirements,
-            };
 
-            await dispatch(updateProgramPhase(updatedPhase));
-            toast.success(
-                <p className="text-white tx-16 mb-0">{"Exigences mises à jour avec succès !"}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
+        try {
+            const newRequirements = requirements.filter((req) => !req.id);
+            const existingRequirements = requirements.filter((req) => req.id);
+
+            if (newRequirements.length > 0) {
+
+                const payload = {
+                    phase: phase.id,
+                    requirements: newRequirements.map(({ name, description }) => ({ name, description })),
+                };
+
+                console.log("payload", payload);
+
+                await dispatch(createRequirement(payload)).unwrap();
+            }
+
+            if (existingRequirements.length > 0) {
+
+                const promises = existingRequirements.map((requirement) =>
+                    dispatch(updateRequirement({ ...requirement, phase: phase.id })).unwrap()
+                );
+                await Promise.all(promises);
+            }
+
+            toast.success("Toutes les exigences ont été sauvegardées avec succès !");
         } catch (error) {
-            toast.error(
-                <p className="text-white tx-16 mb-0">{"Une erreur est survenue lors de la mise à jour."}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
+            toast.error("Une erreur est survenue lors de la sauvegarde.");
         } finally {
             setIsSaving(false);
         }
     };
 
+
+
     if (!phase) {
         return (
             <TabPane tabId="requirement-tab">
                 <div className="text-center my-4 bg-white">
-                    <div className={'pb-5 pt-2'}>
+                    <div className={"pb-5 pt-2"}>
                         <h1>Aucune phase trouvée</h1>
                         <p>Veuillez sélectionner une phase valide pour afficher ses exigences.</p>
                     </div>
@@ -101,7 +124,7 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     }
 
     return (
-        <TabPane tabId={'requirement-tab'}>
+        <TabPane tabId={"requirement-tab"}>
             <div className="p-3 my-5 bg-white pt-3 text-success">
                 <CardBody>
                     <h5 className="mb-4">Exigences pour la phase : {phase.name}</h5>
@@ -113,31 +136,31 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
                     ) : (
                         <Form>
                             {requirements.map((requirement, index) => (
-                                <Row key={requirement.id} className="mb-3">
+                                <Row key={index} className="mb-3">
                                     <Col md={4}>
                                         <FormGroup>
-                                            <Label for={`name-${requirement.id}`}>Nom</Label>
+                                            <Label for={`name-${index}`}>Nom</Label>
                                             <Input
                                                 type="text"
-                                                id={`name-${requirement.id}`}
+                                                id={`name-${index}`}
                                                 value={requirement.name}
                                                 placeholder="Nom de l'exigence"
                                                 onChange={(e) =>
-                                                    handleEditRequirement(requirement.id, "name", e.target.value)
+                                                    handleEditRequirement(index, "name", e.target.value)
                                                 }
                                             />
                                         </FormGroup>
                                     </Col>
                                     <Col md={6}>
                                         <FormGroup>
-                                            <Label for={`description-${requirement.id}`}>Description</Label>
+                                            <Label for={`description-${index}`}>Description</Label>
                                             <Input
                                                 type="textarea"
-                                                id={`description-${requirement.id}`}
+                                                id={`description-${index}`}
                                                 value={requirement.description}
                                                 placeholder="Description de l'exigence"
                                                 onChange={(e) =>
-                                                    handleEditRequirement(requirement.id, "description", e.target.value)
+                                                    handleEditRequirement(index, "description", e.target.value)
                                                 }
                                             />
                                         </FormGroup>
@@ -146,7 +169,7 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
                                         <Button
                                             color="danger"
                                             outline
-                                            onClick={() => handleDeleteRequirement(requirement.id)}
+                                            onClick={() => handleDeleteRequirement(requirement.id, index)}
                                         >
                                             Supprimer
                                         </Button>
@@ -170,4 +193,5 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
 };
 
 export default PhaseRequired;
+
 
