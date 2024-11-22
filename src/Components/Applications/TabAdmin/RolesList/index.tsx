@@ -49,7 +49,7 @@ const RoleListContainer = () => {
               </div>
               <div className="list-product">
                 <div className="table-responsive">
-                  <DataTable className="theme-scrollbar" data={transformedRoles} columns={RoleListTableDataColumn} striped highlightOnHover pagination  subHeader subHeaderComponent={subHeaderComponentMemo} />
+                  <DataTable className="theme-scrollbar" data={transformedRoles as any} columns={RoleListTableDataColumn} striped highlightOnHover pagination  subHeader subHeaderComponent={subHeaderComponentMemo} />
                 </div>
               </div>
             </CardBody>

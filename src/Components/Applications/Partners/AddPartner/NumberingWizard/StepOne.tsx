@@ -8,6 +8,15 @@ const StepOne: React.FC<StepProps> = ({formValue, getPartnerData}) => {
 
     const {name, description} = formValue
 
+    const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        // @ts-ignore
+        const { name, value, type, checked } = event.target;
+        getPartnerData({
+            field: name,
+            value: type === "checkbox" ? checked : value,
+        });
+    };
+
     return (
         <Col xs="12">
             <div >
@@ -20,7 +29,7 @@ const StepOne: React.FC<StepProps> = ({formValue, getPartnerData}) => {
                     type="text"
                     name="name"
                     value={name}
-                    onChange={getPartnerData}
+                    onChange={handleChange}
                     required
                 />
             </div>
@@ -35,7 +44,7 @@ const StepOne: React.FC<StepProps> = ({formValue, getPartnerData}) => {
                     name="description"
                     rows={5}
                     value={description}
-                    onChange={getPartnerData}
+                    onChange={handleChange}
                 />
             </div>
         </Col>

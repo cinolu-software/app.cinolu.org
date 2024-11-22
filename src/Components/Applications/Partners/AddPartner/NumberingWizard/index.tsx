@@ -82,7 +82,6 @@ const NumberingWizard = () => {
         }
     };
 
-    console.log("====>", formValue)
 
 
     return (

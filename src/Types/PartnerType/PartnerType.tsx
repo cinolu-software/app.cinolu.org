@@ -47,7 +47,7 @@ export interface InitialStatePatnerType {
 
 export interface StepProps {
     formValue: FormValuePartnerType;
-    getPartnerData: (event: ChangeEvent<HTMLInputElement>) => void;
+    getPartnerData: (event: { field: string; value: any }) => void;
 }
 
 export interface CreatePartnerType {

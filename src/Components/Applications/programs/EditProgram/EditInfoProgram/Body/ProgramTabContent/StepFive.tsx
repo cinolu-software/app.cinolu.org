@@ -20,7 +20,7 @@
             if(!EditFormValue) return;
 
             const updatedPatner = EditFormValue.partners.includes(partnerId)
-            ? EditFormValue.partners.filter(id => id !== partnerId)
+            ? EditFormValue.partners.filter((id: string) => id !== partnerId)
                 : [...EditFormValue.partners, partnerId];
 
             dispatch(setEditFormValue({field: 'partners', value: updatedPatner}))

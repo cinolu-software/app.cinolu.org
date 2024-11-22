@@ -1,5 +1,4 @@
 import { Col, TabContent, TabPane } from "reactstrap";
-import StepFour from "./StepFour";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
@@ -24,9 +23,6 @@ const ProgramTabContent = () => {
                         <StepThree />
                     </TabPane>
                     <TabPane tabId={4}>
-                        <StepFour />
-                    </TabPane>
-                    <TabPane tabId={5}>
                         <StepFive />
                     </TabPane>
                 </TabContent>

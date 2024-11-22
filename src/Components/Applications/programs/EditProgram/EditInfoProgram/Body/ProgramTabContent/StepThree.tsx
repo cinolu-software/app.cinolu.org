@@ -19,7 +19,9 @@ const StepThree = () => {
     }, [dispatch, status]);
 
     useEffect(() => {
+        // @ts-ignore
         if(selectedProgram && selectedProgram.types.length > 0){
+            // @ts-ignore
             const selectedTypesIds = selectedProgram.types.map(type => type.id);
             dispatch(setEditFormValue({ field: 'types', value: selectedTypesIds }));
         }

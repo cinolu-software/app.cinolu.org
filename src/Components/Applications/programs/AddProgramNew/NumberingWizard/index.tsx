@@ -13,11 +13,13 @@ import StepFour from "@/Components/Applications/programs/AddProgramNew/Numbering
 import StepFive from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFive";
 import {FormValueType} from "@/Types/Programs/ProgramsType";
 import {Flip, toast} from "react-toastify";
+import {useRouter} from "next/navigation";
 
 const NumberingWizard = () => {
 
     const {numberLevel, formValue, showFinish,} = useAppSelector(state => state.programs);
     const dispatch = useAppDispatch();
+    const router = useRouter()
 
     const getUserData = (event: ChangeEvent<HTMLInputElement> | string) => {
         if (typeof event === "string") {
@@ -57,6 +59,7 @@ const NumberingWizard = () => {
                     theme: "colored",
                 }
             );
+            router.push('/programs')
         } catch (error) {
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du programme"}</p>,

@@ -78,6 +78,6 @@ export const RoleListTableDataColumn = [
     },
     {
         name: "Action",
-        cell: (row: RoleListTableColumnType) => <RoleListTableAction role={row} />,
+        cell: (row: RoleListTableColumnType) => <RoleListTableAction role={row as any} />,
     }
 ];

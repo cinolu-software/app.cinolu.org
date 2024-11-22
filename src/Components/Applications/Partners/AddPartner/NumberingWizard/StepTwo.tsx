@@ -1,10 +1,18 @@
-import React from 'react'
+import React, {ChangeEvent} from 'react'
 import {Col, Input, Label} from "reactstrap";
 import {StepProps} from "@/Types/PartnerType/PartnerType";
 
 const StepTwo: React.FC<StepProps> = ({formValue ,getPartnerData}) => {
 
     const {website_link} = formValue
+    const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        // @ts-ignore
+        const { name, value, type, checked } = event.target;
+        getPartnerData({
+            field: name,
+            value: type === "checkbox" ? checked : value,
+        });
+    };
 
     return (
         <Col xs="12">
@@ -19,7 +27,7 @@ const StepTwo: React.FC<StepProps> = ({formValue ,getPartnerData}) => {
                     type="text"
                     name="website_link"
                     value={website_link}
-                    onChange={getPartnerData}
+                    onChange={handleChange}
                     required
                 />
             </div>
