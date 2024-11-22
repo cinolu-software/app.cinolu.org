@@ -1,11 +1,10 @@
 import { TabPane, Button, Form, FormGroup, Input, Label, Row, Col, Spinner } from "reactstrap";
 import React, { useState, useEffect } from "react";
-import {updateProgramPhase} from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import { updateProgramPhase } from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
+import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
 
 const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
-
     const dispatch = useAppDispatch();
     const { programData } = useAppSelector((state) => state.programs);
     const [formFields, setFormFields] = useState<any[]>([]);
@@ -30,7 +29,8 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
         setIsLoading(false);
     }, [phase]);
 
-    const handleAddField = () => {
+    const handleAddField = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         if (newField.label && newField.name) {
             setFormFields([...formFields, newField]);
             setNewField({ label: "", name: "", required: false, type: "text" });
@@ -43,13 +43,16 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
         setFormFields(updatedFields);
     };
 
-    const handleDeleteField = (index: number) => {
+    const handleDeleteField = (e: React.MouseEvent<HTMLButtonElement>, index: number) => {
+        e.preventDefault();
         const updatedFields = [...formFields];
         updatedFields.splice(index, 1);
         setFormFields(updatedFields);
     };
 
-    const handleSavePhase = async () => {
+    const handleSavePhase = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
         if (!phase) return;
 
         setIsSaving(true);
@@ -177,8 +180,10 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                                 </FormGroup>
                                             </Col>
                                             <Col md="2">
-                                                <button className={'btn btn-outline-danger btn-sm'}
-                                                    onClick={() => handleDeleteField(index)}
+                                                <button
+                                                    type="button"
+                                                    className={'btn btn-outline-danger btn-sm'}
+                                                    onClick={(e) => handleDeleteField(e, index)}
                                                 >
                                                     Supprimer
                                                 </button>
@@ -202,7 +207,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                             type="text"
                                             value={newField.label}
                                             onChange={(e) =>
-                                                setNewField({...newField, label: e.target.value})
+                                                setNewField({ ...newField, label: e.target.value })
                                             }
                                             placeholder="Label"
                                             bsSize="sm"
@@ -213,7 +218,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                             type="text"
                                             value={newField.name}
                                             onChange={(e) =>
-                                                setNewField({...newField, name: e.target.value})
+                                                setNewField({ ...newField, name: e.target.value })
                                             }
                                             placeholder="Nom"
                                             bsSize="sm"
@@ -224,7 +229,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                             type="select"
                                             value={newField.type}
                                             onChange={(e) =>
-                                                setNewField({...newField, type: e.target.value})
+                                                setNewField({ ...newField, type: e.target.value })
                                             }
                                             bsSize="sm"
                                         >
@@ -252,7 +257,11 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                         </FormGroup>
                                     </Col>
                                     <Col md="2">
-                                        <button className={'btn btn-outline-primary btn-sm'} onClick={handleAddField}>
+                                        <button
+                                            type="button"
+                                            className={'btn btn-outline-primary btn-sm'}
+                                            onClick={handleAddField}
+                                        >
                                             Ajouter
                                         </button>
                                     </Col>
@@ -261,6 +270,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
 
                             <div className="text-start ms-4 mt-5">
                                 <button
+                                    type="button"
                                     className={'btn btn-outline-primary btn-sm'}
                                     onClick={handleSavePhase}
                                     disabled={isSaving}
