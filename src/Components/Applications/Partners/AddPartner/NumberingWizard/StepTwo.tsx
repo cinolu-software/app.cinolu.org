@@ -1,37 +1,36 @@
-import React, {ChangeEvent} from 'react'
-import {Col, Input, Label} from "reactstrap";
-import {StepProps} from "@/Types/PartnerType/PartnerType";
+import React from 'react';
+import { Col, Input, Label } from "reactstrap";
 
-const StepTwo: React.FC<StepProps> = ({formValue ,getPartnerData}) => {
+interface StepProps {
+    formValue: any;
+    onChange: (name: string, value: any) => void;
+}
 
-    const {website_link} = formValue
-    const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        // @ts-ignore
-        const { name, value, type, checked } = event.target;
-        getPartnerData({
-            field: name,
-            value: type === "checkbox" ? checked : value,
-        });
-    };
+const StepTwo: React.FC<StepProps> = ({ formValue, onChange }) => {
+    const { website_link } = formValue;
 
     return (
         <Col xs="12">
-
-            <div >
-                <Label for="programName" check>
-                    Web site Link <span className="txt-danger">*</span>
+            <div>
+                <Label for="websiteLink" check>
+                    Website Link <span className="text-danger">*</span>
                 </Label>
                 <Input
                     className="m-0"
                     id="websiteLink"
-                    type="text"
+                    type="url"
                     name="website_link"
-                    value={website_link}
-                    onChange={handleChange}
+                    value={website_link || ""}
+                    onChange={(e) => onChange("website_link", e.target.value)}
                     required
+                    placeholder="Enter the website URL"
                 />
             </div>
         </Col>
-    )
-}
-export default StepTwo
+    );
+};
+
+export default StepTwo;
+
+
+
