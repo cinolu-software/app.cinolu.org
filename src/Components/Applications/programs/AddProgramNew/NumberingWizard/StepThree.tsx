@@ -5,7 +5,7 @@ import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
-const StepThree: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
+const StepThree: React.FC<StepPropsType> = ({ formValue }) => {
     const dispatch = useAppDispatch();
     const { transformedProgramsData, status } = useAppSelector(state => state.programsType);
 

@@ -77,11 +77,11 @@ const NumberingWizard = () => {
 
     const renderStep = () => {
         switch (numberLevel) {
-            case 1: return <StepOne formValue={formValue} getUserData={getUserData} />;
-            case 2: return <StepTwo formValue={formValue} getUserData={getUserData} />;
-            case 3: return <StepThree formValue={formValue} getUserData={getUserData} />;
-            case 4: return <StepFour formValue={formValue} getUserData={getUserData} />;
-            case 5: return <StepFive formValue={formValue} getUserData={getUserData} />;
+            case 1: return <StepOne formValue={formValue}/>;
+            case 2: return <StepTwo formValue={formValue}/>;
+            case 3: return <StepThree formValue={formValue} />;
+            case 4: return <StepFour formValue={formValue}/>;
+            case 5: return <StepFive formValue={formValue} />;
             case 6: return (
                 <Form className="stepper-four g-3 needs-validation" noValidate>
                     <FinishForm

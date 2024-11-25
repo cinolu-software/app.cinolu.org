@@ -7,7 +7,9 @@ import Calendar from "react-calendar";
 import { Value } from 'react-calendar/dist/cjs/shared/types';
 import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
-const StepTwo: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
+
+const StepTwo: React.FC<StepPropsType> = ({ formValue }) => {
+
     const dispatch = useAppDispatch();
 
     const [startDate, setStartDate] = useState<Date | null>(formValue?.started_at ? new Date(formValue.started_at) : null);

@@ -106,7 +106,6 @@ export type NumberingWizardPropsType = {
 
 export interface StepPropsType {
     formValue: FormValueType;
-    getUserData: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export interface FormEditorsProps {

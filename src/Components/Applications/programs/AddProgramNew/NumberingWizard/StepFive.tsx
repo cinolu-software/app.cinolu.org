@@ -7,7 +7,7 @@ import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
 
 
-const StepFive : React.FC<StepPropsType> = ({ formValue, getUserData }) => {
+const StepFive : React.FC<StepPropsType> = ({ formValue }) => {
 
     const dispatch = useAppDispatch();
     const {partnerData, status} = useAppSelector((state)=>state.partner);

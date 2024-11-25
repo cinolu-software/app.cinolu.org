@@ -13,6 +13,7 @@ import { Flip, toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 const NumberingWizard = () => {
+
     const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.partner);
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -25,8 +26,6 @@ const NumberingWizard = () => {
             })
         );
     };
-
-
 
     const handleCreatePartner = () => {
         try {

@@ -1,32 +1,13 @@
-import React, { useMemo, ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { Col, Form, Input, Label, Row } from 'reactstrap';
-import SimpleMdeReact from 'react-simplemde-editor';
-import {StepPropsType, FormEditorsProps} from "@/Types/Programs/ProgramsType";
+import {StepPropsType} from "@/Types/Programs/ProgramsType";
+import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {useAppDispatch} from "@/Redux/Hooks";
 
-
-const FormEditors: React.FC<FormEditorsProps> = ({ description, onChangeDescription }) => {
-    const options = useMemo(() => ({
-        autofocus: true,
-        spellChecker: false,
-    }), []);
-
-    const handleEditorChange = (value: string) => {
-        onChangeDescription(value);
-    };
-
-    return (
-        <SimpleMdeReact
-            id="editor_container"
-            value={description}
-            onChange={handleEditorChange}
-            options={options}
-        />
-    );
-};
-
-const StepOne: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
+const StepOne: React.FC<StepPropsType> = ({ formValue }) => {
 
     const { name, description, targeted_audience } = formValue;
+    const dispatch = useAppDispatch();
 
     return (
         <Form className="theme-form theme-form-2 mega-form">
@@ -39,7 +20,7 @@ const StepOne: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
                         required
                         name="name"
                         value={name}
-                        onChange={getUserData}
+                        onChange={() => dispatch(setNewFormValue({ field: "name", value: name }))}
                     />
                 </Col>
                 <Col xs="12">
@@ -50,12 +31,19 @@ const StepOne: React.FC<StepPropsType> = ({ formValue, getUserData }) => {
                         required
                         name="targeted_audience"
                         value={targeted_audience}
-                        onChange={getUserData}
+                        onChange={()=> dispatch(setNewFormValue({ field: "targeted_audience", value: targeted_audience }))}
                     />
                 </Col>
                 <Col xs="12">
                     <Label className="col-form-label">{"Description du programme"}</Label>
-                    <FormEditors description={description || ''} onChangeDescription={(value) => getUserData({ target: { name: "description", value } } as ChangeEvent<HTMLInputElement>)} />
+                    <textarea
+                        rows={10}
+                        className="form-control"
+                        name="description"
+                        value={description}
+                        onChange={()=> dispatch(setNewFormValue({ field: "description", value: description }))}
+                    >
+                    </textarea>
                 </Col>
             </Row>
         </Form>
