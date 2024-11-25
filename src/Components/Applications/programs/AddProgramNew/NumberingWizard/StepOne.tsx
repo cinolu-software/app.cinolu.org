@@ -7,6 +7,7 @@ import { useAppDispatch } from "@/Redux/Hooks";
 const StepOne: React.FC<StepPropsType> = ({ formValue }) => {
 
     const { name, description, targeted_audience, aim, prize, town } = formValue;
+
     const dispatch = useAppDispatch();
 
     const handleChange = (field: keyof typeof formValue) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

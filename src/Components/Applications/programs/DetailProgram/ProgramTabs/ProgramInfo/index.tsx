@@ -1,6 +1,6 @@
 import React from 'react';
 import {TabPane, UncontrolledAccordion} from 'reactstrap';
-import {Calendar, FileText, Home, Layers, Tag, User, Users} from 'react-feather';
+import {Calendar, FileText, Home, Layers, Tag, User, Users, Target, Award, MapPin} from 'react-feather';
 import ProgramInfoAccordionItem from '@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramInfo/ProgramInfoAccordionItem';
 import {useAppSelector} from "@/Redux/Hooks";
 import {calculateDuration} from "@/utils";
@@ -46,6 +46,34 @@ const ProgramInfo = () => {
 
                                 <ProgramInfoAccordionItem
                                     id="3"
+                                    Icon={<Target className="svg-wrapper text-success" />}
+                                    title="Objectif du programme"
+                                >
+                                    <div className="program-info text-success">
+                                        <div className="info-row">
+                                            <span className="value">
+                                                {programData?.aim || "Objectif du programme"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </ProgramInfoAccordionItem>
+
+                                <ProgramInfoAccordionItem
+                                    id="4"
+                                    Icon={<User className="svg-wrapper text-success" />}
+                                    title="Audience ciblée"
+                                >
+                                    <div className="program-info text-success">
+                                        <div className="info-row">
+                                            <span className="value">
+                                                {programData?.targeted_audience || "Audience non spécifiée"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </ProgramInfoAccordionItem>
+
+                                <ProgramInfoAccordionItem
+                                    id="5"
                                     Icon={<Calendar className="svg-wrapper text-success" />}
                                     title="Durée du programme"
                                 >
@@ -74,21 +102,39 @@ const ProgramInfo = () => {
                                 </ProgramInfoAccordionItem>
 
                                 <ProgramInfoAccordionItem
-                                    id="4"
-                                    Icon={<User className="svg-wrapper text-success" />}
-                                    title="Audience ciblée"
+                                    id="6"
+                                    Icon={<Award className="svg-wrapper text-success" />}
+                                    title="A la clé"
                                 >
                                     <div className="program-info text-success">
                                         <div className="info-row">
                                             <span className="value">
-                                                {programData?.targeted_audience || "Audience non spécifiée"}
+                                                {programData?.prize || "A la clé"}
                                             </span>
                                         </div>
                                     </div>
                                 </ProgramInfoAccordionItem>
 
                                 <ProgramInfoAccordionItem
-                                    id="5"
+                                    id="7"
+                                    Icon={<MapPin className="svg-wrapper text-success" />}
+                                    title="Ville cible"
+                                >
+                                    <div className="program-info text-success">
+                                        <div className="info-row">
+                                            <span className="value">
+                                                {programData?.town || "Ville cible"}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </ProgramInfoAccordionItem>
+
+
+
+
+
+                                <ProgramInfoAccordionItem
+                                    id="8"
                                     Icon={<Layers className="svg-wrapper text-success" />}
                                     title="Type de programme"
                                 >
@@ -108,7 +154,7 @@ const ProgramInfo = () => {
                                 </ProgramInfoAccordionItem>
 
                                 <ProgramInfoAccordionItem
-                                    id="6"
+                                    id="9"
                                     Icon={<Home className="svg-wrapper text-success" />}
                                     title="Catégorie de programme"
                                 >
@@ -127,7 +173,7 @@ const ProgramInfo = () => {
                                     </div>
                                 </ProgramInfoAccordionItem>
                                 <ProgramInfoAccordionItem
-                                    id="7"
+                                    id="10"
                                     Icon={<Users className="svg-wrapper text-success" />}
                                     title="Partenaires"
                                 >
