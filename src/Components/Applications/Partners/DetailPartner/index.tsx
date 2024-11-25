@@ -1,15 +1,15 @@
-import {Card, CardBody, Col, Nav, NavItem, NavLink, Container, Row} from "reactstrap";
-import React, {useState} from 'react'
-import ProgramEditTabContent from "@/Components/Applications/programs/EditProgram/ProgramEditTabContent";
+import {Card, CardBody, Col, Nav, NavLink, NavItem, Container, Row} from 'reactstrap';
+import React, {useState} from "react";
 import BackButton from "@/CommonComponent/BackButton";
+import PartnerEditTabContent from "@/Components/Applications/Partners/DetailPartner/PartnerEditTabContent";
 
-const EditProgramTabs = () => {
+const EditPartenaire = () => {
 
     const [activeTab, setActiveTab] = useState('1');
 
     return (
         <Container fluid>
-            <BackButton link={'/programs'}/>
+            <BackButton link={'/partners'}/>
             <Row>
                 <Card>
                     <CardBody>
@@ -18,7 +18,7 @@ const EditProgramTabs = () => {
                                 <NavItem>
                                     <NavLink href='#' className={`txt-secondary ${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")}>
                                         <i className="icofont icofont-files"></i>
-                                        <span>Détail du programme</span>
+                                        <span>Détail du Partenaire</span>
                                     </NavLink>
                                 </NavItem>
                             </NavItem>
@@ -28,12 +28,14 @@ const EditProgramTabs = () => {
                                     <NavLink href='#' className={`txt-secondary ${activeTab === "2" ? "active" : ""}`}
                                              onClick={() => setActiveTab("2")}>
                                         <i className="fa fa-file-image-o"></i>
-                                        <span>Image de couverture</span>
+                                        <span>Logo</span>
                                     </NavLink>
                                 </NavItem>
                             </NavItem>
                         </Nav>
-                        <ProgramEditTabContent activeTab={activeTab}/>
+
+                        <PartnerEditTabContent activeTab={activeTab}/>
+
                     </CardBody>
                 </Card>
             </Row>
@@ -41,4 +43,4 @@ const EditProgramTabs = () => {
     )
 }
 
-export default EditProgramTabs;
+export default EditPartenaire;

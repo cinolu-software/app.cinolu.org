@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {PartnerListTableColumnType, PartnerType} from "@/Types/PartnerType/PartnerType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
 import {useAppDispatch} from "@/Redux/Hooks";
-import {setModalDeletePartner, setModalEditPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
+import {setModalDeletePartner, setModalEditPartner, setSelectedPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 import SVG from '@/CommonComponent/SVG';
+import {useRouter} from "next/navigation";
+import {Spinner} from "reactstrap";
 
 const PartnerListTableName: React.FC<{image: string; name: string}> = ({image, name}) =>{
     return (
@@ -20,35 +22,44 @@ const PartnerListTableName: React.FC<{image: string; name: string}> = ({image, n
 const PartnerListTableAction: React.FC<{partner: PartnerType}> = ({partner}) =>{
 
     const dispatch = useAppDispatch();
+    const router = useRouter();
 
-    const handleEdit = () =>{
-        dispatch(setModalEditPartner({isOpen: true, partner: partner}))
+    const [loadingEdit, setLoadingEdit] = useState(false);
+    const [loadingDetail, setLoadingDetail] = useState(false);
+    const [loadingDelete, setLoadingDelete] = useState(false);
+
+    const handleShowDetail = () =>{
+        setLoadingDetail(true)
+        router.push('/partners/detail')
+        dispatch(setSelectedPartner({partner}))
     }
 
     const handleDelete = () => {
+        setLoadingDelete(true)
         dispatch(setModalDeletePartner({isOpen: true, partner: partner}))
+        setLoadingDelete(false)
     }
 
     return (
         <div className="product-action">
             <div className={'row w-100 justify-content-center'}>
                 <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} >
                       <span>
                         <SVG iconId="editTable"/>
                       </span>
                     </button>
                 </div>
                 <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleShowDetail}>
                       <span>
-                        <SVG iconId="moreTable"/>
+                        {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
                       </span>
                     </button>
                 </div>
                 <div className={'col-4'}>
                     <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-                        <SVG iconId="trashTable" />
+                        {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
                     </button>
                 </div>
             </div>
