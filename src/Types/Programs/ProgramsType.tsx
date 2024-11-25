@@ -26,6 +26,9 @@ export interface CreateProgramType {
     started_at: string;
     ended_at: string;
     types?: string[];
+    aim?: string;
+    prize?: string;
+    town?: string;
     categories?:  string[];
     partners: string[];
 }
@@ -37,7 +40,10 @@ export interface ReceiveProgramsType {
     targeted_audience: string;
     started_at: string;
     ended_at: string;
-    image: string;
+    image?: string;
+    aim?: string;
+    prize?: string;
+    town?: string;
     attachments: AttachmentType[];
     types?: DataType[];
     categories?: any;
@@ -53,6 +59,9 @@ export interface FormValueType {
     started_at: string;
     ended_at: string;
     types?: any;
+    aim?: string;
+    prize?: string;
+    town?: string;
     categories?: any;
     partners: string[];
 }

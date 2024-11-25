@@ -26,6 +26,9 @@ const initialState: InitialStateProgramsType = {
     formValue: {
         name: "",
         description: "",
+        aim: "",
+        prize: "",
+        town: "",
         targeted_audience: '',
         started_at: "",
         ended_at: "",
@@ -36,6 +39,9 @@ const initialState: InitialStateProgramsType = {
     EditFormValue: {
         name: "",
         description: "",
+        aim: "",
+        prize: "",
+        town: "",
         targeted_audience: '',
         started_at: "",
         ended_at: "",
@@ -133,35 +139,35 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 
 
 const validateStep = (state: InitialStateProgramsType) => {
-    const { name, description, started_at, ended_at, types, categories, partners, targeted_audience } = state.formValue;
+    const { name, description, town, aim, prize, started_at, ended_at, types, categories, partners, targeted_audience } = state.formValue;
     switch (state.numberLevel) {
         case 1:
-            if (!name || !description || !targeted_audience) {
+            if (!name || !description || !targeted_audience || town || aim || prize) {
                 ShowError();
                 return false;
             }
             break;
         case 2:
-            if (!name || !description || !targeted_audience || !started_at || !ended_at) {
+            if (!name || !description || !targeted_audience || town || aim || prize || !started_at || !ended_at) {
                 ShowError();
                 return false;
             }
             break;
         case 3:
-            if (!name || !description || !targeted_audience || !started_at || !ended_at || types.length === 0) {
+            if (!name || !description || !targeted_audience || town || aim || prize || !started_at || !ended_at || types.length === 0) {
                 ShowError();
                 return false;
             }
             break;
         case 4 :
-            if (!name || !description || !targeted_audience || !started_at || !ended_at || types.length === 0 || categories.length === 0) {
+            if (!name || !description || !targeted_audience || town || aim || prize || !started_at || !ended_at || types.length === 0 || categories.length === 0) {
                 ShowError();
                 return false;
             }
             break;
 
         case 5 :
-            if (!name || !description || !targeted_audience || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
+            if (!name || !description || !targeted_audience || town || aim || prize || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
                 ShowError();
                 return false;
             }

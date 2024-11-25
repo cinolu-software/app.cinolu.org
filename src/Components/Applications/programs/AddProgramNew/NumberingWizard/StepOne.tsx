@@ -1,13 +1,17 @@
-import React, { ChangeEvent } from 'react';
-import { Col, Form, Input, Label, Row } from 'reactstrap';
-import {StepPropsType} from "@/Types/Programs/ProgramsType";
+import React, { ChangeEvent } from "react";
+import { Col, Form, Input, Label, Row } from "reactstrap";
+import { StepPropsType } from "@/Types/Programs/ProgramsType";
 import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
-import {useAppDispatch} from "@/Redux/Hooks";
+import { useAppDispatch } from "@/Redux/Hooks";
 
 const StepOne: React.FC<StepPropsType> = ({ formValue }) => {
 
-    const { name, description, targeted_audience } = formValue;
+    const { name, description, targeted_audience, aim, prize, town } = formValue;
     const dispatch = useAppDispatch();
+
+    const handleChange = (field: keyof typeof formValue) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        dispatch(setNewFormValue({ field, value: event.target.value }));
+    };
 
     return (
         <Form className="theme-form theme-form-2 mega-form">
@@ -20,20 +24,55 @@ const StepOne: React.FC<StepPropsType> = ({ formValue }) => {
                         required
                         name="name"
                         value={name}
-                        onChange={() => dispatch(setNewFormValue({ field: "name", value: name }))}
+                        onChange={handleChange("name")}
                     />
                 </Col>
                 <Col xs="12">
-                    <Label className="col-form-label">{"Audience ciblée"}</Label>
+                    <Label className="col-form-label">{"Ville cible"}</Label>
                     <Input
-                        className={targeted_audience !== "" ? "valid" : "is-invalid"}
+                        className={town !== "" ? "valid" : "is-invalid"}
                         type="text"
                         required
-                        name="targeted_audience"
-                        value={targeted_audience}
-                        onChange={()=> dispatch(setNewFormValue({ field: "targeted_audience", value: targeted_audience }))}
+                        name="town"
+                        value={town}
+                        onChange={handleChange("town")}
                     />
                 </Col>
+
+                <Col xs="12">
+                    <Label className="col-form-label">{"Audience ciblée"}</Label>
+                    <textarea
+                        rows={5}
+                        className="form-control"
+                        name="targeted_audience"
+                        value={targeted_audience}
+                        onChange={handleChange("targeted_audience")}
+                    />
+                </Col>
+
+
+                <Col xs="12">
+                    <Label className="col-form-label">{"A la clé"}</Label>
+                    <textarea
+                        rows={5}
+                        className="form-control"
+                        name="prize"
+                        value={prize}
+                        onChange={handleChange("prize")}
+                    />
+                </Col>
+
+                <Col xs="12">
+                    <Label className="col-form-label">{"Objectif du programme"}</Label>
+                    <textarea
+                        rows={10}
+                        className="form-control"
+                        name="aim"
+                        value={aim}
+                        onChange={handleChange("aim")}
+                    />
+                </Col>
+
                 <Col xs="12">
                     <Label className="col-form-label">{"Description du programme"}</Label>
                     <textarea
@@ -41,9 +80,8 @@ const StepOne: React.FC<StepPropsType> = ({ formValue }) => {
                         className="form-control"
                         name="description"
                         value={description}
-                        onChange={()=> dispatch(setNewFormValue({ field: "description", value: description }))}
-                    >
-                    </textarea>
+                        onChange={handleChange("description")}
+                    />
                 </Col>
             </Row>
         </Form>
