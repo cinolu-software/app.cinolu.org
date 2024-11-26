@@ -1,6 +1,7 @@
 import React from 'react';
 import {TabContent, TabPane} from "reactstrap";
 import EditProgramInfo from "@/Components/Applications/Partners/DetailPartner/EditProgramInfo";
+import PartnerLogo from "@/Components/Applications/Partners/DetailPartner/PartnerLogo";
 
 
 
@@ -11,7 +12,7 @@ const PartnerEditTabContent: React.FC<{activeTab : string}> = ({activeTab}) => {
                 <EditProgramInfo/>
             </TabPane>
             <TabPane tabId="2">
-
+                <PartnerLogo/>
             </TabPane>
         </TabContent>
     )

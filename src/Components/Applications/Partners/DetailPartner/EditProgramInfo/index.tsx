@@ -15,7 +15,6 @@ const ProgramInfo = () => {
                     <div className="basic-accordion">
                         <div className="mt-5 accordion-border icons-accordion">
                             <UncontrolledAccordion className="me-5 mb-5" toggle={() => {}}>
-
                                 <ProgramInfoAccordionItem
                                     id="1"
                                     Icon={<Tag className="svg-wrapper text-success" />}

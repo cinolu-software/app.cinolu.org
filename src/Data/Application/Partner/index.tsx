@@ -3,16 +3,18 @@ import {PartnerListTableColumnType, PartnerType} from "@/Types/PartnerType/Partn
 import RatioImage from "@/CommonComponent/RatioImage";
 import {ImagePath} from "@/Constant";
 import {useAppDispatch} from "@/Redux/Hooks";
-import {setModalDeletePartner, setModalEditPartner, setSelectedPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
+import {setModalDeletePartner, setSelectedPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 import SVG from '@/CommonComponent/SVG';
 import {useRouter} from "next/navigation";
 import {Spinner} from "reactstrap";
+import {imageBaseUrl} from "@/services/axios";
+import {truncateText} from "@/utils";
 
 const PartnerListTableName: React.FC<{image: string; name: string}> = ({image, name}) =>{
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
-                <RatioImage className="img-fluid" src={`${ImagePath}/${image}`} alt="image"/>
+                <RatioImage className="img-fluid" src={`${image}`} alt="image"/>
             </div>
             <p>{name}</p>
         </div>
@@ -70,16 +72,21 @@ const PartnerListTableAction: React.FC<{partner: PartnerType}> = ({partner}) =>{
 export const PartnerListTableDataColumn = [
     {
         name: "Partenaire",
-        cell:(row: PartnerListTableColumnType) => <PartnerListTableName image={"programs/types/typeProgram.png"} name={row.name}/>,
+        cell:(row: PartnerListTableColumnType) => <PartnerListTableName image={row?.profile ? `${imageBaseUrl}/partners/${row.profile}` : `${ImagePath}/programs/types/typeProgram.png`} name={row.name}/>,
         sortable: true,
         grow: 1
     },
     {
         name: "Description",
-        cell:(row: PartnerListTableColumnType) => <div>{row.description}</div>,
+        cell: (row: PartnerListTableColumnType) => (
+            <div>
+                {truncateText(row.description, 100)}
+            </div>
+        ),
         sortable: true,
-        grow: 1
+        grow: 1,
     },
+
     {
         name: "Website link",
         cell:(row: PartnerListTableColumnType) => <div>{row.website_link}</div>,

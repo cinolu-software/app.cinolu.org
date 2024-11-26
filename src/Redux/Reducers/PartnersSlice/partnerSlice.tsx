@@ -75,6 +75,22 @@ export const updatePartner = createAsyncThunk(
     }
 );
 
+export const updateProfileImage = createAsyncThunk(
+    "partner/updateProfileImage",
+    async (formData: FormData, { rejectWithValue }) => {
+        try {
+            const response = await axiosInstance.post<{ data: PartnerType }>(`${apiBaseUrl}/partners/${id}/image`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            return { data: response.data.data };
+        } catch (error: any) {
+            return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la modification de l'image du partenaire.");
+        }
+    }
+);
+
 const validateStep = (state: InitialStatePatnerType) => {
     const {name, partnerships, description, website_link} = state.formValue;
     switch(state.numberLevel){
