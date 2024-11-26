@@ -23,27 +23,65 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
 
     useEffect(() => {
         if (mode === "edit" && initialValues) {
-            Object.keys(initialValues).forEach((key) => {
+            const transformedInitialValues = {
+                ...initialValues,
+                types: Array.isArray(initialValues.types)
+                    ? initialValues.types.map((type: { id?: string }) => type?.id).filter(Boolean)
+                    : [],
+                categories: Array.isArray(initialValues.categories)
+                    ? initialValues.categories.map((category: { id?: string }) => category?.id).filter(Boolean)
+                    : [],
+            };
+
+            Object.keys(transformedInitialValues).forEach((key) => {
                 const typedKey = key as keyof FormValueType;
-                dispatch(setNewFormValue({ field: typedKey, value: initialValues[typedKey] }));
+                dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
             });
         }
     }, [mode, initialValues, dispatch]);
 
+
+
     const handleSubmit = () => {
         try {
+            const filteredFormValue = {
+                name: formValue.name,
+                description: formValue.description,
+                started_at: formValue.started_at,
+                ended_at: formValue.ended_at,
+                targeted_audience: formValue.targeted_audience,
+                aim: formValue.aim,
+                prize: formValue.prize,
+                town: formValue.town,
+                types: formValue.types?.filter(Boolean),
+                categories: formValue.categories?.filter(Boolean),
+                partners: formValue.partners,
+            };
+
             if (mode === "add") {
-                dispatch(createProgram(formValue));
-                toast.success("Programme créé avec succès", { autoClose: 5000, position: toast.POSITION.TOP_CENTER });
+                dispatch(createProgram(filteredFormValue));
+                toast.success("Programme créé avec succès", {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                });
             } else {
-                dispatch(updateProgram({ programId: initialValues?.id!, updatedProgram: formValue }));
-                toast.success("Programme modifié avec succès", { autoClose: 5000, position: toast.POSITION.TOP_CENTER });
+                dispatch(updateProgram({ programId: initialValues?.id!, updatedProgram: filteredFormValue }));
+                toast.success("Programme modifié avec succès", {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                });
             }
+
             router.push("/programs");
         } catch (error) {
-            toast.error("Une erreur est survenue", { autoClose: 5000, position: toast.POSITION.TOP_CENTER });
+            toast.error("Une erreur est survenue", {
+                autoClose: 5000,
+                position: toast.POSITION.TOP_CENTER,
+            });
         }
     };
+
+
 
     const renderStep = () => {
         switch (numberLevel) {
