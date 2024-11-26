@@ -21,29 +21,6 @@ const NumberingWizard = () => {
     const dispatch = useAppDispatch();
     const router = useRouter()
 
-    const getUserData = (event: ChangeEvent<HTMLInputElement> | string) => {
-        if (typeof event === "string") {
-            dispatch(setNewFormValue({ field: "description", value: event }));
-        } else {
-            const { name, value, type, checked, files } = event.target;
-
-            let newValue: any;
-
-            switch (type) {
-                case "checkbox":
-                    newValue = checked;
-                    break;
-                case "file":
-                    newValue = files ? files[0].name : "";
-                    break;
-                default:
-                    newValue = value;
-                    break;
-            }
-
-            dispatch(setNewFormValue({ field: name as keyof FormValueType, value: newValue }));
-        }
-    };
 
     const handleCreateProgram = () => {
 
