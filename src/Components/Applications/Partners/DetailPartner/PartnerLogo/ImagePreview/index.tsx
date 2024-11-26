@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ImagePreview = () => {
+
     const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
     const { selectedPartner } = useAppSelector((state) => state.partner);

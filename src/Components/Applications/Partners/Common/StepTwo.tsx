@@ -31,6 +31,3 @@ const StepTwo: React.FC<StepProps> = ({ formValue, onChange }) => {
 };
 
 export default StepTwo;
-
-
-

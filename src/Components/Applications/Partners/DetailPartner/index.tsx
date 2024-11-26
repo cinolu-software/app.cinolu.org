@@ -2,6 +2,7 @@ import {Card, CardBody, Col, Nav, NavLink, NavItem, Container, Row} from 'reacts
 import React, {useState} from "react";
 import BackButton from "@/CommonComponent/BackButton";
 import PartnerEditTabContent from "@/Components/Applications/Partners/DetailPartner/PartnerEditTabContent";
+import PartnerProfile from "@/Components/Applications/Partners/DetailPartner/PartnerProfil";
 
 const EditPartenaire = () => {
 
@@ -10,6 +11,9 @@ const EditPartenaire = () => {
     return (
         <Container fluid>
             <BackButton link={'/partners'}/>
+            <Row>
+                <PartnerProfile/>
+            </Row>
             <Row>
                 <Card>
                     <CardBody>

@@ -29,5 +29,3 @@ const StepOne = ({ formValue, onChange }: { formValue: any; onChange: (name: str
 };
 
 export default StepOne;
-
-

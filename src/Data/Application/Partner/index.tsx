@@ -36,6 +36,12 @@ const PartnerListTableAction: React.FC<{partner: PartnerType}> = ({partner}) =>{
         dispatch(setSelectedPartner({partner}))
     }
 
+    const handleEdit = () => {
+        setLoadingEdit(true)
+        router.push('/partners/update')
+        dispatch(setSelectedPartner({partner}))
+    }
+
     const handleDelete = () => {
         setLoadingDelete(true)
         dispatch(setModalDeletePartner({isOpen: true, partner: partner}))
@@ -46,9 +52,9 @@ const PartnerListTableAction: React.FC<{partner: PartnerType}> = ({partner}) =>{
         <div className="product-action">
             <div className={'row w-100 justify-content-center'}>
                 <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} >
+                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleEdit} >
                       <span>
-                        <SVG iconId="editTable"/>
+                        {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
                       </span>
                     </button>
                 </div>
@@ -86,7 +92,6 @@ export const PartnerListTableDataColumn = [
         sortable: true,
         grow: 1,
     },
-
     {
         name: "Website link",
         cell:(row: PartnerListTableColumnType) => <div>{row.website_link}</div>,

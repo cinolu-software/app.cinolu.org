@@ -67,7 +67,7 @@ export const updatePartner = createAsyncThunk(
     "partner/updatePartner",
     async (partner: PartnerType, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.put<{ data: PartnerType }>(`${apiBaseUrl}/partners/${partner.id}`, partner);
+            const response = await axiosInstance.patch<{ data: PartnerType }>(`${apiBaseUrl}/partners/${partner.id}`, partner);
             return { data: response.data.data };
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la modification du partenaire.");

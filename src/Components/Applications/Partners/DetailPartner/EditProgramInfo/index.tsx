@@ -32,10 +32,10 @@ const ProgramInfo = () => {
 
                                 <ProgramInfoAccordionItem
                                     id="2"
-                                    Icon={<FileText className="svg-wrapper text-info" />}
+                                    Icon={<FileText className="svg-wrapper text-success" />}
                                     title="Description"
                                 >
-                                    <div className="program-info text-info">
+                                    <div className="program-info text-success">
                                         <div className="info-row">
                                           <span className="value">
                                             {selectedPartner?.description || "Description indisponible"}
@@ -47,10 +47,10 @@ const ProgramInfo = () => {
 
                                 <ProgramInfoAccordionItem
                                     id="3"
-                                    Icon={<Link className="svg-wrapper text-primary" />}
+                                    Icon={<Link className="svg-wrapper text-success" />}
                                     title="Site Web"
                                 >
-                                    <div className="program-info text-primary">
+                                    <div className="program-info text-success">
                                         <div className="info-row">
                                             <a
                                                 href={selectedPartner?.website_link || "#"}
@@ -66,10 +66,10 @@ const ProgramInfo = () => {
 
                                 <ProgramInfoAccordionItem
                                     id="4"
-                                    Icon={<Users className="svg-wrapper text-warning" />}
+                                    Icon={<Users className="svg-wrapper text-success" />}
                                     title="Partenariats"
                                 >
-                                    <div className="program-info text-warning">
+                                    <div className="program-info text-success">
                                         {selectedPartner && selectedPartner.partnerships.length > 0 ? (
                                             <ul>
                                                 {selectedPartner?.partnerships.map((partnership) => (
