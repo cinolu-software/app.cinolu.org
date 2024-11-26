@@ -75,7 +75,7 @@ export const updatePartner = createAsyncThunk(
     }
 );
 
-export const addProfileImage = createAsyncThunk<{ data: PartnerType }, { id: string; formData: FormData }, { rejectValue: string }>(
+export const addProfileImage = createAsyncThunk<{ data: PartnerType }, { id: string; formData: any }, { rejectValue: string }>(
     "partner/addProfileImage",
     async ({ id, formData }, { rejectWithValue }) => {
         try {

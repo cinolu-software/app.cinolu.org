@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
-import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
+import React, { useState } from "react";
+import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast, Flip } from "react-toastify";
-import { updateAttachmentProgramImage } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { CardBody, Col, Button } from "reactstrap";
+import { addProfileImage } from "@/Redux/Reducers/PartnersSlice/partnerSlice";
+import { CardBody, Col } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
-import {useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ImagePreview = () => {
-
     const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
-    const { selectedProgram } = useAppSelector(state => state.programs);
+    const { selectedPartner } = useAppSelector((state) => state.partner);
+
     const router = useRouter();
 
     const handleUpdateImage = () => {
@@ -34,13 +34,15 @@ const ImagePreview = () => {
             return;
         }
 
-        if (selectedProgram) {
-            const imageFile = files[0].file as File;
+        if (selectedPartner) {
+            const formData = new FormData();
+            formData.append("thumb", files[0].file);
 
-            dispatch(updateAttachmentProgramImage({ programId: selectedProgram.id, imageFile })).unwrap()
+            dispatch(addProfileImage({ id: selectedPartner.id, formData }))
+                .unwrap()
                 .then(() => {
                     toast.success(
-                        <p className="text-white tx-16 mb-0">{'Ajout de l\'image de couverture effectué avec succès'}</p>,
+                        <p className="text-white tx-16 mb-0">{"Ajout du logo effectué avec succès"}</p>,
                         {
                             autoClose: 5000,
                             position: toast.POSITION.TOP_CENTER,
@@ -49,11 +51,11 @@ const ImagePreview = () => {
                             theme: "colored",
                         }
                     );
-                    router.push(`/programs`);
+                    router.push(`/partners`);
                 })
-                .catch((err) => {
+                .catch(() => {
                     toast.error(
-                        <p className="text-white tx-16 mb-0">{"Erreur survenue lors de l'ajout de l'image de couverture"}</p>,
+                        <p className="text-white tx-16 mb-0">{"Erreur survenue lors de l'ajout du logo"}</p>,
                         {
                             autoClose: 5000,
                             position: toast.POSITION.TOP_CENTER,
@@ -65,7 +67,6 @@ const ImagePreview = () => {
                 });
         }
     };
-
 
     return (
         <Col lg="12">
