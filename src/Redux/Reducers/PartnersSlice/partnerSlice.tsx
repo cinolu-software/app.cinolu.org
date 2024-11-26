@@ -75,21 +75,26 @@ export const updatePartner = createAsyncThunk(
     }
 );
 
-export const updateProfileImage = createAsyncThunk(
-    "partner/updateProfileImage",
-    async (formData: FormData, { rejectWithValue }) => {
+export const addProfileImage = createAsyncThunk<{ data: PartnerType }, { id: string; formData: FormData }, { rejectValue: string }>(
+    "partner/addProfileImage",
+    async ({ id, formData }, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post<{ data: PartnerType }>(`${apiBaseUrl}/partners/${id}/image`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
+            const response = await axiosInstance.post<{ data: PartnerType }>(
+                `${apiBaseUrl}/partners/${id}/profile`,
+                formData,
+                {
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                }
+            );
             return { data: response.data.data };
         } catch (error: any) {
-            return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la modification de l'image du partenaire.");
+            return rejectWithValue(
+                error.response?.data || "Une erreur est survenue lors de l'ajout de l'image de profil du partenaire."
+            );
         }
     }
 );
+
 
 const validateStep = (state: InitialStatePatnerType) => {
     const {name, partnerships, description, website_link} = state.formValue;
@@ -243,6 +248,24 @@ const PartnerSlice = createSlice({
             .addCase(updatePartner.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.error.message || "Erreur lors de la mise à jour du partenaire.";
+            })
+            .addCase(addProfileImage.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+
+            .addCase(addProfileImage.fulfilled, (state, action: PayloadAction<{ data: PartnerType }>) => {
+                state.status = "succeeded";
+                const updatedPartnerIndex = state.partnerData.findIndex(
+                    (partner) => partner.id === action.payload.data.id
+                );
+                if (updatedPartnerIndex >= 0) {
+                    state.partnerData[updatedPartnerIndex] = action.payload.data;
+                }
+            })
+            .addCase(addProfileImage.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload || "Erreur lors de l'ajout de l'image de profil.";
             });
     }
 });
