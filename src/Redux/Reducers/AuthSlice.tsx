@@ -77,7 +77,7 @@ export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: st
             const response = await axiosInstance.get(`/auth/profile`);
             const user = response.data.data;
             localStorage.setItem("user_profile", JSON.stringify(user));
-            Cookies.set("cinolu_token", user);
+            Cookies.set("cinolu_token", JSON.stringify(user));
             return { user };
         } catch (error: any) {
             const errorMessage = error.response?.data?.message || "Erreur lors de la récupération du profil utilisateur";

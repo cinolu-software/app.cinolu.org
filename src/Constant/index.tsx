@@ -1484,7 +1484,7 @@ export const TodaysTasks: string = "Today’s Tasks";
 export const NFTillustrarionPackage: string = "NFT illustrarion Package";
 export const PodcastlandingPage: string = "Podcast landing Page";
 export const DeliveryFoodApp: string = "Delivery Food App";
-export const RunningEvent: string = "Running Events";
+export const RunningEvent: string = "Running EventsType";
 export const UpgradePlan: string = "Upgrade Plan";
 export const ViewProject: string = "View Project";
 export const OnlineCourseTimelines: string = "Online Course Timeline";
@@ -1617,7 +1617,7 @@ export const AddTask: string = "Add Task";
 
 //Calendar
 export const CalendarBasic: string = "Calender Basic";
-export const DraggableEvents: string = "Draggable Events";
+export const DraggableEvents: string = "Draggable EventsType";
 export const RemoveAfterDrop: string = "remove after drop";
 export const CalendarFilter: string = "calendar filter";
 

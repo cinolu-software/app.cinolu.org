@@ -21,7 +21,7 @@ export const TotalCoachData = [
     },
     // {
     //     student:"984",
-    //     title:"Events",
+    //     title:"EventsType",
     //     color:"success",
     //     icon:"up",
     //     percentage:"+ 12.01%",
