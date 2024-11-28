@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from "react";
 import {Container} from "reactstrap";
 import {useAppSelector} from "@/Redux/Hooks";
-import UpdateCoachModal from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UpdateCoachModal";
+import UpdateUserModal from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UpdateUserModal";
 import UserProfile from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfile/UserProfile"
 
 
@@ -14,10 +14,10 @@ const UserDetailContainer = () => {
         <Container fluid>
             <div className="user-profile social-app-profile">
                 <UserProfile  user={selectedUser}/>
-                <UpdateCoachModal/>
+                <UpdateUserModal/>
             </div>
         </Container>
     );
 }
 
-export default UserDetailContainer
+export default UserDetailContainer;

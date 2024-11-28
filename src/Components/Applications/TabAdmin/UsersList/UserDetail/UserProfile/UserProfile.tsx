@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from "react";
 import { Card, Row, Col, CardHeader, Button,  } from "reactstrap";
-import {setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
+import {setModalUpdateUser} from "@/Redux/Reducers/userSlice/UserSlice";
 import {useAppDispatch} from "@/Redux/Hooks";
 import {imageBaseUrl} from "@/services/axios";
 import BackButton from "@/CommonComponent/BackButton";
@@ -50,7 +50,7 @@ const UserProfile: React.FC<{user: any}> = ({ user }) => {
                             <Button
                                 color="primary" outline className="mt-3 rounded-pill shadow-sm"
                                 style={{ padding: '5px 20px' }}
-                                onClick={()=>dispatch(setModalUpdateCoach({isOpen: true, user}))}
+                                onClick={()=>dispatch(setModalUpdateUser({isOpen: true, user}))}
                             >
                                 Modifier le rôle
                             </Button>

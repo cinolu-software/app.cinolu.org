@@ -17,6 +17,8 @@ const initialState: InitialStateUserType = {
     isOpenModalDeleteCoach: false,
     isOpenModalDeleteStaffMember: false,
     isOpenModalUpdateCoach: false,
+    isOpenModalUpdateUser: false,
+    isOpenModalUpdateStaphMember: false,
     selectedUser: null,
     selectedCoach: null,
     selectedStaffMember: null,
@@ -142,6 +144,12 @@ const UsersSlice = createSlice({
                 state.selectedCoach = action.payload.user;
             }
         },
+        setModalUpdateUser: (state, action: PayloadAction<{isOpen: boolean; user?: UserType | null}>) => {
+            state.isOpenModalUpdateUser = action.payload.isOpen;
+            if(action.payload.user) {
+                state.selectedUser = action.payload.user;
+            }
+        },
         setFilterToggle: (state) => {
             state.filterToggle = !state.filterToggle;
         },
@@ -240,6 +248,7 @@ export const {
     setModalDeleteCoach,
     setModalDeleteStaffMember,
     setModalUpdateCoach,
+    setModalUpdateUser,
     setSelectedStaffMember,
     setSelectedCoach,
     setSelectedUser,

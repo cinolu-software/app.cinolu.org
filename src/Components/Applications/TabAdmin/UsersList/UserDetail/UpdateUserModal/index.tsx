@@ -2,17 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Button, CardBody, Col, Input } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalUpdateCoach, updateUser } from "@/Redux/Reducers/userSlice/UserSlice";
+import { setModalUpdateUser, updateUser } from "@/Redux/Reducers/userSlice/UserSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 import {TransformedRoleType} from "@/Types/AdminOptions/Roles/RoleType";
 
-const UpdateCoachModal = () => {
+const UpdateUserModal = () => {
+
     const dispatch = useAppDispatch();
-    const { isOpenModalUpdateCoach, selectedCoach } = useAppSelector(state => state.users);
+
+    const { isOpenModalUpdateUser, selectedUser } = useAppSelector(state => state.users);
     const { originalRoleData, status } = useAppSelector(state => state.role);
 
-    const [selectedRoles, setSelectedRoles] = useState<string[]>(selectedCoach?.roles.map((role: TransformedRoleType) => role.id) || []);
+    const [selectedRoles, setSelectedRoles] = useState<string[]>(selectedUser?.roles.map((role: TransformedRoleType) => role.id) || []);
 
     useEffect(() => {
         if (status === 'idle') {
@@ -27,28 +29,24 @@ const UpdateCoachModal = () => {
     };
 
     const handleSubmit = async () => {
-        if (!selectedCoach) return;
+        if (!selectedUser) return;
         try {
-            await dispatch(updateUser({ id: selectedCoach.id, roles: selectedRoles })).unwrap();
+            await dispatch(updateUser({ id: selectedUser.id, roles: selectedRoles })).unwrap();
             toast.success("Rôle(s) mis à jour avec succès !", { transition: Flip });
-            dispatch(setModalUpdateCoach({ isOpen: false, user: null }));
+            dispatch(setModalUpdateUser({ isOpen: false, user: null }));
         } catch (error) {
             toast.error("Une erreur est survenue lors de la mise à jour.");
         }
     };
-
-    useEffect(() => {
-
-    }, [selectedCoach]);
 
     return (
         <Col xl="4">
             <CardBody className="badge-spacing">
                 <CommonModal
                     centered
-                    isOpen={isOpenModalUpdateCoach}
-                    toggle={() => dispatch(setModalUpdateCoach({ isOpen: false, user: null }))}
-                    title="Modifier"
+                    isOpen={isOpenModalUpdateUser}
+                    toggle={() => dispatch(setModalUpdateUser({ isOpen: false, user: null }))}
+                    title="Modifier le Rôle"
                 >
                     <section className="main-upgrade">
                         <div>
@@ -81,4 +79,4 @@ const UpdateCoachModal = () => {
     );
 };
 
-export default UpdateCoachModal;
+export default UpdateUserModal;
