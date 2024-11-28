@@ -4,37 +4,28 @@ import { UserProfileData } from "@/Data/Layout";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogOut } from "react-feather";
-import { selectAuth, logout, loadUserFromStorage } from "@/Redux/Reducers/AuthSlice";
-import { useDispatch, useSelector } from "react-redux";
+import {logout, getProfile } from "@/Redux/Reducers/AuthSlice";
 import { imageBaseUrl } from "@/services/axios";
-import { AppDispatch } from "@/Redux/Store";
+import {useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 
 export const Profile = () => {
-    const dispatch = useDispatch<AppDispatch>();
-    const router = useRouter();
-    const { user, isAuthenticated } = useSelector(selectAuth);
 
-    const [localUser, setLocalUser] = useState(user);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    const {user} = useAppSelector(state => state.auth);
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user_profile");
-        if (storedUser) {
-            setLocalUser(JSON.parse(storedUser));
-        } else if (isAuthenticated && user) {
-            localStorage.setItem("user_profile", JSON.stringify(user));
-            setLocalUser(user);
+        try {
+            dispatch(getProfile());
+        }catch (e) {
+            router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string);
         }
-    }, [user, isAuthenticated]);
+    }, [dispatch]);
 
     const LogOutUser = async () => {
         await dispatch(logout());
-        localStorage.removeItem("user_profile");
         router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string);
     };
-
-    useEffect(() => {
-        dispatch(loadUserFromStorage());
-    }, [dispatch]);
 
     return (
         <li className="profile-nav onhover-dropdown px-0 py-0">
@@ -42,17 +33,17 @@ export const Profile = () => {
                 <img
                     className="profile-img"
                     src={
-                        localUser?.profile
-                            ? `${imageBaseUrl}/profiles/${localUser.profile}`
+                        user?.profile
+                            ? `${imageBaseUrl}/profiles/${user.profile}`
                             : `${ImagePath}/avtar/avatar.jpg`
                     }
                     alt="profile utilisateur"
                 />
                 <div className="flex-grow-1">
-                    <span>{localUser ? localUser.name : "Utilisateur"}</span>
+                    <span>{user ? user.name : "Utilisateur"}</span>
                     <p className="mb-0 font-outfit">
-                        {localUser?.roles && Array.isArray(localUser.roles) ? (
-                            localUser.roles.map((role, index) => (
+                        {user?.roles && Array.isArray(user.roles) ? (
+                            user.roles.map((role, index) => (
                                 <span key={index} className=" me-1">{role}</span>
                             ))
                         ) : (

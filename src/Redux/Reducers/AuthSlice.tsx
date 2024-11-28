@@ -25,7 +25,7 @@ export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload
         try {
             const response = await axiosInstance.patch(`${apiBaseUrl}/auth/profile`, profileData);
             const updatedProfile = response.data.data;
-            localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
+            // localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
             return { user: updatedProfile };
         }
         catch (error: any) {
@@ -46,7 +46,7 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
                 },
             });
 
-            localStorage.setItem("user_profile", JSON.stringify(response.data.data));
+            // localStorage.setItem("user_profile", JSON.stringify(response.data.data));
 
             return { user: response.data.data };
         }
@@ -76,7 +76,7 @@ export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: st
         try {
             const response = await axiosInstance.get(`/auth/profile`);
             const user = response.data.data;
-            localStorage.setItem("user_profile", JSON.stringify(user));
+            // localStorage.setItem("user_profile", JSON.stringify(user));
             Cookies.set("cinolu_token", JSON.stringify(user));
             return { user };
         } catch (error: any) {
@@ -99,15 +99,13 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-
-        loadUserFromStorage: (state) => {
-            const storedUser = localStorage.getItem("user_profile");
-            if (storedUser) {
-                state.user = JSON.parse(storedUser);
-                state.isAuthenticated = true;
-            }
-        },
-
+        // loadUserFromStorage: (state) => {
+        //     const storedUser = localStorage.getItem("user_profile");
+        //     if (storedUser) {
+        //         state.user = JSON.parse(storedUser);
+        //         state.isAuthenticated = true;
+        //     }
+        // },
     },
     extraReducers: (builder) => {
         builder
@@ -131,7 +129,7 @@ const authSlice = createSlice({
             .addCase(updateProfile.fulfilled, (state, action) => {
                 state.statusAuth = 'succeeded';
                 state.user = action.payload.user;
-                localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
+                // localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(updateProfile.rejected, (state, action) => {
                 state.statusAuth = 'failed';
@@ -144,7 +142,7 @@ const authSlice = createSlice({
             .addCase(updateProfileImage.fulfilled, (state, action) => {
                 state.statusAuth = 'succeeded';
                 state.user = action.payload.user;
-                localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
+                // localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(updateProfileImage.rejected, (state, action) => {
                 state.statusAuth = 'failed';
@@ -178,7 +176,7 @@ const authSlice = createSlice({
     },
 });
 
-export const { loadUserFromStorage } = authSlice.actions;
+// export const { loadUserFromStorage } = authSlice.actions;
 export const selectAuth = (state: RootState) => state.auth;
 export const selectStatus = (state: RootState) => state.auth.statusAuth;
 export const selectError = (state: RootState) => state.auth.errorAuth;
