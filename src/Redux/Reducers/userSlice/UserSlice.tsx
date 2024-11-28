@@ -33,7 +33,7 @@ const initialState: InitialStateUserType = {
     }
 };
 
-// Thunk pour récupérer les utilisateurs
+
 export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchUsers',
     async () => {
@@ -42,7 +42,7 @@ export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     }
 );
 
-// Thunk pour récupérer les membres du staff
+
 export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     'users/fetchStaffMembers',
     async () => {
@@ -51,7 +51,7 @@ export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     }
 );
 
-// Thunk pour récupérer les coachs
+
 export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchCoaches',
     async () => {
@@ -60,7 +60,7 @@ export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
     }
 );
 
-// Thunk pour créer un utilisateur
+
 export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>>(
     'users/createUser',
     async (newUser, { rejectWithValue }) => {
@@ -79,7 +79,7 @@ export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
     }
 );
 
-// Thunk pour mettre à jour un utilisateur
+
 export const updateUser = createAsyncThunk<{ data: UserType }, Partial<UserType>>(
     'users/updateUser',
     async (user, { rejectWithValue }) => {
@@ -92,7 +92,7 @@ export const updateUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
     }
 );
 
-// Thunk pour supprimer un utilisateur
+
 export const deleteUser = createAsyncThunk<string, string>(
     'users/deleteUser',
     async (userId, { rejectWithValue }) => {

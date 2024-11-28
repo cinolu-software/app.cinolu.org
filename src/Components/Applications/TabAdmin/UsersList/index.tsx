@@ -18,7 +18,7 @@ const UsersListContainer: React.FC = () => {
   const {usersData, statusUsers, isOpenModalDeleteUser, selectedUser} = useAppSelector((state) => state.users);
   const [roleFilter, setRoleFilter] = useState<string>("");
 
-    useEffect(() => {
+  useEffect(() => {
     if (statusUsers === 'idle') {
       dispatch(fetchUsers());
     }

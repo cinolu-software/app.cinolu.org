@@ -29,8 +29,6 @@ const SidebarMenuList = () => {
     return mainMenu?.Items?.map((data) => data.title).every((titles) => pinedMenu.includes(titles || ""));
   };
 
-  console.log(user)
-
   return (
       <>
         {visibleMenuList &&

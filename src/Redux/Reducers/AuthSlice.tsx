@@ -19,17 +19,16 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     }
 );
 
-export const updateProfile = createAsyncThunk<AuthResponse, UpdateProfilePayload, { rejectValue: string }>(
+export const updateProfile = createAsyncThunk<any, UpdateProfilePayload, { rejectValue: string }>(
     "auth/updateProfile",
     async (profileData, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.patch(`${apiBaseUrl}/auth/profile`, profileData);
             const updatedProfile = response.data.data;
-            // localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
             return { user: updatedProfile };
         }
         catch (error: any) {
-            const errorMessage = error.response?.data?.message?.map((err: { message: string }) => `${err.message}`).join(", ") || "Une erreur est survenue lors de la mise à jour du profil";
+            const errorMessage = "Une erreur est survenue lors de la mise à jour du profil";
             return rejectWithValue(errorMessage);
         }
     }
@@ -39,15 +38,11 @@ export const updateProfileImage = createAsyncThunk<AuthResponse, FormData, { rej
     "auth/updateProfileImage",
     async (formData, { rejectWithValue }) => {
         try {
-
             const response = await axios.post(`${apiBaseUrl}/users/image-profile/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-
-            // localStorage.setItem("user_profile", JSON.stringify(response.data.data));
-
             return { user: response.data.data };
         }
         catch (error: any) {
@@ -76,7 +71,6 @@ export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: st
         try {
             const response = await axiosInstance.get(`/auth/profile`);
             const user = response.data.data;
-            // localStorage.setItem("user_profile", JSON.stringify(user));
             Cookies.set("cinolu_token", JSON.stringify(user));
             return { user };
         } catch (error: any) {
@@ -88,10 +82,10 @@ export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: st
 
 
 const initialState: AuthState = {
-    user: null,
-    statusAuth: "idle",
-    errorAuth: null,
-    isAuthenticated: false,
+    user : null,
+    statusAuth : "idle",
+    errorAuth : null,
+    isAuthenticated : false,
 };
 
 
@@ -99,13 +93,7 @@ const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        // loadUserFromStorage: (state) => {
-        //     const storedUser = localStorage.getItem("user_profile");
-        //     if (storedUser) {
-        //         state.user = JSON.parse(storedUser);
-        //         state.isAuthenticated = true;
-        //     }
-        // },
+
     },
     extraReducers: (builder) => {
         builder
@@ -129,7 +117,6 @@ const authSlice = createSlice({
             .addCase(updateProfile.fulfilled, (state, action) => {
                 state.statusAuth = 'succeeded';
                 state.user = action.payload.user;
-                // localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(updateProfile.rejected, (state, action) => {
                 state.statusAuth = 'failed';
@@ -142,7 +129,6 @@ const authSlice = createSlice({
             .addCase(updateProfileImage.fulfilled, (state, action) => {
                 state.statusAuth = 'succeeded';
                 state.user = action.payload.user;
-                // localStorage.setItem('user_profile', JSON.stringify(action.payload.user));
             })
             .addCase(updateProfileImage.rejected, (state, action) => {
                 state.statusAuth = 'failed';
@@ -176,8 +162,7 @@ const authSlice = createSlice({
     },
 });
 
-// export const { loadUserFromStorage } = authSlice.actions;
-export const selectAuth = (state: RootState) => state.auth;
+
 export const selectStatus = (state: RootState) => state.auth.statusAuth;
 export const selectError = (state: RootState) => state.auth.errorAuth;
 
