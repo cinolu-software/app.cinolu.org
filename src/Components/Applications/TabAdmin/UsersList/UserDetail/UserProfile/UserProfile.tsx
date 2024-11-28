@@ -6,6 +6,7 @@ import { Card, Row, Col, CardHeader, Button,  } from "reactstrap";
 import {setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
 import {useAppDispatch} from "@/Redux/Hooks";
 import {imageBaseUrl} from "@/services/axios";
+import BackButton from "@/CommonComponent/BackButton";
 
 
 
@@ -15,19 +16,13 @@ const UserProfile: React.FC<{user: any}> = ({ user }) => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (!user) router.push('/users/admin/coachs');
+        if (!user) router.push('/users/admin/list');
     }, []);
 
 
     return (
         <>
-            <Row className="mb-4">
-                <Col className="d-flex justify-content-end">
-                    <Link href="/users/admin/coachs" className='btn btn-outline-primary'>
-                        <i className="bi bi-arrow-left"></i> Retour
-                    </Link>
-                </Col>
-            </Row>
+            <BackButton link={'/users/admin/list'}/>
             <Row>
                 <Col className="mx-auto">
                     <Card className="shadow-sm">
@@ -35,7 +30,7 @@ const UserProfile: React.FC<{user: any}> = ({ user }) => {
                             <div className="position-relative d-inline-block ">
                                 <img
                                     className="rounded-circle border border-3 border-light shadow-lg"
-                                    src={user?.profile ? `${imageBaseUrl}/profiles/user.profile` : `${ImagePath}/avtar/avatar.jpg` }
+                                    src={user?.profile ? `${imageBaseUrl}/profiles/${user.profile}` : `${ImagePath}/avtar/avatar.jpg` }
                                     alt="Profile Image"
                                     width="120" height="120"
                                     style={{ objectFit: 'cover' }}

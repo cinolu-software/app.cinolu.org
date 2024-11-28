@@ -7,13 +7,13 @@ import UserProfile from "@/Components/Applications/TabAdmin/UsersList/UserDetail
 
 const UserDetailContainer = () => {
 
-    const {selectedCoach} = useAppSelector(state=>state.users)
+    const {selectedUser} = useAppSelector(state=>state.users)
 
 
     return (
         <Container fluid>
             <div className="user-profile social-app-profile">
-                <UserProfile  user={selectedCoach}/>
+                <UserProfile  user={selectedUser}/>
                 <UpdateCoachModal/>
             </div>
         </Container>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import RatioImage from "@/CommonComponent/RatioImage";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
@@ -6,6 +6,7 @@ import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, set
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
 import {useRouter} from "next/navigation";
+import {Spinner} from "reactstrap";
 
 const UsersListTableName : React.FC<{image: string; name: string}> = ({image, name}) => {
   return (
@@ -15,21 +16,25 @@ const UsersListTableName : React.FC<{image: string; name: string}> = ({image, na
         </div>
         <p>{name}</p>
       </div>
-  )
+  );
 }
 
 const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [loadingEdit, setLoadingEdit] = useState(false);
+  const [loadingDetail, setLoadingDetail] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   const handleDelete = () => {
     dispatch(setModalDeleteUser({isOpen: true, user}));
   }
 
   const handleViewDetail = () => {
-    dispatch(setSelectedUser({user}))
-    router.push('/users/admin/coachs/detail_coach')
+    setLoadingDetail(true)
+    router.push('/users/admin/detail_user');
+    dispatch(setSelectedUser({user}));
   }
 
   return (
@@ -38,25 +43,22 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
           <div className={'col-4'}>
             <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
               <span>
-                <SVG iconId="editTable"/>
+                {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
               </span>
             </button>
           </div>
 
           <div className={'col-4'}>
-            <button
-                onClick={handleViewDetail}
-                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
-            >
+            <button onClick={handleViewDetail} style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
               <span>
-                <SVG iconId="moreTable"/>
+                {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
               </span>
             </button>
           </div>
 
           <div className={'col-4'}>
             <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-              <SVG iconId="trashTable" />
+              {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
             </button>
           </div>
         </div>
@@ -67,7 +69,7 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
-  const {isOpenModalUpdateCoach} = useAppSelector(state=>state.users)
+  const {} = useAppSelector(state=>state.users);
   const router = useRouter();
 
   const handleDelete = () => {
@@ -76,14 +78,12 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const handleViewDetail = () => {
     dispatch(setSelectedCoach({coach: user}))
-    router.push('/users/admin/coachs/detail_coach')
+    router.push('/users/admin/coachs/detail_coach');
   }
 
   const handleModifiedCoach = () => {
-    dispatch(setModalUpdateCoach({isOpen: true, user}))
-    console.log("C'est bon", user)
+    dispatch(setModalUpdateCoach({isOpen: true, user}));
   }
-
 
   return (
       <div className="product-action">
@@ -258,7 +258,7 @@ export const AddUser = [
     title: "Rôle de l'utilisateur",
     detail: "Sélectionner le rôle de l'utilisateur"
   },
-]
+];
 
 export const AddProjectAndUpload = [
   {
