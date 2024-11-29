@@ -17,4 +17,4 @@ const AddUser = () => {
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
 
-export default AddUser
+export default AddUser;

@@ -9,6 +9,7 @@ import {useRouter} from "next/navigation";
 import {Spinner} from "reactstrap";
 
 const UsersListTableName : React.FC<{image: string; name: string}> = ({image, name}) => {
+
   return (
       <div className={'product-names my-2'}>
         <div className={'light-product-box bg-img-cover'}>
@@ -19,13 +20,15 @@ const UsersListTableName : React.FC<{image: string; name: string}> = ({image, na
         </p>
       </div>
   );
+
 }
 
 const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const {selectedUser} = useAppSelector(state=>state.users)
+
+
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -43,7 +46,7 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
   const handleModifiedUser = () => {
     setLoadingEdit(true)
     setTimeout(()=>{
-      dispatch(setModalUpdateUser({isOpen: true, user}));
+      router.push('/users/admin/edit_user');
       setLoadingEdit(false);
     }, 1000)
     dispatch(setSelectedUser({user}))

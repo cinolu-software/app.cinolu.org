@@ -28,4 +28,5 @@ const UserTabContent = () => {
         </>
     );
 }
+
 export default UserTabContent

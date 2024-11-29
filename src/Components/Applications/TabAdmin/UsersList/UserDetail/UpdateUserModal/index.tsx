@@ -40,8 +40,6 @@ const UpdateUserModal = () => {
         }
     };
 
-    console.log("+++++++++>", selectedRoles);
-
     return (
         <Col xl="4">
             <CardBody className="badge-spacing">
