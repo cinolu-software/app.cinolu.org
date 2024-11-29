@@ -9,6 +9,7 @@ import { imageBaseUrl } from "@/services/axios";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 
 export const Profile = () => {
+
     const dispatch = useAppDispatch();
     const router = useRouter();
     const { user } = useAppSelector((state) => state.auth);
