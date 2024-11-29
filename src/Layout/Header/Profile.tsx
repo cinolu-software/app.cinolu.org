@@ -1,23 +1,22 @@
 import { Href, Logout, ImagePath } from "@/Constant";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { UserProfileData } from "@/Data/Layout";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { LogOut } from "react-feather";
-import {logout, getProfile } from "@/Redux/Reducers/AuthSlice";
+import { logout, getProfile } from "@/Redux/Reducers/AuthSlice";
 import { imageBaseUrl } from "@/services/axios";
-import {useAppSelector, useAppDispatch } from "@/Redux/Hooks";
+import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 
 export const Profile = () => {
-
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const {user} = useAppSelector(state => state.auth);
+    const { user } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
         try {
             dispatch(getProfile());
-        }catch (e) {
+        } catch (e) {
             router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string);
         }
     }, [dispatch]);
@@ -35,7 +34,9 @@ export const Profile = () => {
                     src={
                         user?.profile
                             ? `${imageBaseUrl}/profiles/${user.profile}`
-                            : `${ImagePath}/avtar/avatar.jpg`
+                            : user?.google_image
+                                ? user.google_image
+                                : `${ImagePath}/avtar/avatar.jpg`
                     }
                     alt="profile utilisateur"
                 />
@@ -44,7 +45,9 @@ export const Profile = () => {
                     <p className="mb-0 font-outfit">
                         {user?.roles && Array.isArray(user.roles) ? (
                             user.roles.map((role, index) => (
-                                <span key={index} className=" me-1">{role}</span>
+                                <span key={index} className="me-1">
+                                    {role}
+                                </span>
                             ))
                         ) : (
                             <span>Aucun rôle</span>

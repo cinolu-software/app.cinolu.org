@@ -8,7 +8,6 @@ import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 import {TransformedRoleType} from "@/Types/AdminOptions/Roles/RoleType";
 
 
-
 const UpdateUserModal = () => {
 
     const dispatch = useAppDispatch();

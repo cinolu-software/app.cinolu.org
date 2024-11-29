@@ -92,7 +92,7 @@ export const MenuList: MenuItem [] | undefined = [
                 path: '/notifications',
             },
         ],
-        requiredRoles: ["admin"],
+        requiredRoles: ["admin", "staff"],
     },
     {
         id: 3,
