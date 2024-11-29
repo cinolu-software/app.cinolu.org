@@ -1,5 +1,4 @@
 import { ImagePath } from "@/Constant";
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from "react";
 import { Card, Row, Col, CardHeader, Button,  } from "reactstrap";
@@ -18,7 +17,6 @@ const UserProfile: React.FC<{user: any}> = ({ user }) => {
     useEffect(() => {
         if (!user) router.push('/users/admin/list');
     }, []);
-
 
     return (
         <>
@@ -55,7 +53,6 @@ const UserProfile: React.FC<{user: any}> = ({ user }) => {
                                 Modifier le rôle
                             </Button>
                         </CardHeader>
-
                     </Card>
                 </Col>
             </Row>

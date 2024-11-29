@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import RatioImage from "@/CommonComponent/RatioImage";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
-import { setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setModalUpdateCoach, setSelectedUser} from "@/Redux/Reducers/userSlice/UserSlice";
+import {setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setModalUpdateCoach, setSelectedUser, setModalUpdateUser} from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
 import {useRouter} from "next/navigation";
@@ -14,7 +14,9 @@ const UsersListTableName : React.FC<{image: string; name: string}> = ({image, na
         <div className={'light-product-box bg-img-cover'}>
           <RatioImage src={`${image}`} alt={'image'} />
         </div>
-        <p>{name}</p>
+        <p>
+          {name}
+        </p>
       </div>
   );
 }
@@ -23,6 +25,7 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const {selectedUser} = useAppSelector(state=>state.users)
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -37,11 +40,23 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
     dispatch(setSelectedUser({user}));
   }
 
+  const handleModifiedUser = () => {
+    setLoadingEdit(true)
+    setTimeout(()=>{
+      dispatch(setModalUpdateUser({isOpen: true, user}));
+      setLoadingEdit(false);
+    }, 1000)
+    dispatch(setSelectedUser({user}))
+  }
+
   return (
       <div className="product-action">
         <div className={'row w-100 justify-content-center'}>
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+            <button
+                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                onClick={handleModifiedUser}
+            >
               <span>
                 {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
               </span>
@@ -69,7 +84,7 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
-  const {} = useAppSelector(state=>state.users);
+  const {isOpenModalUpdateCoach} = useAppSelector(state=>state.users);
   const router = useRouter();
 
   const handleDelete = () => {

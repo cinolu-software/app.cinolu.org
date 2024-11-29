@@ -7,6 +7,8 @@ import { toast, ToastContainer, Flip } from "react-toastify";
 import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 import {TransformedRoleType} from "@/Types/AdminOptions/Roles/RoleType";
 
+
+
 const UpdateUserModal = () => {
 
     const dispatch = useAppDispatch();
@@ -38,6 +40,8 @@ const UpdateUserModal = () => {
             toast.error("Une erreur est survenue lors de la mise à jour.");
         }
     };
+
+    console.log("+++++++++>", selectedRoles);
 
     return (
         <Col xl="4">

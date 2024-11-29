@@ -7,7 +7,7 @@ import {CoatchListTableDataColumn} from "@/Data/Application/Users";
 import { UsersListTableColumnType } from '@/Types/Users/UsersType';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import DeleteEntityModal from '@/CommonComponent/DeleteEntityModal';
-import UpdateCoachModal from "../UsersList/UserDetail/UpdateUserModal";
+import UpdateCoachModal from "@/Components/Applications/TabAdmin/CoachsList/CoachDetail/UpdateCoachModal";
 
 
 const CoachsListContainer = () =>{

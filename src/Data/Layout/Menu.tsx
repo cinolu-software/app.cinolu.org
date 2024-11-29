@@ -48,19 +48,19 @@ export const MenuList: MenuItem [] | undefined = [
                     {path: "/programs/programmCategory", title: "catégorie", type: "link", lanClass: "lan-6"},
                 ]
             },
-            {
-                title: "Evénements",
-                id: 2,
-                icon: "calendar",
-                type: "link",
-                lanClass: "lan-1",
-                active: false,
-                children: [
-                    {path: "/programs", title: "Evénements", type: "link", lanClass: "lan-6"},
-                    {path: "/programs/programTypes", title: "Types", type: "link", lanClass: "lan-6"},
-                    {path: "/programs/programmCategory", title: "Catégorie" , lanClass: "lan-6"},
-                ]
-            },
+            // {
+            //     title: "Evénements",
+            //     id: 2,
+            //     icon: "calendar",
+            //     type: "link",
+            //     lanClass: "lan-1",
+            //     active: false,
+            //     children: [
+            //         {path: "/programs", title: "Evénements", type: "link", lanClass: "lan-6"},
+            //         {path: "/programs/programTypes", title: "Types", type: "link", lanClass: "lan-6"},
+            //         {path: "/programs/programmCategory", title: "Catégorie" , lanClass: "lan-6"},
+            //     ]
+            // },
             {
                 title: "Partenaires",
                 id: 3,

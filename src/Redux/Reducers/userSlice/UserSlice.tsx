@@ -6,22 +6,28 @@ const initialState: InitialStateUserType = {
     usersData: [],
     coachsData: [],
     staffMemberData: [],
+
     statusUsers: 'idle',
     statusCoachs: 'idle',
     statusStaff: 'idle',
+
     filterToggle: false,
     errorUsers: null,
     errorCoachs: null,
     errorStaff: null,
+
     isOpenModalDeleteUser: false,
     isOpenModalDeleteCoach: false,
     isOpenModalDeleteStaffMember: false,
+
     isOpenModalUpdateCoach: false,
     isOpenModalUpdateUser: false,
     isOpenModalUpdateStaphMember: false,
+
     selectedUser: null,
     selectedCoach: null,
     selectedStaffMember: null,
+
     navId: 1,
     tabId: 1,
     formValue: {
@@ -114,9 +120,11 @@ const UsersSlice = createSlice({
         setNavId: (state, action: PayloadAction<number>) => {
             state.navId = action.payload;
         },
+
         setTabId: (state, action: PayloadAction<number>) => {
             state.tabId = action.payload;
         },
+
         setFormValue: (state, action: { payload: { name: keyof any, value: any } }) => {
             state.formValue[action.payload.name] = action.payload.value;
         },
@@ -138,6 +146,7 @@ const UsersSlice = createSlice({
                 state.selectedStaffMember = action.payload.user;
             }
         },
+
         setModalUpdateCoach: (state, action: PayloadAction<{isOpen: boolean; user?: CoachsType | null}>) => {
             state.isOpenModalUpdateCoach = action.payload.isOpen;
             if(action.payload.user) {
@@ -150,6 +159,7 @@ const UsersSlice = createSlice({
                 state.selectedUser = action.payload.user;
             }
         },
+
         setFilterToggle: (state) => {
             state.filterToggle = !state.filterToggle;
         },
@@ -243,13 +253,11 @@ export const {
     setModalDeleteUser,
     setFilterToggle,
     setNavId,
-    setTabId,
     setFormValue,
     setModalDeleteCoach,
     setModalDeleteStaffMember,
     setModalUpdateCoach,
     setModalUpdateUser,
-    setSelectedStaffMember,
     setSelectedCoach,
     setSelectedUser,
 } = UsersSlice.actions;

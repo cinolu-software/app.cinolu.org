@@ -7,8 +7,7 @@ import UserProfile from "@/Components/Applications/TabAdmin/UsersList/UserDetail
 
 const UserDetailContainer = () => {
 
-    const {selectedUser} = useAppSelector(state=>state.users)
-
+    const {selectedUser} = useAppSelector(state=>state.users);
 
     return (
         <Container fluid>

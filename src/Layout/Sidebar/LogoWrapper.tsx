@@ -10,7 +10,6 @@ export const LogoWrapper = () => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-  
   const { sidebarIconType } = useAppSelector((state) => state.themeCustomizer);
   const { toggleSidebar } = useAppSelector((state) => state.layout);
 
