@@ -35,29 +35,27 @@ const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
         }
     };
 
-    // Pré-remplir les champs du formulaire avec initialData
+
     useEffect(() => {
         if (initialData) {
             Object.keys(initialData).forEach((key) => {
                 if (key === "roles" && Array.isArray(initialData.roles)) {
-                    // Extraire uniquement les IDs des rôles
+
                     const roleIds = initialData.roles.map((role: any) => role.id);
                     dispatch(setFormValue({ name: key, value: roleIds }));
                 } else if (Object.keys(formValue).includes(key)) {
-                    // Ne mettre à jour que les clés existantes dans formValue
+
                     dispatch(setFormValue({ name: key, value: initialData[key] }));
                 }
             });
         }
     }, [initialData, dispatch]);
 
-    // Validation du formulaire
+
     useEffect(() => {
         const validateForm = () => {
             const isValid =
                 formValue?.email &&
-                formValue?.first_name &&
-                formValue?.last_name &&
                 formValue?.name &&
                 formValue?.phone_number &&
                 formValue?.address &&

@@ -15,8 +15,6 @@ const StepThree = () => {
         selectedUser?.roles.map((role: TransformedRoleType) => role.id) || []
     );
 
-    console.log('stepFree===>', formValue);
-
     useEffect(() => {
         if (status === 'idle') {
             dispatch(fetchRole());
