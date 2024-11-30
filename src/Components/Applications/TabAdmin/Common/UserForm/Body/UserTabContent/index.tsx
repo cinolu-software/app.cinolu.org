@@ -11,15 +11,11 @@ const UserTabContent = () => {
     return (
         <>
             <Col xxl="8" xl="8" className="box-col-8 position-relative">
-
                 <TabContent activeTab={navId}>
                     <TabPane tabId={1}>
-                        <StepOne />
-                    </TabPane>
-                    <TabPane tabId={2}>
                         <StepTwo />
                     </TabPane>
-                    <TabPane tabId={3}>
+                    <TabPane tabId={2}>
                         <StepThree />
                     </TabPane>
                 </TabContent>

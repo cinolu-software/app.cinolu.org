@@ -11,7 +11,7 @@ const StepOne = () => {
     return (
         <Row className={'g-2'}>
             <Col xs={'12'}>
-                <Row className={''}>
+                <Row className={'mt-5'}>
                     <Col >
                         <Label className="col-form-label">{"Nom"}</Label>
                         <Input
@@ -24,32 +24,32 @@ const StepOne = () => {
                         />
                     </Col>
                 </Row>
-                <Row className={'mt-4'}>
-                    <Col >
-                        <Label className="col-form-label">{"Post-nom"}</Label>
-                        <Input
-                            className={formValue?.first_name !== "" ? "valid" : "is-invalid"}
-                            type="text"
-                            required
-                            name="first_name"
-                            value={formValue?.first_name || ""}
-                            onChange={(e) => dispatch(setFormValue({name: 'first_name', value: e.target.value}))}
-                        />
-                    </Col>
-                </Row>
-                <Row className={'mt-4'}>
-                    <Col >
-                        <Label className="col-form-label">{"Prénom"}</Label>
-                        <Input
-                            className={formValue?.last_name !== "" ? "valid" : "is-invalid"}
-                            type="text"
-                            required
-                            name="last_name"
-                            value={formValue?.last_name || ""}
-                            onChange={(e) => dispatch(setFormValue({name: 'last_name', value: e.target.value}))}
-                        />
-                    </Col>
-                </Row>
+                {/*<Row className={'mt-4'}>*/}
+                {/*    <Col >*/}
+                {/*        <Label className="col-form-label">{"Post-nom"}</Label>*/}
+                {/*        <Input*/}
+                {/*            className={formValue?.first_name !== "" ? "valid" : "is-invalid"}*/}
+                {/*            type="text"*/}
+                {/*            required*/}
+                {/*            name="first_name"*/}
+                {/*            value={formValue?.first_name || ""}*/}
+                {/*            onChange={(e) => dispatch(setFormValue({name: 'first_name', value: e.target.value}))}*/}
+                {/*        />*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
+                {/*<Row className={'mt-4'}>*/}
+                {/*    <Col >*/}
+                {/*        <Label className="col-form-label">{"Prénom"}</Label>*/}
+                {/*        <Input*/}
+                {/*            className={formValue?.last_name !== "" ? "valid" : "is-invalid"}*/}
+                {/*            type="text"*/}
+                {/*            required*/}
+                {/*            name="last_name"*/}
+                {/*            value={formValue?.last_name || ""}*/}
+                {/*            onChange={(e) => dispatch(setFormValue({name: 'last_name', value: e.target.value}))}*/}
+                {/*        />*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
 
             </Col>
         </Row>

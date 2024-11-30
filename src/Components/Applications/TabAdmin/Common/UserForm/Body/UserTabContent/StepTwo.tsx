@@ -12,7 +12,22 @@ const StepTwo = () => {
     return (
         <Row className={'g-2'}>
             <Col xs={'12'}>
-                <Row className=''>
+
+                <Row className={''}>
+                    <Col >
+                        <Label className="col-form-label">{"Nom"}</Label>
+                        <Input
+                            className={formValue?.name !== "" ? "valid" : "is-invalid"}
+                            type="text"
+                            required
+                            name="name"
+                            value={formValue?.name || ""}
+                            onChange={(e) => dispatch(setFormValue({name: 'name', value: e.target.value}))}
+                        />
+                    </Col>
+                </Row>
+
+                <Row className='mt-2'>
                     <Col >
                         <Label className="col-form-label">{"Email"}</Label>
                         <Input

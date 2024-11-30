@@ -12,7 +12,6 @@ interface UserFormProps {
 }
 
 const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
-
     const [isFormValid, setIsFormValid] = useState<boolean>(false);
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -36,17 +35,33 @@ const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
         }
     };
 
+    // Pré-remplir les champs du formulaire avec initialData
     useEffect(() => {
         if (initialData) {
             Object.keys(initialData).forEach((key) => {
-                dispatch(setFormValue({ name: key, value: initialData[key] }));
+                if (key === "roles" && Array.isArray(initialData.roles)) {
+                    // Extraire uniquement les IDs des rôles
+                    const roleIds = initialData.roles.map((role: any) => role.id);
+                    dispatch(setFormValue({ name: key, value: roleIds }));
+                } else if (Object.keys(formValue).includes(key)) {
+                    // Ne mettre à jour que les clés existantes dans formValue
+                    dispatch(setFormValue({ name: key, value: initialData[key] }));
+                }
             });
         }
     }, [initialData, dispatch]);
 
+    // Validation du formulaire
     useEffect(() => {
         const validateForm = () => {
-            const isValid = formValue?.email && formValue?.first_name && formValue?.last_name && formValue?.name && formValue?.phone_number && formValue?.address && formValue?.roles?.length > 0;
+            const isValid =
+                formValue?.email &&
+                formValue?.first_name &&
+                formValue?.last_name &&
+                formValue?.name &&
+                formValue?.phone_number &&
+                formValue?.address &&
+                formValue?.roles?.length > 0;
             setIsFormValid(Boolean(isValid));
         };
         validateForm();
@@ -58,7 +73,9 @@ const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
                 <Col>
                     <Card>
                         <CardHeader>
-                            <h4 className={'ms-3'}>{mode === "create" ? "Créer un utilisateur" : "Modifier un utilisateur"}</h4>
+                            <h4 className={'ms-3'}>
+                                {mode === "create" ? "Créer un utilisateur" : "Modifier l'utilisateur"}
+                            </h4>
                         </CardHeader>
                         <CardBody>
                             <Body />

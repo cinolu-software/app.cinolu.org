@@ -8,7 +8,8 @@ import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 
 const UpdateUser = () => {
 
-    const {selectedUser} = useAppSelector(state => state.users)
+    const {selectedUser} = useAppSelector(state => state.users);
+
 
     return (
         <Container fluid>

@@ -260,18 +260,12 @@ export const StaffMemberListTableDataColumn = [
 export const AddUser = [
   {
     id: 1,
-    icon: "user_info",
-    title: "Indetités de l'utilisateur",
-    detail:"Indetités de l'utilisateur",
+    icon: "user_contact",
+    title: "Utilisateur",
+    detail: "Utilisateur"
   },
   {
     id: 2,
-    icon: "user_contact",
-    title: "Contact de l'utilisateur",
-    detail: "Contact de l'utilisateur"
-  },
-  {
-    id: 3,
     icon: "user_role",
     title: "Rôle de l'utilisateur",
     detail: "Sélectionner le rôle de l'utilisateur"

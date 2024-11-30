@@ -50,7 +50,6 @@ export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
     }
 );
 
-
 export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     'users/fetchStaffMembers',
     async () => {
@@ -58,7 +57,6 @@ export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
         return { data: response.data.data };
     }
 );
-
 
 export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchCoaches',
