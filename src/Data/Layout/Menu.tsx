@@ -3,19 +3,25 @@ import {MenuItem} from "@/Types/LayoutTypes";
 export const MenuList: MenuItem [] | undefined = [
     {
         id: 1,
-        title : "General",
+        title : "Mon Compte",
         lanClass : "lan-1",
-        menucontent : "Dashboard",
+        menucontent : "Compte",
         Items: [
             {
-                path: "/dashboard",
-                icon: "home",
-                type: "link",
-                title: "Dashboard",
+                title: "Compte",
+                id: 2,
+                icon: "user",
+                type: "sub",
+                lanClass: "lan-1",
+                active: false,
+                children: [
+                    {path: "/users/profile", title: "Profile", type: "link", lanClass: "lan-6"},
+                ]
             },
         ],
-        requiredRoles: ["admin", "coach", "staff"],
+        requiredRoles: ["admin", "coach", "staff", 'user'],
     },
+
     {
         id: 2,
         title: "Administration",
@@ -23,8 +29,15 @@ export const MenuList: MenuItem [] | undefined = [
         menucontent: "admin",
         Items: [
             {
-                title: "Users",
                 id: 1,
+                path: "/dashboard",
+                icon: "home",
+                type: "link",
+                title: "Dashboard",
+            },
+            {
+                title: "Users",
+                id: 2,
                 icon: "user",
                 type: "sub",
                 lanClass: "lan-1",
@@ -37,7 +50,7 @@ export const MenuList: MenuItem [] | undefined = [
             },
             {
                 title: "Programmes",
-                id: 2,
+                id: 3,
                 icon: "builders",
                 type: "link",
                 lanClass: "lan-1",
@@ -50,7 +63,7 @@ export const MenuList: MenuItem [] | undefined = [
             },
             // {
             //     title: "Evénements",
-            //     id: 2,
+            //     id: 4,
             //     icon: "calendar",
             //     type: "link",
             //     lanClass: "lan-1",
@@ -63,7 +76,7 @@ export const MenuList: MenuItem [] | undefined = [
             // },
             {
                 title: "Partenaires",
-                id: 3,
+                id: 5,
                 icon: "bonus-kit",
                 type: "sub",
                 lanClass: "lan-1",
@@ -75,7 +88,7 @@ export const MenuList: MenuItem [] | undefined = [
             },
             {
                 title: "Rôle",
-                id: 4,
+                id: 6,
                 icon: "file",
                 type: "link",
                 lanClass: "lan-1",
@@ -84,7 +97,7 @@ export const MenuList: MenuItem [] | undefined = [
             },
             {
                 title: "Notifications",
-                id: 5,
+                id: 7,
                 icon: "chat",
                 type: "link",
                 lanClass: "lan-1",
