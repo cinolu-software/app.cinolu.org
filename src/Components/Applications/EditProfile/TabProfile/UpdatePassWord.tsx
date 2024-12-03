@@ -133,7 +133,7 @@ const UpdatePassWord = () => {
                         </div>
                     </Col>
                     <Col sm="12">
-                        <Button block color="primary" onClick={handlePasswordUpdate}>{"Modifier le mot de passe"}</Button>
+                        <button className={'btn btn-outline-primary'} onClick={handlePasswordUpdate}>{"Modifier le mot de passe"}</button>
                     </Col>
                 </Row>
             </Form>

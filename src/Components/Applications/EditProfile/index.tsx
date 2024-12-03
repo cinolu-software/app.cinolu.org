@@ -4,13 +4,24 @@ import EditProfileForm from "./EditProfileImageAndPassword/EditProfileForm";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import UserProfileInfo from "./UserProfileInfo/UserProfileInfo";
 import BackButton from "@/CommonComponent/BackButton";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 
 const EditProfileContainer = () => {
+  const {user} = useAppSelector(state=>state.auth)
+
+  // @ts-ignore
+  const roles = user?.roles.map(role=>role);
+
 
   return (
     <Container fluid>
       <div className="edit-profile">
-        <BackButton link={'/dashboard'}/>
+
+        {
+          !roles?.includes('user') && (
+                <BackButton link={'/dashboard'}/>
+            )
+        }
         <Row>
           <UserProfileInfo/>
           <EditProfileForm />
