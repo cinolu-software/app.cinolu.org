@@ -3,7 +3,7 @@ import {Col, Form, Input, Label, Row} from "reactstrap";
 import { useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import {setFormValue} from "@/Redux/Reducers/userSlice/UserSlice";
 
-const StepTwo = () => {
+const StepTwo : React.FC<{mode: string}> = ({mode}) => {
 
     const dispatch = useAppDispatch();
     const {formValue} = useAppSelector((state) => state.users);
@@ -18,6 +18,7 @@ const StepTwo = () => {
                         <Label className="col-form-label">{"Nom"}</Label>
                         <Input
                             className={formValue?.name !== "" ? "valid" : "is-invalid"}
+                            disabled={mode==="edit"}
                             type="text"
                             required
                             name="name"
@@ -33,6 +34,7 @@ const StepTwo = () => {
                         <Input
                             className={formValue?.email !== "" ? "valid" : "is-invalid"}
                             type="email"
+                            disabled={mode==="edit"}
                             required
                             name="email"
                             value={formValue?.email || ""}
@@ -47,6 +49,7 @@ const StepTwo = () => {
                         <Input
                             className={formValue?.phone_number !== "" ? "valid" : "is-invalid"}
                             type="text"
+                            disabled={mode==="edit"}
                             required
                             name="phone_number"
                             value={formValue?.phone_number || ""}
@@ -61,6 +64,7 @@ const StepTwo = () => {
                         <Input
                             className={formValue?.address !== "" ? "valid" : "is-invalid"}
                             type="text"
+                            disabled={mode==="edit"}
                             required
                             name="address"
                             value={formValue?.address || ""}

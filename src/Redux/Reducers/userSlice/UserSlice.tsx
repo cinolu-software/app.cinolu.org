@@ -32,8 +32,6 @@ const initialState: InitialStateUserType = {
     tabId: 1,
     formValue: {
         email: "",
-        first_name: "",
-        last_name: "",
         name: "",
         phone_number: "",
         address: "",
@@ -110,6 +108,7 @@ export const deleteUser = createAsyncThunk<string, string>(
         }
     }
 );
+
 
 const UsersSlice = createSlice({
     name: 'users',
@@ -251,6 +250,7 @@ export const {
     setModalDeleteUser,
     setFilterToggle,
     setNavId,
+    setTabId,
     setFormValue,
     setModalDeleteCoach,
     setModalDeleteStaffMember,

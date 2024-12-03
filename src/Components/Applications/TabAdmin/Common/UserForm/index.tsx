@@ -12,6 +12,7 @@ interface UserFormProps {
 }
 
 const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
+
     const [isFormValid, setIsFormValid] = useState<boolean>(false);
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -76,7 +77,7 @@ const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
                             </h4>
                         </CardHeader>
                         <CardBody>
-                            <Body />
+                            <Body mode={mode} />
                         </CardBody>
                         <CardFooter>
                             <Row>

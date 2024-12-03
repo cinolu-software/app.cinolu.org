@@ -1,10 +1,12 @@
+import React from "react";
 import { Col, TabContent, TabPane } from "reactstrap";
-import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 import { useAppSelector } from "@/Redux/Hooks";
+import CommonButton from "@/Components/Applications/TabAdmin/Common/CommonButton";
 
-const UserTabContent = () => {
+
+const UserTabContent : React.FC<{mode: string}> = ({mode}) =>  {
 
     const {navId} = useAppSelector((state)=> state.users);
 
@@ -13,14 +15,15 @@ const UserTabContent = () => {
             <Col xxl="8" xl="8" className="box-col-8 position-relative">
                 <TabContent activeTab={navId}>
                     <TabPane tabId={1}>
-                        <StepTwo />
+                        <StepTwo mode={mode} />
                     </TabPane>
                     <TabPane tabId={2}>
                         <StepThree />
                     </TabPane>
                 </TabContent>
-
             </Col>
+            <CommonButton/>
+
         </>
     );
 }
