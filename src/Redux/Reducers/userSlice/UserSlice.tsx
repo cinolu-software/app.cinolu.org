@@ -83,7 +83,6 @@ export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
     }
 );
 
-
 export const updateUser = createAsyncThunk<{ data: UserType }, Partial<UserType>>(
     'users/updateUser',
     async (user, { rejectWithValue }) => {
@@ -168,6 +167,15 @@ const UsersSlice = createSlice({
         },
         setSelectedStaffMember : (state, action: PayloadAction<{staffMember: StaffMemberType}>) => {
             state.selectedStaffMember = action.payload.staffMember;
+        },
+        resetFormValue : (state) => {
+            state.formValue = {
+                email: "",
+                name: "",
+                phone_number: "",
+                address: "",
+                roles: [],
+            };
         }
     },
     extraReducers: (builder) => {
@@ -252,6 +260,7 @@ export const {
     setNavId,
     setTabId,
     setFormValue,
+    resetFormValue,
     setModalDeleteCoach,
     setModalDeleteStaffMember,
     setModalUpdateCoach,

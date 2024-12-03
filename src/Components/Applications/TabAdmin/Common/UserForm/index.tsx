@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardFooter, Container, Row, Col, CardHeader } from "reactstrap";
 import Body from "@/Components/Applications/TabAdmin/Common/UserForm/Body";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createUser, updateUser, setFormValue } from "@/Redux/Reducers/userSlice/UserSlice";
+import { createUser, updateUser, setFormValue, resetFormValue } from "@/Redux/Reducers/userSlice/UserSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import { useRouter } from "next/navigation";
 
@@ -36,12 +36,20 @@ const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
         }
     };
 
+    useEffect(() => {
+        if (mode==='create'){
+
+        }
+    }, [mode]);
+
 
     useEffect(() => {
-        if (initialData) {
+        if(mode === "create") {
+            dispatch(resetFormValue());
+        }
+        else if (initialData) {
             Object.keys(initialData).forEach((key) => {
                 if (key === "roles" && Array.isArray(initialData.roles)) {
-
                     const roleIds = initialData.roles.map((role: any) => role.id);
                     dispatch(setFormValue({ name: key, value: roleIds }));
                 } else if (Object.keys(formValue).includes(key)) {
@@ -65,6 +73,7 @@ const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
         };
         validateForm();
     }, [formValue]);
+
 
     return (
         <Container fluid>
