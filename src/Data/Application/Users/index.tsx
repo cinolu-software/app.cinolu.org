@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import RatioImage from "@/CommonComponent/RatioImage";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
-import {setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setSelectedUser, } from "@/Redux/Reducers/userSlice/UserSlice";
+import {setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setSelectedUser, setSelectedStaffMember } from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
 import {useRouter} from "next/navigation";
@@ -146,12 +146,34 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
   )
 }
 
+
+
 const StaffMemberListTableAction: React.FC<{ user: UserType }> = ({user}) => {
 
   const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const [loadingEdit, setLoadingEdit] = useState(false);
+  const [loadingDetail, setLoadingDetail] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   const handleDelete = () => {
-    dispatch(setModalDeleteStaffMember({isOpen: true, user}));
+    dispatch(setModalDeleteUser({isOpen: true, user}));
+  }
+
+  const handleViewDetail = () => {
+    setLoadingDetail(true)
+    router.push('/users/admin/staffMembers/detail_staffMembers');
+    dispatch(setSelectedStaffMember({staffMember: user}));
+  }
+
+  const handleModifiedUser = () => {
+    setLoadingEdit(true)
+    setTimeout(()=>{
+      router.push('/users/admin/staffMembers/edit_staffMembers');
+      setLoadingEdit(false);
+    }, 1000)
+    dispatch(setSelectedStaffMember({staffMember: user}))
   }
 
 
@@ -159,30 +181,34 @@ const StaffMemberListTableAction: React.FC<{ user: UserType }> = ({user}) => {
       <div className="product-action">
         <div className={'row w-100 justify-content-center'}>
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+            <button
+                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                onClick={handleModifiedUser}
+            >
               <span>
-                <SVG iconId="editTable"/>
+                {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
               </span>
             </button>
           </div>
-
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
+            <button onClick={handleViewDetail}
+                    style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
               <span>
-                <SVG iconId="moreTable"/>
+                {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
               </span>
             </button>
           </div>
-
           <div className={'col-4'}>
-            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-              <SVG iconId="trashTable" />
+            <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                    onClick={handleDelete}>
+              {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
             </button>
           </div>
         </div>
       </div>
   )
 }
+
 
 export const UsersListTableDataColumn = [
   {
@@ -196,10 +222,10 @@ export const UsersListTableDataColumn = [
     grow: 2
   },
   {
-      name: "Email",
-      selector: (row: UsersListTableColumnType) => row.email,
-      sortable: true,
-      grow: 2
+    name: "Email",
+    selector: (row: UsersListTableColumnType) => row.email,
+    sortable: true,
+    grow: 2
   },
   {
     name: "Actions",
@@ -222,8 +248,8 @@ export const CoatchListTableDataColumn = [
     grow: 2
   },
   {
-      name: "Email",
-      selector: (row: UsersListTableColumnType) => row.email,
+    name: "Email",
+    selector: (row: UsersListTableColumnType) => row.email,
       sortable: true,
       grow: 2
   },

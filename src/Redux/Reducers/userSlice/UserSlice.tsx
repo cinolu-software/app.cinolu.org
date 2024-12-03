@@ -257,6 +257,7 @@ const UsersSlice = createSlice({
 export const {
     setModalDeleteUser,
     setFilterToggle,
+    setSelectedStaffMember,
     setNavId,
     setTabId,
     setFormValue,
