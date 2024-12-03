@@ -86,7 +86,7 @@ const UserForm: React.FC<UserFormProps> = ({ mode, initialData }) => {
                             </h4>
                         </CardHeader>
                         <CardBody>
-                            <Body mode={mode} />
+                            <Body mode={mode} selectedUser={initialData}/>
                         </CardBody>
                         <CardFooter>
                             <Row>

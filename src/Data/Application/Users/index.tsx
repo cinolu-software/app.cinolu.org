@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import RatioImage from "@/CommonComponent/RatioImage";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import {UsersListTableColumnType, UserType} from "@/Types/Users/UsersType";
-import {setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setModalUpdateCoach, setSelectedUser, setModalUpdateUser} from "@/Redux/Reducers/userSlice/UserSlice";
+import {setModalDeleteUser, setModalDeleteCoach, setModalDeleteStaffMember, setSelectedCoach, setSelectedUser, } from "@/Redux/Reducers/userSlice/UserSlice";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from "@/CommonComponent/SVG";
 import {useRouter} from "next/navigation";
@@ -27,7 +27,6 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
   const router = useRouter();
-
 
   const [loadingEdit, setLoadingEdit] = useState(false);
   const [loadingDetail, setLoadingDetail] = useState(false);
@@ -87,20 +86,28 @@ const UsersListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
 
   const dispatch = useAppDispatch();
-  const {isOpenModalUpdateCoach} = useAppSelector(state=>state.users);
   const router = useRouter();
+  const [loadingEdit, setLoadingEdit] = useState(false);
+  const [loadingDetail, setLoadingDetail] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
 
   const handleDelete = () => {
     dispatch(setModalDeleteCoach({isOpen: true, user}));
   }
 
   const handleViewDetail = () => {
+    setLoadingDetail(true)
     dispatch(setSelectedCoach({coach: user}))
     router.push('/users/admin/coachs/detail_coach');
   }
 
   const handleModifiedCoach = () => {
-    dispatch(setModalUpdateCoach({isOpen: true, user}));
+    setLoadingEdit(true)
+    setTimeout(()=>{
+      router.push('/users/admin/coachs/edit_coach');
+      setLoadingEdit(false);
+    }, 1000)
+    dispatch(setSelectedCoach({coach: user}))
   }
 
   return (
@@ -112,18 +119,16 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
                 onClick={handleModifiedCoach}
             >
               <span>
-                <SVG iconId="editTable"/>
+                {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
               </span>
             </button>
           </div>
 
           <div className={'col-4'}>
-            <button
-                onClick={handleViewDetail}
-                style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
-            >
+            <button onClick={handleViewDetail}
+                    style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
               <span>
-                <SVG iconId="moreTable"/>
+                {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
               </span>
             </button>
           </div>
@@ -133,7 +138,7 @@ const CoachListTableAction : React.FC<{user: UserType}> = ({ user}) => {
                 style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                 onClick={handleDelete}
             >
-              <SVG iconId="trashTable"/>
+              {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
             </button>
           </div>
         </div>

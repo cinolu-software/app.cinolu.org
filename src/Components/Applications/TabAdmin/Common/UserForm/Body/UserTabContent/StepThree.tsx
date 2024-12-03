@@ -5,11 +5,11 @@ import { setFormValue } from "@/Redux/Reducers/userSlice/UserSlice";
 import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 import { TransformedRoleType } from "@/Types/AdminOptions/Roles/RoleType";
 
-const StepThree = () => {
+const StepThree: React.FC<{selectedUser?: any}> = ({selectedUser}) => {
 
     const dispatch = useAppDispatch();
 
-    const { formValue, selectedUser } = useAppSelector(state => state.users);
+    const { formValue } = useAppSelector(state => state.users);
     const { originalRoleData, status } = useAppSelector(state => state.role);
     const [selectedRoles, setSelectedRoles] = useState<string[]>(
         selectedUser?.roles.map((role: TransformedRoleType) => role.id) || []

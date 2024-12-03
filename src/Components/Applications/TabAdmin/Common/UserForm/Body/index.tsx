@@ -5,11 +5,11 @@ import {Row} from 'reactstrap';
 
 
 
-const Body : React.FC<{mode: string}> = ({mode}) => {
+const Body : React.FC<{mode: string , selectedUser?: any}> = ({mode, selectedUser}) => {
     return (
         <Row className={'g-xl-5 g-3'}>
             <UserLeftSideBar/>
-            <UserTabContent mode={mode} />
+            <UserTabContent mode={mode}  selectedUser={selectedUser}/>
         </Row>
     )
 }

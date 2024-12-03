@@ -6,7 +6,7 @@ import { useAppSelector } from "@/Redux/Hooks";
 import CommonButton from "@/Components/Applications/TabAdmin/Common/CommonButton";
 
 
-const UserTabContent : React.FC<{mode: string}> = ({mode}) =>  {
+const UserTabContent : React.FC<{mode: string , selectedUser?: any}> = ({mode, selectedUser}) =>  {
 
     const {navId} = useAppSelector((state)=> state.users);
 
@@ -18,7 +18,7 @@ const UserTabContent : React.FC<{mode: string}> = ({mode}) =>  {
                         <StepTwo mode={mode} />
                     </TabPane>
                     <TabPane tabId={2}>
-                        <StepThree />
+                        <StepThree selectedUser={selectedUser}/>
                     </TabPane>
                 </TabContent>
             </Col>
