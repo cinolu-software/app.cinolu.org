@@ -78,7 +78,7 @@ const EventsTypeSlice = createSlice({
             state.isOpenModalEditEventType = action.payload.isOpen;
             state.selectedEventType = action.payload.EventType;
         },
-        setModalDeleteProgramTypes: (state, action: PayloadAction<{ isOpen: boolean, EventType: EventType | null }>) => {
+        setModalDeleteEventTypes: (state, action: PayloadAction<{ isOpen: boolean, EventType: EventType | null }>) => {
             state.isOpenModalDeleteEventType = action.payload.isOpen;
             state.selectedEventType = action.payload.EventType;
         },
@@ -139,6 +139,6 @@ const EventsTypeSlice = createSlice({
     }
 });
 
-export const {setModalCreateEventType, setModalEditEventTypes, setModalDeleteProgramTypes} = EventsTypeSlice.actions;
+export const {setModalCreateEventType, setModalEditEventTypes, setModalDeleteEventTypes} = EventsTypeSlice.actions;
 
 export default EventsTypeSlice.reducer

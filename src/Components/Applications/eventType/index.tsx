@@ -3,24 +3,21 @@ import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { ProgramsTypesHeader } from "./ProgramsList";
-import { useSelector, useDispatch } from "react-redux";
-import { selectOriginalProgramData,selectProgramTypeStatus, fetchProgramsType, selectTransformedProgramDataType, setModalDeleteProgramTypes, deleteProgramType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/ProgramsTypes";
-import { ProgramsListTypeTableColumnType } from "@/Types/Programs/ProgramsTypeType";
+import {fetchEventsType, setModalDeleteEventTypes, deleteEventType} from "@/Redux/Reducers/eventSlice/EventTypeSlice"
+import {EventsListTableDataColumn} from "@/Data/Application/eventTypes";
+import {EventsListTypeTableColumnType} from "@/Types/EventsType/eventsTypeType";
 import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";
 import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import {setModalDeleteProgramTypes} from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 
 
 const ProgramsTypesListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch()
-    const status = useSelector(selectProgramTypeStatus);
-    const transformedPrograms = useSelector(selectTransformedProgramDataType);
-    const data = useSelector(selectOriginalProgramData);
-    const {isOpenModalDeleteProgramType, selectedProgramType, originalTypeProgramsData} = useAppSelector(state => state.programsType)
+    const {status, dataEventType, isOpenModalDeleteEventType, isOpenModalEditEventType, selectedEventType } = useAppSelector(state=>state.eventType);
 
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -34,24 +31,24 @@ const ProgramsTypesListContainer: React.FC = () => {
 
     useEffect(() => {
         if (status === "idle") {
-            dispatch(fetchProgramsType());
+            dispatch(fetchEventsType());
         }
     }, [status, dispatch]);
 
-    const filteredPrograms = transformedPrograms.filter(program =>
-        program.name.toLowerCase().includes(filterText.toLowerCase())
+    const filteredEvents = dataEventType.filter(event =>
+        event.name.toLowerCase().includes(filterText.toLowerCase())
     );
 
     return (
         <Container fluid>
             <UpdateProgramTypeModal />
             <DeleteEntityModal
-                isOpen={isOpenModalDeleteProgramType}
-                entityName="type de programme"
-                selectedEntity={selectedProgramType}
-                entities={originalTypeProgramsData}
+                isOpen={isOpenModalDeleteEventType}
+                entityName="type d'événement"
+                selectedEntity={selectedEventType}
+                entities={dataEventType}
                 setModalAction={setModalDeleteProgramTypes as any}
-                deleteEntityThunk={deleteProgramType}
+                deleteEntityThunk={deleteEventType}
             />
             <ModalCreateProgramType/>
             <Row>
@@ -65,8 +62,8 @@ const ProgramsTypesListContainer: React.FC = () => {
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={filteredPrograms}
-                                        columns={ProgramsListTableDataColumn as TableColumn<ProgramsListTypeTableColumnType>[]}
+                                        data={filteredEvents}
+                                        columns={EventsListTableDataColumn as TableColumn<EventsListTypeTableColumnType>[]}
                                         striped
                                         highlightOnHover
                                         pagination
