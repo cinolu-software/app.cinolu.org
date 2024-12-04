@@ -8,7 +8,7 @@ import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/UsersList/AdminListFilterHeader";
 import {CollapseFilterData} from "@/Components/Applications/TabAdmin/UsersList/CollapseFilterData";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
-import UpdateUserModal from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UpdateUserModal";
+import UpdateUserModal from "@/Components/Applications/TabAdmin/Common/UpdateUserModal";
 
 
 
@@ -62,7 +62,7 @@ const UsersListContainer: React.FC = () => {
               deleteEntityThunk={deleteUser}
           />
 
-          <UpdateUserModal/>
+          <UpdateUserModal selectedUser={selectedUser}/>
 
         <Row>
           <Col sm="12">

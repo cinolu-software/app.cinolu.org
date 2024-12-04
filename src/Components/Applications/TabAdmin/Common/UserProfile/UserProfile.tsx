@@ -5,7 +5,6 @@ import { Card, Row, Col, CardHeader, Button,  } from "reactstrap";
 import {setModalUpdateUser} from "@/Redux/Reducers/userSlice/UserSlice";
 import {useAppDispatch} from "@/Redux/Hooks";
 import {imageBaseUrl} from "@/services/axios";
-import BackButton from "@/CommonComponent/BackButton";
 
 
 
@@ -20,7 +19,7 @@ const UserProfile: React.FC<{user: any}> = ({ user }) => {
 
     return (
         <>
-            <BackButton link={'/users/admin/list'}/>
+
             <Row>
                 <Col className="mx-auto">
                     <Card className="shadow-sm">
@@ -61,4 +60,3 @@ const UserProfile: React.FC<{user: any}> = ({ user }) => {
 }
 
 export default UserProfile;
-

@@ -3,11 +3,11 @@ import { UserProfileAppCallBackType } from '@/Types/Users/Profile/UserProfileTyp
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from "react";
 import { Card, Row, CardBody, Col, Nav, NavItem, NavLink, CardHeader, Button,  } from "reactstrap";
-import UserProfilTabContent from "@/Components/Applications/TabAdmin/UsersList/UserDetail/UserProfilContext";
 import {setModalUpdateCoach} from "@/Redux/Reducers/userSlice/UserSlice";
 import {useAppDispatch} from "@/Redux/Hooks";
 import {imageBaseUrl} from "@/services/axios";
 import BackButton from "@/CommonComponent/BackButton";
+import CoachProfilTabContent from "@/Components/Applications/TabAdmin/CoachsList/CoachDetail/CoachProfilContext";
 
 
 const CoachProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) => {
@@ -83,7 +83,7 @@ const CoachProfile: React.FC<UserProfileAppCallBackType> = ({ callback, user }) 
                                     </NavLink>
                                 </NavItem>
                             </Nav>
-                            <UserProfilTabContent basicTab={basicTab} user={user} />
+                            <CoachProfilTabContent basicTab={basicTab} user={user} />
                         </CardBody>
                     </Card>
                 </Col>

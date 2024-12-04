@@ -8,13 +8,12 @@ import { fetchRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
 import {TransformedRoleType} from "@/Types/AdminOptions/Roles/RoleType";
 
 
-const UpdateUserModal = () => {
+const UpdateUserModal: React.FC<{selectedUser?: any}> = ({selectedUser}) => {
 
     const dispatch = useAppDispatch();
 
-    const { isOpenModalUpdateUser, selectedUser } = useAppSelector(state => state.users);
+    const { isOpenModalUpdateUser } = useAppSelector(state => state.users);
     const { originalRoleData, status } = useAppSelector(state => state.role);
-
     const [selectedRoles, setSelectedRoles] = useState<string[]>(selectedUser?.roles.map((role: TransformedRoleType) => role.id) || []);
 
     useEffect(() => {
