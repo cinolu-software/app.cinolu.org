@@ -2,7 +2,7 @@ import { TableColumn } from 'react-data-table-component';
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { ProgramsTypesHeader } from "./ProgramsList";
+import { EventsTypesHeader } from "./EventsList";
 import {fetchEventsType, setModalDeleteEventTypes, deleteEventType} from "@/Redux/Reducers/eventSlice/EventTypeSlice"
 import {EventsListTableDataColumn} from "@/Data/Application/eventTypes";
 import {EventsListTypeTableColumnType} from "@/Types/EventsType/eventsTypeType";
@@ -56,7 +56,7 @@ const ProgramsTypesListContainer: React.FC = () => {
                     <Card>
                         <CardBody>
                             <div className="list-product-header">
-                                <ProgramsTypesHeader />
+                                <EventsTypesHeader />
                             </div>
                             <div className="list-program">
                                 <div className="table-responsive">

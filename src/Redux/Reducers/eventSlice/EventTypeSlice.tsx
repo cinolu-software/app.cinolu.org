@@ -74,11 +74,11 @@ const EventsTypeSlice = createSlice({
         setModalCreateEventType: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateEventType = action.payload.isOpen;
         },
-        setModalEditEventTypes: (state, action: PayloadAction<{ isOpen: boolean, EventType: EventType | null }>) => {
+        setModalEditEventTypes: (state, action: PayloadAction<{ isOpen: boolean, EventType: EventType  }>) => {
             state.isOpenModalEditEventType = action.payload.isOpen;
             state.selectedEventType = action.payload.EventType;
         },
-        setModalDeleteEventTypes: (state, action: PayloadAction<{ isOpen: boolean, EventType: EventType | null }>) => {
+        setModalDeleteEventTypes: (state, action: PayloadAction<{ isOpen: boolean, EventType: EventType  }>) => {
             state.isOpenModalDeleteEventType = action.payload.isOpen;
             state.selectedEventType = action.payload.EventType;
         },

@@ -1,46 +1,47 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { updateProgramType, setModalEditProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import {updateEventsType, setModalEditEventTypes} from "@/Redux/Reducers/eventSlice/EventTypeSlice"
 import { Flip, toast } from "react-toastify";
-import { UpdateTypeType } from "@/Types/Programs/ProgramsTypeType";
+import {UpdateEventType} from "@/Types/EventsType/eventsTypeType";
 
-const UpdateProgramTypeModal = () => {
+
+const UpdateEventsTypeModal = () => {
     const dispatch = useAppDispatch();
-    const { selectedProgramType, isOpenModalEditProgramType } = useAppSelector((state) => state.programsType);
-    const [programType, setProgramType] = useState<UpdateTypeType>({ name: '', description: '', id: '' });
+    const { selectedEventType, isOpenModalEditEventType} = useAppSelector(state=>state.eventType)
+    const [eventType, setEventType] = useState<UpdateEventType>({ name: '', description: '', id: '' });
 
     const isEditingRef = useRef(false);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newName = e.target.value;
-        setProgramType((prev) => ({ ...prev, name: newName }));
+        setEventType((prev) => ({ ...prev, name: newName }));
         isEditingRef.current = true;
     };
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newDescription = e.target.value;
-        setProgramType((prev) => ({ ...prev, description: newDescription }));
+        setEventType((prev) => ({ ...prev, description: newDescription }));
         isEditingRef.current = true;
     };
 
     useEffect(() => {
-
         if (!isEditingRef.current) {
-            setProgramType({
-                id: selectedProgramType?.id || '',
-                name: selectedProgramType?.name || '',
-                description: selectedProgramType?.description || '',
+            setEventType({
+                id: selectedEventType?.id || '',
+                name: selectedEventType?.name || '',
+                description: selectedEventType?.description || '',
             });
         } else {
             isEditingRef.current = false;
         }
-    }, [selectedProgramType]);
+    }, [selectedEventType]);
 
     const handleSubmit = async () => {
+
         try {
-            await dispatch(updateProgramType(programType)).unwrap();
-            dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }));
+            await dispatch(updateEventsType(eventType)).unwrap();
+            dispatch(setModalEditEventTypes({ isOpen: false, EventType: eventType }));
             toast.success(
                 <p className="text-white tx-16 mb-0">{"Type de programme mis à jour avec succès"}</p>,
                 {
@@ -69,12 +70,12 @@ const UpdateProgramTypeModal = () => {
         <Col xs="12">
             <Modal
                 isOpen={isOpenModalEditProgramType}
-                toggle={() => dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }))}
+                toggle={() => dispatch(setModalEditEventTypes({ isOpen: false, programType: null }))}
                 size="lg"
             >
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">{"Mettre à jour un type de programme"}</h1>
-                    <Button close onClick={() => dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }))} />
+                    <Button close onClick={() => dispatch(setModalEditEventTypes({ isOpen: false, programType: null }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="update-category">
@@ -85,7 +86,7 @@ const UpdateProgramTypeModal = () => {
                             className="m-0"
                             id="programName"
                             type="text"
-                            value={programType.name}
+                            value={eventType.name}
                             onChange={handleNameChange}
                             required
                         />
@@ -96,7 +97,7 @@ const UpdateProgramTypeModal = () => {
                             id="programDescription"
                             className="form-control"
                             rows={5}
-                            value={programType.description}
+                            value={eventType.description}
                             onChange={handleDescriptionChange}
                         />
                     </div>
@@ -104,7 +105,7 @@ const UpdateProgramTypeModal = () => {
                 <ModalFooter>
                     <button
                         className="btn btn-outline-light"
-                        onClick={() => dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }))}
+                        onClick={() => dispatch(setModalEditEventTypes({ isOpen: false, programType: null }))}
                     >
                         {"Annuler"}
                     </button>
@@ -117,4 +118,4 @@ const UpdateProgramTypeModal = () => {
     );
 };
 
-export default UpdateProgramTypeModal;
+export default UpdateEventsTypeModal;
