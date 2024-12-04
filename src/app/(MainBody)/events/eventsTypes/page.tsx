@@ -2,7 +2,7 @@
 
 import React, {FunctionComponent, useEffect, useState} from "react";
 
-const AddPartner = () => {
+const EventType = () => {
     const [MyAwesomeMap, setClient] = useState<FunctionComponent>();
 
     useEffect(() => {
@@ -17,4 +17,4 @@ const AddPartner = () => {
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
 
-export default AddPartner;
+export default EventType;
