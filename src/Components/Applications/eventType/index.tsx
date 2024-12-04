@@ -7,7 +7,9 @@ import {fetchEventsType, setModalDeleteEventTypes, deleteEventType} from "@/Redu
 import {EventsListTableDataColumn} from "@/Data/Application/eventTypes";
 import {EventsListTypeTableColumnType} from "@/Types/EventsType/eventsTypeType";
 import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";
-import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType";
+
+
+import UpdateEventsTypeModal from "@/Components/Applications/eventType/ModalUpdateEventsType";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {setModalDeleteProgramTypes} from "@/Redux/Reducers/programsSlice/programsTypeSlice";
@@ -41,7 +43,7 @@ const ProgramsTypesListContainer: React.FC = () => {
 
     return (
         <Container fluid>
-            <UpdateProgramTypeModal />
+            <UpdateEventsTypeModal />
             <DeleteEntityModal
                 isOpen={isOpenModalDeleteEventType}
                 entityName="type d'événement"

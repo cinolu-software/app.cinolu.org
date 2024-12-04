@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createProgramType, setModalCreateProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import { createEventType, setModalCreateEventType  } from "@/Redux/Reducers/eventSlice/EventTypeSlice"
 import { Flip, toast } from "react-toastify";
-import { CreateProgramTypeType } from "@/Types/Programs/ProgramsTypeType";
+import {CreateEventType} from "@/Types/EventsType/eventsTypeType";
 
 const CreateNewType = () => {
 
     const dispatch = useAppDispatch();
-    const isOpenModalCreateProgramType = useAppSelector(state => state.programsType.isOpenModalCreateProgramType);
-    const [program, setProgram] = useState<CreateProgramTypeType>({ name: '', description: '' });
+    const { isOpenModalCreateEventType } = useAppSelector(state => state.eventType);
+    const [event, setEvent] = useState<CreateEventType>({ name: '', description: '' });
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProgram(prevProgram => ({ ...prevProgram, name: e.target.value }));
+        setEvent(prevEvent => ({ ...prevEvent, name: e.target.value }));
     };
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setProgram(prevProgram => ({ ...prevProgram, description: e.target.value }));
+        setEvent(prevEvent => ({ ...prevEvent, description: e.target.value }));
     };
 
     const handleSubmit = async () => {
-        await dispatch(createProgramType(program)).unwrap()
+        await dispatch(createEventType(event)).unwrap()
             .then(() => {
-                dispatch(setModalCreateProgramTypes({ isOpen: false }));
+                dispatch(setModalCreateEventType({ isOpen: false }));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
                     {
@@ -50,38 +50,38 @@ const CreateNewType = () => {
 
     return (
         <Col xs="12">
-            <Modal isOpen={isOpenModalCreateProgramType} toggle={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))} size="lg">
+            <Modal isOpen={isOpenModalCreateEventType} toggle={() => dispatch(setModalCreateEventType({ isOpen: false }))} size="lg">
                 <div className="modal-header">
-                    <h1 className="modal-title fs-5">{"Ajouter un type de programme"}</h1>
-                    <Button close onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))} />
+                    <h1 className="modal-title fs-5">{"Ajouter un type d'événement"}</h1>
+                    <Button close onClick={() => dispatch(setModalCreateEventType({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-category">
                         <Label for="programName" check>
-                            Nom du type de programme <span className="txt-danger">*</span>
+                            Nom du type d'événement <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"
                             id="programName"
                             type="text"
-                            value={program.name}
+                            value={event.name}
                             onChange={handleNameChange}
                             required
                         />
                         <Label for="programDescription" className="mt-2" check>
-                            Description du type de programme
+                            Description du type d'événement
                         </Label>
                         <textarea
                             id="programDescription"
                             className="form-control"
                             rows={5}
-                            value={program.description}
+                            value={event.description}
                             onChange={handleDescriptionChange}
                         />
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))}>
+                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateEventType({ isOpen: false }))}>
                         {"Annuler"}
                     </button>
                     <button className={'btn btn-outline-primary'} onClick={handleSubmit}>

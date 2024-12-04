@@ -7,6 +7,7 @@ import {UpdateEventType} from "@/Types/EventsType/eventsTypeType";
 
 
 const UpdateEventsTypeModal = () => {
+
     const dispatch = useAppDispatch();
     const { selectedEventType, isOpenModalEditEventType} = useAppSelector(state=>state.eventType)
     const [eventType, setEventType] = useState<UpdateEventType>({ name: '', description: '', id: '' });
@@ -41,9 +42,9 @@ const UpdateEventsTypeModal = () => {
 
         try {
             await dispatch(updateEventsType(eventType)).unwrap();
-            dispatch(setModalEditEventTypes({ isOpen: false, EventType: eventType }));
+            dispatch(setModalEditEventTypes({ isOpen: false, EventType: null }));
             toast.success(
-                <p className="text-white tx-16 mb-0">{"Type de programme mis à jour avec succès"}</p>,
+                <p className="text-white tx-16 mb-0">{"Type d'événement mis à jour avec succès"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -54,7 +55,7 @@ const UpdateEventsTypeModal = () => {
             );
         } catch (error) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour du type de programme"}</p>,
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour du type de l'événement"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -69,18 +70,18 @@ const UpdateEventsTypeModal = () => {
     return (
         <Col xs="12">
             <Modal
-                isOpen={isOpenModalEditProgramType}
-                toggle={() => dispatch(setModalEditEventTypes({ isOpen: false, programType: null }))}
+                isOpen={isOpenModalEditEventType}
+                toggle={() => dispatch(setModalEditEventTypes({ isOpen: false, EventType: null }))}
                 size="lg"
             >
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">{"Mettre à jour un type de programme"}</h1>
-                    <Button close onClick={() => dispatch(setModalEditEventTypes({ isOpen: false, programType: null }))} />
+                    <Button close onClick={() => dispatch(setModalEditEventTypes({ isOpen: false, EventType: null }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="update-category">
                         <Label for="programName" check>
-                            Nom du type de programme <span className="txt-danger">*</span>
+                            Nom du type d'événement <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"
@@ -91,7 +92,7 @@ const UpdateEventsTypeModal = () => {
                             required
                         />
                         <Label for="programDescription" className="mt-2" check>
-                            Description du type de programme
+                            Description du type d'événement
                         </Label>
                         <textarea
                             id="programDescription"
@@ -105,7 +106,7 @@ const UpdateEventsTypeModal = () => {
                 <ModalFooter>
                     <button
                         className="btn btn-outline-light"
-                        onClick={() => dispatch(setModalEditEventTypes({ isOpen: false, programType: null }))}
+                        onClick={() => dispatch(setModalEditEventTypes({ isOpen: false, EventType: null }))}
                     >
                         {"Annuler"}
                     </button>
