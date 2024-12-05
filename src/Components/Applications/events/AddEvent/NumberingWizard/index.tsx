@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from "react";
 import {Button, Card, CardBody, Col, Form} from "reactstrap";
 import FinishForm from "@/CommonComponent/FinishForm";
+
 import StepperHorizontal from "@/Components/Applications/events/AddEvent/NumberingWizard/StepperHorizontal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
@@ -9,26 +10,21 @@ import {createEvent, handleNextButton, handleBackButton, setCreateFomValue} from
 import StepOne from "@/Components/Applications/events/AddEvent/NumberingWizard/StepOne";
 import StepTwo from "@/Components/Applications/events/AddEvent/NumberingWizard/StepTwo";
 import StepThree from "@/Components/Applications/events/AddEvent/NumberingWizard/StepThree";
-import StepFour from "@/Components/Applications/events/AddEvent/NumberingWizard/StepFour";
-import StepFive from "@/Components/Applications/events/AddEvent/NumberingWizard/StepFive";
-
-import {FormValueType} from "@/Types/Programs/ProgramsType";
+import {Event} from "@/Types/Events";
 import {Flip, toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
-const NumberingWizard = () => {
+const NumberingWizardEvent = () => {
 
-    const {numberLevel, formValue, showFinish,} = useAppSelector(state => state.programs);
+    const {numberLevel, CreateFormValue, showFinish} = useAppSelector(state=>state.event);
     const dispatch = useAppDispatch();
     const router = useRouter()
 
-
     const handleCreateProgram = () => {
-
         try {
-            dispatch(createProgram(formValue));
+            dispatch(createEvent(CreateFormValue));
             toast.success(
-                <p className="text-white tx-16 mb-0">{"Programme créé avec succès"}</p>,
+                <p className="text-white tx-16 mb-0">{"Evénement créé avec succès"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -37,10 +33,11 @@ const NumberingWizard = () => {
                     theme: "colored",
                 }
             );
-            router.push('/programs')
-        } catch (error) {
+            router.push('/events')
+        }
+        catch (error) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du programme"}</p>,
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création de l'événement"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -50,23 +47,16 @@ const NumberingWizard = () => {
                 }
             );
         }
-
     };
 
     const renderStep = () => {
         switch (numberLevel) {
-            case 1: return <StepOne formValue={formValue}/>;
-            case 2: return <StepTwo formValue={formValue}/>;
-            case 3: return <StepThree formValue={formValue} />;
-            case 4: return <StepFour formValue={formValue}/>;
-            case 5: return <StepFive formValue={formValue} />;
+            case 1: return <StepOne createFormValue={CreateFormValue}/>;
+            case 2: return <StepTwo createFormValue={CreateFormValue}/>;
+            case 3: return <StepThree createFormValue={CreateFormValue} />;
             case 6: return (
                 <Form className="stepper-four g-3 needs-validation" noValidate>
-                    <FinishForm
-                        isComplete={true}
-                        onCreateProgram={handleCreateProgram}
-                        textButton='Créer le Programme'
-                    />
+                    <FinishForm isComplete={true} onCreateProgram={handleCreateProgram} textButton="Créer l'événement"/>
                 </Form>
             );
             default: return null;
@@ -76,7 +66,7 @@ const NumberingWizard = () => {
     return (
         <Col>
             <Card className="height-equal">
-                <CommonCardHeader title="Ajout de Programme" />
+                <CommonCardHeader title="Ajout d'un événement" />
                 <CardBody className="basic-wizard important-validation">
                     <StepperHorizontal level={numberLevel} />
                     <div id="msform">
@@ -106,4 +96,4 @@ const NumberingWizard = () => {
     );
 };
 
-export default NumberingWizard;
+export default NumberingWizardEvent;

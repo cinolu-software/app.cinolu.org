@@ -2,22 +2,21 @@ import React, { useEffect } from "react";
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
-import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue,} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {createEvent, handleNextButton, handleBackButton, setCreateFomValue, updateEvent} from "@/Redux/Reducers/eventSlice/eventSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
+
 import StepOne from "@/Components/Applications/programs/Common/StepOne";
 import StepTwo from "@/Components/Applications/programs/Common/StepTwo";
 import StepThree from "@/Components/Applications/programs/Common/StepThree";
-import StepFour from "@/Components/Applications/programs/Common/StepFour";
-import StepFive from "@/Components/Applications/programs/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/programs/Common/StepperHorizontal";
-import { FormValueType } from "@/Types/Programs/ProgramsType";
+import {CreateEvent} from "@/Types/Events";
 
-const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
+const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
 
-    const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.programs);
+    const {numberLevel, CreateFormValue, showFinish} = useAppSelector(state=>state.event);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -28,51 +27,44 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 types: Array.isArray(initialValues.types)
                     ? initialValues.types.map((type: { id?: string }) => type?.id).filter(Boolean)
                     : [],
-                categories: Array.isArray(initialValues.categories)
-                    ? initialValues.categories.map((category: { id?: string }) => category?.id).filter(Boolean)
-                    : [],
             };
 
             Object.keys(transformedInitialValues).forEach((key) => {
-                const typedKey = key as keyof FormValueType;
-                dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
+                const typedKey = key as keyof CreateEvent;
+                dispatch(setCreateFomValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
             });
         }
     }, [mode, initialValues, dispatch]);
 
-
-
     const handleSubmit = () => {
         try {
             const filteredFormValue = {
-                name: formValue.name,
-                description: formValue.description,
-                started_at: formValue.started_at,
-                ended_at: formValue.ended_at,
-                targeted_audience: formValue.targeted_audience,
-                aim: formValue.aim,
-                prize: formValue.prize,
-                town: formValue.town,
-                types: formValue.types?.filter(Boolean),
-                categories: formValue.categories?.filter(Boolean),
-                partners: formValue.partners,
+                name: CreateFormValue.name,
+                description: CreateFormValue.description,
+                started_at: CreateFormValue.started_at,
+                ended_at: CreateFormValue.ended_at,
+                types: CreateFormValue.types?.filter(Boolean),
+                location: CreateFormValue.location,
+                online_link: CreateFormValue.online_link,
+                attendees: CreateFormValue.attendees,
+                event_type: CreateFormValue.event_type,
             };
 
             if (mode === "add") {
-                dispatch(createProgram(filteredFormValue));
-                toast.success("Programme créé avec succès", {
+                dispatch(createEvent(filteredFormValue as CreateEvent));
+                toast.success("Evénement créé avec succès", {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
                 });
             } else {
-                dispatch(updateProgram({ programId: initialValues?.id!, updatedProgram: filteredFormValue }));
-                toast.success("Programme modifié avec succès", {
+                dispatch(updateEvent({ eventId: initialValues?.id!, updatedEvent: filteredFormValue }));
+                toast.success("Evénement modifié avec succès", {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
                 });
             }
 
-            router.push("/programs");
+            router.push("/events");
         } catch (error) {
             toast.error("Une erreur est survenue", {
                 autoClose: 5000,
@@ -81,21 +73,12 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
         }
     };
 
-
-
     const renderStep = () => {
         switch (numberLevel) {
-            case 1:
-                return <StepOne formValue={formValue} />;
-            case 2:
-                return <StepTwo formValue={formValue} />;
-            case 3:
-                return <StepThree formValue={formValue} />;
+            case 1: return <StepOne createFormValue={CreateFormValue}/>;
+            case 2: return <StepTwo createFormValue={CreateFormValue}/>;
+            case 3: return <StepThree createFormValue={CreateFormValue} />;
             case 4:
-                return <StepFour formValue={formValue} />;
-            case 5:
-                return <StepFive formValue={formValue} />;
-            case 6:
                 return (
                     <Form className="stepper-four g-3 needs-validation" noValidate>
                         <FinishForm
@@ -113,7 +96,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     return (
         <div className={'mt-5'}>
             <div className="height-equal">
-                {/*<CommonCardHeader title={mode === "add" ? "Ajout du programme" : "Modification du programme"} />*/}
                 <CardBody className="basic-wizard important-validation">
                     <StepperHorizontal level={numberLevel} />
                     <div id="msform">{renderStep()}</div>
@@ -141,4 +123,4 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     );
 };
 
-export default NumberingWizard;
+export default NumberingWizardEvent;

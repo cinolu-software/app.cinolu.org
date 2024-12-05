@@ -178,7 +178,7 @@ const EventSlice = createSlice({
             }
         },
         handleNextButton: (state) => {
-            if (state.numberLevel < 6) {
+            if (state.numberLevel < 3) {
                 state.numberLevel += 1;
             }else if(state.numberLevel === 6 ){
                 state.showFinish = true;

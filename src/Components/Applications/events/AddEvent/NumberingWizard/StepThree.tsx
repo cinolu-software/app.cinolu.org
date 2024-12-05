@@ -1,28 +1,29 @@
 import React, { useEffect } from "react";
 import { Col, Row, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
-import { StepPropsType } from "@/Types/Programs/ProgramsType";
+import {setCreateFomValue} from "@/Redux/Reducers/eventSlice/eventSlice";
+import {fetchEventsType} from "@/Redux/Reducers/eventSlice/EventTypeSlice";
+import { StepPropsType} from "@/Types/Events";
 
-const StepThree: React.FC<StepPropsType> = ({ formValue }) => {
+const StepThree: React.FC<StepPropsType> = ({ createFormValue }) => {
+
     const dispatch = useAppDispatch();
-    const { transformedProgramsData, status } = useAppSelector(state => state.programsType);
+    const {dataEventType, status} = useAppSelector(state=>state.eventType);
 
     useEffect(() => {
         if (status === 'idle') {
-            dispatch(fetchProgramsType());
+            dispatch(fetchEventsType());
         }
     }, [dispatch, status]);
 
     const handleTypeChange = (typeId: string) => {
-        if (!formValue) return;
+        if (!createFormValue) return;
 
-        const updatedTypes = formValue.types.includes(typeId)
-            ? formValue.types.filter((id: string) => id !== typeId)
-            : [...formValue.types, typeId];
+        const updatedTypes = createFormValue.types.includes(typeId)
+            ? createFormValue.types.filter((id: string) => id !== typeId)
+            : [...createFormValue.types, typeId];
 
-        dispatch(setNewFormValue({ field: 'types', value: updatedTypes }));
+        dispatch(setCreateFomValue({ field: 'types', value: updatedTypes }));
     };
 
     return (
@@ -30,19 +31,19 @@ const StepThree: React.FC<StepPropsType> = ({ formValue }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">le type de programme</span>
+                        Sélectionner <span className="txt-primary">le type d'événement</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur les types de programme qui correspondent à vos besoins.
+                        Cliquez sur les types d'événement qui correspondent à vos besoins.
                     </p>
                 </div>
                 <div className="variation-box">
-                    {transformedProgramsData.map(type => (
+                    {dataEventType.map(type => (
                         <div className="selection-box" key={type.id}>
                             <Input
                                 id={`type${type.id}`}
                                 type="checkbox"
-                                checked={formValue?.types.includes(type.id)}
+                                checked={createFormValue?.types.includes(type.id)}
                                 onChange={() => handleTypeChange(type.id)}
                             />
                             <div className="custom--mega-checkbox">
@@ -57,5 +58,6 @@ const StepThree: React.FC<StepPropsType> = ({ formValue }) => {
         </Col>
     );
 };
+
 
 export default StepThree;

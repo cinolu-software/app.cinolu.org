@@ -20,7 +20,7 @@ export interface Event {
 
 export interface CreateEvent {
     name: string;
-    image: string | null;
+    image?: string | null;
     location: string;
     description: string;
     started_at: string;
@@ -66,5 +66,9 @@ export interface NumberingWizardPropsType {
 export interface FormEditorsProps {
     description: string | undefined;
     onChangeDescription: (value: string) => void;
+}
+
+export interface StepPropsType {
+    createFormValue: CreateEvent
 }
 
