@@ -6,20 +6,16 @@ import { EventsTypesHeader } from "./EventsList";
 import {fetchEventsType, setModalDeleteEventTypes, deleteEventType} from "@/Redux/Reducers/eventSlice/EventTypeSlice"
 import {EventsListTableDataColumn} from "@/Data/Application/eventTypes";
 import {EventsListTypeTableColumnType} from "@/Types/EventsType/eventsTypeType";
-import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";
-
-
+import CreateNewEventType from "@/Components/Applications/eventType/ModalCreateEventsType";
 import UpdateEventsTypeModal from "@/Components/Applications/eventType/ModalUpdateEventsType";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {setModalDeleteProgramTypes} from "@/Redux/Reducers/programsSlice/programsTypeSlice";
-
 
 const ProgramsTypesListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch()
-    const {status, dataEventType, isOpenModalDeleteEventType, isOpenModalEditEventType, selectedEventType } = useAppSelector(state=>state.eventType);
+    const {status, dataEventType, isOpenModalDeleteEventType, selectedEventType } = useAppSelector(state=>state.eventType);
 
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -49,10 +45,10 @@ const ProgramsTypesListContainer: React.FC = () => {
                 entityName="type d'événement"
                 selectedEntity={selectedEventType}
                 entities={dataEventType}
-                setModalAction={setModalDeleteProgramTypes as any}
+                setModalAction={setModalDeleteEventTypes as any}
                 deleteEntityThunk={deleteEventType}
             />
-            <ModalCreateProgramType/>
+            <CreateNewEventType/>
             <Row>
                 <Col sm="12">
                     <Card>

@@ -5,7 +5,7 @@ import { createEventType, setModalCreateEventType  } from "@/Redux/Reducers/even
 import { Flip, toast } from "react-toastify";
 import {CreateEventType} from "@/Types/EventsType/eventsTypeType";
 
-const CreateNewType = () => {
+const CreateNewEventType = () => {
 
     const dispatch = useAppDispatch();
     const { isOpenModalCreateEventType } = useAppSelector(state => state.eventType);
@@ -93,4 +93,4 @@ const CreateNewType = () => {
     );
 };
 
-export default CreateNewType;
+export default CreateNewEventType;
