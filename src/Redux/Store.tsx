@@ -14,7 +14,8 @@ import PartnerShipSlice from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice
 import PartnerSlice from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 import ProgramCategorySlice from "@/Redux/Reducers/programsSlice/ProgramsCategory"
 import ProgramPhaseSlice from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
-import EventsTypeSlice from "@/Redux/Reducers/eventSlice/EventTypeSlice"
+import EventsTypeSlice from "@/Redux/Reducers/eventSlice/EventTypeSlice";
+import EventSlice from "@/Redux/Reducers/eventSlice/eventSlice";
 
 const Store = configureStore({
 
@@ -35,6 +36,7 @@ const Store = configureStore({
     programCategory: ProgramCategorySlice,
     programPhase: ProgramPhaseSlice,
     eventType: EventsTypeSlice,
+    event: EventSlice
   },
 
   middleware: getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
