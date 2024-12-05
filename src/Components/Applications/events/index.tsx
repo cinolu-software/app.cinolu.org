@@ -1,22 +1,22 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { ProgramsHeader } from "./ProgramsList";
-import {  fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
-import DeleteProgramsModal from "./DeleteProgramsModal";
+import {EventsHeader} from "@/Components/Applications/events/EventsList";
+import {fetchEvents} from "@/Redux/Reducers/eventSlice/eventSlice";
+import {EventsListTableDataColumn} from "@/Data/Application/eventTypes";
+import DeleteEventModal from "@/Components/Applications/events/DeleteEventModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
 import {CollapseFilterData} from "./CollapseFilterData";
 import { ToastContainer} from "react-toastify";
 
 
-const ProgramsListContainer = () => {
+const EventsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {status, originalProgramsData } = useAppSelector((state: RootState) => state.programs);
-    const filteredItems = originalProgramsData.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const {status, dataEvent} = useAppSelector((state)=> state.event);
+    const filteredItems = dataEvent.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -28,28 +28,28 @@ const ProgramsListContainer = () => {
 
     useEffect(() => {
         if (status === "idle") {
-            dispatch(fetchPrograms());
+            dispatch(fetchEvents());
         }
     }, [status, dispatch]);
 
 
     return (
         <Container fluid>
-            <DeleteProgramsModal />
+            <DeleteEventModal />
             <Row>
                 <Col sm="12">
                     <Card>
                         <CardBody>
                             <div className="list-product-header">
-                                <ProgramsHeader />
+                                <EventsHeader />
                                 <CollapseFilterData/>
                             </div>
                             <div className="list-product">
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={filteredItems}
-                                        columns={ProgramsListTableDataColumn}
+                                        data={filteredItems as any}
+                                        columns={EventsListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination
@@ -67,5 +67,5 @@ const ProgramsListContainer = () => {
     );
 };
 
-export default ProgramsListContainer;
+export default EventsListContainer;
 

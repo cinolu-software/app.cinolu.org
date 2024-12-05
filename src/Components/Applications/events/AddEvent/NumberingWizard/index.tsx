@@ -1,16 +1,17 @@
 import React, {ChangeEvent} from "react";
 import {Button, Card, CardBody, Col, Form} from "reactstrap";
 import FinishForm from "@/CommonComponent/FinishForm";
-import StepperHorizontal from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepperHorizontal";
+import StepperHorizontal from "@/Components/Applications/events/AddEvent/NumberingWizard/StepperHorizontal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import {Back} from "@/Constant";
-import {createProgram, handleBackButton, handleNextButton, setNewFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
-import StepOne from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepOne";
-import StepTwo from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepTwo";
-import StepThree from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepThree";
-import StepFour from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFour";
-import StepFive from "@/Components/Applications/programs/AddProgramNew/NumberingWizard/StepFive";
+import {createEvent, handleNextButton, handleBackButton, setCreateFomValue} from "@/Redux/Reducers/eventSlice/eventSlice";
+import StepOne from "@/Components/Applications/events/AddEvent/NumberingWizard/StepOne";
+import StepTwo from "@/Components/Applications/events/AddEvent/NumberingWizard/StepTwo";
+import StepThree from "@/Components/Applications/events/AddEvent/NumberingWizard/StepThree";
+import StepFour from "@/Components/Applications/events/AddEvent/NumberingWizard/StepFour";
+import StepFive from "@/Components/Applications/events/AddEvent/NumberingWizard/StepFive";
+
 import {FormValueType} from "@/Types/Programs/ProgramsType";
 import {Flip, toast} from "react-toastify";
 import {useRouter} from "next/navigation";

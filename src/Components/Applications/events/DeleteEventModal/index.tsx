@@ -3,20 +3,20 @@ import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {setModalDeleteEvent, deleteEvent} from "@/Redux/Reducers/eventSlice/eventSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 
-const DeleteProgramModal = () => {
+const DeleteEventModal = () => {
 
     const dispatch = useAppDispatch();
-    const { isOpenModalDeleteProgram, selectedProgram, originalProgramsData } = useAppSelector((state) => state.programs);
-    const selectedProgramData = originalProgramsData.find((item) => item.id === selectedProgram?.id);
+    const {isOpenModalDeleteEvent, selectedEvent, dataEvent} = useAppSelector(state=>state.event)
+    const selectedEventData = dataEvent.find((item) => item.id === selectedEvent?.id);
 
     const handleDelete = async () => {
-        if (selectedProgramData && selectedProgramData.id !== undefined) {
+        if (selectedEventData && selectedEventData.id !== undefined) {
             try {
-                await dispatch(deleteProgram(selectedProgramData.id)).unwrap();
-                dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
+                await dispatch(deleteEvent(selectedEventData.id)).unwrap();
+                dispatch(setModalDeleteEvent({ isOpen: false, event: null }));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"Suppression effectuée avec succès"}</p>,
                     {
@@ -29,7 +29,7 @@ const DeleteProgramModal = () => {
                 );
             } catch (error) {
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la suppression du programme"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la suppression de l'événement"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -47,8 +47,8 @@ const DeleteProgramModal = () => {
             <CardBody className="badge-spacing">
                 <CommonModal
                     centered
-                    isOpen={isOpenModalDeleteProgram}
-                    toggle={() => dispatch(setModalDeleteProgram({ isOpen: false, program: null }))}
+                    isOpen={isOpenModalDeleteEvent}
+                    toggle={() => dispatch(setModalDeleteEvent({ isOpen: false, event: null }))}
                     title="Supprimer le programme"
                 >
                     <div className="modal-toggle-wrapper">
@@ -58,13 +58,13 @@ const DeleteProgramModal = () => {
                             </li>
                         </ul>
                         <h4 className="text-center pb-2">
-                            Êtes-vous sûr de vouloir supprimer ce programme ?
+                            Êtes-vous sûr de vouloir supprimer cet événement ?
                         </h4>
                         <div className="d-flex justify-content-center mt-5">
                             <Button
                                 color="secondary"
                                 className="me-2"
-                                onClick={() => dispatch(setModalDeleteProgram({ isOpen: false, program: null }))}
+                                onClick={() => dispatch(setModalDeleteEvent({ isOpen: false, event: null }))}
                             >
                                 {"Fermer"}
                             </Button>
@@ -80,7 +80,7 @@ const DeleteProgramModal = () => {
     );
 };
 
-export default DeleteProgramModal;
+export default DeleteEventModal;
 
 
 

@@ -4,9 +4,9 @@ import { setFilterToggle } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Filter } from "react-feather";
 import AddButton from "@/CommonComponent/AddButton";
 
-export const ProgramsHeader = () => {
+export const EventsHeader = () => {
     const dispatch = useAppDispatch();
-    const { filterToggle } = useAppSelector((state) => state.programs);
+    const {filterToggle} = useAppSelector(state=>state.event);
 
     return (
         <div>
@@ -16,7 +16,7 @@ export const ProgramsHeader = () => {
                     <i className={`icon-close filter-close ${filterToggle ? "show" : "hide"}`} />
                 </a>
             </div>
-            <AddButton link={'/programs/new'} name={'Ajouter un programme'} />
+            <AddButton link={'/events/eventsAdd'} name={'Ajouter un Evénement'} />
         </div>
     );
 };

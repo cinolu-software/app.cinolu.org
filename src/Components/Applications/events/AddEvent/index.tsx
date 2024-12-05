@@ -1,11 +1,11 @@
 import React from "react";
 import {Container, Row} from "reactstrap";
-import NumberingWizard from "@/Components/Applications/programs/AddProgramNew/NumberingWizard";
+import NumberingWizard from "@/Components/Applications/events/AddEvent/NumberingWizard";
 import BackButton from "@/CommonComponent/BackButton";
 
 
 
-const AddProgramNewContainer = () => {
+const AddEventNewContainer = () => {
 
     return (
         <Container fluid>
@@ -17,4 +17,4 @@ const AddProgramNewContainer = () => {
     )
 }
 
-export default AddProgramNewContainer;
+export default AddEventNewContainer;
