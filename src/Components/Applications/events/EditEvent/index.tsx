@@ -9,7 +9,7 @@ const EditProgramTabs = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/programs'}/>
+            <BackButton link={'/events'}/>
             <Row>
                 <Card>
                     <CardBody>
@@ -18,7 +18,7 @@ const EditProgramTabs = () => {
                                 <NavItem>
                                     <NavLink href='#' className={`txt-secondary ${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")}>
                                         <i className="icofont icofont-files"></i>
-                                        <span>Détail du programme</span>
+                                        <span>Détail de l'événement</span>
                                     </NavLink>
                                 </NavItem>
                             </NavItem>
