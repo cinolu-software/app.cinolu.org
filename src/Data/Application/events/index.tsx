@@ -38,7 +38,7 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
 
     const handleDetail = async () => {
         setLoadingDetail(true);
-        router.push('/programs/detail_program');
+        router.push('/events/eventDetail');
         dispatch(setSelectedEvent({ event }));
     };
 

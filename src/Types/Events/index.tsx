@@ -13,20 +13,22 @@ export interface Event {
     started_at: string;
     ended_at: string;
     attendees: string;
-    event_type: "physical" | "online";
+    event_type: "" |"physical" | "online";
     online_link: string | null;
     types: EventType[];
+    responsible?: string;
 }
 
 export interface CreateEvent {
     name: string;
     image?: string | null;
+    responsible: string;
     location: string;
     description: string;
     started_at: string;
     ended_at: string;
     attendees: string;
-    event_type: "physical" | "online";
+    event_type: "physical" | "online" | "";
     online_link: string | null;
     types: string[];
 }

@@ -9,6 +9,7 @@ import { Back } from "@/Constant";
 import StepOne from "@/Components/Applications/events/Common/StepOne";
 import StepTwo from "@/Components/Applications/events/Common/StepTwo";
 import StepThree from "@/Components/Applications/events/Common/StepThree";
+import StepFour from "@/Components/Applications/events/Common/StepFour";
 import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/events/Common/StepperHorizontal";
@@ -44,6 +45,7 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                 started_at: CreateFormValue.started_at,
                 ended_at: CreateFormValue.ended_at,
                 types: CreateFormValue.types?.filter(Boolean),
+                responsible: CreateFormValue.responsible,
                 location: CreateFormValue.location,
                 online_link: CreateFormValue.online_link,
                 attendees: CreateFormValue.attendees,
@@ -63,7 +65,6 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                     position: toast.POSITION.TOP_CENTER,
                 });
             }
-
             router.push("/events");
         } catch (error) {
             toast.error("Une erreur est survenue", {
@@ -78,13 +79,14 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
             case 1: return <StepOne createFormValue={CreateFormValue}/>;
             case 2: return <StepTwo createFormValue={CreateFormValue}/>;
             case 3: return <StepThree createFormValue={CreateFormValue} />;
-            case 4:
+            case 4: return <StepThree createFormValue={CreateFormValue} />;
+            case 5:
                 return (
                     <Form className="stepper-four g-3 needs-validation" noValidate>
                         <FinishForm
                             isComplete={true}
                             onCreateProgram={handleSubmit}
-                            textButton={mode === "add" ? "Créer le programme" : "Modifier le programme"}
+                            textButton={mode === "add" ? "Créer l'événement" : "Modifier l'événement"}
                         />
                     </Form>
                 );

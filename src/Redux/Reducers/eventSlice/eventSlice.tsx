@@ -23,6 +23,7 @@ const initialState: InitialStateEvent = {
         started_at: '',
         ended_at: '',
         attendees: '',
+        responsible: '',
         event_type: 'physical',
         online_link: '',
         types: []
@@ -33,6 +34,7 @@ const initialState: InitialStateEvent = {
         location: '',
         description: '',
         started_at: '',
+        responsible: '',
         ended_at: '',
         attendees: '',
         event_type: 'physical',
@@ -103,7 +105,28 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 );
 
 const validateStep = (state: InitialStateEvent) =>{
-
+    const {name, location, description, started_at, ended_at, attendees, event_type, types} = state.CreateFormValue;
+    switch(state.numberLevel){
+        case 1:
+            if(!name || !location || !description || !attendees || !location || !event_type){
+                ShowError();
+                return false;
+            }
+            break;
+        case 2:
+            if(!name || !location || !description || !attendees || !location || !event_type || !started_at || !ended_at){
+                ShowError();
+                return false;
+            }
+            break;
+        case 3:
+            if(!name || !location || !description || !attendees || !location || !event_type || !started_at || !ended_at || types.length === 0){
+                ShowError();
+                return false;
+            }
+            break;
+    }
+    return true;
 }
 
 const EventSlice = createSlice({
@@ -118,10 +141,11 @@ const EventSlice = createSlice({
                     image: action.payload.event.image || '',
                     location: action.payload.event.location,
                     description: action.payload.event.description,
+                    responsible: action.payload.event.responsible || '',
                     started_at: action.payload.event.started_at,
                     ended_at: action.payload.event.ended_at,
                     attendees: action.payload.event.attendees,
-                    event_type: action.payload.event.event_type,
+                    event_type: action.payload.event.event_type || '',
                     online_link: action.payload.event.online_link || '',
                     types: action.payload.event.types.map(type => type.id)
                 }
@@ -178,13 +202,17 @@ const EventSlice = createSlice({
             }
         },
         handleNextButton: (state) => {
-            if (state.numberLevel < 3) {
-                state.numberLevel += 1;
-            }else if(state.numberLevel === 6 ){
-                state.showFinish = true;
+            const isValid = validateStep(state);
+            if(isValid) {
+                if (state.numberLevel < 4) {
+                    state.numberLevel += 1;
+                }else if(state.numberLevel === 4 ){
+                    state.showFinish = true;
+                }
             }
         },
     },
+
     extraReducers: (builder) => {
         builder
             .addCase(fetchEvents.pending, (state) => {
