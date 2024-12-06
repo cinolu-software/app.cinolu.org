@@ -32,7 +32,7 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
 
     const handleEdit = async () => {
         setLoadingEdit(true);
-        router.push('/programs/edit_program');
+        router.push('/events/eventEdit');
         dispatch(setSelectedEvent({ event }));
     };
 
@@ -87,7 +87,7 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
 
 };
 
-export const ProgramsListTableDataColumn: TableColumn<Event>[] = [
+export const EventsListTableDataColumn: TableColumn<Event>[] = [
     {
         name: "Nom",
         cell: (row: Event) => (

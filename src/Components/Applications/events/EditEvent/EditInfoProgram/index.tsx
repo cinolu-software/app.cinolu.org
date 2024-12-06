@@ -1,21 +1,21 @@
 import React from 'react';
 import {Container, Row} from 'reactstrap';
 import BackButton from "@/CommonComponent/BackButton";
-import NumberingWizard from "@/Components/Applications/programs/Common/NumberingWizard";
+import NumberingWizard from "@/Components/Applications/events/Common/NumberingWizard";
 import {useAppSelector} from "@/Redux/Hooks";
 
-const EditProgramContainer = () => {
+const EditEventContainer = () => {
 
-    const { selectedProgram } = useAppSelector(state=>state.programs);
+    const { selectedEvent } = useAppSelector(state=>state.event);
 
     return (
         <Container fluid>
+            <BackButton link={'/events'}/>
             <Row>
-                <NumberingWizard  mode={'edit'} initialValues={selectedProgram} />
+                <NumberingWizard  mode={'edit'} initialValues={selectedEvent} />
             </Row>
         </Container>
-    )
-
+    );
 }
 
-export default EditProgramContainer;
+export default EditEventContainer;

@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import {EventsHeader} from "@/Components/Applications/events/EventsList";
 import {fetchEvents} from "@/Redux/Reducers/eventSlice/eventSlice";
-import {EventsListTableDataColumn} from "@/Data/Application/eventTypes";
+import {EventsListTableDataColumn} from "@/Data/Application/events";
 import DeleteEventModal from "@/Components/Applications/events/DeleteEventModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";

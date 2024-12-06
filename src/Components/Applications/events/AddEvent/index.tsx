@@ -1,20 +1,20 @@
-import React from "react";
-import {Container, Row} from "reactstrap";
-import NumberingWizardEvent from "@/Components/Applications/events/AddEvent/NumberingWizard";
+import React from 'react';
+import {Container, Row} from 'reactstrap';
 import BackButton from "@/CommonComponent/BackButton";
+import NumberingWizard from "@/Components/Applications/events/Common/NumberingWizard";
+import {useAppSelector} from "@/Redux/Hooks";
+const AddNewEventContainer = () => {
 
-
-
-const AddEventNewContainer = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/programs'}/>
+            <BackButton link={'/events'}/>
             <Row>
-                <NumberingWizardEvent/>
+                <NumberingWizard  mode={'add'}  />
             </Row>
         </Container>
     )
+
 }
 
-export default AddEventNewContainer;
+export default AddNewEventContainer;

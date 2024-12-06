@@ -6,12 +6,12 @@ import {createEvent, handleNextButton, handleBackButton, setCreateFomValue, upda
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
 
-import StepOne from "@/Components/Applications/programs/Common/StepOne";
-import StepTwo from "@/Components/Applications/programs/Common/StepTwo";
-import StepThree from "@/Components/Applications/programs/Common/StepThree";
+import StepOne from "@/Components/Applications/events/Common/StepOne";
+import StepTwo from "@/Components/Applications/events/Common/StepTwo";
+import StepThree from "@/Components/Applications/events/Common/StepThree";
 import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import StepperHorizontal from "@/Components/Applications/programs/Common/StepperHorizontal";
+import StepperHorizontal from "@/Components/Applications/events/Common/StepperHorizontal";
 import {CreateEvent} from "@/Types/Events";
 
 const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
@@ -94,9 +94,10 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
     };
 
     return (
-        <div className={'mt-5'}>
-            <div className="height-equal">
-                <CardBody className="basic-wizard important-validation">
+        <Col>
+            <Card className="height-equal">
+                <CommonCardHeader title="Ajout d'événement"/>
+                <CardBody className="basic-wizard important-validation mt-2">
                     <StepperHorizontal level={numberLevel} />
                     <div id="msform">{renderStep()}</div>
                     <div className="wizard-footer d-flex gap-2 justify-content-end mt-4 me-5">
@@ -118,8 +119,8 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                         </Button>
                     </div>
                 </CardBody>
-            </div>
-        </div>
+            </Card>
+        </Col>
     );
 };
 
