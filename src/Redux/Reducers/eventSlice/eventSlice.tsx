@@ -105,7 +105,7 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 );
 
 const validateStep = (state: InitialStateEvent) =>{
-    const {name, location, description, started_at, ended_at, attendees, event_type, types} = state.CreateFormValue;
+    const {name, location, description, started_at, ended_at, attendees, event_type, types, responsible} = state.CreateFormValue;
     switch(state.numberLevel){
         case 1:
             if(!name || !location || !description || !attendees || !location || !event_type){
@@ -121,6 +121,12 @@ const validateStep = (state: InitialStateEvent) =>{
             break;
         case 3:
             if(!name || !location || !description || !attendees || !location || !event_type || !started_at || !ended_at || types.length === 0){
+                ShowError();
+                return false;
+            }
+            break;
+        case 4:
+            if(!name || !location || !description || !attendees || !location || !event_type || !started_at || !ended_at || types.length === 0 || !responsible){
                 ShowError();
                 return false;
             }
@@ -204,9 +210,9 @@ const EventSlice = createSlice({
         handleNextButton: (state) => {
             const isValid = validateStep(state);
             if(isValid) {
-                if (state.numberLevel < 4) {
+                if (state.numberLevel < 5) {
                     state.numberLevel += 1;
-                }else if(state.numberLevel === 4 ){
+                }else if(state.numberLevel === 5 ){
                     state.showFinish = true;
                 }
             }

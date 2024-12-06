@@ -17,7 +17,7 @@ import {CreateEvent} from "@/Types/Events";
 
 const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
 
-    const {numberLevel, CreateFormValue, showFinish} = useAppSelector(state=>state.event);
+    const {numberLevel, CreateFormValue, showFinish, selectedEvent} = useAppSelector(state=>state.event);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -79,7 +79,7 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
             case 1: return <StepOne createFormValue={CreateFormValue}/>;
             case 2: return <StepTwo createFormValue={CreateFormValue}/>;
             case 3: return <StepThree createFormValue={CreateFormValue} />;
-            case 4: return <StepThree createFormValue={CreateFormValue} />;
+            case 4: return <StepFour createFormValue={CreateFormValue} />;
             case 5:
                 return (
                     <Form className="stepper-four g-3 needs-validation" noValidate>

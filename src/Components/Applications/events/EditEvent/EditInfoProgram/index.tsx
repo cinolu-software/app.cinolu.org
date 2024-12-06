@@ -8,6 +8,7 @@ const EditEventContainer = () => {
 
     const { selectedEvent } = useAppSelector(state=>state.event);
 
+
     return (
         <Container fluid>
             <BackButton link={'/events'}/>

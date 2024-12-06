@@ -34,7 +34,7 @@ const initialState: InitialStateUserType = {
         email: "",
         name: "",
         phone_number: "",
-        address: "",
+        address: "", 
         roles: [],
     }
 };
@@ -69,7 +69,7 @@ export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
     'users/createUser',
     async (newUser, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post<{ data: UserType }>(`${apiBaseUrl}/auth/add-user`, {
+            const response = await axiosInstance.post<{ data: UserType }>(`${apiBaseUrl}/users`, {
                 email: newUser.email,
                 name: `${newUser.last_name} ${newUser.name} ${newUser.first_name}`,
                 phone_number: newUser.phone_number,
