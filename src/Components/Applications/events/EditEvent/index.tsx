@@ -1,6 +1,6 @@
 import {Card, CardBody, Nav, NavItem, NavLink, Container, Row} from "reactstrap";
 import React, {useState} from 'react'
-import ProgramEditTabContent from "@/Components/Applications/programs/EditProgram/ProgramEditTabContent";
+import EventEditTabContent from "@/Components/Applications/events/EditEvent/EventEditTabContent";
 import BackButton from "@/CommonComponent/BackButton";
 
 const EditProgramTabs = () => {
@@ -33,7 +33,7 @@ const EditProgramTabs = () => {
                                 </NavItem>
                             </NavItem>
                         </Nav>
-                        <ProgramEditTabContent activeTab={activeTab}/>
+                        <EventEditTabContent activeTab={activeTab}/>
                     </CardBody>
                 </Card>
             </Row>

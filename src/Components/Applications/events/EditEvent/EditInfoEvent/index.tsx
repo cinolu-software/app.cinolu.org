@@ -8,6 +8,7 @@ const EditEventContainer = () => {
 
     const { selectedEvent } = useAppSelector(state=>state.event);
 
+    console.log('selectedEvent', selectedEvent);
 
     return (
         <Container fluid>

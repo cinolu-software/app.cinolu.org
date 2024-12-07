@@ -7,7 +7,6 @@ import {EventsListTableDataColumn} from "@/Data/Application/events";
 import DeleteEventModal from "@/Components/Applications/events/DeleteEventModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
-import {CollapseFilterData} from "./CollapseFilterData";
 import { ToastContainer} from "react-toastify";
 
 
@@ -42,7 +41,6 @@ const EventsListContainer = () => {
                         <CardBody>
                             <div className="list-product-header">
                                 <EventsHeader />
-                                <CollapseFilterData/>
                             </div>
                             <div className="list-product">
                                 <div className="table-responsive">

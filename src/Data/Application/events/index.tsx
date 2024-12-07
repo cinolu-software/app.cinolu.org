@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Event} from "@/Types/Events";
 import RatioImage from "@/CommonComponent/RatioImage";
-import {useDispatch} from "react-redux";
+import {useAppDispatch} from "@/Redux/Hooks";
 import {setModalDeleteEvent, setSelectedEvent} from "@/Redux/Reducers/eventSlice/eventSlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
@@ -23,7 +23,7 @@ const EventsListTableName: React.FC<{ image: string, name: string }> = ({image, 
 
 const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const router = useRouter();
 
     const [loadingEdit, setLoadingEdit] = useState(false);
