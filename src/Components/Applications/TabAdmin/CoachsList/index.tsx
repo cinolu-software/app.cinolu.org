@@ -8,6 +8,7 @@ import { UsersListTableColumnType } from '@/Types/Users/UsersType';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import DeleteEntityModal from '@/CommonComponent/DeleteEntityModal';
 import UpdateCoachModal from "@/Components/Applications/TabAdmin/CoachsList/CoachDetail/UpdateCoachModal";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 const CoachsListContainer = () =>{
@@ -54,30 +55,37 @@ const CoachsListContainer = () =>{
               />
 
               <UpdateCoachModal/>
+              {
+                  statusCoachs !== 'succeeded'
+                      ? <TableSkeleton/>
+                      : (
+                          <Row>
+                              <Col sm="12">
+                                  <Card>
+                                      <CardBody>
+                                          <div className="list-product-header"><h5>Liste des coachs</h5></div>
+                                          <div className="list-user">
+                                              <div className="table-responsive">
+                                                  <DataTable
+                                                      className="theme-scrollbar"
+                                                      data={filteredUsers}
+                                                      columns={CoatchListTableDataColumn}
+                                                      striped
+                                                      highlightOnHover
+                                                      pagination
+                                                      subHeader
+                                                      subHeaderComponent={subHeaderComponentMemo}
+                                                  />
+                                              </div>
+                                          </div>
+                                      </CardBody>
+                                  </Card>
+                              </Col>
+                          </Row>
+                      )
 
-              <Row>
-                  <Col sm="12">
-                    <Card>
-                      <CardBody>
-                        <div className="list-product-header"><h5>Liste des coachs</h5></div>
-                        <div className="list-user">
-                          <div className="table-responsive">
-                            <DataTable
-                                className="theme-scrollbar"
-                                data={filteredUsers}
-                                columns={CoatchListTableDataColumn}
-                                striped
-                                highlightOnHover
-                                pagination
-                                subHeader
-                                subHeaderComponent={subHeaderComponentMemo}
-                            />
-                          </div>
-                        </div>
-                      </CardBody>
-                    </Card>
-                  </Col>
-                </Row>
+              }
+
           </Container>
     );
 }

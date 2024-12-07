@@ -7,6 +7,7 @@ import {StaffMemberListTableDataColumn} from "@/Data/Application/Users";
 import { UsersListTableColumnType } from '@/Types/Users/UsersType';
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import DeleteEntityModal from '@/CommonComponent/DeleteEntityModal';
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 const StaffMembersListContainer = () =>{
@@ -52,31 +53,36 @@ const StaffMembersListContainer = () =>{
                 setModalAction={setModalDeleteStaffMember}
                 deleteEntityThunk={deleteUser}
             />
-            <Row>
-                <Col sm="12">
-                    <Card>
-                        <CardBody>
-                            <div className="list-product-header">
-                                <h5>Liste des coachs</h5>
-                            </div>
-                            <div className="list-user">
-                                <div className="table-responsive">
-                                    <DataTable
-                                        className="theme-scrollbar"
-                                        data={filteredUsers}
-                                        columns={StaffMemberListTableDataColumn}
-                                        striped
-                                        highlightOnHover
-                                        pagination
-                                        subHeader
-                                        subHeaderComponent={subHeaderComponentMemo}
-                                    />
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+            {
+                statusStaff !== 'succeeded' ? <TableSkeleton/> : (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <h5>Liste des coachs</h5>
+                                    </div>
+                                    <div className="list-user">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredUsers}
+                                                columns={StaffMemberListTableDataColumn}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+            }
+
         </Container>
     );
 }
