@@ -9,6 +9,7 @@ import {AdminListFilterHeader} from "@/Components/Applications/TabAdmin/UsersLis
 import {CollapseFilterData} from "@/Components/Applications/TabAdmin/UsersList/CollapseFilterData";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import UpdateUserModal from "@/Components/Applications/TabAdmin/Common/UpdateUserModal";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 
@@ -63,34 +64,39 @@ const UsersListContainer: React.FC = () => {
           />
 
           <UpdateUserModal selectedUser={selectedUser}/>
-
-        <Row>
-          <Col sm="12">
-            <Card>
-              <CardBody>
-                <div className="list-product-header">
-                  <h5>Liste des Utilisateurs</h5>
-                  <AdminListFilterHeader/>
-                  <CollapseFilterData setRoleFilter={setRoleFilter} />
-                </div>
-                <div className="list-user">
-                  <div className="table-responsive">
-                    <DataTable
-                        className="theme-scrollbar"
-                        data={filteredUsers}
-                        columns={UsersListTableDataColumn}
-                        striped
-                        highlightOnHover
-                        pagination
-                        subHeader
-                        subHeaderComponent={subHeaderComponentMemo}
-                    />
-                  </div>
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+          {
+                statusUsers !== 'succeeded' ? (
+                    <TableSkeleton/>
+                ) : (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <h5>Liste des Utilisateurs</h5>
+                                        <AdminListFilterHeader/>
+                                        <CollapseFilterData setRoleFilter={setRoleFilter} />
+                                    </div>
+                                    <div className="list-user">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredUsers}
+                                                columns={UsersListTableDataColumn}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+          }
       </Container>
   );
 };
