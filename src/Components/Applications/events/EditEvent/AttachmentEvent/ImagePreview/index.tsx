@@ -5,7 +5,7 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast, Flip } from "react-toastify";
-import { updateAttachmentProgramImage } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {updateAttachmentEventImage} from "@/Redux/Reducers/eventSlice/eventSlice"
 import { CardBody, Col, Button } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
 import {useRouter} from "next/navigation";
@@ -17,7 +17,7 @@ const ImagePreview = () => {
 
     const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
-    const { selectedProgram } = useAppSelector(state => state.programs);
+    const { selectedEvent } = useAppSelector(state => state.event);
     const router = useRouter()
 
     const handleUpdateImage = () => {
@@ -35,10 +35,10 @@ const ImagePreview = () => {
             return;
         }
 
-        if (selectedProgram) {
+        if (selectedEvent) {
             const imageFile = files[0].file as File;
 
-            dispatch(updateAttachmentProgramImage({ programId: selectedProgram.id, imageFile })).unwrap()
+            dispatch(updateAttachmentEventImage({ eventId : selectedEvent.id, imageFile })).unwrap()
                 .then(() => {
                     toast.success(
                         <p className="text-white tx-16 mb-0">{'Ajout de l\'image de couverture effectué avec succès'}</p>,
@@ -50,7 +50,7 @@ const ImagePreview = () => {
                             theme: "colored",
                         }
                     );
-                    router.push(`/programs`);
+                    router.push(`/events`);
                 })
                 .catch((err) => {
                     toast.error(

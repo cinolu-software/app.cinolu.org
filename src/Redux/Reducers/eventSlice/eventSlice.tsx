@@ -84,7 +84,7 @@ export const deleteEvent = createAsyncThunk<{id: string}, string, {rejectValue: 
     }
 );
 
-export const updateAttachmentProgramImage = createAsyncThunk<
+export const updateAttachmentEventImage = createAsyncThunk<
     { eventId: string ; imageUrl: string }, { eventId: string; imageFile: File }, { rejectValue: any }>(
     'events/updateAttachmentEventImage',
     async ({ eventId, imageFile }, thunkAPI) => {
@@ -278,17 +278,17 @@ const EventSlice = createSlice({
                 state.status = 'failed';
                 state.error = 'Failed to delete event';
             })
-            .addCase(updateAttachmentProgramImage.pending, (state) => {
+            .addCase(updateAttachmentEventImage.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(updateAttachmentProgramImage.fulfilled, (state, action) => {
+            .addCase(updateAttachmentEventImage.fulfilled, (state, action) => {
                 const { eventId, imageUrl } = action.payload;
                 const existingEvent = state.dataEvent.find(event => event.id === eventId);
                 if (existingEvent) {
                     existingEvent.image = imageUrl;
                 }
             })
-            .addCase(updateAttachmentProgramImage.rejected, (state, action) => {
+            .addCase(updateAttachmentEventImage.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = 'Failed to update image';
             })

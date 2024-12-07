@@ -91,7 +91,7 @@ export const EventsListTableDataColumn: TableColumn<Event>[] = [
     {
         name: "Nom",
         cell: (row: Event) => (
-            <EventsListTableName image={row?.image ? `${imageBaseUrl}/programs/${row.image}`: '/assets/images/programs/programs.png'} name={row.name}/>
+            <EventsListTableName image={row?.image ? `${imageBaseUrl}/events/${row.image}`: '/assets/images/programs/programs.png'} name={row.name}/>
         ),
         sortable: true,
         grow: 1,
