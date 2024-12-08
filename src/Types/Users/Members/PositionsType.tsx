@@ -31,4 +31,4 @@ export interface StaticModalToggleProp {
     staticModalToggle: () => void;
 }
 
-export interface ExpertisesListTypeTableColumnType extends Position {}
+export interface PositionsListTypeTableColumnType extends Position {}
