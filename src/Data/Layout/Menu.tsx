@@ -44,8 +44,26 @@ export const MenuList: MenuItem [] | undefined = [
                 active: false,
                 children: [
                     {path: "/users/admin/list", title: "Liste", type: "link", lanClass: "lan-6"},
-                    {path: "/users/admin/coachs", title: "Coachs", type: "link", lanClass: "lan-6"},
-                    {path: "/users/admin/staffMembers", title: "Staff", type: "link", lanClass: "lan-6"},
+                    {
+
+                        title: "Coachs",
+                        type: "sub",
+                        lanClass: "lan-6",
+                        children: [
+                            {path: "/users/admin/coachs", title: 'liste', type: 'link'},
+                            {path: '/users/admin/coachs/expertises', title: 'Expertises', type: 'link'}
+                        ]
+
+                    },
+                    {
+                        title: "Staff",
+                        type: "sub",
+                        lanClass: "lan-6",
+                        children: [
+                            {path: "/users/admin/staffMembers", title: 'liste', type: 'link'},
+                            {path: "/users/admin/staffMembers/positions", title: "Job Title", type: 'link'}
+                        ]
+                    }
                 ]
             },
             {

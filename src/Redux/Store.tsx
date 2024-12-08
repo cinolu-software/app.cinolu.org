@@ -16,6 +16,8 @@ import ProgramCategorySlice from "@/Redux/Reducers/programsSlice/ProgramsCategor
 import ProgramPhaseSlice from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
 import EventsTypeSlice from "@/Redux/Reducers/eventSlice/EventTypeSlice";
 import EventSlice from "@/Redux/Reducers/eventSlice/eventSlice";
+import ExpertiseSlice from "@/Redux/Reducers/userSlice/ExpertiseSlice";
+import PositionSlice from "@/Redux/Reducers/userSlice/PositionSlice";
 
 const Store = configureStore({
 
@@ -36,7 +38,9 @@ const Store = configureStore({
     programCategory: ProgramCategorySlice,
     programPhase: ProgramPhaseSlice,
     eventType: EventsTypeSlice,
-    event: EventSlice
+    event: EventSlice,
+    expertise : ExpertiseSlice,
+    position: PositionSlice,
   },
 
   middleware: getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
