@@ -10,6 +10,7 @@ import { fetchPartnerShip, deletePartnerShip, setModalDeletePartnerShip} from "@
 import ModalCreatePartnerShip from "@/Components/Applications/PartnersShip/ModalCreatePartnerShip";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import UpdateProgramPartnerShip from "@/Components/Applications/PartnersShip/ModalUpdatePartnerShip";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 const PartnersShipListContainer = () => {
@@ -49,33 +50,38 @@ const PartnersShipListContainer = () => {
                 setModalAction={setModalDeletePartnerShip}
                 deleteEntityThunk={deletePartnerShip}
             />
-            <Row>
-                <Col sm="12">
-                    <Card>
-                        <CardBody>
-                            <div className="list-product-header">
-                                <PartnerShipList />
-                                <ModalCreatePartnerShip/>
-                                <UpdateProgramPartnerShip/>
-                            </div>
-                            <div className="list-program">
-                                <div className="table-responsive">
-                                    <DataTable
-                                        className="theme-scrollbar"
-                                        data={filteredPartnerShip}
-                                        columns={PartnerShipListTableDataColumn as TableColumn<PartnerShipListTableColumnType>[]}
-                                        striped
-                                        highlightOnHover
-                                        pagination
-                                        subHeader
-                                        subHeaderComponent={subHeaderComponentMemo}
-                                    />
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+            {
+                status !== 'succeeded' ? <TableSkeleton/> : (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <PartnerShipList />
+                                        <ModalCreatePartnerShip/>
+                                        <UpdateProgramPartnerShip/>
+                                    </div>
+                                    <div className="list-program">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredPartnerShip}
+                                                columns={PartnerShipListTableDataColumn as TableColumn<PartnerShipListTableColumnType>[]}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+            }
+
         </Container>
     );
 }

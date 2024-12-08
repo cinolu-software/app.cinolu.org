@@ -9,6 +9,8 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
 import {CollapseFilterData} from "./CollapseFilterData";
 import { ToastContainer} from "react-toastify";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
+
 
 
 const ProgramsListContainer = () => {
@@ -36,32 +38,37 @@ const ProgramsListContainer = () => {
     return (
         <Container fluid>
             <DeleteProgramsModal />
-            <Row>
-                <Col sm="12">
-                    <Card>
-                        <CardBody>
-                            <div className="list-product-header">
-                                <ProgramsHeader />
-                                <CollapseFilterData/>
-                            </div>
-                            <div className="list-product">
-                                <div className="table-responsive">
-                                    <DataTable
-                                        className="theme-scrollbar"
-                                        data={filteredItems}
-                                        columns={ProgramsListTableDataColumn}
-                                        striped
-                                        highlightOnHover
-                                        pagination
-                                        subHeader
-                                        subHeaderComponent={subHeaderComponentMemo}
-                                    />
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+            {
+                status !== 'succeeded' ? <TableSkeleton/> : (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <ProgramsHeader />
+                                        <CollapseFilterData/>
+                                    </div>
+                                    <div className="list-product">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredItems}
+                                                columns={ProgramsListTableDataColumn}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+            }
+
             <ToastContainer/>
         </Container>
     );

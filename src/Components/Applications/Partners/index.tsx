@@ -8,6 +8,7 @@ import {PartnerListTableColumnType} from "@/Types/PartnerType/PartnerType";
 import {PartnerListTableDataColumn} from "@/Data/Application/Partner";
 import {setModalEditPartner, setModalDeletePartner, setModalCreatePartner, fetchPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 import PartnerList from "@/Components/Applications/Partners/PartnerList";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 
@@ -46,32 +47,36 @@ const PartnersListContainer = () => {
 
     return (
         <Container fluid>
+            {
+                status !== 'succeeded' ? <TableSkeleton/> : (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <PartnerList />
+                                    </div>
+                                    <div className="list-program">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredPartner}
+                                                columns={PartnerListTableDataColumn as TableColumn<PartnerListTableColumnType>[]}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+            }
 
-            <Row>
-                <Col sm="12">
-                    <Card>
-                        <CardBody>
-                            <div className="list-product-header">
-                                <PartnerList />
-                            </div>
-                            <div className="list-program">
-                                <div className="table-responsive">
-                                    <DataTable
-                                        className="theme-scrollbar"
-                                        data={filteredPartner}
-                                        columns={PartnerListTableDataColumn as TableColumn<PartnerListTableColumnType>[]}
-                                        striped
-                                        highlightOnHover
-                                        pagination
-                                        subHeader
-                                        subHeaderComponent={subHeaderComponentMemo}
-                                    />
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
         </Container>
     )
 }

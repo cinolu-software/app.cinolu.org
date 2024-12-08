@@ -8,6 +8,7 @@ import DeleteEventModal from "@/Components/Applications/events/DeleteEventModal"
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
 import { ToastContainer} from "react-toastify";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 const EventsListContainer = () => {
@@ -35,31 +36,36 @@ const EventsListContainer = () => {
     return (
         <Container fluid>
             <DeleteEventModal />
-            <Row>
-                <Col sm="12">
-                    <Card>
-                        <CardBody>
-                            <div className="list-product-header">
-                                <EventsHeader />
-                            </div>
-                            <div className="list-product">
-                                <div className="table-responsive">
-                                    <DataTable
-                                        className="theme-scrollbar"
-                                        data={filteredItems as any}
-                                        columns={EventsListTableDataColumn}
-                                        striped
-                                        highlightOnHover
-                                        pagination
-                                        subHeader
-                                        subHeaderComponent={subHeaderComponentMemo}
-                                    />
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+            {
+                status !== 'succeeded' ? <TableSkeleton/> : (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <EventsHeader />
+                                    </div>
+                                    <div className="list-product">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredItems as any}
+                                                columns={EventsListTableDataColumn}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+            }
+
             <ToastContainer/>
         </Container>
     );

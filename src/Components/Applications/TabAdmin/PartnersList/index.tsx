@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { CollapseFilterData } from "./CollapseFilterData";
 import { MembersListFilterHeader } from "./MembersListFilterHeader";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 const PartenersListContainer = () => {
 

@@ -9,6 +9,7 @@ import {fetchCategory, deleteCategory, setModalDeleteCategory} from "@/Redux/Red
 import {ProgramsCategoryListTableDataColumn} from "@/Data/Application/ProgramsCategory";
 import {ProgramCategoryHeader} from "@/Components/Applications/programsCategory/ProgramCategoryHeader";
 import UpdateProgramCategory from "@/Components/Applications/programsCategory/ModalUpdateProgramCategory";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 
@@ -52,31 +53,35 @@ const ProgramsCategoryListContainer: React.FC = () => {
                 setModalAction={setModalDeleteCategory as any}
             />
             <UpdateProgramCategory/>
-            <Row>
-                <Col sm="12">
-                    <Card>
-                        <CardBody>
-                            <div className="list-product-header">
-                                <ProgramCategoryHeader />
-                            </div>
-                            <div className="list-program">
-                                <div className="table-responsive">
-                                    <DataTable
-                                        className="theme-scrollbar"
-                                        data={filteredProgramCategory}
-                                        columns={ ProgramsCategoryListTableDataColumn }
-                                        striped
-                                        highlightOnHover
-                                        pagination
-                                        subHeader
-                                        subHeaderComponent={subHeaderComponentMemo}
-                                    />
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+            {
+                status !== 'succeeded' ? <TableSkeleton/> : (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <ProgramCategoryHeader />
+                                    </div>
+                                    <div className="list-program">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredProgramCategory}
+                                                columns={ ProgramsCategoryListTableDataColumn }
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+            }
         </Container>
     )
 }

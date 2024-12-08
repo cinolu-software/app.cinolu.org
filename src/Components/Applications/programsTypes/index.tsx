@@ -11,6 +11,7 @@ import ModalCreateProgramType from "@/Components/Applications/programsTypes/Moda
 import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
 const ProgramsTypesListContainer: React.FC = () => {
@@ -54,31 +55,36 @@ const ProgramsTypesListContainer: React.FC = () => {
                 deleteEntityThunk={deleteProgramType}
             />
             <ModalCreateProgramType/>
-            <Row>
-                <Col sm="12">
-                    <Card>
-                        <CardBody>
-                            <div className="list-product-header">
-                                <ProgramsTypesHeader />
-                            </div>
-                            <div className="list-program">
-                                <div className="table-responsive">
-                                    <DataTable
-                                        className="theme-scrollbar"
-                                        data={filteredPrograms}
-                                        columns={ProgramsListTableDataColumn as TableColumn<ProgramsListTypeTableColumnType>[]}
-                                        striped
-                                        highlightOnHover
-                                        pagination
-                                        subHeader
-                                        subHeaderComponent={subHeaderComponentMemo}
-                                    />
-                                </div>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+            {
+                status !== 'succeeded' ? <TableSkeleton/>: (
+                    <Row>
+                        <Col sm="12">
+                            <Card>
+                                <CardBody>
+                                    <div className="list-product-header">
+                                        <ProgramsTypesHeader />
+                                    </div>
+                                    <div className="list-program">
+                                        <div className="table-responsive">
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredPrograms}
+                                                columns={ProgramsListTableDataColumn as TableColumn<ProgramsListTypeTableColumnType>[]}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                )
+            }
+
         </Container>
     );
 };
