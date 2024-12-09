@@ -10,7 +10,7 @@ const initialState: InitialStateExpertiseType = {
     isOpenModalCreateExpertiseType: false,
     isOpenModalEditExpertiseType: false,
     isOpenModalDeleteExpertiseType: false,
-    selectedExpertiseType: null
+    selectedExpertise: null
 };
 
 const transformExpertise = (types: Expertise[]): Expertise[] => {
@@ -82,13 +82,13 @@ const ExpertiseSlice = createSlice({
         setModalCreateExpertise: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateExpertiseType = action.payload.isOpen;
         },
-        setModalEditExpertise: (state, action: PayloadAction<{ isOpen: boolean, expertise: Expertise }>) => {
+        setModalEditExpertise: (state, action: PayloadAction<{ isOpen: boolean, expertise: Expertise | null }>) => {
             state.isOpenModalEditExpertiseType = action.payload.isOpen;
-            state.selectedExpertiseType = action.payload.expertise;
+            state.selectedExpertise = action.payload.expertise;
         },
         setModalDeleteExpertise: (state, action: PayloadAction<{ isOpen: boolean, expertise: Expertise | null }>) => {
             state.isOpenModalDeleteExpertiseType = action.payload.isOpen;
-            state.selectedExpertiseType = action.payload.expertise;
+            state.selectedExpertise = action.payload.expertise;
         },
     },
     extraReducers: (builder) => {

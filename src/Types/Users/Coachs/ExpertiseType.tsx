@@ -22,7 +22,7 @@ export interface InitialStateExpertiseType {
     isOpenModalCreateExpertiseType: boolean;
     isOpenModalEditExpertiseType: boolean;
     isOpenModalDeleteExpertiseType: boolean;
-    selectedExpertiseType: Expertise | null;
+    selectedExpertise: Expertise | null;
 }
 
 

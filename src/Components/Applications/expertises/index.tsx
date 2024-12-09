@@ -2,15 +2,15 @@ import { TableColumn } from 'react-data-table-component';
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { ProgramsTypesHeader } from "./ProgramsList";
-import { useSelector, useDispatch } from "react-redux";
-import { selectOriginalProgramData,selectProgramTypeStatus, fetchProgramsType, selectTransformedProgramDataType, setModalDeleteProgramTypes, deleteProgramType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/ProgramsTypes";
-import { ProgramsListTypeTableColumnType } from "@/Types/Programs/ProgramsTypeType";
-import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";
-import UpdateProgramTypeModal from "@/Components/Applications/programsTypes/ModalUpdateProgramsType";
-import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
+import {ExpertiseTypesHeader} from "@/Components/Applications/expertises/ExpertiseList";
+import { fetchExpertises, setModalDeleteExpertise, deleteExpertise} from "@/Redux/Reducers/userSlice/ExpertiseSlice"
+import {ExpertiseListTableDataColumn} from "@/Data/Application/expertises";
+import {ExpertisesListTypeTableColumnType} from "@/Types/Users/Coachs/ExpertiseType";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+
+import ModalCreateExpertise from "@/Components/Applications/expertises/ModalCreateExpertise";
+import ModalUpdateExpertise from "@/Components/Applications/expertises/ModalUpdateExpertise";
+import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 
@@ -18,10 +18,7 @@ const ProgramsTypesListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch()
-    const status = useSelector(selectProgramTypeStatus);
-    const transformedPrograms = useSelector(selectTransformedProgramDataType);
-    const data = useSelector(selectOriginalProgramData);
-    const {isOpenModalDeleteProgramType, selectedProgramType, originalTypeProgramsData} = useAppSelector(state => state.programsType)
+    const {status, dataExpertise, isOpenModalDeleteExpertiseType, selectedExpertise } = useAppSelector(state=> state.expertise);
 
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -35,26 +32,26 @@ const ProgramsTypesListContainer: React.FC = () => {
 
     useEffect(() => {
         if (status === "idle") {
-            dispatch(fetchProgramsType());
+            dispatch(fetchExpertises());
         }
     }, [status, dispatch]);
 
-    const filteredPrograms = transformedPrograms.filter(program =>
-        program.name.toLowerCase().includes(filterText.toLowerCase())
+    const filteredExpertise = dataExpertise.filter(expertise =>
+        expertise.name.toLowerCase().includes(filterText.toLowerCase())
     );
 
     return (
         <Container fluid>
-            <UpdateProgramTypeModal />
+            <ModalUpdateExpertise />
             <DeleteEntityModal
-                isOpen={isOpenModalDeleteProgramType}
-                entityName="type de programme"
-                selectedEntity={selectedProgramType}
-                entities={originalTypeProgramsData}
-                setModalAction={setModalDeleteProgramTypes as any}
-                deleteEntityThunk={deleteProgramType}
+                isOpen={isOpenModalDeleteExpertiseType}
+                entityName="Expertise de coach"
+                selectedEntity={selectedExpertise}
+                entities={dataExpertise}
+                setModalAction={setModalDeleteExpertise as any}
+                deleteEntityThunk={deleteExpertise}
             />
-            <ModalCreateProgramType/>
+            <ModalCreateExpertise/>
             {
                 status !== 'succeeded' ? <TableSkeleton/>: (
                     <Row>
@@ -62,14 +59,14 @@ const ProgramsTypesListContainer: React.FC = () => {
                             <Card>
                                 <CardBody>
                                     <div className="list-product-header">
-                                        <ProgramsTypesHeader />
+                                        <ExpertiseTypesHeader />
                                     </div>
                                     <div className="list-program">
                                         <div className="table-responsive">
                                             <DataTable
                                                 className="theme-scrollbar"
-                                                data={filteredPrograms}
-                                                columns={ProgramsListTableDataColumn as TableColumn<ProgramsListTypeTableColumnType>[]}
+                                                data={filteredExpertise}
+                                                columns={ExpertiseListTableDataColumn as TableColumn<ExpertisesListTypeTableColumnType>[]}
                                                 striped
                                                 highlightOnHover
                                                 pagination

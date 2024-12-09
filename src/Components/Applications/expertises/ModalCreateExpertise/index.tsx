@@ -1,30 +1,31 @@
 import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createProgramType, setModalCreateProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import {createExpertise, setModalCreateExpertise} from "@/Redux/Reducers/userSlice/ExpertiseSlice";
 import { Flip, toast } from "react-toastify";
-import { CreateProgramTypeType } from "@/Types/Programs/ProgramsTypeType";
+import {CreateExpertiseType} from "@/Types/Users/Coachs/ExpertiseType";
 
-const CreateNewType = () => {
+
+const ModalCreateExpertise = () => {
 
     const dispatch = useAppDispatch();
-    const isOpenModalCreateProgramType = useAppSelector(state => state.programsType.isOpenModalCreateProgramType);
-    const [program, setProgram] = useState<CreateProgramTypeType>({ name: '', description: '' });
+    const {isOpenModalCreateExpertiseType} = useAppSelector(state=>state.expertise)
+    const [expertise, setExpertise] = useState<CreateExpertiseType>({ name: '', description: '' });
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProgram(prevProgram => ({ ...prevProgram, name: e.target.value }));
+        setExpertise(prevExpertise => ({ ...prevExpertise, name: e.target.value }));
     };
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setProgram(prevProgram => ({ ...prevProgram, description: e.target.value }));
+        setExpertise(prevExpertise => ({ ...prevExpertise, description: e.target.value }));
     };
 
     const handleSubmit = async () => {
-        await dispatch(createProgramType(program)).unwrap()
+        await dispatch(createExpertise(expertise)).unwrap()
             .then(() => {
-                dispatch(setModalCreateProgramTypes({ isOpen: false }));
+                dispatch(setModalCreateExpertise({ isOpen: false }));
                 toast.success(
-                    <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Expertise crééé avec succès"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -36,7 +37,7 @@ const CreateNewType = () => {
             })
             .catch((error) => {
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création de l'expertise"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -50,38 +51,38 @@ const CreateNewType = () => {
 
     return (
         <Col xs="12">
-            <Modal isOpen={isOpenModalCreateProgramType} toggle={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))} size="lg">
+            <Modal isOpen={isOpenModalCreateExpertiseType} toggle={() => dispatch(setModalCreateExpertise({ isOpen: false }))} size="lg">
                 <div className="modal-header">
-                    <h1 className="modal-title fs-5">{"Ajouter un type de programme"}</h1>
-                    <Button close onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))} />
+                    <h1 className="modal-title fs-5">{"Ajouter un de l'expertise"}</h1>
+                    <Button close onClick={() => dispatch(setModalCreateExpertise({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-category">
-                        <Label for="programName" check>
-                            Nom du type de programme <span className="txt-danger">*</span>
+                        <Label for="expertise" check>
+                            Nom de l'expertise <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"
-                            id="programName"
+                            id="expertise"
                             type="text"
-                            value={program.name}
+                            value={expertise.name}
                             onChange={handleNameChange}
                             required
                         />
-                        <Label for="programDescription" className="mt-2" check>
-                            Description du type de programme
+                        <Label for="expertiseDescription" className="mt-2" check>
+                            Description de l'expertise <span className="txt-danger">*</span>
                         </Label>
                         <textarea
-                            id="programDescription"
+                            id="expertiseDescription"
                             className="form-control"
                             rows={5}
-                            value={program.description}
+                            value={expertise.description}
                             onChange={handleDescriptionChange}
                         />
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))}>
+                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateExpertise({ isOpen: false }))}>
                         {"Annuler"}
                     </button>
                     <button className={'btn btn-outline-primary'} onClick={handleSubmit}>
@@ -93,4 +94,4 @@ const CreateNewType = () => {
     );
 };
 
-export default CreateNewType;
+export default ModalCreateExpertise
