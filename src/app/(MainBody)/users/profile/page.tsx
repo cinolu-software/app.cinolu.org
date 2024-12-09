@@ -1,12 +1,20 @@
-"use client"
+'use client';
 
-import EditProfileContainer from "@/Components/Applications/EditProfile";
+import React, {FunctionComponent, useEffect, useState} from 'react';
 
+const Profile = () => {
+    const [MyAwesomeMap, setClient] = useState<FunctionComponent>();
 
-import React from "react";
+    useEffect(() => {
+        (async () => {
+            if (typeof navigator !== "undefined") {
+                const newClient = (await import('@/Components/Applications/Profile')).default
+                setClient(() => newClient);
+            }
+        })();
+    }, []);
 
-const EditProfile = () => {
-    return <EditProfileContainer/>
+    return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
 
-export default EditProfile;
+export default Profile;

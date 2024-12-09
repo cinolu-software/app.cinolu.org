@@ -22,6 +22,12 @@ export const Profile = () => {
         }
     }, [dispatch]);
 
+    useEffect(() => {
+        if (user?.roles && Array.isArray(user.roles) && user.roles.length === 0) {
+            router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string);
+        }
+    }, [user]);
+
     const LogOutUser = async () => {
         await dispatch(logout());
         router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string);

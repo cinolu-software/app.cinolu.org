@@ -71,7 +71,7 @@ export const createUser = createAsyncThunk<{ data: UserType }, Partial<UserType>
         try {
             const response = await axiosInstance.post<{ data: UserType }>(`${apiBaseUrl}/users`, {
                 email: newUser.email,
-                name: `${newUser.last_name} ${newUser.name} ${newUser.first_name}`,
+                name: newUser.name,
                 phone_number: newUser.phone_number,
                 address: newUser.address,
                 roles: newUser.roles

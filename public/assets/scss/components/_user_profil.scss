@@ -125,5 +125,36 @@
   }
 }
 
+.profile-header{
+
+  position: relative;
+
+  .block-backgroud{
+    height: 150px;
+  }
+
+  .avatar-profile{
+    background-image: url(../../images/avtar/avatar_.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    top: 100px;
+    left: 6%;
+    transform: translateX(-50%);
+    border: 5px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 5px #f2f2f2;
+  }
+
+  .block-info{
+    height: 150px;
+  }
+
+}
+
+
 
 

@@ -131,26 +131,6 @@ export const MenuList: MenuItem [] | undefined = [
         menucontent: "coach",
         Items: [
             {
-                title: "Coachés",
-                id: 1,
-                icon: "user",
-                type: "sub",
-                lanClass: "lan-1",
-                active: false,
-                children: [
-                    {path: "/users/admin/list", title: "Liste", type: "link", lanClass: "lan-6"},
-                ]
-            },
-            {
-                title: "Programmes",
-                id: 2,
-                icon: "builders",
-                type: "link",
-                lanClass: "lan-1",
-                active: false,
-                path: ''
-            },
-            {
                 title: "Rapports",
                 id: 3,
                 icon: "charts",
