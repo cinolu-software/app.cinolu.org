@@ -10,7 +10,7 @@ const DeleteEventModal = () => {
 
     const dispatch = useAppDispatch();
     const {isOpenModalDeleteEvent, selectedEvent, dataEvent} = useAppSelector(state=>state.event)
-    const selectedEventData = dataEvent.find((item) => item.id === selectedEvent?.id);
+    const selectedEventData = dataEvent?.find((item) => item.id === selectedEvent?.id);
 
     const handleDelete = async () => {
         if (selectedEventData && selectedEventData.id !== undefined) {

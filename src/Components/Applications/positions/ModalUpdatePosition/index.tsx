@@ -1,48 +1,50 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { updateProgramType, setModalEditProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import {updatePosition, setModalEditPosition} from "@/Redux/Reducers/userSlice/PositionSlice";
 import { Flip, toast } from "react-toastify";
-import { UpdateTypeType } from "@/Types/Programs/ProgramsTypeType";
+import {UpdatePositionType} from "@/Types/Users/Members/PositionsType";
 
-const UpdateProgramTypeModal = () => {
+
+const ModalUpdatePosition = () => {
+
     const dispatch = useAppDispatch();
-    const { selectedProgramType, isOpenModalEditProgramType } = useAppSelector((state) => state.programsType);
-    const [programType, setProgramType] = useState<UpdateTypeType>({ name: '', description: '', id: '' });
+    const {selectedPosition, isOpenModalEditPosition} = useAppSelector(state=>state.position)
+    const [position, setPosition] = useState<UpdatePositionType>({ name: '', description: '', id: '' });
 
     const isEditingRef = useRef(false);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newName = e.target.value;
-        setProgramType((prev) => ({ ...prev, name: newName }));
+        setPosition((prev) => ({ ...prev, name: newName }));
         isEditingRef.current = true;
     };
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const newDescription = e.target.value;
-        setProgramType((prev) => ({ ...prev, description: newDescription }));
+        setPosition((prev) => ({ ...prev, description: newDescription }));
         isEditingRef.current = true;
     };
 
     useEffect(() => {
 
         if (!isEditingRef.current) {
-            setProgramType({
-                id: selectedProgramType?.id || '',
-                name: selectedProgramType?.name || '',
-                description: selectedProgramType?.description || '',
+            setPosition({
+                id: selectedPosition?.id || '',
+                name: selectedPosition?.name || '',
+                description: selectedPosition?.description || '',
             });
         } else {
             isEditingRef.current = false;
         }
-    }, [selectedProgramType]);
+    }, [selectedPosition]);
 
     const handleSubmit = async () => {
         try {
-            await dispatch(updateProgramType(programType)).unwrap();
-            dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }));
+            await dispatch(updatePosition(position)).unwrap();
+            dispatch(setModalEditPosition({ isOpen: false, position : null }));
             toast.success(
-                <p className="text-white tx-16 mb-0">{"Type de programme mis à jour avec succès"}</p>,
+                <p className="text-white tx-16 mb-0">{"Job title mis à jour avec succès"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -53,7 +55,7 @@ const UpdateProgramTypeModal = () => {
             );
         } catch (error) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour du type de programme"}</p>,
+                <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la mise à jour du job title"}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -68,35 +70,35 @@ const UpdateProgramTypeModal = () => {
     return (
         <Col xs="12">
             <Modal
-                isOpen={isOpenModalEditProgramType}
-                toggle={() => dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }))}
+                isOpen={isOpenModalEditPosition}
+                toggle={() => dispatch(setModalEditPosition({ isOpen: false, position : null }))}
                 size="lg"
             >
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">{"Mettre à jour un type de programme"}</h1>
-                    <Button close onClick={() => dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }))} />
+                    <Button close onClick={() => dispatch(setModalEditPosition({ isOpen: false, position : null }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="update-category">
                         <Label for="programName" check>
-                            Nom du type de programme <span className="txt-danger">*</span>
+                            Nom du job title <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"
                             id="programName"
                             type="text"
-                            value={programType.name}
+                            value={position.name}
                             onChange={handleNameChange}
                             required
                         />
                         <Label for="programDescription" className="mt-2" check>
-                            Description du type de programme
+                            Description du job title
                         </Label>
                         <textarea
                             id="programDescription"
                             className="form-control"
                             rows={5}
-                            value={programType.description}
+                            value={position.description}
                             onChange={handleDescriptionChange}
                         />
                     </div>
@@ -104,7 +106,7 @@ const UpdateProgramTypeModal = () => {
                 <ModalFooter>
                     <button
                         className="btn btn-outline-light"
-                        onClick={() => dispatch(setModalEditProgramTypes({ isOpen: false, programType: null }))}
+                        onClick={() => dispatch(setModalEditPosition({ isOpen: false, position : null }))}
                     >
                         {"Annuler"}
                     </button>
@@ -117,4 +119,4 @@ const UpdateProgramTypeModal = () => {
     );
 };
 
-export default UpdateProgramTypeModal;
+export default ModalUpdatePosition;

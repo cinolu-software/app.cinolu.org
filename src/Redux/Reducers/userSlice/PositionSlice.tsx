@@ -4,13 +4,13 @@ import { InitialStatePositionType, Position, CreatePositionType, UpdatePositionT
 import { RootState } from "@/Redux/Store";
 
 const initialState: InitialStatePositionType = {
-    dataExpertise: [],
+    dataPosition: [],
     status: "idle",
     error: null,
-    isOpenModalCreateExpertiseType: false,
-    isOpenModalEditExpertiseType: false,
-    isOpenModalDeleteExpertiseType: false,
-    selectedExpertiseType: null,
+    isOpenModalCreatePosition: false,
+    isOpenModalEditPosition: false,
+    isOpenModalDeletePosition: false,
+    selectedPosition: null,
 };
 
 const transformPosition = (positions: Position[]): Position[] => {
@@ -79,15 +79,15 @@ const PositionSlice = createSlice({
     initialState,
     reducers: {
         setModalCreatePosition: (state, action: PayloadAction<{ isOpen: boolean }>) => {
-            state.isOpenModalCreateExpertiseType = action.payload.isOpen;
+            state.isOpenModalCreatePosition = action.payload.isOpen;
         },
-        setModalEditPosition: (state, action: PayloadAction<{ isOpen: boolean; position: Position }>) => {
-            state.isOpenModalEditExpertiseType = action.payload.isOpen;
-            state.selectedExpertiseType = action.payload.position;
+        setModalEditPosition: (state, action: PayloadAction<{ isOpen: boolean; position: Position | null }>) => {
+            state.isOpenModalEditPosition = action.payload.isOpen;
+            state.selectedPosition = action.payload.position;
         },
         setModalDeletePosition: (state, action: PayloadAction<{ isOpen: boolean; position: Position | null }>) => {
-            state.isOpenModalDeleteExpertiseType = action.payload.isOpen;
-            state.selectedExpertiseType = action.payload.position;
+            state.isOpenModalDeletePosition = action.payload.isOpen;
+            state.selectedPosition = action.payload.position;
         },
     },
     extraReducers: (builder) => {
@@ -98,7 +98,7 @@ const PositionSlice = createSlice({
             })
             .addCase(fetchPositions.fulfilled, (state, action: PayloadAction<{ data: Position[] }>) => {
                 state.status = "succeeded";
-                state.dataExpertise = action.payload.data;
+                state.dataPosition = action.payload.data;
             })
             .addCase(fetchPositions.rejected, (state, action) => {
                 state.status = "failed";
@@ -110,7 +110,7 @@ const PositionSlice = createSlice({
             })
             .addCase(createPosition.fulfilled, (state, action: PayloadAction<Position>) => {
                 state.status = "succeeded";
-                state.dataExpertise.push(action.payload);
+                state.dataPosition.push(action.payload);
             })
             .addCase(createPosition.rejected, (state, action) => {
                 state.status = "failed";
@@ -122,9 +122,9 @@ const PositionSlice = createSlice({
             })
             .addCase(updatePosition.fulfilled, (state, action: PayloadAction<Position>) => {
                 state.status = "succeeded";
-                const index = state.dataExpertise.findIndex((position) => position.id === action.payload.id);
+                const index = state.dataPosition.findIndex((position) => position.id === action.payload.id);
                 if (index !== -1) {
-                    state.dataExpertise[index] = {
+                    state.dataPosition[index] = {
                         ...action.payload,
                         image: "programs/types/typePosition.png",
                     };
@@ -140,7 +140,7 @@ const PositionSlice = createSlice({
             })
             .addCase(deletePosition.fulfilled, (state, action: PayloadAction<string>) => {
                 state.status = "succeeded";
-                state.dataExpertise = state.dataExpertise.filter((position) => position.id !== action.payload);
+                state.dataPosition = state.dataPosition.filter((position) => position.id !== action.payload);
             })
             .addCase(deletePosition.rejected, (state, action) => {
                 state.status = "failed";

@@ -16,13 +16,13 @@ export interface UpdatePositionType extends CreatePositionType{
 }
 
 export interface InitialStatePositionType {
-    dataExpertise: Position[];
+    dataPosition: Position[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
-    isOpenModalCreateExpertiseType: boolean;
-    isOpenModalEditExpertiseType: boolean;
-    isOpenModalDeleteExpertiseType: boolean;
-    selectedExpertiseType: Position | null;
+    isOpenModalCreatePosition: boolean;
+    isOpenModalEditPosition: boolean;
+    isOpenModalDeletePosition: boolean;
+    selectedPosition: Position | null;
 }
 
 

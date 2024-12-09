@@ -1,30 +1,30 @@
 import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createProgramType, setModalCreateProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import {createPosition, setModalCreatePosition} from "@/Redux/Reducers/userSlice/PositionSlice";
 import { Flip, toast } from "react-toastify";
-import { CreateProgramTypeType } from "@/Types/Programs/ProgramsTypeType";
+import {CreatePositionType} from "@/Types/Users/Members/PositionsType";
 
-const CreateNewType = () => {
+const ModalCreatePosition = () => {
 
     const dispatch = useAppDispatch();
-    const isOpenModalCreateProgramType = useAppSelector(state => state.programsType.isOpenModalCreateProgramType);
-    const [program, setProgram] = useState<CreateProgramTypeType>({ name: '', description: '' });
+    const {isOpenModalCreatePosition} = useAppSelector(state=>state.position)
+    const [position, setPosition] = useState<CreatePositionType>({ name: '', description: '' });
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setProgram(prevProgram => ({ ...prevProgram, name: e.target.value }));
+        setPosition(prevPosition => ({ ...prevPosition, name: e.target.value }));
     };
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setProgram(prevProgram => ({ ...prevProgram, description: e.target.value }));
+        setPosition(prevPosition => ({ ...prevPosition, description: e.target.value }));
     };
 
     const handleSubmit = async () => {
-        await dispatch(createProgramType(program)).unwrap()
+        await dispatch(createPosition(position)).unwrap()
             .then(() => {
-                dispatch(setModalCreateProgramTypes({ isOpen: false }));
+                dispatch(setModalCreatePosition({ isOpen: false }));
                 toast.success(
-                    <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Job title créé avec succès"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -36,7 +36,7 @@ const CreateNewType = () => {
             })
             .catch((error) => {
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du job title"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -50,38 +50,38 @@ const CreateNewType = () => {
 
     return (
         <Col xs="12">
-            <Modal isOpen={isOpenModalCreateProgramType} toggle={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))} size="lg">
+            <Modal isOpen={isOpenModalCreatePosition} toggle={() => dispatch(setModalCreatePosition({ isOpen: false }))} size="lg">
                 <div className="modal-header">
-                    <h1 className="modal-title fs-5">{"Ajouter un type de programme"}</h1>
-                    <Button close onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))} />
+                    <h1 className="modal-title fs-5">{"Ajouter un job title"}</h1>
+                    <Button close onClick={() => dispatch(setModalCreatePosition({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-category">
                         <Label for="programName" check>
-                            Nom du type de programme <span className="txt-danger">*</span>
+                            Nom du job title <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"
                             id="programName"
                             type="text"
-                            value={program.name}
+                            value={position.name}
                             onChange={handleNameChange}
                             required
                         />
                         <Label for="programDescription" className="mt-2" check>
-                            Description du type de programme
+                            Description du job title
                         </Label>
                         <textarea
                             id="programDescription"
                             className="form-control"
                             rows={5}
-                            value={program.description}
+                            value={position.description}
                             onChange={handleDescriptionChange}
                         />
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateProgramTypes({ isOpen: false }))}>
+                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreatePosition({ isOpen: false }))}>
                         {"Annuler"}
                     </button>
                     <button className={'btn btn-outline-primary'} onClick={handleSubmit}>
@@ -93,4 +93,4 @@ const CreateNewType = () => {
     );
 };
 
-export default CreateNewType;
+export default ModalCreatePosition;
