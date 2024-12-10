@@ -1,3 +1,9 @@
+//User Profile
+export const userProfileBasicInfo="Informations de Base";
+export const userProfilePersonalInfo="Informations Personnelles";
+export const userProfileSecurity="Sécurité";
+export const userProfileTitle="Mon Compte";
+
 export const Href = "#javascript";
 export const ImagePath = "/assets/images";
 export const StarColor = "var(--theme-default)";

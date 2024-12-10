@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {CardBody, Nav, NavItem, NavLink} from "reactstrap";
-import { Description, Href, MaterialStyleTab, Review, User } from "@/Constant";
+import { Description, Href, MaterialStyleTab, Review, userProfileBasicInfo, userProfileSecurity, userProfilePersonalInfo } from "@/Constant";
+import TabsContent from "@/Components/Applications/Profile/ProfileTabs/TabsContent";
 
 
 const ProfileTabs = () => {
@@ -9,11 +10,26 @@ const ProfileTabs = () => {
 
     return (
         <CardBody>
-            <Nav tabs className="border-tab border-0 mb-0 nav-danger">
-                <NavItem><NavLink href={Href} className={`nav-border pt-0 txt-danger nav-danger ${basicTab === "1" ? "active" : ""}`} onClick={() => setBasicTab("1")}><i className="icofont icofont-man-in-glasses"></i>{User}</NavLink></NavItem>
-                <NavItem><NavLink href={Href} className={`nav-border txt-danger nav-danger ${basicTab === "2" ? "active" : ""}`} onClick={() => setBasicTab("2")}><i className="icofont icofont-file-document"></i>{Description}</NavLink></NavItem>
-                <NavItem><NavLink href={Href} className={`nav-border txt-danger nav-danger ${basicTab === "3" ? "active" : ""}`} onClick={() => setBasicTab("3")}><i className="icofont icofont-star"></i>{Review}</NavLink></NavItem>
+            <Nav tabs className="border-tab border-0 mb-0 nav-primary">
+                <NavItem>
+                    <NavLink href={Href} className={`nav-border pt-0 nav-danger ${basicTab === "1" ? "active" : ""}`} onClick={() => setBasicTab("1")}>
+                        <i className="icofont icofont-info-square"></i>{userProfileBasicInfo}
+                    </NavLink>
+                </NavItem>
+
+                <NavItem>
+                    <NavLink href={Href} className={`nav-border pt-0 nav-danger ${basicTab === "2" ? "active" : ""}`} onClick={() => setBasicTab("2")}>
+                        <i className="icofont icofont-user-alt-3"></i>{userProfilePersonalInfo}
+                    </NavLink>
+                </NavItem>
+
+                <NavItem>
+                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "3" ? "active" : ""}`} onClick={() => setBasicTab("3")}>
+                        <i className="icofont icofont-ui-lock"></i>{userProfileSecurity}
+                    </NavLink>
+                </NavItem>
             </Nav>
+            <TabsContent basicTab={basicTab}/>
         </CardBody>
     )
 }
