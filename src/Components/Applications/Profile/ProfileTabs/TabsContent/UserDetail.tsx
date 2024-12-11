@@ -23,7 +23,7 @@ const UserDetail = () => {
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-ui-email"></i>
                             </InputGroupText>
-                            <Input type={'text'} placeholder={'Entrer votre nom'}/>
+                            <Input type={'text'} placeholder={'Entrer votre email'}/>
                         </InputGroup>
                     </div>
                     <div className={'mb-3 m-form__group'}>
@@ -32,16 +32,16 @@ const UserDetail = () => {
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-ui-call"></i>
                             </InputGroupText>
-                            <Input type={'text'} placeholder={'Entrer votre nom'}/>
+                            <Input type={'text'} placeholder={'Entrer votre numero de telephone'}/>
                         </InputGroup>
                     </div>
                     <div className={'mb-3 m-form__group'}>
-                        <Label>{'Adress'}</Label>
+                        <Label>{'Adresse'}</Label>
                         <InputGroup>
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-location-pin"></i>
                             </InputGroupText>
-                            <Input type={'text'} placeholder={'Entrer votre nom'}/>
+                            <Input type={'text'} placeholder={'Entrer votre adresse'}/>
                         </InputGroup>
                     </div>
                 </div>

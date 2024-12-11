@@ -125,35 +125,53 @@
   }
 }
 
-.profile-header{
 
+.profile-header {
   position: relative;
 
-  .block-backgroud{
+  .block-backgroud {
     height: 150px;
+    background-color: #f4f4f4;
   }
 
-  .avatar-profile{
-    background-image: url(../../images/avtar/avatar_.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+  .avatar-profile {
+    background-color: #f3f3f3;
     position: absolute;
+    top: 150px;
+    left: 3%;
+    transform: translateY(-50%);
     width: 110px;
     height: 110px;
-    top: 100px;
-    left: 6%;
-    transform: translateX(-50%);
     border: 5px solid #fff;
     border-radius: 50%;
     box-shadow: 0 0 0 5px #f2f2f2;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
-  .block-info{
-    height: 150px;
-  }
+  .block-info {
+    margin-left: 3%;
+    margin-top: 60px;
+    margin-bottom: 50px;
 
+    h1 {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    h4 {
+      color: #6c757d;
+      font-weight: 300;
+    }
+  }
 }
+
+
 
 
 

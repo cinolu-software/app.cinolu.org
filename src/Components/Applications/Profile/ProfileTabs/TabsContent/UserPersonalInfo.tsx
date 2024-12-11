@@ -6,9 +6,8 @@ const UserPersonalInfo = () => {
     return (
         <Container fluid className={'mt-5'}>
             <div>
-                <h5 className={'mb-3'}>{}</h5>
+                <h5 className={'mb-3'}>{"Information Personnelles"}</h5>
                 <div>
-
                     <div className={'mb-3 m-form__group'}>
                         <Label>{"Linkedin"}</Label>
                         <InputGroup>
@@ -31,14 +30,15 @@ const UserPersonalInfo = () => {
                         <Label>{"Biographie"}</Label>
                         <InputGroup>
                             <InputGroupText className={'list-light-primary'}>
-                                <i className="icofont icofont-location-pin"></i>
+                                <i className="icofont icofont-newspaper"></i>
                             </InputGroupText>
-                            <Input type={'textarea'} placeholder={'Entrer votre nom'}/>
+                            <Input type={'textarea'} placeholder={'Entrer votre biographie'}/>
                         </InputGroup>
                     </div>
                 </div>
-
-
+                <div className={'mt-5'}>
+                    <button className={'btn btn-outline-primary'}>Ajouter</button>
+                </div>
             </div>
         </Container>
     )

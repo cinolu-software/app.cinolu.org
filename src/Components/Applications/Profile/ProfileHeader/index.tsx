@@ -1,22 +1,32 @@
 import React from "react";
-import BackButton from "@/CommonComponent/BackButton";
-import {Container, Card, CardHeader} from "reactstrap";
+import { CardHeader } from "reactstrap";
+import { useAppSelector } from "@/Redux/Hooks";
+import { ImagePath } from "@/Constant";
 
 const ProfileHeader = () => {
+    const { user } = useAppSelector((state) => state.auth);
 
-    return(
+    return (
         <CardHeader>
-            <div className={'row profile-header'}>
-                <div className={'col-12 bg-light-primary block-backgroud'}></div>
-                <div className={'col-12 block-info mt-5'}>
-                    <h1 className={'fw-bold'}>Moses Kalunga Ziongo</h1>
-                    <p>
-                        <h4 className={'text-muted fw-light'}>mosesziongo@gmail.com · Joined July 8, 2024</h4>
-                    </p>
+            <div className="row profile-header">
+                <div className="col-12 bg-light-primary block-backgroud"></div>
+                <div className="avatar-profile">
+                    <img
+                        src={`${ImagePath}/avtar/avatar_.jpg`}
+                        alt="Profile"
+                        onError={(e) =>
+                            (e.currentTarget.src = `${ImagePath}/default-avatar.jpg`)
+                        }
+                    />
                 </div>
-                <div className={'avatar-profile'}></div>
+                <div className="col-12 block-info">
+                    <h1>{user?.name || "Utilisateur Inconnu"}</h1>
+                    <h4>{user?.email || "Email non disponible"} · Rejoint le 8 juillet 2024</h4>
+                </div>
             </div>
         </CardHeader>
-    )
-}
+    );
+};
+
 export default ProfileHeader;
+
