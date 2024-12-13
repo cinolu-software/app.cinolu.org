@@ -1,24 +1,23 @@
-import React, {useState} from 'react';
-import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
+import React, { useState } from 'react';
+import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast, Flip } from "react-toastify";
-import {updateAttachmentEventImage} from "@/Redux/Reducers/eventSlice/eventSlice"
-import { CardBody, Col, Button } from "reactstrap";
+import { updateAttachmentEventImage } from "@/Redux/Reducers/eventSlice/eventSlice";
+import { CardBody, Col, Spinner } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
-import {useRouter} from "next/navigation";
-
+import { useRouter } from "next/navigation";
 
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ImagePreview = () => {
-
     const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
     const { selectedEvent } = useAppSelector(state => state.event);
-    const router = useRouter()
+    const router = useRouter();
 
     const handleUpdateImage = () => {
         if (files.length === 0) {
@@ -38,10 +37,12 @@ const ImagePreview = () => {
         if (selectedEvent) {
             const imageFile = files[0].file as File;
 
-            dispatch(updateAttachmentEventImage({ eventId : selectedEvent.id, imageFile })).unwrap()
+            setIsLoading(true);
+            dispatch(updateAttachmentEventImage({ eventId: selectedEvent.id, imageFile }))
+                .unwrap()
                 .then(() => {
                     toast.success(
-                        <p className="text-white tx-16 mb-0">{'Ajout de l\'image de couverture effectué avec succès'}</p>,
+                        <p className="text-white tx-16 mb-0">{"Ajout de l'image de couverture effectué avec succès"}</p>,
                         {
                             autoClose: 5000,
                             position: toast.POSITION.TOP_CENTER,
@@ -52,7 +53,7 @@ const ImagePreview = () => {
                     );
                     router.push(`/events`);
                 })
-                .catch((err) => {
+                .catch(() => {
                     toast.error(
                         <p className="text-white tx-16 mb-0">{"Erreur survenue lors de l'ajout de l'image de couverture"}</p>,
                         {
@@ -63,10 +64,12 @@ const ImagePreview = () => {
                             theme: "colored",
                         }
                     );
+                })
+                .finally(() => {
+                    setIsLoading(false);
                 });
         }
     };
-
 
     return (
         <Col lg="12">
@@ -79,8 +82,8 @@ const ImagePreview = () => {
                     onupdatefiles={setFiles}
                     labelIdle='<span class="filepond--label-action text-danger text-decoration-none">Déposez le fichier ici</span>'
                 />
-                <button className="btn btn-outline-primary" onClick={handleUpdateImage}>
-                    Mettre à jour l'image de couverture
+                <button className="btn btn-outline-primary" onClick={handleUpdateImage} disabled={isLoading}>
+                    {isLoading ? ( <>{"Mise à jour en cours"} <Spinner size="sm" color="light" /></> ) : "Mettre à jour l'image de couverture"}
                 </button>
             </CardBody>
         </Col>
@@ -88,3 +91,4 @@ const ImagePreview = () => {
 };
 
 export default ImagePreview;
+
