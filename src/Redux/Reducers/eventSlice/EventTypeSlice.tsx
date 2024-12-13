@@ -73,6 +73,7 @@ const EventsTypeSlice = createSlice({
     reducers: {
         setModalCreateEventType: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateEventType = action.payload.isOpen;
+            state.selectedEventType = null;
         },
         setModalEditEventTypes: (state, action: PayloadAction<{ isOpen: boolean, EventType: EventType | null }>) => {
             state.isOpenModalEditEventType = action.payload.isOpen;
@@ -103,7 +104,15 @@ const EventsTypeSlice = createSlice({
             })
             .addCase(createEventType.fulfilled, (state, action: PayloadAction<EventType>) => {
                 state.status = 'succeeded';
-                state.dataEventType.push(action.payload);
+                state.dataEventType.push({
+                    id: action.payload.id || "",
+                    name: action.payload.name || "",
+                    description: action.payload.description || "",
+                    created_at: action.payload.created_at || "",
+                    updated_at: action.payload.updated_at || "",
+                    image: "programs/types/typeProgram.png",
+                    deleted_at: null
+                });
             })
             .addCase(createEventType.rejected, (state, action) => {
                 state.status = 'failed';

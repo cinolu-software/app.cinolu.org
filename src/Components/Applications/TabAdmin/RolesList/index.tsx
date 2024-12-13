@@ -18,7 +18,6 @@ const RoleListContainer = () => {
   const status = useSelector(selectRoleStatus);
   const transformedRoles = useSelector(selectTransformedRoles);
 
-
   const subHeaderComponentMemo = useMemo(() => {
     return (
       <div className="dataTables_filter d-flex align-items-center">
@@ -29,11 +28,10 @@ const RoleListContainer = () => {
   }, [filterText]);
 
   useEffect(() => {
-    if(status === 'idle'){
+    if(status === "idle" || status === "loading"){
       dispatch(fetchRole())
     }
   }, []);
-
 
   return (
     <Container fluid>

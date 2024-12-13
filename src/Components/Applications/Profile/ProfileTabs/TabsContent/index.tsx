@@ -3,6 +3,7 @@ import {CardBody, TabContent, TabPane} from "reactstrap";
 import UserDetail from "@/Components/Applications/Profile/ProfileTabs/TabsContent/UserDetail";
 import UserPersonalInfo from "@/Components/Applications/Profile/ProfileTabs/TabsContent/UserPersonalInfo";
 import UserPassword from "@/Components/Applications/Profile/ProfileTabs/TabsContent/UserPassword";
+import UserImageProfile from "@/Components/Applications/Profile/ProfileTabs/TabsContent/UserImageProfile";
 
 const TabsContent : React.FC<{basicTab : string}> = ({basicTab}) => {
 
@@ -15,6 +16,9 @@ const TabsContent : React.FC<{basicTab : string}> = ({basicTab}) => {
                 <UserPersonalInfo />
             </TabPane>
             <TabPane tabId={'3'}>
+                <UserImageProfile/>
+            </TabPane>
+            <TabPane tabId={'4'}>
                 <UserPassword/>
             </TabPane>
         </TabContent>

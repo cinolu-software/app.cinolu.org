@@ -80,14 +80,12 @@ export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: st
     }
 );
 
-
 const initialState: AuthState = {
     user : null,
     statusAuth : "idle",
     errorAuth : null,
     isAuthenticated : false,
 };
-
 
 const authSlice = createSlice({
     name: "auth",

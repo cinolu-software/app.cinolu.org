@@ -18,13 +18,12 @@ const CoachsListContainer = () =>{
     const {coachsData, statusCoachs, isOpenModalDeleteCoach, selectedCoach} = useAppSelector(state => state.users)
 
     useEffect(() => {
-        if (statusCoachs === 'idle') {
+        if (status === "idle" || status === "loading") {
           dispatch(fetchCoaches());
         }
-      }, [statusCoachs, dispatch]);
+    }, [statusCoachs, dispatch]);
     
-    const filteredUsers = coachsData
-    .filter((user: UserType) =>
+    const filteredUsers = coachsData.filter((user: UserType) =>
         (user.name.toLowerCase().includes(filterText.toLowerCase()) ||
         user.email.toLowerCase().includes(filterText.toLowerCase()))
     );

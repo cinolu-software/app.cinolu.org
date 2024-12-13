@@ -1,6 +1,5 @@
 import React from "react";
 import { FormGroup, Input, Label } from "reactstrap";
-
 interface CommonUserFormGroupProps {
     name: string;
     defaultValue: any;
@@ -8,9 +7,10 @@ interface CommonUserFormGroupProps {
     title: string;
     type: string;
     inputRef?: React.Ref<HTMLInputElement>;
-}
+};
 
 const CommonUserFormGroup: React.FC<CommonUserFormGroupProps> = ({type, title, placeholder, defaultValue, name, inputRef,}) => {
+
     return (
         <FormGroup>
             <Label>{title}</Label>

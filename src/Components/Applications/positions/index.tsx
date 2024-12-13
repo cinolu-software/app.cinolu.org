@@ -30,7 +30,7 @@ const PositionListContainer: React.FC = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (status === "idle") {
+        if (status === "idle" || status === "loading") {
             dispatch(fetchPositions());
         }
     }, [status, dispatch]);

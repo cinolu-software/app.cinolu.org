@@ -11,8 +11,6 @@ import {CollapseFilterData} from "./CollapseFilterData";
 import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
-
-
 const ProgramsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
@@ -29,7 +27,7 @@ const ProgramsListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (status === "idle") {
+        if (status === "idle" || status === "loading") {
             dispatch(fetchPrograms());
         }
     }, [status, dispatch]);
@@ -68,7 +66,6 @@ const ProgramsListContainer = () => {
                     </Row>
                 )
             }
-
             <ToastContainer/>
         </Container>
     );

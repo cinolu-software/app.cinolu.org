@@ -62,7 +62,6 @@ const UsersListContainer: React.FC = () => {
               setModalAction={setModalDeleteUser}
               deleteEntityThunk={deleteUser}
           />
-
           <UpdateUserModal selectedUser={selectedUser}/>
           {
                 statusUsers !== 'succeeded' ? (

@@ -1,9 +1,9 @@
 import React from "react";
-import ProfileHeader from "@/Components/Applications/Profile/ProfileHeader";
 import {Container, Card} from "reactstrap";
 import BackButton from "@/CommonComponent/BackButton";
 import ProfileTabs from "@/Components/Applications/Profile/ProfileTabs";
 import {userProfileTitle} from "@/Constant";
+import ProfileHeader from "@/Components/Applications/Profile/ProfileHeader";
 
 const Profile = () => {
 

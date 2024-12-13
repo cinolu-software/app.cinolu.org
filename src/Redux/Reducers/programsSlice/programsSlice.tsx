@@ -55,7 +55,8 @@ const initialState: InitialStateProgramsType = {
 
 
 export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {
-    const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`);
+    const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`)
+    console.log('response', response.data.data.programs);
     const originalPrograms = response.data.data.programs;
     return { original: originalPrograms };
 });

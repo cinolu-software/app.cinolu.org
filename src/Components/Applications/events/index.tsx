@@ -27,11 +27,10 @@ const EventsListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (status === "idle") {
+        if (status === "idle" || status === "loading") {
             dispatch(fetchEvents());
         }
     }, [status, dispatch]);
-
 
     return (
         <Container fluid>
@@ -65,7 +64,6 @@ const EventsListContainer = () => {
                     </Row>
                 )
             }
-
             <ToastContainer/>
         </Container>
     );

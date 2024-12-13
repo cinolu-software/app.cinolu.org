@@ -35,7 +35,7 @@ const PartnersListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (status === "idle") {
+        if (status === "idle" || status === "loading") {
             dispatch(fetchPartner());
         }
     }, [status, dispatch]);

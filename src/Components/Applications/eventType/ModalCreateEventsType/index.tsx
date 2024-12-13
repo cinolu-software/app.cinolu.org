@@ -1,27 +1,30 @@
 import React, { useState } from "react";
-import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter, Spinner } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createEventType, setModalCreateEventType  } from "@/Redux/Reducers/eventSlice/EventTypeSlice"
+import { createEventType, setModalCreateEventType } from "@/Redux/Reducers/eventSlice/EventTypeSlice";
 import { Flip, toast } from "react-toastify";
-import {CreateEventType} from "@/Types/EventsType/eventsTypeType";
+import { CreateEventType } from "@/Types/EventsType/eventsTypeType";
 
 const CreateNewEventType = () => {
-
     const dispatch = useAppDispatch();
-    const { isOpenModalCreateEventType } = useAppSelector(state => state.eventType);
+    const { isOpenModalCreateEventType } = useAppSelector((state) => state.eventType);
     const [event, setEvent] = useState<CreateEventType>({ name: '', description: '' });
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEvent(prevEvent => ({ ...prevEvent, name: e.target.value }));
+        setEvent((prevEvent) => ({ ...prevEvent, name: e.target.value }));
     };
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setEvent(prevEvent => ({ ...prevEvent, description: e.target.value }));
+        setEvent((prevEvent) => ({ ...prevEvent, description: e.target.value }));
     };
 
     const handleSubmit = async () => {
-        await dispatch(createEventType(event)).unwrap()
+        setIsLoading(true);
+        await dispatch(createEventType(event))
+            .unwrap()
             .then(() => {
+                setEvent({ name: '', description: '' });
                 dispatch(setModalCreateEventType({ isOpen: false }));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
@@ -34,7 +37,7 @@ const CreateNewEventType = () => {
                     }
                 );
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error(
                     <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
                     {
@@ -45,6 +48,9 @@ const CreateNewEventType = () => {
                         theme: "colored",
                     }
                 );
+            })
+            .finally(() => {
+                setIsLoading(false);
             });
     };
 
@@ -81,11 +87,11 @@ const CreateNewEventType = () => {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateEventType({ isOpen: false }))}>
+                    <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateEventType({ isOpen: false }))} disabled={isLoading}>
                         {"Annuler"}
                     </button>
-                    <button className={'btn btn-outline-primary'} onClick={handleSubmit}>
-                        {"Créer"}
+                    <button className={'btn btn-outline-primary'} onClick={handleSubmit} disabled={isLoading}>
+                        {isLoading ? <Spinner size="sm" color="light" /> : "Créer"}
                     </button>
                 </ModalFooter>
             </Modal>
