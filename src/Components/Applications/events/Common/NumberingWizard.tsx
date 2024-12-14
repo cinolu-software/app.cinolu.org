@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
-import {createEvent, handleNextButton, handleBackButton, setCreateFomValue, updateEvent} from "@/Redux/Reducers/eventSlice/eventSlice";
+import {createEvent, handleNextButton, handleBackButton, setCreateFomValue, updateEvent, resetFormValue} from "@/Redux/Reducers/eventSlice/eventSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
 
@@ -34,6 +34,8 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                 const typedKey = key as keyof CreateEvent;
                 dispatch(setCreateFomValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
             });
+        }else if(mode === "add"){
+            dispatch(resetFormValue());
         }
     }, [mode, initialValues, dispatch]);
 

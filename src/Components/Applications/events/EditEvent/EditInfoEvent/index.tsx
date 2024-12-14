@@ -12,7 +12,6 @@ const EditEventContainer = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/events'}/>
             <Row>
                 <NumberingWizard  mode={'edit'} initialValues={selectedEvent} />
             </Row>

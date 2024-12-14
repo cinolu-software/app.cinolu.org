@@ -217,6 +217,21 @@ const EventSlice = createSlice({
                 }
             }
         },
+        resetFormValue: (state) => {
+            state.CreateFormValue = {
+                name : '',
+                image: '',
+                location: '',
+                description: '',
+                started_at: '',
+                ended_at: '',
+                attendees: '',
+                responsible: '',
+                event_type: 'physical',
+                online_link: '',
+                types: []
+            }
+        }
     },
 
     extraReducers: (builder) => {
@@ -307,7 +322,8 @@ export const {
     setFilterToggle,
     setShowFinish,
     handleBackButton,
-    handleNextButton
+    handleNextButton,
+    resetFormValue
 } = EventSlice.actions;
 
 export default EventSlice.reducer;
