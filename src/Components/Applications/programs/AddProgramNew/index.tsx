@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Row} from "reactstrap";
-import NumberingWizard from "@/Components/Applications/programs/AddProgramNew/NumberingWizard";
 import BackButton from "@/CommonComponent/BackButton";
+import NumberingWizard from "@/Components/Applications/programs/Common/NumberingWizard";
 
 
 
@@ -11,7 +11,7 @@ const AddProgramNewContainer = () => {
         <Container fluid>
             <BackButton link={'/programs'}/>
             <Row>
-                <NumberingWizard/>
+                <NumberingWizard mode={'add'}/>
             </Row>
         </Container>
     )

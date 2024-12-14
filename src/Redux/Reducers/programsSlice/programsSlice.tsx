@@ -20,7 +20,7 @@ const initialState: InitialStateProgramsType = {
     isOpenModalDeleteProgram: false,
     filterToggle: false,
     selectedProgram: null,
-    programData: null,
+    programData: [],
     navId: 1,
     tabId: 1,
     formValue: {
@@ -56,7 +56,6 @@ const initialState: InitialStateProgramsType = {
 
 export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {
     const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`)
-    console.log('response', response.data.data.programs);
     const originalPrograms = response.data.data.programs;
     return { original: originalPrograms };
 });
@@ -232,7 +231,8 @@ const ProgramSlice = createSlice({
                 //@ts-ignore
                 state.EditFormValue[action.payload.field] = action.payload.value;
             }
-        },setNewFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
+        },
+        setNewFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
             const { field, value } = action.payload;
 
             if (field === 'types' && typeof value === 'string') {
@@ -247,7 +247,6 @@ const ProgramSlice = createSlice({
                 state.formValue[field] = value;
             }
         },
-
         setFilterToggle: (state) => {
             state.filterToggle = !state.filterToggle;
         },
@@ -261,7 +260,6 @@ const ProgramSlice = createSlice({
         },
         handleNextButton: (state) => {
             const isValid = validateStep(state);
-
             if (isValid) {
                 if (state.numberLevel < 6) {
                     state.numberLevel++;
@@ -270,6 +268,22 @@ const ProgramSlice = createSlice({
                 }
             }
         },
+        resetFormValue: (state) => {
+            state.formValue = {
+                name: "",
+                description: "",
+                aim: "",
+                prize: "",
+                town: "",
+                targeted_audience: '',
+                started_at: "",
+                ended_at: "",
+                types: [],
+                categories: [],
+                partners: []
+            }
+        },
+
     },
     extraReducers: (builder) => {
         builder
@@ -367,7 +381,8 @@ export const {
     setSelectedProgram,
     setShowFinish,
     handleBackButton,
-    handleNextButton
+    handleNextButton,
+    resetFormValue
 } = ProgramSlice.actions;
 
 export const selectSelectedProgram = (state: RootState) => state.programs.selectedProgram;

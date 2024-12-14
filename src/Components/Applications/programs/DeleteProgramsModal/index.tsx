@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ImagePath } from "@/Constant";
-import { Button, CardBody, Col } from "reactstrap";
+import { Button, CardBody, Col, Spinner } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 
 const DeleteProgramModal = () => {
-
     const dispatch = useAppDispatch();
     const { isOpenModalDeleteProgram, selectedProgram, originalProgramsData } = useAppSelector((state) => state.programs);
     const selectedProgramData = originalProgramsData?.find((item) => item.id === selectedProgram?.id);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleDelete = async () => {
         if (selectedProgramData && selectedProgramData.id !== undefined) {
+            setIsLoading(true);
             try {
                 await dispatch(deleteProgram(selectedProgramData.id)).unwrap();
                 dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
@@ -38,6 +40,8 @@ const DeleteProgramModal = () => {
                         theme: "colored",
                     }
                 );
+            } finally {
+                setIsLoading(false);
             }
         }
     };
@@ -65,11 +69,12 @@ const DeleteProgramModal = () => {
                                 color="secondary"
                                 className="me-2"
                                 onClick={() => dispatch(setModalDeleteProgram({ isOpen: false, program: null }))}
+                                disabled={isLoading}
                             >
                                 {"Fermer"}
                             </Button>
-                            <Button color="danger" onClick={handleDelete}>
-                                {"Supprimer"}
+                            <Button color="danger" onClick={handleDelete} disabled={isLoading}>
+                                {isLoading ? <> 'Suppression '<Spinner size="sm" color="light" /></> : "Supprimer"}
                             </Button>
                         </div>
                     </div>
@@ -81,6 +86,7 @@ const DeleteProgramModal = () => {
 };
 
 export default DeleteProgramModal;
+
 
 
 

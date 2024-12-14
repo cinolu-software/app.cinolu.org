@@ -7,7 +7,7 @@ import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from '@/CommonComponent/SVG';
-import {Spinner} from 'reactstrap'
+import {Spinner} from 'reactstrap';
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -25,7 +25,6 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
 
     const dispatch = useDispatch();
     const router = useRouter();
-
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -45,6 +44,7 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
     const handleDelete = async () => {
         setLoadingDelete(true);
         dispatch(setModalDeleteProgram({ isOpen: true, program }));
+        setLoadingDelete(false);
     };
 
 

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
-import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue,} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
 import StepOne from "@/Components/Applications/programs/Common/StepOne";
@@ -22,6 +22,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     const router = useRouter();
 
     useEffect(() => {
+
         if (mode === "edit" && initialValues) {
             const transformedInitialValues = {
                 ...initialValues,
@@ -37,6 +38,8 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 const typedKey = key as keyof FormValueType;
                 dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
             });
+        }else if (mode === "add") {
+            dispatch(resetFormValue());
         }
     }, [mode, initialValues, dispatch]);
 
