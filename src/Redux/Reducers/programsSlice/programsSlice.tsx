@@ -1,15 +1,8 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import {
-    CreateProgramType,
-    FormValueType,
-    InitialStateProgramsType,
-    ReceiveProgramsType
-} from "@/Types/Programs/ProgramsType";
+import { CreateProgramType, FormValueType, InitialStateProgramsType, ReceiveProgramsType, ProgramDataType } from "@/Types/Programs/ProgramsType";
 import {RootState} from "@/Redux/Store";
 import {ShowError} from "@/utils/MultiStepForm.service";
-
-
 
 const initialState: InitialStateProgramsType = {
     originalProgramsData: [],
@@ -24,6 +17,7 @@ const initialState: InitialStateProgramsType = {
     navId: 1,
     tabId: 1,
     formValue: {
+        id: "",
         name: "",
         description: "",
         aim: "",
@@ -37,6 +31,7 @@ const initialState: InitialStateProgramsType = {
         partners: []
     },
     EditFormValue: {
+        id: "",
         name: "",
         description: "",
         aim: "",
@@ -60,11 +55,7 @@ export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async ()
     return { original: originalPrograms };
 });
 
-export const fetchProgramById = createAsyncThunk<
-    ReceiveProgramsType,
-    string,
-    { rejectValue: any }
->('programs/fetchProgramById', async (programId, thunkAPI) => {
+export const fetchProgramById = createAsyncThunk<ReceiveProgramsType, string, { rejectValue: any }>('programs/fetchProgramById', async (programId, thunkAPI) => {
     try {
         const response = await axiosInstance.get<{ data: ReceiveProgramsType }>(
             `${apiBaseUrl}/programs/${programId}`
@@ -119,7 +110,6 @@ export const updateAttachmentProgramImage = createAsyncThunk<
     'programs/updateAttachmentProgramImage',
     async ({ programId, imageFile }, thunkAPI) => {
         try {
-
             const formData = new FormData();
             formData.append('thumb', imageFile);
 
@@ -234,15 +224,12 @@ const ProgramSlice = createSlice({
         },
         setNewFormValue: (state, action: PayloadAction<{ field: keyof FormValueType, value: any }>) => {
             const { field, value } = action.payload;
-
             if (field === 'types' && typeof value === 'string') {
                 state.formValue.types = JSON.parse(value).map((type: string) => parseInt(type));
             }
-
             else if (field === 'started_at' || field === 'ended_at') {
                 state.formValue[field] = new Date(value).toISOString().split("T")[0];
             }
-
             else {
                 state.formValue[field] = value;
             }
@@ -270,6 +257,7 @@ const ProgramSlice = createSlice({
         },
         resetFormValue: (state) => {
             state.formValue = {
+                id: "",
                 name: "",
                 description: "",
                 aim: "",
@@ -283,7 +271,6 @@ const ProgramSlice = createSlice({
                 partners: []
             }
         },
-
     },
     extraReducers: (builder) => {
         builder
@@ -358,7 +345,7 @@ const ProgramSlice = createSlice({
             .addCase(fetchProgramById.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchProgramById.fulfilled, (state, action: PayloadAction<ReceiveProgramsType>) => {
+            .addCase(fetchProgramById.fulfilled, (state, action: PayloadAction<any>) => {
                 state.status = 'succeeded';
                 state.programData = action.payload;
             })

@@ -13,7 +13,7 @@ import StepFive from "@/Components/Applications/programs/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/programs/Common/StepperHorizontal";
-import { FormValueType } from "@/Types/Programs/ProgramsType";
+import { FormValueType, ProgramDataType } from "@/Types/Programs/ProgramsType";
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
 
@@ -22,7 +22,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     const router = useRouter();
 
     useEffect(() => {
-
         if (mode === "edit" && initialValues) {
             const transformedInitialValues = {
                 ...initialValues,
@@ -33,7 +32,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                     ? initialValues.categories.map((category: { id?: string }) => category?.id).filter(Boolean)
                     : [],
             };
-
             Object.keys(transformedInitialValues).forEach((key) => {
                 const typedKey = key as keyof FormValueType;
                 dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
@@ -42,8 +40,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
             dispatch(resetFormValue());
         }
     }, [mode, initialValues, dispatch]);
-
-
 
     const handleSubmit = () => {
         try {
@@ -89,15 +85,15 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     const renderStep = () => {
         switch (numberLevel) {
             case 1:
-                return <StepOne formValue={formValue} />;
+                return <StepOne data={formValue} />;
             case 2:
-                return <StepTwo formValue={formValue} />;
+                return <StepTwo data={formValue} />;
             case 3:
-                return <StepThree formValue={formValue} />;
+                return <StepThree data={formValue} />;
             case 4:
-                return <StepFour formValue={formValue} />;
+                return <StepFour data={formValue} />;
             case 5:
-                return <StepFive formValue={formValue} />;
+                return <StepFive data={formValue } />;
             case 6:
                 return (
                     <Form className="stepper-four g-3 needs-validation" noValidate>

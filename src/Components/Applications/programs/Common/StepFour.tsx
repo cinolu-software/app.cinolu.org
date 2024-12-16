@@ -5,7 +5,7 @@ import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchCategory } from "@/Redux/Reducers/programsSlice/ProgramsCategory";
 import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
-const StepFour: React.FC<StepPropsType> = ({ formValue }) => {
+const StepFour: React.FC<StepPropsType> = ({ data }) => {
     const dispatch = useAppDispatch();
     const { status, programsCategoryData } = useAppSelector((state) => state.programCategory);
 
@@ -16,11 +16,11 @@ const StepFour: React.FC<StepPropsType> = ({ formValue }) => {
     }, [dispatch, status]);
 
     const handleCategoryChange = (categoryId: string) => {
-        if (!formValue || !Array.isArray(formValue.categories)) return;
+        if (!data || !Array.isArray(data.categories)) return;
 
-        const updatedCategories = formValue.categories.includes(categoryId)
-            ? formValue.categories.filter((id: string) => id !== categoryId)
-            : [...formValue.categories, categoryId];
+        const updatedCategories = data.categories.includes(categoryId)
+            ? data.categories.filter((id: string) => id !== categoryId)
+            : [...data.categories, categoryId];
 
         dispatch(setNewFormValue({ field: "categories", value: updatedCategories }));
     };
@@ -42,7 +42,7 @@ const StepFour: React.FC<StepPropsType> = ({ formValue }) => {
                             <Input
                                 id={`category${category.id}`}
                                 type="checkbox"
-                                checked={formValue?.categories.includes(category.id)}
+                                checked={data?.categories.includes(category.id)}
                                 onChange={() => handleCategoryChange(category.id)}
                             />
                             <div className="custom--mega-checkbox">

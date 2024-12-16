@@ -4,13 +4,13 @@ import { StepPropsType } from "@/Types/Programs/ProgramsType";
 import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { useAppDispatch } from "@/Redux/Hooks";
 
-const StepOne: React.FC<StepPropsType> = ({ formValue }) => {
+const StepOne: React.FC<StepPropsType> = ({ data }) => {
 
-    const { name, description, targeted_audience, aim, prize, town } = formValue;
+    const { name, description, targeted_audience, aim, prize, town } = data;
 
     const dispatch = useAppDispatch();
 
-    const handleChange = (field: keyof typeof formValue) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (field: keyof typeof data) => (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         dispatch(setNewFormValue({ field, value: event.target.value }));
     };
 

@@ -5,7 +5,7 @@ import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
 import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
-const StepThree: React.FC<StepPropsType> = ({ formValue }) => {
+const StepThree: React.FC<StepPropsType> = ({ data }) => {
     const dispatch = useAppDispatch();
     const { transformedProgramsData, status } = useAppSelector(state => state.programsType);
 
@@ -16,11 +16,11 @@ const StepThree: React.FC<StepPropsType> = ({ formValue }) => {
     }, [dispatch, status]);
 
     const handleTypeChange = (typeId: string) => {
-        if (!formValue) return;
+        if (!data) return;
 
-        const updatedTypes = formValue.types.includes(typeId)
-            ? formValue.types.filter((id: string) => id !== typeId)
-            : [...formValue.types, typeId];
+        const updatedTypes = data.types.includes(typeId)
+            ? data.types.filter((id: string) => id !== typeId)
+            : [...data.types, typeId];
 
         dispatch(setNewFormValue({ field: 'types', value: updatedTypes }));
     };
@@ -42,7 +42,7 @@ const StepThree: React.FC<StepPropsType> = ({ formValue }) => {
                             <Input
                                 id={`type${type.id}`}
                                 type="checkbox"
-                                checked={formValue?.types.includes(type.id)}
+                                checked={data?.types.includes(type.id)}
                                 onChange={() => handleTypeChange(type.id)}
                             />
                             <div className="custom--mega-checkbox">

@@ -8,12 +8,12 @@ import { Value } from 'react-calendar/dist/cjs/shared/types';
 import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
 
-const StepTwo: React.FC<StepPropsType> = ({ formValue }) => {
+const StepTwo: React.FC<StepPropsType> = ({ data }) => {
 
     const dispatch = useAppDispatch();
 
-    const [startDate, setStartDate] = useState<Date | null>(formValue?.started_at ? new Date(formValue.started_at) : null);
-    const [endDate, setEndDate] = useState<Date | null>(formValue?.ended_at ? new Date(formValue.ended_at) : null);
+    const [startDate, setStartDate] = useState<Date | null>(data?.started_at ? new Date(data.started_at) : null);
+    const [endDate, setEndDate] = useState<Date | null>(data?.ended_at ? new Date(data.ended_at) : null);
 
     const handleStartDateChange = (value: Value) => {
         if (value instanceof Date) {

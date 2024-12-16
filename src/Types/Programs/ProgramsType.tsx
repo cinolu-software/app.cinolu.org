@@ -1,4 +1,5 @@
 import {ChangeEvent} from "react";
+import {PartnerType} from "@/Types/PartnerType/PartnerType";
 
 export type RequirementType = {
     id?: string;
@@ -30,7 +31,7 @@ export interface CreateProgramType {
     prize?: string;
     town?: string;
     categories?:  string[];
-    partners: string[];
+    partners: PartnerType [] | string[];
 }
 
 export interface ReceiveProgramsType {
@@ -53,6 +54,7 @@ export interface ReceiveProgramsType {
 }
 
 export interface FormValueType {
+    id: string;
     name: string;
     description: string;
     targeted_audience: string;
@@ -63,7 +65,11 @@ export interface FormValueType {
     prize?: string;
     town?: string;
     categories?: any;
-    partners: string[];
+    partners:  PartnerType [] | string[] ;
+}
+
+export interface ProgramDataType extends FormValueType {
+    partners_data: PartnerType[];
 }
 
 export interface InitialStateProgramsType {
@@ -74,8 +80,8 @@ export interface InitialStateProgramsType {
     isOpenModalEditProgram: boolean;
     isOpenModalDeleteProgram: boolean;
     filterToggle: boolean;
-    selectedProgram?: ReceiveProgramsType | null | undefined;
-    programData: any;
+    selectedProgram?: ReceiveProgramsType | null ;
+    programData: ProgramDataType[];
     navId: number;
     tabId: number;
     formValue: FormValueType;
@@ -114,12 +120,10 @@ export type NumberingWizardPropsType = {
 };
 
 export interface StepPropsType {
-    formValue: FormValueType;
+    data :  FormValueType;
 }
 
 export interface FormEditorsProps {
     description: string | undefined;
     onChangeDescription: (value: string) => void;
 }
-
-
