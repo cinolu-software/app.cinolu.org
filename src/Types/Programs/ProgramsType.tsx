@@ -80,7 +80,7 @@ export interface InitialStateProgramsType {
     isOpenModalDeleteProgram: boolean;
     filterToggle: boolean;
     selectedProgram?: ReceiveProgramsType | null ;
-    programData: FormValueType;
+    programData: ReceiveProgramsType | null;
     navId: number;
     tabId: number;
     formValue: FormValueType;

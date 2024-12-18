@@ -3,9 +3,11 @@ import { TabPane, Badge, Row, Col } from "reactstrap";
 import { useAppSelector } from "@/Redux/Hooks";
 
 const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
+
     const { programData } = useAppSelector((state) => state.programs);
 
-    const phase = programData.phases.find((phase: { id: string; }) => phase.id === navId);
+    // @ts-ignore
+    const phase = programData?.phases.find((phase: { id: string; }) => phase.id === navId);
 
     if (!phase) {
         return (
@@ -19,6 +21,7 @@ const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
             </TabPane>
         );
     }
+
 
     return (
         <TabPane tabId="details-tab">

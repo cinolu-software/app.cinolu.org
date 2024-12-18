@@ -13,8 +13,7 @@ const initialState: InitialStateProgramsType = {
     isOpenModalDeleteProgram: false,
     filterToggle: false,
     selectedProgram: null,
-    // @ts-ignore
-    programData: [],
+    programData: null,
     navId: 1,
     tabId: 1,
     formValue: {

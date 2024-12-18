@@ -22,7 +22,7 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     const [requirements, setRequirements] = useState<Requirement[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
-
+    // @ts-ignore
     const phase = programData.phases.find((phase: { id: string }) => phase.id === navId);
 
     useEffect(() => {

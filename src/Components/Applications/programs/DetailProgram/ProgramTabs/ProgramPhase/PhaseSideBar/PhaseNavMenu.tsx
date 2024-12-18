@@ -7,6 +7,7 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
 
     const { programData } = useAppSelector(state => state.programs);
 
+    // @ts-ignore
     const phases = programData?.phases || [];
 
 
