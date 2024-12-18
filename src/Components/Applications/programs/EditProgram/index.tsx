@@ -13,10 +13,10 @@ const EditProgramTabs = () => {
             <Row>
                 <Card>
                     <CardBody>
-                        <Nav tabs>
+                        <Nav tabs className={'border-tab border-0 mb-0 nav-primary'}>
                             <NavItem>
                                 <NavItem>
-                                    <NavLink href='#' className={`txt-secondary ${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")}>
+                                    <NavLink href='#' className={`nav-border txt-secondary ${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")}>
                                         <i className="icofont icofont-files"></i>
                                         <span>Détail du programme</span>
                                     </NavLink>
@@ -25,7 +25,7 @@ const EditProgramTabs = () => {
 
                             <NavItem>
                                 <NavItem>
-                                    <NavLink href='#' className={`txt-secondary ${activeTab === "2" ? "active" : ""}`}
+                                    <NavLink href='#' className={`nav-border txt-secondary ${activeTab === "2" ? "active" : ""}`}
                                              onClick={() => setActiveTab("2")}>
                                         <i className="fa fa-file-image-o"></i>
                                         <span>Image de couverture</span>

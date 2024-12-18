@@ -16,13 +16,10 @@ const StepThree: React.FC<StepPropsType> = ({ data }) => {
     }, [dispatch, status]);
 
     const handleTypeChange = (typeId: string) => {
-
         if (!data) return;
-
         const updatedTypes = data.types.includes(typeId)
             ? data.types.filter((id: string) => id !== typeId)
             : [...data.types, typeId];
-
         dispatch(setNewFormValue({ field: 'types', value: updatedTypes }));
     };
 

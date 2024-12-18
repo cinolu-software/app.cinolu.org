@@ -16,7 +16,6 @@ const UserPassword = () => {
         password: '',
         password_confirm: ''
     });
-
     const [showPassword, setShowPassword] = useState({
         old_password: false,
         password: false,
@@ -143,5 +142,3 @@ const UserPassword = () => {
 };
 
 export default UserPassword;
-
-

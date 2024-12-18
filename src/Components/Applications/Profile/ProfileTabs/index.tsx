@@ -28,6 +28,12 @@ const ProfileTabs = () => {
                         <i className="icofont icofont-ui-lock"></i>{userProfileSecurity}
                     </NavLink>
                 </NavItem>
+
+                <NavItem>
+                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "3" ? "active" : ""}`} onClick={() => setBasicTab("4")}>
+                        <i className="icofont icofont-ui-lock"></i>{userProfileSecurity}
+                    </NavLink>
+                </NavItem>
             </Nav>
             <TabsContent basicTab={basicTab}/>
         </CardBody>
