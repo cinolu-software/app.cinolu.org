@@ -18,7 +18,7 @@ const CoachsListContainer = () =>{
     const {coachsData, statusCoachs, isOpenModalDeleteCoach, selectedCoach} = useAppSelector(state => state.users)
 
     useEffect(() => {
-        if (status === "idle" || status === "loading") {
+        if (statusCoachs === "idle" || statusCoachs === "loading") {
           dispatch(fetchCoaches());
         }
     }, [statusCoachs, dispatch]);
