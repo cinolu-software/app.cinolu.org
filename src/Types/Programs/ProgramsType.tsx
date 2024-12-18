@@ -65,11 +65,10 @@ export interface FormValueType {
     prize?: string;
     town?: string;
     categories?: any;
-    partners:  PartnerType [] | string[] ;
+    partners:  string[] ;
 }
 
 export interface ProgramDataType extends FormValueType {
-    partners_data: PartnerType[];
 }
 
 export interface InitialStateProgramsType {
@@ -81,7 +80,7 @@ export interface InitialStateProgramsType {
     isOpenModalDeleteProgram: boolean;
     filterToggle: boolean;
     selectedProgram?: ReceiveProgramsType | null ;
-    programData: ProgramDataType[];
+    programData: FormValueType;
     navId: number;
     tabId: number;
     formValue: FormValueType;
@@ -121,6 +120,11 @@ export type NumberingWizardPropsType = {
 
 export interface StepPropsType {
     data :  FormValueType;
+}
+
+export interface StepFiveProps {
+    data: FormValueType;
+    normalizedPartners: string[];
 }
 
 export interface FormEditorsProps {

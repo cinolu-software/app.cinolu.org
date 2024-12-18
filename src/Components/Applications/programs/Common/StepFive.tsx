@@ -1,25 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { setNewFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
 import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
-import { StepPropsType } from "@/Types/Programs/ProgramsType";
+import { StepPropsType, StepFiveProps} from "@/Types/Programs/ProgramsType";
 
 const StepFive: React.FC<StepPropsType> = ({ data }) => {
+
     const dispatch = useAppDispatch();
     const { partnerData, status } = useAppSelector((state) => state.partner);
-    const [normalizedData, setNormalizedData] = useState<string[]>([]);
-
-
-    useEffect(() => {
-        if (data && Array.isArray(data.partners)) {
-            const normalizedPartners = data.partners.map((partner) =>
-                typeof partner === 'string' ? partner : partner.id
-            );
-
-            setNormalizedData(normalizedPartners);
-        }
-    }, [data]);
+    const { formValue } = useAppSelector((state) => state.programs);
 
 
     useEffect(() => {
@@ -28,17 +18,15 @@ const StepFive: React.FC<StepPropsType> = ({ data }) => {
         }
     }, [dispatch, status]);
 
-
     const handlePartnerChange = (partnerId: string) => {
-        const isAlreadySelected = normalizedData.includes(partnerId);
+        if (!data) return;
+        const updatedPartners = data.partners.includes(partnerId)
+            ? data.partners.filter((id: string) => id !== partnerId)
+            : [...data.partners, partnerId];
 
-        const updatedPartners = isAlreadySelected
-            ? normalizedData.filter((id) => id !== partnerId)
-            : [...normalizedData, partnerId];
-
-        setNormalizedData(updatedPartners);
         dispatch(setNewFormValue({ field: 'partners', value: updatedPartners }));
     };
+
 
     return (
         <Col>
@@ -58,7 +46,7 @@ const StepFive: React.FC<StepPropsType> = ({ data }) => {
                             <Input
                                 id={`partner${partner.id}`}
                                 type="checkbox"
-                                checked={normalizedData.includes(partner.id)}
+                                checked={data.partners.includes(partner.id)}
                                 onChange={() => handlePartnerChange(partner.id)}
                             />
                             <div className="custom--mega-checkbox">

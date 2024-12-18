@@ -15,7 +15,7 @@ import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/programs/Common/StepperHorizontal";
 import { FormValueType, ProgramDataType } from "@/Types/Programs/ProgramsType";
 
-const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
+const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
 
     const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
@@ -31,6 +31,9 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 categories: Array.isArray(initialValues.categories)
                     ? initialValues.categories.map((category: { id?: string }) => category?.id).filter(Boolean)
                     : [],
+                partners: Array.isArray(initialValues.partners)
+                    ? initialValues.partners.map((partner: { id?: string }) => partner?.id).filter(Boolean)
+                    : [],
             };
             Object.keys(transformedInitialValues).forEach((key) => {
                 const typedKey = key as keyof FormValueType;
@@ -43,6 +46,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
 
     const handleSubmit = () => {
         try {
+
             const filteredFormValue = {
                 name: formValue.name,
                 description: formValue.description,
@@ -70,7 +74,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                     position: toast.POSITION.TOP_CENTER,
                 });
             }
-
             router.push("/programs");
         } catch (error) {
             toast.error("Une erreur est survenue", {
@@ -80,7 +83,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
         }
     };
 
-
+    console.log("formValue===>", formValue);
 
     const renderStep = () => {
         switch (numberLevel) {
@@ -93,7 +96,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
             case 4:
                 return <StepFour data={formValue} />;
             case 5:
-                return <StepFive data={formValue } />;
+                return <StepFive data={formValue }  />;
             case 6:
                 return (
                     <Form className="stepper-four g-3 needs-validation" noValidate>

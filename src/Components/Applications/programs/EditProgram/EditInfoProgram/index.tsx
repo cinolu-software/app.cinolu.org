@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Spinner, Col } from 'reactstrap';
 import NumberingWizard from "@/Components/Applications/programs/Common/NumberingWizard";
 import { fetchProgramById } from "@/Redux/Reducers/programsSlice/programsSlice";
@@ -6,7 +6,8 @@ import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
 
 const EditProgramContainer = () => {
-    const { selectedProgram, programData, status } = useAppSelector((state) => state.programs); // Ajout de isLoading
+
+    const { selectedProgram, status } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -28,10 +29,12 @@ const EditProgramContainer = () => {
         );
     }
 
+    console.log("===>|",selectedProgram);
+
     return (
         <Container fluid>
             <Row>
-                <NumberingWizard mode={'edit'} initialValues={programData} />
+                <NumberingWizard mode={'edit'} initialValues={selectedProgram}  />
             </Row>
         </Container>
     );

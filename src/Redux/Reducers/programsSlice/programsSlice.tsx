@@ -13,6 +13,7 @@ const initialState: InitialStateProgramsType = {
     isOpenModalDeleteProgram: false,
     filterToggle: false,
     selectedProgram: null,
+    // @ts-ignore
     programData: [],
     navId: 1,
     tabId: 1,
@@ -45,13 +46,12 @@ const initialState: InitialStateProgramsType = {
         partners: []
     },
     numberLevel:1,
-    showFinish:false
+    showFinish:false,
 };
-
 
 export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {
     const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`)
-    const originalPrograms = response.data.data.programs;
+    const originalPrograms = response.data.data;
     return { original: originalPrograms };
 });
 
