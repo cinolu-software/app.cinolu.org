@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { headerResponsive } from "@/Redux/Reducers/LayoutSlice";
 
-
 export const Header = () => {
 
   const { toggleSidebar } = useAppSelector((state) => state.layout);
@@ -17,10 +16,13 @@ export const Header = () => {
   }, []);
 
   return (
+
     <Row className={`page-header ${toggleSidebar ? "close_icon" : ""}`} id="page-header">
       <MobileView />
       <BreadCrumbs />
       <PageHeader />
     </Row>
+    
   );
+
 };

@@ -3,6 +3,7 @@ import { CardHeader } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { ImagePath } from "@/Constant";
 import {updateProfileImage} from "@/Redux/Reducers/AuthSlice";
+import {imageBaseUrl} from "@/services/axios";
 
 const ProfileHeader = () => {
 
@@ -42,13 +43,17 @@ const ProfileHeader = () => {
                 <div className="col-12 bg-light-primary block-backgroud"></div>
                 <div className={'container-avatar'}>
                     <div className="avatar-profile">
-                        <img src={`${ImagePath}/avtar/avatar_.jpg`} alt="Profile" />
+                        {
+                            user?.profile ?
+                                <img src={`${imageBaseUrl}/profiles/${user.profile}`} alt="Profile"/> :
+                                <img src={`${ImagePath}/avtar/avatar_.jpg`} alt="Profile"/>
+                        }
                     </div>
-                    <div className={''}>
-                        <button className="camera-button" title="Changer l'image de profil">
-                            <img src={`${ImagePath}/other/camera.png`} alt="Changer l'image" />
-                        </button>
-                    </div>
+                    {/*<div className={''}>*/}
+                    {/*    <button className="camera-button" title="Changer l'image de profil">*/}
+                    {/*         <img src={`${ImagePath}/other/camera.png`} alt="Changer l'image" />*/}
+                    {/*    </button>*/}
+                    {/*</div>*/}
                 </div>
 
                 <div className="col-12 block-info">

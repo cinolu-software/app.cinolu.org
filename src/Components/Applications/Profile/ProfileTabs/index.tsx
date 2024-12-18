@@ -1,6 +1,15 @@
 import React, {useState} from 'react'
 import {CardBody, Nav, NavItem, NavLink} from "reactstrap";
-import { Description, Href, MaterialStyleTab, Review, userProfileBasicInfo, userProfileSecurity, userProfilePersonalInfo } from "@/Constant";
+import {
+    Description,
+    Href,
+    MaterialStyleTab,
+    Review,
+    userProfileBasicInfo,
+    userProfileSecurity,
+    userProfilePersonalInfo,
+    userProfileImage
+} from "@/Constant";
 import TabsContent from "@/Components/Applications/Profile/ProfileTabs/TabsContent";
 
 
@@ -25,12 +34,12 @@ const ProfileTabs = () => {
 
                 <NavItem>
                     <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "3" ? "active" : ""}`} onClick={() => setBasicTab("3")}>
-                        <i className="icofont icofont-ui-lock"></i>{userProfileSecurity}
+                        <i className="icofont icofont-file-tiff"></i>{userProfileImage}
                     </NavLink>
                 </NavItem>
 
                 <NavItem>
-                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "3" ? "active" : ""}`} onClick={() => setBasicTab("4")}>
+                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "4" ? "active" : ""}`} onClick={() => setBasicTab("4")}>
                         <i className="icofont icofont-ui-lock"></i>{userProfileSecurity}
                     </NavLink>
                 </NavItem>
