@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter, Spinner } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {createExpertise, setModalCreateExpertise} from "@/Redux/Reducers/userSlice/ExpertiseSlice";
 import { Flip, toast } from "react-toastify";
@@ -9,7 +9,7 @@ import {CreateExpertiseType} from "@/Types/Users/Coachs/ExpertiseType";
 const ModalCreateExpertise = () => {
 
     const dispatch = useAppDispatch();
-    const {isOpenModalCreateExpertiseType} = useAppSelector(state=>state.expertise)
+    const {isOpenModalCreateExpertiseType, status} = useAppSelector(state=>state.expertise)
     const [expertise, setExpertise] = useState<CreateExpertiseType>({ name: '', description: '' });
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,6 +34,7 @@ const ModalCreateExpertise = () => {
                         theme: "colored",
                     }
                 );
+                setExpertise({name: '', description: ''});
             })
             .catch((error) => {
                 toast.error(
@@ -85,8 +86,12 @@ const ModalCreateExpertise = () => {
                     <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreateExpertise({ isOpen: false }))}>
                         {"Annuler"}
                     </button>
-                    <button className={'btn btn-outline-primary'} onClick={handleSubmit}>
-                        {"Créer"}
+                    <button className={'btn btn-outline-primary'} onClick={handleSubmit} disabled={
+                        expertise.name === "" || expertise.description === "" || status === "loading"
+                    } >
+                        {
+                            status === "loading" ? <Spinner size="sm" color="light" /> : "Créer"
+                        }
                     </button>
                 </ModalFooter>
             </Modal>

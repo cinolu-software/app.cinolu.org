@@ -97,6 +97,9 @@ const ProgramsTypeSlice = createSlice({
             state.isOpenModalDeleteProgramType = action.payload.isOpen;
             state.selectedProgramType = action.payload.programType;
         },
+        resetProgramTypeState: (state) => {
+            state.selectedProgramType = null;
+        }
     },
     extraReducers: (builder) => {
         builder

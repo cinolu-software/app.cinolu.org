@@ -111,7 +111,10 @@ const ExpertiseSlice = createSlice({
             })
             .addCase(createExpertise.fulfilled, (state, action: PayloadAction<Expertise>) => {
                 state.status = 'succeeded';
-                state.dataExpertise.push(action.payload);
+                state.dataExpertise.push({
+                    ...action.payload,
+                    image: "programs/types/typeProgram.png"
+                })
 
             })
             .addCase(createExpertise.rejected, (state, action) => {
