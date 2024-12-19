@@ -17,7 +17,7 @@ export interface UpdatePositionType extends CreatePositionType{
 
 export interface InitialStatePositionType {
     dataPosition: Position[];
-    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusPosition: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     isOpenModalCreatePosition: boolean;
     isOpenModalEditPosition: boolean;

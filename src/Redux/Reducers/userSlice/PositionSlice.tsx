@@ -5,7 +5,7 @@ import { RootState } from "@/Redux/Store";
 
 const initialState: InitialStatePositionType = {
     dataPosition: [],
-    status: "idle",
+    statusPosition: "idle",
     error: null,
     isOpenModalCreatePosition: false,
     isOpenModalEditPosition: false,
@@ -93,23 +93,23 @@ const PositionSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchPositions.pending, (state) => {
-                state.status = "loading";
+                state.statusPosition = "loading";
                 state.error = null;
             })
             .addCase(fetchPositions.fulfilled, (state, action: PayloadAction<{ data: Position[] }>) => {
-                state.status = "succeeded";
+                state.statusPosition = "succeeded";
                 state.dataPosition = action.payload.data;
             })
             .addCase(fetchPositions.rejected, (state, action) => {
-                state.status = "failed";
+                state.statusPosition = "failed";
                 state.error = action.error.message || "Something went wrong";
             })
             .addCase(createPosition.pending, (state) => {
-                state.status = "loading";
+                state.statusPosition = "loading";
                 state.error = null;
             })
             .addCase(createPosition.fulfilled, (state, action: PayloadAction<Position>) => {
-                state.status = "succeeded";
+                state.statusPosition = "succeeded";
                 state.dataPosition.push(
                     {
                         ...action.payload,
@@ -119,15 +119,15 @@ const PositionSlice = createSlice({
 
             })
             .addCase(createPosition.rejected, (state, action) => {
-                state.status = "failed";
+                state.statusPosition = "failed";
                 state.error = action.error.message || "Something went wrong";
             })
             .addCase(updatePosition.pending, (state) => {
-                state.status = "loading";
+                state.statusPosition = "loading";
                 state.error = null;
             })
             .addCase(updatePosition.fulfilled, (state, action: PayloadAction<Position>) => {
-                state.status = "succeeded";
+                state.statusPosition = "succeeded";
                 const index = state.dataPosition.findIndex((position) => position.id === action.payload.id);
                 if (index !== -1) {
                     state.dataPosition[index] = {
@@ -137,19 +137,19 @@ const PositionSlice = createSlice({
                 }
             })
             .addCase(updatePosition.rejected, (state, action) => {
-                state.status = "failed";
+                state.statusPosition = "failed";
                 state.error = action.error.message || "Something went wrong";
             })
             .addCase(deletePosition.pending, (state) => {
-                state.status = "loading";
+                state.statusPosition = "loading";
                 state.error = null;
             })
             .addCase(deletePosition.fulfilled, (state, action: PayloadAction<string>) => {
-                state.status = "succeeded";
+                state.statusPosition = "succeeded";
                 state.dataPosition = state.dataPosition.filter((position) => position.id !== action.payload);
             })
             .addCase(deletePosition.rejected, (state, action) => {
-                state.status = "failed";
+                state.statusPosition = "failed";
                 state.error = action.error.message || "Something went wrong";
             });
     },
