@@ -6,6 +6,7 @@ import { updateProfile } from "@/Redux/Reducers/AuthSlice";
 import { Flip, toast } from "react-toastify";
 
 const UserDetail = () => {
+
     const { user } = useAppSelector(state => state.auth);
     const dispatch = useAppDispatch();
     const [loading, setLoading] = useState(false);

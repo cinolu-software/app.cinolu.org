@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter, Spinner } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {createPosition, setModalCreatePosition} from "@/Redux/Reducers/userSlice/PositionSlice";
 import { Flip, toast } from "react-toastify";
@@ -8,7 +8,7 @@ import {CreatePositionType} from "@/Types/Users/Members/PositionsType";
 const ModalCreatePosition = () => {
 
     const dispatch = useAppDispatch();
-    const {isOpenModalCreatePosition} = useAppSelector(state=>state.position)
+    const {isOpenModalCreatePosition, status} = useAppSelector(state=>state.position)
     const [position, setPosition] = useState<CreatePositionType>({ name: '', description: '' });
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +33,12 @@ const ModalCreatePosition = () => {
                         theme: "colored",
                     }
                 );
+                setPosition(
+                    {
+                        name: '',
+                        description: ''
+                    }
+                )
             })
             .catch((error) => {
                 toast.error(
@@ -84,8 +90,12 @@ const ModalCreatePosition = () => {
                     <button className={'btn btn-outline-light'} onClick={() => dispatch(setModalCreatePosition({ isOpen: false }))}>
                         {"Annuler"}
                     </button>
-                    <button className={'btn btn-outline-primary'} onClick={handleSubmit}>
-                        {"Créer"}
+                    <button className={'btn btn-outline-primary'} onClick={handleSubmit} disabled={
+                        position.name === "" || position.description === "" || status === "loading"
+                    }>
+                        {
+                            status === "loading" ? <Spinner size="sm" color="light" /> : "Ajouter"
+                        }
                     </button>
                 </ModalFooter>
             </Modal>

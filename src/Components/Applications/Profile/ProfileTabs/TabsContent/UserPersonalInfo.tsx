@@ -8,7 +8,6 @@ import { Flip, toast } from "react-toastify";
 const UserPersonalInfo = () => {
 
 
-
     return (
         <Container fluid className={'mt-5'}>
             <div>

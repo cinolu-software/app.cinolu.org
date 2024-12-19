@@ -20,7 +20,7 @@ const transformPosition = (positions: Position[]): Position[] => {
         }
         return {
             ...position,
-            image: position.image || "programs/types/typePosition.png",
+            image: "programs/types/typeProgram.png",
         };
     });
 };
@@ -110,7 +110,13 @@ const PositionSlice = createSlice({
             })
             .addCase(createPosition.fulfilled, (state, action: PayloadAction<Position>) => {
                 state.status = "succeeded";
-                state.dataPosition.push(action.payload);
+                state.dataPosition.push(
+                    {
+                        ...action.payload,
+                        image: "programs/types/typeProgram.png",
+                    }
+                )
+
             })
             .addCase(createPosition.rejected, (state, action) => {
                 state.status = "failed";
