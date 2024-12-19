@@ -214,7 +214,13 @@ export const UsersListTableDataColumn = [
     name: "Nom",
     cell: (row: UsersListTableColumnType) => (
         <UsersListTableName
-            image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"}
+            image={
+                    row?.profile ?
+                        `${imageBaseUrl}/profiles/${row?.profile}` :
+                          row?.google_image
+                            ? row.google_image
+                            : "/assets/images/avtar/avatar.jpg"
+            }
             name={row.name}/>
     ),
     sortable: true,
@@ -240,7 +246,13 @@ export const CoatchListTableDataColumn = [
     name: "Nom",
     cell: (row: UsersListTableColumnType) => (
         <UsersListTableName
-            image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"}
+            image={
+              row?.profile ?
+                  `${imageBaseUrl}/profiles/${row?.profile}` :
+                  row?.google_image
+                      ? row.google_image
+                      : "/assets/images/avtar/avatar.jpg"
+            }
             name={row.name}/>
     ),
     sortable: true,
@@ -266,7 +278,13 @@ export const StaffMemberListTableDataColumn = [
     name: "Nom",
     cell: (row: UsersListTableColumnType) => (
         <UsersListTableName
-            image={row?.profile ? `${imageBaseUrl}/profiles/${row?.profile}` : "/assets/images/avtar/avatar.jpg"}
+            image={
+              row?.profile ?
+                  `${imageBaseUrl}/profiles/${row?.profile}` :
+                  row?.google_image
+                      ? row.google_image
+                      : "/assets/images/avtar/avatar.jpg"
+            }
             name={row.name}/>
     ),
     sortable: true,

@@ -29,7 +29,6 @@ const EditProgramContainer = () => {
         );
     }
 
-    console.log("===>|",selectedProgram);
 
     return (
         <Container fluid>

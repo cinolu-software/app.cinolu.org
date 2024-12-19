@@ -46,7 +46,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
 
     const handleSubmit = () => {
         try {
-
             const filteredFormValue = {
                 name: formValue.name,
                 description: formValue.description,
@@ -60,7 +59,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 categories: formValue.categories?.filter(Boolean),
                 partners: formValue.partners,
             };
-
             if (mode === "add") {
                 dispatch(createProgram(filteredFormValue));
                 toast.success("Programme créé avec succès", {
@@ -82,8 +80,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
             });
         }
     };
-
-    console.log("formValue===>", formValue);
 
     const renderStep = () => {
         switch (numberLevel) {
@@ -115,7 +111,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     return (
         <div className={'mt-5'}>
             <div className="height-equal">
-                {/*<CommonCardHeader title={mode === "add" ? "Ajout du programme" : "Modification du programme"} />*/}
                 <CardBody className="basic-wizard important-validation">
                     <StepperHorizontal level={numberLevel} />
                     <div id="msform">{renderStep()}</div>
