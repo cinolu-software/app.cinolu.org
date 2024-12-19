@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "@/services/axios";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import Cookies from "js-cookie";
-import {AuthResponse, AuthState, UpdateProfilePassword, UpdateProfilePayload} from "@/Types/AuthType";
+import {AuthResponse, AuthState, UpdateProfilePassword, UpdateProfilePayload, AddUserDetail} from "@/Types/AuthType";
 import {RootState} from "@/Redux/Store";
 
 
@@ -79,6 +79,19 @@ export const getProfile = createAsyncThunk<AuthResponse, void, { rejectValue: st
         }
     }
 );
+
+export const addDetails = createAsyncThunk<{data: AddUserDetail}>(
+    'users/addDetails',
+    async(data, {rejectWithValue}) => {
+        try {
+            const response = await axiosInstance.post<{data: AddUserDetail}>(`${apiBaseUrl}/users/add-detail`, data);
+            return response.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response.data);
+        }
+    }
+)
+
 
 const initialState: AuthState = {
     user : null,

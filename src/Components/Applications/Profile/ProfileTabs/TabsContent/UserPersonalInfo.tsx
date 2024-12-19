@@ -29,9 +29,6 @@ const UserPersonalInfo = () => {
     console.log("dataPosition===>|",dataPosition);
     console.log("dataExpertise===>|",dataExpertise);
 
-
-
-
     return (
         <Container fluid className={'mt-5'}>
             <div>
@@ -43,7 +40,12 @@ const UserPersonalInfo = () => {
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-social-linkedin"></i>
                             </InputGroupText>
-                            <Input placeholder={'https://'}/>
+                            <Input
+                                placeholder={'https://'}
+                                value={
+                                    user?.detail?.socials?.Linkedin && user.detail.socials.Linkedin
+                                }
+                            />
                         </InputGroup>
                     </div>
                     <div className={'mb-3 m-form__group'}>
@@ -52,7 +54,12 @@ const UserPersonalInfo = () => {
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-social-facebook"></i>
                             </InputGroupText>
-                            <Input placeholder={'https://'}/>
+                            <Input
+                                placeholder={'https://'}
+                                value = {
+                                user?.detail?.socials?.Facebook && user.detail.socials.Facebook
+                                }
+                            />
                         </InputGroup>
                     </div>
                     <div className={'mb-3 m-form__group'}>
@@ -61,7 +68,13 @@ const UserPersonalInfo = () => {
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-newspaper"></i>
                             </InputGroupText>
-                            <Input type={'textarea'} placeholder={'Entrer votre biographie'}/>
+                            <Input
+                                type={'textarea'}
+                                placeholder={'Entrer votre biographie'}
+                                value={
+                                    user?.detail?.bio && user.detail.bio
+                                }
+                            />
                         </InputGroup>
                     </div>
                 </div>

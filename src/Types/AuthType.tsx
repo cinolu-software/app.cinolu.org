@@ -21,6 +21,27 @@ export interface UpdateProfilePassword {
     password_confirm: string;
 }
 
+export interface SocialType {
+    Facebook: string;
+    Linkedin: string;
+}
+
+export interface UserDetailType {
+    id: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+    bio: string;
+    socials: SocialType
+}
+
+export interface AddUserDetail {
+    bio?: string;
+    socials?: SocialType;
+    expertises?: string[];
+    position?: string[];
+}
+
 export interface User {
     id: number | undefined;
     email?: string;
@@ -37,6 +58,7 @@ export interface User {
     created_at?: string;
     updated_at?: string;
     roles?: string[];
+    detail?: UserDetailType;
 }
 
 export interface AuthResponse {
