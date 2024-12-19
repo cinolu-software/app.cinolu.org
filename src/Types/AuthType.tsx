@@ -27,10 +27,6 @@ export interface SocialType {
 }
 
 export interface UserDetailType {
-    id: string;
-    created_at: string;
-    updated_at: string;
-    deleted_at: string;
     bio: string;
     socials: SocialType
 }
@@ -58,7 +54,7 @@ export interface User {
     created_at?: string;
     updated_at?: string;
     roles?: string[];
-    detail?: UserDetailType;
+    detail?: AddUserDetail;
 }
 
 export interface AuthResponse {

@@ -84,7 +84,7 @@ export const addDetails = createAsyncThunk<{data: AddUserDetail}>(
     'users/addDetails',
     async(data, {rejectWithValue}) => {
         try {
-            const response = await axiosInstance.post<{data: AddUserDetail}>(`${apiBaseUrl}/users/add-detail`, data);
+            const response = await axiosInstance.post<{data: AddUserDetail}>(`${apiBaseUrl}/users/add-details`, data);
             return response.data;
         } catch (error: any) {
             return rejectWithValue(error.response.data);
@@ -169,12 +169,31 @@ const authSlice = createSlice({
             .addCase(getProfile.rejected, (state, action) => {
                 state.statusAuth = "failed";
                 state.errorAuth = action.payload || "Impossible de récupérer le profil";
-            });
+            })
+            .addCase(addDetails.pending, (state) => {
+                state.statusAuth = 'loading';
+                state.errorAuth = null;
+            })
+            .addCase(addDetails.fulfilled, (state, action) => {
+                state.statusAuth = 'succeeded';
+
+                // @ts-ignore
+                state.user = {
+                    ...state.user,
+                    detail: action.payload.data
+                }
+            })
+            .addCase(addDetails.rejected, (state, action) => {
+                state.statusAuth = 'failed';
+                state.errorAuth =  '';
+            })
+        ;
     },
 });
 
 
 export const selectStatus = (state: RootState) => state.auth.statusAuth;
 export const selectError = (state: RootState) => state.auth.errorAuth;
+
 
 export default authSlice.reducer;

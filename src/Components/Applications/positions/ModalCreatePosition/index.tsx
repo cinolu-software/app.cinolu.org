@@ -8,7 +8,7 @@ import {CreatePositionType} from "@/Types/Users/Members/PositionsType";
 const ModalCreatePosition = () => {
 
     const dispatch = useAppDispatch();
-    const {isOpenModalCreatePosition, status} = useAppSelector(state=>state.position)
+    const {isOpenModalCreatePosition, statusPosition} = useAppSelector(state=>state.position)
     const [position, setPosition] = useState<CreatePositionType>({ name: '', description: '' });
 
     const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,7 +94,7 @@ const ModalCreatePosition = () => {
                         position.name === "" || position.description === "" || status === "loading"
                     }>
                         {
-                            status === "loading" ? <Spinner size="sm" color="light" /> : "Ajouter"
+                            statusPosition === "loading" ? <Spinner size="sm" color="light" /> : "Ajouter"
                         }
                     </button>
                 </ModalFooter>

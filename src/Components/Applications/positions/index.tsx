@@ -18,7 +18,7 @@ const PositionListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch()
-    const {status, dataPosition, selectedPosition, isOpenModalDeletePosition} = useAppSelector(state=>state.position)
+    const {statusPosition, dataPosition, selectedPosition, isOpenModalDeletePosition} = useAppSelector(state=>state.position)
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -30,10 +30,10 @@ const PositionListContainer: React.FC = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (status === "idle" || status === "loading") {
+        if (statusPosition === "idle" || statusPosition === "loading") {
             dispatch(fetchPositions());
         }
-    }, [status, dispatch]);
+    }, [statusPosition, dispatch]);
 
     const filteredPosition = dataPosition.filter(position =>
         position.name.toLowerCase().includes(filterText.toLowerCase())
@@ -52,7 +52,7 @@ const PositionListContainer: React.FC = () => {
             />
             <ModalCreatePosition/>
             {
-                status !== 'succeeded' ? <TableSkeleton/>: (
+                statusPosition !== 'succeeded' ? <TableSkeleton/>: (
                     <Row>
                         <Col sm="12">
                             <Card>
