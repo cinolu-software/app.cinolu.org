@@ -7,11 +7,11 @@ const ProgramImage : React.FC<{image: string | undefined}> = ({image}) => {
 
     return (
         <>
-            <Row>
+            <Row className={'program-detail'}>
                 <Col xs="12">
                     <Card>
                         <CardBody>
-                            <img src={image ? `${imageBaseUrl}/programs/${image}` : ''} alt={''}  className={'img-fluid'} />
+                            <img src={image ? `${imageBaseUrl}/programs/${image}` : ''} alt={''}  className={'cover-image'} />
                         </CardBody>
                     </Card>
                 </Col>
