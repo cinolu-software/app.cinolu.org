@@ -1,9 +1,8 @@
 import React, {useCallback, useState} from "react";
-import {Container} from "reactstrap";
+import {Card, Container} from "reactstrap";
 import {useAppSelector} from "@/Redux/Hooks";
-import UpdateUserModal from "@/Components/Applications/TabAdmin/Common/UpdateUserModal";
-import UserProfile from "@/Components/Applications/TabAdmin/Common/UserProfile/UserProfile";
 import BackButton from "@/CommonComponent/BackButton";
+import ProfileHeader from "@/Components/Applications/TabAdmin/Common/UserDetails/ProfileHeader";
 
 const UserDetailContainer = () => {
 
@@ -12,10 +11,9 @@ const UserDetailContainer = () => {
     return (
         <Container fluid>
             <BackButton link={'/users/admin/list'}/>
-            <div className="user-profile social-app-profile">
-                <UserProfile  user={selectedUser}/>
-                <UpdateUserModal selectedUser={selectedUser} />
-            </div>
+            <Card>
+                <ProfileHeader selectedUser={selectedUser}/>
+            </Card>
         </Container>
     );
 }

@@ -32,7 +32,6 @@ const ProgramsListContainer = () => {
         }
     }, [status, dispatch]);
 
-    console.log('programStatus===>', status);
 
 
     return (

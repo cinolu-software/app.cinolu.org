@@ -126,6 +126,22 @@ export const updateAttachmentProgramImage = createAsyncThunk<
     }
 );
 
+export const publisheProgram = createAsyncThunk<ReceiveProgramsType, { programId: string }, { rejectValue: any }>(
+    'programs/publisheProgram',
+    async ({ programId }, thunkAPI) => {
+        try {
+
+            console.log('programId',programId)
+            const response = await axiosInstance.post<{ data: ReceiveProgramsType }>(
+                `${apiBaseUrl}/programs/publish/${programId}`
+            );
+            return response.data.data;
+        } catch (err: any) {
+            return thunkAPI.rejectWithValue(err.response.data);
+        }
+    }
+);
+
 
 const validateStep = (state: InitialStateProgramsType) => {
     const { name, description, town, aim, prize, started_at, ended_at, types, categories, partners, targeted_audience } = state.formValue;

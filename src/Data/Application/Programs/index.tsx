@@ -2,12 +2,14 @@ import React, {useState} from 'react';
 import {ReceiveProgramsType} from "@/Types/Programs/ProgramsType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useDispatch} from "react-redux";
-import {setModalDeleteProgram, setSelectedProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {setModalDeleteProgram, setSelectedProgram, publisheProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from '@/CommonComponent/SVG';
 import {Spinner} from 'reactstrap';
+import { Flip, toast } from "react-toastify";
+
 
 
 const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -21,13 +23,14 @@ const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image
     );
 };
 
-const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
+const ProgramsListTableAction: React.FC<{ program: ReceiveProgramsType }> = ({ program }) => {
 
     const dispatch = useDispatch();
     const router = useRouter();
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
+    const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
         setLoadingEdit(true);
@@ -47,12 +50,38 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
         setLoadingDelete(false);
     };
 
+    const handlePublish = async () => {
+
+        try {
+            setLoadingPublish(true);
+            setTimeout(() => {
+                // @ts-ignore
+                    dispatch(publisheProgram({ programId: program.id }));
+                    toast.success("Programme publié avec succès", {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        transition: Flip,
+                    });
+                    setLoadingPublish(false);
+            }
+            , 1000);
+        }
+        catch (e) {
+            setLoadingPublish(false);
+            toast.error("Une erreur est survenue", {
+                autoClose: 5000,
+                position: toast.POSITION.TOP_CENTER,
+                transition: Flip,
+            });
+        }
+    }
+
 
 
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center">
-                <div className="col-4">
+                <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleEdit}
@@ -62,7 +91,7 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
                     </button>
                 </div>
 
-                <div className="col-4">
+                <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDetail}
@@ -72,7 +101,17 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
                     </button>
                 </div>
 
-                <div className="col-4">
+                <div className="col-3">
+                    <button
+                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                        onClick={handlePublish}
+                        disabled={loadingPublish}
+                    >
+                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="fill-calendar"/>}
+                    </button>
+                </div>
+
+                <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDelete}
@@ -81,6 +120,7 @@ const ProgramsListTableAction: React.FC<{ program: any }> = ({ program }) => {
                         {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
                     </button>
                 </div>
+
             </div>
         </div>
     );
@@ -91,7 +131,9 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     {
         name: "Nom",
         cell: (row: ReceiveProgramsType) => (
-            <ProgramsListTableName image={row?.image ? `${imageBaseUrl}/programs/${row.image}`: '/assets/images/programs/programs.png'} name={row.name}/>
+            <ProgramsListTableName
+                image={row?.image ? `${imageBaseUrl}/programs/${row.image}` : '/assets/images/programs/programs.png'}
+                name={row.name}/>
         ),
         sortable: true,
         grow: 1,
