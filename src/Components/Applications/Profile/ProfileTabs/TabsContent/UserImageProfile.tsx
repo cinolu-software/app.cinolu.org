@@ -1,15 +1,15 @@
-import {Container, Form, Input, InputGroup, InputGroupText, Label} from "reactstrap";
+import {Container} from "reactstrap";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,  } from "react-redux";
 import { CardBody, Col, Button, Spinner } from "reactstrap";
-import { FilePond, registerPlugin } from "react-filepond";
-import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import { FilePond } from "react-filepond";
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { AppDispatch } from "@/Redux/Store";
 import { updateProfileImage } from "@/Redux/Reducers/AuthSlice";
 import { toast, Flip } from "react-toastify";
+
+
 
 const UserImageProfile = () => {
 
