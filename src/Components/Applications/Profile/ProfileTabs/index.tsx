@@ -27,19 +27,13 @@ const ProfileTabs = () => {
                 </NavItem>
 
                 <NavItem>
-                    <NavLink href={Href} className={`nav-border pt-0 nav-danger ${basicTab === "2" ? "active" : ""}`} onClick={() => setBasicTab("2")}>
-                        <i className="icofont icofont-user-alt-3"></i>{userProfilePersonalInfo}
-                    </NavLink>
-                </NavItem>
-
-                <NavItem>
-                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "3" ? "active" : ""}`} onClick={() => setBasicTab("3")}>
+                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "2" ? "active" : ""}`} onClick={() => setBasicTab("2")}>
                         <i className="icofont icofont-file-tiff"></i>{userProfileImage}
                     </NavLink>
                 </NavItem>
 
                 <NavItem>
-                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "4" ? "active" : ""}`} onClick={() => setBasicTab("4")}>
+                    <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "3" ? "active" : ""}`} onClick={() => setBasicTab("3")}>
                         <i className="icofont icofont-ui-lock"></i>{userProfileSecurity}
                     </NavLink>
                 </NavItem>

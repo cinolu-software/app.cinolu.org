@@ -13,12 +13,9 @@ const TabsContent : React.FC<{basicTab : string}> = ({basicTab}) => {
                 <UserDetail />
             </TabPane>
             <TabPane tabId={'2'}>
-                <UserPersonalInfo />
-            </TabPane>
-            <TabPane tabId={'3'}>
                 <UserImageProfile/>
             </TabPane>
-            <TabPane tabId={'4'}>
+            <TabPane tabId={'3'}>
                 <UserPassword/>
             </TabPane>
         </TabContent>

@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-    Container,
-    Label,
-    InputGroup,
-    InputGroupText,
-    Input,
-    Button,
-} from "reactstrap";
+import {Container, Label, InputGroup, InputGroupText, Input, Button} from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { fetchPositions } from "@/Redux/Reducers/userSlice/PositionSlice";
 import { fetchExpertises } from "@/Redux/Reducers/userSlice/ExpertiseSlice";
@@ -27,6 +20,7 @@ interface FormData {
 }
 
 const UserPersonalInfo: React.FC = () => {
+
     const { dataPosition, statusPosition } = useAppSelector((state) => state.position);
     const { dataExpertise, status } = useAppSelector((state) => state.expertise);
     const { user } = useAppSelector((state) => state.auth);
@@ -94,7 +88,6 @@ const UserPersonalInfo: React.FC = () => {
             <div>
                 <h5 className="mb-3">Informations Personnelles</h5>
                 <div>
-                    {/* Réseaux sociaux */}
                     <div className="mb-3 m-form__group">
                         <Label>LinkedIn</Label>
                         <InputGroup>
@@ -132,7 +125,6 @@ const UserPersonalInfo: React.FC = () => {
                         </InputGroup>
                     </div>
 
-                    {/* Biographie */}
                     <div className="mb-3 m-form__group">
                         <Label>Biographie</Label>
                         <InputGroup>
@@ -148,7 +140,6 @@ const UserPersonalInfo: React.FC = () => {
                         </InputGroup>
                     </div>
 
-                    {/* Rôle staff : Sélection des positions */}
                     {user?.roles?.includes("staff") && (
                         <div className="mb-3 m-form__group">
                             <Label>Positions</Label>
@@ -173,7 +164,6 @@ const UserPersonalInfo: React.FC = () => {
                         </div>
                     )}
 
-                    {/* Rôle coach : Sélection des expertises */}
                     {user?.roles?.includes("coach") && (
                         <div className="mb-3 m-form__group">
                             <Label>Domaines d'expertise</Label>
@@ -198,8 +188,6 @@ const UserPersonalInfo: React.FC = () => {
                         </div>
                     )}
                 </div>
-
-                {/* Bouton de soumission */}
                 <div className="mt-5">
                     <Button color="primary" onClick={handleSubmit}>
                         Ajouter / Mettre à jour

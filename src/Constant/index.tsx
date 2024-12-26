@@ -1,5 +1,5 @@
 //User Profile
-export const userProfileBasicInfo="Informations de Base";
+export const userProfileBasicInfo="Informations";
 export const userProfilePersonalInfo="Informations Personnelles";
 export const userProfileSecurity="Sécurité";
 export const userProfileTitle="Mon Compte";
