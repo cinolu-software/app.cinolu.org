@@ -9,6 +9,8 @@ import {PartnerListTableDataColumn} from "@/Data/Application/Partner";
 import {setModalEditPartner, setModalDeletePartner, setModalCreatePartner, fetchPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 import PartnerList from "@/Components/Applications/Partners/PartnerList";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
+import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
+import {deletePartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 
 
 
@@ -39,6 +41,7 @@ const PartnersListContainer = () => {
             dispatch(fetchPartner());
         }
     }, [status, dispatch]);
+
     const filteredPartner = partnerData.filter(partner =>
         partner.name.toLowerCase().includes(filterText.toLowerCase())
     );
@@ -47,6 +50,14 @@ const PartnersListContainer = () => {
 
     return (
         <Container fluid>
+            <DeleteEntityModal
+                isOpen={isOpenModalDeletePartner}
+                entityName={'Partenaire'}
+                selectedEntity={selectedPartner}
+                entities={partnerData}
+                deleteEntityThunk={deletePartner}
+                setModalAction={setModalDeletePartner as any}
+            />
             {
                 status !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
