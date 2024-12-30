@@ -137,7 +137,7 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
         <Document>
             <Page size="A4" style={stylesWithTable.page}>
                 <View style={stylesWithTable.container}>
-                    {/* Header */}
+
                     <View style={stylesWithTable.header}>
                         <Image src={`${ImagePath}/logo/logo-g.png`} style={stylesWithTable.imageLogo} />
                         <View style={stylesWithTable.headerText}>
@@ -150,12 +150,10 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
                         </View>
                     </View>
 
-                    {/* Main Title */}
                     <View>
                         <Text style={styles.mainTitle}>Rapport Annuel</Text>
                     </View>
 
-                    {/* Résumé dans un tableau */}
                     <View>
                         <Text style={stylesWithTable.programTitle}>Résumé</Text>
                         <View style={stylesWithTable.table}>
@@ -178,7 +176,6 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
                         </View>
                     </View>
 
-                    {/* Tableau des programmes par type */}
                     <View>
                         <Text style={stylesWithTable.programTitle}>Programmes Par Type</Text>
                         <View style={stylesWithTable.table}>
@@ -197,7 +194,6 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
                         </View>
                     </View>
 
-                    {/* Tableau des programmes par catégorie */}
                     <View>
                         <Text style={stylesWithTable.programTitle}>Programmes Par Catégorie</Text>
                         <View style={stylesWithTable.table}>
