@@ -3,6 +3,7 @@ import {Card, Col, TabContent} from "reactstrap";
 import TabsHeader from "@/Components/Applications/programs/DetailProgram/ProgramTabs/TabsHeader";
 import ProgramInfo from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramInfo";
 import ProgramPhase from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase";
+import ProgramRapport from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramRapport";
 
 
 const ProgamTabs = () => {
@@ -17,6 +18,7 @@ const ProgamTabs = () => {
                     <TabContent  activeTab={navId} id="notifications-pills-tabContent">
                         <ProgramInfo/>
                         <ProgramPhase/>
+                        <ProgramRapport/>
                     </TabContent>
                 </Card>
             </div>
