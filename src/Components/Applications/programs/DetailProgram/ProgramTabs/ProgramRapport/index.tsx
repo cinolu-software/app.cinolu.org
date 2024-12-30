@@ -2,6 +2,9 @@ import React from 'react';
 import { Document, Page, Text, View, StyleSheet, PDFViewer, Image } from '@react-pdf/renderer';
 import { useAppSelector } from '@/Redux/Hooks';
 import {TabPane} from "reactstrap";
+import {imageBaseUrl} from "@/services/axios";
+import {ImagePath} from "@/Constant";
+
 
 const styles = StyleSheet.create({
     viewer: {
@@ -35,6 +38,33 @@ const styles = StyleSheet.create({
         height: 200,
         marginBottom: 10,
     },
+    header: {
+        marginBottom: 10,
+        paddingBottom: 10,
+        borderBottomWidth: 0.5,
+        borderBottomColor: '#000',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    headerText: {
+        marginLeft: 10,
+        justifyContent: 'center',
+    },
+    headerTitle: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginBottom: 10,
+        marginLeft:30
+    },
+    headerTextItem: {
+        fontSize: 10,
+        marginBottom: 2,
+        marginLeft:35
+    },
+    imageLogo: {
+        width: 50,
+        height: 50,
+    },
     list: {
         marginLeft: 10,
     },
@@ -46,16 +76,27 @@ const styles = StyleSheet.create({
 const ProgramPDF = ({ programData }: { programData: any }) => (
     <Document>
         <Page size="A4" style={styles.page}>
+            <View style={styles.header}>
+                <Image src={`${ImagePath}/logo/logo-g.png`} style={styles.imageLogo} />
+                <View style={styles.headerText}>
+                    <Text style={styles.headerTitle}>Centre d’Innovation de Lubumbashi - C.I.L Asbl</Text>
+                    <Text style={styles.headerTextItem}>Avenue des Usines, Makomeno</Text>
+                    <Text style={styles.headerTextItem}>221 Lubumbashi, Haut-Katanga RDC</Text>
+                    <Text style={styles.headerTextItem}>Site web: www.cinolu.org</Text>
+                    <Text style={styles.headerTextItem}>E-mail: compta@cinolu.org</Text>
+                    <Text style={styles.headerTextItem}>Tel: +243 993 320 803</Text>
+                </View>
+            </View>
+
 
             {programData.image && (
                 <View style={styles.section}>
                     <Image
                         style={styles.image}
-                        src={`http://localhost:8000/uploads/programs/${programData.image}`}
+                        src={`${imageBaseUrl}/programs/${programData.image}`}
                     />
                 </View>
             )}
-
 
             <View style={styles.section}>
                 <Text style={styles.title}>{programData.name}</Text>
@@ -97,7 +138,6 @@ const ProgramPDF = ({ programData }: { programData: any }) => (
                     </View>
                 </View>
             )}
-
 
             {programData.phases?.length > 0 && (
                 <View style={styles.section}>
