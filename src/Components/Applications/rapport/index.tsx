@@ -111,9 +111,12 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
             borderBottomWidth: 1,
             borderRightWidth: 1,
             borderColor: '#000',
-            padding: 5,
+            padding: 8, // Augmenter le padding pour une meilleure visibilité
             fontWeight: 'bold',
             textAlign: 'center',
+            backgroundColor: '#84a02f', // Ajout d'une couleur de fond
+            color: '#fff', // Texte en blanc
+            fontSize: 12, // Ajuster la taille du texte si nécessaire
         },
         tableCell: {
             flex: 1,
@@ -128,6 +131,7 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
             borderRightWidth: 0,
         },
     });
+
 
     return (
         <Document>
