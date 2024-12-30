@@ -79,7 +79,7 @@ const ProgramPDF = ({ programData }: { programData: any }) => (
             <View style={styles.header}>
                 <Image src={`${ImagePath}/logo/logo-g.png`} style={styles.imageLogo} />
                 <View style={styles.headerText}>
-                    <Text style={styles.headerTitle}>Centre d’Innovation de Lubumbashi - C.I.L Asbl</Text>
+                    <Text style={styles.headerTitle}>Centre d’Innovation de Lubumbashi</Text>
                     <Text style={styles.headerTextItem}>Avenue des Usines, Makomeno</Text>
                     <Text style={styles.headerTextItem}>221 Lubumbashi, Haut-Katanga RDC</Text>
                     <Text style={styles.headerTextItem}>Site web: www.cinolu.org</Text>
