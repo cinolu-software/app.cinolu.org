@@ -1,7 +1,7 @@
 import React from 'react';
 import {TabPane, UncontrolledAccordion} from 'reactstrap';
 import {Calendar, FileText, Home, Layers, Tag, User, Users, Target, Award, MapPin} from 'react-feather';
-import ProgramInfoAccordionItem from '@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramInfo/ProgramInfoAccordionItem';
+import ProgramInfoAccordionItem from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramInfo/ProgramInfoAccordionItem";
 import {useAppSelector} from "@/Redux/Hooks";
 import {calculateDuration} from "@/utils";
 
@@ -128,10 +128,6 @@ const ProgramInfo = () => {
                                         </div>
                                     </div>
                                 </ProgramInfoAccordionItem>
-
-
-
-
 
                                 <ProgramInfoAccordionItem
                                     id="8"

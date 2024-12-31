@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {Card, Col, Row, Container, TabContent, TabPane} from "reactstrap";
-import PhaseSideBar from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar";
-import PhaseRightSide from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide";
-import CreatePhaseModal from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar/CreatePhaseModal";
+import PhaseSideBar from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar";
+import PhaseRightSide from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide";
+import CreatePhaseModal from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar/CreatePhaseModal";
 
 const ProgramPhase = () => {
 

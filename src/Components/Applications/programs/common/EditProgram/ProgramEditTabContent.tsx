@@ -1,6 +1,6 @@
 import React from 'react';
 import {TabContent, TabPane} from "reactstrap";
-import EditProgramContainer from "@/Components/Applications/programs/EditProgram/EditInfoProgram";
+import EditProgramContainer from "@/Components/Applications/programs/common/EditProgram/EditInfoProgram";
 import EditProgramTabs from './AttachmentProgram';
 
 

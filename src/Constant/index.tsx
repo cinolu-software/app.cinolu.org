@@ -5,6 +5,11 @@ export const userProfileSecurity="Sécurité";
 export const userProfileTitle="Mon Compte";
 export const userProfileImage="Image Profile";
 
+//Programs
+
+export const allPrograms="Programmes"
+export const publishedPrograms="Publié(s)"
+
 
 export const Href = "#javascript";
 export const ImagePath = "/assets/images";

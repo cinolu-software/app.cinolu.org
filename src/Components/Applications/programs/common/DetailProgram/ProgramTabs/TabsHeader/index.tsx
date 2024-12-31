@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgramNavTab from "@/Components/Applications/programs/DetailProgram/ProgramTabs/TabsHeader/ProgramNavTab";
+import ProgramNavTab from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/TabsHeader/ProgramNavTab";
 
 const TabsHeader: React.FC<{navId: string, setNavId: React.Dispatch<React.SetStateAction<string>>}> = ({navId, setNavId}) => {
 

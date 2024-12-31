@@ -1,5 +1,5 @@
 import React from "react";
-import RightSideNavTab from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/RightSideHeader/RightSideNavTab";
+import RightSideNavTab from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/RightSideHeader/RightSideNavTab";
 
 
 interface RightSideHeaderProps {

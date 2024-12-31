@@ -1,7 +1,7 @@
 import React from "react";
 import {Container, Row} from "reactstrap";
 import BackButton from "@/CommonComponent/BackButton";
-import NumberingWizard from "@/Components/Applications/programs/Common/NumberingWizard";
+import NumberingWizard from "@/Components/Applications/programs/common/Common/NumberingWizard";
 
 
 

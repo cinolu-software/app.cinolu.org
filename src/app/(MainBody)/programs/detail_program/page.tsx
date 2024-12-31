@@ -8,7 +8,7 @@ const DetailProgram = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/programs/DetailProgram")).default;
+                const newClient = (await import("@/Components/Applications/programs/common/DetailProgram")).default;
                 setClient(() => newClient);
             }
         })();

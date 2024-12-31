@@ -1,5 +1,5 @@
 import React from "react";
-import PhaseNavMenu from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar/PhaseNavMenu";
+import PhaseNavMenu from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar/PhaseNavMenu";
 import {PhaseLeftSidebarProps} from "@/Types/Programs/PhasesType";
 import {setModalcreateProgramPhase} from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
 import {useAppDispatch} from "@/Redux/Hooks";

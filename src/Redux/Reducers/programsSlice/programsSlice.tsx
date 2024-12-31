@@ -6,7 +6,9 @@ import {ShowError} from "@/utils/MultiStepForm.service";
 
 const initialState: InitialStateProgramsType = {
     originalProgramsData: [],
+    publishedProgramsData: [],
     status: "idle",
+    publishedProgramsStatus: "idle",
     error: null,
     isOpenModalCreateProgram: false,
     isOpenModalEditProgram: false,
@@ -52,6 +54,12 @@ export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async ()
     const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`)
     const originalPrograms = response.data.data;
     return { original: originalPrograms };
+});
+
+export const fetchPublishedPrograms = createAsyncThunk('programs/fetchPublishedPrograms', async () => {
+    const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs/find-published`)
+    const publishedPrograms = response.data.data;
+    return { publishedProgram: publishedPrograms };
 });
 
 export const fetchProgramById = createAsyncThunk<ReceiveProgramsType, string, { rejectValue: any }>('programs/fetchProgramById', async (programId, thunkAPI) => {
@@ -298,6 +306,18 @@ const ProgramSlice = createSlice({
                 state.originalProgramsData = action.payload.original;
             })
             .addCase(fetchPrograms.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.error.message || 'Something went wrong';
+            })
+            .addCase(fetchPublishedPrograms.pending, (state)=>{
+                state.publishedProgramsStatus = 'loading';
+                state.error = null;
+            })
+            .addCase(fetchPublishedPrograms.fulfilled, (state, action: PayloadAction<{publishedProgram: ReceiveProgramsType[]}>)=>{
+                state.publishedProgramsStatus = 'succeeded';
+                state.publishedProgramsData = action.payload.publishedProgram
+            })
+            .addCase(fetchPublishedPrograms.rejected, (state, action)=>{
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })

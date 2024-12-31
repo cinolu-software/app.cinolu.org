@@ -1,10 +1,10 @@
 import {Card, Col, TabContent} from "reactstrap";
 import React, {useState} from "react";
 import {PhaseRightSideProps} from "@/Types/Programs/PhasesType";
-import RightSideHeader from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/RightSideHeader";
-import PhaseDetails from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseDetails";
-import PhaseForm from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseForm";
-import PhaseRequired from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseRequired";
+import RightSideHeader from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/RightSideHeader";
+import PhaseDetails from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseDetails";
+import PhaseForm from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseForm";
+import PhaseRequired from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseRightSide/PhaseRequired";
 
 
 

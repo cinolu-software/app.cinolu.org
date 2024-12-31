@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Spinner, Col } from 'reactstrap';
-import NumberingWizard from "@/Components/Applications/programs/Common/NumberingWizard";
+import NumberingWizard from "@/Components/Applications/programs/common/Common/NumberingWizard";
 import { fetchProgramById } from "@/Redux/Reducers/programsSlice/programsSlice";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";

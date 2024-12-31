@@ -53,6 +53,11 @@ export interface ReceiveProgramsType {
     updated_at: string;
 }
 
+export interface ReceiveProgramsTypeTable {
+    programs: ReceiveProgramsType[];
+    programStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
+}
+
 export interface FormValueType {
     id: string;
     name: string;
@@ -73,7 +78,9 @@ export interface ProgramDataType extends FormValueType {
 
 export interface InitialStateProgramsType {
     originalProgramsData: ReceiveProgramsType[];
+    publishedProgramsData?:ReceiveProgramsType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    publishedProgramsStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     isOpenModalCreateProgram: boolean;
     isOpenModalEditProgram: boolean;

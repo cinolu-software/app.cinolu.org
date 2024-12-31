@@ -5,14 +5,14 @@ import { useRouter } from "next/navigation";
 import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
-import StepOne from "@/Components/Applications/programs/Common/StepOne";
-import StepTwo from "@/Components/Applications/programs/Common/StepTwo";
-import StepThree from "@/Components/Applications/programs/Common/StepThree";
-import StepFour from "@/Components/Applications/programs/Common/StepFour";
-import StepFive from "@/Components/Applications/programs/Common/StepFive";
+import StepOne from "@/Components/Applications/programs/common/Common/StepOne";
+import StepTwo from "@/Components/Applications/programs/common/Common/StepTwo";
+import StepThree from "@/Components/Applications/programs/common/Common/StepThree";
+import StepFour from "@/Components/Applications/programs/common/Common/StepFour";
+import StepFive from "@/Components/Applications/programs/common/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import StepperHorizontal from "@/Components/Applications/programs/Common/StepperHorizontal";
+import StepperHorizontal from "@/Components/Applications/programs/common/Common/StepperHorizontal";
 import { FormValueType, ProgramDataType } from "@/Types/Programs/ProgramsType";
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {

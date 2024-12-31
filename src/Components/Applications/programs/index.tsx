@@ -1,76 +1,38 @@
-import React, { useMemo, useState, useEffect } from "react";
-import DataTable from "react-data-table-component";
-import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { ProgramsHeader } from "./ProgramsList";
-import {  fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
-import DeleteProgramsModal from "./DeleteProgramsModal";
+import React, {useEffect, useState} from "react";
+import {Card, NavItem, Nav, NavLink, CardBody,} from "reactstrap";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {RootState} from "@/Redux/Store";
-import {CollapseFilterData} from "./CollapseFilterData";
-import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-
-const ProgramsListContainer = () => {
-
-    const [filterText, setFilterText] = useState("");
-    const dispatch = useAppDispatch();
-    const {status, originalProgramsData } = useAppSelector((state: RootState) => state.programs);
-    const filteredItems = originalProgramsData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
-    const subHeaderComponentMemo = useMemo(() => {
-        return (
-            <div className="dataTables_filter d-flex align-items-center">
-                <Label className="me-2">{"Chercher"}:</Label>
-                <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
-            </div>
-        );
-    }, [filterText]);
-
-    useEffect(() => {
-        if (status === "idle" || status === "loading") {
-            dispatch(fetchPrograms());
-        }
-    }, [status, dispatch]);
+import {fetchPrograms, fetchPublishedPrograms} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {Href, userProfileBasicInfo, userProfileImage, publishedPrograms, allPrograms} from "@/Constant";
+import TabsContent from "@/Components/Applications/programs/TabsContent";
 
 
+const Programs = () => {
+
+    const {status, publishedProgramsStatus} = useAppSelector(state=>state.programs);
+    const [basicTab, setBasicTab] = useState("1");
 
     return (
-        <Container fluid>
-            <DeleteProgramsModal />
-            {
-                status !== 'succeeded' ? <TableSkeleton/> : (
-                    <Row>
-                        <Col sm="12">
-                            <Card>
-                                <CardBody>
-                                    <div className="list-product-header">
-                                        <ProgramsHeader />
-                                        <CollapseFilterData/>
-                                    </div>
-                                    <div className="list-product">
-                                        <div className="table-responsive">
-                                            <DataTable
-                                                className="theme-scrollbar"
-                                                data={filteredItems}
-                                                columns={ProgramsListTableDataColumn}
-                                                striped
-                                                highlightOnHover
-                                                pagination
-                                                subHeader
-                                                subHeaderComponent={subHeaderComponentMemo}
-                                            />
-                                        </div>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                )
-            }
-            <ToastContainer/>
-        </Container>
-    );
-};
+        <Card>
+            <CardBody>
+                <Nav tabs className="border-tab border-0 mb-0 nav-primary">
+                    <NavItem>
+                        <NavLink href={Href} className={`nav-border pt-0 nav-danger ${basicTab === "1" ? "active" : ""}`} onClick={() => setBasicTab("1")}>
+                            <i className="icofont icofont-files"></i>{allPrograms}
+                        </NavLink>
+                    </NavItem>
 
-export default ProgramsListContainer;
+                    <NavItem>
+                        <NavLink href={Href} className={`nav-border nav-danger ${basicTab === "2" ? "active" : ""}`} onClick={() => setBasicTab("2")}>
+                            <i className="icofont icofont-ui-clip-board"></i>{publishedPrograms}
+                        </NavLink>
+                    </NavItem>
+                </Nav>
+                <TabsContent basicTab={basicTab}/>
+            </CardBody>
+        </Card>
+    )
 
+}
+
+export default Programs

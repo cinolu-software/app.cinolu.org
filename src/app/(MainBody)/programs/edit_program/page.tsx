@@ -8,7 +8,7 @@ const EditProgram = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/programs/EditProgram")).default;
+                const newClient = (await import("@/Components/Applications/programs/common/EditProgram")).default;
                 setClient(() => newClient);
             }
         })();
