@@ -58,7 +58,7 @@ export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async ()
 
 export const fetchPublishedPrograms = createAsyncThunk('programs/fetchPublishedPrograms', async () => {
     const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs/find-published`)
-    const publishedPrograms = response.data.data;
+    const publishedPrograms = response.data.data.programs;
     return { publishedProgram: publishedPrograms };
 });
 
@@ -128,28 +128,24 @@ export const updateAttachmentProgramImage = createAsyncThunk<
 
             return { programId, imageUrl: response.data.data.image };
 
-        } catch (err: any) {
+        }
+        catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
         }
     }
 );
 
 export const publisheProgram = createAsyncThunk<ReceiveProgramsType, { programId: string }, { rejectValue: any }>(
-    'programs/publisheProgram',
+    'programs/publishProgram',
     async ({ programId }, thunkAPI) => {
         try {
-
-            console.log('programId',programId)
-            const response = await axiosInstance.post<{ data: ReceiveProgramsType }>(
-                `${apiBaseUrl}/programs/publish/${programId}`
-            );
+            const response = await axiosInstance.post<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/publish/${programId}`);
             return response.data.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
         }
     }
 );
-
 
 const validateStep = (state: InitialStateProgramsType) => {
     const { name, description, town, aim, prize, started_at, ended_at, types, categories, partners, targeted_audience } = state.formValue;
@@ -189,7 +185,6 @@ const validateStep = (state: InitialStateProgramsType) => {
     }
     return true;
 };
-
 
 const ProgramSlice = createSlice({
     name: "programs",
@@ -315,7 +310,7 @@ const ProgramSlice = createSlice({
             })
             .addCase(fetchPublishedPrograms.fulfilled, (state, action: PayloadAction<{publishedProgram: ReceiveProgramsType[]}>)=>{
                 state.publishedProgramsStatus = 'succeeded';
-                state.publishedProgramsData = action.payload.publishedProgram
+                state.publishedProgramsData = action.payload.publishedProgram;
             })
             .addCase(fetchPublishedPrograms.rejected, (state, action)=>{
                 state.status = 'failed';

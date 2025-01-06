@@ -78,7 +78,7 @@ export interface ProgramDataType extends FormValueType {
 
 export interface InitialStateProgramsType {
     originalProgramsData: ReceiveProgramsType[];
-    publishedProgramsData?:ReceiveProgramsType[];
+    publishedProgramsData :ReceiveProgramsType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     publishedProgramsStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
