@@ -9,7 +9,7 @@ const AddProgramNew = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/programs/AddProgramNew")).default;
+                const newClient = (await import("@/Components/Applications/programs/common/AddProgramNew")).default;
                 setClient(() => newClient);
             }
         })();

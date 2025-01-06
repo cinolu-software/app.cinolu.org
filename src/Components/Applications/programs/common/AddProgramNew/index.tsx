@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Container, Row} from "reactstrap";
 import BackButton from "@/CommonComponent/BackButton";
 import NumberingWizard from "@/Components/Applications/programs/common/Common/NumberingWizard";
@@ -6,6 +6,7 @@ import NumberingWizard from "@/Components/Applications/programs/common/Common/Nu
 
 
 const AddProgramNewContainer = () => {
+
 
     return (
         <Container fluid>

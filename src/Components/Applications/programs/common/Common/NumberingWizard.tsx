@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Card, CardBody, Col, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
@@ -20,6 +20,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
     const router = useRouter();
+    const [hasRefreshed, setHasRefreshed] = useState(false);
 
     useEffect(() => {
         if (mode === "edit" && initialValues) {
@@ -39,10 +40,12 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 const typedKey = key as keyof FormValueType;
                 dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
             });
-        }else if (mode === "add") {
+        }else if (mode === "add" && !hasRefreshed) {
             dispatch(resetFormValue());
+            setHasRefreshed(true);
+            router.refresh();
         }
-    }, [mode, initialValues, dispatch]);
+    }, [mode, initialValues, dispatch, hasRefreshed, router]);
 
     const handleSubmit = () => {
         try {
