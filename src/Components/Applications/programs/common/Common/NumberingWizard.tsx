@@ -11,16 +11,14 @@ import StepThree from "@/Components/Applications/programs/common/Common/StepThre
 import StepFour from "@/Components/Applications/programs/common/Common/StepFour";
 import StepFive from "@/Components/Applications/programs/common/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
-import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/programs/common/Common/StepperHorizontal";
-import { FormValueType, ProgramDataType } from "@/Types/Programs/ProgramsType";
+import { FormValueType } from "@/Types/Programs/ProgramsType";
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
 
     const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.programs);
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const [hasRefreshed, setHasRefreshed] = useState(false);
 
     useEffect(() => {
         if (mode === "edit" && initialValues) {
@@ -40,12 +38,11 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 const typedKey = key as keyof FormValueType;
                 dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
             });
-        }else if (mode === "add" && !hasRefreshed) {
+        }else if (mode === "add") {
             dispatch(resetFormValue());
-            setHasRefreshed(true);
             router.refresh();
         }
-    }, [mode, initialValues, dispatch, hasRefreshed, router]);
+    }, [mode, initialValues, dispatch, router]);
 
     const handleSubmit = () => {
         try {
@@ -112,33 +109,36 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     };
 
     return (
-        <div className={'mt-5'}>
-            <div className="height-equal">
-                <CardBody className="basic-wizard important-validation">
-                    <StepperHorizontal level={numberLevel} />
-                    <div id="msform">{renderStep()}</div>
-                    <div className="wizard-footer d-flex gap-2 justify-content-end mt-4 me-5">
-                        {numberLevel > 1 && (
-                            <Button
-                                className="alert-light-primary"
-                                color="transparent"
-                                onClick={() => dispatch(handleBackButton())}
-                            >
-                                {Back}
-                            </Button>
-                        )}
-                        <Button
-                            disabled={!!showFinish}
-                            color="primary"
-                            onClick={() => dispatch(handleNextButton())}
-                        >
-                            {showFinish ? "Finish" : "Next"}
-                        </Button>
+            <Card>
+                <div className={'mt-5'}>
+                    <div className="height-equal">
+                        <CardBody className="basic-wizard important-validation">
+                            <StepperHorizontal level={numberLevel}/>
+                            <div id="msform">{renderStep()}</div>
+                            <div className="wizard-footer d-flex gap-2 justify-content-end mt-4 me-5 mb-4">
+                                {numberLevel > 1 && (
+                                    <Button
+                                        className="alert-light-primary"
+                                        color="transparent"
+                                        onClick={() => dispatch(handleBackButton())}
+                                    >
+                                        {Back}
+                                    </Button>
+                                )}
+                                <Button
+                                    disabled={!!showFinish}
+                                    color="primary"
+                                    onClick={() => dispatch(handleNextButton())}
+                                >
+                                    {showFinish ? "Finish" : "Next"}
+                                </Button>
+                            </div>
+                        </CardBody>
                     </div>
-                </CardBody>
-            </div>
-        </div>
+                </div>
+            </Card>
     );
+
 };
 
 export default NumberingWizard;

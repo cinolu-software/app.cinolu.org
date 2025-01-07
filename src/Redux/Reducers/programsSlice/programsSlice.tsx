@@ -289,6 +289,7 @@ const ProgramSlice = createSlice({
                 categories: [],
                 partners: []
             }
+            state.numberLevel=1
         },
     },
     extraReducers: (builder) => {
