@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, Col, Form } from "reactstrap";
+import React, { useEffect } from "react";
+import { Button, Card, CardBody, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
 import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
@@ -13,6 +13,8 @@ import StepFive from "@/Components/Applications/programs/common/Common/StepFive"
 import FinishForm from "@/CommonComponent/FinishForm";
 import StepperHorizontal from "@/Components/Applications/programs/common/Common/StepperHorizontal";
 import { FormValueType } from "@/Types/Programs/ProgramsType";
+import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
+import {titleAddProgram} from "@/Constant";
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
 
@@ -112,6 +114,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
             <Card>
                 <div className={'mt-5'}>
                     <div className="height-equal">
+                        <CommonCardHeader title={titleAddProgram}/>
                         <CardBody className="basic-wizard important-validation">
                             <StepperHorizontal level={numberLevel}/>
                             <div id="msform">{renderStep()}</div>

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {createEvent, handleNextButton, handleBackButton, setCreateFomValue, updateEvent, resetFormValue} from "@/Redux/Reducers/eventSlice/eventSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
-
 import StepOne from "@/Components/Applications/events/Common/StepOne";
 import StepTwo from "@/Components/Applications/events/Common/StepTwo";
 import StepThree from "@/Components/Applications/events/Common/StepThree";
@@ -14,6 +13,7 @@ import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/events/Common/StepperHorizontal";
 import {CreateEvent} from "@/Types/Events";
+import { titleAddEvent } from "@/Constant";
 
 const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
 
@@ -100,7 +100,7 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
     return (
         <Col>
             <Card className="height-equal">
-                <CommonCardHeader title="Ajout d'événement"/>
+                <CommonCardHeader title={titleAddEvent} />
                 <CardBody className="basic-wizard important-validation mt-2">
                     <StepperHorizontal level={numberLevel} />
                     <div id="msform">{renderStep()}</div>

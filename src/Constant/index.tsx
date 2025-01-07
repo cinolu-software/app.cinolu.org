@@ -7,8 +7,13 @@ export const userProfileImage="Image Profile";
 
 //Programs
 
-export const allPrograms="Programmes"
-export const publishedPrograms="Publié(s)"
+export const allPrograms="Programmes";
+export const publishedPrograms="Publié(s)";
+export const titleAddProgram = "Ajout d'un programme";
+
+//Events
+
+export const titleAddEvent = "Ajout d'un événement";
 
 
 export const Href = "#javascript";

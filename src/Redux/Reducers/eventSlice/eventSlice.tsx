@@ -230,7 +230,8 @@ const EventSlice = createSlice({
                 event_type: 'physical',
                 online_link: '',
                 types: []
-            }
+            },
+            state.numberLevel = 1
         }
     },
 

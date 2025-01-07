@@ -288,7 +288,7 @@ const ProgramSlice = createSlice({
                 types: [],
                 categories: [],
                 partners: []
-            }
+            },
             state.numberLevel=1
         },
     },
