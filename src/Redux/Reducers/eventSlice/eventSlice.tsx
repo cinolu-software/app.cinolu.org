@@ -3,9 +3,12 @@ import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import {CreateEvent, UpdateEvent, Event, InitialStateEvent,fetchEventsResponse } from "@/Types/Events";
 import {RootState} from "@/Redux/Store";
 import {ShowError} from "@/utils/MultiStepForm.service";
+import { StateChoose } from "@/Constant";
 
 const initialState: InitialStateEvent = {
     dataEvent: [],
+    publishedEventData: [],
+    publishedEventStatus: 'idle',
     status: 'idle',
     error: null,
     isOpenModalCreateEvent: false,
@@ -49,6 +52,25 @@ export const fetchEvents = createAsyncThunk('events/fetchEvents', async ()=> {
     const response = await axiosInstance.get<{data : fetchEventsResponse}>(`${apiBaseUrl}/events`);
     return {data: response.data.data.events}
 });
+
+export const fetchPublishedEvents = createAsyncThunk('events/fetchPublishedEvents', async () => {
+    const response = await axiosInstance.get<{data : any}>(`${apiBaseUrl}/events/find-published`);
+    const publishedEvents = response.data.data.events;
+
+    return {publishedEvent: publishedEvents}
+});
+
+export const publisheProgram = createAsyncThunk<Event, { eventId: string }, { rejectValue: any }>(
+    'programs/publishProgram',
+    async ({ eventId }, thunkAPI) => {
+        try {
+            const response = await axiosInstance.post<{ data: Event }>(`${apiBaseUrl}/events/publish/${eventId}`);
+            return response.data.data;
+        } catch (err: any) {
+            return thunkAPI.rejectWithValue(err.response.data);
+        }
+    }
+);
 
 export const createEvent = createAsyncThunk<Event, CreateEvent, {rejectValue: any}>(
     'events/createEvent' , async (newEvent, thunkAPI) => {
@@ -247,6 +269,18 @@ const EventSlice = createSlice({
             .addCase(fetchEvents.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || null;
+            })
+            .addCase(fetchPublishedEvents.pending, (state)=>{
+                state.publishedEventStatus = 'loading';
+                state.error = null;
+            })
+            .addCase(fetchPublishedEvents.fulfilled, (state, action: PayloadAction<{publishedEvent : Event[]}>)=>{
+                state.publishedEventStatus = 'succeeded';
+                state.publishedEventData = action.payload.publishedEvent
+            })
+            .addCase(fetchPublishedEvents.rejected, (state, action)=>{
+                state.publishedEventStatus = 'failed';
+                state.error = 'Something went wrong';
             })
             .addCase(createEvent.pending, (state) => {
                 state.status = 'loading';

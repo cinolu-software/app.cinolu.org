@@ -14,6 +14,8 @@ export const titleAddProgram = "Ajout d'un programme";
 //Events
 
 export const titleAddEvent = "Ajout d'un événement";
+export const publishedEvents = "Publié(s)";
+export const allEvents = "Evénements";
 
 
 export const Href = "#javascript";

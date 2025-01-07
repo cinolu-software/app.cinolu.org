@@ -41,7 +41,9 @@ export interface fetchEventsResponse {
 
 export interface InitialStateEvent  {
     dataEvent : Event[];
+    publishedEventData: Event[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    publishedEventStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     isOpenModalCreateEvent: boolean;
     isOpenModalEditEvent: boolean;

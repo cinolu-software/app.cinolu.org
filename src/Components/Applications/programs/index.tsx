@@ -1,15 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {Card, NavItem, Nav, NavLink, CardBody,} from "reactstrap";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {fetchPrograms, fetchPublishedPrograms} from "@/Redux/Reducers/programsSlice/programsSlice";
-import {Href, userProfileBasicInfo, userProfileImage, publishedPrograms, allPrograms} from "@/Constant";
+import {Href, publishedPrograms, allPrograms} from "@/Constant";
 import TabsContent from "@/Components/Applications/programs/TabsContent";
 
 
 const Programs = () => {
 
-    const {status, publishedProgramsStatus} = useAppSelector(state=>state.programs);
     const [basicTab, setBasicTab] = useState("1");
 
     return (

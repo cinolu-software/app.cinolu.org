@@ -5,13 +5,13 @@ import { useRouter } from "next/navigation";
 import {createEvent, handleNextButton, handleBackButton, setCreateFomValue, updateEvent, resetFormValue} from "@/Redux/Reducers/eventSlice/eventSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
-import StepOne from "@/Components/Applications/events/Common/StepOne";
-import StepTwo from "@/Components/Applications/events/Common/StepTwo";
-import StepThree from "@/Components/Applications/events/Common/StepThree";
-import StepFour from "@/Components/Applications/events/Common/StepFour";
+import StepOne from "@/Components/Applications/events/Common/Common/StepOne";
+import StepTwo from "@/Components/Applications/events/Common/Common/StepTwo";
+import StepThree from "@/Components/Applications/events/Common/Common/StepThree";
+import StepFour from "@/Components/Applications/events/Common/Common/StepFour";
 import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import StepperHorizontal from "@/Components/Applications/events/Common/StepperHorizontal";
+import StepperHorizontal from "@/Components/Applications/events/Common/Common/StepperHorizontal";
 import {CreateEvent} from "@/Types/Events";
 import { titleAddEvent } from "@/Constant";
 
