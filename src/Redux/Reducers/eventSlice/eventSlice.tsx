@@ -1,9 +1,7 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import {CreateEvent, UpdateEvent, Event, InitialStateEvent,fetchEventsResponse } from "@/Types/Events";
-import {RootState} from "@/Redux/Store";
 import {ShowError} from "@/utils/MultiStepForm.service";
-import { StateChoose } from "@/Constant";
 
 const initialState: InitialStateEvent = {
     dataEvent: [],

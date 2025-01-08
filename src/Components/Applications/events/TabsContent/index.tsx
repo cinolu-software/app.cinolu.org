@@ -1,6 +1,7 @@
 import React from 'react';
 import { TabContent, TabPane } from 'reactstrap';
 import EventsListContainer from "@/Components/Applications/events/all";
+import PublishedEventsListContainer from "@/Components/Applications/events/published";
 
 
 
@@ -12,7 +13,7 @@ const TabsContent : React.FC<{basicTab: string}> = ({basicTab}) => {
                 <EventsListContainer/>
             </TabPane>
             <TabPane tabId={'2'}>
-                
+                <PublishedEventsListContainer/>
             </TabPane>
         </TabContent>
     )

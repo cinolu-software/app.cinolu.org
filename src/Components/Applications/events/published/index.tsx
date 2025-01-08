@@ -1,24 +1,20 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, {useMemo, useState, useEffect} from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
-import { fetchPublishedPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
-import DeleteProgramsModal from "@/Components/Applications/programs/common/DeleteProgramsModal";
+import {fetchPublishedEvents} from "@/Redux/Reducers/eventSlice/eventSlice";
+import {EventsListTableDataColumn} from "@/Data/Application/events";
+import DeleteEventModal from "@/Components/Applications/events/Common/DeleteEventModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {RootState} from "@/Redux/Store";
-// import {CollapseFilterData} from "../common/CollapseFilterData";
-import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {CollapseFilterData} from "@/Components/Applications/programs/common/CollapseFilterData";
+import {ToastContainer} from "react-toastify";
 
-const PublishedProgramsListContainer = () => {
+
+const PublishedEventsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const { publishedProgramsData, publishedProgramsStatus } = useAppSelector((state) => state.programs);
-    const filteredItems = publishedProgramsData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
-
-
+    const {publishedEventData, publishedEventStatus} = useAppSelector(state=>state.event);
+    const filteredItems = publishedEventData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -29,28 +25,28 @@ const PublishedProgramsListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (publishedProgramsStatus === "idle" || publishedProgramsStatus === "loading") {
-            dispatch(fetchPublishedPrograms());
+        if(publishedEventStatus === "idle" || publishedEventStatus === "loading"){
+            dispatch(fetchPublishedEvents())
         }
-    }, [publishedProgramsStatus, dispatch]);
+    }, [publishedEventStatus, dispatch]);
 
     return (
         <Container fluid>
-            <DeleteProgramsModal />
+            <DeleteEventModal />
             {
-                publishedProgramsStatus !== 'succeeded' ? <TableSkeleton/> : (
+                publishedEventStatus !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
                         <Col sm="12">
 
                             <div className="list-product-header">
-                                <CollapseFilterData/>
+                                {/* <CollapseFilterData/> */}
                             </div>
                             <div className="list-product">
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems}
-                                        columns={ProgramsListTableDataColumn}
+                                        columns={EventsListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination
@@ -67,7 +63,6 @@ const PublishedProgramsListContainer = () => {
             <ToastContainer/>
         </Container>
     );
-};
+}
 
-export default PublishedProgramsListContainer;
-
+export default PublishedEventsListContainer;
