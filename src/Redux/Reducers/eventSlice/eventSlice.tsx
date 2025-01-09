@@ -58,7 +58,7 @@ export const fetchPublishedEvents = createAsyncThunk('events/fetchPublishedEvent
     return {publishedEvent: publishedEvents}
 });
 
-export const publisheProgram = createAsyncThunk<Event, { eventId: string }, { rejectValue: any }>(
+export const publishEvent = createAsyncThunk<Event, { eventId: string }, { rejectValue: any }>(
     'programs/publishProgram',
     async ({ eventId }, thunkAPI) => {
         try {

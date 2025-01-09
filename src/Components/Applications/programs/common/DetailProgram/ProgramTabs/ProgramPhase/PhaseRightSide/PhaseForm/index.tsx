@@ -1,6 +1,6 @@
 import { TabPane, Button, Form, FormGroup, Input, Label, Row, Col, Spinner } from "reactstrap";
 import React, { useState, useEffect } from "react";
-import { updateProgramPhase } from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
+import { updateProgramPhase } from "@/Redux/Reducers/projectSlice/ProgramPhaseSlice";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
 

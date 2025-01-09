@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import {  Col, Container, Input, Label, Row } from "reactstrap";
-import {  fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
+import {  fetchProjects } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
 import DeleteProgramsModal from "@/Components/Applications/programs/common/DeleteProgramsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
@@ -16,8 +16,8 @@ const ProgramsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {status, originalProgramsData } = useAppSelector((state: RootState) => state.programs);
-    const filteredItems = originalProgramsData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const {status, originalProjectData} = useAppSelector((state: RootState) => state.project);
+    const filteredItems = originalProjectData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -30,7 +30,7 @@ const ProgramsListContainer = () => {
 
     useEffect(() => {
         if (status === "idle" || status === "loading") {
-            dispatch(fetchPrograms());
+            dispatch(fetchProjects());
         }
     }, [status, dispatch]);
 

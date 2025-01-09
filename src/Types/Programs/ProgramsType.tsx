@@ -20,7 +20,7 @@ export type DataType = {
     description: string;
 }
 
-export interface CreateProgramType {
+export interface CreateProjectType {
     name: string;
     description: string;
     targeted_audience: string;
@@ -34,7 +34,7 @@ export interface CreateProgramType {
     partners: PartnerType [] | string[];
 }
 
-export interface ReceiveProgramsType {
+export interface ReceiveProjectType {
     id: string;
     name: string;
     description: string;
@@ -53,8 +53,8 @@ export interface ReceiveProgramsType {
     updated_at: string;
 }
 
-export interface ReceiveProgramsTypeTable {
-    programs: ReceiveProgramsType[];
+export interface ReceiveProjectTypeTable {
+    programs: ReceiveProjectType[];
     programStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
 }
 
@@ -73,21 +73,21 @@ export interface FormValueType {
     partners:  string[] ;
 }
 
-export interface ProgramDataType extends FormValueType {
+export interface ProjectDataType extends FormValueType {
 }
 
-export interface InitialStateProgramsType {
-    originalProgramsData: ReceiveProgramsType[];
-    publishedProgramsData :ReceiveProgramsType[];
+export interface InitialStateProjectType {
+    originalProjectData: ReceiveProjectType[];
+    publishedProjectData :ReceiveProjectType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    publishedProgramsStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
+    publishedProjectStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
-    isOpenModalCreateProgram: boolean;
-    isOpenModalEditProgram: boolean;
-    isOpenModalDeleteProgram: boolean;
+    isOpenModalCreateProject: boolean;
+    isOpenModalEditProject: boolean;
+    isOpenModalDeleteProject: boolean;
     filterToggle: boolean;
-    selectedProgram?: ReceiveProgramsType | null ;
-    programData: ReceiveProgramsType | null;
+    selectedProject?: ReceiveProjectType | null ;
+    projectData: ReceiveProjectType | null;
     navId: number;
     tabId: number;
     formValue: FormValueType;

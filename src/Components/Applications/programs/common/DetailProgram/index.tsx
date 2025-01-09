@@ -5,7 +5,7 @@ import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import ProgramImage from "@/Components/Applications/programs/common/DetailProgram/ProgramImage"
 import ProgramTabs from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs";
 import {useRouter} from "next/navigation";
-import {fetchProgramById} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {fetchProgramById} from "@/Redux/Reducers/projectSlice/projectSlice";
 
 
 const DetailProgramContainer = () => {

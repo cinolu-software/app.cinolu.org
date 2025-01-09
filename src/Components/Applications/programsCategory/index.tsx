@@ -5,7 +5,7 @@ import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import ModalCreateProgramCategory from "@/Components/Applications/programsCategory/ModalCreateProgramCategory";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {fetchCategory, deleteCategory, setModalDeleteCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
+import {fetchCategory, deleteCategory, setModalDeleteCategory} from "@/Redux/Reducers/projectSlice/ProgramsCategory";
 import {ProgramsCategoryListTableDataColumn} from "@/Data/Application/ProgramsCategory";
 import {ProgramCategoryHeader} from "@/Components/Applications/programsCategory/ProgramCategoryHeader";
 import UpdateProgramCategory from "@/Components/Applications/programsCategory/ModalUpdateProgramCategory";

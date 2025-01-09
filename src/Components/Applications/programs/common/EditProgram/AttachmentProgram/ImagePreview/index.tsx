@@ -5,7 +5,7 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast, Flip } from "react-toastify";
-import { updateAttachmentProgramImage } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { updateAttachmentProgramImage } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { CardBody, Col, Spinner } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
 import { useRouter } from "next/navigation";

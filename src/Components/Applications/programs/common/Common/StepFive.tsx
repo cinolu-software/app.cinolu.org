@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
-import { setNewFormValue } from '@/Redux/Reducers/programsSlice/programsSlice';
+import { setNewFormValue } from '@/Redux/Reducers/projectSlice/projectSlice';
 import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
 import { StepPropsType, StepFiveProps} from "@/Types/Programs/ProgramsType";
 

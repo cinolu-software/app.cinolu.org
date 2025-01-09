@@ -4,7 +4,7 @@ import { ProgramsListTypeTableColumnType, ProgramsTypeType } from "@/Types/Progr
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
-import { setModalDeleteProgramTypes, setModalEditProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import { setModalDeleteProgramTypes, setModalEditProgramTypes } from "@/Redux/Reducers/projectSlice/programsTypeSlice";
 import SVG from '@/CommonComponent/SVG';
 
 

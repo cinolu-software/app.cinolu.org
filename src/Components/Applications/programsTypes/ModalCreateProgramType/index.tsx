@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createProgramType, setModalCreateProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import { createProgramType, setModalCreateProgramTypes } from "@/Redux/Reducers/projectSlice/programsTypeSlice";
 import { Flip, toast } from "react-toastify";
 import { CreateProgramTypeType } from "@/Types/Programs/ProgramsTypeType";
 

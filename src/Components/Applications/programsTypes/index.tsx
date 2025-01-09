@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
 import { ProgramsTypesHeader } from "./ProgramsList";
 import { useSelector, useDispatch } from "react-redux";
-import { selectOriginalProgramData,selectProgramTypeStatus, fetchProgramsType, selectTransformedProgramDataType, setModalDeleteProgramTypes, deleteProgramType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import { selectOriginalProgramData,selectProgramTypeStatus, fetchProgramsType, selectTransformedProgramDataType, setModalDeleteProgramTypes, deleteProgramType } from "@/Redux/Reducers/projectSlice/programsTypeSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/ProgramsTypes";
 import { ProgramsListTypeTableColumnType } from "@/Types/Programs/ProgramsTypeType";
 import ModalCreateProgramType from "@/Components/Applications/programsTypes/ModalCreateProgramType";

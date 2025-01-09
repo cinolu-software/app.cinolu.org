@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Col, Form, Label, Row, InputGroup, Card, CardBody } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import Calendar from "react-calendar";
 // @ts-ignore
 import { Value } from 'react-calendar/dist/cjs/shared/types';

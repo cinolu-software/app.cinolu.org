@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { updateProgramType, setModalEditProgramTypes } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import { updateProgramType, setModalEditProgramTypes } from "@/Redux/Reducers/projectSlice/programsTypeSlice";
 import { Flip, toast } from "react-toastify";
 import { UpdateTypeType } from "@/Types/Programs/ProgramsTypeType";
 

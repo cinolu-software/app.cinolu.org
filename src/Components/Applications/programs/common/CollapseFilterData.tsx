@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 import { Card, CardBody, Col, Collapse, Row, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import { fetchProgramsType } from "@/Redux/Reducers/projectSlice/programsTypeSlice";
 
 export const CollapseFilterData = () => {
 

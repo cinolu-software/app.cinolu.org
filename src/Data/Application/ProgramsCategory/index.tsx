@@ -4,7 +4,7 @@ import { ProgramsListTypeTableColumnType, ProgramsTypeType } from "@/Types/Progr
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
-import {setModalCreateCategory, setModalDeleteCategory, setModalEditCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
+import {setModalCreateCategory, setModalDeleteCategory, setModalEditCategory} from "@/Redux/Reducers/projectSlice/ProgramsCategory";
 import SVG from '@/CommonComponent/SVG';
 
 const ProgramsCategoryListTableName: React.FC<{ image: string; name: string }> = ({ image, name }) => {

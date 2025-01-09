@@ -3,9 +3,9 @@ import { Container, Card } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { Document, Page, View, StyleSheet, PDFViewer, Image, Text } from '@react-pdf/renderer';
 import { ImagePath } from "@/Constant";
-import { fetchCategory } from "@/Redux/Reducers/programsSlice/ProgramsCategory";
-import { fetchProgramsType } from "@/Redux/Reducers/programsSlice/programsTypeSlice";
-import { fetchPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProgramsCategory";
+import { fetchProgramsType } from "@/Redux/Reducers/projectSlice/programsTypeSlice";
+import { fetchPrograms } from "@/Redux/Reducers/projectSlice/projectSlice";
 
 const styles = StyleSheet.create({
     viewer: {

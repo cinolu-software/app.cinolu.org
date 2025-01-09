@@ -1,21 +1,21 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import { CreateProgramType, FormValueType, InitialStateProgramsType, ReceiveProgramsType, ProgramDataType } from "@/Types/Programs/ProgramsType";
-import {RootState} from "@/Redux/Store";
+import { CreateProjectType, FormValueType, InitialStateProjectType, ReceiveProjectType, ProjectDataType } from "@/Types/Programs/ProgramsType";
 import {ShowError} from "@/utils/MultiStepForm.service";
+import {RootState} from "@/Redux/Store";
 
-const initialState: InitialStateProgramsType = {
-    originalProgramsData: [],
-    publishedProgramsData: [],
+const initialState : InitialStateProjectType = {
+    originalProjectData: [],
+    publishedProjectData: [],
     status: "idle",
-    publishedProgramsStatus: "idle",
+    publishedProjectStatus: "idle",
     error: null,
-    isOpenModalCreateProgram: false,
-    isOpenModalEditProgram: false,
-    isOpenModalDeleteProgram: false,
+    isOpenModalCreateProject: false,
+    isOpenModalEditProject: false,
+    isOpenModalDeleteProject: false,
     filterToggle: false,
-    selectedProgram: null,
-    programData: null,
+    selectedProject: null,
+    projectData: null,
     navId: 1,
     tabId: 1,
     formValue: {
@@ -30,7 +30,7 @@ const initialState: InitialStateProgramsType = {
         ended_at: "",
         types: [],
         categories: [],
-        partners: []
+        partners: [],
     },
     EditFormValue: {
         id: "",
@@ -50,34 +50,35 @@ const initialState: InitialStateProgramsType = {
     showFinish:false,
 };
 
-export const fetchPrograms = createAsyncThunk('programs/fetchPrograms', async () => {
-    const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs`)
-    const originalPrograms = response.data.data;
-    return { original: originalPrograms };
+export const fetchProjects = createAsyncThunk('projects/fetchProjects', async () => {
+    const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/projects`)
+    const originalProjects = response.data.data;
+    return { original: originalProjects };
 });
 
-export const fetchPublishedPrograms = createAsyncThunk('programs/fetchPublishedPrograms', async () => {
-    const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/programs/find-published`)
-    const publishedPrograms = response.data.data.programs;
-    return { publishedProgram: publishedPrograms };
+export const fetchPublishedProject = createAsyncThunk('projects/fetchPublishedProjects', async () => {
+    const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/projects/find-published`)
+    const publishedProject = response.data.data.project;
+    return { publishedProject: publishedProject };
 });
 
-export const fetchProgramById = createAsyncThunk<ReceiveProgramsType, string, { rejectValue: any }>('programs/fetchProgramById', async (programId, thunkAPI) => {
+export const fetchProjectById = createAsyncThunk<ReceiveProjectType, string, { rejectValue: any }>('projects/fetchProjectById', async (projectId, thunkAPI) => {
     try {
-        const response = await axiosInstance.get<{ data: ReceiveProgramsType }>(
-            `${apiBaseUrl}/programs/${programId}`
+        const response = await axiosInstance.get<{ data: ReceiveProjectType }>(
+            `${apiBaseUrl}/projects/${projectId}`
         );
         return response.data.data;
-    } catch (err: any) {
+    }
+    catch (err: any) {
         return thunkAPI.rejectWithValue(err.response.data);
     }
 });
 
-export const createProgram = createAsyncThunk<ReceiveProgramsType, CreateProgramType, { rejectValue: any }>(
-    'programs/createProgram',
-    async (newProgram, thunkAPI) => {
+export const createProject = createAsyncThunk<ReceiveProjectType, CreateProjectType, { rejectValue: any }>(
+    'project/createProject',
+    async (newProject, thunkAPI) => {
         try {
-            const response = await axiosInstance.post<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs`, newProgram);
+            const response = await axiosInstance.post<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects`, newProject);
             return response.data.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -85,11 +86,11 @@ export const createProgram = createAsyncThunk<ReceiveProgramsType, CreateProgram
     }
 );
 
-export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: string, updatedProgram: any }, { rejectValue: any }>(
-    'programs/updateProgram',
-    async ({ programId, updatedProgram }, thunkAPI) => {
+export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: string, updatedProject: any }, { rejectValue: any }>(
+    'project/updateProject',
+    async ({ projectId, updatedProject }, thunkAPI) => {
         try {
-            const response = await axiosInstance.patch<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/${programId}`, updatedProgram);
+            const response = await axiosInstance.patch<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects/${projectId}`, updatedProject);
             return response.data.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -97,37 +98,32 @@ export const updateProgram = createAsyncThunk<ReceiveProgramsType, { programId: 
     }
 );
 
-export const deleteProgram = createAsyncThunk<{ id: string }, string, { rejectValue: any }>(
-    'programs/deleteProgram',
-    async (programId, thunkAPI) => {
+export const deleteProject = createAsyncThunk<{ id: string }, string, { rejectValue: any }>(
+    'project/deleteProject',
+    async (projectId, thunkAPI) => {
         try {
-            await axiosInstance.delete(`${apiBaseUrl}/programs/${programId}`);
-            return { id: programId };
+            await axiosInstance.delete(`${apiBaseUrl}/projects/${projectId}`);
+            return { id: projectId };
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
         }
     }
 );
 
-export const updateAttachmentProgramImage = createAsyncThunk<
-    { programId: string ; imageUrl: string },
-    { programId: string; imageFile: File },
+export const updatedAttachmentProjectImage = createAsyncThunk<
+    { projectId: string ; imageUrl: string },
+    { projectId: string; imageFile: File },
     { rejectValue: any }
->(
-    'programs/updateAttachmentProgramImage',
-    async ({ programId, imageFile }, thunkAPI) => {
+>('project/updateAttachmentProjectImage', async ({ projectId, imageFile }, thunkAPI) => {
         try {
             const formData = new FormData();
             formData.append('thumb', imageFile);
-
             const response = await axiosInstance.post<{ data: { image: string } }>(
-                `${apiBaseUrl}/programs/image/${programId}`,
+                `${apiBaseUrl}/projects/image/${projectId}`,
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
-
-            return { programId, imageUrl: response.data.data.image };
-
+            return { projectId, imageUrl: response.data.data.image };
         }
         catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -135,11 +131,11 @@ export const updateAttachmentProgramImage = createAsyncThunk<
     }
 );
 
-export const publisheProgram = createAsyncThunk<ReceiveProgramsType, { programId: string }, { rejectValue: any }>(
-    'programs/publishProgram',
-    async ({ programId }, thunkAPI) => {
+export const publishProject = createAsyncThunk<ReceiveProjectType, { projectId: string }, { rejectValue: any }>(
+    'project/publishProject',
+    async ({ projectId }, thunkAPI) => {
         try {
-            const response = await axiosInstance.post<{ data: ReceiveProgramsType }>(`${apiBaseUrl}/programs/publish/${programId}`);
+            const response = await axiosInstance.post<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects/publish/${projectId}`);
             return response.data.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -147,7 +143,7 @@ export const publisheProgram = createAsyncThunk<ReceiveProgramsType, { programId
     }
 );
 
-const validateStep = (state: InitialStateProgramsType) => {
+const validateStep = (state: InitialStateProjectType) => {
     const { name, description, town, aim, prize, started_at, ended_at, types, categories, partners, targeted_audience } = state.formValue;
     switch (state.numberLevel) {
         case 1:
@@ -186,35 +182,35 @@ const validateStep = (state: InitialStateProgramsType) => {
     return true;
 };
 
-const ProgramSlice = createSlice({
-    name: "programs",
+const ProjectSlice = createSlice({
+    name: "project",
     initialState,
     reducers: {
-        setSelectedProgram: (state, action: PayloadAction<{ program: ReceiveProgramsType | null }>) => {
-            state.selectedProgram = action.payload.program;
-            if (action.payload.program) {
+        setSelectedProject: (state, action: PayloadAction<{ project: ReceiveProjectType | null }>) => {
+            state.selectedProject = action.payload.project;
+            if (action.payload.project) {
                 state.EditFormValue = {
-                    name: action.payload.program.name,
-                    description: action.payload.program.description,
-                    targeted_audience: action.payload.program.targeted_audience,
-                    started_at: action.payload.program.started_at,
-                    ended_at: action.payload.program.ended_at,
-                    types: action.payload.program.types || [],
-                    categories: action.payload.program.categories || [],
-                    partners: action.payload.program.partners || []
+                    name: action.payload.project.name,
+                    description: action.payload.project.description,
+                    targeted_audience: action.payload.project.targeted_audience,
+                    started_at: action.payload.project.started_at,
+                    ended_at: action.payload.project.ended_at,
+                    types: action.payload.project.types || [],
+                    categories: action.payload.project.categories || [],
+                    partners: action.payload.project.partners || []
                 };
             }
         },
-        setModalCreateProgram: (state, action: PayloadAction<{ isOpen: boolean }>) => {
-            state.isOpenModalCreateProgram = action.payload.isOpen;
+        setModalCreateProject: (state, action: PayloadAction<{ isOpen: boolean }>) => {
+            state.isOpenModalCreateProject = action.payload.isOpen;
         },
-        setModalEditProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType | null }>) => {
-            state.isOpenModalEditProgram = action.payload.isOpen;
-            state.selectedProgram = action.payload.program;
+        setModalEditProject: (state, action: PayloadAction<{ isOpen: boolean, project: ReceiveProjectType | null }>) => {
+            state.isOpenModalEditProject = action.payload.isOpen;
+            state.selectedProject = action.payload.project;
         },
-        setModalDeleteProgram: (state, action: PayloadAction<{ isOpen: boolean, program: ReceiveProgramsType | null }>) => {
-            state.isOpenModalDeleteProgram = action.payload.isOpen;
-            state.selectedProgram = action.payload.program;
+        setModalDeleteProject: (state, action: PayloadAction<{ isOpen: boolean, project: ReceiveProjectType | null }>) => {
+            state.isOpenModalDeleteProject = action.payload.isOpen;
+            state.selectedProject = action.payload.project;
         },
         setNavId: (state, action: PayloadAction<number>) => {
             state.navId = action.payload;
@@ -274,7 +270,6 @@ const ProgramSlice = createSlice({
             }
         },
         resetFormValue: (state) => {
-
             state.formValue = {
                 id: "",
                 name: "",
@@ -294,94 +289,94 @@ const ProgramSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchPrograms.pending, (state) => {
+            .addCase(fetchProjects.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(fetchPrograms.fulfilled, (state, action: PayloadAction<{ original: ReceiveProgramsType[] }>) => {
+            .addCase(fetchProjects.fulfilled, (state, action: PayloadAction<{ original: ReceiveProjectType[] }>) => {
                 state.status = 'succeeded';
-                state.originalProgramsData = action.payload.original;
+                state.originalProjectData = action.payload.original;
             })
-            .addCase(fetchPrograms.rejected, (state, action) => {
+            .addCase(fetchProjects.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })
-            .addCase(fetchPublishedPrograms.pending, (state)=>{
-                state.publishedProgramsStatus = 'loading';
+            .addCase(fetchPublishedProject.pending, (state)=>{
+                state.publishedProjectStatus = 'loading';
                 state.error = null;
             })
-            .addCase(fetchPublishedPrograms.fulfilled, (state, action: PayloadAction<{publishedProgram: ReceiveProgramsType[]}>)=>{
-                state.publishedProgramsStatus = 'succeeded';
-                state.publishedProgramsData = action.payload.publishedProgram;
+            .addCase(fetchPublishedProject.fulfilled, (state, action: PayloadAction<{publishedProject: ReceiveProjectType[]}>)=>{
+                state.publishedProjectStatus = 'succeeded';
+                state.publishedProjectData = action.payload.publishedProject;
             })
-            .addCase(fetchPublishedPrograms.rejected, (state, action)=>{
+            .addCase(fetchPublishedProject.rejected, (state, action)=>{
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })
-            .addCase(createProgram.pending, (state) => {
+            .addCase(createProject.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(createProgram.fulfilled, (state, action: PayloadAction<ReceiveProgramsType>) => {
+            .addCase(createProject.fulfilled, (state, action: PayloadAction<ReceiveProjectType>) => {
                 state.status = 'succeeded';
-                state.originalProgramsData.push(action.payload);
+                state.originalProjectData.push(action.payload);
             })
-            .addCase(createProgram.rejected, (state, action) => {
+            .addCase(createProject.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })
-            .addCase(updateProgram.pending, (state) => {
+            .addCase(updateProject.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(updateProgram.fulfilled, (state, action: PayloadAction<ReceiveProgramsType>) => {
+            .addCase(updateProject.fulfilled, (state, action: PayloadAction<ReceiveProjectType>) => {
                 state.status = 'succeeded';
-                const updatedProgram = action.payload;
-                const existingProgram = state.originalProgramsData.find((program) => program.id === updatedProgram.id);
-                if (existingProgram) {
-                    Object.assign(existingProgram, updatedProgram);
+                const updatedProject = action.payload;
+                const existingProject = state.originalProjectData.find((project) => project.id === updatedProject.id);
+                if (existingProject) {
+                    Object.assign(existingProject, updatedProject);
                 }
             })
-            .addCase(updateProgram.rejected, (state, action) => {
+            .addCase(updateProject.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })
-            .addCase(deleteProgram.pending, (state) => {
+            .addCase(deleteProject.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(deleteProgram.fulfilled, (state, action: PayloadAction<{ id: string }>) => {
+            .addCase(deleteProject.fulfilled, (state, action: PayloadAction<{ id: string }>) => {
                 state.status = 'succeeded';
-                state.originalProgramsData = state.originalProgramsData.filter(
-                    (program) => program.id !== action.payload.id
+                state.originalProjectData = state.originalProjectData.filter(
+                    (project) => project.id !== action.payload.id
                 );
             })
-            .addCase(deleteProgram.rejected, (state, action) => {
+            .addCase(deleteProject.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })
-            .addCase(updateAttachmentProgramImage.pending, (state) => {
+            .addCase(updatedAttachmentProjectImage.pending, (state) => {
                 state.status = 'loading';
                 state.error = null;
             })
-            .addCase(updateAttachmentProgramImage.fulfilled, (state, action: PayloadAction<{ programId: string; imageUrl: string }>) => {
+            .addCase(updatedAttachmentProjectImage.fulfilled, (state, action: PayloadAction<{ projectId: string; imageUrl: string }>) => {
                 state.status = 'succeeded';
-                const program = state.originalProgramsData.find((program) => program.id === action.payload.programId);
-                if (program) {
-                    program.image = action.payload.imageUrl;
+                const event = state.originalProjectData.find((project) => project.id === action.payload.projectId);
+                if (event) {
+                    event.image = action.payload.imageUrl;
                 }
             })
-            .addCase(updateAttachmentProgramImage.rejected, (state, action) => {
+            .addCase(updatedAttachmentProjectImage.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             })
-            .addCase(fetchProgramById.pending, (state) => {
+            .addCase(fetchProjectById.pending, (state) => {
                 state.status = 'loading';
             })
-            .addCase(fetchProgramById.fulfilled, (state, action: PayloadAction<any>) => {
+            .addCase(fetchProjectById.fulfilled, (state, action: PayloadAction<any>) => {
                 state.status = 'succeeded';
-                state.programData = action.payload;
+                state.projectData = action.payload;
             })
-            .addCase(fetchProgramById.rejected, (state, action) => {
+            .addCase(fetchProjectById.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
             });
@@ -389,20 +384,21 @@ const ProgramSlice = createSlice({
 });
 
 export const {
-    setModalCreateProgram,
-    setModalEditProgram,
-    setModalDeleteProgram,
+    setModalCreateProject,
+    setModalEditProject,
+    setModalDeleteProject,
     setNavId,
     setFormValue,
     setNewFormValue,
     setEditFormValue,
     setFilterToggle,
-    setSelectedProgram,
+    setSelectedProject,
     setShowFinish,
     handleBackButton,
     handleNextButton,
     resetFormValue
-} = ProgramSlice.actions;
+} = ProjectSlice.actions;
 
-export const selectSelectedProgram = (state: RootState) => state.programs.selectedProgram;
-export default ProgramSlice.reducer;
+export const selectSelectedProject = (state: RootState) => state.project.selectedProject;
+
+export default ProjectSlice.reducer;

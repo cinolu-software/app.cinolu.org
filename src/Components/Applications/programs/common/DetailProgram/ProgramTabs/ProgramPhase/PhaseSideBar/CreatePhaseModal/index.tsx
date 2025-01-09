@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter, Badge } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
-import { setModalcreateProgramPhase, createProgramPhase } from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
+import { setModalcreateProgramPhase, createProgramPhase } from "@/Redux/Reducers/projectSlice/ProgramPhaseSlice";
 
 const CreateNewPhase = () => {
     const dispatch = useAppDispatch();

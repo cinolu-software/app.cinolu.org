@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFilterToggle } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setFilterToggle } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { Filter } from "react-feather";
 import AddButton from "@/CommonComponent/AddButton";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalCreateProgramTypes} from "@/Redux/Reducers/programsSlice/programsTypeSlice";
+import { setModalCreateProgramTypes} from "@/Redux/Reducers/projectSlice/programsTypeSlice";
 import AddWithModalButton from "@/CommonComponent/AddWithModalButton";
 
 export const ProgramsTypesHeader = () => {

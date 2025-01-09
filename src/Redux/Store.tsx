@@ -5,15 +5,15 @@ import ThemeCustomizerSlice from "./Reducers/ThemeCustomizerSlice";
 import AuthSlice from "@/Redux/Reducers/AuthSlice";
 import RoleSlice from "./Reducers/AdminOptions/roleSlice/RoleSlice";
 import UsersSlice from "./Reducers/userSlice/UserSlice";
-import ProgramSlice from "./Reducers/programsSlice/programsSlice";
-import ProgramsTypeSlice from "./Reducers/programsSlice/programsTypeSlice";
+import ProjectSlice from "@/Redux/Reducers/projectSlice/projectSlice";
+import ProgramsTypeSlice from "@/Redux/Reducers/projectSlice/programsTypeSlice";
 import FilterSlice from "./Reducers/FilterSlice";
 import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
 import NotificationSlice from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import PartnerShipSlice from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 import PartnerSlice from "@/Redux/Reducers/PartnersSlice/partnerSlice";
-import ProgramCategorySlice from "@/Redux/Reducers/programsSlice/ProgramsCategory"
-import ProgramPhaseSlice from "@/Redux/Reducers/programsSlice/ProgramPhaseSlice";
+import ProgramCategorySlice from "@/Redux/Reducers/projectSlice/ProgramsCategory"
+import ProgramPhaseSlice from "@/Redux/Reducers/projectSlice/ProgramPhaseSlice";
 import EventsTypeSlice from "@/Redux/Reducers/eventSlice/EventTypeSlice";
 import EventSlice from "@/Redux/Reducers/eventSlice/eventSlice";
 import ExpertiseSlice from "@/Redux/Reducers/userSlice/ExpertiseSlice";
@@ -25,7 +25,7 @@ const Store = configureStore({
     layout: LayoutSlice,
     headerBookMark: HeaderBookmarkSlice,
     themeCustomizer: ThemeCustomizerSlice,
-    programs: ProgramSlice,
+    project: ProjectSlice,
     programsType: ProgramsTypeSlice,
     users : UsersSlice,
     role: RoleSlice,
@@ -43,7 +43,7 @@ const Store = configureStore({
     position: PositionSlice,
   },
 
-  middleware: getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
+  middleware : getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
 });
 
 export default Store;

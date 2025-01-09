@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {
     updateCategory,
     setModalEditCategory,
-} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
+} from "@/Redux/Reducers/projectSlice/ProgramsCategory";
 import {Flip, toast} from "react-toastify";
 import {UpdateCategoryType} from "@/Types/Programs/ProgramsCategoryType"
 

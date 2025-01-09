@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setNewFormValue } from "@/Redux/Reducers/programsSlice/programsSlice";
-import { fetchCategory } from "@/Redux/Reducers/programsSlice/ProgramsCategory";
+import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
+import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProgramsCategory";
 import { StepPropsType } from "@/Types/Programs/ProgramsType";
 
 const StepFour: React.FC<StepPropsType> = ({ data }) => {

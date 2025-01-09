@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
-import {createCategory, setModalCreateCategory} from "@/Redux/Reducers/programsSlice/ProgramsCategory";
+import {createCategory, setModalCreateCategory} from "@/Redux/Reducers/projectSlice/ProgramsCategory";
 import { CreateCategoryType } from '@/Types/Programs/ProgramsCategoryType'
 
 const CreateNewProgramCategory = () => {

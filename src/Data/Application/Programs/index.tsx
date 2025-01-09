@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {ReceiveProgramsType} from "@/Types/Programs/ProgramsType";
+import {ReceiveProjectType} from "@/Types/Programs/ProgramsType";
 import RatioImage from "@/CommonComponent/RatioImage";
-import {useDispatch} from "react-redux";
-import {setModalDeleteProgram, setSelectedProgram, publisheProgram} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {useAppDispatch} from "@/Redux/Hooks";
+import { publishProject, setSelectedProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
@@ -10,9 +10,7 @@ import SVG from '@/CommonComponent/SVG';
 import {Spinner} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
-
-
-const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
+const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -23,30 +21,35 @@ const ProgramsListTableName: React.FC<{ image: string, name: string }> = ({image
     );
 };
 
-const ProgramsListTableAction: React.FC<{ program: ReceiveProgramsType }> = ({ program }) => {
+const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ project }) => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+
     const router = useRouter();
+
     const [loadingEdit, setLoadingEdit] = useState(false);
+
     const [loadingDetail, setLoadingDetail] = useState(false);
+
     const [loadingDelete, setLoadingDelete] = useState(false);
+
     const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
         setLoadingEdit(true);
         router.push('/programs/edit_program');
-        dispatch(setSelectedProgram({ program }));
+        dispatch(setSelectedProject({project}));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
         router.push('/programs/detail_program');
-        dispatch(setSelectedProgram({program}));
+        dispatch(setSelectedProject({project}));
     };
 
     const handleDelete = async () => {
         setLoadingDelete(true);
-        dispatch(setModalDeleteProgram({ isOpen: true, program }));
+        dispatch(setModalDeleteProject({ isOpen: true, project }));
         setLoadingDelete(false);
     };
 
@@ -56,7 +59,7 @@ const ProgramsListTableAction: React.FC<{ program: ReceiveProgramsType }> = ({ p
             setLoadingPublish(true);
             setTimeout(() => {
                 // @ts-ignore
-                    dispatch(publisheProgram({ programId: program.id }));
+                    dispatch(publishProject({projectId: project.id}));
                     toast.success("Programme publié avec succès", {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -75,7 +78,6 @@ const ProgramsListTableAction: React.FC<{ program: ReceiveProgramsType }> = ({ p
             });
         }
     }
-
 
 
     return (
@@ -127,11 +129,11 @@ const ProgramsListTableAction: React.FC<{ program: ReceiveProgramsType }> = ({ p
 
 };
 
-export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
+export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
     {
         name: "Nom",
-        cell: (row: ReceiveProgramsType) => (
-            <ProgramsListTableName
+        cell: (row: ReceiveProjectType) => (
+            <ProjectListTableName
                 image={row?.image ? `${imageBaseUrl}/programs/${row.image}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
         ),
@@ -140,19 +142,19 @@ export const ProgramsListTableDataColumn: TableColumn<ReceiveProgramsType>[] = [
     },
     {
         name: "Date de début",
-        selector: (row: ReceiveProgramsType) => row.started_at,
+        selector: (row: ReceiveProjectType) => row.started_at,
         sortable: true,
         grow: 1
     },
     {
         name: "Date de fin",
-        selector: (row: ReceiveProgramsType) => row.ended_at,
+        selector: (row: ReceiveProjectType) => row.ended_at,
         sortable: true,
         grow: 1
     },
     {
         name: "Actions",
-        cell: (row: ReceiveProgramsType) => <ProgramsListTableAction program={row}/>,
+        cell: (row: ReceiveProjectType) => <ProjectListTableAction project={row}/>,
         grow: 2
     },
 ];

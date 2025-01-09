@@ -6,7 +6,7 @@ import {
     createRequirement,
     updateRequirement,
     deleteRequirement,
-} from "@/Redux/Reducers/programsSlice/ProgramRequiredSlice";
+} from "@/Redux/Reducers/projectSlice/ProgramRequiredSlice";
 
 interface Requirement {
     id?: string;

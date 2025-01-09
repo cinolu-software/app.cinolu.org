@@ -1,12 +1,10 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
-import { fetchPublishedPrograms } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { fetchPublishedPrograms } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
 import DeleteProgramsModal from "@/Components/Applications/programs/common/DeleteProgramsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {RootState} from "@/Redux/Store";
-// import {CollapseFilterData} from "../common/CollapseFilterData";
 import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 import {CollapseFilterData} from "@/Components/Applications/programs/common/CollapseFilterData";

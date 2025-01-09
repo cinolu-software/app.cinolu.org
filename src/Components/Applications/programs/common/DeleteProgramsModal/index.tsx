@@ -3,7 +3,7 @@ import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col, Spinner } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/programsSlice/programsSlice";
+import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 
 const DeleteProgramModal = () => {

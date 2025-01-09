@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Card, CardBody, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
-import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/programsSlice/programsSlice";
+import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
 import StepOne from "@/Components/Applications/programs/common/Common/StepOne";
