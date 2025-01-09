@@ -24,15 +24,10 @@ const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image,
 const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ project }) => {
 
     const dispatch = useAppDispatch();
-
     const router = useRouter();
-
     const [loadingEdit, setLoadingEdit] = useState(false);
-
     const [loadingDetail, setLoadingDetail] = useState(false);
-
     const [loadingDelete, setLoadingDelete] = useState(false);
-
     const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
@@ -54,7 +49,6 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
     };
 
     const handlePublish = async () => {
-
         try {
             setLoadingPublish(true);
             setTimeout(() => {
@@ -79,7 +73,6 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
         }
     }
 
-
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center">
@@ -92,7 +85,6 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                         {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
                     </button>
                 </div>
-
                 <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
@@ -102,7 +94,6 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                         {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
                     </button>
                 </div>
-
                 <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
@@ -112,7 +103,6 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                         {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="fill-calendar"/>}
                     </button>
                 </div>
-
                 <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
@@ -122,11 +112,9 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                         {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
                     </button>
                 </div>
-
             </div>
         </div>
     );
-
 };
 
 export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
@@ -192,12 +180,10 @@ export const AddProgram = [
         title: "Partenaires",
         detail: "Partenaires"
       },
-  ];
+];
 
 export const NumberWizardData = [
-    {
-        text: "Fill up your details and proceed next steps.",
-    },
+    {text: "Fill up your details and proceed next steps.",},
 ];
 
 

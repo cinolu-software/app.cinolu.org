@@ -2,14 +2,14 @@ import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import {  Col, Container, Input, Label, Row } from "reactstrap";
 import {  fetchProjects } from "@/Redux/Reducers/projectSlice/projectSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
-import DeleteProgramsModal from "@/Components/Applications/programs/common/DeleteProgramsModal";
+import { ProjectListTableDataColumn } from "@/Data/Application/Programs/";
+import DeleteProgramsModal from "@/Components/Applications/projets/common/DeleteProgramsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
 import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {ProgramsHeader} from "@/Components/Applications/programs/common/ProgramsList";
-import {CollapseFilterData} from "@/Components/Applications/programs/common/CollapseFilterData";
+import {ProgramsHeader} from "@/Components/Applications/projets/common/ProgramsList";
+import {CollapseFilterData} from "@/Components/Applications/projets/common/CollapseFilterData";
 
 
 const ProgramsListContainer = () => {
