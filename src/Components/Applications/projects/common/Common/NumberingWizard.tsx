@@ -12,7 +12,7 @@ import StepFour from "@/Components/Applications/programs/common/Common/StepFour"
 import StepFive from "@/Components/Applications/programs/common/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
 import StepperHorizontal from "@/Components/Applications/programs/common/Common/StepperHorizontal";
-import { FormValueType } from "@/Types/Programs/ProgramsType";
+import { FormValueType } from "@/Types/Project/ProgramsType";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import {titleAddProgram} from "@/Constant";
 

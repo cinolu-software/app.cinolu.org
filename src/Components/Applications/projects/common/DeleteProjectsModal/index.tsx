@@ -3,22 +3,22 @@ import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col, Spinner } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalDeleteProgram, deleteProgram } from "@/Redux/Reducers/projectSlice/projectSlice";
+import { setModalDeleteProject, deleteProject } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 
-const DeleteProgramModal = () => {
+const DeleteProjectModal = () => {
     const dispatch = useAppDispatch();
-    const { isOpenModalDeleteProgram, selectedProgram, originalProgramsData } = useAppSelector((state) => state.programs);
-    const selectedProgramData = originalProgramsData?.find((item) => item.id === selectedProgram?.id);
+    const { isOpenModalDeleteProject, selectedProject, originalProjectData } = useAppSelector((state) => state.project);
+    const selectedProjectData = originalProjectData?.find((item: { id: any; }) => item.id === selectedProject?.id);
 
     const [isLoading, setIsLoading] = useState(false);
 
     const handleDelete = async () => {
-        if (selectedProgramData && selectedProgramData.id !== undefined) {
+        if (selectedProjectData && selectedProjectData.id !== undefined) {
             setIsLoading(true);
             try {
-                await dispatch(deleteProgram(selectedProgramData.id)).unwrap();
-                dispatch(setModalDeleteProgram({ isOpen: false, program: null }));
+                await dispatch(deleteProject(selectedProjectData.id)).unwrap();
+                dispatch(setModalDeleteProject({ isOpen: false, project: null }));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"Suppression effectuée avec succès"}</p>,
                     {
@@ -51,9 +51,9 @@ const DeleteProgramModal = () => {
             <CardBody className="badge-spacing">
                 <CommonModal
                     centered
-                    isOpen={isOpenModalDeleteProgram}
-                    toggle={() => dispatch(setModalDeleteProgram({ isOpen: false, program: null }))}
-                    title="Supprimer le programme"
+                    isOpen={isOpenModalDeleteProject}
+                    toggle={() => dispatch(setModalDeleteProject({ isOpen: false, project: null }))}
+                    title="Supprimer le projet"
                 >
                     <div className="modal-toggle-wrapper">
                         <ul className="modal-img">
@@ -62,13 +62,13 @@ const DeleteProgramModal = () => {
                             </li>
                         </ul>
                         <h4 className="text-center pb-2">
-                            Êtes-vous sûr de vouloir supprimer ce programme ?
+                            Êtes-vous sûr de vouloir supprimer ce projet ?
                         </h4>
                         <div className="d-flex justify-content-center mt-5">
                             <Button
                                 color="secondary"
                                 className="me-2"
-                                onClick={() => dispatch(setModalDeleteProgram({ isOpen: false, program: null }))}
+                                onClick={() => dispatch(setModalDeleteProject({ isOpen: false, project: null }))}
                                 disabled={isLoading}
                             >
                                 {"Fermer"}
@@ -85,7 +85,7 @@ const DeleteProgramModal = () => {
     );
 };
 
-export default DeleteProgramModal;
+export default DeleteProjectModal;
 
 
 

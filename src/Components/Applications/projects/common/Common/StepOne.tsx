@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { Col, Form, Input, Label, Row } from "reactstrap";
-import { StepPropsType } from "@/Types/Programs/ProgramsType";
+import { StepPropsType } from "@/Types/Project/ProgramsType";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { useAppDispatch } from "@/Redux/Hooks";
 

@@ -2,22 +2,22 @@ import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import {  Col, Container, Input, Label, Row } from "reactstrap";
 import {  fetchProjects } from "@/Redux/Reducers/projectSlice/projectSlice";
-import { ProjectListTableDataColumn } from "@/Data/Application/Programs/";
-import DeleteProgramsModal from "@/Components/Applications/projets/common/DeleteProgramsModal";
+import { ProjectListTableDataColumn } from "@/Data/Application/Project/";
+import DeleteProjectModal from "@/Components/Applications/projects/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {RootState} from "@/Redux/Store";
 import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {ProgramsHeader} from "@/Components/Applications/projets/common/ProgramsList";
-import {CollapseFilterData} from "@/Components/Applications/projets/common/CollapseFilterData";
+import {ProjectHeader} from "@/Components/Applications/projects/common/ProjectList";
+import {CollapseFilterData} from "@/Components/Applications/projects/common/CollapseFilterData";
 
 
-const ProgramsListContainer = () => {
+const ProjectListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
     const {status, originalProjectData} = useAppSelector((state: RootState) => state.project);
-    const filteredItems = originalProjectData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = originalProjectData?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -37,14 +37,14 @@ const ProgramsListContainer = () => {
 
     return (
         <Container fluid>
-            <DeleteProgramsModal />
+            <DeleteProjectModal />
             {
                 status !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
                         <Col sm="12">
 
                             <div className="list-product-header">
-                                <ProgramsHeader />
+                                <ProjectHeader />
                                 <CollapseFilterData/>
                             </div>
                             <div className="list-product">
@@ -52,7 +52,7 @@ const ProgramsListContainer = () => {
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems}
-                                        columns={ProgramsListTableDataColumn}
+                                        columns={ProjectListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination
@@ -71,5 +71,5 @@ const ProgramsListContainer = () => {
     );
 };
 
-export default ProgramsListContainer;
+export default ProjectListContainer;
 

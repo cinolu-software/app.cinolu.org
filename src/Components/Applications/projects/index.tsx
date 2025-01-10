@@ -1,10 +1,10 @@
 import React, { useState} from "react";
 import {Card, NavItem, Nav, NavLink, CardBody,} from "reactstrap";
 import {Href, publishedPrograms, allPrograms} from "@/Constant";
-import TabsContent from "@/Components/Applications/programs/TabsContent";
+import TabsContent from "@/Components/Applications/projects/TabsContent";
 
 
-const Programs = () => {
+const Project = () => {
 
     const [basicTab, setBasicTab] = useState("1");
 
@@ -31,4 +31,4 @@ const Programs = () => {
 
 }
 
-export default Programs
+export default Project

@@ -5,7 +5,7 @@ export const userProfileSecurity="Sécurité";
 export const userProfileTitle="Mon Compte";
 export const userProfileImage="Image Profile";
 
-//Programs
+//Project
 
 export const allPrograms="Programmes";
 export const publishedPrograms="Publié(s)";

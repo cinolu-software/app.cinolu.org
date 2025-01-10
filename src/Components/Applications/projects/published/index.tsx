@@ -1,20 +1,20 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
-import { fetchPublishedPrograms } from "@/Redux/Reducers/projectSlice/projectSlice";
-import { ProgramsListTableDataColumn } from "@/Data/Application/Programs/";
-import DeleteProgramsModal from "@/Components/Applications/programs/common/DeleteProgramsModal";
+import { fetchPublishedProject } from "@/Redux/Reducers/projectSlice/projectSlice";
+import { ProjectListTableDataColumn } from "@/Data/Application/Project/";
+import DeleteProjectModal from "@/Components/Applications/projects/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {CollapseFilterData} from "@/Components/Applications/programs/common/CollapseFilterData";
+import {CollapseFilterData} from "@/Components/Applications/projects/common/CollapseFilterData";
 
-const PublishedProgramsListContainer = () => {
+const PublishedProjectListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const { publishedProgramsData, publishedProgramsStatus } = useAppSelector((state) => state.programs);
-    const filteredItems = publishedProgramsData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const { publishedProjectData, publishedProjectStatus } = useAppSelector((state) => state.project);
+    const filteredItems = publishedProjectStatus?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -27,16 +27,16 @@ const PublishedProgramsListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (publishedProgramsStatus === "idle" || publishedProgramsStatus === "loading") {
-            dispatch(fetchPublishedPrograms());
+        if (publishedProjectStatus === "idle" || publishedProjectStatus === "loading") {
+            dispatch(fetchPublishedProject());
         }
-    }, [publishedProgramsStatus, dispatch]);
+    }, [publishedProjectStatus, dispatch]);
 
     return (
         <Container fluid>
-            <DeleteProgramsModal />
+            <DeleteProjectModal />
             {
-                publishedProgramsStatus !== 'succeeded' ? <TableSkeleton/> : (
+                publishedProjectStatus !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
                         <Col sm="12">
 
@@ -48,7 +48,7 @@ const PublishedProgramsListContainer = () => {
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems}
-                                        columns={ProgramsListTableDataColumn}
+                                        columns={ProjectListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination
@@ -67,5 +67,5 @@ const PublishedProgramsListContainer = () => {
     );
 };
 
-export default PublishedProgramsListContainer;
+export default PublishedProjectListContainer;
 

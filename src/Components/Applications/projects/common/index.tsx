@@ -1,16 +1,16 @@
 import React, {useState, useMemo} from 'react';
-import {ReceiveProgramsType, ReceiveProgramsTypeTable} from "@/Types/Programs/ProgramsType";
+import {ReceiveProjectType, ReceiveProjectTypeTable} from "@/Types/Projects/ProjectType";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {Card, CardBody, Col, Input, Label, Row} from "reactstrap";
-import {ProgramsHeader} from "@/Components/Applications/programs/common/ProgramsList";
-import {CollapseFilterData} from "@/Components/Applications/programs/common/CollapseFilterData";
+import {ProjectHeader} from "@/Components/Applications/projects/common/ProjectList";
+import {CollapseFilterData} from "@/Components/Applications/projects/common/CollapseFilterData";
 import DataTable from "react-data-table-component";
-import {ProgramsListTableDataColumn} from "@/Data/Application/Programs";
+import {ProjectListTableDataColumn} from "@/Data/Application/Project";
 
-const ProgramsListContainer: React.FC<ReceiveProgramsTypeTable> = ({programs, programStatus}) => {
+const ProjectListContainer: React.FC<ReceiveProjectTypeTable> = ({project, projectStatus}) => {
 
     const [filterText, setFilterText] = useState("");
-    const filteredItems = programs?.filter((item : ReceiveProgramsType)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = project?.filter((item : ReceiveProjectType)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(()=>{
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -28,7 +28,7 @@ const ProgramsListContainer: React.FC<ReceiveProgramsTypeTable> = ({programs, pr
                     <Card>
                         <CardBody>
                             <div className="list-product-header">
-                                <ProgramsHeader />
+                                <ProjectHeader />
                                 <CollapseFilterData/>
                             </div>
                             <div className="list-product">
@@ -36,7 +36,7 @@ const ProgramsListContainer: React.FC<ReceiveProgramsTypeTable> = ({programs, pr
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems}
-                                        columns={ProgramsListTableDataColumn}
+                                        columns={ProjectListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination
@@ -53,4 +53,4 @@ const ProgramsListContainer: React.FC<ReceiveProgramsTypeTable> = ({programs, pr
     )
 }
 
-export default ProgramsListContainer;
+export default ProjectListContainer;

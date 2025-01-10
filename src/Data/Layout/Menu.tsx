@@ -67,16 +67,16 @@ export const MenuList: MenuItem [] | undefined = [
                 ]
             },
             {
-                title: "Programmes",
+                title: "Projets",
                 id: 3,
                 icon: "builders",
                 type: "link",
                 lanClass: "lan-1",
                 active: false,
                 children: [
-                    {path: "/programs", title: "programmes", type: "link", lanClass: "lan-6"},
-                    {path: "/programs/programTypes", title: "types", type: "link", lanClass: "lan-6"},
-                    {path: "/programs/programmCategory", title: "catégorie", type: "link", lanClass: "lan-6"},
+                    {path: "/project", title: "programmes", type: "link", lanClass: "lan-6"},
+                    {path: "/project/projectTypes", title: "types", type: "link", lanClass: "lan-6"},
+                    {path: "/project/projectCategory", title: "catégorie", type: "link", lanClass: "lan-6"},
                 ]
             },
             {

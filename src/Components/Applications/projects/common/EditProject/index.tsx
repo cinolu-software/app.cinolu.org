@@ -1,9 +1,9 @@
 import {Card, CardBody, Nav, NavItem, NavLink, Container, Row} from "reactstrap";
 import React, {useState} from 'react'
-import ProgramEditTabContent from "@/Components/Applications/programs/common/EditProgram/ProgramEditTabContent";
+import ProjectEditTabContent from "@/Components/Applications/projects/common/EditProject/ProjectEditTabContent";
 import BackButton from "@/CommonComponent/BackButton";
 
-const EditProgramTabs = () => {
+const EditProjectTabs = () => {
 
     const [activeTab, setActiveTab] = useState('1');
 
@@ -33,7 +33,7 @@ const EditProgramTabs = () => {
                                 </NavItem>
                             </NavItem>
                         </Nav>
-                        <ProgramEditTabContent activeTab={activeTab}/>
+                        <ProjectEditTabContent activeTab={activeTab}/>
                     </CardBody>
                 </Card>
             </Row>
@@ -41,4 +41,4 @@ const EditProgramTabs = () => {
     )
 }
 
-export default EditProgramTabs;
+export default EditProjectTabs;

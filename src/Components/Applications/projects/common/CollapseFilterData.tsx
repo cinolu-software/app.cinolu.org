@@ -1,28 +1,26 @@
 import React, { useEffect, useMemo } from "react";
 import { Card, CardBody, Col, Collapse, Row, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { fetchProgramsType } from "@/Redux/Reducers/projectSlice/programsTypeSlice";
+import { fetchProjectType } from "@/Redux/Reducers/projectSlice/projectTypeSlice";
 
 export const CollapseFilterData = () => {
 
-    const { filterToggle } = useAppSelector((state) => state.programs);
-    const { transformedProgramsData, status } = useAppSelector((state) => state.programsType);
+    const { filterToggle } = useAppSelector((state) => state.project);
+    const { transformedProjectData, status } = useAppSelector((state) => state.projectType);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (status === 'idle') {
-            dispatch(fetchProgramsType());
+            dispatch(fetchProjectType());
         }
     }, [dispatch, status]);
 
     const options = useMemo(() => {
-        return transformedProgramsData.map((typeProgram) => ({
-            value: typeProgram.name,
-            label: typeProgram.name,
+        return transformedProjectData.map((typeProject) => ({
+            value: typeProject.name,
+            label: typeProject.name,
         }));
-    }, [transformedProgramsData]);
-
-
+    }, [transformedProjectData]);
 
     return (
         <Collapse isOpen={filterToggle}>
@@ -35,7 +33,7 @@ export const CollapseFilterData = () => {
                                 type="select"
                                 className={'custom-sel'}
                             >
-                                <option>Type de programme</option>
+                                <option>Type de projet</option>
                                 {options.map((option) => (
                                     <option key={option.value} value={option.value}>
                                         {option.label}

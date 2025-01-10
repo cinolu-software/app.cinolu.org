@@ -6,14 +6,14 @@ import AuthSlice from "@/Redux/Reducers/AuthSlice";
 import RoleSlice from "./Reducers/AdminOptions/roleSlice/RoleSlice";
 import UsersSlice from "./Reducers/userSlice/UserSlice";
 import ProjectSlice from "@/Redux/Reducers/projectSlice/projectSlice";
-import ProgramsTypeSlice from "@/Redux/Reducers/projectSlice/programsTypeSlice";
+import ProjectTypeSlice from "@/Redux/Reducers/projectSlice/projectTypeSlice";
 import FilterSlice from "./Reducers/FilterSlice";
 import OtherSlice from "@/Redux/Reducers/otherSlice/otherSlice";
 import NotificationSlice from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
 import PartnerShipSlice from "@/Redux/Reducers/PartnerShipSlice/partnerShipSlice";
 import PartnerSlice from "@/Redux/Reducers/PartnersSlice/partnerSlice";
-import ProgramCategorySlice from "@/Redux/Reducers/projectSlice/ProgramsCategory"
-import ProgramPhaseSlice from "@/Redux/Reducers/projectSlice/ProgramPhaseSlice";
+import ProjectCategorySlice from "@/Redux/Reducers/projectSlice/ProjectCategory"
+import ProjectPhaseSlice from "@/Redux/Reducers/projectSlice/ProjectPhaseSlice";
 import EventsTypeSlice from "@/Redux/Reducers/eventSlice/EventTypeSlice";
 import EventSlice from "@/Redux/Reducers/eventSlice/eventSlice";
 import ExpertiseSlice from "@/Redux/Reducers/userSlice/ExpertiseSlice";
@@ -26,7 +26,7 @@ const Store = configureStore({
     headerBookMark: HeaderBookmarkSlice,
     themeCustomizer: ThemeCustomizerSlice,
     project: ProjectSlice,
-    programsType: ProgramsTypeSlice,
+    projectType: ProjectTypeSlice,
     users : UsersSlice,
     role: RoleSlice,
     filterData: FilterSlice,
@@ -35,8 +35,8 @@ const Store = configureStore({
     partner: PartnerSlice,
     otherProgram : OtherSlice,
     notifications: NotificationSlice,
-    programCategory: ProgramCategorySlice,
-    programPhase: ProgramPhaseSlice,
+    projectCategory: ProjectCategorySlice,
+    projectPhase: ProjectPhaseSlice,
     eventType: EventsTypeSlice,
     event: EventSlice,
     expertise : ExpertiseSlice,

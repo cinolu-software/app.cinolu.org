@@ -2,22 +2,22 @@ import React, {useEffect} from 'react';
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 import BackButton from "@/CommonComponent/BackButton";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
-import ProgramImage from "@/Components/Applications/programs/common/DetailProgram/ProgramImage"
-import ProgramTabs from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs";
+import ProjectImage from "@/Components/Applications/projects/common/DetailProject/ProjectImage";
+import ProjectTabs from "@/Components/Applications/projects/common/DetailProject/ProjectTabs";
 import {useRouter} from "next/navigation";
-import {fetchProgramById} from "@/Redux/Reducers/projectSlice/projectSlice";
+import {fetchProjectById} from "@/Redux/Reducers/projectSlice/projectSlice";
 
 
-const DetailProgramContainer = () => {
+const DetailProjectContainer = () => {
 
-    const {selectedProgram, programData} = useAppSelector(state=> state.programs);
+    const {selectedProgram, programData} = useAppSelector(state=> state.project);
     const router = useRouter();
     const dispatch = useAppDispatch();
 
 
     useEffect(() => {
         if(selectedProgram){
-            dispatch(fetchProgramById(selectedProgram.id));
+            dispatch(fetchProjectById(selectedProgram.id));
         }
         else {
             router.push('/programs');
@@ -30,8 +30,8 @@ const DetailProgramContainer = () => {
             {
                 programData && (
                     <>
-                        <ProgramImage image={programData?.image} />
-                        <ProgramTabs/>
+                        <ProjectImage image={programData?.image} />
+                        <ProjectTabs/>
                     </>
                 )
             }
@@ -39,4 +39,4 @@ const DetailProgramContainer = () => {
     );
 }
 
-export default DetailProgramContainer;
+export default DetailProjectContainer;

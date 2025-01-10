@@ -5,7 +5,7 @@ import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import Calendar from "react-calendar";
 // @ts-ignore
 import { Value } from 'react-calendar/dist/cjs/shared/types';
-import { StepPropsType } from "@/Types/Programs/ProgramsType";
+import { StepPropsType } from "@/Types/Project/ProgramsType";
 
 
 const StepTwo: React.FC<StepPropsType> = ({ data }) => {
