@@ -2,7 +2,7 @@ import { TableColumn } from 'react-data-table-component';
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import { ProgramsTypesHeader } from "./ProgramsList";
+import ProjectTypesHeader from "@/Components/Applications/projectTypes/ProjectsList";
 import { useSelector, useDispatch } from "react-redux";
 import { selectOriginalProjectData ,selectProjectTypeStatus, fetchProjectType, selectTransformedProjectDataType, setModalDeleteProjectTypes, deleteProjectType } from "@/Redux/Reducers/projectSlice/projectTypeSlice";
 import {ProjectListTypeTableColumnType} from "@/Types/Projects/ProjectTypeType";
@@ -11,7 +11,8 @@ import UpdateProjectTypeModal from "@/Components/Applications/projectTypes/Modal
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {ProjectListTableDataColumn} from "@/Data/Application/Project";
+import {ProjectTypeListTableDataColumn} from "@/Data/Application/ProjectTypes";
+
 
 
 const ProgramsTypesListContainer: React.FC = () => {
@@ -19,7 +20,7 @@ const ProgramsTypesListContainer: React.FC = () => {
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch()
     const status = useSelector(selectProjectTypeStatus);
-    const transformedPrograms = useSelector(selectTransformedProjectDataType);
+    const transformedProject = useSelector(selectTransformedProjectDataType);
     const data = useSelector(selectOriginalProjectData);
     const {isOpenModalDeleteProjectType, selectedProjectType, originalTypeProjectData} = useAppSelector(state => state.projectType)
 
@@ -39,8 +40,8 @@ const ProgramsTypesListContainer: React.FC = () => {
         }
     }, [status, dispatch]);
 
-    const filteredPrograms = transformedPrograms.filter(program =>
-        program.name.toLowerCase().includes(filterText.toLowerCase())
+    const filteredPrograms = transformedProject.filter(project =>
+        project.name.toLowerCase().includes(filterText.toLowerCase())
     );
 
     return (
@@ -62,14 +63,14 @@ const ProgramsTypesListContainer: React.FC = () => {
                             <Card>
                                 <CardBody>
                                     <div className="list-product-header">
-                                        <ProgramsTypesHeader />
+                                        <ProjectTypesHeader />
                                     </div>
                                     <div className="list-program">
                                         <div className="table-responsive">
                                             <DataTable
                                                 className="theme-scrollbar"
                                                 data={filteredPrograms}
-                                                columns={ProjectListTableDataColumn as TableColumn<ProjectListTypeTableColumnType>[]}
+                                                columns={ProjectTypeListTableDataColumn as unknown as TableColumn<ProjectListTypeTableColumnType>[]}
                                                 striped
                                                 highlightOnHover
                                                 pagination
@@ -84,7 +85,6 @@ const ProgramsTypesListContainer: React.FC = () => {
                     </Row>
                 )
             }
-
         </Container>
     );
 };

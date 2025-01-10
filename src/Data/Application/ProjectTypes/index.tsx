@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from "reactstrap";
 import { ProjectListTypeTableColumnType, ProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
@@ -52,7 +51,7 @@ const ProjectListTableAction: React.FC<{ projectType: ProjectTypeType }> = ({ pr
     )
 };
 
-export const ProgramsListTableDataColumn = [
+export const ProjectTypeListTableDataColumn = [
     {
         name: "Nom",
         cell: (row: ProjectListTypeTableColumnType) => (

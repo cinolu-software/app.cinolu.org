@@ -21,7 +21,6 @@ export const MenuList: MenuItem [] | undefined = [
         ],
         requiredRoles: ["admin", "coach", "staff", 'user'],
     },
-
     {
         id: 2,
         title: "Administration",
@@ -43,7 +42,12 @@ export const MenuList: MenuItem [] | undefined = [
                 lanClass: "lan-1",
                 active: false,
                 children: [
-                    {path: "/users/admin/list", title: "Liste", type: "link", lanClass: "lan-6"},
+                    {
+                        path: "/users/admin/list",
+                        title: "Liste",
+                        type: "link",
+                        lanClass: "lan-6"
+                    },
                     {
 
                         title: "Coachs",
@@ -67,28 +71,60 @@ export const MenuList: MenuItem [] | undefined = [
                 ]
             },
             {
-                title: "Projets",
+                title: "Programmes",
                 id: 3,
                 icon: "builders",
-                type: "link",
+                type: "sub",
                 lanClass: "lan-1",
                 active: false,
                 children: [
-                    {path: "/project", title: "programmes", type: "link", lanClass: "lan-6"},
-                    {path: "/project/projectTypes", title: "types", type: "link", lanClass: "lan-6"},
-                    {path: "/project/projectCategory", title: "catégorie", type: "link", lanClass: "lan-6"},
-                ]
-            },
-            {
-                title: "Evénements",
-                id: 4,
-                icon: "calendar",
-                type: "link",
-                lanClass: "lan-1",
-                active: false,
-                children: [
-                    {path: "/events", title: "Evénements", type: "link", lanClass: "lan-6"},
-                    {path: "/events/eventsTypes", title: "Types", type: "link", lanClass: "lan-6"},
+                    {
+                        path: "/programs",
+                        title: "Tous les programmes",
+                        type: "link",
+                        lanClass: "lan-6",
+                    },
+                    {
+                        title: "Projets",
+                        type: "sub",
+                        lanClass: "lan-6",
+                        children: [
+                            {
+                                path: "/project",
+                                title: "Tous les projets",
+                                type: "link",
+                                lanClass: "lan-6"
+                            },
+                            {
+                                path: "/project/projectTypes",
+                                title: "types",
+                                type: "link",
+                                lanClass: "lan-6"
+                            },
+                            {path: "/project/projectCategory", title: "catégorie", type: "link", lanClass: "lan-6"},
+                        ]
+                    },
+                    {
+                        title: "Evénements",
+                        id: 4,
+                        type: "sub",
+                        lanClass: "lan-6",
+                        children: [
+                            {
+                                path: "/events",
+                                title: "Tous les événements",
+                                type: "link",
+                                lanClass: "lan-6"
+                            },
+                            {
+                                path: "/events/eventsTypes",
+                                title: "Types",
+                                type: "link",
+                                lanClass: "lan-6"
+                            },
+                        ]
+                    },
+
                 ]
             },
             {

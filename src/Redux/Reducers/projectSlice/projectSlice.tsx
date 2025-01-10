@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import { CreateProjectType, FormValueType, InitialStateProjectType, ReceiveProjectType, ProjectDataType } from "@/Types/Project/ProgramsType";
+import {CreateProjectType, FormValueType, InitialStateProjectType, ReceiveProjectType} from "@/Types/Projects/ProjectType";
 import {ShowError} from "@/utils/MultiStepForm.service";
 import {RootState} from "@/Redux/Store";
 

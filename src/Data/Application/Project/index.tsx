@@ -122,7 +122,7 @@ export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
         name: "Nom",
         cell: (row: ReceiveProjectType) => (
             <ProjectListTableName
-                image={row?.image ? `${imageBaseUrl}/programs/${row.image}` : '/assets/images/programs/programs.png'}
+                image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
         ),
         sortable: true,

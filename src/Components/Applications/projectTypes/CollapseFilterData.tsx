@@ -8,10 +8,10 @@ import { Card, CardBody, Col, Collapse, Input, Row } from "reactstrap";
 
 export const CollapseFilterData = () => {
 
-  const { filterToggle } = useAppSelector((state) => state.programs);
+  const {  } = useAppSelector((state) => state.projectType);
 
   return (
-    <Collapse isOpen={filterToggle}>
+    <Collapse isOpen={false}>
       <Card className="shadow-none">
         <CardBody className="list-product-body">
           <Row className="row-cols-xl-5 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 row-cols-2 g-3">

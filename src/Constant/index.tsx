@@ -7,9 +7,9 @@ export const userProfileImage="Image Profile";
 
 //Project
 
-export const allPrograms="Programmes";
-export const publishedPrograms="Publié(s)";
-export const titleAddProgram = "Ajout d'un programme";
+export const allProjects="Projets";
+export const publishedProjects="Publié(s)";
+export const titleAddProject = "Ajout d'un projet";
 
 //Events
 

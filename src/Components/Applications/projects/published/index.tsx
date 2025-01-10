@@ -14,7 +14,7 @@ const PublishedProjectListContainer = () => {
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
     const { publishedProjectData, publishedProjectStatus } = useAppSelector((state) => state.project);
-    const filteredItems = publishedProjectStatus?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = publishedProjectData?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
 
     const subHeaderComponentMemo = useMemo(() => {
