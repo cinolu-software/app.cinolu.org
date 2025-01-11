@@ -9,7 +9,7 @@ const EditProjectTabs = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/programs'}/>
+            <BackButton link={'/project'}/>
             <Row>
                 <Card>
                     <CardBody>
@@ -18,7 +18,7 @@ const EditProjectTabs = () => {
                                 <NavItem>
                                     <NavLink href='#' className={`nav-border txt-secondary ${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")}>
                                         <i className="icofont icofont-files"></i>
-                                        <span>Détail du programme</span>
+                                        <span>Détail du projet</span>
                                     </NavLink>
                                 </NavItem>
                             </NavItem>

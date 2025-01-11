@@ -20,13 +20,13 @@ const DetailProjectContainer = () => {
             dispatch(fetchProjectById(selectedProject.id));
         }
         else {
-            router.push('/programs');
+            router.push('/project');
         }
     }, [selectedProject]);
 
     return (
         <Container fluid>
-            <BackButton link={'/programs'} />
+            <BackButton link={'/project'} />
             {
                 projectData && (
                     <>

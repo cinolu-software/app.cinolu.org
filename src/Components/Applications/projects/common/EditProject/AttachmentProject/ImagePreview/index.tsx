@@ -51,7 +51,7 @@ const ImagePreview = () => {
                             theme: "colored",
                         }
                     );
-                    router.push(`/programs`);
+                    router.push(`/project`);
                 })
                 .catch(() => {
                     toast.error(

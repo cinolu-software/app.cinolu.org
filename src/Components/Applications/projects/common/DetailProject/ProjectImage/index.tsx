@@ -11,7 +11,7 @@ const ProjectImage : React.FC<{image: string | undefined}> = ({image}) => {
                 <Col xs="12">
                     <Card>
                         <CardBody>
-                            <img src={image ? `${imageBaseUrl}/programs/${image}` : ''} alt={''}  className={'cover-image'} />
+                            <img src={image ? `${imageBaseUrl}/projects/${image}` : ''} alt={''}  className={'cover-image'} />
                         </CardBody>
                     </Card>
                 </Col>

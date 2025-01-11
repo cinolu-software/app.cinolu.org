@@ -32,13 +32,13 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
 
     const handleEdit = async () => {
         setLoadingEdit(true);
-        router.push('/projects/edit_project');
+        router.push('/project/edit_project');
         dispatch(setSelectedProject({project}));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
-        router.push('/projects/detail_project');
+        router.push('/project/detail_project');
         dispatch(setSelectedProject({project}));
     };
 

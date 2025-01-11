@@ -13,7 +13,7 @@ const EditProjectContainer = () => {
 
     useEffect(() => {
         if (selectedProject === null) {
-            router.push('/programs');
+            router.push('/project');
         } else {
             if (selectedProject?.id) {
                 dispatch(fetchProjectById(selectedProject?.id));
