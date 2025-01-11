@@ -10,27 +10,27 @@ import {fetchProjectById} from "@/Redux/Reducers/projectSlice/projectSlice";
 
 const DetailProjectContainer = () => {
 
-    const {selectedProgram, programData} = useAppSelector(state=> state.project);
+    const {selectedProject, projectData} = useAppSelector(state=> state.project);
     const router = useRouter();
     const dispatch = useAppDispatch();
 
 
     useEffect(() => {
-        if(selectedProgram){
-            dispatch(fetchProjectById(selectedProgram.id));
+        if(selectedProject){
+            dispatch(fetchProjectById(selectedProject.id));
         }
         else {
             router.push('/programs');
         }
-    }, [selectedProgram]);
+    }, [selectedProject]);
 
     return (
         <Container fluid>
             <BackButton link={'/programs'} />
             {
-                programData && (
+                projectData && (
                     <>
-                        <ProjectImage image={programData?.image} />
+                        <ProjectImage image={projectData?.image} />
                         <ProjectTabs/>
                     </>
                 )

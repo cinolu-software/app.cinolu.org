@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter, Badge } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
-import { setModalcreateProgramPhase, createProgramPhase } from "@/Redux/Reducers/projectSlice/ProjectPhaseSlice";
+import { setModalcreateProjectPhase, createProjectPhase } from "@/Redux/Reducers/projectSlice/ProjectPhaseSlice";
 
 const CreateNewPhase = () => {
     const dispatch = useAppDispatch();
-    const { isOpenModalCreateProgramPhase, formValue } = useAppSelector(state => state.programPhase);
-    const { programData } = useAppSelector(state => state.programs);
+    const { isOpenModalCreateProjectPhase, formValue } = useAppSelector(state => state.projectPhase);
+    const { projectData } = useAppSelector(state => state.project);
 
     const handleInputChange = (field: keyof typeof formValue, value: string) => {
         dispatch({
-            type: 'programsPhase/setFormValue',
+            type: 'projectPhase/setFormValue',
             payload: { field, value },
         });
     };
@@ -24,8 +24,8 @@ const CreateNewPhase = () => {
             return;
         }
 
-        if (!programData?.id) {
-            toast.error("Aucun programme sélectionné", {
+        if (!projectData?.id) {
+            toast.error("Aucun projet sélectionné", {
                 transition: Flip,
             });
             return;
@@ -33,13 +33,13 @@ const CreateNewPhase = () => {
 
         const newPhase = {
             ...formValue,
-            program: programData.id,
+            program: projectData.id,
         };
 
         try {
-            await dispatch(createProgramPhase(newPhase)).unwrap();
+            await dispatch(createProjectPhase(newPhase)).unwrap();
             toast.success("Phase créée avec succès !", { transition: Flip });
-            dispatch(setModalcreateProgramPhase({ isOpen: false }));
+            dispatch(setModalcreateProjectPhase({ isOpen: false }));
         } catch (err) {
             toast.error("Erreur lors de la création de la phase", { transition: Flip });
         }
@@ -48,16 +48,16 @@ const CreateNewPhase = () => {
     return (
         <Col xs="12">
             <Modal
-                isOpen={isOpenModalCreateProgramPhase}
-                toggle={() => dispatch(setModalcreateProgramPhase({ isOpen: false }))}
+                isOpen={isOpenModalCreateProjectPhase}
+                toggle={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))}
                 size="lg"
             >
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">
-                        Ajouter une phase au programme{" "}
-                        <Badge className="bg-brown">{programData?.name || "Programme non spécifié"}</Badge>
+                        Ajouter une phase au projet{" "}
+                        <Badge className="bg-brown">{projectData?.name || "Projet non spécifié"}</Badge>
                     </h1>
-                    <Button close onClick={() => dispatch(setModalcreateProgramPhase({ isOpen: false }))} />
+                    <Button close onClick={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-phase">
@@ -112,7 +112,7 @@ const CreateNewPhase = () => {
                 <ModalFooter>
                     <button
                         className="btn btn-outline-light"
-                        onClick={() => dispatch(setModalcreateProgramPhase({ isOpen: false }))}
+                        onClick={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))}
                     >
                         Annuler
                     </button>

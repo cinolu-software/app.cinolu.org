@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Button, Col} from "reactstrap";
-import PhaseLeftSidebar from "@/Components/Applications/programs/common/DetailProgram/ProgramTabs/ProgramPhase/PhaseSideBar/PhaseLeftSidebar";
-import {PhaseSideBarProps} from "@/Types/Project/PhasesType";
+import PhaseLeftSidebar from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseSideBar/PhaseLeftSidebar";
+import {PhaseSideBarProps} from "@/Types/Projects/PhasesType";
 
 const PhaseSideBar: React.FC<PhaseSideBarProps> = ({navId, setNavId}) => {
 

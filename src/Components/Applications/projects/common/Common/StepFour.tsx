@@ -3,11 +3,12 @@ import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
-import { StepPropsType } from "@/Types/Project/ProgramsType";
+import {StepPropsType} from "@/Types/Projects/ProjectType";
 
 const StepFour: React.FC<StepPropsType> = ({ data }) => {
+
     const dispatch = useAppDispatch();
-    const { status, programsCategoryData } = useAppSelector((state) => state.programCategory);
+    const { status, projectCategoryData } = useAppSelector((state) => state.projectCategory);
 
     useEffect(() => {
         if (status === "idle") {
@@ -25,6 +26,7 @@ const StepFour: React.FC<StepPropsType> = ({ data }) => {
         dispatch(setNewFormValue({ field: "categories", value: updatedCategories }));
     };
 
+
     return (
         <Col>
             <section className="main-upgrade">
@@ -37,7 +39,7 @@ const StepFour: React.FC<StepPropsType> = ({ data }) => {
                     </p>
                 </div>
                 <div className="variation-box">
-                    {programsCategoryData?.map((category) => (
+                    {projectCategoryData?.map((category) => (
                         <div className="selection-box" key={category.id}>
                             <Input
                                 id={`category${category.id}`}
@@ -57,5 +59,6 @@ const StepFour: React.FC<StepPropsType> = ({ data }) => {
         </Col>
     );
 };
+
 
 export default StepFour;

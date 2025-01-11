@@ -1,6 +1,6 @@
-import { CommonMofiModalTitleType } from "@/Types/Projects/ProjectsType";
+import React from 'react';
 
-export const CommonMofiModalTitle: React.FC<CommonMofiModalTitleType> = ({ heading, subHeading, text }) => {
+export const CommonMofiModalTitle: React.FC<{heading: string; subHeading: string ; text: string}> = ({ heading, subHeading, text }) => {
 
     return (
         <>

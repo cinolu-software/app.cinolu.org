@@ -2,23 +2,23 @@ import React, { useEffect } from "react";
 import { Button, Card, CardBody, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
-import {createProgram, updateProgram, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
+import {createProject, updateProject, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
 import { Flip, toast } from "react-toastify";
 import { Back } from "@/Constant";
-import StepOne from "@/Components/Applications/programs/common/Common/StepOne";
-import StepTwo from "@/Components/Applications/programs/common/Common/StepTwo";
-import StepThree from "@/Components/Applications/programs/common/Common/StepThree";
-import StepFour from "@/Components/Applications/programs/common/Common/StepFour";
-import StepFive from "@/Components/Applications/programs/common/Common/StepFive";
+import StepOne from "@/Components/Applications/projects/common/Common/StepOne";
+import StepTwo from "@/Components/Applications/projects/common/Common/StepTwo";
+import StepThree from "@/Components/Applications/projects/common/Common/StepThree";
+import StepFour from "@/Components/Applications/projects/common/Common/StepFour";
+import StepFive from "@/Components/Applications/projects/common/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
-import StepperHorizontal from "@/Components/Applications/programs/common/Common/StepperHorizontal";
-import { FormValueType } from "@/Types/Project/ProgramsType";
+import StepperHorizontal from "@/Components/Applications/projects/common/Common/StepperHorizontal";
+import { FormValueType } from "@/Types/Projects/ProjectType";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import {titleAddProgram} from "@/Constant";
+import {titleAddProject} from "@/Constant";
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
 
-    const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.programs);
+    const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.project);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -62,19 +62,19 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 partners: formValue.partners,
             };
             if (mode === "add") {
-                dispatch(createProgram(filteredFormValue));
-                toast.success("Programme créé avec succès", {
+                dispatch(createProject(filteredFormValue));
+                toast.success("Projet créé avec succès", {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
                 });
             } else {
-                dispatch(updateProgram({ programId: initialValues?.id!, updatedProgram: filteredFormValue }));
-                toast.success("Programme modifié avec succès", {
+                dispatch(updateProject({ projectId: initialValues?.id!, updatedProject: filteredFormValue }));
+                toast.success("Projet modifié avec succès", {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
                 });
             }
-            router.push("/programs");
+            router.push("/project");
         } catch (error) {
             toast.error("Une erreur est survenue", {
                 autoClose: 5000,
@@ -101,7 +101,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                         <FinishForm
                             isComplete={true}
                             onCreateProgram={handleSubmit}
-                            textButton={mode === "add" ? "Créer le programme" : "Modifier le programme"}
+                            textButton={mode === "add" ? "Créer le projet" : "Modifier le projet"}
                         />
                     </Form>
                 );
@@ -112,9 +112,9 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
 
     return (
             <Card>
-                <div className={'mt-5'}>
+                <div className={'mt-2'}>
                     <div className="height-equal">
-                        <CommonCardHeader title={titleAddProgram}/>
+                        <CommonCardHeader title={titleAddProject}/>
                         <CardBody className="basic-wizard important-validation">
                             <StepperHorizontal level={numberLevel}/>
                             <div id="msform">{renderStep()}</div>

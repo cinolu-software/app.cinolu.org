@@ -3,14 +3,12 @@ import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { setNewFormValue } from '@/Redux/Reducers/projectSlice/projectSlice';
 import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
-import { StepPropsType, StepFiveProps} from "@/Types/Project/ProgramsType";
+import {StepPropsType} from "@/Types/Projects/ProjectType";
 
 const StepFive: React.FC<StepPropsType> = ({ data }) => {
 
     const dispatch = useAppDispatch();
     const { partnerData, status } = useAppSelector((state) => state.partner);
-    const { formValue } = useAppSelector((state) => state.programs);
-
 
     useEffect(() => {
         if (status === 'idle') {
@@ -33,10 +31,10 @@ const StepFive: React.FC<StepPropsType> = ({ data }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">les partenaires du programme</span>
+                        Sélectionner <span className="txt-primary">les partenaires du projet</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur les partenaires que vous souhaitez associer à ce programme.
+                        Cliquez sur les partenaires que vous souhaitez associer à ce projet.
                     </p>
                 </div>
 

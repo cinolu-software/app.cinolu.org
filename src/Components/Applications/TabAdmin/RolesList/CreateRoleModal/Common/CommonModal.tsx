@@ -1,5 +1,5 @@
 import { Close, SaveChanges } from "@/Constant";
-import { CommonModalType } from "@/Types/Projects/ProjectsType";
+import {CommonModalType} from "@/Types/CommonType/CommonType";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 const CommonModal:React.FC<CommonModalType> = ({backdrop, centered, size, isOpen, toggle, title, onClosed, sizeTitle, fullTitle, modalBodyClassName, children }) => {

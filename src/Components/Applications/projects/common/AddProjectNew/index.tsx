@@ -1,16 +1,14 @@
 import React from "react";
 import {Container, Row} from "reactstrap";
 import BackButton from "@/CommonComponent/BackButton";
-import NumberingWizard from "@/Components/Applications/programs/common/Common/NumberingWizard";
+import NumberingWizard from "@/Components/Applications/projects/common/Common/NumberingWizard";
 
 
-
-const AddProgramNewContainer = () => {
-
+const AddProjectNewContainer = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/programs'}/>
+            <BackButton link={'/project'}/>
             <Row>
                 <NumberingWizard mode={'add'}/>
             </Row>
@@ -18,4 +16,4 @@ const AddProgramNewContainer = () => {
     )
 }
 
-export default AddProgramNewContainer;
+export default AddProjectNewContainer;

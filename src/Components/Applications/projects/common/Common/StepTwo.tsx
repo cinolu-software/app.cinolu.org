@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Col, Form, Label, Row, InputGroup, Card, CardBody } from "reactstrap";
-import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import { useAppDispatch } from "@/Redux/Hooks";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import Calendar from "react-calendar";
 // @ts-ignore
 import { Value } from 'react-calendar/dist/cjs/shared/types';
-import { StepPropsType } from "@/Types/Project/ProgramsType";
+import {StepPropsType} from "@/Types/Projects/ProjectType";
 
 
 const StepTwo: React.FC<StepPropsType> = ({ data }) => {

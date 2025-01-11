@@ -8,7 +8,7 @@ import { Card, CardBody, Col, Collapse, Input, Row } from "reactstrap";
 
 export const CollapseFilterData = () => {
 
-  const { filterToggle } = useAppSelector((state) => state.programs);
+  const { filterToggle } = useAppSelector((state) => state.project);
 
   return (
     <Collapse isOpen={filterToggle}>

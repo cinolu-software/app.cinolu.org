@@ -1,4 +1,4 @@
-import { CommonCardHeaderProp } from "@/Types/Projects/ProjectsType";
+import {CommonCardHeaderProp} from "@/Types/AdminOptions/Roles/RoleType";
 import React, { Fragment } from "react";
 
 import { CardHeader } from "reactstrap";

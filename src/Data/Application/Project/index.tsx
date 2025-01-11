@@ -32,13 +32,13 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
 
     const handleEdit = async () => {
         setLoadingEdit(true);
-        router.push('/programs/edit_program');
+        router.push('/projects/edit_project');
         dispatch(setSelectedProject({project}));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
-        router.push('/programs/detail_program');
+        router.push('/projects/detail_project');
         dispatch(setSelectedProject({project}));
     };
 
@@ -54,7 +54,7 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
             setTimeout(() => {
                 // @ts-ignore
                     dispatch(publishProject({projectId: project.id}));
-                    toast.success("Programme publié avec succès", {
+                    toast.success("Projet publié avec succès", {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
                         transition: Flip,

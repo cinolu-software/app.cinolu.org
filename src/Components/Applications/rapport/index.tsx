@@ -4,8 +4,8 @@ import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { Document, Page, View, StyleSheet, PDFViewer, Image, Text } from '@react-pdf/renderer';
 import { ImagePath } from "@/Constant";
 import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
-import { fetchProgramsType } from "@/Redux/Reducers/projectSlice/projectTypeSlice";
-import { fetchPrograms } from "@/Redux/Reducers/projectSlice/projectSlice";
+import {fetchProjectType} from "@/Redux/Reducers/projectSlice/projectTypeSlice";
+import {fetchProjects} from "@/Redux/Reducers/projectSlice/projectSlice";
 
 const styles = StyleSheet.create({
     viewer: {
@@ -67,30 +67,30 @@ const styles = StyleSheet.create({
     },
 });
 
-const MyDocument = ({ programsData, programCategory, programType }: { programsData: any, programCategory: any, programType: any }) => {
-    const programsByType = programType.map((type: any) => ({
+const MyDocument = ({ projectData, projectCategory, projectType }: { projectData: any, projectCategory: any, projectType: any }) => {
+    const programsByType = projectType.map((type: any) => ({
         name: type.name,
-        count: programsData.filter((program: any) =>
-            program.types.some((programType: any) => programType.name === type.name)
+        count: projectData.filter((program: any) =>
+            program.types.some((projectType: any) => projectType.name === type.name)
         ).length,
-        programs: programsData.filter((program: any) =>
-            program.types.some((programType: any) => programType.name === type.name)
+        programs: projectData.filter((program: any) =>
+            program.types.some((projectType: any) => projectType.name === type.name)
         ).map((program: any) => program.name),
     }));
 
-    const programsByCategory = programCategory.map((category: any) => ({
+    const programsByCategory = projectCategory.map((category: any) => ({
         name: category.name,
-        count: programsData.filter((program: any) =>
-            program.categories.some((programCategory: any) => programCategory.name === category.name)
+        count: projectData.filter((program: any) =>
+            program.categories.some((projectCategory: any) => projectCategory.name === category.name)
         ).length,
-        programs: programsData.filter((program: any) =>
-            program.categories.some((programCategory: any) => programCategory.name === category.name)
+        programs: projectData.filter((program: any) =>
+            program.categories.some((projectCategory: any) => projectCategory.name === category.name)
         ).map((program: any) => program.name),
     }));
 
-    const totalPrograms = programsData.length;
-    const totalCategory = programCategory.length;
-    const totalType = programType.length;
+    const totalPrograms = projectData.length;
+    const totalCategory = projectCategory.length;
+    const totalType = projectType.length;
 
     const stylesWithTable = StyleSheet.create({
         ...styles,
@@ -111,12 +111,12 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
             borderBottomWidth: 1,
             borderRightWidth: 1,
             borderColor: '#000',
-            padding: 8, // Augmenter le padding pour une meilleure visibilité
+            padding: 8,
             fontWeight: 'bold',
             textAlign: 'center',
-            backgroundColor: '#84a02f', // Ajout d'une couleur de fond
-            color: '#fff', // Texte en blanc
-            fontSize: 12, // Ajuster la taille du texte si nécessaire
+            backgroundColor: '#84a02f',
+            color: '#fff',
+            fontSize: 12,
         },
         tableCell: {
             flex: 1,
@@ -131,7 +131,6 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
             borderRightWidth: 0,
         },
     });
-
 
     return (
         <Document>
@@ -222,17 +221,17 @@ const MyDocument = ({ programsData, programCategory, programType }: { programsDa
 
 
 const Rapport = () => {
-    const { originalProgramsData, status } = useAppSelector(state => state.programs);
-    const { programsCategoryData } = useAppSelector(state => state.programCategory);
-    const { originalTypeProgramsData } = useAppSelector(state => state.programsType);
+    const { originalProjectData, status } = useAppSelector(state => state.project);
+    const { projectCategoryData } = useAppSelector(state => state.projectCategory);
+    const { originalTypeProjectData } = useAppSelector(state => state.projectType);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (status === "idle") {
-            dispatch(fetchPrograms());
+            dispatch(fetchProjects());
         }
         dispatch(fetchCategory());
-        dispatch(fetchProgramsType());
+        dispatch(fetchProjectType());
     }, [status, dispatch]);
 
     return (
@@ -240,9 +239,9 @@ const Rapport = () => {
             <Card>
                 <PDFViewer style={styles.viewer}>
                     <MyDocument
-                        programsData={originalProgramsData}
-                        programCategory={programsCategoryData}
-                        programType={originalTypeProgramsData}
+                        projectData={originalProjectData}
+                        projectCategory={projectCategoryData}
+                        projectType={originalTypeProjectData}
                     />
                 </PDFViewer>
             </Card>

@@ -2,16 +2,18 @@ import React, { useEffect } from "react";
 import { Col, Row, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
-import { fetchProgramsType } from "@/Redux/Reducers/projectSlice/projectTypeSlice";
-import { StepPropsType } from "@/Types/Project/ProgramsType";
+import {fetchProjectType} from "@/Redux/Reducers/projectSlice/projectTypeSlice";
+import {StepPropsType} from "@/Types/Projects/ProjectType";
+import {ReceiveProjectType} from "@/Types/Projects/ProjectType";
+import {TransformedProjectTypeType} from "@/Types/Projects/ProjectTypeType";
 
 const StepThree: React.FC<StepPropsType> = ({ data }) => {
     const dispatch = useAppDispatch();
-    const { transformedProgramsData, status } = useAppSelector(state => state.programsType);
+    const { transformedProjectData, status } = useAppSelector(state => state.projectType);
 
     useEffect(() => {
         if (status === 'idle') {
-            dispatch(fetchProgramsType());
+            dispatch(fetchProjectType());
         }
     }, [dispatch, status]);
 
@@ -36,21 +38,23 @@ const StepThree: React.FC<StepPropsType> = ({ data }) => {
                     </p>
                 </div>
                 <div className="variation-box">
-                    {transformedProgramsData.map(type => (
-                        <div className="selection-box" key={type.id}>
-                            <Input
-                                id={`type${type.id}`}
-                                type="checkbox"
-                                checked={data?.types.includes(type.id)}
-                                onChange={() => handleTypeChange(type.id)}
-                            />
-                            <div className="custom--mega-checkbox">
-                                <ul>
-                                    <li>{type.name}</li>
-                                </ul>
+                    {transformedProjectData.map((type : TransformedProjectTypeType) => {
+                        return (
+                            <div className="selection-box" key={type.id}>
+                                <Input
+                                    id={`type${type.id}`}
+                                    type="checkbox"
+                                    checked={data?.types.includes(type.id)}
+                                    onChange={() => handleTypeChange(type.id)}
+                                />
+                                <div className="custom--mega-checkbox">
+                                    <ul>
+                                        <li>{type.name}</li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </section>
         </Col>

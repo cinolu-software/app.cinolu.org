@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { Col, Form, Input, Label, Row } from "reactstrap";
-import { StepPropsType } from "@/Types/Project/ProgramsType";
+import {StepPropsType} from "@/Types/Projects/ProjectType";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { useAppDispatch } from "@/Redux/Hooks";
 
@@ -18,7 +18,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
         <Form className="theme-form theme-form-2 mega-form">
             <Row className="g-2 mx-5">
                 <Col xs="12">
-                    <Label className="col-form-label">{"Nom du programme"}</Label>
+                    <Label className="col-form-label">{"Nom du projet"}</Label>
                     <Input
                         className={name !== "" ? "valid" : "is-invalid"}
                         type="text"
@@ -64,7 +64,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
                 </Col>
 
                 <Col xs="12">
-                    <Label className="col-form-label">{"Objectif du programme"}</Label>
+                    <Label className="col-form-label">{"Objectif du projet"}</Label>
                     <textarea
                         rows={10}
                         className="form-control"
@@ -75,7 +75,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
                 </Col>
 
                 <Col xs="12">
-                    <Label className="col-form-label">{"Description du programme"}</Label>
+                    <Label className="col-form-label">{"Description du projet"}</Label>
                     <textarea
                         rows={10}
                         className="form-control"

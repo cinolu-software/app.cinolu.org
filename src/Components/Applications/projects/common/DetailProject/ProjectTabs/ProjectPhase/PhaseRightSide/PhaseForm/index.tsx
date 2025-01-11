@@ -6,7 +6,7 @@ import { Flip, toast } from "react-toastify";
 
 const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
     const dispatch = useAppDispatch();
-    const { programData } = useAppSelector((state) => state.project);
+    const { projectData } = useAppSelector((state) => state.project);
     const [formFields, setFormFields] = useState<any[]>([]);
     const [newField, setNewField] = useState({
         label: "",
@@ -18,7 +18,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
     const [isSaving, setIsSaving] = useState(false);
 
     // @ts-ignore
-    const phase = programData.phases.find((phase: { id: string }) => phase.id === navId);
+    const phase = projectData.phases.find((phase: { id: string }) => phase.id === navId);
 
     useEffect(() => {
         setIsLoading(true);

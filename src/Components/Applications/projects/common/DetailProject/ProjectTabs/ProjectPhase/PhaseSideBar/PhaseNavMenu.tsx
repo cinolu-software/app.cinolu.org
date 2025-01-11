@@ -1,14 +1,14 @@
 import { Badge, Nav, NavItem, NavLink } from "reactstrap";
 import React from "react";
 import { useAppSelector } from "@/Redux/Hooks";
-import { PhaseNavMenuProps } from "@/Types/Project/PhasesType";
+import {PhaseNavMenuProps} from "@/Types/Projects/PhasesType";
 
 const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
 
-    const { programData } = useAppSelector(state => state.programs);
+    const { projectData } = useAppSelector(state => state.project);
 
     // @ts-ignore
-    const phases = programData?.phases || [];
+    const phases = projectData?.phases || [];
 
 
     const getPhaseStatus = (startDate: string, endDate: string): { status: string, color: string } => {

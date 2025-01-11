@@ -58,7 +58,7 @@ export const fetchProjects = createAsyncThunk('projects/fetchProjects', async ()
 
 export const fetchPublishedProject = createAsyncThunk('projects/fetchPublishedProjects', async () => {
     const response = await axiosInstance.get<{ data: any }>(`${apiBaseUrl}/projects/find-published`)
-    const publishedProject = response.data.data.project;
+    const publishedProject = response.data.data.projects;
     return { publishedProject: publishedProject };
 });
 

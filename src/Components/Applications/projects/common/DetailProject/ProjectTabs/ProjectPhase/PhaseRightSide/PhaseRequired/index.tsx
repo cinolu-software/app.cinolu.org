@@ -13,13 +13,13 @@ interface Requirement {
 
 const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     const dispatch = useAppDispatch();
-    const { programData } = useAppSelector((state) => state.project);
+    const { projectData } = useAppSelector((state) => state.project);
 
     const [requirements, setRequirements] = useState<Requirement[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     // @ts-ignore
-    const phase = programData.phases.find((phase: { id: string }) => phase.id === navId);
+    const phase = projectData.phases.find((phase: { id: string }) => phase.id === navId);
 
     useEffect(() => {
         setIsLoading(true);

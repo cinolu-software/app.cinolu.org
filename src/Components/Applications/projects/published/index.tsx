@@ -39,7 +39,6 @@ const PublishedProjectListContainer = () => {
                 publishedProjectStatus !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
                         <Col sm="12">
-
                             <div className="list-product-header">
                                 <CollapseFilterData/>
                             </div>

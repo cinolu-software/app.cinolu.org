@@ -1,7 +1,7 @@
 import React from "react";
 import { TabPane, UncontrolledAccordion } from "reactstrap";
 import {Calendar, FileText, Tag, Users, Link,} from "react-feather";
-import ProgramInfoAccordionItem from "@/Components/Applications/programs/DetailProgram/ProgramTabs/ProgramInfo/ProgramInfoAccordionItem";
+import ProjectInfoAccordionItem from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectInfo/ProjectInfoAccordionItem";
 import { useAppSelector } from "@/Redux/Hooks";
 
 const ProgramInfo = () => {
@@ -15,7 +15,7 @@ const ProgramInfo = () => {
                     <div className="basic-accordion">
                         <div className="mt-5 accordion-border icons-accordion">
                             <UncontrolledAccordion className="me-5 mb-5" toggle={() => {}}>
-                                <ProgramInfoAccordionItem
+                                <ProjectInfoAccordionItem
                                     id="1"
                                     Icon={<Tag className="svg-wrapper text-success" />}
                                     title="Nom du Partenaire"
@@ -27,10 +27,10 @@ const ProgramInfo = () => {
                                           </span>
                                         </div>
                                     </div>
-                                </ProgramInfoAccordionItem>
+                                </ProjectInfoAccordionItem>
 
 
-                                <ProgramInfoAccordionItem
+                                <ProjectInfoAccordionItem
                                     id="2"
                                     Icon={<FileText className="svg-wrapper text-success" />}
                                     title="Description"
@@ -42,10 +42,10 @@ const ProgramInfo = () => {
                                           </span>
                                         </div>
                                     </div>
-                                </ProgramInfoAccordionItem>
+                                </ProjectInfoAccordionItem>
 
 
-                                <ProgramInfoAccordionItem
+                                <ProjectInfoAccordionItem
                                     id="3"
                                     Icon={<Link className="svg-wrapper text-success" />}
                                     title="Site Web"
@@ -62,9 +62,9 @@ const ProgramInfo = () => {
                                             </a>
                                         </div>
                                     </div>
-                                </ProgramInfoAccordionItem>
+                                </ProjectInfoAccordionItem>
 
-                                <ProgramInfoAccordionItem
+                                <ProjectInfoAccordionItem
                                     id="4"
                                     Icon={<Users className="svg-wrapper text-success" />}
                                     title="Partenariats"
@@ -82,7 +82,7 @@ const ProgramInfo = () => {
                                             <span>Aucun partenariat spécifié</span>
                                         )}
                                     </div>
-                                </ProgramInfoAccordionItem>
+                                </ProjectInfoAccordionItem>
 
                             </UncontrolledAccordion>
                         </div>

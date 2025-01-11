@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFilterToggle } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { Filter } from "react-feather";
 import AddButton from "@/CommonComponent/AddButton";
+import {AddProject} from "@/Constant";
 
 export const ProjectHeader = () => {
 
@@ -17,7 +18,7 @@ export const ProjectHeader = () => {
                     <i className={`icon-close filter-close ${filterToggle ? "show" : "hide"}`} />
                 </a>
             </div>
-            <AddButton link={'/programs/new'} name={'Ajouter un programme'} />
+            <AddButton link={'/project/new'} name={AddProject} />
         </div>
     );
 };

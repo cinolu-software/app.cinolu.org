@@ -1,4 +1,4 @@
-import { StepperHorizontalPropsType } from "@/Types/Project/ProgramsType";
+import {StepperHorizontalPropsType} from "@/Types/Projects/ProjectType";
 import React from "react";
 
 const StepperHorizontal: React.FC<StepperHorizontalPropsType> = ({ level }) => {
