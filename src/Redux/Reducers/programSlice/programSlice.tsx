@@ -56,7 +56,7 @@ export const updateProgram = createAsyncThunk(
     'program/updateProgram',
     async (updatedProgram: UpdateProgramType , { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.patch<{ data: UpdateProgramType }>(`${apiBaseUrl}/project-types/${updatedProgram.id}`, updatedProgram);
+            const response = await axiosInstance.patch<{ data: UpdateProgramType }>(`${apiBaseUrl}/programs/${updatedProgram.id}`, updatedProgram);
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue(err.response.data);
@@ -68,7 +68,7 @@ export const deleteProgram = createAsyncThunk(
     'program/deleteProgram',
     async (programId: string, { rejectWithValue }) => {
         try {
-            await axiosInstance.delete(`${apiBaseUrl}/program/${programId}`);
+            await axiosInstance.delete(`${apiBaseUrl}/programs/${programId}`);
             return programId;
         } catch (err: any) {
             return rejectWithValue(err.response.data);

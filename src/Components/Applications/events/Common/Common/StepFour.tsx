@@ -16,11 +16,9 @@ const StepFour: React.FC<StepPropsType> = ({ createFormValue }) => {
     }, [dispatch, statusStaff]);
 
     const handleResponsibleChange = (responsibleId: string) => {
-        console.log("Selected responsible ID:", responsibleId);
         dispatch(setCreateFomValue({ field: "responsible", value: responsibleId }));
     };
 
-    console.log(createFormValue);
 
     return (
         <Col>

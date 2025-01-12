@@ -20,6 +20,7 @@ const initialState: InitialStateEvent = {
         name : '',
         image: '',
         location: '',
+        program: '',
         description: '',
         started_at: '',
         ended_at: '',
@@ -33,6 +34,7 @@ const initialState: InitialStateEvent = {
         name : '',
         image: '',
         location: '',
+        program: '',
         description: '',
         started_at: '',
         responsible: '',
@@ -125,7 +127,7 @@ export const updateAttachmentEventImage = createAsyncThunk<
 );
 
 const validateStep = (state: InitialStateEvent) =>{
-    const {name, location, description, started_at, ended_at, attendees, event_type, types, responsible} = state.CreateFormValue;
+    const {name, location, description, started_at, ended_at, attendees, event_type, types, responsible, program} = state.CreateFormValue;
     switch(state.numberLevel){
         case 1:
             if(!name || !location || !description || !attendees || !location || !event_type){
@@ -134,19 +136,25 @@ const validateStep = (state: InitialStateEvent) =>{
             }
             break;
         case 2:
-            if(!name || !location || !description || !attendees || !location || !event_type || !started_at || !ended_at){
+            if(!name || !location || !description || !attendees || !location || !program ){
                 ShowError();
                 return false;
             }
             break;
         case 3:
-            if(!name || !location || !description || !attendees || !location || !event_type || !started_at || !ended_at || types.length === 0){
+            if(!name || !location || !description || !attendees || !location || !program || !started_at || !ended_at){
                 ShowError();
                 return false;
             }
             break;
         case 4:
-            if(!name || !location || !description || !attendees || !location || !event_type || !started_at || !ended_at || types.length === 0 || !responsible){
+            if(!name || !location || !description || !attendees || !location || !program || !event_type || !started_at || !ended_at || types.length === 0){
+                ShowError();
+                return false;
+            }
+            break;
+        case 5:
+            if(!name || !location || !description || !attendees || !location || !program || !event_type || !started_at || !ended_at || types.length === 0 || !responsible){
                 ShowError();
                 return false;
             }
@@ -164,6 +172,7 @@ const EventSlice = createSlice({
             if(action.payload.event) {
                 state.EditFormValue = {
                     name: action.payload.event.name,
+                    program: action.payload.event.program,
                     image: action.payload.event.image || '',
                     location: action.payload.event.location,
                     description: action.payload.event.description,
@@ -230,9 +239,9 @@ const EventSlice = createSlice({
         handleNextButton: (state) => {
             const isValid = validateStep(state);
             if(isValid) {
-                if (state.numberLevel < 5) {
+                if (state.numberLevel < 6) {
                     state.numberLevel += 1;
-                }else if(state.numberLevel === 5 ){
+                }else if(state.numberLevel === 6 ){
                     state.showFinish = true;
                 }
             }
@@ -242,6 +251,7 @@ const EventSlice = createSlice({
                 name : '',
                 image: '',
                 location: '',
+                program: '',
                 description: '',
                 started_at: '',
                 ended_at: '',

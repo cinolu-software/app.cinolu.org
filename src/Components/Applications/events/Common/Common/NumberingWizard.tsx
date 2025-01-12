@@ -9,6 +9,7 @@ import StepOne from "@/Components/Applications/events/Common/Common/StepOne";
 import StepTwo from "@/Components/Applications/events/Common/Common/StepTwo";
 import StepThree from "@/Components/Applications/events/Common/Common/StepThree";
 import StepFour from "@/Components/Applications/events/Common/Common/StepFour";
+import StepFive from "@/Components/Applications/events/Common/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/events/Common/Common/StepperHorizontal";
@@ -44,6 +45,7 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
             const filteredFormValue = {
                 name: CreateFormValue.name,
                 description: CreateFormValue.description,
+                program: CreateFormValue.program,
                 started_at: CreateFormValue.started_at,
                 ended_at: CreateFormValue.ended_at,
                 types: CreateFormValue.types?.filter(Boolean),
@@ -79,10 +81,12 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
     const renderStep = () => {
         switch (numberLevel) {
             case 1: return <StepOne createFormValue={CreateFormValue}/>;
-            case 2: return <StepTwo createFormValue={CreateFormValue}/>;
-            case 3: return <StepThree createFormValue={CreateFormValue} />;
-            case 4: return <StepFour createFormValue={CreateFormValue} />;
-            case 5:
+            case 2: return <StepFive createFormValue={CreateFormValue}/>;
+            case 3: return <StepTwo createFormValue={CreateFormValue}/>;
+            case 4: return <StepThree createFormValue={CreateFormValue} />;
+            case 5: return <StepFour createFormValue={CreateFormValue} />;
+
+            case 6:
                 return (
                     <Form className="stepper-four g-3 needs-validation" noValidate>
                         <FinishForm

@@ -17,12 +17,14 @@ export interface Event {
     online_link: string | null;
     types: EventType[];
     responsible?: string;
+    program: string;
 }
 
 export interface CreateEvent {
     name: string;
     image?: string | null;
     responsible: string;
+    program: string;
     location: string;
     description: string;
     started_at: string;
