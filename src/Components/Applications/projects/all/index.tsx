@@ -30,6 +30,7 @@ const ProjectListContainer = () => {
 
     useEffect(() => {
         if (status === "idle" || status === "loading") {
+            console.log(status)
             dispatch(fetchProjects());
         }
     }, [status, dispatch]);

@@ -35,7 +35,7 @@ const StepFour: React.FC<StepPropsType> = ({ data }) => {
                         Sélectionner <span className="txt-primary">la catégorie</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur la catégorie de programme qui correspond.
+                        Cliquez sur la catégorie du projet qui correspond.
                     </p>
                 </div>
                 <div className="variation-box">

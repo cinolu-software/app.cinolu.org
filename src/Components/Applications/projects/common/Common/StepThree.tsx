@@ -31,10 +31,10 @@ const StepThree: React.FC<StepPropsType> = ({ data }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">le type de programme</span>
+                        Sélectionner <span className="txt-primary">le type de projet</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur les types de programme qui correspondent à vos besoins.
+                        Cliquez sur les types de projet qui correspondent à vos besoins.
                     </p>
                 </div>
                 <div className="variation-box">
