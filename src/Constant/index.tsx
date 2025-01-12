@@ -18,6 +18,9 @@ export const titleAddEvent = "Ajout d'un événement";
 export const publishedEvents = "Publié(s)";
 export const allEvents = "Evénements";
 
+//Programs
+export const addProgram = "Ajouter un programme";
+
 
 export const Href = "#javascript";
 export const ImagePath = "/assets/images";

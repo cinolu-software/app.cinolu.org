@@ -2,6 +2,7 @@ import React from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import AddWithModalButton from "@/CommonComponent/AddWithModalButton";
 import {setModalCreateProgram} from "@/Redux/Reducers/programSlice/programSlice";
+import {addProgram} from "@/Constant";
 
 export const ProgramTypesHeader = () => {
 
@@ -11,7 +12,7 @@ export const ProgramTypesHeader = () => {
     return (
         <div>
             <AddWithModalButton
-                buttonText="Ajouter un Type de Programme"
+                buttonText={addProgram}
                 onClick={() => dispatch(setModalCreateProgram({ isOpen : !isOpenModalCreateProgram}))}
             />
         </div>
