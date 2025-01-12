@@ -37,4 +37,4 @@ export interface StaticModalToggleProp {
     staticModalToggle: () => void;
 }
 
-export interface ProgramListTypeTableColumnType extends ProgramType {}
+export interface ProgramListTypeTableColumnType extends ProgramTypeWithImage {}

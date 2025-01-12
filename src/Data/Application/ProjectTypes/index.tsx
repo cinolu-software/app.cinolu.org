@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { setModalDeleteProjectTypes, setModalEditProjectTypes } from "@/Redux/Reducers/projectSlice/projectTypeSlice";
 import SVG from '@/CommonComponent/SVG';
 
-
 const ProjectListTableName: React.FC<{ image: string; name: string }> = ({ image, name }) => {
     return (
         <div className="product-names my-2">
