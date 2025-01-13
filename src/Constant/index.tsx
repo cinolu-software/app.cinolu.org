@@ -7,11 +7,11 @@ export const userProfileImage="Image Profile";
 
 //Project
 
-export const allProjects="Projets";
-export const publishedProjects="Publié(s)";
-export const titleAddProject = "Ajout d'un projet";
-export const AddProject = "Ajouter un projet";
-export const ModifyProject = "Modifier un projet"
+export const allProjects="Activités";
+export const publishedProjects="Publiée(s)";
+export const titleAddProject = "Ajout d'une activité";
+export const AddProject = "Ajouter une activité";
+export const ModifyProject = "Modifier une activité";
 
 //Events
 

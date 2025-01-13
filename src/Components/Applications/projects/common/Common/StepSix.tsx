@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { Col, Row, Input } from "reactstrap";
+import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {setNewFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
 import {fetchProgram} from "@/Redux/Reducers/programSlice/programSlice";
-import { StepPropsType} from "@/Types/Events";
+
 
 const StepSix = () => {
 
