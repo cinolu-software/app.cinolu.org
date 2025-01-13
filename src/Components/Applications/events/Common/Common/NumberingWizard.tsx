@@ -30,7 +30,6 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                     ? initialValues.types.map((type: { id?: string }) => type?.id).filter(Boolean)
                     : [],
             };
-
             Object.keys(transformedInitialValues).forEach((key) => {
                 const typedKey = key as keyof CreateEvent;
                 dispatch(setCreateFomValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
@@ -102,9 +101,8 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
     };
 
     return (
-        <Col>
-            <Card className="height-equal">
-                <CommonCardHeader title={titleAddEvent} />
+        <div className = {'mt-2'}>
+            <div className={'height-equal'}>
                 <CardBody className="basic-wizard important-validation mt-2">
                     <StepperHorizontal level={numberLevel} />
                     <div id="msform">{renderStep()}</div>
@@ -127,8 +125,8 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                         </Button>
                     </div>
                 </CardBody>
-            </Card>
-        </Col>
+            </div>
+        </div>
     );
 };
 

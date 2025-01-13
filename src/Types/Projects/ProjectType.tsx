@@ -24,6 +24,7 @@ export interface CreateProjectType {
     name: string;
     description: string;
     targeted_audience: string;
+    program: string;
     started_at: string;
     ended_at: string;
     types?: string[];
@@ -42,6 +43,7 @@ export interface ReceiveProjectType {
     started_at: string;
     ended_at: string;
     image?: string;
+    program?: string;
     aim?: string;
     prize?: string;
     town?: string;
@@ -62,6 +64,7 @@ export interface FormValueType {
     id: string;
     name: string;
     description: string;
+    program: string;
     targeted_audience: string;
     started_at: string;
     ended_at: string;

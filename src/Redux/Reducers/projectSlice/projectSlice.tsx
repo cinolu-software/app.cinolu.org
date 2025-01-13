@@ -22,6 +22,7 @@ const initialState : InitialStateProjectType = {
         id: "",
         name: "",
         description: "",
+        program: "",
         aim: "",
         prize: "",
         town: "",
@@ -36,6 +37,7 @@ const initialState : InitialStateProjectType = {
         id: "",
         name: "",
         description: "",
+        program: "",
         aim: "",
         prize: "",
         town: "",
@@ -144,7 +146,7 @@ export const publishProject = createAsyncThunk<ReceiveProjectType, { projectId: 
 );
 
 const validateStep = (state: InitialStateProjectType) => {
-    const { name, description, town, aim, prize, started_at, ended_at, types, categories, partners, targeted_audience } = state.formValue;
+    const { name, description, town, aim, prize, started_at, ended_at, types, categories, partners, targeted_audience, program } = state.formValue;
     switch (state.numberLevel) {
         case 1:
             if (!name || !description || !targeted_audience || !town || !aim || !prize) {
@@ -153,26 +155,32 @@ const validateStep = (state: InitialStateProjectType) => {
             }
             break;
         case 2:
-            if (!name || !description || !targeted_audience || !town || !aim || !prize || !started_at || !ended_at) {
+            if (!name || !description || !targeted_audience || !town || !aim || !prize || !program) {
                 ShowError();
                 return false;
             }
             break;
         case 3:
-            if (!name || !description || !targeted_audience || !town || !aim || !prize || !started_at || !ended_at || types.length === 0) {
+            if (!name || !description || !targeted_audience || !town || !aim || !prize || !program || !started_at || !ended_at) {
                 ShowError();
                 return false;
             }
             break;
-        case 4 :
-            if (!name || !description || !targeted_audience || !town || !aim || !prize || !started_at || !ended_at || types.length === 0 || categories.length === 0) {
+        case 4:
+            if (!name || !description || !targeted_audience || !town || !aim || !prize  || !program || !started_at || !ended_at || types.length === 0) {
+                ShowError();
+                return false;
+            }
+            break;
+        case 5 :
+            if (!name || !description || !targeted_audience || !town || !aim || !prize || !program || !started_at || !ended_at || types.length === 0 || categories.length === 0) {
                 ShowError();
                 return false;
             }
             break;
 
-        case 5 :
-            if (!name || !description || !targeted_audience || !town || !aim || !prize || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
+        case 6 :
+            if (!name || !description || !targeted_audience || !town || !aim || !prize || !program || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
                 ShowError();
                 return false;
             }
@@ -262,9 +270,9 @@ const ProjectSlice = createSlice({
         handleNextButton: (state) => {
             const isValid = validateStep(state);
             if (isValid) {
-                if (state.numberLevel < 6) {
+                if (state.numberLevel < 7) {
                     state.numberLevel++;
-                } else if( state.numberLevel === 6) {
+                } else if( state.numberLevel === 7) {
                     state.showFinish = true;
                 }
             }
@@ -274,6 +282,7 @@ const ProjectSlice = createSlice({
                 id: "",
                 name: "",
                 description: "",
+                program: "",
                 aim: "",
                 prize: "",
                 town: "",

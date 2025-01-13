@@ -3,18 +3,20 @@ import { Button, Card, CardBody, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
 import {createProject, updateProject, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
-import { Flip, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { Back } from "@/Constant";
 import StepOne from "@/Components/Applications/projects/common/Common/StepOne";
 import StepTwo from "@/Components/Applications/projects/common/Common/StepTwo";
 import StepThree from "@/Components/Applications/projects/common/Common/StepThree";
 import StepFour from "@/Components/Applications/projects/common/Common/StepFour";
 import StepFive from "@/Components/Applications/projects/common/Common/StepFive";
+import StepSix from "@/Components/Applications/projects/common/Common/StepSix";
 import FinishForm from "@/CommonComponent/FinishForm";
 import StepperHorizontal from "@/Components/Applications/projects/common/Common/StepperHorizontal";
 import { FormValueType } from "@/Types/Projects/ProjectType";
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import {titleAddProject} from "@/Constant";
+import {titleAddProject, ModifyProject} from "@/Constant";
+
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
 
@@ -36,6 +38,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                     ? initialValues.partners.map((partner: { id?: string }) => partner?.id).filter(Boolean)
                     : [],
             };
+
             Object.keys(transformedInitialValues).forEach((key) => {
                 const typedKey = key as keyof FormValueType;
                 dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
@@ -51,6 +54,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
             const filteredFormValue = {
                 name: formValue.name,
                 description: formValue.description,
+                program: formValue.program,
                 started_at: formValue.started_at,
                 ended_at: formValue.ended_at,
                 targeted_audience: formValue.targeted_audience,
@@ -87,15 +91,19 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
         switch (numberLevel) {
             case 1:
                 return <StepOne data={formValue} />;
+
             case 2:
-                return <StepTwo data={formValue} />;
+                return <StepSix />;
+
             case 3:
-                return <StepThree data={formValue} />;
+                return <StepTwo data={formValue} />;
             case 4:
-                return <StepFour data={formValue} />;
+                return <StepThree data={formValue} />;
             case 5:
-                return <StepFive data={formValue }  />;
+                return <StepFour data={formValue} />;
             case 6:
+                return <StepFive data={formValue }  />;
+            case 7:
                 return (
                     <Form className="stepper-four g-3 needs-validation" noValidate>
                         <FinishForm
@@ -111,10 +119,8 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     };
 
     return (
-            <Card>
                 <div className={'mt-2'}>
                     <div className="height-equal">
-                        <CommonCardHeader title={titleAddProject}/>
                         <CardBody className="basic-wizard important-validation">
                             <StepperHorizontal level={numberLevel}/>
                             <div id="msform">{renderStep()}</div>
@@ -139,7 +145,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                         </CardBody>
                     </div>
                 </div>
-            </Card>
     );
 
 };

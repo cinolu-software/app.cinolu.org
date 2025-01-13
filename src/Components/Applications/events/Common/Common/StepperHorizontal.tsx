@@ -5,7 +5,7 @@ const StepperHorizontal: React.FC<StepperHorizontalPropsType> = ({ level }) => {
 
     const StepperHorizontalData = [
         "Informations de base",
-        "Program",
+        "Programme",
         "Durée",
         "Type",
         "Responsable",

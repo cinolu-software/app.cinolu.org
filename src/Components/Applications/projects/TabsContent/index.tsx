@@ -4,7 +4,6 @@ import PublishedProjectListContainer from "@/Components/Applications/projects/pu
 import ProjectListContainer from "@/Components/Applications/projects/all";
 
 
-
 const TabsContent : React.FC<{basicTab: string}> = ({basicTab})=> {
 
     return (
