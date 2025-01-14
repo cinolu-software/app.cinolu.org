@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Col, Row, Input } from "reactstrap";
+import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import {fetchProjectType} from "@/Redux/Reducers/projectSlice/projectTypeSlice";
 import {StepPropsType} from "@/Types/Projects/ProjectType";
-import {ReceiveProjectType} from "@/Types/Projects/ProjectType";
 import {TransformedProjectTypeType} from "@/Types/Projects/ProjectTypeType";
+import {activitySelect, activityStepThreeType, activityStepThreeDescription} from "@/Constant";
 
 const StepThree: React.FC<StepPropsType> = ({ data }) => {
     const dispatch = useAppDispatch();
@@ -31,10 +31,10 @@ const StepThree: React.FC<StepPropsType> = ({ data }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">le type de projet</span>
+                        {activitySelect} <span className="txt-primary">{activityStepThreeType}</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur les types de projet qui correspondent à vos besoins.
+                        {activityStepThreeDescription}
                     </p>
                 </div>
                 <div className="variation-box">

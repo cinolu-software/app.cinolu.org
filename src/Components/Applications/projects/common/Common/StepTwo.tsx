@@ -6,6 +6,7 @@ import Calendar from "react-calendar";
 // @ts-ignore
 import { Value } from 'react-calendar/dist/cjs/shared/types';
 import {StepPropsType} from "@/Types/Projects/ProjectType";
+import {activityStartDate, activityEndDate} from "@/Constant";
 
 
 const StepTwo: React.FC<StepPropsType> = ({ data }) => {
@@ -34,7 +35,7 @@ const StepTwo: React.FC<StepPropsType> = ({ data }) => {
             <Form>
                 <Row className="g-2">
                     <Col xs="12">
-                        <Label className="m-0" check>Date de début <span className="txt-danger"> *</span></Label>
+                        <Label className="m-0" check>{activityStartDate} <span className="txt-danger"> *</span></Label>
                     </Col>
                     <Col xs="12">
                         <Card>
@@ -50,7 +51,7 @@ const StepTwo: React.FC<StepPropsType> = ({ data }) => {
                         </Card>
                     </Col>
                     <Col xs="12">
-                        <Label className="m-0" check>Date de fin <span className="txt-danger"> *</span></Label>
+                        <Label className="m-0" check>{activityEndDate} <span className="txt-danger"> *</span></Label>
                     </Col>
                     <Col xs="12">
                         <Card>

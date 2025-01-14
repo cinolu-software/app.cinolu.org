@@ -5,13 +5,44 @@ export const userProfileSecurity="Sécurité";
 export const userProfileTitle="Mon Compte";
 export const userProfileImage="Image Profile";
 
-//Project
+//Activity
+export const allActivities="Activités";
+export const publishedActivity="Publiée(s)";
+export const titleAddActivity = "Ajout d'une activité";
+export const AddActivity = "Ajouter une activité";
+export const ModifyActivity = "Modifier une activité";
+export const CreateActivity= "Créer l'activité";
+export const ModifyActivityTitle = "Modifier l'activité";
+    //------------------
+export const activityName="Nom de l'activité";
+export const activityTown="Ville cible";
+export const activityAudience="Audience cible";
+export const activityPrise="A la clé";
+export const activityDescription="Description de l'activité";
+export const activityObjectif="Objectif de l'activité";
+    //------------------
+export const activitySelect= "Sélectionner";
+export const activityStepTwoDescription = "le pragramme au quel sera attaché cette activité";
+export const activityStepTwoClique= "Cliquez sur le programme";
+export const activityStepTwoLoadingProgram="Chargement...";
+export const activityStartDate = "Date de début";
+export const activityEndDate= "Date de fin";
+    //------------------
+export const activityStepThreeType="Le type d'activité";
+export const activityStepThreeDescription="Cliquez sur les types de projet qui correspondent à vos besoins.";
+    //------------------
+export const activityStepFourCategory="la catégorie";
+export const activityStepFourDescription="Cliquez sur la catégorie du projet qui correspond.";
+    //------------------
+export const activityStepFivePartners="Les partenaires du projet";
+export const activityStepFiveDescription="Cliquez sur les partenaires que vous souhaitez associer à ce projet.";
 
-export const allProjects="Activités";
-export const publishedProjects="Publiée(s)";
-export const titleAddProject = "Ajout d'une activité";
-export const AddProject = "Ajouter une activité";
-export const ModifyProject = "Modifier une activité";
+//MultiStep Form
+
+export const buttonFinish = "Terminer";
+export const buttonNext = "Suivant";
+export const buttonPrevious = "Précédent";
+
 
 //Events
 

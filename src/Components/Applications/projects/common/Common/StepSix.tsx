@@ -3,6 +3,7 @@ import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {setNewFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
 import {fetchProgram} from "@/Redux/Reducers/programSlice/programSlice";
+import {activityStepTwoDescription, activitySelect, activityStepTwoClique, activityStepTwoLoadingProgram} from "@/Constant";
 
 
 const StepSix = () => {
@@ -26,15 +27,15 @@ const StepSix = () => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">le pragramme au quel sera attaché cet événement</span>
+                        {activitySelect} <span className="txt-primary">{activityStepTwoDescription}</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur le programme.
+                        {activityStepTwoClique}
                     </p>
                 </div>
                 <div className="variation-box">
                     {
-                        status === 'loading' ? <div>Loading...</div> : transformedPrograms.map(program => (
+                        status === 'loading' ? <div>{activityStepTwoLoadingProgram}</div> : transformedPrograms.map(program => (
                             <div className="selection-box" key={program.id}>
                                 <Input
                                     id={`program${program.id}`}

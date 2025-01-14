@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
 import {StepPropsType} from "@/Types/Projects/ProjectType";
+import {activitySelect} from "@/Constant";
+import {activityStepFourCategory, activityStepFourDescription} from "@/Constant";
 
 const StepFour: React.FC<StepPropsType> = ({ data }) => {
 
@@ -32,10 +34,10 @@ const StepFour: React.FC<StepPropsType> = ({ data }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">la catégorie</span>
+                        {activitySelect} <span className="txt-primary">{activityStepFourCategory}</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur la catégorie du projet qui correspond.
+                        {activityStepFourDescription}
                     </p>
                 </div>
                 <div className="variation-box">

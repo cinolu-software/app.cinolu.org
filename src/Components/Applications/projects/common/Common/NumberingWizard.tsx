@@ -1,10 +1,9 @@
 import React, { useEffect } from "react";
-import { Button, Card, CardBody, Form } from "reactstrap";
+import { Button, CardBody, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
 import {createProject, updateProject, handleBackButton, handleNextButton, setNewFormValue, resetFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
 import { toast } from "react-toastify";
-import { Back } from "@/Constant";
 import StepOne from "@/Components/Applications/projects/common/Common/StepOne";
 import StepTwo from "@/Components/Applications/projects/common/Common/StepTwo";
 import StepThree from "@/Components/Applications/projects/common/Common/StepThree";
@@ -14,8 +13,7 @@ import StepSix from "@/Components/Applications/projects/common/Common/StepSix";
 import FinishForm from "@/CommonComponent/FinishForm";
 import StepperHorizontal from "@/Components/Applications/projects/common/Common/StepperHorizontal";
 import { FormValueType } from "@/Types/Projects/ProjectType";
-import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import {titleAddProject, ModifyProject} from "@/Constant";
+import { CreateActivity, ModifyActivityTitle, buttonFinish, buttonNext, buttonPrevious} from "@/Constant";
 
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
@@ -109,7 +107,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                         <FinishForm
                             isComplete={true}
                             onCreateProgram={handleSubmit}
-                            textButton={mode === "add" ? "Créer le projet" : "Modifier le projet"}
+                            textButton={mode === "add" ? CreateActivity : ModifyActivityTitle}
                         />
                     </Form>
                 );
@@ -131,7 +129,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                                         color="transparent"
                                         onClick={() => dispatch(handleBackButton())}
                                     >
-                                        {Back}
+                                        {buttonPrevious}
                                     </Button>
                                 )}
                                 <Button
@@ -139,7 +137,7 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                                     color="primary"
                                     onClick={() => dispatch(handleNextButton())}
                                 >
-                                    {showFinish ? "Finish" : "Next"}
+                                    {showFinish ? buttonFinish : buttonNext}
                                 </Button>
                             </div>
                         </CardBody>

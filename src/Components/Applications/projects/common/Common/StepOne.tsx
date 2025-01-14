@@ -3,6 +3,7 @@ import { Col, Form, Input, Label, Row } from "reactstrap";
 import {StepPropsType} from "@/Types/Projects/ProjectType";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { useAppDispatch } from "@/Redux/Hooks";
+import { activityAudience, activityDescription, activityName, activityPrise, activityTown, activityObjectif} from "@/Constant";
 
 const StepOne: React.FC<StepPropsType> = ({ data }) => {
 
@@ -18,7 +19,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
         <Form className="theme-form theme-form-2 mega-form">
             <Row className="g-2 mx-5">
                 <Col xs="12">
-                    <Label className="col-form-label">{"Nom du projet"}</Label>
+                    <Label className="col-form-label">{activityName}</Label>
                     <Input
                         className={name !== "" ? "valid" : "is-invalid"}
                         type="text"
@@ -29,7 +30,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
                     />
                 </Col>
                 <Col xs="12">
-                    <Label className="col-form-label">{"Ville cible"}</Label>
+                    <Label className="col-form-label">{activityTown}</Label>
                     <Input
                         className={town !== "" ? "valid" : "is-invalid"}
                         type="text"
@@ -41,7 +42,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
                 </Col>
 
                 <Col xs="12">
-                    <Label className="col-form-label">{"Audience ciblée"}</Label>
+                    <Label className="col-form-label">{activityAudience}</Label>
                     <textarea
                         rows={5}
                         className="form-control"
@@ -53,7 +54,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
 
 
                 <Col xs="12">
-                    <Label className="col-form-label">{"A la clé"}</Label>
+                    <Label className="col-form-label">{activityPrise}</Label>
                     <textarea
                         rows={5}
                         className="form-control"
@@ -64,7 +65,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
                 </Col>
 
                 <Col xs="12">
-                    <Label className="col-form-label">{"Objectif du projet"}</Label>
+                    <Label className="col-form-label">{activityObjectif}</Label>
                     <textarea
                         rows={10}
                         className="form-control"
@@ -75,7 +76,7 @@ const StepOne: React.FC<StepPropsType> = ({ data }) => {
                 </Col>
 
                 <Col xs="12">
-                    <Label className="col-form-label">{"Description du projet"}</Label>
+                    <Label className="col-form-label">{activityDescription}</Label>
                     <textarea
                         rows={10}
                         className="form-control"

@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/Redux/Hooks';
 import { setNewFormValue } from '@/Redux/Reducers/projectSlice/projectSlice';
 import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
 import {StepPropsType} from "@/Types/Projects/ProjectType";
+import {activitySelect, activityStepFivePartners, activityStepFiveDescription} from "@/Constant";
 
 const StepFive: React.FC<StepPropsType> = ({ data }) => {
 
@@ -31,10 +32,10 @@ const StepFive: React.FC<StepPropsType> = ({ data }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">les partenaires du projet</span>
+                        {activitySelect} <span className="txt-primary">{activityStepFivePartners}</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur les partenaires que vous souhaitez associer à ce projet.
+                        {activityStepFiveDescription}
                     </p>
                 </div>
 
