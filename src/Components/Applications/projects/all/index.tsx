@@ -62,7 +62,6 @@ const ProjectListContainer = () => {
                                     />
                                 </div>
                             </div>
-
                         </Col>
                     </Row>
                 )

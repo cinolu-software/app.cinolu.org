@@ -4,7 +4,6 @@ export const userProfilePersonalInfo="Informations Personnelles";
 export const userProfileSecurity="Sécurité";
 export const userProfileTitle="Mon Compte";
 export const userProfileImage="Image Profile";
-
 //Activity
 export const allActivities="Activités";
 export const publishedActivity="Publiée(s)";
@@ -13,53 +12,124 @@ export const AddActivity = "Ajouter une activité";
 export const ModifyActivity = "Modifier une activité";
 export const CreateActivity= "Créer l'activité";
 export const ModifyActivityTitle = "Modifier l'activité";
-    //------------------
+    //---------------------------------------------------------------------------------------------------------
 export const activityName="Nom de l'activité";
 export const activityTown="Ville cible";
 export const activityAudience="Audience cible";
 export const activityPrise="A la clé";
 export const activityDescription="Description de l'activité";
 export const activityObjectif="Objectif de l'activité";
-    //------------------
+    //---------------------------------------------------------------------------------------------------------
 export const activitySelect= "Sélectionner";
-export const activityStepTwoDescription = "le pragramme au quel sera attaché cette activité";
+export const activityStepTwoDescription = "le programme au quel sera attaché cette activité";
 export const activityStepTwoClique= "Cliquez sur le programme";
 export const activityStepTwoLoadingProgram="Chargement...";
 export const activityStartDate = "Date de début";
 export const activityEndDate= "Date de fin";
-    //------------------
+    //----------------------------------------------------------------------------------------------------------
 export const activityStepThreeType="Le type d'activité";
 export const activityStepThreeDescription="Cliquez sur les types de projet qui correspondent à vos besoins.";
-    //------------------
+    //----------------------------------------------------------------------------------------------------------
 export const activityStepFourCategory="la catégorie";
 export const activityStepFourDescription="Cliquez sur la catégorie du projet qui correspond.";
-    //------------------
+    //----------------------------------------------------------------------------------------------------------
 export const activityStepFivePartners="Les partenaires du projet";
 export const activityStepFiveDescription="Cliquez sur les partenaires que vous souhaitez associer à ce projet.";
+    //----------------------------------------------------------------------------------------------------------
+//Activity Delete Modale
+export const activitySuccessMessageDelete = "Suppression effectuée avec succès";
+export const activityErrorMessageDelete = "Erreur survenue lors de la suppression de l'activité";
+export const activityWarningDeleteMessage = "Êtes-vous sûr de vouloir supprimer cette activité?";
+export const activityTitleDeleteModal="Supprimer l'activité";
+
+//inputSearch
+export const inputSearch = "Chercher";
+export const editProgramEventDetail= "Détail de l'événement";
+export const editProgramEventImagedeCouverture="Image de couverture";
+
+//Evenements 
+export const createEventSuccessMessage = "Evénement créé avec succès";
+export const updateEventSuccessMessage = "Evénement modifié avec succès";
+export const errorEventMessage = "Une erreur est survenue";
+export const btncreateEvent = "Créer l'événement";
+export const btnModifyEvent = "Modifier l'événement";
+    //------------------------------------------------------------------------------------------------------------
+export const eventName="Nom de l'événement";
+export const eventType="Type d'événement";
+export const eventSelectType="Sélectionner un type";
+export const eventSelectPhysique="Physique";
+export const eventSelectOnline="En ligne";
+export const eventLocation="Localisation de l'événement";
+export const eventLink="Lien en ligne de l'événement";
+export const eventParticipant = "Nombre de participants attendus";
+export const eventDescription = "Description de l'événement";
+    //-------------------------------------------------------------------------------------------------------------
+export const eventTextDescription = "Cliquez sur les types d'événement qui correspondent à vos besoins."
+
+export const eventProgram= "le programme au quel sera attaché cet événement";
+export const eventProgramSelect="Sélectionner";
+export const eventProgramClick="Cliquez sur le programme";
+export const eventStartDate="Date de début";
+export const eventEndDate="Date de fin";
+export const eventSelect="Sélectionner";
+export const eventResponsible="le responsable de cet événement";
+export const eventSelectResponsible="Cliquez sur un membre du staff pour le définir comme responsable.";
+export const eventSelectLoading="Chargement des membres du staff...";
+
+
+
 
 //MultiStep Form
-
 export const buttonFinish = "Terminer";
 export const buttonNext = "Suivant";
 export const buttonPrevious = "Précédent";
-
-
+//Modal
+export const closeModal="Fermer";
+export const deleteBtnModal="Supprimer";
 //Events
-
 export const titleAddEvent = "Ajout d'un événement";
 export const publishedEvents = "Publié(s)";
 export const allEvents = "Evénements";
-
 //Programs
 export const addProgram = "Ajouter un programme";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 export const Href = "#javascript";
 export const ImagePath = "/assets/images";
 export const StarColor = "var(--theme-default)";
 export const StarColorTwo = "#D77748";
-
-
 //Layout
 export const Loading: string = "Loading...";
 export const SearchMofi: string = "Search Mofi ..";

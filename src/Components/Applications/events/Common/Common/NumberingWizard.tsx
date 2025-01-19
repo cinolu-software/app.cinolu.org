@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
-import { Button, Card, CardBody, Col, Form } from "reactstrap";
+import { Button, CardBody, Form } from "reactstrap";
 import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import { useRouter } from "next/navigation";
 import {createEvent, handleNextButton, handleBackButton, setCreateFomValue, updateEvent, resetFormValue} from "@/Redux/Reducers/eventSlice/eventSlice";
-import { Flip, toast } from "react-toastify";
-import { Back } from "@/Constant";
+import { toast } from "react-toastify";
 import StepOne from "@/Components/Applications/events/Common/Common/StepOne";
 import StepTwo from "@/Components/Applications/events/Common/Common/StepTwo";
 import StepThree from "@/Components/Applications/events/Common/Common/StepThree";
 import StepFour from "@/Components/Applications/events/Common/Common/StepFour";
 import StepFive from "@/Components/Applications/events/Common/Common/StepFive";
 import FinishForm from "@/CommonComponent/FinishForm";
-import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import StepperHorizontal from "@/Components/Applications/events/Common/Common/StepperHorizontal";
 import {CreateEvent} from "@/Types/Events";
-import { titleAddEvent } from "@/Constant";
+import {createEventSuccessMessage, updateEventSuccessMessage, errorEventMessage, buttonFinish, buttonNext, buttonPrevious, btncreateEvent, btnModifyEvent} from "@/Constant";
 
 const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any }) => {
 
@@ -57,20 +55,20 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
 
             if (mode === "add") {
                 dispatch(createEvent(filteredFormValue as CreateEvent));
-                toast.success("Evénement créé avec succès", {
+                toast.success(createEventSuccessMessage, {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
                 });
             } else {
                 dispatch(updateEvent({ eventId: initialValues?.id!, updatedEvent: filteredFormValue }));
-                toast.success("Evénement modifié avec succès", {
+                toast.success(updateEventSuccessMessage, {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
                 });
             }
             router.push("/events");
         } catch (error) {
-            toast.error("Une erreur est survenue", {
+            toast.error(errorEventMessage, {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER,
             });
@@ -91,7 +89,7 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                         <FinishForm
                             isComplete={true}
                             onCreateProgram={handleSubmit}
-                            textButton={mode === "add" ? "Créer l'événement" : "Modifier l'événement"}
+                            textButton={mode === "add" ? btncreateEvent : btnModifyEvent}
                         />
                     </Form>
                 );
@@ -113,7 +111,7 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                                 color="transparent"
                                 onClick={() => dispatch(handleBackButton())}
                             >
-                                {Back}
+                                {buttonPrevious}
                             </Button>
                         )}
                         <Button
@@ -121,7 +119,7 @@ const NumberingWizardEvent = ({ mode = "add", initialValues } : { mode: "add" | 
                             color="primary"
                             onClick={() => dispatch(handleNextButton())}
                         >
-                            {showFinish ? "Finish" : "Next"}
+                            {showFinish ? buttonFinish : buttonNext}
                         </Button>
                     </div>
                 </CardBody>

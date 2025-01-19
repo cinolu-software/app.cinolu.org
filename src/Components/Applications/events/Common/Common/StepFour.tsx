@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setCreateFomValue } from "@/Redux/Reducers/eventSlice/eventSlice";
 import { fetchStaffMembers } from "@/Redux/Reducers/userSlice/UserSlice";
 import { StepPropsType } from "@/Types/Events";
+import {eventResponsible, eventSelect, eventSelectLoading, eventSelectResponsible} from "@/Constant";
 
 const StepFour: React.FC<StepPropsType> = ({ createFormValue }) => {
     const dispatch = useAppDispatch();
@@ -25,15 +26,15 @@ const StepFour: React.FC<StepPropsType> = ({ createFormValue }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">le responsable de cet événement</span>
+                        {eventSelect} <span className="txt-primary">{eventResponsible}</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur un membre du staff pour le définir comme responsable.
+                        {eventSelectResponsible}
                     </p>
                 </div>
                 <div className="variation-box">
                     {statusStaff === "loading" ? (
-                        <p>Chargement des membres du staff...</p>
+                        <p>{eventSelectLoading}</p>
                     ) : (
                         staffMemberData?.map((staff) => (
                             <div className="selection-box" key={staff.id}>

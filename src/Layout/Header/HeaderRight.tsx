@@ -18,7 +18,7 @@ export const HeaderRight = () => {
                 {/*<HeaderSearch />*/}
                 <MaximizeScreen/>
                 {/*<DarkMode />*/}
-                {/*<Languages/>*/}
+                <Languages/>
                 <Notification/>
                 <Profile/>
             </ul>

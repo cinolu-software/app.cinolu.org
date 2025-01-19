@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Col, Form, Label, Row, InputGroup, Card, CardBody } from "reactstrap";
-import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import { useAppDispatch } from "@/Redux/Hooks";
 import {setCreateFomValue} from "@/Redux/Reducers/eventSlice/eventSlice";
 import Calendar from "react-calendar";
 // @ts-ignore
 import { Value } from 'react-calendar/dist/cjs/shared/types';
 import { StepPropsType} from "@/Types/Events";
-
+import {eventStartDate, eventEndDate} from "@/Constant";
 
 const StepTwo: React.FC<StepPropsType> = ({ createFormValue }) => {
 
@@ -34,7 +34,7 @@ const StepTwo: React.FC<StepPropsType> = ({ createFormValue }) => {
             <Form>
                 <Row className="g-2">
                     <Col xs="12">
-                        <Label className="m-0" check>Date de début <span className="txt-danger"> *</span></Label>
+                        <Label className="m-0" check>{eventStartDate} <span className="txt-danger"> *</span></Label>
                     </Col>
                     <Col xs="12">
                         <Card>
@@ -50,7 +50,7 @@ const StepTwo: React.FC<StepPropsType> = ({ createFormValue }) => {
                         </Card>
                     </Col>
                     <Col xs="12">
-                        <Label className="m-0" check>Date de fin <span className="txt-danger"> *</span></Label>
+                        <Label className="m-0" check>{eventEndDate} <span className="txt-danger"> *</span></Label>
                     </Col>
                     <Col xs="12">
                         <Card>

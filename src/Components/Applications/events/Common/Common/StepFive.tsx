@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {setCreateFomValue} from "@/Redux/Reducers/eventSlice/eventSlice";
 import {fetchProgram} from "@/Redux/Reducers/programSlice/programSlice";
 import { StepPropsType} from "@/Types/Events";
+import {eventProgram, eventProgramClick, eventProgramSelect} from "@/Constant";
 
 const StepFive: React.FC<StepPropsType> = ({ createFormValue }) => {
 
@@ -25,10 +26,10 @@ const StepFive: React.FC<StepPropsType> = ({ createFormValue }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">le pragramme au quel sera attaché cet événement</span>
+                        {eventProgramSelect} <span className="txt-primary">{eventProgram}</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur le programme.
+                        {eventProgramClick}
                     </p>
                 </div>
                 <div className="variation-box">

@@ -1,11 +1,14 @@
 import "../../src/index.scss";
+import React from "react";
 import NoSsr from "@/utils/NoSsr";
 import MainProvider from "./MainProvider";
 import { I18nProvider } from "./i18n/i18n-context";
 import { detectLanguage } from "./i18n/server";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
+
   const lng = await detectLanguage();
+
   return (
     <I18nProvider language={lng}>
       <html>

@@ -3,6 +3,17 @@ import { Col, Form, Input, Label, Row } from "reactstrap";
 import { StepPropsType } from "@/Types/Events";
 import { setCreateFomValue } from "@/Redux/Reducers/eventSlice/eventSlice";
 import { useAppDispatch } from "@/Redux/Hooks";
+import {
+    eventName,
+    eventType,
+    eventSelectType,
+    eventSelectOnline,
+    eventSelectPhysique,
+    eventLocation,
+    eventLink,
+    eventParticipant,
+    eventDescription
+} from "@/Constant";
 
 const StepOne: React.FC<StepPropsType> = ({ createFormValue }) => {
 
@@ -22,7 +33,7 @@ const StepOne: React.FC<StepPropsType> = ({ createFormValue }) => {
         <Form className="theme-form theme-form-2 mega-form">
             <Row className="g-2 mx-5">
                 <Col xs="12" className="mt-3">
-                    <Label className="col-form-label">{"Nom de l'événement"}</Label>
+                    <Label className="col-form-label">{eventName}</Label>
                     <Input
                         className={name !== "" ? "valid" : "is-invalid"}
                         type="text"
@@ -34,21 +45,21 @@ const StepOne: React.FC<StepPropsType> = ({ createFormValue }) => {
                 </Col>
 
                 <Col xs="12" className="mt-3">
-                    <Label className="col-form-label">{"Type d'événement"}</Label>
+                    <Label className="col-form-label">{eventType}</Label>
                     <Input
                         type="select"
                         value={event_type}
                         onChange={handleSelectChange}
                         className={event_type ? "valid" : "is-invalid"}
                     >
-                        <option value="">Sélectionner un type</option>
-                        <option value="physical">Physique</option>
-                        <option value="online">En ligne</option>
+                        <option value="">{eventSelectType}</option>
+                        <option value="physical">{eventSelectPhysique}</option>
+                        <option value="online">{eventSelectOnline}</option>
                     </Input>
                 </Col>
 
                 <Col xs="12" className="mt-3">
-                    <Label className="col-form-label">{"Localisation de l'événement"}</Label>
+                    <Label className="col-form-label">{eventLocation}</Label>
                     <Input
                         className={location !== "" ? "valid" : "is-invalid"}
                         type="text"
@@ -61,7 +72,7 @@ const StepOne: React.FC<StepPropsType> = ({ createFormValue }) => {
 
                 {event_type === "online" && (
                     <Col xs="12" className="mt-3">
-                        <Label className="col-form-label">{"Lien en ligne de l'événement"}</Label>
+                        <Label className="col-form-label">{eventLink}</Label>
                         <Input
                             className={online_link !== "" ? "valid" : "is-invalid"}
                             type="text"
@@ -74,7 +85,7 @@ const StepOne: React.FC<StepPropsType> = ({ createFormValue }) => {
                 )}
 
                 <Col xs="12" className="mt-3">
-                    <Label className="col-form-label">{"Nombre de participants attendus"}</Label>
+                    <Label className="col-form-label">{eventParticipant}</Label>
                     <Input
                         className={attendees !== "" ? "valid" : "is-invalid"}
                         type="number"
@@ -86,7 +97,7 @@ const StepOne: React.FC<StepPropsType> = ({ createFormValue }) => {
                 </Col>
 
                 <Col xs="12" className="mt-3">
-                    <Label className="col-form-label">{"Description de l'événement"}</Label>
+                    <Label className="col-form-label">{eventDescription}</Label>
                     <Input
                         className={description !== "" ? "valid" : "is-invalid"}
                         type="textarea"

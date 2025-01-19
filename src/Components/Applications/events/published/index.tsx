@@ -7,6 +7,7 @@ import DeleteEventModal from "@/Components/Applications/events/Common/DeleteEven
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 import {ToastContainer} from "react-toastify";
+import {inputSearch} from "@/Constant";
 
 
 const PublishedEventsListContainer = () => {
@@ -18,7 +19,7 @@ const PublishedEventsListContainer = () => {
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
-                <Label className="me-2">{"Chercher"}:</Label>
+                <Label className="me-2">{inputSearch}:</Label>
                 <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
             </div>
         );
@@ -39,7 +40,6 @@ const PublishedEventsListContainer = () => {
                         <Col sm="12">
 
                             <div className="list-product-header">
-                                {/* <CollapseFilterData/> */}
                             </div>
                             <div className="list-product">
                                 <div className="table-responsive">

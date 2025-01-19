@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Col, Row, Input } from "reactstrap";
+import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {setCreateFomValue} from "@/Redux/Reducers/eventSlice/eventSlice";
 import {fetchEventsType} from "@/Redux/Reducers/eventSlice/EventTypeSlice";
 import { StepPropsType} from "@/Types/Events";
+import {eventProgramSelect, eventType, eventTextDescription} from "@/Constant";
 
 const StepThree: React.FC<StepPropsType> = ({ createFormValue }) => {
 
@@ -18,11 +19,9 @@ const StepThree: React.FC<StepPropsType> = ({ createFormValue }) => {
 
     const handleTypeChange = (typeId: string) => {
         if (!createFormValue) return;
-
         const updatedTypes = createFormValue.types.includes(typeId)
             ? createFormValue.types.filter((id: string) => id !== typeId)
             : [...createFormValue.types, typeId];
-
         dispatch(setCreateFomValue({ field: 'types', value: updatedTypes }));
     };
 
@@ -31,10 +30,10 @@ const StepThree: React.FC<StepPropsType> = ({ createFormValue }) => {
             <section className="main-upgrade">
                 <div>
                     <h5 className="mb-2">
-                        Sélectionner <span className="txt-primary">le type d'événement</span>
+                        {eventProgramSelect} <span className="txt-primary">{eventType}</span>
                     </h5>
                     <p className="text-muted mb-2">
-                        Cliquez sur les types d'événement qui correspondent à vos besoins.
+                        {eventTextDescription}
                     </p>
                 </div>
                 <div className="variation-box">

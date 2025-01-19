@@ -5,8 +5,10 @@ import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setModalDeleteProject, deleteProject } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
+import {activitySuccessMessageDelete, activityErrorMessageDelete, activityWarningDeleteMessage, deleteBtnModal, closeModal, activityTitleDeleteModal} from "@/Constant";
 
 const DeleteProjectModal = () => {
+
     const dispatch = useAppDispatch();
     const { isOpenModalDeleteProject, selectedProject, originalProjectData } = useAppSelector((state) => state.project);
     const selectedProjectData = originalProjectData?.find((item: { id: any; }) => item.id === selectedProject?.id);
@@ -20,7 +22,7 @@ const DeleteProjectModal = () => {
                 await dispatch(deleteProject(selectedProjectData.id)).unwrap();
                 dispatch(setModalDeleteProject({ isOpen: false, project: null }));
                 toast.success(
-                    <p className="text-white tx-16 mb-0">{"Suppression effectuée avec succès"}</p>,
+                    <p className="text-white tx-16 mb-0">{activitySuccessMessageDelete}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -31,7 +33,7 @@ const DeleteProjectModal = () => {
                 );
             } catch (error) {
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la suppression du programme"}</p>,
+                    <p className="text-white tx-16 mb-0">{activityErrorMessageDelete}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -53,7 +55,7 @@ const DeleteProjectModal = () => {
                     centered
                     isOpen={isOpenModalDeleteProject}
                     toggle={() => dispatch(setModalDeleteProject({ isOpen: false, project: null }))}
-                    title="Supprimer le projet"
+                    title={activityTitleDeleteModal}
                 >
                     <div className="modal-toggle-wrapper">
                         <ul className="modal-img">
@@ -62,7 +64,7 @@ const DeleteProjectModal = () => {
                             </li>
                         </ul>
                         <h4 className="text-center pb-2">
-                            Êtes-vous sûr de vouloir supprimer ce projet ?
+                            {activityWarningDeleteMessage}
                         </h4>
                         <div className="d-flex justify-content-center mt-5">
                             <Button
@@ -71,10 +73,10 @@ const DeleteProjectModal = () => {
                                 onClick={() => dispatch(setModalDeleteProject({ isOpen: false, project: null }))}
                                 disabled={isLoading}
                             >
-                                {"Fermer"}
+                                {closeModal}
                             </Button>
                             <Button color="danger" onClick={handleDelete} disabled={isLoading}>
-                                {isLoading ? <> 'Suppression '<Spinner size="sm" color="light" /></> : "Supprimer"}
+                                {isLoading ? <> 'Suppression '<Spinner size="sm" color="light" /></> : deleteBtnModal}
                             </Button>
                         </div>
                     </div>
