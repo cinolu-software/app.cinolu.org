@@ -1,6 +1,6 @@
 {
   "General": "Général",
-  "Dashboards": "Tableaux de bord",
+  "Dashboard": "Tableau de bord",
   "Default": "Défaut",
   "Project": "Projet",
   "Ecommerce": "Commerce électronique",
@@ -180,5 +180,7 @@
   "Authentication": "Authentification",
   "Login With Bg Image": "Connexion avec Image de Fond",
   "Pinned":"Épinglé",
-  "Coming Soon": "Prochainement"
+  "Coming Soon": "Prochainement",
+  "Mon Compte" : "Mon Compte"
+
 }

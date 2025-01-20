@@ -1,6 +1,6 @@
 {
   "General": "General",
-  "Dashboards": "Dashboards",
+  "Dashboard": "Dashboards",
   "Default": "Default",
   "Project": "Project",
   "Ecommerce": "Ecommerce",
@@ -179,5 +179,6 @@
   "Authentication": "Authentication",
   "Login With Bg Image": "Login With Bg Image",
   "Coming Soon": "Coming Soon",
-  "Pinned":"Pinned"
+  "Pinned":"Pinned",
+  "Mon Compte": "My Account"
 }
