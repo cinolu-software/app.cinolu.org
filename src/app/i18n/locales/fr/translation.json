@@ -1,3 +1,4 @@
+
 {
   "General": "Général",
   "Dashboard": "Tableau de bord",
@@ -181,6 +182,31 @@
   "Login With Bg Image": "Connexion avec Image de Fond",
   "Pinned":"Épinglé",
   "Coming Soon": "Prochainement",
-  "Mon Compte" : "Mon Compte"
 
+  "Mon Compte" : "Mon Compte",
+  "Compte": "Compte",
+  "Profile": "Profil",
+  "Administration": "Administration",
+  "Admin": "Admin",
+  "Liste": "Liste",
+  "Coachs": "Coachs",
+  "Expertises": "Expertises",
+  "Personnel" : "Personnel",
+  "Titre du Poste": "Titre du Poste",
+  "Programmes": "Programmes",
+  "TProgrammes": "Tous les Programmes",
+  "Activités": "Activités",
+  "TActivités": "Toutes les Activités",
+  "Tevenements": "Tous les événements",
+  "Types": "Types",
+  "Catégories": "Catégories",
+  "Event" : "Événements",
+  "Partenaires": "Partenaires",
+  "Rapports": "Rapports",
+  "Rôles": "Rôles",
+  "Notifications": "Notifications",
+  "Coach":"Coach",
+  "Discussions": "Discussions",
+  "Informations": "Informations",
+  "userProfilePersonalInfo": "Informations Personnelles"
 }

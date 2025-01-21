@@ -49,7 +49,6 @@ export const MenuList: MenuItem [] | undefined = [
                         lanClass: "lan-6"
                     },
                     {
-
                         title: "Coachs",
                         type: "sub",
                         lanClass: "lan-6",
@@ -57,10 +56,9 @@ export const MenuList: MenuItem [] | undefined = [
                             {path: "/users/admin/coachs", title: 'liste', type: 'link'},
                             {path: '/users/admin/coachs/expertises', title: 'Expertises', type: 'link'}
                         ]
-
                     },
                     {
-                        title: "Staff",
+                        title: "Personnel",
                         type: "sub",
                         lanClass: "lan-6",
                         children: [
@@ -80,7 +78,7 @@ export const MenuList: MenuItem [] | undefined = [
                 children: [
                     {
                         path: "/programs",
-                        title: "Tous les programmes",
+                        title: "TProgrammes",
                         type: "link",
                         lanClass: "lan-6",
                     },
@@ -91,7 +89,7 @@ export const MenuList: MenuItem [] | undefined = [
                         children: [
                             {
                                 path: "/project",
-                                title: "Toutes les activités",
+                                title: "TActivités",
                                 type: "link",
                                 lanClass: "lan-6"
                             },
@@ -105,14 +103,14 @@ export const MenuList: MenuItem [] | undefined = [
                         ]
                     },
                     {
-                        title: "Evénements",
+                        title: "Event",
                         id: 4,
                         type: "sub",
                         lanClass: "lan-6",
                         children: [
                             {
                                 path: "/events",
-                                title: "Tous les événements",
+                                title: "Tevenements",
                                 type: "link",
                                 lanClass: "lan-6"
                             },
@@ -175,7 +173,6 @@ export const MenuList: MenuItem [] | undefined = [
         lanClass: "lan-1",
         menucontent: "coach",
         Items: [
-
             {
                 title: "Discutions",
                 id: 4,

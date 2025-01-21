@@ -49,11 +49,6 @@ const ProfileHeader = () => {
                                 <img src={`${ImagePath}/avtar/avatar_.jpg`} alt="Profile"/>
                         }
                     </div>
-                    {/*<div className={''}>*/}
-                    {/*    <button className="camera-button" title="Changer l'image de profil">*/}
-                    {/*         <img src={`${ImagePath}/other/camera.png`} alt="Changer l'image" />*/}
-                    {/*    </button>*/}
-                    {/*</div>*/}
                 </div>
 
                 <div className="col-12 block-info">

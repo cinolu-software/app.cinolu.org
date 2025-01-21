@@ -7,13 +7,21 @@ import { fetchPositions } from "@/Redux/Reducers/userSlice/PositionSlice";
 import { fetchExpertises } from "@/Redux/Reducers/userSlice/ExpertiseSlice";
 import { addDetails } from "@/Redux/Reducers/AuthSlice";
 import { Flip, toast } from "react-toastify";
+import {userDetailTitle, userDetailNameLabel, userDetailNamePlaceholder, userDetailEmailLabel, userDetailEmailPlaceholder, userDetailPhoneLabel, userDetailPhonePlaceholder, userDetailAddressLabel, userDetailAddressPlaceholder, userDetailUpdateButton,
+    userDetailLoading, personalInfoTitle, personalInfoLinkedInLabel, personalInfoLinkedInPlaceholder, personalInfoFacebookLabel, personalInfoFacebookPlaceholder, personalInfoBioLabel, personalInfoBioPlaceholder, staffPositionsLabel,
+    coachExpertisesLabel, updateProfileSuccess, updateProfileError, updateDetailsSuccess, updateDetailsError, updateDetailsButton} from "@/Constant";
+import {useTranslation} from "react-i18next";
+
+
 
 const UserDetail = () => {
+    
     const { user } = useAppSelector((state) => state.auth);
+
     const { dataPosition, statusPosition } = useAppSelector((state) => state.position);
     const { dataExpertise, status } = useAppSelector((state) => state.expertise);
     const dispatch = useAppDispatch();
-
+    const { t } = useTranslation("common");
     const [loading, setLoading] = useState(false);
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
@@ -50,7 +58,7 @@ const UserDetail = () => {
         try {
             await dispatch(updateProfile(completePayload));
             toast.success(
-                <p className="text-white tx-16 mb-0">{"Mise à jour effectuée avec succès"}</p>,
+                <p className="text-white tx-16 mb-0">{updateProfileSuccess}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -61,7 +69,7 @@ const UserDetail = () => {
             );
         } catch (error) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{"Erreur lors de la mise à jour du profil"}</p>,
+                <p className="text-white tx-16 mb-0">{updateProfileError}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -93,7 +101,7 @@ const UserDetail = () => {
             // @ts-ignore
             await dispatch(addDetails(data));
             toast.success(
-                <p className="text-white tx-16 mb-0">{"Détails mis à jour avec succès !"}</p>,
+                <p className="text-white tx-16 mb-0">{updateDetailsSuccess}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -104,7 +112,7 @@ const UserDetail = () => {
             );
         } catch (error) {
             toast.error(
-                <p className="text-white tx-16 mb-0">{"Erreur lors de la mise à jour des détails !"}</p>,
+                <p className="text-white tx-16 mb-0">{updateDetailsError}</p>,
                 {
                     autoClose: 5000,
                     position: toast.POSITION.TOP_CENTER,
@@ -119,83 +127,83 @@ const UserDetail = () => {
     return (
         <Container fluid className="mt-5">
             <div>
-                <h5 className="mb-3">Détails de l'utilisateur</h5>
+                <h5 className="mb-3">{userDetailTitle}</h5>
                 <Form onSubmit={handleProfileUpdate}>
                     <div className={'mb-3 m-form__group'}>
-                        <Label>{'Nom'}</Label>
+                        <Label>{userDetailNameLabel}</Label>
                         <InputGroup>
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-id-card"></i>
                             </InputGroupText>
                             <Input
                                 type={'text'}
-                                placeholder={'Entrer votre nom'}
+                                placeholder={userDetailNamePlaceholder}
                                 innerRef={nameRef}
                                 defaultValue={user?.name}
                             />
                         </InputGroup>
                     </div>
                     <div className={'mb-3 m-form__group'}>
-                        <Label>{'Email'}</Label>
+                        <Label>{userDetailEmailLabel}</Label>
                         <InputGroup>
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-ui-email"></i>
                             </InputGroupText>
                             <Input
                                 type={'text'}
-                                placeholder={'Entrer votre email'}
+                                placeholder={userDetailEmailPlaceholder}
                                 innerRef={emailRef}
                                 defaultValue={user?.email}
                             />
                         </InputGroup>
                     </div>
                     <div className={'mb-3 m-form__group'}>
-                        <Label>{'Numéro de téléphone'}</Label>
+                        <Label>{userDetailPhoneLabel}</Label>
                         <InputGroup>
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-ui-call"></i>
                             </InputGroupText>
                             <Input
                                 type={'text'}
-                                placeholder={'Entrer votre numéro de téléphone'}
+                                placeholder={userDetailPhonePlaceholder}
                                 innerRef={phoneRef}
                                 defaultValue={user?.phone_number}
                             />
                         </InputGroup>
                     </div>
                     <div className={'mb-3 m-form__group'}>
-                        <Label>{'Adresse'}</Label>
+                        <Label>{userDetailAddressLabel}</Label>
                         <InputGroup>
                             <InputGroupText className={'list-light-primary'}>
                                 <i className="icofont icofont-location-pin"></i>
                             </InputGroupText>
                             <Input
                                 type={'text'}
-                                placeholder={'Entrer votre adresse'}
+                                placeholder={userDetailAddressPlaceholder}
                                 innerRef={addressRef}
                                 defaultValue={user?.address}
                             />
                         </InputGroup>
                     </div>
                     <Button color="primary" type="submit" disabled={loading} className={'mb-5 mt-5'} outline >
-                        {loading ? "Chargement..." : "Modifier"}
+                        {loading ? userDetailLoading : userDetailUpdateButton}
                     </Button>
                 </Form>
             </div>
             <hr/>
 
             <div>
-                <h5 className="mb-3 mt-5">Informations Personnelles</h5>
+                <h5 className="mb-3 mt-5">{t(personalInfoTitle)}</h5>
                 <div>
                     <div>
                         <div className="mb-3 m-form__group">
-                            <Label>LinkedIn</Label>
+                            <Label>{personalInfoLinkedInLabel}</Label>
                             <InputGroup>
                                 <InputGroupText className="list-light-primary">
                                     <i className="icofont icofont-social-linkedin"></i>
                                 </InputGroupText>
                                 <Input
-                                    placeholder="https://"
+                                    placeholder={personalInfoLinkedInPlaceholder}
                                     value={formData.socials.Linkedin}
                                     onChange={(e) =>
                                         handleInputChange("socials", {
@@ -207,13 +215,13 @@ const UserDetail = () => {
                             </InputGroup>
                         </div>
                         <div className="mb-3 m-form__group">
-                            <Label>Facebook</Label>
+                            <Label>{personalInfoFacebookLabel}</Label>
                             <InputGroup>
                                 <InputGroupText className="list-light-primary">
                                     <i className="icofont icofont-social-facebook"></i>
                                 </InputGroupText>
                                 <Input
-                                    placeholder="https://"
+                                    placeholder={personalInfoFacebookPlaceholder}
                                     value={formData.socials.Facebook}
                                     onChange={(e) =>
                                         handleInputChange("socials", {
@@ -226,14 +234,14 @@ const UserDetail = () => {
                         </div>
 
                         <div className="mb-3 m-form__group">
-                            <Label>Biographie</Label>
+                            <Label>{personalInfoBioLabel}</Label>
                             <InputGroup>
                                 <InputGroupText className="list-light-primary">
                                     <i className="icofont icofont-newspaper"></i>
                                 </InputGroupText>
                                 <Input
                                     type="textarea"
-                                    placeholder="Entrer votre biographie"
+                                    placeholder={personalInfoBioPlaceholder}
                                     value={formData.bio}
                                     onChange={(e) => handleInputChange("bio", e.target.value)}
                                 />
@@ -242,7 +250,7 @@ const UserDetail = () => {
 
                         {user?.roles?.includes("staff") && (
                             <div className="mb-3 m-form__group">
-                                <Label>Positions</Label>
+                                <Label>{staffPositionsLabel}</Label>
                                 <Input
                                     type="select"
                                     multiple
@@ -266,7 +274,7 @@ const UserDetail = () => {
 
                         {user?.roles?.includes("coach") && (
                             <div className="mb-3 m-form__group">
-                                <Label>Domaines d'expertise</Label>
+                                <Label>{coachExpertisesLabel}</Label>
                                 <Input
                                     type="select"
                                     multiple
@@ -290,7 +298,7 @@ const UserDetail = () => {
                     </div>
                     <div className="mt-5">
                         <Button color="primary" onClick={handlePersonalInfoSubmit} outline>
-                            Ajouter / Mettre à jour
+                            {updateDetailsButton}
                         </Button>
                     </div>
                 </div>
@@ -300,4 +308,3 @@ const UserDetail = () => {
 };
 
 export default UserDetail;
-

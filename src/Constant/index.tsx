@@ -1,10 +1,10 @@
 //User Profile
 export const userProfileBasicInfo="Informations";
-export const userProfilePersonalInfo="Informations Personnelles";
+export const userProfilePersonalInfo="userProfilePersonalInfo";
 export const userProfileSecurity="Sécurité";
 export const userProfileTitle="Mon Compte";
 export const userProfileImage="Image Profile";
-//Activity
+
 export const allActivities="Activités";
 export const publishedActivity="Publiée(s)";
 export const titleAddActivity = "Ajout d'une activité";
@@ -12,42 +12,39 @@ export const AddActivity = "Ajouter une activité";
 export const ModifyActivity = "Modifier une activité";
 export const CreateActivity= "Créer l'activité";
 export const ModifyActivityTitle = "Modifier l'activité";
-    //---------------------------------------------------------------------------------------------------------
+    
 export const activityName="Nom de l'activité";
 export const activityTown="Ville cible";
 export const activityAudience="Audience cible";
 export const activityPrise="A la clé";
 export const activityDescription="Description de l'activité";
 export const activityObjectif="Objectif de l'activité";
-    //---------------------------------------------------------------------------------------------------------
+    
 export const activitySelect= "Sélectionner";
 export const activityStepTwoDescription = "le programme au quel sera attaché cette activité";
 export const activityStepTwoClique= "Cliquez sur le programme";
 export const activityStepTwoLoadingProgram="Chargement...";
 export const activityStartDate = "Date de début";
 export const activityEndDate= "Date de fin";
-    //----------------------------------------------------------------------------------------------------------
+    
 export const activityStepThreeType="Le type d'activité";
 export const activityStepThreeDescription="Cliquez sur les types de projet qui correspondent à vos besoins.";
-    //----------------------------------------------------------------------------------------------------------
+    
 export const activityStepFourCategory="la catégorie";
 export const activityStepFourDescription="Cliquez sur la catégorie du projet qui correspond.";
-    //----------------------------------------------------------------------------------------------------------
+    
 export const activityStepFivePartners="Les partenaires du projet";
 export const activityStepFiveDescription="Cliquez sur les partenaires que vous souhaitez associer à ce projet.";
-    //----------------------------------------------------------------------------------------------------------
-//Activity Delete Modale
+    
 export const activitySuccessMessageDelete = "Suppression effectuée avec succès";
 export const activityErrorMessageDelete = "Erreur survenue lors de la suppression de l'activité";
 export const activityWarningDeleteMessage = "Êtes-vous sûr de vouloir supprimer cette activité?";
 export const activityTitleDeleteModal="Supprimer l'activité";
 
-//inputSearch
 export const inputSearch = "Chercher";
 export const editProgramEventDetail= "Détail de l'événement";
 export const editProgramEventImagedeCouverture="Image de couverture";
 
-//Evenements 
 export const createEventSuccessMessage = "Evénement créé avec succès";
 export const updateEventSuccessMessage = "Evénement modifié avec succès";
 export const errorEventMessage = "Une erreur est survenue";
@@ -65,7 +62,6 @@ export const eventParticipant = "Nombre de participants attendus";
 export const eventDescription = "Description de l'événement";
     //-------------------------------------------------------------------------------------------------------------
 export const eventTextDescription = "Cliquez sur les types d'événement qui correspondent à vos besoins."
-
 export const eventProgram= "le programme au quel sera attaché cet événement";
 export const eventProgramSelect="Sélectionner";
 export const eventProgramClick="Cliquez sur le programme";
@@ -76,22 +72,47 @@ export const eventResponsible="le responsable de cet événement";
 export const eventSelectResponsible="Cliquez sur un membre du staff pour le définir comme responsable.";
 export const eventSelectLoading="Chargement des membres du staff...";
 
-
-
-
-//MultiStep Form
 export const buttonFinish = "Terminer";
 export const buttonNext = "Suivant";
 export const buttonPrevious = "Précédent";
-//Modal
+
 export const closeModal="Fermer";
 export const deleteBtnModal="Supprimer";
-//Events
+
 export const titleAddEvent = "Ajout d'un événement";
 export const publishedEvents = "Publié(s)";
 export const allEvents = "Evénements";
-//Programs
+
 export const addProgram = "Ajouter un programme";
+
+export const userDetailTitle = "Détails de l'utilisateur";
+export const userDetailNameLabel = "Nom";
+export const userDetailNamePlaceholder = "Entrer votre nom";
+export const userDetailEmailLabel = "Email";
+export const userDetailEmailPlaceholder = "Entrer votre email";
+export const userDetailPhoneLabel = "Numéro de téléphone";
+export const userDetailPhonePlaceholder = "Entrer votre numéro de téléphone";
+export const userDetailAddressLabel = "Adresse";
+export const userDetailAddressPlaceholder = "Entrer votre adresse";
+export const userDetailUpdateButton = "Modifier";
+export const userDetailLoading = "Chargement...";
+export const personalInfoTitle = "Informations Personnelles";
+export const personalInfoLinkedInLabel = "LinkedIn";
+export const personalInfoLinkedInPlaceholder = "https://";
+export const personalInfoFacebookLabel = "Facebook";
+export const personalInfoFacebookPlaceholder = "https://";
+export const personalInfoBioLabel = "Biographie";
+export const personalInfoBioPlaceholder = "Entrer votre biographie";
+export const staffPositionsLabel = "Positions";
+export const coachExpertisesLabel = "Domaines d'expertise";
+export const updateProfileSuccess = "Mise à jour effectuée avec succès";
+export const updateProfileError = "Erreur lors de la mise à jour du profil";
+export const updateDetailsSuccess = "Détails mis à jour avec succès !";
+export const updateDetailsError = "Erreur lors de la mise à jour des détails !";
+export const updateDetailsButton="Ajouter / Mettre à jour"
+
+
+
 
 
 
@@ -147,7 +168,6 @@ export const Checkout: string = "Checkout";
 export const Pinned: string = "Pinned";
 export const ErrorMessage = 'Ops!! There are no result found.';
 
-//Ui Kits- Typography
 export const Headings: string = "Headings";
 export const Code: string = "Code";
 export const FontSize: string = "Font-Size";

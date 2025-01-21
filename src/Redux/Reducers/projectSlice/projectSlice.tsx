@@ -66,9 +66,7 @@ export const fetchPublishedProject = createAsyncThunk('projects/fetchPublishedPr
 
 export const fetchProjectById = createAsyncThunk<ReceiveProjectType, string, { rejectValue: any }>('projects/fetchProjectById', async (projectId, thunkAPI) => {
     try {
-        const response = await axiosInstance.get<{ data: ReceiveProjectType }>(
-            `${apiBaseUrl}/projects/${projectId}`
-        );
+        const response = await axiosInstance.get<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects/${projectId}`);
         return response.data.data;
     }
     catch (err: any) {
@@ -88,9 +86,7 @@ export const createProject = createAsyncThunk<ReceiveProjectType, CreateProjectT
     }
 );
 
-export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: string, updatedProject: any }, { rejectValue: any }>(
-    'project/updateProject',
-    async ({ projectId, updatedProject }, thunkAPI) => {
+export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: string, updatedProject: any }, { rejectValue: any }>( 'project/updateProject', async ({ projectId, updatedProject }, thunkAPI) => {
         try {
             const response = await axiosInstance.patch<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects/${projectId}`, updatedProject);
             return response.data.data;
@@ -100,9 +96,7 @@ export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: s
     }
 );
 
-export const deleteProject = createAsyncThunk<{ id: string }, string, { rejectValue: any }>(
-    'project/deleteProject',
-    async (projectId, thunkAPI) => {
+export const deleteProject = createAsyncThunk<{ id: string }, string, { rejectValue: any }>('project/deleteProject', async (projectId, thunkAPI) => {
         try {
             await axiosInstance.delete(`${apiBaseUrl}/projects/${projectId}`);
             return { id: projectId };

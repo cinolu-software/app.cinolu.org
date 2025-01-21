@@ -9,8 +9,6 @@ import { AppDispatch } from "@/Redux/Store";
 import { updateProfileImage } from "@/Redux/Reducers/AuthSlice";
 import { toast, Flip } from "react-toastify";
 
-
-
 const UserImageProfile = () => {
 
     const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +16,6 @@ const UserImageProfile = () => {
     const [loading, setLoading] = useState(false);
 
     const handleUpdateProfileImage = () => {
-
         setLoading(true);
         if (files.length === 0) {
             toast.error(
@@ -33,10 +30,8 @@ const UserImageProfile = () => {
             );
             return;
         }
-
         const formData = new FormData();
         formData.append("thumb", files[0].file);
-
         setTimeout(()=>{
 
             dispatch(updateProfileImage(formData))
@@ -69,7 +64,6 @@ const UserImageProfile = () => {
             setLoading(false);
 
         }, 1000)
-
     };
 
     return (

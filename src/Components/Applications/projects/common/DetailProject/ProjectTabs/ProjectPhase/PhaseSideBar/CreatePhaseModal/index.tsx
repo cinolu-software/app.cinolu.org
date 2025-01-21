@@ -4,7 +4,9 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
 import { setModalcreateProjectPhase, createProjectPhase } from "@/Redux/Reducers/projectSlice/ProjectPhaseSlice";
 
+
 const CreateNewPhase = () => {
+
     const dispatch = useAppDispatch();
     const { isOpenModalCreateProjectPhase, formValue } = useAppSelector(state => state.projectPhase);
     const { projectData } = useAppSelector(state => state.project);
@@ -23,14 +25,12 @@ const CreateNewPhase = () => {
             });
             return;
         }
-
         if (!projectData?.id) {
             toast.error("Aucun projet sélectionné", {
                 transition: Flip,
             });
             return;
         }
-
         const newPhase = {
             ...formValue,
             program: projectData.id,
@@ -40,7 +40,8 @@ const CreateNewPhase = () => {
             await dispatch(createProjectPhase(newPhase)).unwrap();
             toast.success("Phase créée avec succès !", { transition: Flip });
             dispatch(setModalcreateProjectPhase({ isOpen: false }));
-        } catch (err) {
+        }
+        catch (err) {
             toast.error("Erreur lors de la création de la phase", { transition: Flip });
         }
     };

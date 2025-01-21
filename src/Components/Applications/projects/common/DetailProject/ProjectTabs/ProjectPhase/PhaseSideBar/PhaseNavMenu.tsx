@@ -1,15 +1,17 @@
 import { Badge, Nav, NavItem, NavLink } from "reactstrap";
-import React from "react";
-import { useAppSelector } from "@/Redux/Hooks";
+import React, {useEffect} from "react";
+import { useAppSelector, useAppDispatch } from "@/Redux/Hooks";
 import {PhaseNavMenuProps} from "@/Types/Projects/PhasesType";
+import {fetchProjectById} from "@/Redux/Reducers/projectSlice/projectSlice";
+
 
 const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
 
-    const { projectData } = useAppSelector(state => state.project);
-
+    const { projectData, publishedProjectStatus, selectedProject } = useAppSelector(state => state.project);
+    const { status } = useAppSelector(state => state.projectPhase)
     // @ts-ignore
     const phases = projectData?.phases || [];
-
+    const dispatch = useAppDispatch()
 
     const getPhaseStatus = (startDate: string, endDate: string): { status: string, color: string } => {
         const now = new Date();
@@ -25,10 +27,18 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
         }
     };
 
-
     const truncateText = (text: string, maxLength: number): string => {
         return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
     };
+
+    useEffect(() => {
+        if (status === "succeeded") {
+            // @ts-ignore
+            const projectId = selectedProject.id;
+            dispatch(fetchProjectById(projectId));
+        }
+    }
+    , [publishedProjectStatus, selectedProject, status]);
 
     return (
         <Nav pills tabs className="main-menu email-category border-0">

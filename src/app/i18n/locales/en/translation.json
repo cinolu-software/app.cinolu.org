@@ -180,5 +180,32 @@
   "Login With Bg Image": "Login With Bg Image",
   "Coming Soon": "Coming Soon",
   "Pinned":"Pinned",
-  "Mon Compte": "My Account"
+
+
+  "Mon Compte": "My Account",
+  "Compte": "Account",
+  "Profil": "Profile",
+  "Administration": "Administration",
+  "Admin": "Admin",
+  "Liste": "List",
+  "Coachs": "Coaches",
+  "Expertises": "Expertises",
+  "Personnel": "Staff",
+  "Titre du Poste": "Job Title",
+  "Programmes": "Programs",
+  "TProgrammes": "All Programs",
+  "Activités": "Activities",
+  "TActivités": "All Activities",
+  "Tevenements": "All Events",
+  "Types": "Types",
+  "Catégories": "Categories",
+  "Event": "Events",
+  "Partenaires": "Partners",
+  "Rapports": "Reports",
+  "Rôles": "Roles",
+  "Notifications": "Notifications",
+  "Coach": "Coach",
+  "Discussions": "Discussions",
+  "Informations": "Informations",
+  "userProfilePersonalInfo": "Personal Information"
 }
