@@ -33,9 +33,8 @@ const CreateNewPhase = () => {
         }
         const newPhase = {
             ...formValue,
-            program: projectData.id,
+            project: projectData.id,
         };
-
         try {
             await dispatch(createProjectPhase(newPhase)).unwrap();
             toast.success("Phase créée avec succès !", { transition: Flip });
@@ -55,16 +54,14 @@ const CreateNewPhase = () => {
             >
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">
-                        Ajouter une phase au projet{" "}
+                        Ajouter une phase au projet
                         <Badge className="bg-brown">{projectData?.name || "Projet non spécifié"}</Badge>
                     </h1>
                     <Button close onClick={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-phase">
-                        <Label for="phaseName" check>
-                            Nom de la phase <span className="txt-danger">*</span>
-                        </Label>
+                        <Label for="phaseName" check> Nom de la phase <span className="txt-danger">*</span></Label>
                         <Input
                             className="m-0"
                             id="phaseName"
@@ -85,6 +82,7 @@ const CreateNewPhase = () => {
                             onChange={(e) => handleInputChange("started_at", e.target.value)}
                             required
                         />
+
                         <Label for="endDate" className="mt-2" check>
                             Date de fin <span className="txt-danger">*</span>
                         </Label>

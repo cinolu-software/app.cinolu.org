@@ -15,7 +15,7 @@ const initialState: InitialStateProjectPhaseType = {
         description: '',
         started_at: '',
         ended_at: '',
-        program: ''
+        project: ''
     },
 }
 
@@ -81,9 +81,10 @@ const ProjectPhaseSlice = createSlice({
                 description: '',
                 started_at: '',
                 ended_at: '',
-                program: '',
+                project: '',
             };
         },
+
     },
     extraReducers: (builder) => {
         builder

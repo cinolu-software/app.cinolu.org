@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Card, Col, Row, Container, TabContent, TabPane} from "reactstrap";
+
 import PhaseSideBar from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseSideBar";
 import PhaseRightSide from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide";
 import CreatePhaseModal from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseSideBar/CreatePhaseModal";
@@ -21,6 +22,8 @@ const ProgramPhase = () => {
             </Container>
         </TabPane>
     )
+
 }
+
 
 export default ProgramPhase;

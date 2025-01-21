@@ -16,7 +16,7 @@ export interface FormValue {
     description: string;
     started_at: string;
     ended_at: string;
-    program: string;
+    project: string;
 }
 
 export interface FormEditValue extends FormValue{
@@ -30,7 +30,7 @@ export interface ProjectPhaseType {
     description: string;
     started_at: string;
     ended_at: string;
-    program: string
+    project: string
 }
 
 export interface CreateProjectPhaseType extends  ProjectPhaseType{}
