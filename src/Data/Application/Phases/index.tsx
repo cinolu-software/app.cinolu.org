@@ -62,4 +62,10 @@ export const PhasesNavTabs = [
         icon: "audience_phase",
         id: 'audience-tab'
     },
+    {
+        title: "Paramètres",
+        // icon: "knowledgebase",
+        icon: "setting_phase",
+        id: 'setting-tab'
+    },
 ];
