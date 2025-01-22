@@ -24,7 +24,6 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     useEffect(() => {
         setIsLoading(true);
         if (phase?.requirements) {
-
             // @ts-ignore
             const sanitizedRequirements = phase.requirements.map(({ name, description, id }) => ({
                 name,
@@ -82,8 +81,6 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
                     phase: phase.id,
                     requirements: newRequirements.map(({ name, description }) => ({ name, description })),
                 };
-
-                console.log("payload", payload);
 
                 await dispatch(createRequirement(payload)).unwrap();
             }

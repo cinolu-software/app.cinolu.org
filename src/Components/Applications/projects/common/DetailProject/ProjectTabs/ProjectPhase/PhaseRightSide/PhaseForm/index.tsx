@@ -126,36 +126,13 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                     formFields.map((field, index) => (
                                         <Row key={field.name || index} className="mb-3 align-items-center">
                                             <Col md="3">
-                                                <Input
-                                                    bsSize="sm"
-                                                    type="text"
-                                                    value={field.label}
-                                                    onChange={(e) =>
-                                                        handleFieldChange(index, "label", e.target.value)
-                                                    }
-                                                    placeholder="Label"
-                                                />
+                                                <Input bsSize="sm" type="text" value={field.label} onChange={(e) => handleFieldChange(index, "label", e.target.value)} placeholder="Label"/>
                                             </Col>
                                             <Col md="3">
-                                                <Input
-                                                    type="text"
-                                                    value={field.name}
-                                                    onChange={(e) =>
-                                                        handleFieldChange(index, "name", e.target.value)
-                                                    }
-                                                    placeholder="Nom"
-                                                    bsSize="sm"
-                                                />
+                                                <Input type="text" value={field.name} onChange={(e) => handleFieldChange(index, "name", e.target.value)} placeholder="Nom" bsSize="sm"/>
                                             </Col>
                                             <Col md="2">
-                                                <Input
-                                                    bsSize="sm"
-                                                    type="select"
-                                                    value={field.type}
-                                                    onChange={(e) =>
-                                                        handleFieldChange(index, "type", e.target.value)
-                                                    }
-                                                >
+                                                <Input bsSize="sm" type="select" value={field.type} onChange={(e) => handleFieldChange(index, "type", e.target.value)}>
                                                     <option value="text">Texte</option>
                                                     <option value="textarea">Textarea</option>
                                                     <option value="number">Nombre</option>
@@ -164,18 +141,7 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                             </Col>
                                             <Col md="2">
                                                 <FormGroup check>
-                                                    <Label check>
-                                                        <Input
-                                                            type="checkbox"
-                                                            checked={field.required}
-                                                            onChange={(e) =>
-                                                                handleFieldChange(
-                                                                    index,
-                                                                    "required",
-                                                                    e.target.checked
-                                                                )
-                                                            }
-                                                        />{" "}
+                                                    <Label check> <Input type="checkbox" checked={field.required} onChange={(e) => handleFieldChange(index, "required", e.target.checked)}/>
                                                         Requis
                                                     </Label>
                                                 </FormGroup>
@@ -204,36 +170,13 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                 </div>
                                 <Row className="mb-3 align-items-center ms-3">
                                     <Col md="3">
-                                        <Input
-                                            type="text"
-                                            value={newField.label}
-                                            onChange={(e) =>
-                                                setNewField({ ...newField, label: e.target.value })
-                                            }
-                                            placeholder="Label"
-                                            bsSize="sm"
-                                        />
+                                        <Input type="text" value={newField.label} onChange={(e) => setNewField({ ...newField, label: e.target.value })} placeholder="Label" bsSize="sm"/>
                                     </Col>
                                     <Col md="3">
-                                        <Input
-                                            type="text"
-                                            value={newField.name}
-                                            onChange={(e) =>
-                                                setNewField({ ...newField, name: e.target.value })
-                                            }
-                                            placeholder="Nom"
-                                            bsSize="sm"
-                                        />
+                                        <Input type="text" value={newField.name} onChange={(e) => setNewField({ ...newField, name: e.target.value })} placeholder="Nom" bsSize="sm"/>
                                     </Col>
                                     <Col md="2">
-                                        <Input
-                                            type="select"
-                                            value={newField.type}
-                                            onChange={(e) =>
-                                                setNewField({ ...newField, type: e.target.value })
-                                            }
-                                            bsSize="sm"
-                                        >
+                                        <Input type="select" value={newField.type} onChange={(e) => setNewField({ ...newField, type: e.target.value })} bsSize="sm">
                                             <option value="text">Texte</option>
                                             <option value="textarea">Textarea</option>
                                             <option value="number">Nombre</option>
@@ -243,39 +186,19 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
                                     <Col md="2">
                                         <FormGroup check>
                                             <Label check>
-                                                <Input
-                                                    type="checkbox"
-                                                    checked={newField.required}
-                                                    onChange={(e) =>
-                                                        setNewField({
-                                                            ...newField,
-                                                            required: e.target.checked,
-                                                        })
-                                                    }
-                                                />{" "}
+                                                <Input type="checkbox" checked={newField.required} onChange={(e) => setNewField({...newField, required: e.target.checked,})}/>
                                                 Requis
                                             </Label>
                                         </FormGroup>
                                     </Col>
                                     <Col md="2">
-                                        <button
-                                            type="button"
-                                            className={'btn btn-outline-primary btn-sm'}
-                                            onClick={handleAddField}
-                                        >
-                                            Ajouter
-                                        </button>
+                                        <button type="button" className={'btn btn-outline-primary btn-sm'} onClick={handleAddField}>Ajouter</button>
                                     </Col>
                                 </Row>
                             </div>
 
                             <div className="text-start ms-4 mt-5">
-                                <button
-                                    type="button"
-                                    className={'btn btn-outline-primary btn-sm'}
-                                    onClick={handleSavePhase}
-                                    disabled={isSaving}
-                                >
+                                <button type="button" className={'btn btn-outline-primary btn-sm'} onClick={handleSavePhase} disabled={isSaving}>
                                     {isSaving ? "Sauvegarde..." : "Sauvegarder la phase"}
                                 </button>
                             </div>

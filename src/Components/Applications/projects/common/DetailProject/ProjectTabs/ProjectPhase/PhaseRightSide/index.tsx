@@ -1,13 +1,11 @@
-import {Card, Col, TabContent} from "reactstrap";
+import {Col, TabContent} from "reactstrap";
 import React, {useState} from "react";
-
 import {PhaseRightSideProps} from "@/Types/Projects/PhasesType";
 import RightSideHeader from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/RightSideHeader";
 import PhaseDetails from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseDetails";
 import PhaseForm from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseForm";
 import PhaseRequired from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseRequired";
 import PhaseSettings from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseSettings";
-
 
 
 const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {

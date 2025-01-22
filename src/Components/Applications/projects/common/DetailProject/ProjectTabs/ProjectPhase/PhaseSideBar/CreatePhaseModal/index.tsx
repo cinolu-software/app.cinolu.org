@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter, Badge } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
@@ -47,77 +47,29 @@ const CreateNewPhase = () => {
 
     return (
         <Col xs="12">
-            <Modal
-                isOpen={isOpenModalCreateProjectPhase}
-                toggle={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))}
-                size="lg"
-            >
+            <Modal isOpen={isOpenModalCreateProjectPhase} toggle={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))} size="lg">
                 <div className="modal-header">
-                    <h1 className="modal-title fs-5">
-                        Ajouter une phase au projet
-                        <Badge className="bg-brown">{projectData?.name || "Projet non spécifié"}</Badge>
-                    </h1>
+                    <h1 className="modal-title fs-5">Ajouter une phase au projet<Badge className="bg-brown">{projectData?.name || "Projet non spécifié"}</Badge></h1>
                     <Button close onClick={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-phase">
                         <Label for="phaseName" check> Nom de la phase <span className="txt-danger">*</span></Label>
-                        <Input
-                            className="m-0"
-                            id="phaseName"
-                            type="text"
-                            value={formValue.name}
-                            onChange={(e) => handleInputChange("name", e.target.value)}
-                            required
-                        />
+                        <Input className="m-0" id="phaseName" type="text" value={formValue.name} onChange={(e) => handleInputChange("name", e.target.value)} required/>
 
-                        <Label for="startDate" className="mt-2" check>
-                            Date de début <span className="txt-danger">*</span>
-                        </Label>
-                        <Input
-                            className="m-0"
-                            id="startDate"
-                            type="date"
-                            value={formValue.started_at}
-                            onChange={(e) => handleInputChange("started_at", e.target.value)}
-                            required
-                        />
+                        <Label for="startDate" className="mt-2" check> Date de début <span className="txt-danger">*</span></Label>
+                        <Input className="m-0" id="startDate" type="date" value={formValue.started_at} onChange={(e) => handleInputChange("started_at", e.target.value)} required/>
 
-                        <Label for="endDate" className="mt-2" check>
-                            Date de fin <span className="txt-danger">*</span>
-                        </Label>
-                        <Input
-                            className="m-0"
-                            id="endDate"
-                            type="date"
-                            value={formValue.ended_at}
-                            onChange={(e) => handleInputChange("ended_at", e.target.value)}
-                            required
-                        />
+                        <Label for="endDate" className="mt-2" check>Date de fin <span className="txt-danger">*</span></Label>
+                        <Input className="m-0" id="endDate" type="date" value={formValue.ended_at} onChange={(e) => handleInputChange("ended_at", e.target.value)} required/>
 
-                        <Label for="phaseDescription" className="mt-2" check>
-                            Description de la phase <span className="txt-danger">*</span>
-                        </Label>
-                        <textarea
-                            id="phaseDescription"
-                            className="form-control"
-                            rows={5}
-                            value={formValue.description}
-                            onChange={(e) => handleInputChange("description", e.target.value)}
-                            required
-                        />
+                        <Label for="phaseDescription" className="mt-2" check> Description de la phase <span className="txt-danger">*</span></Label>
+                        <textarea id="phaseDescription" className="form-control" rows={5} value={formValue.description} onChange={(e) => handleInputChange("description", e.target.value)} required/>
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button
-                        className="btn btn-outline-light"
-                        onClick={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))}
-                    >
-                        Annuler
-                    </button>
-                    <button className="btn btn-outline-primary" onClick={handleSubmit}>
-                        Créer
-                    </button>
+                    <button className="btn btn-outline-light" onClick={() => dispatch(setModalcreateProjectPhase({ isOpen: false }))}>Annuler</button>
+                    <button className="btn btn-outline-primary" onClick={handleSubmit}>Créer</button>
                 </ModalFooter>
             </Modal>
         </Col>
