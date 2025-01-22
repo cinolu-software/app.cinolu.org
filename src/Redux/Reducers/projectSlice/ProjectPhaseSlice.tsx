@@ -4,7 +4,9 @@ import {InitialStateProjectPhaseType, ProjectPhaseType, CreateProjectPhaseType, 
 
 const initialState: InitialStateProjectPhaseType = {
     ProjectDataPhase: [],
+    dataPhase: null,
     status: 'idle',
+    statusPhase: 'idle',
     error: null,
     isOpenModalCreateProjectPhase : false,
     isOpenModalDeleteProjectPhase : false,
@@ -24,6 +26,11 @@ export const fetchProjectPhase = createAsyncThunk('project/fetchProjectPhase', a
     return {data : response.data.data}
 });
 
+export const fetchProjectPhaseById = createAsyncThunk('project/fetchProjectPhaseById', async (id: string) => {
+    const response = await axiosInstance.get<{data: ProjectPhaseType}>(`${apiBaseUrl}/project-phases/${id}`);
+    return response.data.data;
+});
+
 export const createProjectPhase = createAsyncThunk('project/createProjectPhase', async(newProjectPhase: CreateProjectPhaseType)=>{
     try{
         const response = await axiosInstance.post<{data: ProjectPhaseType}>(`${apiBaseUrl}/project-phases`, newProjectPhase);
@@ -33,9 +40,7 @@ export const createProjectPhase = createAsyncThunk('project/createProjectPhase',
     }
 })
 
-export const updateProjectPhase = createAsyncThunk(
-    'project/updateProjectPhase',
-    async (updatedProjectPhase: any, { rejectWithValue }) => {
+export const updateProjectPhase = createAsyncThunk('project/updateProjectPhase', async (updatedProjectPhase: any, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.patch<{ data: ProjectPhaseType }>(
                 `${apiBaseUrl}/project-phases/${updatedProjectPhase.id}`,
@@ -44,6 +49,18 @@ export const updateProjectPhase = createAsyncThunk(
             return response.data.data;
         } catch (err: any) {
             return rejectWithValue("Erreur survenue lors de la mise à jour de la phase");
+        }
+    }
+);
+
+export const deleteProjectPhase = createAsyncThunk(
+    'project/deleteProjectPhase',
+    async (id: string, { rejectWithValue }) => {
+        try {
+            await axiosInstance.delete(`${apiBaseUrl}/project-phases/${id}`);
+            return id;
+        } catch (err: any) {
+            return rejectWithValue("Erreur survenue lors de la suppression de la phase");
         }
     }
 );
@@ -74,7 +91,6 @@ const ProjectPhaseSlice = createSlice({
                 console.warn(`Le champ ${field} n'existe pas dans formValue.`);
             }
         },
-
         resetFormValue: (state) => {
             state.formValue = {
                 name: '',
@@ -84,7 +100,6 @@ const ProjectPhaseSlice = createSlice({
                 project: '',
             };
         },
-
     },
     extraReducers: (builder) => {
         builder
@@ -128,7 +143,35 @@ const ProjectPhaseSlice = createSlice({
             .addCase(updateProjectPhase.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.payload as string;
-            });
+            })
+            .addCase(deleteProjectPhase.pending, (state) => {
+                state.status = 'loading';
+                state.error = null;
+            })
+            .addCase(deleteProjectPhase.fulfilled, (state, action: PayloadAction<string>) => {
+                state.status = 'succeeded';
+                state.ProjectDataPhase = state.ProjectDataPhase.filter(
+                    (phase) => phase.id !== action.payload
+                );
+            })
+            .addCase(deleteProjectPhase.rejected, (state, action) => {
+                state.status = 'failed';
+                state.error = action.payload as string;
+            })
+            .addCase(fetchProjectPhaseById.pending, (state) => {
+                state.statusPhase = 'loading';
+                state.error = null;
+            })
+            .addCase(fetchProjectPhaseById.fulfilled, (state, action: PayloadAction<any>) => {
+                state.statusPhase = 'succeeded';
+                state.selectedProjectPhase = action.payload;
+            })
+            .addCase(fetchProjectPhaseById.rejected, (state, action) => {
+                state.statusPhase = 'failed';
+                state.error = action.payload as string;
+            })
+
+        ;
     }
 });
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CardBody, Button, Form, FormGroup, Label, Input, Row, Col, Spinner, TabPane } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { Flip, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import {createRequirement, updateRequirement, deleteRequirement,} from "@/Redux/Reducers/projectSlice/ProjectRequiredSlice";
 
 interface Requirement {

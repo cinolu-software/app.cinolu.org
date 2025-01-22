@@ -39,11 +39,13 @@ export interface  FormValue extends ProjectPhaseType{}
 
 export interface InitialStateProjectPhaseType{
     ProjectDataPhase: ProjectPhaseType [];
+    dataPhase: ProjectPhaseType[] | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusPhase: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
     formValue : FormValue;
     isOpenModalCreateProjectPhase: boolean;
     isOpenModalEditProjectPhase: boolean;
     isOpenModalDeleteProjectPhase: boolean;
-    selectedProjectPhase: ProjectPhaseType | null
+    selectedProjectPhase: ProjectPhaseType | null;
 }
