@@ -13,12 +13,11 @@ const PhaseSettings: React.FC<{ navId: string }> = ({ navId }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if(statusPhase === 'idle' && projectData){
-            dispatch(fetchProjectPhaseById(projectData.id))
-        }
-    }, [ statusPhase, projectData]);
+        dispatch(fetchProjectPhaseById(navId))
+    }, [ navId]);
 
-    console.log('selectedProjectPhase ===>|', selectedProjectPhase)
+
+    console.log(selectedProjectPhase);
 
 
     return (

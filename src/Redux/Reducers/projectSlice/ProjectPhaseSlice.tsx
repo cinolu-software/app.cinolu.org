@@ -53,9 +53,7 @@ export const updateProjectPhase = createAsyncThunk('project/updateProjectPhase',
     }
 );
 
-export const deleteProjectPhase = createAsyncThunk(
-    'project/deleteProjectPhase',
-    async (id: string, { rejectWithValue }) => {
+export const deleteProjectPhase = createAsyncThunk('project/deleteProjectPhase', async (id: string, { rejectWithValue }) => {
         try {
             await axiosInstance.delete(`${apiBaseUrl}/project-phases/${id}`);
             return id;
