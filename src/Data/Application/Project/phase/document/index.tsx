@@ -1,8 +1,8 @@
 export const DocumentStep = [
     {
         id: 1,
-        icon: "message",
-        title: "Créer la notification",
+        icon: "document_info",
+        title: "Informations du document",
         detail:"",
     },
     {
@@ -13,8 +13,8 @@ export const DocumentStep = [
     },
     {
         id: 3,
-        icon: "send",
-        title: "Envoyer la notification",
+        icon: "document_done",
+        title: "Créer le document",
         detail: ""
     },
 ]
