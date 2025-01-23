@@ -19,6 +19,8 @@ import EventSlice from "@/Redux/Reducers/eventSlice/eventSlice";
 import ExpertiseSlice from "@/Redux/Reducers/userSlice/ExpertiseSlice";
 import PositionSlice from "@/Redux/Reducers/userSlice/PositionSlice";
 import ProgramSlice from "@/Redux/Reducers/programSlice/programSlice";
+import ProjectDocumentSlice from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
+
 
 const Store = configureStore({
 
@@ -43,6 +45,7 @@ const Store = configureStore({
     expertise : ExpertiseSlice,
     position: PositionSlice,
     program: ProgramSlice,
+    projectDocument: ProjectDocumentSlice
   },
 
   middleware : getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),

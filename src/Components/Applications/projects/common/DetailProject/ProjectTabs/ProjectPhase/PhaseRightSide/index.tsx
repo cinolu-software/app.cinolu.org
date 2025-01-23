@@ -6,6 +6,7 @@ import PhaseDetails from "@/Components/Applications/projects/common/DetailProjec
 import PhaseForm from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseForm";
 import PhaseRequired from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseRequired";
 import PhaseSettings from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseSettings";
+import PhaseDocument from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseDocument";
 
 
 const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
@@ -20,8 +21,9 @@ const PhaseRightSide : React.FC<PhaseRightSideProps> = ({navId}) => {
                     <TabContent activeTab={tabId} id="phases-content-tab">
                         <PhaseDetails navId={navId} />
                         <PhaseForm navId={navId} />
-                        <PhaseRequired navId={navId }/>
+                        <PhaseRequired navId={navId} />
                         <PhaseSettings navId={navId} />
+                        <PhaseDocument navId={navId} />
                     </TabContent>
                 </div>
             </div>

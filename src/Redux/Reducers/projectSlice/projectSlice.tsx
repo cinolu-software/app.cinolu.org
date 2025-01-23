@@ -106,11 +106,8 @@ export const deleteProject = createAsyncThunk<{ id: string }, string, { rejectVa
     }
 );
 
-export const updatedAttachmentProjectImage = createAsyncThunk<
-    { projectId: string ; imageUrl: string },
-    { projectId: string; imageFile: File },
-    { rejectValue: any }
->('project/updateAttachmentProjectImage', async ({ projectId, imageFile }, thunkAPI) => {
+export const updatedAttachmentProjectImage = createAsyncThunk<{ projectId: string ; imageUrl: string }, { projectId: string; imageFile: File },{ rejectValue: any }>
+('project/updateAttachmentProjectImage', async ({ projectId, imageFile }, thunkAPI) => {
         try {
             const formData = new FormData();
             formData.append('thumb', imageFile);
