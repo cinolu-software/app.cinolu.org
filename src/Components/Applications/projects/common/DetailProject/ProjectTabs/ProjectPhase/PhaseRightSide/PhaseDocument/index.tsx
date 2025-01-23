@@ -1,13 +1,18 @@
+import {Col} from "reactstrap";
 import { TabPane} from "reactstrap";
 import React from "react";
+import StepDocument from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseDocument/stepDocument";
 
 const PhaseDocument: React.FC<{navId: string}> = ({navId}) => {
 
     return (
         <TabPane tabId="document-tab">
             <div className="p-3 my-5 bg-white">
-                <h5 className="text-success">Document de la phase</h5>
-
+                <Col xxl="12" xl="12" className="box-col-12">
+                    <div className="email-right-aside">
+                        <StepDocument/>
+                    </div>
+                </Col>
             </div>
         </TabPane>
     )

@@ -1,12 +1,13 @@
 import {Row} from "reactstrap";
 import DocumentLeftSidebar from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseDocument/stepDocument/DocumentLeftSidebar";
-
+import DocumentTabContent from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseDocument/stepDocument/DocumentTabContent";
 
 const StepDocument = () => {
 
     return (
-        <Row className="p-3 my-5 bg-white">
-            <h5 className="text-success">Document de la phase</h5>
+        <Row className="ps-3 pe-3 bg-white">
+            <DocumentLeftSidebar />
+            <DocumentTabContent/>
         </Row>
     )
 

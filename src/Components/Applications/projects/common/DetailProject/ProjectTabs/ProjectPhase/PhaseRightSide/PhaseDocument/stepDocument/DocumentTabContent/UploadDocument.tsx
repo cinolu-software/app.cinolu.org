@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Dropzone, ExtFile, FileMosaic } from "@dropzone-ui/react";
-import { setFormValue } from "@/Redux/Reducers/NotifcationSlice/notificationSlice";
+import {setFormValue} from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
+import {useAppDispatch} from "@/Redux/Hooks";
 import SVG from "@/CommonComponent/SVG";
-import { useAppDispatch } from "@/Redux/Hooks";
 
-const InterviewAttachment = () => {
+const UploadDocument = () => {
     const [files, setFiles] = useState<ExtFile[]>([]);
     const dispatch = useAppDispatch();
 
@@ -13,15 +13,15 @@ const InterviewAttachment = () => {
         setFiles(incomingFiles);
 
         if (incomingFiles.length > 0) {
-            dispatch(setFormValue({ name: "attachment", value: incomingFiles[0].file }));
+            dispatch(setFormValue({ name: "file_name", value: incomingFiles[0].file }));
         } else {
-            dispatch(setFormValue({ name: "attachment", value: null }));
+            dispatch(setFormValue({ name: "file_name", value: null }));
         }
     };
 
     const removeFile = (id: string | number | undefined) => {
         setFiles(files.filter((x: ExtFile) => x.id !== id));
-        dispatch(setFormValue({ name: "attachment", value: null }));
+        dispatch(setFormValue({ name: "file_name", value: null }));
     };
 
 
@@ -56,6 +56,6 @@ const InterviewAttachment = () => {
             </div>
         </div>
     );
-};
+}
 
-export default InterviewAttachment;
+export default UploadDocument;
