@@ -3,9 +3,9 @@ import UploadDocument from "@/Components/Applications/projects/common/DetailProj
 
 const StepTwo = () => {
     return (
-        <>
+        <div className={'mt-5'}>
             <UploadDocument/>
-        </>
+        </div>
     )
 }
 

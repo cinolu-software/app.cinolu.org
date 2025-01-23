@@ -27,7 +27,7 @@ const UploadDocument = () => {
 
     return (
         <div className="product-upload">
-            <div className="mt-3 pe-4">
+            <div className="pt-4 pe-4">
                 <Dropzone
                     onChange={(files) => updateFiles(files)}
                     value={files}
