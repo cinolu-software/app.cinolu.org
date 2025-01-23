@@ -14,6 +14,10 @@ export interface CreateDocumentType {
     phase: string;
 }
 
+export interface FormValue extends CreateDocumentType {
+    file_name: File | null;
+}
+
 export interface ReceiveFile {
     id: string;
     created_at: string;
@@ -33,6 +37,8 @@ export interface InitialStateDocumentType {
     documentData: DocumentType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
-    formValue: CreateDocumentType;
+    formValue: FormValue;
     selectedDocument: CreateDocumentType | null;
+    navId: number;
+    tabId: number
 }

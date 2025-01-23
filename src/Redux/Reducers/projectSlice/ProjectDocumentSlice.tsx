@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
-import { InitialStateDocumentType, CreateDocumentType, DocumentType, ReceiveFile, AddFileType } from "@/Types/Projects/PhasesDocumentType";
+import { InitialStateDocumentType, CreateDocumentType, DocumentType, ReceiveFile, AddFileType, FormValue } from "@/Types/Projects/PhasesDocumentType";
 
 
 const initialState: InitialStateDocumentType = {
@@ -11,8 +11,11 @@ const initialState: InitialStateDocumentType = {
         title: '',
         description: '',
         phase: '',
+        file_name: null
     },
     selectedDocument: null,
+    navId: 1,
+    tabId: 1,
 };
 
 export const fetchDocument = createAsyncThunk('project/fetchDocument', async () => {
@@ -56,11 +59,7 @@ export const deleteDocument = createAsyncThunk('project/deleteDocument', async (
 });
 
 
-export const addAttachmentDocumentFile = createAsyncThunk<
-    ReceiveFile,
-    AddFileType,
-    { rejectValue: string }
->(
+export const addAttachmentDocumentFile = createAsyncThunk<ReceiveFile, AddFileType, { rejectValue: string }>(
     'project/addAttachmentDocumentFile',
     async ({ documentId, file }, thunkAPI) => {
         try {
@@ -90,11 +89,18 @@ const projectDocumentSlice = createSlice({
     name: 'projectDocument',
     initialState,
     reducers: {
-        setFormValue: (state, action: PayloadAction<CreateDocumentType>) => {
-            state.formValue = action.payload;
+        setFormValue: (state, action: { payload: { name: keyof FormValue, value: any } }) => {
+            state.formValue[action.payload.name] = action.payload.value;
+        },
+        setNavId: (state, action) => {
+            state.navId = action.payload;
+        },
+        setTabId: (state, action) => {
+            state.tabId = action.payload;
         },
         setSelectedDocument: (state, action: PayloadAction<DocumentType | null>) => {
-            state.selectedDocument = action.payload;
+            // @ts-ignore
+            state.selectedDocument = action.payload
         },
     },
     extraReducers: (builder) => {
@@ -111,6 +117,7 @@ const projectDocumentSlice = createSlice({
                 state.error = action.error.message || null;
             })
             .addCase(fetchDocumentById.fulfilled, (state, action) => {
+                // @ts-ignore
                 state.selectedDocument = action.payload;
             })
             .addCase(createDocument.fulfilled, (state, action) => {
@@ -139,7 +146,7 @@ const projectDocumentSlice = createSlice({
     },
 });
 
-export const { setFormValue, setSelectedDocument } = projectDocumentSlice.actions;
+export const { setFormValue, setSelectedDocument, setNavId, setTabId } = projectDocumentSlice.actions;
 export default projectDocumentSlice.reducer;
 
 
