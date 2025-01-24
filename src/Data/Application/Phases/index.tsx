@@ -64,7 +64,6 @@ export const PhasesNavTabs = [
     },
     {
         title: "Paramètres",
-        // icon: "knowledgebase",
         icon: "setting_phase",
         id: 'setting-tab'
     },
