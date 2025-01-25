@@ -20,6 +20,7 @@ import ExpertiseSlice from "@/Redux/Reducers/userSlice/ExpertiseSlice";
 import PositionSlice from "@/Redux/Reducers/userSlice/PositionSlice";
 import ProgramSlice from "@/Redux/Reducers/programSlice/programSlice";
 import ProjectDocumentSlice from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
+import PhaseApplicationSlice from "@/Redux/Reducers/projectSlice/ProjectApplicationSlice"
 
 
 const Store = configureStore({
@@ -45,7 +46,8 @@ const Store = configureStore({
     expertise : ExpertiseSlice,
     position: PositionSlice,
     program: ProgramSlice,
-    projectDocument: ProjectDocumentSlice
+    projectDocument: ProjectDocumentSlice,
+    PhaseApplication: PhaseApplicationSlice
   },
 
   middleware : getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),
