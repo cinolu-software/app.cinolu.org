@@ -109,7 +109,7 @@ export const LanguagesData = [
   {
     data: "fr",
     logo: "flag-icon flag-icon-bl",
-    language: "Français",
+    language: "French",
   },
   // {
   //   data: "ae",

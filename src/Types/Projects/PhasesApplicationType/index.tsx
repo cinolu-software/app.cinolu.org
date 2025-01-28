@@ -2,6 +2,7 @@ import {ReceiveProjectType} from "@/Types/Projects/ProjectType";
 import {User} from "@/Types/AuthType"
 
 export interface ApplicationPhaseType {
+    data: any;
     id: string;
     created_at: string | null;
     updated_at: string | null;
@@ -14,6 +15,7 @@ export interface ApplicationPhaseType {
 export interface InitialStateApplicationPhaseType{
     ApplicationPhaseData : ApplicationPhaseType[];
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    page : boolean;
     error: string | null;
 }
 

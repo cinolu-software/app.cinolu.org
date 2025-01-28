@@ -190,7 +190,7 @@ const ProjectRapportViewer = () => {
     const { projectData } = useAppSelector((state) => state.project);
 
     return (
-        <TabPane tabId={'3'}>
+        <TabPane tabId={'4'}>
             <PDFViewer style={styles.viewer}>
                 <ProjectPDF projectData={projectData} />
             </PDFViewer>

@@ -4,27 +4,36 @@ import {ApplicationPhaseType, InitialStateApplicationPhaseType} from "@/Types/Pr
 
 const initialState: InitialStateApplicationPhaseType = {
     ApplicationPhaseData : [],
+    page: false,
     status: 'idle',
     error: null
 }
 
 export const fetchApplicationByproject = createAsyncThunk('project-application/fetchApplicationByProject', async (id: string)=>{
+
     const response = await axiosInstance.get<ApplicationPhaseType[]>(`${apiBaseUrl}/project-applications/project/${id}`);
+    // @ts-ignore
     return {data : response.data.data}
 })
 
 const PhaseApplicationSlice = createSlice({
     name: 'phaseApplication',
     initialState,
-    reducers: {},
+    reducers: {
+        setPage: (state,action) => {
+            state.page = action.payload
+        },
+    },
     extraReducers: (builder)=>{
         builder
             .addCase(fetchApplicationByproject.pending, (state)=>{
                 state.status = 'loading';
                 state.error = null
             })
+            // @ts-ignore
             .addCase(fetchApplicationByproject.fulfilled, (state, action : PayloadAction<ApplicationPhaseType>) => {
                 state.status = 'succeeded';
+                // @ts-ignore
                 state.ApplicationPhaseData = action.payload.data
             })
             .addCase(fetchApplicationByproject.rejected, (state)=>{
@@ -33,5 +42,7 @@ const PhaseApplicationSlice = createSlice({
             })   
     }
 });
+
+export const {setPage} = PhaseApplicationSlice.actions;
 
 export default PhaseApplicationSlice.reducer;

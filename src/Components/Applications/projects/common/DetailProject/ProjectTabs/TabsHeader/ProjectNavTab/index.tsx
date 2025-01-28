@@ -15,14 +15,19 @@ const ProjectNavTabs = [
         id: "1",
     },
     {
-        title: "Phases du programme",
+        title: "Phases de l'activité",
         icon: "program_phase",
         id: "2",
     },
     {
+        title: "Critère de l'activité",
+        icon: "program_criteria",
+        id: "3",
+    },
+    {
         title: "Rapports",
         icon: "program_report",
-        id: "3",
+        id: "4",
     },
 ];
 

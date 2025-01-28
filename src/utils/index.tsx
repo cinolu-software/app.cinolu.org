@@ -15,3 +15,28 @@ export const truncateText = (text: string, maxLength: number) => {
     return text;
 };
 
+export const generateSmartShortName = (name: string): string => {
+
+    if (!name) return '';
+
+
+    const cleanName = name
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim()
+        .replace(/\s+/g, ' ');
+
+    const words = cleanName.split(' ');
+
+    if (words.length === 1) {
+        return words[0].charAt(0).toUpperCase();
+    }
+
+    const initials = words
+        .slice(0, 2)
+        .map(word => word.charAt(0).toUpperCase());
+
+    return initials.join('');
+};
+
+
