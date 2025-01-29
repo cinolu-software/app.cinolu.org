@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import {InitialStateProjectPhaseType, ProjectPhaseType, CreateProjectPhaseType, FormValue} from "@/Types/Projects/PhasesType";
 
-const initialState: InitialStateProjectPhaseType = {
+const initialState : InitialStateProjectPhaseType = {
     ProjectDataPhase: [],
     dataPhase: null,
     status: 'idle',
