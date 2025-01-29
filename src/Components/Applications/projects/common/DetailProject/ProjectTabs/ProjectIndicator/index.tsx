@@ -5,13 +5,15 @@ import { updateProject } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { Flip, toast } from "react-toastify";
 import { INDICATOR_CATEGORIES, INPUT_TYPES } from "@/Data/Application/ProjectIndicator";
 
+
 const ProjectIndicator = () => {
     const dispatch = useAppDispatch();
     const { selectedProject } = useAppSelector((state) => state.project);
 
     const [selectedIndicators, setSelectedIndicators] = useState<string[]>([]);
     const [indicatorValues, setIndicatorValues] = useState<{ [key: string]: string | number }>({});
-    const [customIndicator, setCustomIndicator] = useState<string>("");
+    const [customIndicatorInput, setCustomIndicatorInput] = useState<string>("");
+    const [customIndicators, setCustomIndicators] = useState<{ name: string; value: string | number }[]>([]);
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
@@ -20,7 +22,6 @@ const ProjectIndicator = () => {
             setIndicatorValues(selectedProject.indicators);
         }
     }, [selectedProject]);
-
 
     const handleToggleIndicator = (indicator: string) => {
         if (selectedIndicators.includes(indicator)) {
@@ -36,27 +37,41 @@ const ProjectIndicator = () => {
         }
     };
 
-    // Mettre à jour la valeur d'un indicateur
     const handleIndicatorValueChange = (indicator: string, value: string | number) => {
         setIndicatorValues({ ...indicatorValues, [indicator]: value });
     };
 
-    // Ajouter un indicateur personnalisé
     const handleAddCustomIndicator = () => {
-        if (customIndicator.trim() !== "" && !selectedIndicators.includes(customIndicator)) {
-            setSelectedIndicators([...selectedIndicators, customIndicator]);
-            setIndicatorValues({ ...indicatorValues, [customIndicator]: "" });
-            setCustomIndicator("");
+        if (customIndicatorInput.trim() !== "" && !customIndicators.some((i) => i.name === customIndicatorInput)) {
+            setCustomIndicators([...customIndicators, { name: customIndicatorInput, value: "" }]);
+            setCustomIndicatorInput("");
         }
     };
 
-    // Sauvegarder les indicateurs
+    const handleCustomIndicatorValueChange = (index: number, value: string | number) => {
+        const updatedIndicators = [...customIndicators];
+        updatedIndicators[index].value = value;
+        setCustomIndicators(updatedIndicators);
+    };
+
+    const handleRemoveCustomIndicator = (index: number) => {
+        setCustomIndicators(customIndicators.filter((_, i) => i !== index));
+    };
+
     const handleSaveIndicators = async () => {
         if (!selectedProject) return;
         setIsSaving(true);
 
+        const customIndicatorsObject = customIndicators.reduce((acc, curr) => {
+            acc[curr.name] = curr.value;
+            return acc;
+        }, {} as { [key: string]: string | number });
+
         try {
-            await dispatch(updateProject({ ...selectedProject, indicators: indicatorValues }));
+            await dispatch(updateProject({
+                ...selectedProject,
+                indicators: { ...indicatorValues, ...customIndicatorsObject }
+            }));
             toast.success("Indicateurs mis à jour avec succès !", {
                 autoClose: 3000,
                 position: toast.POSITION.TOP_CENTER,
@@ -113,14 +128,13 @@ const ProjectIndicator = () => {
                     </Card>
                 ))}
 
-                {/* Ajouter un indicateur personnalisé */}
                 <h5 className="mt-4 pb-2 border-bottom">Ajouter un indicateur personnalisé</h5>
                 <Row className="mb-3">
                     <Col md="9">
                         <Input
                             type="text"
-                            value={customIndicator}
-                            onChange={(e) => setCustomIndicator(e.target.value)}
+                            value={customIndicatorInput}
+                            onChange={(e) => setCustomIndicatorInput(e.target.value)}
                             placeholder="Ex: Nombre de participants internationaux"
                             bsSize="sm"
                         />
@@ -132,24 +146,30 @@ const ProjectIndicator = () => {
                     </Col>
                 </Row>
 
-                {/* Indicateurs sélectionnés */}
-                <h5 className="mt-4 pb-2 border-bottom">Indicateurs sélectionnés</h5>
-                {selectedIndicators.length === 0 ? (
-                    <p>Aucun indicateur sélectionné.</p>
-                ) : (
-                    <ul className="list-group">
-                        {selectedIndicators.map((indicator, index) => (
-                            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-                                {indicator}
-                                <Button color="danger" size="sm" onClick={() => handleToggleIndicator(indicator)}>
-                                    Supprimer
-                                </Button>
-                            </li>
-                        ))}
-                    </ul>
+                {customIndicators.length > 0 && (
+                    <>
+                        <h5 className="mt-4 pb-2 border-bottom">Indicateurs personnalisés ajoutés</h5>
+                        <ul className="list-group">
+                            {customIndicators.map((indicator, index) => (
+                                <li key={index} className="list-group-item d-flex flex-column">
+                                    <span className="fw-bold">{indicator.name}</span>
+                                    <Input
+                                        type="text"
+                                        value={indicator.value}
+                                        onChange={(e) => handleCustomIndicatorValueChange(index, e.target.value)}
+                                        placeholder="Entrer une valeur"
+                                        bsSize="sm"
+                                        className="mt-2"
+                                    />
+                                    <Button color="danger" size="sm" onClick={() => handleRemoveCustomIndicator(index)} className="mt-2">
+                                        Supprimer
+                                    </Button>
+                                </li>
+                            ))}
+                        </ul>
+                    </>
                 )}
 
-                {/* Bouton de sauvegarde */}
                 <div className="mt-4">
                     <Button color="success" onClick={handleSaveIndicators} disabled={isSaving}>
                         {isSaving ? <Spinner size="sm" /> : "Sauvegarder les indicateurs"}
@@ -161,4 +181,6 @@ const ProjectIndicator = () => {
 };
 
 export default ProjectIndicator;
+
+
 
