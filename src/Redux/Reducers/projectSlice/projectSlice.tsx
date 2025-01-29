@@ -46,7 +46,8 @@ const initialState : InitialStateProjectType = {
         ended_at: "",
         types: [],
         requirements: [],
-        partners: []
+        partners: [],
+        report: []
     },
     numberLevel:1,
     showFinish:false,

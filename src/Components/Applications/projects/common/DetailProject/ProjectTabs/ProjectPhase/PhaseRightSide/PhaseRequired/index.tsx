@@ -12,6 +12,7 @@ interface Requirement {
 }
 
 const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
+    
     const dispatch = useAppDispatch();
     const { projectData } = useAppSelector((state) => state.project);
 
@@ -46,7 +47,6 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
         };
         setRequirements([...requirements, newRequirement]);
     };
-
 
     const handleEditRequirement = (index: number, key: keyof Requirement, value: string) => {
         setRequirements((prev) =>
@@ -90,20 +90,26 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
                 const promises = existingRequirements.map((requirement) =>
                     dispatch(updateRequirement({ ...requirement, phase: phase.id })).unwrap()
                 );
+
                 await Promise.all(promises);
             }
 
             toast.success("Toutes les exigences ont été sauvegardées avec succès !");
+
         } catch (error) {
+
             toast.error("Une erreur est survenue lors de la sauvegarde.");
+
         } finally {
+
             setIsSaving(false);
+
         }
     };
 
 
 
-    if (!phase) {
+    if(!phase) {
         return (
             <TabPane tabId="requirement-tab">
                 <div className="text-center my-4 bg-white">
@@ -115,6 +121,7 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
             </TabPane>
         );
     }
+
 
     return (
         <TabPane tabId={"requirement-tab"}>

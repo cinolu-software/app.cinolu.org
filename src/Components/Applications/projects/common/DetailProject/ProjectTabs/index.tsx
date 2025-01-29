@@ -5,6 +5,7 @@ import TabsHeader from "@/Components/Applications/projects/common/DetailProject/
 import ProjectInfo from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectInfo";
 import ProjectPhase from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase";
 import ProjectRapportViewer from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectReport";
+import ProjectIndicator from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectIndicator";
 
 const ProjectTabs = () => {
 
@@ -18,6 +19,7 @@ const ProjectTabs = () => {
                     <TabContent  activeTab={navId} id="notifications-pills-tabContent">
                         <ProjectInfo/>
                         <ProjectPhase/>
+                        <ProjectIndicator/>
                         <ProjectRapportViewer/>
                     </TabContent>
                 </Card>
