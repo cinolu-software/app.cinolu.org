@@ -35,6 +35,11 @@ export interface CreateProjectType {
     partners: PartnerType [] | string[];
 }
 
+export interface UpdateProjectType extends CreateProjectType {
+    report?: Object;
+}
+
+
 export interface ReceiveProjectType {
     id: string;
     name: string;
@@ -47,6 +52,7 @@ export interface ReceiveProjectType {
     aim?: string;
     prize?: string;
     town?: string;
+    report?: Object;
     attachments: AttachmentType[];
     types?: DataType[];
     categories?: any;

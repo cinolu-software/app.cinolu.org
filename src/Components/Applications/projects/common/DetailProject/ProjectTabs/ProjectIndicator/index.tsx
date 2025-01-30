@@ -9,7 +9,7 @@ import { INDICATOR_CATEGORIES, INPUT_TYPES } from "@/Data/Application/ProjectInd
 const ProjectIndicator = () => {
 
     const dispatch = useAppDispatch();
-    const { selectedProject } = useAppSelector((state) => state.project);
+    const { selectedProject, EditFormValue } = useAppSelector((state) => state.project);
 
     const [selectedIndicators, setSelectedIndicators] = useState<string[]>([]);
     const [indicatorValues, setIndicatorValues] = useState<{ [key: string]: string | number }>({});
@@ -18,9 +18,9 @@ const ProjectIndicator = () => {
     const [isSaving, setIsSaving] = useState(false);
 
     useEffect(() => {
-        if (selectedProject?.indicators) {
-            setSelectedIndicators(Object.keys(selectedProject.indicators));
-            setIndicatorValues(selectedProject.indicators);
+        if (selectedProject?.report) {
+            setSelectedIndicators(Object.keys(selectedProject.report));
+            setIndicatorValues(selectedProject.report);
         }
     }, [selectedProject]);
 
@@ -70,14 +70,29 @@ const ProjectIndicator = () => {
 
         try {
             await dispatch(updateProject({
-                ...selectedProject,
-                indicators : { ...indicatorValues, ...customIndicatorsObject }
+                projectId: selectedProject.id,
+                // @ts-ignore
+                updatedProject: {
+                    name: selectedProject.name,
+                    description: selectedProject.description,
+                    started_at: selectedProject.started_at,
+                    ended_at: selectedProject.ended_at,
+                    targeted_audience: selectedProject.targeted_audience,
+                    aim: selectedProject.aim,
+                    prize: selectedProject.prize,
+                    town: selectedProject.town,
+                    types: selectedProject.types?.map(type => type.id) || [],
+                    partners: selectedProject.partners?.map(partner => partner.id) || [],
+                    categories: selectedProject.categories?.map(category => category.id) || [],
+                    report: { ...indicatorValues, ...customIndicatorsObject }
+                }
             }));
+
             toast.success("Indicateurs mis à jour avec succès !", {
-                autoClose : 3000,
-                position : toast.POSITION.TOP_CENTER,
-                transition : Flip,
-                theme : "colored",
+                autoClose: 3000,
+                position: toast.POSITION.TOP_CENTER,
+                transition: Flip,
+                theme: "colored",
             });
         } catch (error) {
             toast.error("Erreur lors de la mise à jour des indicateurs.", {
@@ -90,6 +105,8 @@ const ProjectIndicator = () => {
             setIsSaving(false);
         }
     };
+
+
 
     return (
         <TabPane tabId="3">
@@ -195,7 +212,6 @@ const ProjectIndicator = () => {
                     </ul>
 
                 )}
-
                 <div className="mt-4">
                     <Button color="success" onClick={handleSaveIndicators} disabled={isSaving}>
                         {isSaving ? <Spinner size="sm" /> : "Sauvegarder les indicateurs"}

@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import {CreateProjectType, FormValueType, InitialStateProjectType, ReceiveProjectType} from "@/Types/Projects/ProjectType";
+import {CreateProjectType, FormValueType, InitialStateProjectType, ReceiveProjectType, UpdateProjectType} from "@/Types/Projects/ProjectType";
 import {ShowError} from "@/utils/MultiStepForm.service";
 import {RootState} from "@/Redux/Store";
 
@@ -87,7 +87,7 @@ export const createProject = createAsyncThunk<ReceiveProjectType, CreateProjectT
     }
 );
 
-export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: string, updatedProject: any }, { rejectValue: any }>( 'project/updateProject', async ({ projectId, updatedProject }, thunkAPI) => {
+export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: string, updatedProject: UpdateProjectType }, { rejectValue: any }>( 'project/updateProject', async ({ projectId, updatedProject }, thunkAPI) => {
         try {
             const response = await axiosInstance.patch<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects/${projectId}`, updatedProject);
             return response.data.data;
