@@ -7,6 +7,7 @@ import { INDICATOR_CATEGORIES, INPUT_TYPES } from "@/Data/Application/ProjectInd
 
 
 const ProjectIndicator = () => {
+
     const dispatch = useAppDispatch();
     const { selectedProject } = useAppSelector((state) => state.project);
 
@@ -128,8 +129,8 @@ const ProjectIndicator = () => {
                     </Card>
                 ))}
 
-                <h5 className="mt-4 pb-2 border-bottom">Ajouter un indicateur personnalisé</h5>
-                <Row className="mb-3">
+                <h5 className="mt-4 pb-2 border-bottom ">Ajouter un indicateur personnalisé</h5>
+                <Row className="my-3">
                     <Col md="9">
                         <Input
                             type="text"

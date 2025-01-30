@@ -20,7 +20,7 @@ const ProjectNavTabs = [
         id: "2",
     },
     {
-        title: "Critère de l'activité",
+        title: "Indicateurs de l'activité",
         icon: "program_criteria",
         id: "3",
     },
