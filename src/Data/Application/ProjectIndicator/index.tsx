@@ -1,7 +1,7 @@
 export const INDICATOR_CATEGORIES = {
     "Participation": [
         "Nombre total de participants",
-        "Répartition par genre (Homme/Femme/Autre)",
+        "Répartition par genre (Homme/Femme)",
         "Participants par tranche d'âge",
     ],
     "Performance": [

@@ -5,11 +5,10 @@ import { updateProject } from "@/Redux/Reducers/projectSlice/projectSlice";
 import { Flip, toast } from "react-toastify";
 import { INDICATOR_CATEGORIES, INPUT_TYPES } from "@/Data/Application/ProjectIndicator";
 
-
 const ProjectIndicator = () => {
 
     const dispatch = useAppDispatch();
-    const { selectedProject, EditFormValue } = useAppSelector((state) => state.project);
+    const { selectedProject} = useAppSelector((state) => state.project);
 
     const [selectedIndicators, setSelectedIndicators] = useState<string[]>([]);
     const [indicatorValues, setIndicatorValues] = useState<{ [key: string]: string | number }>({});
@@ -71,21 +70,8 @@ const ProjectIndicator = () => {
         try {
             await dispatch(updateProject({
                 projectId: selectedProject.id,
-                // @ts-ignore
                 updatedProject: {
-                    name: selectedProject.name,
-                    description: selectedProject.description,
-                    started_at: selectedProject.started_at,
-                    ended_at: selectedProject.ended_at,
-                    targeted_audience: selectedProject.targeted_audience,
-                    aim: selectedProject.aim,
-                    prize: selectedProject.prize,
-                    town: selectedProject.town,
-                    types: selectedProject.types?.map(type => type.id) || [],
-                    // @ts-ignore
-                    partners: selectedProject.partners?.map(partner => partner.id) || [],
-                    // @ts-ignore
-                    categories: selectedProject.categories?.map(category => category.id) || [],
+                    ...selectedProject,
                     report: { ...indicatorValues, ...customIndicatorsObject }
                 }
             }));
@@ -108,16 +94,14 @@ const ProjectIndicator = () => {
         }
     };
 
-
-
     return (
         <TabPane tabId="3">
             <div className="p-4 bg-white">
                 <h4 className="pb-3 border-bottom">Indicateurs du projet</h4>
 
                 {Object.entries(INDICATOR_CATEGORIES).map(([category, indicators]) => (
-                    <Card key={category} className="mb-3">
-                        <CardBody>
+                    <div key={category} className="mb-3 border border-radius p-3">
+                        <div>
                             <h5 className="text-primary">{category}</h5>
                             <Row>
                                 {indicators.map((indicator) => (
@@ -132,7 +116,50 @@ const ProjectIndicator = () => {
                                                 {indicator}
                                             </Label>
                                         </FormGroup>
-                                        {selectedIndicators.includes(indicator) && (
+                                        {selectedIndicators.includes(indicator) && indicator === "Répartition par genre (Homme/Femme)" && (
+                                            <div>
+                                                <Input
+                                                    type="number"
+                                                    value={indicatorValues["Homme"] || ""}
+                                                    onChange={(e) => handleIndicatorValueChange("Homme", e.target.value)}
+                                                    placeholder="Nombre d'hommes"
+                                                    bsSize="sm"
+                                                />
+                                                <Input
+                                                    type="number"
+                                                    value={indicatorValues["Femme"] || ""}
+                                                    onChange={(e) => handleIndicatorValueChange("Femme", e.target.value)}
+                                                    placeholder="Nombre de femmes"
+                                                    bsSize="sm"
+                                                    className="mt-2"
+                                                />
+                                            </div>
+                                        )}
+                                        {selectedIndicators.includes(indicator) && indicator === "Participants par tranche d'âge" && (
+                                            <div>
+                                                <Input
+                                                    type="select"
+                                                    value={indicatorValues["tranche_age"] || ""}
+                                                    onChange={(e) => handleIndicatorValueChange("tranche_age", e.target.value)}
+                                                    bsSize="sm"
+                                                >
+                                                    <option value="">Sélectionnez une tranche d'âge</option>
+                                                    <option value="18-25">18-25 ans</option>
+                                                    <option value="26-35">26-35 ans</option>
+                                                    <option value="36-45">36-45 ans</option>
+                                                    <option value="46+">46+ ans</option>
+                                                </Input>
+                                                <Input
+                                                    type="number"
+                                                    value={indicatorValues["participants_age"] || ""}
+                                                    onChange={(e) => handleIndicatorValueChange("participants_age", e.target.value)}
+                                                    placeholder="Nombre de participants"
+                                                    bsSize="sm"
+                                                    className="mt-2"
+                                                />
+                                            </div>
+                                        )}
+                                        {selectedIndicators.includes(indicator) && indicator !== "Répartition par genre (Homme/Femme)" && indicator !== "Participants par tranche d'âge" && (
                                             <Input
                                                 type={INPUT_TYPES[indicator] as any || "text"}
                                                 value={indicatorValues[indicator] || ""}
@@ -144,8 +171,8 @@ const ProjectIndicator = () => {
                                     </Col>
                                 ))}
                             </Row>
-                        </CardBody>
-                    </Card>
+                        </div>
+                    </div>
                 ))}
 
                 <h5 className="mt-4 pb-2 border-bottom ">Ajouter un indicateur personnalisé</h5>
@@ -195,25 +222,69 @@ const ProjectIndicator = () => {
                     <p>Aucun indicateur sélectionné.</p>
                 ) : (
                     <ul className="list-group">
-                        {selectedIndicators.map((indicator, index) => (
-                            <li key={index} className="list-group-item d-flex flex-column">
-                                <span className="fw-bold">{indicator}</span>
+                    {selectedIndicators.map((indicator, index) => (
+                        <li key={index} className="list-group-item d-flex flex-column">
+                            <span className="fw-bold">{indicator}</span>
+                            
+                            {indicator === "Répartition par genre (Homme/Femme)" ? (
+                                <div>
+                                    <Input
+                                        type="number"
+                                        value={indicatorValues["Homme"] || ""}
+                                        onChange={(e) => handleIndicatorValueChange("Homme", e.target.value)}
+                                        placeholder="Nombre d'hommes"
+                                        bsSize="sm"
+                                    />
+                                    <Input
+                                        type="number"
+                                        value={indicatorValues["Femme"] || ""}
+                                        onChange={(e) => handleIndicatorValueChange("Femme", e.target.value)}
+                                        placeholder="Nombre de femmes"
+                                        bsSize="sm"
+                                        className="mt-2"
+                                    />
+                                </div>
+                            ) : indicator === "Participants par tranche d'âge" ? (
+                                <div>
+                                    <Input
+                                        type="select"
+                                        value={indicatorValues["tranche_age"] || ""}
+                                        onChange={(e) => handleIndicatorValueChange("tranche_age", e.target.value)}
+                                        bsSize="sm"
+                                    >
+                                        <option value="">Sélectionnez une tranche d'âge</option>
+                                        <option value="18-25">18-25 ans</option>
+                                        <option value="26-35">26-35 ans</option>
+                                        <option value="36-45">36-45 ans</option>
+                                        <option value="46+">46+ ans</option>
+                                    </Input>
+                                    <Input
+                                        type="number"
+                                        value={indicatorValues["participants_age"] || ""}
+                                        onChange={(e) => handleIndicatorValueChange("participants_age", e.target.value)}
+                                        placeholder="Nombre de participants"
+                                        bsSize="sm"
+                                        className="mt-2"
+                                    />
+                                </div>
+                            ) : (
                                 <Input
                                     type={INPUT_TYPES[indicator] as any || "text"}
                                     value={indicatorValues[indicator] || ""}
                                     onChange={(e) => handleIndicatorValueChange(indicator, e.target.value)}
                                     placeholder="Entrer une valeur"
                                     bsSize="sm"
-                                    className="mt-2"
                                 />
-                                <Button color="danger" size="sm" onClick={() => handleToggleIndicator(indicator)} className="mt-2">
-                                    Supprimer
-                                </Button>
-                            </li>
-                        ))}
-                    </ul>
-
+                            )}
+            
+                            <Button color="danger" size="sm" onClick={() => handleToggleIndicator(indicator)} className="mt-2">
+                                Supprimer
+                            </Button>
+                        </li>
+                    ))}
+                </ul>
                 )}
+
                 <div className="mt-4">
                     <Button color="success" onClick={handleSaveIndicators} disabled={isSaving}>
                         {isSaving ? <Spinner size="sm" /> : "Sauvegarder les indicateurs"}
@@ -225,6 +296,3 @@ const ProjectIndicator = () => {
 };
 
 export default ProjectIndicator;
-
-
-
