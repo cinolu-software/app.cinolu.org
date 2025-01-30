@@ -73,6 +73,8 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
         }
     }
 
+    console.log("project ===>", project);
+
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center">
@@ -126,7 +128,7 @@ export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
                 name={row.name}/>
         ),
         sortable: true,
-        grow: 1,
+        grow: 2,
     },
     {
         name: "Date de début",
@@ -141,11 +143,18 @@ export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
         grow: 1
     },
     {
+        name: "Nombre de participants",
+        selector: (row: ReceiveProjectType) => row.report?.["Nombre total de participants"] ?? 0,
+        sortable: true,
+        grow: 1
+    },
+    {
         name: "Actions",
         cell: (row: ReceiveProjectType) => <ProjectListTableAction project={row}/>,
         grow: 2
     },
 ];
+
 
 export const AddProgram = [
     {
@@ -185,6 +194,3 @@ export const AddProgram = [
 export const NumberWizardData = [
     {text: "Fill up your details and proceed next steps.",},
 ];
-
-
-
