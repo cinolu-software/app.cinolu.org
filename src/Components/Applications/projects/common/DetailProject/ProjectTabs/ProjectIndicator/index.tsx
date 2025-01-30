@@ -71,13 +71,13 @@ const ProjectIndicator = () => {
         try {
             await dispatch(updateProject({
                 ...selectedProject,
-                indicators: { ...indicatorValues, ...customIndicatorsObject }
+                indicators : { ...indicatorValues, ...customIndicatorsObject }
             }));
             toast.success("Indicateurs mis à jour avec succès !", {
-                autoClose: 3000,
-                position: toast.POSITION.TOP_CENTER,
-                transition: Flip,
-                theme: "colored",
+                autoClose : 3000,
+                position : toast.POSITION.TOP_CENTER,
+                transition : Flip,
+                theme : "colored",
             });
         } catch (error) {
             toast.error("Erreur lors de la mise à jour des indicateurs.", {
@@ -169,6 +169,31 @@ const ProjectIndicator = () => {
                             ))}
                         </ul>
                     </>
+                )}
+
+                <h5 className="mt-4 pb-2 border-bottom">Indicateurs sélectionnés</h5>
+                {selectedIndicators.length === 0 ? (
+                    <p>Aucun indicateur sélectionné.</p>
+                ) : (
+                    <ul className="list-group">
+                        {selectedIndicators.map((indicator, index) => (
+                            <li key={index} className="list-group-item d-flex flex-column">
+                                <span className="fw-bold">{indicator}</span>
+                                <Input
+                                    type={INPUT_TYPES[indicator] || "text"}
+                                    value={indicatorValues[indicator] || ""}
+                                    onChange={(e) => handleIndicatorValueChange(indicator, e.target.value)}
+                                    placeholder="Entrer une valeur"
+                                    bsSize="sm"
+                                    className="mt-2"
+                                />
+                                <Button color="danger" size="sm" onClick={() => handleToggleIndicator(indicator)} className="mt-2">
+                                    Supprimer
+                                </Button>
+                            </li>
+                        ))}
+                    </ul>
+
                 )}
 
                 <div className="mt-4">
