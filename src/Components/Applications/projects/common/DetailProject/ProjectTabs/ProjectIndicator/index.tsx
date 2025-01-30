@@ -82,7 +82,9 @@ const ProjectIndicator = () => {
                     prize: selectedProject.prize,
                     town: selectedProject.town,
                     types: selectedProject.types?.map(type => type.id) || [],
+                    // @ts-ignore
                     partners: selectedProject.partners?.map(partner => partner.id) || [],
+                    // @ts-ignore
                     categories: selectedProject.categories?.map(category => category.id) || [],
                     report: { ...indicatorValues, ...customIndicatorsObject }
                 }
@@ -132,7 +134,7 @@ const ProjectIndicator = () => {
                                         </FormGroup>
                                         {selectedIndicators.includes(indicator) && (
                                             <Input
-                                                type={INPUT_TYPES[indicator] || "text"}
+                                                type={INPUT_TYPES[indicator] as any || "text"}
                                                 value={indicatorValues[indicator] || ""}
                                                 onChange={(e) => handleIndicatorValueChange(indicator, e.target.value)}
                                                 placeholder="Entrer une valeur"
@@ -197,7 +199,7 @@ const ProjectIndicator = () => {
                             <li key={index} className="list-group-item d-flex flex-column">
                                 <span className="fw-bold">{indicator}</span>
                                 <Input
-                                    type={INPUT_TYPES[indicator] || "text"}
+                                    type={INPUT_TYPES[indicator] as any || "text"}
                                     value={indicatorValues[indicator] || ""}
                                     onChange={(e) => handleIndicatorValueChange(indicator, e.target.value)}
                                     placeholder="Entrer une valeur"
