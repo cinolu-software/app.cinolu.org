@@ -73,7 +73,6 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
         }
     }
 
-    console.log("project ===>", project);
 
     return (
         <div className="product-action">

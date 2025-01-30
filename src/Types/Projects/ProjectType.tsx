@@ -52,7 +52,10 @@ export interface ReceiveProjectType {
     aim?: string;
     prize?: string;
     town?: string;
-    report?: Object;
+    report?: {
+        "Nombre total de participants"?: number;
+        [key: string]: any;
+    };
     attachments: AttachmentType[];
     types?: DataType[];
     categories?: any;
@@ -60,6 +63,8 @@ export interface ReceiveProjectType {
     created_at: string;
     updated_at: string;
 }
+
+
 
 export interface ReceiveProjectTypeTable {
     project: ReceiveProjectType[];
