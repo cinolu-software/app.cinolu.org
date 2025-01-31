@@ -68,10 +68,24 @@ const ProjectIndicator = () => {
         }, {} as { [key: string]: string | number });
 
         try {
+
             await dispatch(updateProject({
                 projectId: selectedProject.id,
+                // @ts-ignore
                 updatedProject: {
-                    ...selectedProject,
+                    name: selectedProject.name,
+                    description: selectedProject.description,
+                    started_at: selectedProject.started_at,
+                    ended_at: selectedProject.ended_at,
+                    targeted_audience: selectedProject.targeted_audience,
+                    aim: selectedProject.aim,
+                    prize: selectedProject.prize,
+                    town: selectedProject.town,
+                    types: selectedProject.types?.map(type => type.id) || [],
+                    // @ts-ignore
+                    partners: selectedProject.partners?.map(partner => partner.id) || [],
+                    // @ts-ignore
+                    categories: selectedProject.categories?.map(category => category.id) || [],
                     report: { ...indicatorValues, ...customIndicatorsObject }
                 }
             }));
