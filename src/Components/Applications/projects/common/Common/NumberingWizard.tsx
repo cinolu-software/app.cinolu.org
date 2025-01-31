@@ -14,11 +14,12 @@ import FinishForm from "@/CommonComponent/FinishForm";
 import StepperHorizontal from "@/Components/Applications/projects/common/Common/StepperHorizontal";
 import { FormValueType } from "@/Types/Projects/ProjectType";
 import { CreateActivity, ModifyActivityTitle, buttonFinish, buttonNext, buttonPrevious} from "@/Constant";
+import { RootState } from "@/Redux/Store";
 
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
 
-    const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.project);
+    const { numberLevel, formValue, showFinish } = useAppSelector((state: RootState) => state.project);
     const dispatch = useAppDispatch();
     const router = useRouter();
 

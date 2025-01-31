@@ -6,7 +6,9 @@ import StepThree from "@/Components/Applications/projects/common/DetailProject/P
 import {useAppSelector} from "@/Redux/Hooks";
 
 const DocumentTabContent = () => {
+
     const { navId } = useAppSelector(state=>state.projectDocument);
+    
     return (
         <>
             <Col xxl="8" xl="8" className="box-col-8 position-relative">

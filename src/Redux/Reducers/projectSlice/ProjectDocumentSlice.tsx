@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
 import { InitialStateDocumentType, CreateDocumentType, DocumentType, ReceiveFile, AddFileType, FormValue } from "@/Types/Projects/PhasesDocumentType";
 
-
 const initialState: InitialStateDocumentType = {
     documentData: [],
     status: 'idle',
@@ -148,5 +147,3 @@ const projectDocumentSlice = createSlice({
 
 export const { setFormValue, setSelectedDocument, setNavId, setTabId } = projectDocumentSlice.actions;
 export default projectDocumentSlice.reducer;
-
-

@@ -1,49 +1,61 @@
-import React, {useState} from 'react';
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {Button, Row, Col, Label, Input} from "reactstrap";
-import SVG from "@/CommonComponent/SVG";
-import {setFormValue} from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
+import React, { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import { Button, Row, Col, Label, Input,  } from "reactstrap";
+import { createDocument } from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
 
 const StepOne = () => {
+    const dispatch = useAppDispatch();
+    const {  selectedProjectPhase } = useAppSelector(state => state.projectPhase);
 
-    const dispatch = useAppDispatch()
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
-    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value);
-    };
 
-    const handleMessageChange = (value: string) => {
-        setDescription(value);
-    };
 
     const saveToRedux = () => {
-        dispatch(setFormValue({ name: 'title', value: title }));
-        dispatch(setFormValue({ name: 'description', value: description }));
+        if (!title || !description || !selectedProjectPhase?.id) {
+            alert("Veuillez remplir tous les champs");
+            return;
+        }
+
+        const newDocument = {
+            title,
+            description,
+            phase: selectedProjectPhase?.id,
+        };
+
+        dispatch(createDocument(newDocument));
     };
 
     return (
-        <div className={'mt-5'}>
+        <div className="mt-5">
+
+
+
             <Row>
-                <Col md='12'>
-                    <Label className={'txt-secondary'}>Nom du document</Label>
-                    <Input className='form-control mb-4'  />
+                <Col md="12">
+                    <Label className="txt-secondary">Nom du document</Label>
+                    <Input className="form-control mb-4" value={title} onChange={(e) => setTitle(e.target.value)} />
                 </Col>
             </Row>
+
+
             <Row>
-                <Col md='12'>
-                    <Label className={'txt-secondary'}>Description du document</Label>
-                    <textarea rows={3} className={'form-control'}></textarea>
+                <Col md="12">
+                    <Label className="txt-secondary">Description du document</Label>
+                    <textarea rows={3} className="form-control" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                 </Col>
             </Row>
+
             <Row>
-                <Col className={'mt-4'}>
-                    <Button color="primary" onClick={saveToRedux} outline>{"Sauvegarder"}</Button>
+                <Col className="mt-4">
+                    <Button color="primary" onClick={saveToRedux} outline>
+                        Sauvegarder
+                    </Button>
                 </Col>
             </Row>
         </div>
-    )
-}
+    );
+};
 
-export default StepOne
+export default StepOne;

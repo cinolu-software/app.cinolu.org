@@ -143,7 +143,7 @@ const RequirementsPhaseSlice = createSlice({
     },
 });
 
-// Actions exportées
+
 export const {
     setFormValue,
     toggleCreateModal,
@@ -152,5 +152,4 @@ export const {
     setSelectedRequirement,
 } = RequirementsPhaseSlice.actions;
 
-// Reducer exporté
 export default RequirementsPhaseSlice.reducer;
