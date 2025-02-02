@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Button, Row, Col, Label, Input,  } from "reactstrap";
 import { createDocument } from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
+import {Flip, toast} from "react-toastify";
 
 const StepOne = () => {
     const dispatch = useAppDispatch();
@@ -10,9 +11,7 @@ const StepOne = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
-
-
-    const saveToRedux = () => {
+    const saveToRedux = async () => {
         if (!title || !description || !selectedProjectPhase?.id) {
             alert("Veuillez remplir tous les champs");
             return;
@@ -25,12 +24,40 @@ const StepOne = () => {
         };
 
         dispatch(createDocument(newDocument));
+        try {
+            await dispatch(createDocument(newDocument));
+            toast.success(
+                <p className="text-white txt-16 mb-0">Document créé avec succès</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                }
+            )
+        } catch (error) {
+            toast.error(
+                <p className="text-white txt-16 mb-0">Une erreur est survenue lors de la création du document</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                }
+            )
+        }
     };
 
     return (
         <div className="mt-5">
-
-
 
             <Row>
                 <Col md="12">
