@@ -126,6 +126,22 @@ export const MenuList: MenuItem [] | undefined = [
                 ]
             },
             {
+                title: "Blog",
+                id: 3,
+                icon: "blog",
+                type: "sub",
+                lanClass: "lan-1",
+                active: false,
+                children: [
+                    {
+                        path: "/blog/blog_add",
+                        title: "Ajouter un article",
+                        type: "link",
+                        lanClass: "lan-6",
+                    },  
+                ]
+            },
+            {
                 title: "Partenaires",
                 id: 5,
                 icon: "bonus-kit",
