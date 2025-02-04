@@ -138,7 +138,13 @@ export const MenuList: MenuItem [] | undefined = [
                         title: "Ajouter un article",
                         type: "link",
                         lanClass: "lan-6",
-                    },  
+                    },
+                    {
+                        path: "/blog/blog_category",
+                        title: "Catégorie d'article",
+                        type: "link",
+                        lanClass: "lan-6",
+                    },
                 ]
             },
             {
