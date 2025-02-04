@@ -1,9 +1,9 @@
 import {createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import {InitialStatePostCategoryType, PostCategoryType, CreateCategoryType, UpdateCategoryType} from "@/Types/Blog/categoryPostType";
+import {ProjectCategoryType,InitialStateCategoryType,CreateCategoryType, UpdateCategoryType} from '@/Types/Projects/ProjectCategoryType';
 
-const initialState: InitialStatePostCategoryType = {
-    postCategoryData: [],
+const initialState: InitialStateCategoryType = {
+    projectCategoryData: [],
     status: 'idle',
     filterToggle: false,
     isOpenModalCreateCategory: false,
@@ -14,29 +14,29 @@ const initialState: InitialStatePostCategoryType = {
     error: '',
 };
 
-export const fetchCategory = createAsyncThunk('postCategory/fetchCategory', async () => {
-    const response = await axiosInstance.get(`${apiBaseUrl}/blog-categories`);
+export const fetchCategory = createAsyncThunk('projectCategory/fetchCategory', async () => {
+    const response = await axiosInstance.get(`${apiBaseUrl}/project-categories`);
     return response.data.data;
 });
 
-export const createCategory = createAsyncThunk('postCategory/createCategory', async (category: CreateCategoryType) => {
-    const response = await axiosInstance.post(`${apiBaseUrl}/blog-categories`, category);
+export const createCategory = createAsyncThunk('projectCategory/createCategory', async (category: CreateCategoryType) => {
+    const response = await axiosInstance.post(`${apiBaseUrl}/program-categories`, category);
     return response.data;
 });
 
-export const updateCategory = createAsyncThunk('postCategory/updateCategory', async (category: UpdateCategoryType) => {
-    const response = await axiosInstance.patch(`${apiBaseUrl}/blog-categories/${category.id}`, category);
+export const updateCategory = createAsyncThunk('programsCategory/updateCategory', async (category: UpdateCategoryType) => {
+    const response = await axiosInstance.patch(`${apiBaseUrl}/project-categories/${category.id}`, category);
     return response.data.data;
 });
 
-export const deleteCategory = createAsyncThunk('postCategory/deleteCategory', async (id: string) => {
-    await axiosInstance.delete(`${apiBaseUrl}/blog-categories/${id}`);
+export const deleteCategory = createAsyncThunk('projectCategory/deleteCategory', async (id: string) => {
+    await axiosInstance.delete(`${apiBaseUrl}/project-categories/${id}`);
     return id;
 });
 
 
-const PostCategorySlice = createSlice({
-    name: 'postCategory',
+const ProgramCategorySlice = createSlice({
+    name: 'projectCategory',
     initialState,
     reducers: {
         toggleFilter: (state) => {
@@ -61,7 +61,7 @@ const PostCategorySlice = createSlice({
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.postCategoryData = action.payload;
+                state.projectCategoryData = action.payload;
             })
             .addCase(fetchCategory.rejected, (state, action) => {
                 state.status = 'failed';
@@ -72,7 +72,7 @@ const PostCategorySlice = createSlice({
             })
             .addCase(createCategory.fulfilled, (state, action) => {
                 state.loading = false;
-                state.postCategoryData.push(action.payload);
+                state.projectCategoryData.push(action.payload);
             })
             .addCase(createCategory.rejected, (state, action) => {
                 state.loading = false;
@@ -86,11 +86,13 @@ const PostCategorySlice = createSlice({
                 state.status = 'succeeded';
                 const { id, name, created_at, updated_at } = action.payload;
 
+
                 if (id) {
-                    const index = state.postCategoryData.findIndex((project) => project.id === id);
+                    const index = state.projectCategoryData.findIndex((project) => project.id === id);
+
                     if (index !== -1) {
-                        state.postCategoryData[index] = {
-                            ...state.postCategoryData[index],
+                        state.projectCategoryData[index] = {
+                            ...state.projectCategoryData[index],
                             ...(name !== null && { name }),
                             ...(created_at && { created_at }),
                             ...(updated_at && { updated_at }),
@@ -105,7 +107,7 @@ const PostCategorySlice = createSlice({
             })
             .addCase(deleteCategory.fulfilled, (state, action: PayloadAction<string>)=>{
                 state.status = 'succeeded';
-                state.postCategoryData = state.postCategoryData.filter((program: {id : string}) => program.id !== action.payload)
+                state.projectCategoryData = state.projectCategoryData.filter((program: {id : string}) => program.id !== action.payload)
             })
             .addCase(deleteCategory.rejected, (state) => {
                 state.status = 'failed';
@@ -120,8 +122,8 @@ export const {
     setModalCreateCategory,
     setModalEditCategory,
     setModalDeleteCategory
-} = PostCategorySlice.actions;
+} = ProgramCategorySlice.actions;
 
-export default PostCategorySlice.reducer
+export default ProgramCategorySlice.reducer
 
 
