@@ -17,9 +17,15 @@ export interface FormValue {
     ended_at: string;
     project: string;
 }
+export interface FormInputType {
+    name: string;
+    type:string;
+    label:string;
+    required:boolean;
+}
 
-export interface FormEditValue extends FormValue{
-    form : string;
+export interface DynamicFormType {
+    inputs: FormInputType[]
 }
 
 export interface ProjectPhaseType {
@@ -28,7 +34,8 @@ export interface ProjectPhaseType {
     description: string;
     started_at: string;
     ended_at: string;
-    project: string
+    project: string;
+    form?: DynamicFormType;
 }
 
 export interface CreateProjectPhaseType extends  ProjectPhaseType{}

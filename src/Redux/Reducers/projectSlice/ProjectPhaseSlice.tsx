@@ -31,6 +31,10 @@ export const fetchProjectPhaseById = createAsyncThunk('project/fetchProjectPhase
     return response.data.data;
 });
 
+export const fetchPhaseByProject = createAsyncThunk('project/fetchPhaseByProject', async (id: string)=>{
+    const response = await axiosInstance.get<{}>(`${apiBaseUrl}/project-phase/project/${id}`);
+})
+
 export const createProjectPhase = createAsyncThunk('project/createProjectPhase', async(newProjectPhase: CreateProjectPhaseType)=>{
     try{
         const response = await axiosInstance.post<{data: ProjectPhaseType}>(`${apiBaseUrl}/project-phases`, newProjectPhase);
@@ -84,6 +88,7 @@ const ProjectPhaseSlice = createSlice({
         setFormValue: (state, action: PayloadAction<{ field: keyof FormValue, value: string }>) => {
             const { field, value } = action.payload;
             if (field in state.formValue) {
+                // @ts-ignore
                 state.formValue[field as keyof FormValue] = value;
             } else {
                 console.warn(`Le champ ${field} n'existe pas dans formValue.`);
