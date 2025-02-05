@@ -6,7 +6,7 @@ import {UpdateCategoryType} from "@/Types/Blog/categoryPostType";
 import {Flip, toast} from "react-toastify";
 
 
-const UpdateProgramCategory = () => {
+const UpdatePostCategory = () => {
 
     const dispatch = useAppDispatch();
     const {selectedCategory, isOpenModalEditCategory} = useAppSelector((state) => state.postCategory);
@@ -106,4 +106,4 @@ const UpdateProgramCategory = () => {
 
 }
 
-export default UpdateProgramCategory
+export default UpdatePostCategory

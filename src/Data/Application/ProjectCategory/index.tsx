@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button } from "reactstrap";
-import {ProjectListTypeTableColumnType, ProjectTypeType} from "@/Types/Projects/ProjectTypeType";
+import {ProjectListTypeTableColumnType} from "@/Types/Projects/ProjectTypeType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
