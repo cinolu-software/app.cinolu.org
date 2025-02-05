@@ -1,5 +1,5 @@
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
-import { BlogDiscardButton, BlogPostButton, PostEdit } from "@/Constant";
+import { BlogDiscardButton, BlogPostButton } from "@/Constant";
 import React from "react";
 import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
 import DropzoneClass from "@/Components/Applications/blog/blog_add/DropzoneClass";

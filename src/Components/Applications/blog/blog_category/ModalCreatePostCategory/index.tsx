@@ -51,7 +51,7 @@ const CreateNewPostCategory = () => {
                 <ModalBody className="custom-input">
                     <div className="create-category">
                         <Label for="programName" check>
-                            Nom de la catégorie du projet <span className="txt-danger">*</span>
+                            Nom de la catégorie de l'article <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"

@@ -31,7 +31,6 @@ const UpdatePostCategory = () => {
         }
     }, [selectedCategory]);
 
-
     const handleSubmit = async () => {
         try {
             await dispatch(updateCategory(projectCategory)).unwrap()
@@ -69,14 +68,12 @@ const UpdatePostCategory = () => {
             >
                 <div className="modal-header">
                     <h1 className="modal-title fs-5">{"Mettre à jour une catégorie d'article"}</h1>
-                    <Button close
-                            onClick={() => dispatch(setModalEditCategory({isOpen: false, postCategory: null}))}
-                    />
+                    <Button close onClick={() => dispatch(setModalEditCategory({isOpen: false, postCategory: null}))}/>
                 </div>
                 <ModalBody className="custom-input">
                     <div className="update-category">
                         <Label for="programName" check>
-                            Nom du type de projet <span className="txt-danger">*</span>
+                            Nom de la catégorie de l'article <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"
