@@ -45,13 +45,13 @@ const PostCategorySlice = createSlice({
         setModalCreateCategory: (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateCategory = action.payload.isOpen;
         },
-        setModalEditCategory: (state, action: PayloadAction<{ isOpen: boolean, projectCategory: any }>) => {
+        setModalEditCategory: (state, action: PayloadAction<{ isOpen: boolean, postCategory: any }>) => {
             state.isOpenModalEditCategory = action.payload.isOpen;
-            state.selectedCategory = action.payload.projectCategory;
+            state.selectedCategory = action.payload.postCategory;
         },
-        setModalDeleteCategory: (state, action: PayloadAction<{ isOpen: boolean, projectCategory: any }>) => {
+        setModalDeleteCategory: (state, action: PayloadAction<{ isOpen: boolean, postCategory: any }>) => {
             state.isOpenModalDeleteCategory = action.payload.isOpen;
-            state.selectedCategory = action.payload.projectCategory;
+            state.selectedCategory = action.payload.postCategory;
         }
     },
     extraReducers: (builder) => {
