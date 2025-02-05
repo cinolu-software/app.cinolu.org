@@ -14,7 +14,7 @@ const BlogCategoryContainer  = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {status, isOpenModalCreateCategory, isOpenModalDeleteCategory, postCategoryData, selectedCategory} = useAppSelector(state => state.postCategory);
+    const {status, isOpenModalDeleteCategory, postCategoryData, selectedCategory} = useAppSelector(state => state.postCategory);
 
 
 
