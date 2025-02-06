@@ -22,6 +22,7 @@ import ProgramSlice from "@/Redux/Reducers/programSlice/programSlice";
 import ProjectDocumentSlice from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
 import PhaseApplicationSlice from "@/Redux/Reducers/projectSlice/ProjectApplicationSlice";
 import PostCategorySlice from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
+import PostSlice from "@/Redux/Reducers/BlogSlice/postSlice";
 
 
 const Store = configureStore({
@@ -49,7 +50,8 @@ const Store = configureStore({
     program: ProgramSlice,
     projectDocument: ProjectDocumentSlice,
     PhaseApplication: PhaseApplicationSlice,
-    postCategory: PostCategorySlice
+    postCategory: PostCategorySlice,
+    post: PostSlice,
   },
 
   middleware : getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),

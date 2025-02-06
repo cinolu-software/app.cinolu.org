@@ -16,7 +16,8 @@ export interface UpdatePost extends CreatePost {
     id: string,
 }
 
-
 export interface InitialStatePost {
-
+    postData : Post[];
+    status: 'idle' | 'loading' | 'success' | 'failed';
+    error: string | null ;
 }
