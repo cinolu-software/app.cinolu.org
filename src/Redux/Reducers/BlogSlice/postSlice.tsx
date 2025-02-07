@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axiosInstance, {apiBaseUrl} from "@/services/axios";
+import axiosInstance, { apiBaseUrl } from "@/services/axios";
 import { InitialStatePost, Post, UpdatePost, CreatePost } from "@/Types/Blog/postType";
 import { RootState } from "@/Redux/Store";
 
@@ -38,7 +38,7 @@ export const createPost = createAsyncThunk("posts/createPost", async (newPost: C
 
 export const updatePost = createAsyncThunk("posts/updatePost", async (updatedPost: UpdatePost, { rejectWithValue }) => {
     try {
-        const response = await axiosInstance.patch(`/blog-posts/${updatedPost.id}`, updatedPost);
+        const response = await axiosInstance.patch(`${apiBaseUrl}/blog-posts/${updatedPost.id}`, updatedPost);
         return response.data.data;
     } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || "Erreur lors de la mise à jour du post");
@@ -54,49 +54,95 @@ export const deletePost = createAsyncThunk("posts/deletePost", async (id: string
     }
 });
 
+export const uploadPostImage = createAsyncThunk(
+    "posts/uploadImage",
+    async ({ id, file }: { id: string; file: File }, { rejectWithValue }) => {
+        try {
+            const formData = new FormData();
+            formData.append("thumb", file);
+            const response = await axiosInstance.post(
+                `${apiBaseUrl}/blog-posts/image-cover`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            return response.data.data;
+        } catch (error: any) {
+            return rejectWithValue(error.response?.data?.message || "Erreur lors de l'upload de l'image");
+        }
+    }
+);
+
 const PostSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {},
     extraReducers: (builder) => {
-
-        builder.addCase(fetchPosts.pending, (state) => {
+        const handlePending = (state: InitialStatePost) => {
             state.status = "loading";
-        });
-        builder.addCase(fetchPosts.fulfilled, (state, action: PayloadAction<Post[]>) => {
-            state.status = "success";
-            state.postData = action.payload;
-        });
-        builder.addCase(fetchPosts.rejected, (state, action: PayloadAction<any>) => {
+        };
+
+        const handleRejected = (state: InitialStatePost, action: PayloadAction<any>) => {
             state.status = "failed";
             state.error = action.payload;
-        });
-        builder.addCase(fetchPostById.fulfilled, (state, action: PayloadAction<Post>) => {
-            state.status = "success";
-            const postIndex = state.postData.findIndex((post) => post.title === action.payload.title);
-            if (postIndex === -1) {
-                state.postData.push(action.payload);
-            }
-        });
-        builder.addCase(createPost.fulfilled, (state, action: PayloadAction<Post>) => {
-            state.status = "success";
-            state.postData.push(action.payload);
-        });
-        builder.addCase(updatePost.fulfilled, (state, action: PayloadAction<Post>) => {
-            state.status = "success";
-            const index = state.postData.findIndex((post) => post.title === action.payload.title);
-            if (index !== -1) {
-                state.postData[index] = action.payload;
-            }
-        });
-        builder.addCase(deletePost.fulfilled, (state, action: PayloadAction<string>) => {
-            state.status = "success";
-            state.postData = state.postData.filter((post) => post.title !== action.payload);
-        });
-        builder.addCase(createPost.rejected, (state, action: PayloadAction<any>) => {
-            state.status = "failed";
-            state.error = action.payload;
-        });
+        };
+
+        builder
+            .addCase(fetchPosts.pending, handlePending)
+            .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<Post[]>) => {
+                state.status = "success";
+                state.postData = action.payload;
+            })
+            .addCase(fetchPosts.rejected, handleRejected)
+
+            .addCase(fetchPostById.pending, handlePending)
+            .addCase(fetchPostById.fulfilled, (state, action: PayloadAction<Post>) => {
+                state.status = "success";
+                const index = state.postData.findIndex(post => post.id === action.payload.id);
+                if (index === -1) {
+                    state.postData.push(action.payload);
+                } else {
+                    state.postData[index] = action.payload;
+                }
+            })
+            .addCase(fetchPostById.rejected, handleRejected)
+
+            .addCase(createPost.pending, handlePending)
+            .addCase(createPost.fulfilled, (state, action: PayloadAction<Post>) => {
+                state.status = "success";
+                state.postData.unshift(action.payload);
+            })
+            .addCase(createPost.rejected, handleRejected)
+
+            .addCase(updatePost.pending, handlePending)
+            .addCase(updatePost.fulfilled, (state, action: PayloadAction<Post>) => {
+                state.status = "success";
+                const index = state.postData.findIndex(post => post.id === action.payload.id);
+                if (index !== -1) {
+                    state.postData[index] = action.payload;
+                }
+            })
+            .addCase(updatePost.rejected, handleRejected)
+
+            .addCase(deletePost.pending, handlePending)
+            .addCase(deletePost.fulfilled, (state, action: PayloadAction<string>) => {
+                state.status = "success";
+                state.postData = state.postData.filter(post => post.id !== action.payload);
+            })
+            .addCase(deletePost.rejected, handleRejected)
+
+            .addCase(uploadPostImage.pending, handlePending)
+            .addCase(uploadPostImage.fulfilled, (state, action: PayloadAction<Post>) => {
+                state.status = "success";
+                const index = state.postData.findIndex(post => post.id === action.payload.id);
+                if (index !== -1) {
+                    state.postData[index] = action.payload;
+                }
+            })
+            .addCase(uploadPostImage.rejected, handleRejected);
     },
 });
 

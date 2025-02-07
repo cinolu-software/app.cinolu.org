@@ -910,8 +910,8 @@ export const PostType: string = "Type";
 export const PostContent: string = "Content";
 export const PostTypePlaceholder: string = "Select Your Name....";
 export const BlogPostText: string = `Entrer le contenu de l'article`;
-export const BlogPostButton: string = "Post";
-export const BlogDiscardButton: string = "Discard";
+export const BlogPostButton: string = "Créer";
+export const BlogDiscardButton: string = "Annuler";
 export const BlogDropFilesHereOrClickToUpload: string = "Drop files here or click to upload.";
 
 //FAQ

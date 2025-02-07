@@ -4,64 +4,81 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import "easymde/dist/easymde.min.css";
 import { PostCategory, PostTitlePlaceholder } from "@/Constant";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createPost } from "@/Redux/Reducers/BlogSlice/postSlice";
+import { createPost, uploadPostImage } from "@/Redux/Reducers/BlogSlice/postSlice";
 import { fetchCategory } from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
 import SimpleMdeReact from "react-simplemde-editor";
 
-type SelectOptionType = { value: number; label: string };
+type SelectOptionType = { value: string; label: string };
 
-const FormPost = () => {
-
+const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
     const dispatch = useAppDispatch();
     const [title, setTitle] = useState("");
-    const [categories, setCategories] = useState<SelectOptionType[]>([]);
+    const [category, setCategory] = useState<SelectOptionType | null>(null);
     const [content, setContent] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const { postCategoryData, loading } = useAppSelector((state) => state.postCategory);
+    const { status, error } = useAppSelector((state) => state.post);
 
     useEffect(() => {
         dispatch(fetchCategory());
     }, [dispatch]);
 
-    const categoryOptions : SelectOptionType[] = postCategoryData.map((cat) => ({
+    const categoryOptions: SelectOptionType[] = postCategoryData.map((cat) => ({
         value: cat.id,
         label: cat.name,
     }));
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!title.trim() || categories.length === 0 || !content.trim()) {
+        setIsSubmitting(true);
+
+        if (!title.trim() || !category || !content.trim()) {
             alert("Veuillez remplir tous les champs obligatoires !");
+            setIsSubmitting(false);
             return;
         }
 
-        dispatch(
-            createPost({
+        try {
+            const resultAction = await dispatch(createPost({
                 title,
-                category: categories.map((cat) => cat.value), // Extraction des IDs
+                category: category.value,
                 content,
-            })
-        );
+            }));
+
+            if (createPost.fulfilled.match(resultAction)) {
+                const newPost = resultAction.payload;
+                if (onFileUpload) {
+                    await onFileUpload(newPost.id);
+                }
+
+                setTitle("");
+                setContent("");
+                setCategory(null);
+                alert("Article créé avec succès !");
+            }
+        } catch (error) {
+            console.error("Erreur lors de la création:", error);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const onChangeContent = useCallback((value: string) => {
         setContent(value);
-    }, [])
-
-    const autofocusNoSpellcheckerOptions = useMemo(() => {
-        return {
-            autofocus: true,
-            spellChecker: false,
-        } as SimpleMDE.Options;
     }, []);
 
-    console.log(title)
+    const editorOptions = useMemo(() => ({
+        autofocus: true,
+        spellChecker: false,
+        minHeight: "300px",
+        status: false,
+    }), []);
 
     return (
-        <Form className="needs-validation" >
+        <Form className="needs-validation" onSubmit={handleSubmit} id="post-form">
             <Row>
                 <Col sm="12">
-
                     <FormGroup>
                         <Label>Titre de l'article :</Label>
                         <Input
@@ -69,33 +86,33 @@ const FormPost = () => {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder={PostTitlePlaceholder}
+                            disabled={isSubmitting}
                         />
                     </FormGroup>
+
                     <FormGroup>
                         <Label>{PostCategory} :</Label>
                         {loading ? (
                             <p>Chargement des catégories...</p>
                         ) : (
                             <Select
-                                isMulti
                                 options={categoryOptions}
-                                value={categories}
-                                onChange={(selected) =>
-                                    setCategories(selected as SelectOptionType[])
-                                }
-                                placeholder="Sélectionnez les catégories..."
+                                value={category}
+                                onChange={(selected) => setCategory(selected)}
+                                placeholder="Sélectionnez une catégorie..."
                                 classNamePrefix="react-select"
+                                isDisabled={isSubmitting}
                             />
                         )}
                     </FormGroup>
 
-
                     <FormGroup>
                         <Label>Contenu de l'article :</Label>
                         <SimpleMdeReact
-                            options={autofocusNoSpellcheckerOptions}
+                            options={editorOptions}
                             value={content}
                             onChange={onChangeContent}
+                            // disabled={isSubmitting}
                         />
                     </FormGroup>
                 </Col>

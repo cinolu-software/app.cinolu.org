@@ -1,12 +1,38 @@
 import CommonCardHeader from "@/CommonComponent/CommonCardHeader";
 import { BlogDiscardButton, BlogPostButton } from "@/Constant";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Button, Card, CardBody, Col, Container, Row } from "reactstrap";
 import DropzoneClass from "@/Components/Applications/blog/blog_add/DropzoneClass";
 import FormPost from "@/Components/Applications/blog/blog_add/FormPost";
-
+import { useAppDispatch } from "@/Redux/Hooks";
+import { uploadPostImage } from "@/Redux/Reducers/BlogSlice/postSlice";
 
 const AddPostContainer = () => {
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const formRef = useRef<HTMLFormElement>(null);
+    const dispatch = useAppDispatch();
+
+    const handleFileUpload = async (postId: string) => {
+        if (selectedFile) {
+            try {
+                await dispatch(uploadPostImage({
+                    id: postId,
+                    file: selectedFile
+                })).unwrap();
+                setSelectedFile(null);
+            } catch (error) {
+                console.error("Erreur lors de l'upload de l'image:", error);
+            }
+        }
+    };
+
+    const handleDiscard = () => {
+        if (formRef.current) {
+            formRef.current.reset();
+        }
+        setSelectedFile(null);
+    };
+
 
     return (
         <Container fluid>
@@ -15,11 +41,27 @@ const AddPostContainer = () => {
                     <Card>
                         <CommonCardHeader title={"Ajouter un article"} />
                         <CardBody className="add-post">
-                            <FormPost />
-                            <DropzoneClass />
+                            <FormPost
+                                // @ts-ignore
+                                onFileUpload={handleFileUpload}
+                                ref={formRef}
+                            />
+                            <DropzoneClass onFilesChange={setSelectedFile} />
                             <div className="btn-showcase text-end">
-                                <Button color="primary">{BlogPostButton}</Button>
-                                <Button color="light" type="reset">{BlogDiscardButton}</Button>
+                                <Button
+                                    type="submit"
+                                    color="primary"
+                                    form="post-form"
+                                >
+                                    {BlogPostButton}
+                                </Button>
+                                <Button
+                                    color="light"
+                                    type="button"
+                                    onClick={handleDiscard}
+                                >
+                                    {BlogDiscardButton}
+                                </Button>
                             </div>
                         </CardBody>
                     </Card>
@@ -27,7 +69,7 @@ const AddPostContainer = () => {
             </Row>
         </Container>
     );
-
 };
 
 export default AddPostContainer;
+
