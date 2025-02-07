@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import {InitialStateProjectPhaseType, ProjectPhaseType, CreateProjectPhaseType, FormValue} from "@/Types/Projects/PhasesType";
 
+// @ts-ignore
 const initialState : InitialStateProjectPhaseType = {
     ProjectDataPhase: [],
     dataPhase: null,
@@ -12,6 +13,7 @@ const initialState : InitialStateProjectPhaseType = {
     isOpenModalDeleteProjectPhase : false,
     isOpenModalEditProjectPhase : false,
     selectedProjectPhase: null,
+    // @ts-ignore
     formValue : {
         name : '',
         description: '',
@@ -95,6 +97,8 @@ const ProjectPhaseSlice = createSlice({
             }
         },
         resetFormValue: (state) => {
+
+            // @ts-ignore
             state.formValue = {
                 name: '',
                 description: '',

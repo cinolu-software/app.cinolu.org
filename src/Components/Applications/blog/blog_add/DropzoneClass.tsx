@@ -5,9 +5,11 @@ import { Form } from "reactstrap";
 
 const DropzoneClass = () => {
     const [files, setFiles] = useState<ExtFile[]>([]);
+
     const updateFiles = (incomingFiles: ExtFile[]) => {
         setFiles(incomingFiles);
     };
+
     const removeFile = (id: string | number | undefined) => {
         setFiles(files.filter((x: ExtFile) => x.id !== id));
     };
