@@ -1,62 +1,41 @@
-import { useState } from "react";
-import { Dropzone, ExtFile, FileMosaic } from "@dropzone-ui/react";
-import {setFormValue} from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
-import {useAppDispatch} from "@/Redux/Hooks";
-import SVG from "@/CommonComponent/SVG";
+import React, { useState } from 'react';
 
-const UploadDocument = () => {
+type UploadDocumentProps = {
+    documentId: string;
+    onUpload: (file: File) => void;
+};
 
-    const [files, setFiles] = useState<ExtFile[]>([]);
-    const dispatch = useAppDispatch();
+const UploadDocument: React.FC<UploadDocumentProps> = ({ documentId, onUpload }) => {
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-    const updateFiles = (incomingFiles: ExtFile[]) => {
-
-        setFiles(incomingFiles);
-
-        if (incomingFiles.length > 0) {
-            dispatch(setFormValue({ name: "file_name", value: incomingFiles[0].file }));
-        } else {
-            dispatch(setFormValue({ name: "file_name", value: null }));
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files.length > 0) {
+            setSelectedFile(event.target.files[0]);
         }
     };
 
-    const removeFile = (id: string | number | undefined) => {
-        setFiles(files.filter((x: ExtFile) => x.id !== id));
-        dispatch(setFormValue({ name: "file_name", value: null }));
+    const handleUploadClick = () => {
+        if (selectedFile) {
+            onUpload(selectedFile);
+        }
     };
 
-
     return (
-        <div className="product-upload">
-            <div className="pt-4 pe-4">
-                <Dropzone
-                    onChange={(files) => updateFiles(files)}
-                    value={files}
-                    maxFiles={1}
-                    header={false}
-                    footer={false}
-                    minHeight="80px"
-                    name="fileName1"
-                >
-                    {files.map((file: ExtFile) => (
-                        <FileMosaic
-                            key={file.id}
-                            {...file}
-                            onDelete={removeFile}
-                            info={true}
-                        />
-                    ))}
-                    {files.length === 0 && (
-                        <div className="dz-message needsclick">
-                            <SVG iconId="file-upload1" />
-                            <h5>{'Joindre un fichier'}</h5>
-                        </div>
-                    )}
-                </Dropzone>
-
-            </div>
+        <div className="flex items-center space-x-4">
+            <input
+                type="file"
+                onChange={handleFileChange}
+                className="border p-2 rounded"
+            />
+            <button
+                onClick={handleUploadClick}
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                disabled={!selectedFile}
+            >
+                Charger
+            </button>
         </div>
     );
-}
+};
 
 export default UploadDocument;

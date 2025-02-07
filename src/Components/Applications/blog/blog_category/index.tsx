@@ -16,8 +16,6 @@ const BlogCategoryContainer  = () => {
     const dispatch = useAppDispatch();
     const {status, isOpenModalDeleteCategory, postCategoryData, selectedCategory} = useAppSelector(state => state.postCategory);
 
-
-
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">

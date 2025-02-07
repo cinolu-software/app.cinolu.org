@@ -4,7 +4,6 @@ import {setNavId} from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
 import {Col, Nav, NavItem, NavLink} from "reactstrap";
 import {DocumentStep} from "@/Data/Application/Project/phase/document";
 
-
 const DocumentLeftSidebar = () => {
 
     const {navId} = useAppSelector(state => state.projectDocument);

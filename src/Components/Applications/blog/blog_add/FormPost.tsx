@@ -88,9 +88,6 @@ const FormPost = () => {
                             }}
                         />
                     </FormGroup>
-                    {/*<Button type="submit" color="primary" className="mt-3">*/}
-                    {/*    Créer l'article*/}
-                    {/*</Button>*/}
                 </Col>
             </Row>
         </Form>

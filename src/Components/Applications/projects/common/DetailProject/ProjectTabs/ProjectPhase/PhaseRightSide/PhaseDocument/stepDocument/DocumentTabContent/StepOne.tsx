@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Button, Row, Col, Label, Input,  } from "reactstrap";
 import { createDocument } from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
 import {Flip, toast} from "react-toastify";
+import {fetchProjectPhaseById} from "@/Redux/Reducers/projectSlice/ProjectPhaseSlice";
+
 
 const StepOne = () => {
+
     const dispatch = useAppDispatch();
     const {  selectedProjectPhase } = useAppSelector(state => state.projectPhase);
-
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
 
     const saveToRedux = async () => {
+
         if (!title || !description || !selectedProjectPhase?.id) {
             alert("Veuillez remplir tous les champs");
             return;
@@ -24,6 +27,7 @@ const StepOne = () => {
         };
 
         dispatch(createDocument(newDocument));
+        dispatch(fetchProjectPhaseById(selectedProjectPhase.id));
         try {
             await dispatch(createDocument(newDocument));
             toast.success(
@@ -40,7 +44,8 @@ const StepOne = () => {
                     theme: "colored",
                 }
             )
-        } catch (error) {
+        }
+        catch (error) {
             toast.error(
                 <p className="text-white txt-16 mb-0">Une erreur est survenue lors de la création du document</p>,
                 {
@@ -57,6 +62,14 @@ const StepOne = () => {
             )
         }
     };
+
+    useEffect(() => {
+
+        if(selectedProjectPhase?.id){
+            dispatch(fetchProjectPhaseById(selectedProjectPhase.id));
+        }
+
+    }, []);
 
     return (
         <div className="mt-5">

@@ -29,6 +29,7 @@ export interface DynamicFormType {
 }
 
 export interface ProjectPhaseType {
+    documents: any;
     id?: string;
     name : string;
     description: string;
