@@ -50,12 +50,12 @@ const initialState: InitialStateEvent = {
 
 export const fetchEvents = createAsyncThunk('events/fetchEvents', async ()=> {
     const response = await axiosInstance.get<{data : fetchEventsResponse}>(`${apiBaseUrl}/events`);
-    return {data: response.data.data.events}
+    return {data: response.data.data}
 });
 
 export const fetchPublishedEvents = createAsyncThunk('events/fetchPublishedEvents', async () => {
     const response = await axiosInstance.get<{data : any}>(`${apiBaseUrl}/events/find-published`);
-    const publishedEvents = response.data.data.events;
+    const publishedEvents = response.data.data;
 
     return {publishedEvent: publishedEvents}
 });
@@ -272,6 +272,7 @@ const EventSlice = createSlice({
             })
             .addCase(fetchEvents.fulfilled, (state, action) => {
                 state.status = 'succeeded';
+                // @ts-ignore
                 state.dataEvent = action.payload.data;
             })
             .addCase(fetchEvents.rejected, (state, action) => {

@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { createPost, uploadPostImage } from "@/Redux/Reducers/BlogSlice/postSlice";
 import { fetchCategory } from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
 import SimpleMdeReact from "react-simplemde-editor";
+import { Flip, toast } from "react-toastify";
 
 type SelectOptionType = { value: string; label: string };
 
@@ -55,10 +56,29 @@ const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
                 setTitle("");
                 setContent("");
                 setCategory(null);
-                alert("Article créé avec succès !");
+                toast.success(
+                    <p className="text-white tx-16 mb-0">"Article créé avec succès !"</p>,
+                    {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        hideProgressBar: false,
+                        transition: Flip,
+                        theme: "colored",
+                    }
+                );
             }
         } catch (error) {
             console.error("Erreur lors de la création:", error);
+            toast.error(
+                <p className="text-white tx-16 mb-0">{`Erreur lors de la création: ${error}`}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
         } finally {
             setIsSubmitting(false);
         }

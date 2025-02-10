@@ -1,15 +1,6 @@
 import React, {useState} from 'react'
 import {CardBody, Nav, NavItem, NavLink} from "reactstrap";
-import {
-    Description,
-    Href,
-    MaterialStyleTab,
-    Review,
-    userProfileBasicInfo,
-    userProfileSecurity,
-    userProfilePersonalInfo,
-    userProfileImage
-} from "@/Constant";
+import {Href, userProfileBasicInfo, userProfileSecurity, userProfileImage} from "@/Constant";
 import TabsContent from "@/Components/Applications/Profile/ProfileTabs/TabsContent";
 
 

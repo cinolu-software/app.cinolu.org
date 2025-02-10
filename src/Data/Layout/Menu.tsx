@@ -140,6 +140,12 @@ export const MenuList: MenuItem [] | undefined = [
                         lanClass: "lan-6",
                     },
                     {
+                        path: "/blog/blog_detail",
+                        title: "Détails du blog",
+                        type: "link",
+                        lanClass: "lan-6",
+                    },
+                    {
                         path: "/blog/blog_category",
                         title: "Catégorie d'article",
                         type: "link",

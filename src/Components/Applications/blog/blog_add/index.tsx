@@ -7,6 +7,7 @@ import FormPost from "@/Components/Applications/blog/blog_add/FormPost";
 import { useAppDispatch } from "@/Redux/Hooks";
 import { uploadPostImage } from "@/Redux/Reducers/BlogSlice/postSlice";
 
+
 const AddPostContainer = () => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
@@ -20,6 +21,7 @@ const AddPostContainer = () => {
                     file: selectedFile
                 })).unwrap();
                 setSelectedFile(null);
+                
             } catch (error) {
                 console.error("Erreur lors de l'upload de l'image:", error);
             }
