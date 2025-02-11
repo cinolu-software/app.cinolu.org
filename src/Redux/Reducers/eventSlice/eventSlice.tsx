@@ -88,7 +88,8 @@ export const updateEvent =  createAsyncThunk<Event, {eventId: string, updatedEve
         try{
             const response = await axiosInstance.patch<{data: Event}>(`${apiBaseUrl}/events/${eventId}`, updatedEvent);
             return response.data.data;
-        }catch (e) {
+        }
+        catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
         }
     }

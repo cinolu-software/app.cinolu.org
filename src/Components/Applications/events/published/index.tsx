@@ -15,7 +15,8 @@ const PublishedEventsListContainer = () => {
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
     const {publishedEventData, publishedEventStatus} = useAppSelector(state=>state.event);
-    const filteredItems = publishedEventData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    // @ts-ignore
+    const filteredItems = publishedEventData[0]?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
