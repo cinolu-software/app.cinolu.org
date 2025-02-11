@@ -8,6 +8,8 @@ import { createPost, uploadPostImage } from "@/Redux/Reducers/BlogSlice/postSlic
 import { fetchCategory } from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
 import SimpleMdeReact from "react-simplemde-editor";
 import { Flip, toast } from "react-toastify";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 type SelectOptionType = { value: string; label: string };
 
@@ -128,11 +130,11 @@ const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
 
                     <FormGroup>
                         <Label>Contenu de l'article :</Label>
-                        <SimpleMdeReact
-                            options={editorOptions}
+                        <ReactQuill
                             value={content}
-                            onChange={onChangeContent}
-                            // disabled={isSubmitting}
+                            onChange={setContent}
+                            placeholder="Écrivez votre article ici..."
+                            theme="snow"
                         />
                     </FormGroup>
                 </Col>
