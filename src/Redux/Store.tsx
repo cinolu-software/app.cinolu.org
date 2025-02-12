@@ -23,6 +23,8 @@ import ProjectDocumentSlice from "@/Redux/Reducers/projectSlice/ProjectDocumentS
 import PhaseApplicationSlice from "@/Redux/Reducers/projectSlice/ProjectApplicationSlice";
 import PostCategorySlice from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
 import PostSlice from "@/Redux/Reducers/BlogSlice/postSlice";
+import ChatRoomSlice from "@/Redux/Reducers/ChatSlice/ChatRoomSlice";
+
 
 
 const Store = configureStore({
@@ -52,6 +54,7 @@ const Store = configureStore({
     PhaseApplication: PhaseApplicationSlice,
     postCategory: PostCategorySlice,
     post: PostSlice,
+    chat: ChatRoomSlice
   },
 
   middleware : getDefaultMiddleware => getDefaultMiddleware({serializableCheck: false,}),

@@ -18,6 +18,17 @@ export const MenuList: MenuItem [] | undefined = [
                     {path: "/users/profile", title: "Profile", type: "link", lanClass: "lan-6"},
                 ]
             },
+            {
+                title: "Discussion",
+                id: 2,
+                icon: "chat",
+                type: "sub",
+                lanClass: "lan-1",
+                active: false,
+                children: [
+                    {path: "/chat/chat_room", title: "Salon de discussion", type: "link", lanClass: "lan-6"},
+                ]
+            },
         ],
         requiredRoles: ["admin", "coach", "staff", 'user'],
     },
@@ -122,7 +133,6 @@ export const MenuList: MenuItem [] | undefined = [
                             },
                         ]
                     },
-
                 ]
             },
             {

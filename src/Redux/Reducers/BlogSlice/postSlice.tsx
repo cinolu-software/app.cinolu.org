@@ -97,7 +97,6 @@ const PostSlice = createSlice({
                 state.postData = action.payload;
             })
             .addCase(fetchPosts.rejected, handleRejected)
-
             .addCase(fetchPostById.pending, handlePending)
             .addCase(fetchPostById.fulfilled, (state, action: PayloadAction<Post>) => {
                 state.status = "success";
@@ -109,14 +108,12 @@ const PostSlice = createSlice({
                 }
             })
             .addCase(fetchPostById.rejected, handleRejected)
-
             .addCase(createPost.pending, handlePending)
             .addCase(createPost.fulfilled, (state, action: PayloadAction<Post>) => {
                 state.status = "success";
                 state.postData.unshift(action.payload);
             })
             .addCase(createPost.rejected, handleRejected)
-
             .addCase(updatePost.pending, handlePending)
             .addCase(updatePost.fulfilled, (state, action: PayloadAction<Post>) => {
                 state.status = "success";
