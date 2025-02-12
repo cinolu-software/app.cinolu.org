@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { FaEdit, FaTrash } from "react-icons/fa"; // Importation des icônes
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { fetchPosts } from "@/Redux/Reducers/BlogSlice/postSlice";
 import { fetchCategory } from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
@@ -7,7 +8,6 @@ import parse from "html-react-parser";
 import Link from "next/link";
 
 const BlogDetails = () => {
-
     const dispatch = useAppDispatch();
     const { postData, status: postStatus } = useAppSelector((state) => state.post);
     const { postCategoryData, status: categoryStatus } = useAppSelector((state) => state.postCategory);
@@ -59,26 +59,34 @@ const BlogDetails = () => {
                     <p>Aucun article trouvé.</p>
                 ) : (
                     filteredPosts[0].map((post) => (
-                        <Link href={`/blog/${post.id}`} key={post.id} passHref>
-                            <div className="post-card" style={{ cursor: "pointer" }}>
-                                {post.image && (
-                                    <img
-                                        src={`${imageBaseUrl}/posts/${post.image}`}
-                                        alt={post.title}
-                                        className="post-card-image"
-                                    />
-                                )}
-                                <div className="post-card-content">
-                                    <h3 className="post-card-title">{post.title}</h3>
-                                    <div className="post-card-excerpt">
-                                        {parse(truncateContent(post?.content || "", 150))}
-                                    </div>
-                                    <small className="post-card-category">
-                                        Catégorie : {post.category?.name || "Non catégorisé"}
-                                    </small>
+                        <div className="post-card" key={post.id}>
+                            {post.image && (
+                                <img
+                                    src={`${imageBaseUrl}/posts/${post.image}`}
+                                    alt={post.title}
+                                    className="post-card-image"
+                                />
+                            )}
+                            <div className="post-card-content">
+                                <h3 className="post-card-title">{post.title}</h3>
+                                <div className="post-card-excerpt">
+                                    {parse(truncateContent(post?.content || "", 150))}
+                                </div>
+                                <small className="post-card-category">
+                                    Catégorie : {post.category?.name || "Non catégorisé"}
+                                </small>
+
+
+                                <div className="post-card-actions">
+                                    <button className="edit-button" onClick={() => console.log("Edit post", post.id)}>
+                                        <FaEdit />
+                                    </button>
+                                    <button className="delete-button" onClick={() => console.log("Delete post", post.id)}>
+                                        <FaTrash />
+                                    </button>
                                 </div>
                             </div>
-                        </Link>
+                        </div>
                     ))
                 )}
             </div>
@@ -87,3 +95,4 @@ const BlogDetails = () => {
 };
 
 export default BlogDetails;
+
