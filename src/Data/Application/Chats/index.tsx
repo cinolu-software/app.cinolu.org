@@ -236,9 +236,9 @@ export const ChatApiData = [
 export const ChatMemberApiData = [
     {
         id: 0,
-        name: "Cameron Williamson",
-        image: "avtar/3.jpg",
-        status: "Hey, How are you?",
+        name: "Lyu Chang",
+        image: "avtar/1.jpg",
+        status: "I'm busy",
         online: "success",
         lastSeenDate: "0",
         time: "7:30 PM",
@@ -247,8 +247,8 @@ export const ChatMemberApiData = [
     },
     {
         id: 1,
-        name: "Cameron Williamson",
-        image: "avtar/3.jpg",
+        name: "Berry Numbi",
+        image: "avtar/1.jpg",
         status: "Hey, How are you?",
         online: "success",
         lastSeenDate: "0",
@@ -258,8 +258,8 @@ export const ChatMemberApiData = [
     },
     {
         id: 2,
-        name: "Esther Howard",
-        image: "avtar/11.jpg",
+        name: "Rodriguez Monga",
+        image: "avtar/16.jpg",
         status: "Thanks for reply",
         lastSeenDate: "Last seen yesterday 20:07",
         online: "success",
@@ -268,8 +268,8 @@ export const ChatMemberApiData = [
     },
     {
         id: 3,
-        name: "Jane Cooper",
-        image: "avtar/7.jpg",
+        name: "Joyce Mishika",
+        image: "avtar/19.jpg",
         status: "Hey, What's up?",
         lastSeenDate: "Last seen today 15:24",
         online: "success",
@@ -278,8 +278,8 @@ export const ChatMemberApiData = [
     },
     {
         id: 4,
-        name: "Ronald Richards",
-        image: "avtar/16.jpg",
+        name: "Josué Vangu",
+        image: "avtar/2.jpg",
         status: "I'm ready",
         lastSeenDate: "Last seen today 13:24",
         online: "success",
@@ -288,7 +288,7 @@ export const ChatMemberApiData = [
     },
     {
         id: 5,
-        name: "Darlene Robertson",
+        name: "Megan Madia",
         image: "avtar/4.jpg",
         status: "Hey, How are you?",
         lastSeenDate: "1:30 PM",
@@ -298,8 +298,8 @@ export const ChatMemberApiData = [
     },
     {
         id: 6,
-        name: "Darrell Steward",
-        image: "blog/comment.jpg",
+        name: "Lydia Saku",
+        image: "avtar/3.jpg",
         status: "What's going on?",
         lastSeenDate: "Last seen today 12:10",
         online: "warning",
@@ -308,8 +308,8 @@ export const ChatMemberApiData = [
     },
     {
         id: 7,
-        name: "Theresa Webb",
-        image: "blog/4.jpg",
+        name: "Martin Webb",
+        image: "avtar/5.jpg",
         status: "What's up?",
         lastSeenDate: "Last seen today 22:24",
         online: "success",
@@ -319,7 +319,7 @@ export const ChatMemberApiData = [
     {
         id: 8,
         name: "Floyd Miles",
-        image: "blog/12.png",
+        image: "avtar/10.jpg",
         status: "Are you sure?",
         lastSeenDate: "Last seen today 00:24",
         online: "warning",
@@ -328,8 +328,8 @@ export const ChatMemberApiData = [
     },
     {
         id: 9,
-        name: "Annette Black",
-        image: "blog/9.jpg",
+        name: "Anne Black",
+        image: "avtar/7.jpg",
         status: "Thanks",
         lastSeenDate: "Last seen yesterday 06:47",
         online: "warning",
