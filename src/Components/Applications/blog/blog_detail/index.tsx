@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { FaEdit, FaTrash } from "react-icons/fa"; // Importation des icônes
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { fetchPosts } from "@/Redux/Reducers/BlogSlice/postSlice";
 import { fetchCategory } from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
 import { imageBaseUrl } from "@/services/axios";
 import parse from "html-react-parser";
-import Link from "next/link";
+import {setModalDeletePost, setModalEditPost} from "@/Redux/Reducers/BlogSlice/postSlice";
+import ModalPostEdit from "@/Components/Applications/blog/blog_detail/ModalPostEdit";
+import ModalPostDelete from "@/Components/Applications/blog/blog_detail/ModalPostDelete";
 
 const BlogDetails = () => {
+
     const dispatch = useAppDispatch();
-    const { postData, status: postStatus } = useAppSelector((state) => state.post);
+    const { postData, status: postStatus, isOpenModalDeletePost, isOpenModalEditPost } = useAppSelector((state) => state.post);
     const { postCategoryData, status: categoryStatus } = useAppSelector((state) => state.postCategory);
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -37,60 +40,64 @@ const BlogDetails = () => {
     };
 
     return (
-        <div className="post-list-container">
-            <div className="filter-section">
-                <label htmlFor="categoryFilter">Filtrer par catégorie :</label>
-                <select
-                    id="categoryFilter"
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                    <option value="all">Toutes les catégories</option>
-                    {postCategoryData.map((category) => (
-                        <option key={category.id} value={category.id}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
+        <>
+            <ModalPostDelete/>
+            <ModalPostEdit/>
+            <div className="post-list-container">
+                <div className="filter-section">
+                    <label htmlFor="categoryFilter">Filtrer par catégorie :</label>
+                    <select
+                        id="categoryFilter"
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                    >
+                        <option value="all">Toutes les catégories</option>
+                        {postCategoryData.map((category) => (
+                            <option key={category.id} value={category.id}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-            <div className="post-list">
-                {filteredPosts.length === 0 ? (
-                    <p>Aucun article trouvé.</p>
-                ) : (
-                    filteredPosts[0].map((post) => (
-                        <div className="post-card" key={post.id}>
-                            {post.image && (
-                                <img
-                                    src={`${imageBaseUrl}/posts/${post.image}`}
-                                    alt={post.title}
-                                    className="post-card-image"
-                                />
-                            )}
-                            <div className="post-card-content">
-                                <h3 className="post-card-title">{post.title}</h3>
-                                <div className="post-card-excerpt">
-                                    {parse(truncateContent(post?.content || "", 150))}
-                                </div>
-                                <small className="post-card-category">
-                                    Catégorie : {post.category?.name || "Non catégorisé"}
-                                </small>
+                <div className="post-list">
+                    {filteredPosts.length === 0 ? (
+                        <p>Aucun article trouvé.</p>
+                    ) : (
+                        filteredPosts[0].map((post) => (
+                            <div className="post-card" key={post.id}>
+                                {post.image && (
+                                    <img
+                                        src={`${imageBaseUrl}/posts/${post.image}`}
+                                        alt={post.title}
+                                        className="post-card-image"
+                                    />
+                                )}
+                                <div className="post-card-content">
+                                    <h3 className="post-card-title">{post.title}</h3>
+                                    <div className="post-card-excerpt">
+                                        {parse(truncateContent(post?.content || "", 150))}
+                                    </div>
+                                    <small className="post-card-category">
+                                        Catégorie : {post.category?.name || "Non catégorisé"}
+                                    </small>
 
-
-                                <div className="post-card-actions">
-                                    <button className="edit-button" onClick={() => console.log("Edit post", post.id)}>
-                                        <FaEdit />
-                                    </button>
-                                    <button className="delete-button" onClick={() => console.log("Delete post", post.id)}>
-                                        <FaTrash />
-                                    </button>
+                                    <div className="post-card-actions">
+                                        <button className="edit-button" onClick={() => dispatch( setModalEditPost({isOpen: !isOpenModalEditPost}))}>
+                                            <FaEdit />
+                                        </button>
+                                        <button className="delete-button" onClick={() => dispatch( setModalDeletePost({isOpen: !isOpenModalDeletePost}))}>
+                                            <FaTrash />
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    ))
-                )}
+                        ))
+                    )}
+                </div>
             </div>
-        </div>
+        </>
+
     );
 };
 

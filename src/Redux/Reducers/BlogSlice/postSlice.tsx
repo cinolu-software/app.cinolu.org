@@ -1,12 +1,15 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
-import { InitialStatePost, Post, UpdatePost, CreatePost } from "@/Types/Blog/postType";
-import { RootState } from "@/Redux/Store";
+import { InitialStatePost, Post, UpdatePost, CreatePost, GetPostType } from "@/Types/Blog/postType";
+
 
 const initialState: InitialStatePost = {
     postData: [],
     status: "idle",
     error: null,
+    isOpenModalEditPost: false,
+    isOpenModalDeletePost: false,
+    selectedPost: null,
 };
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async (_, { rejectWithValue }) => {
@@ -21,7 +24,7 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async (_, { rejec
 export const fetchPostById = createAsyncThunk("posts/fetchPostById", async (id: string, { rejectWithValue }) => {
     try {
         const response = await axiosInstance.get(`${apiBaseUrl}/blog-posts/${id}`);
-        return response.data.data;
+        return response.data.data as GetPostType;
     } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || "Erreur lors de la récupération du post");
     }
@@ -79,7 +82,14 @@ export const uploadPostImage = createAsyncThunk(
 const PostSlice = createSlice({
     name: "posts",
     initialState,
-    reducers: {},
+    reducers: {
+        setModalEditPost: (state, action: PayloadAction<{isOpen : boolean}>) => {
+            state.isOpenModalEditPost = action.payload.isOpen;
+        },
+        setModalDeletePost: (state, action: PayloadAction<{isOpen : boolean}>) => {
+            state.isOpenModalDeletePost = action.payload.isOpen;
+        }
+    },
     extraReducers: (builder) => {
         const handlePending = (state: InitialStatePost) => {
             state.status = "loading";
@@ -98,14 +108,9 @@ const PostSlice = createSlice({
             })
             .addCase(fetchPosts.rejected, handleRejected)
             .addCase(fetchPostById.pending, handlePending)
-            .addCase(fetchPostById.fulfilled, (state, action: PayloadAction<Post>) => {
+            .addCase(fetchPostById.fulfilled, (state, action: PayloadAction<GetPostType>) => {
                 state.status = "success";
-                const index = state.postData.findIndex(post => post.id === action.payload.id);
-                if (index === -1) {
-                    state.postData.push(action.payload);
-                } else {
-                    state.postData[index] = action.payload;
-                }
+                state.selectedPost = action.payload;
             })
             .addCase(fetchPostById.rejected, handleRejected)
             .addCase(createPost.pending, handlePending)
@@ -123,14 +128,12 @@ const PostSlice = createSlice({
                 }
             })
             .addCase(updatePost.rejected, handleRejected)
-
             .addCase(deletePost.pending, handlePending)
             .addCase(deletePost.fulfilled, (state, action: PayloadAction<string>) => {
                 state.status = "success";
                 state.postData = state.postData.filter(post => post.id !== action.payload);
             })
             .addCase(deletePost.rejected, handleRejected)
-
             .addCase(uploadPostImage.pending, handlePending)
             .addCase(uploadPostImage.fulfilled, (state, action: PayloadAction<Post>) => {
                 state.status = "success";
@@ -143,5 +146,6 @@ const PostSlice = createSlice({
     },
 });
 
+export const {setModalEditPost, setModalDeletePost} = PostSlice.actions;
 
 export default PostSlice.reducer;

@@ -1,13 +1,13 @@
 import React , {useMemo, useState, useEffect} from "react";
 import DataTable from "react-data-table-component";
 import { Card, CardBody, Col, Container, Input, Label, Row } from "reactstrap";
-import ModalCreatePostCategory from "@/Components/Applications/blog/blog_category/ModalCreatePostCategory";
+import ModalCreatePostCategory from "./ModalCreatePostCategory";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {fetchCategory, deleteCategory, setModalDeleteCategory} from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
 import {PostCategoryListTableDataColumn} from "@/Data/Application/Blog";
 import {PostCategoryHeader} from "@/Components/Applications/blog/blog_category/PostCategoryHeader";
-import ModalUpdatePostCategory from "@/Components/Applications/blog/blog_category/ModalUpdatePostCategory";
+import ModalUpdatePostCategory from "./ModalUpdatePostCategory";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
 const BlogCategoryContainer  = () => {
