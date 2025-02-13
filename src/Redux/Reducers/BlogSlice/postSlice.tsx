@@ -83,10 +83,10 @@ const PostSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
-        setModalEditPost: (state, action: PayloadAction<{isOpen : boolean}>) => {
+        setModalEditPost: (state, action: PayloadAction<{isOpen : boolean, post: GetPostType|null}>) => {
             state.isOpenModalEditPost = action.payload.isOpen;
         },
-        setModalDeletePost: (state, action: PayloadAction<{isOpen : boolean}>) => {
+        setModalDeletePost: (state, action: PayloadAction<{isOpen : boolean, post: GetPostType|null}>) => {
             state.isOpenModalDeletePost = action.payload.isOpen;
         }
     },

@@ -12,7 +12,7 @@ import ModalPostDelete from "@/Components/Applications/blog/blog_detail/ModalPos
 const BlogDetails = () => {
 
     const dispatch = useAppDispatch();
-    const { postData, status: postStatus, isOpenModalDeletePost, isOpenModalEditPost } = useAppSelector((state) => state.post);
+    const { postData, status: postStatus, isOpenModalDeletePost, isOpenModalEditPost, selectedPost } = useAppSelector((state) => state.post);
     const { postCategoryData, status: categoryStatus } = useAppSelector((state) => state.postCategory);
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
@@ -83,10 +83,16 @@ const BlogDetails = () => {
                                     </small>
 
                                     <div className="post-card-actions">
-                                        <button className="edit-button" onClick={() => dispatch( setModalEditPost({isOpen: !isOpenModalEditPost}))}>
+                                        <button
+                                            className="edit-button"
+                                            // onClick={() => dispatch( setModalEditPost({isOpen: !isOpenModalEditPost}))}
+                                        >
                                             <FaEdit />
                                         </button>
-                                        <button className="delete-button" onClick={() => dispatch( setModalDeletePost({isOpen: !isOpenModalDeletePost}))}>
+                                        <button
+                                            className="delete-button"
+                                            // onClick={() => dispatch( setModalDeletePost({isOpen: !isOpenModalDeletePost}))}
+                                        >
                                             <FaTrash />
                                         </button>
                                     </div>

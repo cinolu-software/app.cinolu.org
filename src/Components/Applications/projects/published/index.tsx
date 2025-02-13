@@ -16,7 +16,6 @@ const PublishedProjectListContainer = () => {
     const { publishedProjectData, publishedProjectStatus } = useAppSelector((state) => state.project);
     const filteredItems = publishedProjectData?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
-
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -31,6 +30,8 @@ const PublishedProjectListContainer = () => {
             dispatch(fetchPublishedProject());
         }
     }, [publishedProjectStatus, dispatch]);
+
+    console.log("publishedProject", filteredItems);
 
     return (
         <Container fluid>

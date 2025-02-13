@@ -22,6 +22,7 @@ const StepSix = () => {
         dispatch(setNewFormValue({ field: 'program', value: programId }));
     };
 
+
     return (
         <Col>
             <section className="main-upgrade">
@@ -40,7 +41,8 @@ const StepSix = () => {
                                 <Input
                                     id={`program${program.id}`}
                                     type="checkbox"
-                                    checked={formValue?.program === program.id}
+                                    // @ts-ignore
+                                    checked={formValue?.program.id === program.id}
                                     onChange={() => handleProgramChange(program.id)}
                                 />
                                 <div className="custom--mega-checkbox">

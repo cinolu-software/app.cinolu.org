@@ -11,7 +11,10 @@ const ModalPostEdit= () => {
     const { isOpenModalEditPost } = useAppSelector(state=>state.post);
 
     return (
-        <Modal isOpen={isOpenModalEditPost} toggle={()=> dispatch(setModalEditPost({isOpen: false}))} size={"xl"}>
+        <Modal
+            isOpen={isOpenModalEditPost}
+            // toggle={()=> dispatch(setModalEditPost({isOpen: false}))} size={"xl"}
+        >
             <div className="modal-header">
 
             </div>

@@ -4,29 +4,50 @@ import { useAppDispatch } from "@/Redux/Hooks";
 import { setNewFormValue } from "@/Redux/Reducers/projectSlice/projectSlice";
 import Calendar from "react-calendar";
 // @ts-ignore
-import { Value } from 'react-calendar/dist/cjs/shared/types';
-import {StepPropsType} from "@/Types/Projects/ProjectType";
-import {activityStartDate, activityEndDate} from "@/Constant";
-
+import { Value } from "react-calendar/dist/cjs/shared/types";
+import { StepPropsType } from "@/Types/Projects/ProjectType";
+import { activityStartDate, activityEndDate } from "@/Constant";
 
 const StepTwo: React.FC<StepPropsType> = ({ data }) => {
-
     const dispatch = useAppDispatch();
 
-    const [startDate, setStartDate] = useState<Date | null>(data?.started_at ? new Date(data.started_at) : null);
-    const [endDate, setEndDate] = useState<Date | null>(data?.ended_at ? new Date(data.ended_at) : null);
+    const parseDate = (dateString: string): Date => {
+        const [year, month, day] = dateString.split("-").map(Number);
+        return new Date(year, month - 1, day);
+    };
+
+    const formatDate = (date: Date): string => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    };
+
+
+    const [startDate, setStartDate] = useState<Date | null>(
+        data?.started_at ? parseDate(data.started_at) : null
+    );
+
+    const [endDate, setEndDate] = useState<Date | null>(
+        data?.ended_at ? parseDate(data.ended_at) : null
+    );
+
 
     const handleStartDateChange = (value: Value) => {
         if (value instanceof Date) {
             setStartDate(value);
-            dispatch(setNewFormValue({ field: 'started_at', value: value.toISOString().split("T")[0] }));
+            const formattedDate = formatDate(value);
+            dispatch(setNewFormValue({ field: "started_at", value: formattedDate }));
         }
+
     };
+
 
     const handleEndDateChange = (value: Value) => {
         if (value instanceof Date) {
             setEndDate(value);
-            dispatch(setNewFormValue({ field: 'ended_at', value: value.toISOString().split("T")[0] }));
+            const formattedDate = formatDate(value);
+            dispatch(setNewFormValue({ field: "ended_at", value: formattedDate }));
         }
     };
 
@@ -35,7 +56,9 @@ const StepTwo: React.FC<StepPropsType> = ({ data }) => {
             <Form>
                 <Row className="g-2">
                     <Col xs="12">
-                        <Label className="m-0" check>{activityStartDate} <span className="txt-danger"> *</span></Label>
+                        <Label className="m-0" check>
+                            {activityStartDate} <span className="txt-danger"> *</span>
+                        </Label>
                     </Col>
                     <Col xs="12">
                         <Card>
@@ -51,7 +74,9 @@ const StepTwo: React.FC<StepPropsType> = ({ data }) => {
                         </Card>
                     </Col>
                     <Col xs="12">
-                        <Label className="m-0" check>{activityEndDate} <span className="txt-danger"> *</span></Label>
+                        <Label className="m-0" check>
+                            {activityEndDate} <span className="txt-danger"> *</span>
+                        </Label>
                     </Col>
                     <Col xs="12">
                         <Card>

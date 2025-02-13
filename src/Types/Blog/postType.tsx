@@ -1,4 +1,5 @@
 export interface Post  {
+    map(arg0: (post: any) => import("react").JSX.Element): import("react").ReactNode | Iterable<import("react").ReactNode>;
     id: string;
     title: string,
     content: string,
