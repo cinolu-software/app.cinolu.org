@@ -75,7 +75,7 @@ export interface FormValueType {
     id: string;
     name: string;
     description: string;
-    program: string;
+    program: any;
     targeted_audience: string;
     started_at: string;
     ended_at: string;

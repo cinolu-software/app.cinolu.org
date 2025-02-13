@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Col, Input } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {setNewFormValue} from "@/Redux/Reducers/projectSlice/projectSlice";
@@ -19,9 +19,12 @@ const StepSix = () => {
     }, [dispatch, status]);
 
     const handleProgramChange = (programId: string) => {
-        dispatch(setNewFormValue({ field: 'program', value: programId }));
+        if(!formValue) return;
+        const updatedProgram = formValue.program.includes(programId)
+        ? formValue.program.filter((id: string) => id !== programId)
+            : [...formValue.program, programId];
+        dispatch(setNewFormValue({ field: 'program', value: updatedProgram }));
     };
-
 
     return (
         <Col>
@@ -36,13 +39,12 @@ const StepSix = () => {
                 </div>
                 <div className="variation-box">
                     {
-                        status === 'loading' ? <div>{activityStepTwoLoadingProgram}</div> : transformedPrograms.map(program => (
+                        transformedPrograms.map(program => (
                             <div className="selection-box" key={program.id}>
                                 <Input
                                     id={`program${program.id}`}
                                     type="checkbox"
-                                    // @ts-ignore
-                                    checked={formValue?.program.id === program.id}
+                                    checked={formValue?.program.includes(program.id)}
                                     onChange={() => handleProgramChange(program.id)}
                                 />
                                 <div className="custom--mega-checkbox">

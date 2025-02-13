@@ -14,12 +14,10 @@ import FinishForm from "@/CommonComponent/FinishForm";
 import StepperHorizontal from "@/Components/Applications/projects/common/Common/StepperHorizontal";
 import { FormValueType } from "@/Types/Projects/ProjectType";
 import { CreateActivity, ModifyActivityTitle, buttonFinish, buttonNext, buttonPrevious} from "@/Constant";
-import { RootState } from "@/Redux/Store";
-
 
 const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit"; initialValues?: any; }) => {
 
-    const { numberLevel, formValue, showFinish } = useAppSelector((state: RootState) => state.project);
+    const { numberLevel, formValue, showFinish } = useAppSelector((state) => state.project);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -36,17 +34,22 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
                 partners: Array.isArray(initialValues.partners)
                     ? initialValues.partners.map((partner: { id?: string }) => partner?.id).filter(Boolean)
                     : [],
+                program: Array.isArray(initialValues.program)
+                    ? initialValues.program.map((program: { id?: string }) => program?.id).filter(Boolean)
+                    : [initialValues.program?.id].filter(Boolean),
             };
 
             Object.keys(transformedInitialValues).forEach((key) => {
                 const typedKey = key as keyof FormValueType;
                 dispatch(setNewFormValue({ field: typedKey, value: transformedInitialValues[typedKey] }));
             });
-        }else if (mode === "add") {
+
+        } else if (mode === "add") {
             dispatch(resetFormValue());
             router.refresh();
         }
     }, [mode, initialValues, dispatch, router]);
+
 
     const handleSubmit = () => {
         try {
@@ -86,14 +89,14 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
         }
     };
 
+    console.log("initialValues", initialValues);
+
     const renderStep = () => {
         switch (numberLevel) {
             case 1:
                 return <StepOne data={formValue} />;
-
             case 2:
                 return <StepSix />;
-
             case 3:
                 return <StepTwo data={formValue} />;
             case 4:
@@ -118,32 +121,32 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
     };
 
     return (
-                <div className={'mt-2'}>
-                    <div className="height-equal">
-                        <CardBody className="basic-wizard important-validation">
-                            <StepperHorizontal level={numberLevel}/>
-                            <div id="msform">{renderStep()}</div>
-                            <div className="wizard-footer d-flex gap-2 justify-content-end mt-4 me-5 mb-4">
-                                {numberLevel > 1 && (
-                                    <Button
-                                        className="alert-light-primary"
-                                        color="transparent"
-                                        onClick={() => dispatch(handleBackButton())}
-                                    >
-                                        {buttonPrevious}
-                                    </Button>
-                                )}
-                                <Button
-                                    disabled={!!showFinish}
-                                    color="primary"
-                                    onClick={() => dispatch(handleNextButton())}
-                                >
-                                    {showFinish ? buttonFinish : buttonNext}
-                                </Button>
-                            </div>
-                        </CardBody>
+        <div className={'mt-2'}>
+            <div className="height-equal">
+                <CardBody className="basic-wizard important-validation">
+                    <StepperHorizontal level={numberLevel}/>
+                    <div id="msform">{renderStep()}</div>
+                    <div className="wizard-footer d-flex gap-2 justify-content-end mt-4 me-5 mb-4">
+                        {numberLevel > 1 && (
+                            <Button
+                                className="alert-light-primary"
+                                color="transparent"
+                                onClick={() => dispatch(handleBackButton())}
+                            >
+                                {buttonPrevious}
+                            </Button>
+                        )}
+                        <Button
+                            disabled={!!showFinish}
+                            color="primary"
+                            onClick={() => dispatch(handleNextButton())}
+                        >
+                            {showFinish ? buttonFinish : buttonNext}
+                        </Button>
                     </div>
-                </div>
+                </CardBody>
+            </div>
+        </div>
     );
 
 };

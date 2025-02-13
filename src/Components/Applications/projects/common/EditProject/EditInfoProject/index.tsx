@@ -29,7 +29,6 @@ const EditProjectContainer = () => {
         );
     }
 
-
     return (
         <Container fluid>
             <Row>

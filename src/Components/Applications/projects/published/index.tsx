@@ -31,7 +31,6 @@ const PublishedProjectListContainer = () => {
         }
     }, [publishedProjectStatus, dispatch]);
 
-    console.log("publishedProject", filteredItems);
 
     return (
         <Container fluid>
