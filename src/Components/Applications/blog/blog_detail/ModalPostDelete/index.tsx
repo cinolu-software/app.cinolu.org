@@ -10,12 +10,13 @@ const ModalPostDelete = () => {
 
     const dispatch = useAppDispatch();
     const {isOpenModalDeletePost, selectedPost, postData } = useAppSelector(state=>state.post);
-    const selectedPostData = postData?.find((item)=>item.id === selectedPost?.id);
+    const postsFilteredData = postData?.find((item)=>item.id === selectedPost?.id);
 
     const handleDelete = async () => {
-        if (selectedPostData && selectedPostData.id !== undefined) {
+
+        if (selectedPost && selectedPost.id !== undefined) {
             try {
-                await dispatch(deletePost(selectedPostData.id)).unwrap();
+                await dispatch(deletePost(selectedPost.id));
                 dispatch(setModalDeletePost({isOpen: false, post: null}));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"Suppression effectuée avec succès"}</p>,
@@ -41,9 +42,7 @@ const ModalPostDelete = () => {
             }
 
         }
-
     }
-
 
     return (
         <Col xl="4">

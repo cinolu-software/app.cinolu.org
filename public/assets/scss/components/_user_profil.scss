@@ -225,17 +225,23 @@
 
   .post-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Assure une bonne répartition
     gap: 20px;
+    justify-content: center;
   }
 
   .post-card {
-    position: relative;
-    border-radius: 12px;
+    width: 300px; // Taille fixe des cartes
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // Répartition uniforme du contenu
+    align-items: center;
     overflow: hidden;
+    border-radius: 12px;
+    background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    background-color: #fff;
 
     &:hover {
       transform: translateY(-5px);
@@ -254,80 +260,89 @@
     }
 
     .post-card-content {
-      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 15px;
+      text-align: center;
+      width: 100%;
 
       .post-card-title {
         font-size: 18px;
         font-weight: bold;
         color: #2b4b20;
         margin-bottom: 10px;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: #84a02f;
-        }
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
 
       .post-card-excerpt {
-        font-size: 15px;
+        font-size: 14px;
         color: #555;
-        line-height: 1.5;
-        margin-bottom: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
       }
 
       .post-card-category {
         font-size: 14px;
         color: #708241;
         font-style: italic;
+        margin-top: auto;
       }
     }
-  }
 
-  .post-card-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-
-    button {
+    .post-card-actions {
       display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 8px 12px;
-      font-size: 14px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px;
+      width: 100%;
 
-      svg {
-        font-size: 16px;
-      }
+      button {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 8px 12px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 45%; // Assure une belle répartition des boutons
 
-      &.edit-button {
-
-        color: #4caf50;
-        border: .5px solid #4caf50;
-
-        &:hover {
-          background-color: #388e3c;
-          color: #fff;
+        svg {
+          font-size: 16px;
         }
-      }
 
-      &.delete-button {
+        &.edit-button {
+          color: #4caf50;
+          border: 0.5px solid #4caf50;
 
-        color: #f44336;
-        border: .5px solid #f44336;
+          &:hover {
+            background-color: #388e3c;
+            color: #fff;
+          }
+        }
 
-        &:hover {
-          background-color: #d32f2f;
-          color: #fff;
+        &.delete-button {
+          color: #f44336;
+          border: 0.5px solid #f44336;
+
+          &:hover {
+            background-color: #d32f2f;
+            color: #fff;
+          }
         }
       }
     }
   }
-
 }
+
 
 
 

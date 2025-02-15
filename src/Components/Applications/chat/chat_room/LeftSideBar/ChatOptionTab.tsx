@@ -12,7 +12,7 @@ const ChatOptionTab = () => {
         <div className="advance-options">
             <Nav tabs className="border-tab" id="chat-options-tab">
                 <NavItem><NavLink className={`${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")} id="chats-tab">{Chats}</NavLink></NavItem>
-                <NavItem><NavLink className={`${activeTab === "2" ? "active" : ""}`} onClick={() => setActiveTab("2")} id="contacts-tab">{UserListChat}</NavLink></NavItem>
+                {/*<NavItem><NavLink className={`${activeTab === "2" ? "active" : ""}`} onClick={() => setActiveTab("2")} id="contacts-tab">{UserListChat}</NavLink></NavItem>*/}
             </Nav>
             <TabContent activeTab={activeTab} id="chat-options-tabContent">
                 <TabPane id="chats" tabId="1" className="text-center">

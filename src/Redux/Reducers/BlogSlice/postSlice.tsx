@@ -6,6 +6,7 @@ import { InitialStatePost, Post, UpdatePost, CreatePost, GetPostType } from "@/T
 const initialState: InitialStatePost = {
     postData: [],
     status: "idle",
+    deleteStatus: 'idle',
     error: null,
     isOpenModalEditPost: false,
     isOpenModalDeletePost: false,
@@ -15,7 +16,7 @@ const initialState: InitialStatePost = {
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async (_, { rejectWithValue }) => {
     try {
         const response = await axiosInstance.get(`${apiBaseUrl}/blog-posts`);
-        return response.data.data;
+        return response.data.data[0];
     } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || "Erreur lors de la récupération des posts");
     }
@@ -49,12 +50,14 @@ export const updatePost = createAsyncThunk("posts/updatePost", async (updatedPos
 });
 
 export const deletePost = createAsyncThunk("posts/deletePost", async (id: string, { rejectWithValue }) => {
+    console.log("OK");
     try {
         await axiosInstance.delete(`${apiBaseUrl}/blog-posts/${id}`);
         return id;
     } catch (error: any) {
         return rejectWithValue(error.response?.data?.message || "Erreur lors de la suppression du post");
     }
+
 });
 
 export const uploadPostImage = createAsyncThunk(
@@ -85,9 +88,11 @@ const PostSlice = createSlice({
     reducers: {
         setModalEditPost: (state, action: PayloadAction<{isOpen : boolean, post: GetPostType|null}>) => {
             state.isOpenModalEditPost = action.payload.isOpen;
+            state.selectedPost = action.payload.post;
         },
         setModalDeletePost: (state, action: PayloadAction<{isOpen : boolean, post: GetPostType|null}>) => {
             state.isOpenModalDeletePost = action.payload.isOpen;
+            state.selectedPost = action.payload.post;
         }
     },
     extraReducers: (builder) => {
@@ -128,12 +133,16 @@ const PostSlice = createSlice({
                 }
             })
             .addCase(updatePost.rejected, handleRejected)
-            .addCase(deletePost.pending, handlePending)
+            .addCase(deletePost.pending, (state: InitialStatePost) => {
+                state.deleteStatus = "loading";
+            })
             .addCase(deletePost.fulfilled, (state, action: PayloadAction<string>) => {
-                state.status = "success";
+                state.deleteStatus = "success";
                 state.postData = state.postData.filter(post => post.id !== action.payload);
             })
-            .addCase(deletePost.rejected, handleRejected)
+            .addCase(deletePost.rejected, (state: InitialStatePost) => {
+                state.deleteStatus = "failed";
+            })
             .addCase(uploadPostImage.pending, handlePending)
             .addCase(uploadPostImage.fulfilled, (state, action: PayloadAction<Post>) => {
                 state.status = "success";

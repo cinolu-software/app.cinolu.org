@@ -1,27 +1,28 @@
 import Select from "react-select";
 import { Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import "easymde/dist/easymde.min.css";
 import { PostCategory, PostTitlePlaceholder } from "@/Constant";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createPost, uploadPostImage } from "@/Redux/Reducers/BlogSlice/postSlice";
+import { createPost } from "@/Redux/Reducers/BlogSlice/postSlice";
 import { fetchCategory } from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
-import SimpleMdeReact from "react-simplemde-editor";
 import { Flip, toast } from "react-toastify";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import {useRouter} from "next/navigation";
 
 type SelectOptionType = { value: string; label: string };
 
 const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
+
     const dispatch = useAppDispatch();
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState<SelectOptionType | null>(null);
     const [content, setContent] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
-
     const { postCategoryData, loading } = useAppSelector((state) => state.postCategory);
     const { status, error } = useAppSelector((state) => state.post);
+    const router = useRouter();
 
     useEffect(() => {
         dispatch(fetchCategory());
@@ -33,7 +34,9 @@ const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
     }));
 
     const handleSubmit = async (e: React.FormEvent) => {
+
         e.preventDefault();
+
         setIsSubmitting(true);
 
         if (!title.trim() || !category || !content.trim()) {
@@ -48,11 +51,11 @@ const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
                 category: category.value,
                 content,
             }));
-
             if (createPost.fulfilled.match(resultAction)) {
                 const newPost = resultAction.payload;
+
                 if (onFileUpload) {
-                    await onFileUpload(newPost.id);
+                   await onFileUpload(newPost.id);
                 }
 
                 setTitle("");
@@ -69,8 +72,9 @@ const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
                     }
                 );
             }
-        } catch (error) {
-            console.error("Erreur lors de la création:", error);
+            router.push("/blog/blog_detail");
+        }
+        catch (error) {
             toast.error(
                 <p className="text-white tx-16 mb-0">{`Erreur lors de la création: ${error}`}</p>,
                 {
@@ -81,21 +85,12 @@ const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
                     theme: "colored",
                 }
             );
-        } finally {
+        }
+        finally {
             setIsSubmitting(false);
         }
     };
 
-    const onChangeContent = useCallback((value: string) => {
-        setContent(value);
-    }, []);
-
-    const editorOptions = useMemo(() => ({
-        autofocus: true,
-        spellChecker: false,
-        minHeight: "300px",
-        status: false,
-    }), []);
 
     return (
         <Form className="needs-validation" onSubmit={handleSubmit} id="post-form">

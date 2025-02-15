@@ -65,6 +65,7 @@ export interface UpdatePost extends CreatePost {
 export interface InitialStatePost {
     postData : Post[];
     status: 'idle' | 'loading' | 'success' | 'failed';
+    deleteStatus: 'idle' | 'loading' | 'success' | 'failed';
     error: string | null;
     isOpenModalEditPost: boolean;
     isOpenModalDeletePost: boolean;

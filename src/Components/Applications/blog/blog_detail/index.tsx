@@ -1,31 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { fetchPosts } from "@/Redux/Reducers/BlogSlice/postSlice";
+import { fetchPosts, setModalDeletePost, setModalEditPost } from "@/Redux/Reducers/BlogSlice/postSlice";
 import { fetchCategory } from "@/Redux/Reducers/BlogSlice/categoryPostSlice";
 import { imageBaseUrl } from "@/services/axios";
 import parse from "html-react-parser";
-import {setModalDeletePost, setModalEditPost} from "@/Redux/Reducers/BlogSlice/postSlice";
 import ModalPostEdit from "@/Components/Applications/blog/blog_detail/ModalPostEdit";
 import ModalPostDelete from "@/Components/Applications/blog/blog_detail/ModalPostDelete";
 
 const BlogDetails = () => {
 
     const dispatch = useAppDispatch();
-    const { postData, status: postStatus, isOpenModalDeletePost, isOpenModalEditPost, selectedPost } = useAppSelector((state) => state.post);
+    const { postData, status: postStatus, isOpenModalDeletePost, isOpenModalEditPost, deleteStatus } = useAppSelector((state) => state.post);
     const { postCategoryData, status: categoryStatus } = useAppSelector((state) => state.postCategory);
+
     const [selectedCategory, setSelectedCategory] = useState<string>("all");
+    const [filteredPosts, setFilteredPosts] = useState<any[]>([]);
 
     useEffect(() => {
         dispatch(fetchPosts());
         dispatch(fetchCategory());
-    }, [dispatch]);
+    }, [dispatch, deleteStatus]);
 
+    useEffect(() => {
+        const normalizedPosts = postData.flat();
 
-    const filteredPosts = selectedCategory === "all"
-        ? postData
-        // @ts-ignore
-        : postData.filter((post) => post.category?.id === selectedCategory);
+        const filtered =
+            selectedCategory === "all"
+                ? normalizedPosts
+                // @ts-ignore
+                : normalizedPosts.filter((post) => post.category?.id === selectedCategory);
+        setFilteredPosts(filtered);
+    }, [postData, selectedCategory]);
 
     if (postStatus === "loading" || categoryStatus === "loading") {
         return <div>Chargement...</div>;
@@ -41,8 +47,8 @@ const BlogDetails = () => {
 
     return (
         <>
-            <ModalPostDelete/>
-            <ModalPostEdit/>
+            <ModalPostDelete />
+            <ModalPostEdit />
             <div className="post-list-container">
                 <div className="filter-section">
                     <label htmlFor="categoryFilter">Filtrer par catégorie :</label>
@@ -64,7 +70,7 @@ const BlogDetails = () => {
                     {filteredPosts.length === 0 ? (
                         <p>Aucun article trouvé.</p>
                     ) : (
-                        filteredPosts[0].map((post) => (
+                        filteredPosts.map((post) => (
                             <div className="post-card" key={post.id}>
                                 {post.image && (
                                     <img
@@ -85,13 +91,26 @@ const BlogDetails = () => {
                                     <div className="post-card-actions">
                                         <button
                                             className="edit-button"
-                                            // onClick={() => dispatch( setModalEditPost({isOpen: !isOpenModalEditPost}))}
+                                            onClick={() =>
+                                                dispatch(setModalEditPost({ isOpen: !isOpenModalEditPost, post }))
+                                            }
                                         >
                                             <FaEdit />
                                         </button>
                                         <button
                                             className="delete-button"
-                                            // onClick={() => dispatch( setModalDeletePost({isOpen: !isOpenModalDeletePost}))}
+                                            onClick={() =>
+                                                dispatch(setModalDeletePost({ isOpen: !isOpenModalDeletePost, post }))
+                                            }
+                                        >
+                                            <FaTrash />
+                                        </button>
+
+                                        <button
+                                            className="delete-button"
+                                            onClick={() =>
+                                                dispatch(setModalDeletePost({ isOpen: !isOpenModalDeletePost, post }))
+                                            }
                                         >
                                             <FaTrash />
                                         </button>
@@ -103,9 +122,7 @@ const BlogDetails = () => {
                 </div>
             </div>
         </>
-
     );
 };
 
 export default BlogDetails;
-
