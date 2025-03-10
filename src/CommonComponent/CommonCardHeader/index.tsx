@@ -27,4 +27,5 @@ const CommonCardHeader: React.FC<CommonCardHeaderProp> = ({ title, span, headCla
   );
 };
 
+
 export default CommonCardHeader;

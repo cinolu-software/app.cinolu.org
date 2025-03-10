@@ -7,6 +7,7 @@ import LeftSideBar from "@/Components/Applications/chat/chat_room/LeftSideBar";
 
 
 const ChatRoomComponent = () => {
+    
     const dispatch = useAppDispatch()
 
     useEffect(() => {

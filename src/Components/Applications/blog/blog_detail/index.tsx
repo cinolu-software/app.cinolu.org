@@ -49,6 +49,7 @@ const BlogDetails = () => {
         <>
             <ModalPostDelete />
             <ModalPostEdit />
+
             <div className="post-list-container">
                 <div className="filter-section">
                     <label htmlFor="categoryFilter">Filtrer par catégorie :</label>

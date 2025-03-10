@@ -34,7 +34,6 @@ export const deleteCategory = createAsyncThunk('projectCategory/deleteCategory',
     return id;
 });
 
-
 const ProgramCategorySlice = createSlice({
     name: 'projectCategory',
     initialState,

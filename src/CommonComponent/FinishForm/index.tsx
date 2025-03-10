@@ -8,8 +8,6 @@ interface FinishFormProps {
     textButton: string
 }
 
-
-
 const FinishForm: React.FC<FinishFormProps> = ({ isComplete, onCreateProgram, textButton }) => {
 
     return (

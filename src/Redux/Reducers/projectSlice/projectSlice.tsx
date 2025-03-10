@@ -4,6 +4,7 @@ import {CreateProjectType, FormValueType, InitialStateProjectType, ReceiveProjec
 import {ShowError} from "@/utils/MultiStepForm.service";
 import {RootState} from "@/Redux/Store";
 
+
 const initialState : InitialStateProjectType = {
     originalProjectData: [],
     publishedProjectData: [],
@@ -108,7 +109,7 @@ export const deleteProject = createAsyncThunk<{ id: string }, string, { rejectVa
 );
 
 export const updatedAttachmentProjectImage = createAsyncThunk<{ projectId: string ; imageUrl: string }, { projectId: string; imageFile: File },{ rejectValue: any }>
-('project/updateAttachmentProjectImage', async ({ projectId, imageFile }, thunkAPI) => {
+    ('project/updateAttachmentProjectImage', async ({ projectId, imageFile }, thunkAPI) => {
         try {
             const formData = new FormData();
             formData.append('thumb', imageFile);
@@ -131,7 +132,8 @@ export const publishProject = createAsyncThunk<ReceiveProjectType, { projectId: 
         try {
             const response = await axiosInstance.post<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects/publish/${projectId}`);
             return response.data.data;
-        } catch (err: any) {
+        } 
+        catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
         }
     }
@@ -170,7 +172,6 @@ const validateStep = (state: InitialStateProjectType) => {
                 return false;
             }
             break;
-
         case 6 :
             if (!name || !description || !targeted_audience || !town || !aim || !prize || !program || !started_at || !ended_at || types.length === 0 || categories.length === 0 || partners.length === 0) {
                 ShowError();

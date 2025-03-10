@@ -93,7 +93,6 @@
   border: 1px solid #28a745;
   padding: 15px;
   border-radius: 8px;
-
   p {
     margin: 0;
     color: #6c757d;
@@ -191,7 +190,6 @@
   }
 }
 
-/*post*/
 .post-list-container {
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -225,17 +223,17 @@
 
   .post-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Assure une bonne répartition
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
     justify-content: center;
   }
 
   .post-card {
-    width: 300px; // Taille fixe des cartes
+    width: 300px;
     height: 400px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; // Répartition uniforme du contenu
+    justify-content: space-between;
     align-items: center;
     overflow: hidden;
     border-radius: 12px;
@@ -313,7 +311,7 @@
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-        width: 45%; // Assure une belle répartition des boutons
+        width: 45%;
 
         svg {
           font-size: 16px;
@@ -342,6 +340,7 @@
     }
   }
 }
+
 
 
 
