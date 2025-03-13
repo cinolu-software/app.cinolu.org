@@ -4,9 +4,11 @@ import Image from "next/image";
 import ContactEdit from "./ContactEdit";
 
 const RightChatHeader = () => {
-    const {selectedUser} = useAppSelector((state)=> state.chat)
+
+    const {selectedUser} = useAppSelector((state)=> state.chat);
 
     return (
+
         <div className="right-sidebar-title">
             <div className="common-space">
                 <div className="chat-time">
@@ -20,13 +22,10 @@ const RightChatHeader = () => {
                     </div>
                 </div>
                 <div className="d-flex gap-2">
-                    <div className="contact-edit chat-alert">
-                        <i className="icon-info-alt" />
-                    </div>
-                    <ContactEdit dropClass="chat-alert"  />
                 </div>
             </div>
         </div>
+        
     );
 };
 

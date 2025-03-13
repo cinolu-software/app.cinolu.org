@@ -19,12 +19,12 @@ const LeftSideBar = () => {
         <Col xxl="3" xl="4" md="5" className="box-col-5">
             <Card className="left-sidebar-wrapper">
                 <div className="left-sidebar-chat">
-                    <InputGroup>
+                    {/* <InputGroup>
                         <InputGroupText>
                             <Search className="search-icon text-gray" />
                         </InputGroupText>
                         <Input type="text" placeholder={SearchHere}  defaultValue={searchKeyword} onChange={(e) => handleSearchKeyword(e.target.value)} />
-                    </InputGroup>
+                    </InputGroup> */}
                 </div>
                 <ChatOptionTab />
             </Card>

@@ -9,9 +9,9 @@ const ChatTabPane = () => {
             <div className="common-space">
                 <p>{RecentChats}</p>
                 <div className="header-top">
-                    <Button tag="a" color="transparent" className="badge-light-primary f-w-500">
+                    {/* <Button tag="a" color="transparent" className="badge-light-primary f-w-500">
                         <i className="fa fa-plus" />
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
             <ChatUserProfile />

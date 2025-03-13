@@ -1876,12 +1876,12 @@ export const MyBookmarks: string = "My Bookmarks";
 export const CreatedByMe: string = "Created By Me";
 
 //Chats
-export const Chats: string = "Chats";
+export const Chats: string = "Utilisateur(s)";
 export const Contacts: string = "Contacts";
 export const UserListChat: string = "Users"
 export const NameAndPhoneNumber = "Name and phone number";
 export const SearchHere: string = "Search here..";
-export const RecentChats: string = "Recent chats";
+export const RecentChats: string = "Utilisateur connecté(s)";
 export const TypeMessageHere: string = "Type Message here..";
 
 //Ecommerce - Pricing

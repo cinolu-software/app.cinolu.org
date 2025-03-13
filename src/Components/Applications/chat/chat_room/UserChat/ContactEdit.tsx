@@ -5,14 +5,16 @@ import SVG from "@/CommonComponent/SVG";
 import React from "react";
 
 const ContactEdit: React.FC<DropClassTypes> = ({ dropClass }) => {
+
     const [dropdownOpen, setDropdownOpen] = useState(false);
+
     const toggle = () => setDropdownOpen((prevState) => !prevState);
 
     return (
         <div className={`contact-edit ${dropClass}`}>
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle>
-                    <SVG className="dropdown-toggle border-0" iconId="menubar" />
+                    <SVG className="dropdown-toggle border-0" iconId="menubar"/>
                 </DropdownToggle>
                 <DropdownMenu end>
                     <DropdownItem>View details</DropdownItem>

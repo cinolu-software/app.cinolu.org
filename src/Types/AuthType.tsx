@@ -55,6 +55,7 @@ export interface User {
     updated_at?: string;
     roles?: string[];
     detail?: AddUserDetail;
+    chat_token?:string
 }
 
 export interface AuthResponse {
