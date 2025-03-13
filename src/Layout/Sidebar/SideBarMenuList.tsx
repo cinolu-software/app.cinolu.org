@@ -31,7 +31,8 @@ const SidebarMenuList = () => {
 
   return (
       <>
-        {visibleMenuList &&
+        {
+        visibleMenuList &&
             visibleMenuList.map((mainMenu: MenuItem, index) => (
                 <Fragment key={index}>
                   <li className={`sidebar-main-title ${shouldHideMenu(mainMenu) ? "d-none" : ""}`}>
@@ -41,7 +42,8 @@ const SidebarMenuList = () => {
                   </li>
                   <Menulist menu={mainMenu.Items} activeMenu={activeMenu} setActiveMenu={setActiveMenu} level={0} />
                 </Fragment>
-            ))}
+            ))
+        }
       </>
   );
 };

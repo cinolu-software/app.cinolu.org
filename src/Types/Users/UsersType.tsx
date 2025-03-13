@@ -13,6 +13,7 @@ export interface UserType {
     created_at: string;
     updated_at: string;
     roles: any [];
+    chat_token: string;
 }
 
 export interface StaffMemberType extends UserType{}

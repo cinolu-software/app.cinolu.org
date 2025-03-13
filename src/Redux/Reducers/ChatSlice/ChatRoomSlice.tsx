@@ -1,13 +1,19 @@
-import { AllMemberType, ChatSliceType, ChatsTypes } from "@/Types/ChatType";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { AllMemberType, ChatSliceType, ChatsTypes, MessageType,  } from "@/Types/ChatType";
+import { createAsyncThunk, createSlice, PayloadAction,  } from "@reduxjs/toolkit";
 import axios from "axios";
+import {UserType} from "@/Types/Users/UsersType";
 
 const initialState:ChatSliceType = {
+
+    usersJoined: [],
+    messages: [],
     allMembers : [],
     members: [],
     chats: [],
+
     currentUser: null,
-    selectedUser : null
+    selectedUser : null,
+
 };
 
 export const fetchChatMemberApiData = createAsyncThunk<AllMemberType[], void, {}>("/api/chatmemberapi", async () => {
@@ -120,6 +126,14 @@ const ChatSlice = createSlice({
             }
         },
 
+
+        setMessage : (state, action: PayloadAction<MessageType>) => {
+            state.messages.push(action.payload);
+        },
+        setUsersJoined : (state, action : PayloadAction<UserType>) => {
+            state.usersJoined.push(action.payload);
+        }
+
     },
     extraReducers: (builder) => {
         builder.addCase(fetchChatMemberApiData.fulfilled, (state, action) => {
@@ -132,6 +146,6 @@ const ChatSlice = createSlice({
     },
 });
 
-export const { setAllMembers, setChats, setSelectedUser, fetchChatMemberAsync, getChatsSuccess, changeChat, createNewChatAsync, fetchChatAsync, sendMessageAsync, replyByUserAsync ,searchMember } = ChatSlice.actions;
+export const { setChats, setSelectedUser, fetchChatMemberAsync, changeChat, createNewChatAsync, sendMessageAsync, replyByUserAsync ,searchMember, setMessage, setUsersJoined } = ChatSlice.actions;
 
 export default ChatSlice.reducer;

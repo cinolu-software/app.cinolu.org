@@ -1,3 +1,6 @@
+import {UserType} from "@/Types/Users/UsersType";
+
+
 export interface AllMemberType {
     id: number;
     name: string;
@@ -8,6 +11,17 @@ export interface AllMemberType {
     time: string;
     reply: string;
     badge?: boolean;
+}
+
+
+export interface  MessageType {
+    id: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+    message: string;
+    attachment: string;
+    sender : UserType;
 }
 
 export interface MessageTypes {
@@ -33,6 +47,8 @@ export interface ChatSliceType {
     members: AllMemberType[]|[];
     currentUser:null|AllMemberType,
     selectedUser?: null|AllMemberType
+    usersJoined : UserType [];
+    messages: MessageType[];
 }
 
 export interface DropClassTypes {
@@ -40,11 +56,10 @@ export interface DropClassTypes {
 }
 
 export interface data{
-    users:{
-
-    }
+    users:{}
 }
 
 export interface SearchNotFoundClassType {
     word: string;
 }
+
