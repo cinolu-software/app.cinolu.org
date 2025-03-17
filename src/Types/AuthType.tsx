@@ -39,7 +39,7 @@ export interface AddUserDetail {
 }
 
 export interface User {
-    id: number | undefined;
+    id: string ;
     email?: string;
     first_name?: string;
     name?: string;

@@ -1,14 +1,31 @@
+import{useRef, useState, useEffect} from "react";
 import {ImagePath} from "@/Constant";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import SendMessage from "@/Components/Applications/chat/chat_room/UserChat/SendMessage";
-import {AllMemberType, ChatsTypes} from "@/Types/ChatType";
-import{useRef, useState, useEffect} from "react";
-import { imageBaseUrl } from "@/services/axios";
+import { imageBaseUrl, socket, connectSocket } from "@/services/axios";
+import { setMessage } from "@/Redux/Reducers/ChatSlice/ChatRoomSlice";
+
 
 
 const RightChatBody = () => {
 
-    const {messages} = useAppSelector(state=>state.chat)
+    const {messages} = useAppSelector(state=>state.chat);
+    const {user} = useAppSelector(state=>state.auth);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (socket) {
+            socket.on("newMessage", (newMessage) => {
+                dispatch(setMessage([...messages, newMessage])); 
+            });
+        }
+
+        return () => {
+            if (socket) {
+                socket.off("newMessage"); 
+            }
+        };
+    }, [messages, dispatch]);
 
 
     return (
@@ -21,15 +38,15 @@ const RightChatBody = () => {
                                 messages.length > 0 ? 
                                     messages.map((message) =>{
                                         return (
-                                            <div className={`msg left-msg`}>
+                                            <div className={ message.sender.id === user?.id ? `msg right-msg` : `msg left-msg`}>
                                                 <img 
 
                                                     src={
-                                                        // message.sender?.profile
-                                                            // ? `${imageBaseUrl}/profiles/${message.sender.profile}`
-                                                            // : message.sender?.google_image
-                                                            //     ? message.sender.google_image
-                                                            //     : 
+                                                        message.sender?.profile
+                                                            ? `${imageBaseUrl}/profiles/${message.sender.profile}`
+                                                            : message.sender?.google_image
+                                                                ? message.sender.google_image
+                                                                : 
                                                                 `${ImagePath}/avtar/avatar.jpg`
                                                     }
 

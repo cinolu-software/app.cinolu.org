@@ -34,7 +34,7 @@ export interface MessageTypes {
 }
 
 export interface ChatsTypes {
-    id?: number;
+    id?: string;
     users: number[];
     lastMessageTime: string;
     messages: MessageType[];
