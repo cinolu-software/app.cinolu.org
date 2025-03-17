@@ -4,6 +4,7 @@ import SendMessage from "@/Components/Applications/chat/chat_room/UserChat/SendM
 import {fetchChatMemberAsync, setChats, setSelectedUser} from "@/Redux/Reducers/ChatSlice/ChatRoomSlice";
 import {AllMemberType, ChatsTypes, MessageTypes} from "@/Types/ChatType";
 import{useRef, useState, useEffect} from "react";
+import { imageBaseUrl } from "@/services/axios";
 
 
 const RightChatBody = () => {
@@ -13,6 +14,7 @@ const RightChatBody = () => {
     const [scroll, setScroll] = useState(0);
 
     const { allMembers, chats, selectedUser, currentUser } = useAppSelector((state) => state.chat);
+    const {messages} = useAppSelector(state=>state.chat)
 
     const dispatch = useAppDispatch();
 
@@ -24,14 +26,15 @@ const RightChatBody = () => {
             const chat = chats.filter((x: ChatsTypes) => x.users.includes(currentUserId));
             const selectedUser = chats[0].users.find((x: number) => x !== currentUserId);
             const oneSelect = allMembers.find((x: AllMemberType) => x.id === selectedUser);
+
             if (allMembers.length > 0) {
                 dispatch(setChats(chat));
                 dispatch(setSelectedUser(oneSelect));
             }
+
             if (allMembers.length > 0) {
                 return allMembers.find((x: AllMemberType) => x.id === selectedUser);
             }
-            
         }
 
     };
@@ -49,13 +52,13 @@ const RightChatBody = () => {
     // const selectedChat = allMembers && chats && selectedUser && currentUser ? chats.find((x: ChatsTypes) => x.users.includes(currentUser?.id) && x.users.includes(selectedUser.id)) : null;
 
     return (
+
         <div className="right-sidebar-Chats">
             <div className="msger">
                 <div className="msger-chat">
-                    {
-                        // selectedChat && selectedChat.messages.length > 0 ? (
-                        //     selectedChat.messages.map((item: MessageTypes, id: number) => {
-                        //         const participators = allMembers.find((x: AllMemberType) => x.id === item.sender);
+                        {/* // selectedChat && selectedChat.messages.length > 0 ? (
+                        //     selectedChat.messages.map((item: MessageTypes, id: number) => { */}
+                        {/* //         const participators = allMembers.find((x: AllMemberType) => x.id === item.sender);
                         //         return (
                         //             <div className={`msg ${item.sender === currentUser?.id ? "right" : "left"}-msg`} key={id}>
                         //                 {item?.name ? <div className="msg-img" /> : <img src={`${ImagePath}/${participators?.image}`} className="rounded-circle img-30 h-auto" alt="user" />}
@@ -71,12 +74,45 @@ const RightChatBody = () => {
                         //     })
                         // ) : (
                         //     <img className="w-100" src={`${ImagePath}/start-conversion.jpg`} alt="start conversion" />
-                        // )
-                    }
+                        // ) */}
+                        {
+                            messages && 
+                                messages.length > 0 ? 
+                                    messages.map((message) =>{
+                                        return (
+                                            <div className={`msg left-msg`}>
+                                                <img 
+
+                                                    src={
+                                                        // message.sender?.profile
+                                                            // ? `${imageBaseUrl}/profiles/${message.sender.profile}`
+                                                            // : message.sender?.google_image
+                                                            //     ? message.sender.google_image
+                                                            //     : 
+                                                                `${ImagePath}/avtar/avatar.jpg`
+                                                    }
+
+                                                    className="rounded-circle img-30 h-auto" alt="user" 
+                                                />
+                                                <div className="msg-bubble mx-2">
+                                                    <div className="msg-info">
+                                                        <div className="msg-info-name">{message.sender.name}</div>
+                                                        <div className="msg-info-time">{message.created_at}</div>
+                                                    </div>
+                                                    <div className="msg-text">{message.message}</div>
+                                                </div>
+                                            </div>
+                                        )
+                                    }
+                                ): (
+                                    <img className="w-100" src={`${ImagePath}/start-conversion.jpg`} alt="start conversion" />
+                                )
+                        }
                 </div>
                 <SendMessage />
             </div>
         </div>
+
     );
 };
 

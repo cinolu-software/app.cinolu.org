@@ -13,7 +13,6 @@ const initialState:ChatSliceType = {
 
     currentUser: null,
     selectedUser : null,
-
 };
 
 export const fetchChatMemberApiData = createAsyncThunk<AllMemberType[], void, {}>("/api/chatmemberapi", async () => {
@@ -96,6 +95,7 @@ const ChatSlice = createSlice({
             if (chat) {
                 chat.messages.push({
                     sender: action.payload.currentUserId,
+                // @ts-ignore
                     time: time,
                     text: action.payload.messageInput,
                     status: true,
@@ -116,6 +116,7 @@ const ChatSlice = createSlice({
             if (chat) {
                 chat.messages.push({
                     sender: action.payload.selectedUserId,
+                    //@ts-ignore
                     time: time,
                     text: action.payload.replyMessage,
                     status: true,
@@ -126,14 +127,15 @@ const ChatSlice = createSlice({
             }
         },
 
-
-        setMessage : (state, action: PayloadAction<MessageType>) => {
-            state.messages.push(action.payload);
+        setMessage : (state, action: PayloadAction<MessageType[]>) => {
+            state.messages= action.payload;
         },
         setUsersJoined : (state, action : PayloadAction<UserType>) => {
-            state.usersJoined.push(action.payload);
+            const userExists = state.usersJoined.some(user => user.id === action.payload.id);
+            if (!userExists) {
+                state.usersJoined.push(action.payload);
+            }
         }
-
     },
     extraReducers: (builder) => {
         builder.addCase(fetchChatMemberApiData.fulfilled, (state, action) => {

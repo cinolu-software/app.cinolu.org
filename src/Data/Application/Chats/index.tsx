@@ -7,7 +7,6 @@ export const ContactWrapperData = [
                 name: "Andres Williamson",
                 phoneNumber: "191-900-5689",
                 imageUser: undefined
-
             },
         ],
     },

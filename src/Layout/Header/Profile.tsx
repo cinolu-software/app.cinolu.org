@@ -39,26 +39,31 @@ export const Profile = () => {
                 <img
                     className="profile-img"
                     src={
-                        user?.profile
-                            ? `${imageBaseUrl}/profiles/${user.profile}`
-                            : user?.google_image
-                                ? user.google_image
-                                : `${ImagePath}/avtar/avatar.jpg`
-                    }
+                            user?.profile
+                                ? `${imageBaseUrl}/profiles/${user.profile}`
+                                : user?.google_image
+                                    ? user.google_image
+                                    : `${ImagePath}/avtar/avatar.jpg`
+                        }
                     alt="profile utilisateur"
                 />
                 <div className="flex-grow-1">
                     <span>{user ? user.name : "Utilisateur"}</span>
                     <p className="mb-0 font-outfit">
-                        {user?.roles && Array.isArray(user.roles) ? (
-                            user.roles.map((role, index) => (
-                                <span key={index} className="me-1">
-                                    {role}
-                                </span>
-                            ))
-                        ) : (
-                            <span>Aucun rôle</span>
-                        )}
+                        {
+                            user?.roles && Array.isArray(user.roles) ? (
+                                user.roles.map((role, index) => (
+                                    <span key={index} className="me-1">
+                                        {role}
+                                    </span>
+                                ))
+                            ) :
+                                (
+                                    <span>
+                                        Aucun rôle
+                                    </span>
+                                )
+                        }
                         <i className="ms-2 fa fa-angle-down"></i>
                     </p>
                 </div>
