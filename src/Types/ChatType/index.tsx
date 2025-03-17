@@ -34,7 +34,7 @@ export interface MessageTypes {
 }
 
 export interface ChatsTypes {
-    id?: string;
+    id?: number;
     users: number[];
     lastMessageTime: string;
     messages: MessageType[];
@@ -42,11 +42,6 @@ export interface ChatsTypes {
 }
 
 export interface ChatSliceType {
-    // allMembers: AllMemberType[] | [];
-    // chats: ChatsTypes[] | [];
-    // members: AllMemberType[]|[];
-    // currentUser:null|AllMemberType,
-    // selectedUser?: null|AllMemberType
     usersJoined : UserType [];
     messages: MessageType[];
 }

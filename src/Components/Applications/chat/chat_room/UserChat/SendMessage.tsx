@@ -29,10 +29,6 @@ const SendMessage = () => {
             socket.emit("typing-message", { name: user.name });
         }
     };
-    
-    
-
-
 
     const handleSubmit = () => {
 
