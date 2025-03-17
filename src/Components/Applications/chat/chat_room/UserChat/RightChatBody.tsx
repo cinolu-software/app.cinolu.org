@@ -21,7 +21,6 @@ const RightChatBody = () => {
     useEffect(() => {
         if (socket) {
             socket.on("newMessage", (newMessage) => {
-
                 dispatch(setMessage([...messages, newMessage])); 
                 scrollToBottom(); 
             });
@@ -29,7 +28,7 @@ const RightChatBody = () => {
             socket.on("userTyping", ({ name }) => {
                 setTypingUser(name);
                 scrollToBottom(); 
-                setTimeout(() => setTypingUser(null), 2000); 
+                setTimeout(() => setTypingUser(null), 4000); 
             });
         }
 
@@ -46,7 +45,6 @@ const RightChatBody = () => {
     }, [messages, typingUser]);
 
 
-    console.log(messages);
 
     return (
         <div className="right-sidebar-Chats">
@@ -68,7 +66,18 @@ const RightChatBody = () => {
                                 <div className="msg-bubble mx-2">
                                     <div className="msg-info">
                                         <div className="msg-info-name">{message.sender.name}</div>
-                                        <div className="msg-info-time">{message.created_at}</div>
+                                        <div className="msg-info-time">
+                                            {
+                                                new Date(message.created_at).toLocaleString("fr-FR", 
+                                                    {
+                                                        day: "2-digit",
+                                                        month: "2-digit",
+                                                        year: "numeric",
+                                                        hour: "2-digit",
+                                                        minute: "2-digit",
+                                                    }
+                                            )}
+                                        </div>
                                     </div>
                                     <div className="msg-text">{message.message}</div>
                                 </div>
