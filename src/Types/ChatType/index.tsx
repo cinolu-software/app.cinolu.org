@@ -42,11 +42,11 @@ export interface ChatsTypes {
 }
 
 export interface ChatSliceType {
-    allMembers: AllMemberType[] | [];
-    chats: ChatsTypes[] | [];
-    members: AllMemberType[]|[];
-    currentUser:null|AllMemberType,
-    selectedUser?: null|AllMemberType
+    // allMembers: AllMemberType[] | [];
+    // chats: ChatsTypes[] | [];
+    // members: AllMemberType[]|[];
+    // currentUser:null|AllMemberType,
+    // selectedUser?: null|AllMemberType
     usersJoined : UserType [];
     messages: MessageType[];
 }

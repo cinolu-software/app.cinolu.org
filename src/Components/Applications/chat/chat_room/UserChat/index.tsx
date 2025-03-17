@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import {Card, Col} from "reactstrap";
 import RightChatHeader from "./RightChatHeader";
 import RightChatBody from "./RightChatBody";
