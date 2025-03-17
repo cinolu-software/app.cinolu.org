@@ -24,7 +24,13 @@ const SendMessage = () => {
 
     const handleMessageChange = (message: string) => {
         setMessageInput(message);
+        
+        if (socket && user) {
+            socket.emit("typing-message", { name: user.name });
+        }
     };
+    
+    
 
 
 
