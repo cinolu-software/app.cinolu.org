@@ -47,7 +47,7 @@ export const Profile = () => {
                         }
                     alt="profile utilisateur"
                 />
-                <div className="flex-grow-1">
+                {/* <div className="flex-grow-1">
                     <span>{user ? user.name : "Utilisateur"}</span>
                     <p className="mb-0 font-outfit">
                         {
@@ -66,7 +66,7 @@ export const Profile = () => {
                         }
                         <i className="ms-2 fa fa-angle-down"></i>
                     </p>
-                </div>
+                </div> */}
             </div>
             <ul className="profile-dropdown onhover-show-div">
                 <li onClick={LogOutUser}>
