@@ -12,7 +12,7 @@ export interface UserType {
     verified_at?: string;
     created_at?: string;
     updated_at?: string;
-    roles?: any [];
+    roles: any [];
     chat_token?: string;
 }
 

@@ -7,13 +7,11 @@ import { setUsersJoined, setMessage } from '@/Redux/Reducers/ChatSlice/ChatRoomS
 import { connectSocket, disconnectSocket, socket  } from "@/services/axios";
 import Cookies from "js-cookie";
 import { UserType } from '@/Types/Users/UsersType';
-import { MessageType } from '@/Types/ChatType';
 
 
 const ChatRoomComponent = () => {
     
     const [token, setToken] = useState<string>();
-    const [localMessages, setLocalMessages] = useState<MessageType[]>([]);
     const dispatch = useAppDispatch();
 
     useEffect(()=>{
@@ -27,8 +25,7 @@ const ChatRoomComponent = () => {
         }
         if(socket){
             socket.on("loadMessages", (msgs)=>{
-                setLocalMessages(msgs);
-                dispatch(setMessage(msgs))
+                dispatch(setMessage(msgs.reverse()))
             });
 
             socket.on('userJoined', (user)=>{

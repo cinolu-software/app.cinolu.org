@@ -86,7 +86,33 @@ const RightChatBody = () => {
                     ) : (
                         <img className="w-100" src={`${ImagePath}/start-conversion.jpg`} alt="start conversion" />
                     )}
-                    {typingUser && <div className="typing-indicator">{typingUser} est en train d'écrire...</div>}
+                    {
+                        //@ts-ignore
+                        typingUser && typingUser !== user?.name && (
+                            
+                            <div className={`msg left-msg`}>
+                                <img 
+                                    src={`${ImagePath}/avtar/avatar.jpg`}
+                                    className="rounded-circle img-30 h-auto" alt="user" 
+                                />
+                                <div className="msg-bubble mx-2">
+                                    <div className="msg-info">
+                                        <div className="msg-info-name">{typingUser}</div>
+                                    </div>
+                                    <div className="msg-text">
+                                        <div className="typing-indicator-container">
+                                            <div className="typing-indicator">
+                                                <span></span>
+                                                <span></span>
+                                                <span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+
                     <div ref={messagesEndRef} /> 
                 </div>
                 <SendMessage />
