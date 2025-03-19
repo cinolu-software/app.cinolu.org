@@ -8,6 +8,7 @@ export function middleware(request: NextRequest) {
   if (path.split("/")[1] !== "auth" && !request.cookies.has("cinolu_token")) {
     return NextResponse.redirect(new URL("/auth/login", request.url));
   }
+  
   if (path.split("/")[1] === "auth" && request.cookies.has("cinolu_token")) {
     return NextResponse.redirect(new URL(`/dashboard`, request.url));
   }
