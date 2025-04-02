@@ -6,10 +6,11 @@ const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
 
     const { projectData } = useAppSelector((state) => state.project);
 
-    // @ts-ignore
-    const phase = projectData?.phases.find((phase: { id: string; }) => phase.id === navId);
+
+    const phase = projectData?.phases?.find((phase: { id: string; }) => phase.id === navId);
 
     if (!phase) {
+
         return (
             <TabPane tabId="details-tab">
                 <div className="text-center my-4 bg-white">
@@ -22,10 +23,10 @@ const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
         );
     }
 
-
     return (
         <TabPane tabId="details-tab">
             <div className="mb-4 bg-white mt-5 ps-5">
+
                 <div className=" text-success pt-4 pb-2 border-bottom">
                     <h4 className="mb-0">{phase.name}</h4>
                 </div>
@@ -44,6 +45,7 @@ const PhaseDetails: React.FC<{ navId: string }> = ({ navId }) => {
                         </Col>
                     </Row>
                 </div>
+                
             </div>
         </TabPane>
     );

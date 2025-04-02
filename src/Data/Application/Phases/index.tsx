@@ -43,11 +43,6 @@ export const PhasesNavTabs = [
         id: 'details-tab'
     },
     {
-        title: "Formulaire",
-        icon: "form_phase",
-        id: 'form-tab'
-    },
-    {
         title: "Exigences",
         icon: "requirement_phase",
         id: 'requirement-tab'

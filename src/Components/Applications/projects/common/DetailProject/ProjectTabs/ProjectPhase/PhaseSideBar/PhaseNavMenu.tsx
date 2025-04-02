@@ -32,8 +32,7 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
     };
 
     useEffect(() => {
-        if (status === "succeeded") {
-            // @ts-ignore
+        if (status === "succeeded" && selectedProject) {
             const projectId = selectedProject.id;
             dispatch(fetchProjectById(projectId));
         }
@@ -70,5 +69,3 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
 };
 
 export default PhaseNavMenu;
-
-

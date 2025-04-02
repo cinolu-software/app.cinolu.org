@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CardBody, Button, Form, FormGroup, Label, Input, Row, Col, Spinner, TabPane } from "reactstrap";
+import { CardBody, Button, Form, FormGroup, Label, Input, Row, Col, TabPane } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { toast } from "react-toastify";
 import {createRequirement, updateRequirement, deleteRequirement,} from "@/Redux/Reducers/projectSlice/ProjectRequiredSlice";
@@ -19,8 +19,8 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     const [requirements, setRequirements] = useState<Requirement[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
-    // @ts-ignore
-    const phase = projectData.phases.find((phase: { id: string }) => phase.id === navId);
+
+    const phase = projectData?.phases?.find((phase: { id: string }) => phase.id === navId);
 
     useEffect(() => {
         setIsLoading(true);
@@ -110,13 +110,17 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
 
 
     if(!phase) {
+
         return (
+
             <TabPane tabId="requirement-tab">
                 <div className="text-center my-4 bg-white">
+
                     <div className={"pb-5 pt-2"}>
                         <h1>Aucune phase trouvée</h1>
                         <p>Veuillez sélectionner une phase valide pour afficher ses exigences.</p>
                     </div>
+
                 </div>
             </TabPane>
         );
@@ -127,13 +131,8 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
         <TabPane tabId={"requirement-tab"}>
             <div className="p-3 my-5 bg-white pt-3 text-success">
                 <CardBody>
-                    <h5 className="mb-4">Exigences pour la phase : {phase.name}</h5>
-                    {isLoading ? (
-                        <div className="text-center">
-                            <Spinner color="success" />
-                            <p>Chargement des données...</p>
-                        </div>
-                    ) : (
+                        <h5 className="mb-4">Exigences pour la phase : {phase.name}</h5>
+                
                         <Form>
                             {requirements.map((requirement, index) => (
                                 <Row key={index} className="mb-3">
@@ -180,12 +179,13 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
                                 Ajouter une Exigence
                             </Button>
                         </Form>
-                    )}
-                    <div className="d-flex justify-content-start mt-4">
-                        <Button color="success" onClick={handleSave} disabled={isSaving}>
-                            {isSaving ? "Sauvegarde..." : "Sauvegarder les Changements"}
-                        </Button>
-                    </div>
+                    
+                        <div className="d-flex justify-content-start mt-4">
+                            <Button color="success" onClick={handleSave} disabled={isSaving}>
+                                {isSaving ? "Sauvegarde..." : "Sauvegarder les Changements"}
+                            </Button>
+                        </div>
+                    
                 </CardBody>
             </div>
         </TabPane>

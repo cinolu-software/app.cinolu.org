@@ -14,6 +14,16 @@ export type AttachmentType = {
     updated_at: string;
 }
 
+export type PhaseType = {
+    id: string;
+    name: string;
+    description: string;
+    started_at: string;
+    updated_at: string;
+    ended_at: string;
+    requirements: RequirementType[];
+}
+
 export type DataType = {
     id: string;
     name: string;
@@ -52,7 +62,7 @@ export interface ReceiveProjectType {
     aim?: string;
     prize?: string;
     town?: string;
-    phases?: any[];
+    phases?: PhaseType[];
     report?: {
         "Nombre total de participants"?: number;
         [key: string]: any;

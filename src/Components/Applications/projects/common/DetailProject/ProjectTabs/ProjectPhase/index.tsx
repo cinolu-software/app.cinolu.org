@@ -9,6 +9,7 @@ const ProjectPhase = () => {
     const [activeTab, setActiveTab] = useState('1');
 
     return (
+
         <TabPane tabId={'2'}>
             <Container>
                 <div className={'email-wrap email-main-wrapper'}>
@@ -21,6 +22,6 @@ const ProjectPhase = () => {
             </Container>
         </TabPane>
     )
-
 }
+
 export default ProjectPhase;

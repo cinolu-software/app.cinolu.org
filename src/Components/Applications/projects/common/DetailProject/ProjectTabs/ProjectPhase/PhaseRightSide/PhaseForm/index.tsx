@@ -18,13 +18,12 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
 
-    // @ts-ignore
-    const phase = projectData.phases.find((phase: { id: string }) => phase.id === navId);
+    const phase = projectData?.phases?.find((phase: { id: string }) => phase.id === navId);
 
     useEffect(() => {
         setIsLoading(true);
-        if (phase?.form?.inputs) {
-            setFormFields(phase.form.inputs);
+        if (phase?.requirements) {
+            setFormFields(phase.requirements);
         } else {
             setFormFields([]);
         }

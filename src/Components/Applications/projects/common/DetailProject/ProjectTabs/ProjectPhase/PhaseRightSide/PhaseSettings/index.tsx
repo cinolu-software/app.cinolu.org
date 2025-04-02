@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { Flip, toast } from "react-toastify";
 
 const PhaseSettings: React.FC<{ navId: string }> = ({ navId }) => {
+
     const dispatch = useAppDispatch();
     const { statusPhase, selectedProjectPhase } = useAppSelector((state) => state.projectPhase);
     const [isLoading, setIsLoading] = useState(true);
@@ -65,10 +66,6 @@ const PhaseSettings: React.FC<{ navId: string }> = ({ navId }) => {
                 toast.error(error, { transition: Flip });
             });
     };
-
-    if (isLoading) {
-        return <Spinner />;
-    }
 
     return (
         <TabPane tabId="setting-tab">
