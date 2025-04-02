@@ -5,6 +5,7 @@ import {setModalcreateProjectPhase} from "@/Redux/Reducers/projectSlice/ProjectP
 import {useAppDispatch} from "@/Redux/Hooks";
 
 const PhaseLeftSidebar : React.FC<PhaseLeftSidebarProps> = ({navId, setNavId}) => {
+    
     const dispatch = useAppDispatch();
 
     return (

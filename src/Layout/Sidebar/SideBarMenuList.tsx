@@ -47,4 +47,5 @@ const SidebarMenuList = () => {
       </>
   );
 };
+
 export default SidebarMenuList;

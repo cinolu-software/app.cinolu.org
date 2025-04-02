@@ -6,6 +6,7 @@ import {RootState} from "@/Redux/Store";
 
 
 const initialState : InitialStateProjectType = {
+    
     originalProjectData: [],
     publishedProjectData: [],
     status: "idle",

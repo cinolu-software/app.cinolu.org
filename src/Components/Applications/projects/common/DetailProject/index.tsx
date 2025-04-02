@@ -14,7 +14,6 @@ const DetailProjectContainer = () => {
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-
     useEffect(() => {
         if(selectedProject){
             dispatch(fetchProjectById(selectedProject.id));
@@ -23,6 +22,8 @@ const DetailProjectContainer = () => {
             router.push('/project');
         }
     }, [selectedProject]);
+
+    console.log('selectedProject===>|', selectedProject);
 
     return (
         <Container fluid>

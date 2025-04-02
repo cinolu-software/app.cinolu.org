@@ -9,7 +9,7 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
 
     const { projectData, publishedProjectStatus, selectedProject } = useAppSelector(state => state.project);
     const { status } = useAppSelector(state => state.projectPhase)
-    // @ts-ignore
+    
     const phases = projectData?.phases || [];
     const dispatch = useAppDispatch()
 
@@ -39,6 +39,7 @@ const PhaseNavMenu: React.FC<PhaseNavMenuProps> = ({ navId, setNavId }) => {
         }
     }
     , [publishedProjectStatus, selectedProject, status]);
+
 
     return (
         <Nav pills tabs className="main-menu email-category border-0">

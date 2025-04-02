@@ -48,10 +48,11 @@ export interface ReceiveProjectType {
     started_at: string;
     ended_at: string;
     image?: string;
-    program?: string;
+    program: string;
     aim?: string;
     prize?: string;
     town?: string;
+    phases?: any[];
     report?: {
         "Nombre total de participants"?: number;
         [key: string]: any;

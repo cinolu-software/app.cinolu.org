@@ -32,7 +32,6 @@ export interface UpdateProgramType {
     description: string;
 }
 
-
 export interface StaticModalToggleProp {
     staticModalToggle: () => void;
 }
