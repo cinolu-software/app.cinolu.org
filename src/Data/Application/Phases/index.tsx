@@ -53,11 +53,6 @@ export const PhasesNavTabs = [
         id: 'document-tab'
     },
     {
-        title: "Participant",
-        icon: "audience_phase",
-        id: 'audience-tab'
-    },
-    {
         title: "Paramètres",
         icon: "setting_phase",
         id: 'setting-tab'

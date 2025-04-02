@@ -20,14 +20,19 @@ const ProjectNavTabs = [
         id: "2",
     },
     {
-        title: "Indicateurs de l'activité",
+        title: "Formulaire de l'activité",
         icon: "program_criteria",
         id: "3",
     },
     {
+        title: "Indicateurs de l'activité",
+        icon: "program_criteria",
+        id: "4",
+    },
+    {
         title: "Rapports",
         icon: "program_report",
-        id: "4",
+        id: "5",
     },
 ];
 
@@ -38,7 +43,7 @@ const ProjectNavTab : React.FC<ProjectNavTabProps> = ({navId, setNavId}) => {
             {
                 ProjectNavTabs.map((data, i) => (
                     <NavItem key={i}>
-                        <NavLink className={navId === data.id ? "active" : ""} id={data.id} href={Href} onClick={()=>setNavId(data.id)} >
+                        <NavLink className={navId === data.id ? "active" : ""} id={data.id} onClick={()=>setNavId(data.id)} >
                             <SVG className="stroke-icon" iconId={data.icon} />
                             <span>{data.title} </span>
                         </NavLink>

@@ -12,7 +12,6 @@ const RightSideHeader: React.FC<RightSideHeaderProps> = ({ tabId, setTabId }) =>
         <div className="mail-header-wrapper">
             <div className="mail-header">
                 <div className="form-check form-check-inline m-0">
-
                     <RightSideNavTab tabId={tabId} setTabId={setTabId} />
                 </div>
             </div>

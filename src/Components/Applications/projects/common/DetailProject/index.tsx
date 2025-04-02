@@ -23,8 +23,6 @@ const DetailProjectContainer = () => {
         }
     }, [selectedProject]);
 
-    console.log('selectedProject===>|', selectedProject);
-
     return (
         <Container fluid>
             <BackButton link={'/project'} />

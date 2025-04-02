@@ -12,7 +12,7 @@ const ProjectTabs = () => {
     const [navId, setNavId] = useState('1');
 
     return (
-        <Col className={'box-col-12'}>
+        <Col className="box-col-12">
             <div className={'email-right-aside'}>
                 <Card className={`email-body email-list`}>
                     <TabsHeader navId={navId} setNavId={setNavId}/>

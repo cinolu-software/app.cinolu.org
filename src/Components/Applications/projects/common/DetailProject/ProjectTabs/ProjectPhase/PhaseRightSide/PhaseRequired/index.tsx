@@ -25,11 +25,11 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     useEffect(() => {
         setIsLoading(true);
         if (phase?.requirements) {
-            // @ts-ignore
             const sanitizedRequirements = phase.requirements.map(({ name, description, id }) => ({
                 name,
                 description,
                 id,
+                phase: phase.id,
             }));
             setRequirements(sanitizedRequirements);
         } else {
@@ -68,9 +68,7 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
 
     const handleSave = async () => {
         if (!phase) return;
-
         setIsSaving(true);
-
         try {
             const newRequirements = requirements.filter((req) => !req.id);
             const existingRequirements = requirements.filter((req) => req.id);
@@ -97,13 +95,9 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
             toast.success("Toutes les exigences ont été sauvegardées avec succès !");
 
         } catch (error) {
-
             toast.error("Une erreur est survenue lors de la sauvegarde.");
-
         } finally {
-
             setIsSaving(false);
-
         }
     };
 
@@ -112,18 +106,16 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
     if(!phase) {
 
         return (
-
             <TabPane tabId="requirement-tab">
                 <div className="text-center my-4 bg-white">
-
                     <div className={"pb-5 pt-2"}>
                         <h1>Aucune phase trouvée</h1>
                         <p>Veuillez sélectionner une phase valide pour afficher ses exigences.</p>
                     </div>
-
                 </div>
             </TabPane>
         );
+        
     }
 
 
@@ -193,5 +185,3 @@ const PhaseRequired: React.FC<{ navId: string }> = ({ navId }) => {
 };
 
 export default PhaseRequired;
-
-
