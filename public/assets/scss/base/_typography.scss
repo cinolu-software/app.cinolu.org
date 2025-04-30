@@ -1,7 +1,3 @@
-    /**=====================
-    1.2 Typography CSS start
-==========================**/
-    //Custom css Start
     body {
         font-size: $body-font-size;
         overflow-x: hidden;
@@ -434,7 +430,7 @@
         background-color: var(--theme-default);
     }
 
-    // sweetalert css
+
     .swal-button {
         background-color: var(--theme-default);
 
@@ -492,7 +488,6 @@
         }
     }
 
-    // animated modal css
     .animated-modal {
         .form-select {
             display: inline-block;
@@ -511,14 +506,6 @@
         }
     }
 
-    /* ===== Scrollbar CSS ===== */
-    /* Firefox */
-    // * {
-    //     scrollbar-width: auto;
-    //     scrollbar-color: #f1e6f5 #ffffff;
-    // }
-
-    // table
     table {
         tbody {
             tr {
@@ -527,7 +514,6 @@
         }
     }
 
-    // Common flex
     .common-flex {
         display: flex;
         gap: 12px;
@@ -557,7 +543,3 @@
             }
         }
     }
-
-    /**=====================
-    1.2 Typography CSS Ends
-==========================**/

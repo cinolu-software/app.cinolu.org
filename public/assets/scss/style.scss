@@ -1,56 +1,56 @@
 @import "utils/variables";
 
 :root {
-    --theme-default: #14532D;
-    --theme-secondary: #14532D;
-    --light-background: rgba(20, 83, 45, 0.7);
-    --body-font-color: #14532D;
-    --chart-border: #14532D;
-    --recent-chart-bg: #14532D;
-    --light-bg: #14532D;
+    --theme-default: #556c1f;
+    --theme-secondary: lighten(#556c1f, 10%);
+    --light-background: rgba(91, 108, 31, 0.7);
+    --body-font-color: #4e5c33;
+    --chart-border: #4e5c33;
+    --recent-chart-bg: lighten(#4e5c33, 10%);
+    --light-bg: #dfefd8;
     --white: #FFFFFF;
-    --light2: #F8F9FB;
-    --sidebar-border: rgba(20, 83, 45, 0.1);
-    --chart-text-color: rgba(20, 83, 45, 0.8);
-    --recent-dashed-border: rgba(20, 83, 45, 0.3);
-    --chart-dashed-border: rgba(20, 83, 45, 0.2);
-    --chart-progress-light: rgba(20, 83, 45, 0.1);
-    --recent-box-bg: #F4F6F9;
+    --light2: lighten(#dfefd8, 10%);
+    --sidebar-border: rgba(78, 92, 51, 0.1);
+    --chart-text-color: rgba(78, 92, 51, 0.8);
+    --recent-dashed-border: rgba(78, 92, 51, 0.3);
+    --chart-dashed-border: rgba(78, 92, 51, 0.2);
+    --chart-progress-light: rgba(78, 92, 51, 0.1);
+    --recent-box-bg: lighten(#dfefd8, 5%);
     --recent-border: rgba(117, 121, 142, 0.25);
-    --course-light-btn: #F4F5F9;
-    --course-bg: #FAFAFA;
-    --balance-profie-bg: #E8E7F4;
-    --view-grid-bg: #F3F7FD;
-    --view-border-marker: #DAD9FF;
-    --light-slate: #F8F9FB;
-    --text-gray: rgba(20, 83, 45, 0.8);
-    --product-shadow: 0px 1px 0px rgba(20, 83, 45, 0.15);
-    --light-shade-primary: rgba(20, 83, 45, 0.7);
-    --fc-button-bg-color: var(--theme-default);
-    --fc-button-active-bg-color: var(--theme-default);
-    --fc-button-active-border-color: var(--theme-default);
-    --fc-button-border-color: var(--theme-default);
-    --fc-button-hover-bg-color: var(--theme-default);
-    --fc-button-hover-border-color: var(--theme-default);
+    --course-light-btn: lighten(#dfefd8, 10%);
+    --course-bg: #dfefd8;
+    --balance-profie-bg: lighten(#dfefd8, 15%);
+    --view-grid-bg: lighten(#dfefd8, 20%); /* Vert très clair encore plus clair */
+    --view-border-marker: lighten(#4e5c33, 20%); /* Vert moyen éclairci */
+    --light-slate: lighten(#dfefd8, 5%); /* Vert très clair légèrement éclairci */
+    --text-gray: rgba(78, 92, 51, 0.8); /* Dérivé du vert moyen */
+    --product-shadow: 0px 1px 0px rgba(78, 92, 51, 0.15); /* Dérivé du vert moyen */
+    --light-shade-primary: rgba(91, 108, 31, 0.7); /* Dérivé du vert soutenu */
+    --fc-button-bg-color: var(--theme-default); /* Vert soutenu */
+    --fc-button-active-bg-color: darken(var(--theme-default), 10%); /* Vert soutenu assombri */
+    --fc-button-active-border-color: darken(var(--theme-default), 10%); /* Vert soutenu assombri */
+    --fc-button-border-color: var(--theme-default); /* Vert soutenu */
+    --fc-button-hover-bg-color: lighten(var(--theme-default), 10%); /* Vert soutenu éclairci */
+    --fc-button-hover-border-color: lighten(var(--theme-default), 10%); /* Vert soutenu éclairci */
 
-    --bs-heading-color: #14532D;
+    --bs-heading-color: #4e5c33; /* Vert moyen */
 
-    --normal: #14532D;
-    --normal-shadow: #14532D;
-    --normal-mouth: #B0AFBC;
-    --normal-eye: #6F6F78;
-    --active: #FAE48A;
-    --active-shadow: #F7C67D;
-    --active-mouth: #F47456;
-    --active-eye: #4B4A4F;
-    --active-tear: #88c4f3;
-    --active-shadow-angry: #ee7150;
+    --normal: #4e5c33; /* Vert moyen */
+    --normal-shadow: darken(#4e5c33, 10%); /* Vert moyen assombri */
+    --normal-mouth: #B0AFBC; /* Gris existant */
+    --normal-eye: #6F6F78; /* Gris existant */
+    --active: #FAE48A; /* Jaune existant (pour contraste si nécessaire) */
+    --active-shadow: #F7C67D; /* Jaune existant */
+    --active-mouth: #F47456; /* Orange existant */
+    --active-eye: #4B4A4F; /* Gris foncé existant */
+    --active-tear: #88c4f3; /* Bleu clair existant */
+    --active-shadow-angry: #ee7150; /* Orange-rouge existant */
 
     .customLook {
-        --tag-bg: var(--theme-default);
-        --tag-hover: var(--theme-secondary);
+        --tag-bg: var(--theme-default); /* Vert soutenu */
+        --tag-hover: var(--theme-secondary); /* Vert soutenu éclairci */
         --tag-text-color: var(--white);
-        --tags-border-color: silver;
+        --tags-border-color: silver; /* Gris existant */
         --tag-border-radius: 25px;
         --tag-text-color--edit: #111111;
         --tag-remove-bg: var(--tag-hover);
