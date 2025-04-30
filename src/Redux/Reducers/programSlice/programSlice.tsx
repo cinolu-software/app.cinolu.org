@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction} from "@reduxjs/toolkit";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
 import {InitialStateProgramType, ProgramType, CreateProgramType, ProgramTypeWithImage, UpdateProgramType } from "@/Types/Programs/ProgramType";
-import {RootState} from "@/Redux/Store";
 
 const initialState: InitialStateProgramType = {
     originalPrograms: [],

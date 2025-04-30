@@ -13,10 +13,8 @@ const UpdateUser = () => {
 
     return (
         <Container fluid>
-
             <BackButton link={"/users/admin/list"}/>
             <UserForm mode="edit" initialData={selectedUser} />
-
             <ToastContainer />
         </Container>
     )
