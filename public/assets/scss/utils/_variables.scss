@@ -1,85 +1,81 @@
-// COULEURS DE BASE
-$theme-font-color: #556c1f;       // #73804D (contraste vérifié)
-$theme-body-font-color: #6A7A4D;  // #8A9973
-$theme-body-sub-title-color: $theme-font-color;
-$body-color: lighten(#dfefd8, 5%);              // #F5FBEF
-$main-body-color: #fff;
-$primary-color: lighten(#556c1f, 20%);          // #7D943D
-$secondary-color: lighten(#4e5c33, 20%);        // #6A7A4D
-$tertiary-color: lighten(#556c1f, 30%);         // #A8B387
 
-// ÉTATS
-$success-color: #84a730;  // Utilisation directe de votre vert vif
-$info-color: #A8B387;     // Couleur neutre de votre palette
-$warning-color: desaturate(lighten(#D77748, 25%), 25%); // #E4A76B
-$danger-color: desaturate(lighten(#E44141, 25%), 25%);  // #E87C7C
-$light-color: lighten(#F4F4F4, 10%);            // #FEFEFE
-$badge-light-color: lighten(#52526c, 10%);      // #6B6B83
-$light-gray: rgba(#4e5c33, 0.08);               // Opacité réduite
-$light-widget-border: rgba(#4e5c33, 0.15);    // #F6FBEF
-$light-semi-gray: lighten(#dfefd8, 10%);        // #E6F0E0
-$font-gray-color: lighten(#4e5c33, 35%);        // #A3B38F
+$theme-font-color: #556c1f;
+$theme-body-font-color: #6A7A4D;
+$theme-body-sub-title-color: $theme-font-color;
+$body-color: lighten(#dfefd8, 5%);
+$main-body-color: #fff;
+$primary-color: lighten(#556c1f, 20%);
+$secondary-color: lighten(#4e5c33, 20%);
+$tertiary-color: lighten(#556c1f, 30%);
+
+$success-color: #84a730;
+$info-color: #A8B387;
+$warning-color: desaturate(lighten(#D77748, 25%), 25%);
+$danger-color: desaturate(lighten(#E44141, 25%), 25%);
+$light-color: lighten(#F4F4F4, 10%);
+$badge-light-color: lighten(#52526c, 10%);
+$light-gray: rgba(#4e5c33, 0.08);
+$light-widget-border: rgba(#4e5c33, 0.15);
+$light-semi-gray: lighten(#dfefd8, 10%);
+$font-gray-color: lighten(#4e5c33, 35%);
 $dark-light: $theme-font-color;
-$dark-gray: lighten(#4e5c33, 5%);               // #5A6940
-$dark-color: lighten(#2C323F, 10%);             // #3D4554
-$dark-color-light: rgba(lighten(#2C323F, 10%), 0.5); // #3D455480
-$gray-60: rgba(#4e5c33, 0.08);                 // Opacité ajustée
-$card-body-color: lighten(#f9f9fa, 5%);         // #FEFEFE
+$dark-gray: lighten(#4e5c33, 5%);
+$dark-color: lighten(#2C323F, 10%);
+$dark-color-light: rgba(lighten(#2C323F, 10%), 0.5);
+$gray-60: rgba(#4e5c33, 0.08);
+$card-body-color: lighten(#f9f9fa, 5%);
 $transparent-color: transparent;
-$auth-bg-color: lighten(#FAFAFA, 5%);           // #FFFFFF
-$light: lighten(#FDFFFE, 5%);                   // #FFFFFF
-$semi-dark: lighten(#4e5c33, 5%);               // #5A6940
-$light-text: lighten(#4e5c33, 20%);             // Unifié avec $theme-font-color
-$light-paragraph: lighten(#dfefd8, 20%);        // #F6FBEF
-$light-background: #dfefd8;       // #E6F0E0
-$light-font: rgba(#4e5c33, 0.15);               // Opacité réduite
+$auth-bg-color: lighten(#FAFAFA, 5%);
+$light: lighten(#FDFFFE, 5%);
+$semi-dark: lighten(#4e5c33, 5%);
+$light-text: lighten(#4e5c33, 20%);
+$light-paragraph: lighten(#dfefd8, 20%);
+$light-background: #dfefd8;
+$light-font: rgba(#4e5c33, 0.15);
 $light-semi-font: $semi-dark;
-$light-chartist-grid-color: lighten(#f6f9fd, 5%); // #FFFFFF
-$pitch-color: lighten(#FE8A7D, 10%);             // #FFA195
-$color-scarpa: lighten(#4c5667, 10%);            // #5D6777
-$color-fiord: lighten(#455a64, 10%);             // #566D7A
+$light-chartist-grid-color: lighten(#f6f9fd, 5%);
+$pitch-color: lighten(#FE8A7D, 10%);
+$color-scarpa: lighten(#4c5667, 10%);
+$color-fiord: lighten(#455a64, 10%);
 $black: #000;
 $white: #fff;
-$off-white: lighten(#F7F6FF, 5%);                // #FFFFFF
-$theme-medium-color: lighten(#4e5c33, 5%);       // #5A6940
-$dropdown-border-color: lighten(#918E99, 10%);   // #A6A3AD
+$off-white: lighten(#F7F6FF, 5%);
+$theme-medium-color: lighten(#4e5c33, 5%);
+$dropdown-border-color: lighten(#918E99, 10%);
 
-// VERSIONS CLAIRES
-$light-primary: lighten(#556c1f, 35%);           // #D3DBC4
-$light-secondary: lighten(#4e5c33, 35%);         // #C1C9B5
-$light-tertiary: lighten(#556c1f, 45%);          // #E5EAD9
-$light-success: lighten(#556c1f, 30%);           // #C5D1A9
-$light-info: lighten(#4e5c33, 30%);              // #B8C1A6
-$light-warning: desaturate(lighten(#DF8752, 35%), 35%); // #F3D4C0
-$light-danger: desaturate(lighten(#EB5959, 35%), 35%);  // #F8CACA
-$light-white: lighten(#F9F9FB, 5%);              // #FFFFFF
-$light-dark: lighten(#EAEBF2, 10%);               // #FFFFFF
 
-// SIDEBAR MODIFIÉE (plus claire)
-$sidebar-color: lighten(#4e5c33, 10%);      // #5A6940 (vert olive adouci)
-$sidebar-font: lighten(#dfefd8, 5%);        // #E6F0E0 (contraste 5.2:1 ✅)
-$light-sidebar-bg: rgba(#4e5c33, 0.1);      // Transparence pour légèreté
-$header-light-bg: rgba(#4e5c33, 0.05);      // Transparence subtile
-$card-header-color: #4e5c33;                // Utilisation directe de votre vert foncé
+$light-primary: lighten(#556c1f, 35%);
+$light-secondary: lighten(#4e5c33, 35%);
+$light-tertiary: lighten(#556c1f, 45%);
+$light-success: lighten(#556c1f, 30%);
+$light-info: lighten(#4e5c33, 30%);
+$light-warning: desaturate(lighten(#DF8752, 35%), 35%);
+$light-danger: desaturate(lighten(#EB5959, 35%), 35%);
+$light-white: lighten(#F9F9FB, 5%);
+$light-dark: lighten(#EAEBF2, 10%);
+
+$sidebar-color: lighten(#4e5c33, 10%);
+$sidebar-font: lighten(#dfefd8, 5%);
+$light-sidebar-bg: rgba(#4e5c33, 0.1);
+$header-light-bg: rgba(#4e5c33, 0.05);
+$card-header-color: #4e5c33;
 $light-text-color: #a8b387;
 
-// GRADIENTS (ajustés pour contraste)
 $gradient-primary: linear-gradient(26deg, $primary-color 0%, lighten(#a26cf8, 15%) 60%);
 $gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -5%, $primary-color 60%);
 
-// RÉSEAUX SOCIAUX
-$fb: lighten(#50598e, 10%);       // #6672A6
-$twitter: lighten(#6fa2d8, 10%);  // #8CBAE8
-$google-plus: lighten(#c64e40, 10%); // #DC6254
-$linkedin: #0082B8;               // Conservé
+$fb: lighten(#50598e, 10%);
+$twitter: lighten(#6fa2d8, 10%);
+$google-plus: lighten(#c64e40, 10%);
+$linkedin: #0082B8;
 
-$fb-color: lighten(#2F84F4, 10%);  // #4A9AFF
-$insta-color: lighten(#FC971E, 10%); // #FFAB3C
-$pintrest-color: lighten($secondary-color, 10%); // #7B8B5D
-$twitter-color: lighten(#57B9F6, 10%); // #70CAFF
-$youtube-color: lighten(#F42F2F, 10%); // #FF4949
+$fb-color: lighten(#2F84F4, 10%);
+$insta-color: lighten(#FC971E, 10%);
+$pintrest-color: lighten($secondary-color, 10%);
+$twitter-color: lighten(#57B9F6, 10%);
+$youtube-color: lighten(#F42F2F, 10%);
 
-$light-body-bg-color: lighten(#fafdff, 5%); // #FFFFFF
+$light-body-bg-color: lighten(#fafdff, 5%);
 
 
 
@@ -91,7 +87,7 @@ $font-themify: themify;
 $font-awesome: FontAwesome;
 $font-ICO: IcoFont;
 
-// dark layout variables
+
 $dark-body-background: $light-sidebar-bg;
 $dark-card-background: $sidebar-color;
 $dark-card-inbox: $light-sidebar-bg;
@@ -107,7 +103,7 @@ $dark-datatable-sorting: $sidebar-color;
 $dark-datatable-sorting-even: $light-sidebar-bg;
 $dark-even-hover-sorting: rgba(255, 255, 255, 0.2);
 
-//General tag settings
+
 $body-font-size: 14px;
 $body-font-color: $theme-body-font-color;
 $ul-padding-left: 0px;
@@ -140,7 +136,6 @@ $list-group-img-size: 40px;
 $list-group-margin: 10px;
 
 
-// Tables settings
 $table-b-margin: 0px;
 $table-heading-color: $theme-body-font-color;
 $table-row-color: $theme-body-font-color;
@@ -162,7 +157,6 @@ $horizontal-border-color: #f2f4ff;
 $horizontal-padding: .75rem 2rem;
 $table-inverse-bg-color: #292b2c;
 
-//According setting
 $according-card-top-margin : 10px;
 $according-btn-weight : 500;
 $according-btn-color : $theme-body-font-color;
@@ -171,28 +165,23 @@ $according-card-header-icon : $font-ICO;
 $according-open-icon : "\eb73";
 $according-close-icon : "\eb7a";
 
-//Alert settings
 $alert-hover-color :$dark-color;
 $alert-border-radious :0.15rem;
 $alert-padding :15px;
 $alert-msg-icon-size :16px;
 
-//badge settings
 $badge-padding :0.44em 0.7em;
 $badge-svg-size :16px;
 
-//form input settings
 $form-group-margin-bottom : 1.25em;
 $col-form-label-font-size : 14px;
 $form-control-font-size : 14px;
 $form-control-border-radious : 2px;
 $form-control-border-color : $light-gray;
 
-//breadcrumb setting
 $breadcrumb-ancher-color : $white;
 $breadcrumb-ancher-dark-color : $black;
 
-//buttons setting
 $btn-font-size : 14px;
 $btn-padding : 0.375rem 1.75rem;
 $btn-lg-font-size: 18px;
@@ -200,7 +189,6 @@ $btn-sm-font-size: 12px;
 $btn-xs-font-size: 11px;
 $btn-xs-padding: 0.05rem 0.4rem;
 
-//Card settings
 $card-padding :16px 24px;
 $card-margin-bottom :30px;
 $card-border-color :1px dashed $light-gray;
@@ -215,19 +203,16 @@ $card-body-bg-color : $transparent-color;
 $card-footer-bg-color : $white;
 $card-hover-box-shadow : 0 0 40px rgba(8, 21, 66, .05);
 
-// According settings
 $card-border-width :0px;
 $card-header-font-weight : 600;
 $card-header-font-size : 18px;
 $card-header-font-color : $theme-body-font-color;
 
-//footer settings
 $footer_bg_color : $white;
 $footer_box_shadow : 0 0 20px rgba($semi-dark, 0.1);
 $footer_dark_color : $theme-font-color;
 $footer_dark__txt_color : $white;
 
-//form settings
 $form-group-margin-bottom :20px;
 $sm-form-margin-bottom : 14px;
 $form-placeholder-color : $dark-gray;
@@ -237,10 +222,8 @@ $form-placeholder-font-weight : 100;
 $form-input-border-color : $light-semi-gray;
 $form-input-bg-color : $white;
 
-//Tour settings
 $tour-color: var(--theme-default);
 
-//sidabr main settings
 $sidebar-width: 250px;
 $sidebar-position: fixed;
 $sidebar-background-color: $white;
@@ -250,7 +233,6 @@ $sidebar-z-index: 9;
 $sidebar-transition: 0.5s;
 $sidebar-fill-icon-color: #757589;
 
-//sidebar profile settings
 $sidebar-profile-edit-icon-size: 14px;
 $sidebar-profile-name-txt-color : var(--theme-default);
 $sidebar-profile-name-txt-transfer : uppercase;
@@ -261,7 +243,6 @@ $sidebar-profile-sub-title-font-size: 10px;
 $sidebar-profile-sub-title-margin: 0px;
 $sidebar-profile-img-shadow: 0 0 15px rgba(68, 102, 242, 0.3);
 
-//Sidebar main menu setting
 $sidebar-menu-padding: 15px;
 $sidebar-menu-list-style: none;
 $sidebar-menu-list-margin: 0;
@@ -288,13 +269,11 @@ $sidebar-icon-font-family: $font-awesome;
 $sidebar-height: calc(100vh - 105px);
 $sidebar-compact-width: 252px;
 
-//Header settings
 $main-header-position: fixed;
 $main-header-top: 0;
 $main-header-shadow: 0 0 20px rgba($semi-dark, 0.1);
 $main-header-shadow-1: 0px 4px 40px rgba(39, 32, 120, 0.1);
 
-//page settings
 $page-body-padding : 0 15px 0 15px;
 $page-body-bg-color: $light-color;
 $page-body-margin-bottom: 0px;
@@ -311,8 +290,6 @@ $page-small-title-text-color: $theme-body-sub-title-color;
 $breadcrumb-size: 16px;
 $breadcrumb-content: "/";
 
-
-//main header left settings
 $header-left-bg-color : $white;
 $main-header-padding : 27px 22px;
 $main-header-z-index : 8;
@@ -324,7 +301,6 @@ $header-wrapper-nav-icon-align : middle;
 $header-size: 136px;
 $box-layout-space : 40px;
 
-// typography variables
 $heading_1: 30px;
 $heading_2: 26px;
 $heading_3: 22px;
@@ -333,5 +309,4 @@ $heading_5: 16px;
 $heading_6: 14px;
 $common_letter_spacing: 0.6px;
 
-// widgets variables
 $widget-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);

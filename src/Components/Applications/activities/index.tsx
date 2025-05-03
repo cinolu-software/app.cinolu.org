@@ -1,10 +1,11 @@
 import React from 'react';
-import {Card, CardBody, Col, Row} from 'reactstrap';
+import {Card, CardBody, Col, Container, Row} from 'reactstrap';
 import {useCallback, useState} from 'react';
 import NavComponent from "@/Components/Applications/activities/NavComponent";
 import ActivityFormTabContent from "@/Components/Applications/activities/ActivityFormTabContent";
+import {ActivityFormpropsType} from "@/Types/ActivitiesTypes";
 
-const ActivityForm = () => {
+const ActivityForm : React.FC<ActivityFormpropsType> = ({ heading, firstXl, secondXl, xs, horizontalWizardClass }) => {
 
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
     const callback = useCallback((tab: number | undefined) => {
@@ -12,22 +13,25 @@ const ActivityForm = () => {
     }, []);
 
     return (
-        <Col md={12}>
-            <Card>
-                <CardBody>
-                    <Row className={'shopping-wizard'}>
-                        <Col xs={'12'}>
-                            <Row className={'shipping-form g-5'}>
-                               <Col className={'shipping-border'}>
-                                   <NavComponent callbackActive={callback} activeTab={activeTab}/>
-                                   <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
-                               </Col>
+        <Container fluid>
+            <Col md={12}>
+                <Card>
+                    <CardBody>
+                        <div className={'horizontal-wizard-wrapper  vertical-variations vertical-options'}>
+                            <Row className="g-3">
+                                <Col  xs={3} xl={3} className="main-horizontal-header" >
+                                    <NavComponent callbackActive={callback} activeTab={activeTab} />
+                                </Col>
+                                <Col >
+                                    <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
+                                </Col>
                             </Row>
-                        </Col>
-                    </Row>
-                </CardBody>
-            </Card>
-        </Col>
+                        </div>
+                    </CardBody>
+                </Card>
+            </Col>
+        </Container>
+
     )
 }
 

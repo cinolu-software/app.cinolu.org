@@ -1,6 +1,6 @@
 import Select from "react-select";
 import { Col, Form, FormGroup, Input, Label, Row } from "reactstrap";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import "easymde/dist/easymde.min.css";
 import { PostCategory, PostTitlePlaceholder } from "@/Constant";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
@@ -21,7 +21,6 @@ const FormPost = ({ onFileUpload }: { onFileUpload: (file: File) => void }) => {
     const [content, setContent] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const { postCategoryData, loading } = useAppSelector((state) => state.postCategory);
-    const { status, error } = useAppSelector((state) => state.post);
     const router = useRouter();
 
     useEffect(() => {

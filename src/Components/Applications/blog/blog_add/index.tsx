@@ -24,7 +24,7 @@ const AddPostContainer = () => {
                 setSelectedFile(null);
                 
             } catch (error) {
-                console.error("Erreur lors de l'upload de l'image:", error);
+                console.error("Erreur lors de l'upload de l'image : ", error);
             }
         }
     };

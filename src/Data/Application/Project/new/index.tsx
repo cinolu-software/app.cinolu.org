@@ -2,25 +2,25 @@
 
 
 
-export const ProjectNavData = [
+export const ActivitiesVerticalData = [
     {
         activeTab: 1,
-        iconClassName: "fa-user",
-        title: "Billing",
+        title: "Choose account",
     },
     {
         activeTab: 2,
-        iconClassName: "fa-truck",
-        title: "Shipping",
+        title: "Business settings",
     },
     {
         activeTab: 3,
-        iconClassName: "fa-money",
-        title: "Payment",
+        title: "Contact details",
     },
     {
-        iconClassName: "fa-check-square",
-        title: "Finish",
+        activeTab: 4,
+        title: "Pay details",
+    },
+    {
+        title: "completed",
     },
 ];
 

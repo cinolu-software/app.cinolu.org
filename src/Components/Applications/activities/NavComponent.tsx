@@ -1,26 +1,24 @@
 import React from "react";
-import { ProjectNavData } from "@/Data/Application/Project/new";
+import { ActivitiesVerticalData } from "@/Data/Application/Project/new";
 import { NavComponentProp } from "@/Types/ActivitiesTypes";
 import { Nav, NavItem, NavLink } from "reactstrap";
 
 const NavComponent : React.FC<NavComponentProp> = ({callbackActive, activeTab}) => {
 
     const handleTab = (id: number | undefined) => {
-        if(id !== undefined){
-            callbackActive(id);
-        }
-    }
+        if (id !== undefined) callbackActive(id);
+    };
 
     return (
-        <Nav className="nav-pills horizontal-options shipping-options">
-            {ProjectNavData.map((data, index) => (
-                <NavItem className="w-100" key={index}>
-                    <NavLink className={`b-r-0 ${activeTab === index + 1 ? "active" : ""}`} onClick={() => handleTab(data.activeTab)}>
-                        <div className="cart-options">
+        <Nav className="nav-pills horizontal-options">
+            {ActivitiesVerticalData.map((data, index) => (
+                <NavItem key={index}>
+                    <NavLink className={`${activeTab === index + 1 ? "active" : ""}`} onClick={() => handleTab(data.activeTab)}>
+                        <div className="horizontal-wizard">
                             <div className="stroke-icon-wizard">
-                                <i className={`fa ${data.iconClassName}`} />
+                                <span>{index + 1}</span>
                             </div>
-                            <div className="cart-options-content">
+                            <div className="horizontal-wizard-content business-wizard">
                                 <h6>{data.title}</h6>
                             </div>
                         </div>
