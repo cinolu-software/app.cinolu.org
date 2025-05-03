@@ -15,11 +15,13 @@ const ActivityForm = () => {
         <Col md={12}>
             <Card>
                 <CardBody>
-                    <Row className={'shipping-form g-5'}>
+                    <Row className={'shopping-wizard'}>
                         <Col xs={'12'}>
-                            <Row className={'shipping-border'}>
-                                <NavComponent callbackActive={callback} activeTab={activeTab}/>
-                                <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
+                            <Row className={'shipping-form g-5'}>
+                               <Col className={'shipping-border'}>
+                                   <NavComponent callbackActive={callback} activeTab={activeTab}/>
+                                   <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
+                               </Col>
                             </Row>
                         </Col>
                     </Row>

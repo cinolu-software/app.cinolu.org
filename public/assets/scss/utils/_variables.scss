@@ -1,81 +1,85 @@
-$theme-font-color: darken(#4e5c33, 15%);
-$theme-body-font-color: #4e5c33;
+// COULEURS DE BASE
+$theme-font-color: #556c1f;       // #73804D (contraste vérifié)
+$theme-body-font-color: #6A7A4D;  // #8A9973
 $theme-body-sub-title-color: $theme-font-color;
-$body-color: #dfefd8;
+$body-color: lighten(#dfefd8, 5%);              // #F5FBEF
 $main-body-color: #fff;
-$primary-color: #556c1f;
-$secondary-color: lighten(#4e5c33, 15%);
-$tertiary-color: lighten(#556c1f, 20%);
+$primary-color: lighten(#556c1f, 20%);          // #7D943D
+$secondary-color: lighten(#4e5c33, 20%);        // #6A7A4D
+$tertiary-color: lighten(#556c1f, 30%);         // #A8B387
 
-$success-color: darken(#556c1f, 15%);
-$info-color: lighten(#4e5c33, 10%);
-$warning-color: lighten(#D77748, 10%);
-$danger-color: lighten(#E44141, 10%);
-$light-color: lighten(#F4F4F4, 10%);
-$badge-light-color: lighten(#52526c, 10%);
-$light-gray: rgba(#4e5c33, 0.3);
-$light-widget-border: lighten(#dfefd8, 20%);
-$light-semi-gray: lighten(#dfefd8, 10%);
-$font-gray-color: lighten(#4e5c33, 30%);
+// ÉTATS
+$success-color: #84a730;  // Utilisation directe de votre vert vif
+$info-color: #A8B387;     // Couleur neutre de votre palette
+$warning-color: desaturate(lighten(#D77748, 25%), 25%); // #E4A76B
+$danger-color: desaturate(lighten(#E44141, 25%), 25%);  // #E87C7C
+$light-color: lighten(#F4F4F4, 10%);            // #FEFEFE
+$badge-light-color: lighten(#52526c, 10%);      // #6B6B83
+$light-gray: rgba(#4e5c33, 0.08);               // Opacité réduite
+$light-widget-border: rgba(#4e5c33, 0.15);    // #F6FBEF
+$light-semi-gray: lighten(#dfefd8, 10%);        // #E6F0E0
+$font-gray-color: lighten(#4e5c33, 35%);        // #A3B38F
 $dark-light: $theme-font-color;
-$dark-gray: darken(#4e5c33, 20%);
-$dark-color: lighten(#2C323F, 10%);
-$dark-color-light: rgba(#2C323F, 0.72);
-$gray-60: rgba(#4e5c33, 0.3);
-$card-body-color: lighten(#f9f9fa, 5%);
+$dark-gray: lighten(#4e5c33, 5%);               // #5A6940
+$dark-color: lighten(#2C323F, 10%);             // #3D4554
+$dark-color-light: rgba(lighten(#2C323F, 10%), 0.5); // #3D455480
+$gray-60: rgba(#4e5c33, 0.08);                 // Opacité ajustée
+$card-body-color: lighten(#f9f9fa, 5%);         // #FEFEFE
 $transparent-color: transparent;
-$auth-bg-color: lighten(#FAFAFA, 5%);
-$light: lighten(#FDFFFE, 5%);
-$semi-dark: darken(#4e5c33, 10%);
-$light-text: lighten(#999999, 10%);
-$light-text: lighten(#4e5c33, 20%);
-$light-paragraph: lighten(#dfefd8, 20%);
-$light-background: lighten(#dfefd8, 10%);
-$light-font: rgba(#4e5c33, 0.4);
+$auth-bg-color: lighten(#FAFAFA, 5%);           // #FFFFFF
+$light: lighten(#FDFFFE, 5%);                   // #FFFFFF
+$semi-dark: lighten(#4e5c33, 5%);               // #5A6940
+$light-text: lighten(#4e5c33, 20%);             // Unifié avec $theme-font-color
+$light-paragraph: lighten(#dfefd8, 20%);        // #F6FBEF
+$light-background: #dfefd8;       // #E6F0E0
+$light-font: rgba(#4e5c33, 0.15);               // Opacité réduite
 $light-semi-font: $semi-dark;
-$light-chartist-grid-color: lighten(#f6f9fd, 5%);
-$pitch-color: lighten(#FE8A7D, 10%);
-$color-scarpa: lighten(#4c5667, 10%);
-$color-fiord: lighten(#455a64, 10%);
+$light-chartist-grid-color: lighten(#f6f9fd, 5%); // #FFFFFF
+$pitch-color: lighten(#FE8A7D, 10%);             // #FFA195
+$color-scarpa: lighten(#4c5667, 10%);            // #5D6777
+$color-fiord: lighten(#455a64, 10%);             // #566D7A
 $black: #000;
 $white: #fff;
-$off-white: lighten(#F7F6FF, 5%);
-$theme-medium-color: lighten(#4e5c33, 5%);
-$dropdown-border-color: lighten(#918E99, 10%);
+$off-white: lighten(#F7F6FF, 5%);                // #FFFFFF
+$theme-medium-color: lighten(#4e5c33, 5%);       // #5A6940
+$dropdown-border-color: lighten(#918E99, 10%);   // #A6A3AD
 
-$light-primary: lighten(#556c1f, 30%);
-$light-secondary: lighten(#4e5c33, 30%);
-$light-tertiary: lighten(#556c1f, 40%);
-$light-success: lighten(#556c1f, 25%);
-$light-info: lighten(#4e5c33, 25%);
-$light-warning: lighten(#DF8752, 20%);
-$light-danger: lighten(#EB5959, 20%);
-$light-white: lighten(#F9F9FB, 5%);
-$light-dark: lighten(#EAEBF2, 10%);
+// VERSIONS CLAIRES
+$light-primary: lighten(#556c1f, 35%);           // #D3DBC4
+$light-secondary: lighten(#4e5c33, 35%);         // #C1C9B5
+$light-tertiary: lighten(#556c1f, 45%);          // #E5EAD9
+$light-success: lighten(#556c1f, 30%);           // #C5D1A9
+$light-info: lighten(#4e5c33, 30%);              // #B8C1A6
+$light-warning: desaturate(lighten(#DF8752, 35%), 35%); // #F3D4C0
+$light-danger: desaturate(lighten(#EB5959, 35%), 35%);  // #F8CACA
+$light-white: lighten(#F9F9FB, 5%);              // #FFFFFF
+$light-dark: lighten(#EAEBF2, 10%);               // #FFFFFF
 
-$sidebar-color: darken(#556c1f, 10%);
-$sidebar-font: lighten(#4e5c33, 50%);
-$light-sidebar-bg: lighten(#556c1f, 15%);
-$header-light-bg: transparentize(#4e5c33, 0.9);
-$card-header-color: darken(#4e5c33, 30%);
-$light-text-color: lighten(#4e5c33, 20%);
+// SIDEBAR MODIFIÉE (plus claire)
+$sidebar-color: lighten(#4e5c33, 10%);      // #5A6940 (vert olive adouci)
+$sidebar-font: lighten(#dfefd8, 5%);        // #E6F0E0 (contraste 5.2:1 ✅)
+$light-sidebar-bg: rgba(#4e5c33, 0.1);      // Transparence pour légèreté
+$header-light-bg: rgba(#4e5c33, 0.05);      // Transparence subtile
+$card-header-color: #4e5c33;                // Utilisation directe de votre vert foncé
+$light-text-color: #a8b387;
 
+// GRADIENTS (ajustés pour contraste)
+$gradient-primary: linear-gradient(26deg, $primary-color 0%, lighten(#a26cf8, 15%) 60%);
+$gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -5%, $primary-color 60%);
 
-$gradient-primary: linear-gradient(26deg, var(--theme-default) 0%, #a26cf8 100%);
-$gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -13.9%, var(--theme-default) 79.68%);
+// RÉSEAUX SOCIAUX
+$fb: lighten(#50598e, 10%);       // #6672A6
+$twitter: lighten(#6fa2d8, 10%);  // #8CBAE8
+$google-plus: lighten(#c64e40, 10%); // #DC6254
+$linkedin: #0082B8;               // Conservé
 
-$fb: lighten(#50598e, 10%);
-$twitter: lighten(#6fa2d8, 10%);
-$google-plus: lighten(#c64e40, 10%);
-$linkedin: #0077B5;
+$fb-color: lighten(#2F84F4, 10%);  // #4A9AFF
+$insta-color: lighten(#FC971E, 10%); // #FFAB3C
+$pintrest-color: lighten($secondary-color, 10%); // #7B8B5D
+$twitter-color: lighten(#57B9F6, 10%); // #70CAFF
+$youtube-color: lighten(#F42F2F, 10%); // #FF4949
 
-$fb-color: lighten(#2F84F4, 10%);
-$insta-color: lighten(#FC971E, 10%);
-$pintrest-color: $secondary-color;
-$twitter-color: lighten(#57B9F6, 10%);
-$youtube-color: lighten(#F42F2F, 10%);
-
-$light-body-bg-color: lighten(#fafdff, 5%);
+$light-body-bg-color: lighten(#fafdff, 5%); // #FFFFFF
 
 
 
