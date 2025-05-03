@@ -5,27 +5,59 @@
 export const ActivitiesVerticalData = [
     {
         activeTab: 1,
-        title: "Choose account",
+        title: "Informations",
     },
     {
         activeTab: 2,
-        title: "Business settings",
+        title: "Programme",
     },
     {
         activeTab: 3,
-        title: "Contact details",
+        title: "Durée",
     },
     {
         activeTab: 4,
-        title: "Pay details",
+        title: "Type",
     },
     {
-        title: "completed",
+        activeTab: 5,
+        title: "Catégorie",
+    },
+    {
+        activeTab: 6,
+        title: "Partenaire",
+    },
+    {
+        title: "Finalisation",
     },
 ];
 
-export const ProjectFormData = [
+export const SelectAmountData = [
     {
-        text: "Fill up your true details and next proceed.",
+        iconName: "fa-university",
+        title: "Business",
+    },
+    {
+        iconName: "fa-user",
+        title: "Personal ",
+    },
+];
+
+export const VerticalBoxData = [
+    {
+        title: "Tivo",
+        details: "2-3 Members",
+    },
+    {
+        title: "Cuba",
+        details: "4-5 Members",
+    },
+    {
+        title: "Multikart",
+        details: "2 Member",
+    },
+    {
+        title: "Roxo",
+        details: "1 Member",
     },
 ];

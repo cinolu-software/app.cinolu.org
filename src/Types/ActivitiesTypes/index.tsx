@@ -1,4 +1,4 @@
-
+import {ChangeEvent} from "react";
 
 
 export interface NavComponentProp {
@@ -18,6 +18,11 @@ export interface ActivityFormpropsType {
     firstXl?: number;
     secondXl?: number;
     xs?: number;
+}
+
+export interface BankLogoListProp {
+    getUserData: (event: ChangeEvent<HTMLInputElement>) => void;
+    differentId?: boolean;
 }
 
 

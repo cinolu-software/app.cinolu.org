@@ -1,26 +1,29 @@
 import React from 'react';
 import { TabContent, TabPane } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
-
-
+import SelectAccount from "@/Components/Applications/activities/Steps/SelectAccount";
+import BusinessSettingsForm from "@/Components/Applications/activities/Steps/BusinessSettingsForm";
+import ContactDetailsForm from "@/Components/Applications/activities/Steps/ContactDetailsForm";
+import PayDetailsForm from "@/Components/Applications/activities/Steps/PayDetailsForm";
+import FinishForm from "@/Components/Applications/activities/Steps/FinishForm";
 
 const BusinessVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
     return (
         <TabContent className="dark-field" activeTab={activeTab}>
             <TabPane tabId={1}>
-                {/*<SelectAccount callbackActive={callbackActive} />*/}
+                <SelectAccount callbackActive={callbackActive} />
             </TabPane>
             <TabPane tabId={2}>
-                {/*<BusinessSettingsForm callbackActive={callbackActive} />*/}
+                <BusinessSettingsForm callbackActive={callbackActive} />
             </TabPane>
             <TabPane tabId={3}>
-                {/*<ContactDetailsForm callbackActive={callbackActive} />*/}
+                <ContactDetailsForm callbackActive={callbackActive} />
             </TabPane>
             <TabPane tabId={4}>
-                {/*<PayDetailsForm callbackActive={callbackActive} />*/}
+                <PayDetailsForm callbackActive={callbackActive} />
             </TabPane>
             <TabPane tabId={5}>
-                {/*<FinishForm />*/}
+                <FinishForm />
             </TabPane>
         </TabContent>
     );

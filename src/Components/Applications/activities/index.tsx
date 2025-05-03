@@ -5,7 +5,7 @@ import NavComponent from "@/Components/Applications/activities/NavComponent";
 import ActivityFormTabContent from "@/Components/Applications/activities/ActivityFormTabContent";
 import {ActivityFormpropsType} from "@/Types/ActivitiesTypes";
 
-const ActivityForm : React.FC<ActivityFormpropsType> = ({ heading, firstXl, secondXl, xs, horizontalWizardClass }) => {
+const ActivityForm = () => {
 
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
     const callback = useCallback((tab: number | undefined) => {
