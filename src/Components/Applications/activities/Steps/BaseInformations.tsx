@@ -3,8 +3,6 @@ import {Button, Col, Form, Input, Label, Row} from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {AccountName, Continue, Email, InqMail, Previous} from "@/Constant";
-import {setBusinessSettingsFormValues} from "@/Redux/Reducers/ActivitySlice";
-import ShowError from "@/Components/Applications/activities/Steps/ShowError";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
@@ -16,7 +14,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
     const getUserData = (event: ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
         const value = event.target.value;
-        // dispatch(setBusinessSettingsFormValues({...businessSettingsFormValues,[name]: value}));
+        // dispatch(setaBusinessSettingsFormValues({...businessSettingsFormValues,[name]: value}));
     };
 
     const handleNextButton = () => {
@@ -25,7 +23,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
     };
 
     return (
-        <div className={'border ps-3'}>
+        <div className={'border ps-3 rounded'}>
             <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
             <Form>
 

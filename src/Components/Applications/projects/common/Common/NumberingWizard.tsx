@@ -89,8 +89,6 @@ const NumberingWizard = ({ mode = "add", initialValues } : { mode: "add" | "edit
         }
     };
 
-    console.log("initialValues", initialValues);
-
     const renderStep = () => {
         switch (numberLevel) {
             case 1:

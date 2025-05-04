@@ -25,7 +25,6 @@ const StepThree: React.FC<StepPropsType> = ({ data }) => {
         dispatch(setNewFormValue({ field: 'types', value: updatedTypes }));
     };
 
-
     return (
         <Col>
             <section className="main-upgrade">

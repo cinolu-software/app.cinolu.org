@@ -39,7 +39,6 @@ const StepTwo: React.FC<StepPropsType> = ({ data }) => {
             const formattedDate = formatDate(value);
             dispatch(setNewFormValue({ field: "started_at", value: formattedDate }));
         }
-
     };
 
 
