@@ -8,6 +8,7 @@ import {ActivityFormpropsType} from "@/Types/ActivitiesTypes";
 const ActivityForm = () => {
 
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
+
     const callback = useCallback((tab: number | undefined) => {
         setActiveTab(tab);
     }, []);
@@ -19,10 +20,10 @@ const ActivityForm = () => {
                     <CardBody>
                         <div className={'horizontal-wizard-wrapper  vertical-variations vertical-options'}>
                             <Row className="g-3">
-                                <Col  xs={3} xl={3} className="main-horizontal-header" >
+                                <Col xs={2} className="main-horizontal-header" >
                                     <NavComponent callbackActive={callback} activeTab={activeTab} />
                                 </Col>
-                                <Col >
+                                <Col xs={10} className="main-horizontal-content">
                                     <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
                                 </Col>
                             </Row>

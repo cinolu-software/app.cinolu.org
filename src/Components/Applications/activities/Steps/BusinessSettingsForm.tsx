@@ -1,11 +1,10 @@
+import React from "react";
 import { ChangeEvent } from "react";
 import { Button, Col, Form, Input, Label, Row } from "reactstrap";
 import { AccountName, Continue, Email, InqMail, Previous, ProjectDescription, Projects, SelectTeamWith } from "@/Constant";
 import VariationBox from "./VariationBox";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-// import { setBusinessSettingsFormValues } from "@/Redux/Reducers/FormLayout/FormWizardTwoSlice";
-// import ShowError from "@/Components/Other/Authentication/RegisterWizard/common/ShowError";
 import {setBusinessSettingsFormValues} from "@/Redux/Reducers/ActivitySlice";
 import ShowError from "@/Components/Applications/activities/Steps/ShowError";
 
