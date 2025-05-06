@@ -71,7 +71,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
 
 
     return (
-        <div className="sidebar-body">
+        <div className="border ps-3 rounded ">
             <Form className="theme-form theme-form-2 mega-form">
                 <Row className="g-2 mx-5">
                     <Col xs="12">
