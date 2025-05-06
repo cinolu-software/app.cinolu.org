@@ -2,6 +2,7 @@ import React, {ChangeEvent} from "react";
 import {Button, Col, Form, Input, Label, Row} from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import {handleNextButton, handleBackButton} from "@/Redux/Reducers/ActivitySlice";
 import {AccountName, Continue, Email, InqMail, Previous} from "@/Constant";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
@@ -10,16 +11,16 @@ import 'react-quill/dist/quill.snow.css';
 const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
+    const {numberLevel, addFormValue} = useAppSelector(state => state.activity)
 
     const getUserData = (event: ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
         const value = event.target.value;
-        // dispatch(setaBusinessSettingsFormValues({...businessSettingsFormValues,[name]: value}));
+
     };
 
     const handleNextButton = () => {
-        // if (accountName !== "" && email !== "" && description !== "") callbackActive(3)
-        // else ShowError();
+        callbackActive(2);
     };
 
     return (
@@ -37,7 +38,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                         <ReactQuill
                             value={''}
                             theme={'snow'}
-                            placeholder="Écrivez votre article ici..."
+                            placeholder="Entrez la description ici..."
                             className="quill-editor"
                         />
 
@@ -45,8 +46,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                 </div>
 
                 <Col xs="12" className="text-end p-3">
-                    <Button onClick={() => callbackActive(1)} color="primary">{Previous}</Button>
-                    <Button className="ms-1" color="primary" onClick={handleNextButton}>{Continue}</Button>
+                    <Button className="ms-1" color="primary" onClick={handleNextButton}>{"Suivant"}</Button>
                 </Col>
             </Form>
         </div>

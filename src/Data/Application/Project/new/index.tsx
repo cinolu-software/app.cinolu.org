@@ -1,7 +1,4 @@
 
-
-
-
 export const ActivitiesVerticalData = [
     {
         activeTab: 1,
@@ -10,18 +7,6 @@ export const ActivitiesVerticalData = [
     {
         activeTab: 2,
         title: "Détail",
-    },
-    {
-        activeTab: 3,
-        title: "Type",
-    },
-    {
-        activeTab: 4,
-        title: "Catégorie",
-    },
-    {
-        activeTab: 5,
-        title: "Partenaire",
     },
     {
         title: "Finalisation",

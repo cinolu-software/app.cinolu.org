@@ -1,43 +1,84 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, PayloadAction, createSlice} from "@reduxjs/toolkit";
+import {formValueType, InitialStateActivityType} from "@/Types/ActivitiesTypes";
+import axiosInstance, {apiBaseUrl} from "@/services/axios";
 
-const initialState = {
-    personalDetailsForm: { firstName: "", lastName: "", contact: "", email: "", state: "", zip: "" },
-    bankDetailsForm: { aadhaarNumber: "", panNumber: "", bankName: "" },
-    inquiresForm:{notifications: "",email: "",contactNumber: "",describeIssue: "",},
-    accountType:"",
-    businessSettingsFormValues:{accountName: "",email: "",description: "",},
-    contactDetailsFormValues:{organizationName: "",email: "",description: "",organizationType: "",},
-    payDetailsFormValues:{cardHolderName: "",cardNumber: "",expiryDate: "",expiryYear: "",cvvNumber: "",},
-};
+const initialState : InitialStateActivityType ={
+    originalProjectData: [],
+    publishedProjectData: [],
+    status: "idle",
+    addFormValue : {
+        id: "",
+        name: "",
+        description: "",
+        started_at: '',
+        ended_at: '',
+        program: '',
+        categories: [],
+        form: [],
+        review_form: []
+    },
+    editFormValue : {
+        id: "",
+        name: "",
+        description: "",
+        started_at: '',
+        ended_at: '',
+        program: '',
+        categories: [],
+        form: [],
+        review_form: []
+    },
+    numberLevel: 1,
+    showFinish: false,
+}
 
 const ActivitySlice = createSlice({
     name: "ActivitySlice",
     initialState,
     reducers: {
-        setPersonalDetailsForm: (state, action) => {
-            state.personalDetailsForm = action.payload;
+        handleBackButton: (state, action) => {
+            if(state.numberLevel > 1) {
+                state.numberLevel--;
+            }
         },
-        setBankDetailsForm: (state, action) => {
-            state.bankDetailsForm = action.payload;
+        handleNextButton: (state, action) => {
+            state.numberLevel ++;
         },
-        setInquiresForm: (state, action) => {
-            state.inquiresForm = action.payload;
+        setAddFormValue: (state, action: PayloadAction<{field: keyof formValueType, value: any}>) => {
+            const {field, value} = action.payload;
+            if(field === "started_at" || field === "ended_at") {
+                state.addFormValue[field] = new Date(value).toISOString().split("T")[0];
+            }else{
+                state.addFormValue[field] = value;
+            }
         },
-        setAccountType: (state, action) => {
-            state.accountType = action.payload;
-        },
-        setBusinessSettingsFormValues: (state, action) => {
-            state.businessSettingsFormValues = action.payload;
-        },
-        setContactDetailsFormValue: (state, action) => {
-            state.contactDetailsFormValues = action.payload;
-        },
-        setPayDetailsFormValues: (state, action) => {
-            state.payDetailsFormValues = action.payload;
-        },
+        resetForm: (state) => {
+            state.addFormValue = {
+                id: "",
+                name: "",
+                description: "",
+                started_at: '',
+                ended_at: '',
+                program: '',
+                categories: [],
+                form: [],
+                review_form: []
+            };
+            state.editFormValue = {
+            id: "",
+            name: "",
+            description: "",
+            started_at: '',
+            ended_at: '',
+            program: '',
+            categories: [],
+                form: [],
+                review_form: []
+            }
+        }
     },
 });
 
-export const { setPersonalDetailsForm, setBankDetailsForm ,setInquiresForm,setAccountType,setBusinessSettingsFormValues,setContactDetailsFormValue,setPayDetailsFormValues} = ActivitySlice.actions;
+export const { handleBackButton, handleNextButton } = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;
