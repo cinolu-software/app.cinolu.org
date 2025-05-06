@@ -20,7 +20,7 @@ const initialState: InitialStatePartnerShipType = {
 export const fetchPartnerShip = createAsyncThunk<{data: PartnerShipType[]}>(
     'partnerShip/fetchPartnerShip',
     async () => {
-        const response = await axiosInstance.get<{data: PartnerShipType[]}>(`${apiBaseUrl}/partnerships`);
+        const response = await axiosInstance.get<{data: PartnerShipType[]}>(`${apiBaseUrl}/organization-categories`);
         const partnerShipData = response.data.data;
         return {data: partnerShipData};
     }
@@ -30,7 +30,7 @@ export const createPartnerShip = createAsyncThunk(
     'partnerShip/createPartnerShip',
     async (newPartnerShip : createPartnerShipType, {rejectWithValue}) => {
         try {
-            const response = await axiosInstance.post<{ data : createPartnerShipType }>(`${apiBaseUrl}/partnerships`, newPartnerShip);
+            const response = await axiosInstance.post<{ data : createPartnerShipType }>(`${apiBaseUrl}/organization-categories`, newPartnerShip);
             return {data: response.data.data};
         }
         catch (error: any) {
@@ -43,7 +43,7 @@ export const deletePartnerShip = createAsyncThunk(
     'partnerShip/deletePartnerShip',
     async (id: string, {rejectWithValue}) => {
         try {
-            await axiosInstance.delete(`${apiBaseUrl}/partnerships/${id}`);
+            await axiosInstance.delete(`${apiBaseUrl}/organization-categories/${id}`);
             return id;
         }
         catch (error: any) {
@@ -57,7 +57,7 @@ export const updatePartnerShip = createAsyncThunk(
     'partnerShip/updatePartnerShip',
     async (partnerShip: PartnerShipType, {rejectWithValue}) => {
         try {
-            const response = await axiosInstance.patch<{data: UpdatePartnerShip}>(`${apiBaseUrl}/partnerships/${partnerShip.id}`, partnerShip);
+            const response = await axiosInstance.patch<{data: UpdatePartnerShip}>(`${apiBaseUrl}/organization-categories/${partnerShip.id}`, partnerShip);
             return {data: response.data.data};
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la modification du partenariat.");
