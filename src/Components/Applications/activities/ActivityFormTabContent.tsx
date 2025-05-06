@@ -4,6 +4,8 @@ import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import FinishForm from "@/Components/Applications/activities/Steps/FinishForm";
 import BaseInformations from "@/Components/Applications/activities/Steps/BaseInformations";
 import Details from "@/Components/Applications/activities/Steps/Details";
+import FormActivity from "@/Components/Applications/activities/Steps/FormActivity";
+import ReviewForm from "@/Components/Applications/activities/Steps/ReviewForm";
 
 const BusinessVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
     return (
@@ -15,6 +17,12 @@ const BusinessVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType
                 <Details callbackActive={callbackActive}/>
             </TabPane>
             <TabPane tabId={3}>
+                <FormActivity callbackActive={callbackActive}/>
+            </TabPane>
+            <TabPane tabId={4}>
+                <ReviewForm callbackActive={callbackActive}/>
+            </TabPane>
+            <TabPane tabId={5}>
                 <FinishForm />
             </TabPane>
         </TabContent>

@@ -1,27 +1,32 @@
-import React, {ChangeEvent, useState, useEffect} from "react";
-import {Button, Col, Form, Input, Label, Row, InputGroup} from "reactstrap";
+import React, { ChangeEvent, useState, useEffect } from "react";
+import { Button, Col, Form, InputGroup, Label, Row } from "reactstrap";
 import 'react-quill/dist/quill.snow.css';
 import DatePicker, { DateObject } from "react-multi-date-picker";
-import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
+import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import {fetchProgram} from "@/Redux/Reducers/programSlice/programSlice";
+import { fetchProgram } from "@/Redux/Reducers/programSlice/programSlice";
 import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
-import {TransformedProjectTypeType} from "@/Types/Projects/ProjectTypeType";
-import {PartnerType} from "@/Types/PartnerType/PartnerType";
+import {fetchCategory} from "@/Redux/Reducers/projectSlice/ProjectCategory";
+import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
+import {ProjectCategoryType} from "@/Types/Projects/ProjectCategoryType";
+import { PartnerType } from "@/Types/PartnerType/PartnerType";
+import Select from "react-select";
 
-interface OptionType{
-    value:string,
-    label:string,
+interface OptionType {
+    value: string;
+    label: string;
 }
 
-const BaseInformations : React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
+const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const [value, setValue] = useState<DateObject[]>([new DateObject()]);
     const dispatch = useAppDispatch();
-    const {transformedPrograms, status: programStatus} = useAppSelector(state=>state.program);
-    const { partnerData, status: partnerStatus } = useAppSelector((state) => state.partner);
-    const [selectedOption, setSelectedOption] = useState<OptionType | null >(null);
-    const [selectedPartners, setSelectedPartners] = useState<OptionType[] | null >(null);
+    const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
+    const { partnerData, status: partnerStatus } = useAppSelector(state => state.partner);
+    const {projectCategoryData, status: categoryStatus} = useAppSelector(state=>state.projectCategory);
+    const [selectedProgram, setSelectedProgram] = useState<OptionType | null>(null);
+    const [selectedPartners, setSelectedPartners] = useState<OptionType[] | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<OptionType[] | null>(null);
 
     useEffect(() => {
         if (programStatus === 'idle') {
@@ -35,28 +40,31 @@ const BaseInformations : React.FC<ActivityFormTabContentPropsType> = ({ callback
         }
     }, [dispatch, partnerStatus]);
 
-    const programOptions : OptionType[] = transformedPrograms.map((program: TransformedProjectTypeType) => ({
+    useEffect(() => {
+        if (categoryStatus === 'idle') {
+            dispatch(fetchCategory());
+        }
+    }, [dispatch, categoryStatus]);
+
+    const programOptions: OptionType[] = transformedPrograms.map((program: TransformedProjectTypeType) => ({
         value: program.id,
         label: program.name,
     }));
 
-    const partnerOptions: OptionType [] = partnerData.map((partner: PartnerType) => (
-        {
-            value: partner.id,
-            label: partner.name,
-        }
-    ));
+    const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
+        value: partner.id,
+        label: partner.name,
+    }));
 
+    const categoryOptions: OptionType[] = projectCategoryData.map((category: ProjectCategoryType) => ({
+        value: category.id,
+        label: category.name,
+    }))
 
     const getUserData = (event: ChangeEvent<HTMLInputElement>) => {
         const name = event.target.name;
         const value = event.target.value;
         // dispatch(setaBusinessSettingsFormValues({...businessSettingsFormValues,[name]: value}));
-    };
-
-    const handleNextButton = () => {
-        // if (accountName !== "" && email !== "" && description !== "") callbackActive(3)
-        // else ShowError();
     };
 
     return (
@@ -66,44 +74,36 @@ const BaseInformations : React.FC<ActivityFormTabContentPropsType> = ({ callback
                 <Row className={'p-3 mb-2'}>
                     <Col>
                         <Label className={'mb-2'}>{"Programme associé"}</Label>
-                        <Input
-                            type="select"
-                            value={selectedOption?.value || ""}
-                            onChange={(e) => {
-                                const selectedValue = e.target.value;
-                                const selected = programOptions.find(option => option.value === selectedValue) || null;
-                                setSelectedOption(selected);
-                            }}
-                        >
-                            <option value="">Choisissez un programme</option>
-                            {programOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </Input>
+                        <Select
+                            options={programOptions}
+                            value={selectedProgram}
+                            onChange={(option) => setSelectedProgram(option as OptionType)}
+                            placeholder="Choisissez un programme"
+                        />
                     </Col>
                 </Row>
                 <Row className={'p-3 mb-2'}>
                     <Col>
-                        <Label className={'mb-2'}>{'Partenairs Associés'}</Label>
-                        <Input
-                            type="select"
-                            multiple
-                            value={selectedPartners?.map(p => p.value)}
-                            onChange={(e) => {
-                                const target = e.target as any;
-                                const selectedOptions = Array.from(target.selectedOptions, (opt: any) => opt.value);
-                                const selected = partnerOptions.filter(opt => selectedOptions.includes(opt.value));
-                                setSelectedPartners(selected);
-                            }}
-                        >
-                            {partnerOptions.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                    {option.label}
-                                </option>
-                            ))}
-                        </Input>
+                        <Label className={'mb-2'}>{"Categorie de l'activité associée"}</Label>
+                        <Select
+                            isMulti
+                            options={categoryOptions}
+                            value={selectedCategory}
+                            onChange={(option) => setSelectedCategory(option as OptionType[])}
+                            placeholder="Choisissez une categorie"
+                        />
+                    </Col>
+                </Row>
+                <Row className={'p-3 mb-2'}>
+                    <Col>
+                        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>
+                        <Select
+                            isMulti
+                            options={partnerOptions}
+                            value={selectedPartners}
+                            onChange={(selected) => setSelectedPartners(selected as OptionType[])}
+                            placeholder="Sélectionnez des partenaires"
+                        />
                     </Col>
                 </Row>
                 <Row className={'p-3 mb-2'}>
@@ -121,11 +121,11 @@ const BaseInformations : React.FC<ActivityFormTabContentPropsType> = ({ callback
                 </Row>
                 <Col xs="12" className="text-end p-3">
                     <Button onClick={() => callbackActive(1)} color="primary">{'Précedent'}</Button>
-                    <Button className="ms-1" color="primary" onClick={()=>callbackActive(3)}>{'Suivant'}</Button>
+                    <Button className="ms-1" color="primary" onClick={() => callbackActive(3)}>{'Suivant'}</Button>
                 </Col>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default BaseInformations;

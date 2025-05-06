@@ -9,6 +9,14 @@ export const ActivitiesVerticalData = [
         title: "Détail",
     },
     {
+        activeTab: 3,
+        title: "Formulaire",
+    },
+    {
+        activeTab: 4,
+        title: "Sélection",
+    },
+    {
         title: "Finalisation",
     },
 ];

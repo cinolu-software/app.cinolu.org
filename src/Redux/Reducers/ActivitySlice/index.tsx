@@ -75,10 +75,18 @@ const ActivitySlice = createSlice({
                 form: [],
                 review_form: []
             }
-        }
+        },
+        setFormField: (state, action: PayloadAction<{ form?: any, curationForm?: any }>) => {
+            if (action.payload.form !== undefined) {
+                state.addFormValue.form = action.payload.form;
+            }
+            if (action.payload.curationForm !== undefined) {
+                state.addFormValue.review_form = action.payload.curationForm;
+            }
+        },
     },
 });
 
-export const { handleBackButton, handleNextButton } = ActivitySlice.actions;
+export const { handleBackButton, handleNextButton, setAddFormValue, setFormField, resetForm } = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;
