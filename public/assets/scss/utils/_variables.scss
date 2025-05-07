@@ -1,83 +1,79 @@
-
-$theme-font-color: #556c1f;
-$theme-body-font-color: #6A7A4D;
+$theme-font-color: lighten(#164C45, 20%);  // Using dark teal as base
+$theme-body-font-color: lighten(#164C45, 15%); // Using dark teal
 $theme-body-sub-title-color: $theme-font-color;
-$body-color: lighten(#dfefd8, 5%);
-$main-body-color: #fff;
-$primary-color: lighten(#556c1f, 20%);
-$secondary-color: lighten(#4e5c33, 20%);
-$tertiary-color: lighten(#556c1f, 30%);
+$body-color: lighten(#E3C75F, 8%);  // Using light yellow as base
+$main-body-color: #f8f8f8;
+$primary-color: #164C45;          // Dark teal
+$secondary-color: #CC8D1A;        // Mustard yellow
+$tertiary-color: lighten(#E3C75F, 15%); // Lightened light yellow
 
-$success-color: #84a730;
-$info-color: #A8B387;
-$warning-color: desaturate(lighten(#D77748, 25%), 25%);
-$danger-color: desaturate(lighten(#E44141, 25%), 25%);
-$light-color: lighten(#F4F4F4, 10%);
-$badge-light-color: lighten(#52526c, 10%);
-$light-gray: rgba(#4e5c33, 0.08);
-$light-widget-border: rgba(#4e5c33, 0.15);
-$light-semi-gray: lighten(#dfefd8, 10%);
-$font-gray-color: lighten(#4e5c33, 35%);
+$success-color: #a7c957;
+$info-color: #c8d3b9;
+$warning-color: desaturate(lighten(#D77748, 40%), 40%);
+$danger-color: desaturate(lighten(#E44141, 40%), 40%);
+$light-color: #f0f0f0;
+$badge-light-color: #d8ded8;
+$light-gray: rgba(#a3ac90, 0.05);
+$light-widget-border: rgba(#a3ac90, 0.1);
+$light-semi-gray: #e6f0e0;
+$font-gray-color: #d1dcb0;
 $dark-light: $theme-font-color;
-$dark-gray: lighten(#4e5c33, 5%);
-$dark-color: lighten(#2C323F, 10%);
-$dark-color-light: rgba(lighten(#2C323F, 10%), 0.5);
-$gray-60: rgba(#4e5c33, 0.08);
-$card-body-color: lighten(#f9f9fa, 5%);
+$dark-gray: #c8d3b9;
+$dark-color: #164C45;          // Dark teal
+$dark-color-light: rgba(#164C45, 0.3); // Dark teal transparent
+$gray-60: rgba(#a3ac90, 0.05);
+$card-body-color: #f2fafa;
 $transparent-color: transparent;
-$auth-bg-color: lighten(#FAFAFA, 5%);
-$light: lighten(#FDFFFE, 5%);
-$semi-dark: lighten(#4e5c33, 5%);
-$light-text: lighten(#4e5c33, 20%);
-$light-paragraph: lighten(#dfefd8, 20%);
-$light-background: #dfefd8;
-$light-font: rgba(#4e5c33, 0.15);
+$auth-bg-color: #f5fafa;
+$light: #f8f8f8;
+$semi-dark: #BDA523;          // Darker yellow
+$light-text: #c8d3b9;
+$light-paragraph: #e6f0e0;
+$light-background: rgba(227, 199, 95, 0.1);  // Light yellow (from style.scss)
+$light-font: rgba(#a3ac90, 0.1);
 $light-semi-font: $semi-dark;
-$light-chartist-grid-color: lighten(#f6f9fd, 5%);
-$pitch-color: lighten(#FE8A7D, 10%);
-$color-scarpa: lighten(#4c5667, 10%);
-$color-fiord: lighten(#455a64, 10%);
-$black: #000;
+$light-chartist-grid-color: #f8fcf7;
+$pitch-color: #ffead4;
+$color-scarpa: #b3bdac;
+$color-fiord: #a8b3a3;
+$black: #16232E;              // Dark navy
 $white: #fff;
-$off-white: lighten(#F7F6FF, 5%);
-$theme-medium-color: lighten(#4e5c33, 5%);
-$dropdown-border-color: lighten(#918E99, 10%);
+$off-white: #fcfcfc;
+$theme-medium-color: #b3bd9a;
+$dropdown-border-color: #cdd2c5;
 
+$light-primary: lighten(#164C45, 20%);   // Lightened dark teal
+$light-secondary: lighten(#CC8D1A, 15%); // Lightened mustard yellow
+$light-tertiary: lighten(#E3C75F, 20%);  // Lightened light yellow
+$light-success: #c0d890;
+$light-info: #e0e7d7;
+$light-warning: desaturate(lighten(#DF8752, 50%), 50%);
+$light-danger: desaturate(lighten(#EB5959, 50%), 50%);
+$light-white: #fcfcfc;
+$light-dark: #e8ece8;
 
-$light-primary: lighten(#556c1f, 35%);
-$light-secondary: lighten(#4e5c33, 35%);
-$light-tertiary: lighten(#556c1f, 45%);
-$light-success: lighten(#556c1f, 30%);
-$light-info: lighten(#4e5c33, 30%);
-$light-warning: desaturate(lighten(#DF8752, 35%), 35%);
-$light-danger: desaturate(lighten(#EB5959, 35%), 35%);
-$light-white: lighten(#F9F9FB, 5%);
-$light-dark: lighten(#EAEBF2, 10%);
+$sidebar-color: #8f9e6f;
+$sidebar-font: #e0f2d7;
+$light-sidebar-bg: rgba(#a3ac90, 0.05);
+$header-light-bg: rgba(#a3ac90, 0.02);
+$card-header-color: #6a7a4d;
+$light-text-color: #c8d3b9;
 
-$sidebar-color: lighten(#4e5c33, 10%);
-$sidebar-font: lighten(#dfefd8, 5%);
-$light-sidebar-bg: rgba(#4e5c33, 0.1);
-$header-light-bg: rgba(#4e5c33, 0.05);
-$card-header-color: #4e5c33;
-$light-text-color: #a8b387;
+$gradient-primary: linear-gradient(26deg, $primary-color 0%, lighten(#a26cf8, 40%) 40%);
+$gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -20%, $primary-color 40%);
 
-$gradient-primary: linear-gradient(26deg, $primary-color 0%, lighten(#a26cf8, 15%) 60%);
-$gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -5%, $primary-color 60%);
+$fb: #a0b1cc;
+$twitter: #b8d8e8;
+$google-plus: #f0a09a;
+$linkedin: #0099d0;
 
-$fb: lighten(#50598e, 10%);
-$twitter: lighten(#6fa2d8, 10%);
-$google-plus: lighten(#c64e40, 10%);
-$linkedin: #0082B8;
+$fb-color: #a0c0f0;
+$insta-color: #ffdfba;
+$pintrest-color: #c8d3b9;
+$twitter-color: #a7e1fa;
+$youtube-color: #ff8a8a;
 
-$fb-color: lighten(#2F84F4, 10%);
-$insta-color: lighten(#FC971E, 10%);
-$pintrest-color: lighten($secondary-color, 10%);
-$twitter-color: lighten(#57B9F6, 10%);
-$youtube-color: lighten(#F42F2F, 10%);
-
-$light-body-bg-color: lighten(#fafdff, 5%);
-
-
+$light-body-bg-color: #f2fafa;
 
 $font-outfit: 'Outfit', sans-serif;
 $font-serif: sans-serif;
@@ -86,7 +82,6 @@ $font-merriweather: 'Merriweather Sans', sans-serif;
 $font-themify: themify;
 $font-awesome: FontAwesome;
 $font-ICO: IcoFont;
-
 
 $dark-body-background: $light-sidebar-bg;
 $dark-card-background: $sidebar-color;
@@ -102,7 +97,6 @@ $dark-datatable-odd: $sidebar-color;
 $dark-datatable-sorting: $sidebar-color;
 $dark-datatable-sorting-even: $light-sidebar-bg;
 $dark-even-hover-sorting: rgba(255, 255, 255, 0.2);
-
 
 $body-font-size: 14px;
 $body-font-color: $theme-body-font-color;
@@ -134,7 +128,6 @@ $list-group-active-bg-color: var(--theme-default);
 $list-group-active-border-color: var(--theme-default);
 $list-group-img-size: 40px;
 $list-group-margin: 10px;
-
 
 $table-b-margin: 0px;
 $table-heading-color: $theme-body-font-color;

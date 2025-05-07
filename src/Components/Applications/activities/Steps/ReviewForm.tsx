@@ -14,6 +14,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
     const [editedField, setEditedField] = useState<FormFieldType | null>(null);
 
     const [fields, setFields] = useState<FormFieldType[]>(
+        //@ts-ignore
         AddFormValue.review_form || []
     );
 
@@ -28,7 +29,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
     const handleAddField = () => {
         const updatedField = { ...newField, id: Date.now() };
         const updatedFields = [...fields, updatedField];
-
+        //@ts-ignore
         setFields(updatedFields);
         dispatch(setFormField({ curationForm: updatedFields }));
 
@@ -72,7 +73,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
             <Form className="theme-form theme-form-2 mega-form">
                 <Row className="g-2 mx-5">
                     <Col xs="12">
-                        <h4 className="mb-3 mt-5">Champs du formulaire</h4>
+                        <h4 className="mb-3 mt-5">Formulaire Dynamique de Sélection</h4>
                         <Table striped>
                             <thead className="text-center">
                             <tr>
