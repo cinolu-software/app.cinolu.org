@@ -19,7 +19,7 @@ export const Header = () => {
     
     <Row className={`page-header ${toggleSidebar ? "close_icon" : ""}`} id="page-header">
       <MobileView />
-      <BreadCrumbs />
+      {/*<BreadCrumbs />*/}
       <PageHeader />
     </Row>
 

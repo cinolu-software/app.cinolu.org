@@ -32,7 +32,6 @@ const ActivityForm = () => {
                 </Card>
             </Col>
         </Container>
-
     )
 }
 

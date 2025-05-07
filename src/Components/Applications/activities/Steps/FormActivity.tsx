@@ -1,12 +1,10 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import { Button, Col, Form, Input, Label, Row, FormGroup, Table } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import {setFormField} from "@/Redux/Reducers/ActivitySlice";
 import { toast } from "react-toastify";
-import {handleNextButton, handleBackButton} from "@/Redux/Reducers/ActivitySlice";
-import {AccountName, Continue, Email, InqMail, Previous} from "@/Constant";
-import ReactQuill from "react-quill";
+
 
 import 'react-quill/dist/quill.snow.css';
 
@@ -75,10 +73,10 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
             <Form className="theme-form theme-form-2 mega-form">
                 <Row className="g-2 mx-5">
                     <Col xs="12">
-                        <h4 className="mb-3">Champs ajoutés</h4>
-                        <Table striped>
+                        <h4 className="mb-3 mt-5">Champs ajoutés</h4>
+                        <Table>
                             <thead className="text-center">
-                            <tr>
+                            <tr className={'border-bottom border-primary mb-3'}>
                                 <th>Nom du champ</th>
                                 <th>Type</th>
                                 <th>Requis</th>
@@ -86,12 +84,15 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                             </tr>
                             </thead>
                             <tbody className="text-center">
-                            {AddFormValue.form?.map((field: any, index: number) => (
+                            {
+                             AddFormValue.form?.map((field: any, index: number) => (
                                 <tr key={field.id}>
                                     <td className="align-middle">
                                         {editingIndex === index ? (
                                             <Input
+                                                type={'text'}
                                                 value={editedField?.label || ""}
+                                                className={'border border-primary'}
                                                 onChange={(e) =>
                                                     setEditedField({ ...editedField, label: e.target.value })
                                                 }
@@ -103,7 +104,9 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                     <td className="align-middle">
                                         {editingIndex === index ? (
                                             <Input
+
                                                 type="select"
+                                                className={'border border-primary'}
                                                 value={editedField?.type || "text"}
                                                 onChange={(e) =>
                                                     setEditedField({ ...editedField, type: e.target.value })
@@ -159,7 +162,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                     </Col>
 
                     <Col xs="12" className="mt-2">
-                        <h4 className="mb-3">Ajouter un champ</h4>
+                        <h5 className="mb-3 mt-4">Ajouter un champ</h5>
                         <FormGroup>
                             <Label for="fieldLabel">Nom du champ</Label>
                             <Input
@@ -244,7 +247,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                 </Row>
             </Form>
             <Col xs="12" className="text-end p-3">
-                <Button onClick={() => callbackActive(3)} color="primary">{'Précedent'}</Button>
+                <Button onClick={() => callbackActive(2)} color="primary">{'Précedent'}</Button>
                 <Button className="ms-1" color="primary" onClick={() => callbackActive(4)}>{'Suivant'}</Button>
             </Col>
         </div>
