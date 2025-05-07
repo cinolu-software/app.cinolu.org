@@ -11,13 +11,14 @@ import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import {ProjectCategoryType} from "@/Types/Projects/ProjectCategoryType";
 import { PartnerType } from "@/Types/PartnerType/PartnerType";
 import Select from "react-select";
+import {setAddFormValue} from "@/Redux/Reducers/ActivitySlice";
 
 interface OptionType {
     value: string;
     label: string;
 }
 
-const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
+const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const [value, setValue] = useState<DateObject[]>([new DateObject()]);
     const dispatch = useAppDispatch();
@@ -61,10 +62,38 @@ const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackA
         label: category.name,
     }))
 
-    const getUserData = (event: ChangeEvent<HTMLInputElement>) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        // dispatch(setaBusinessSettingsFormValues({...businessSettingsFormValues,[name]: value}));
+    const handleDateChange = (dates: DateObject[]) => {
+        if (dates.length === 2) {
+            dispatch(setAddFormValue({
+                field: 'started_at',
+                value: dates[0].toDate().toISOString()
+            }));
+            dispatch(setAddFormValue({
+                field: 'ended_at',
+                value: dates[1].toDate().toISOString()
+            }));
+        }
+    };
+
+    const handleProgramChange = (option: OptionType | null) => {
+        dispatch(setAddFormValue({
+            field: 'program',
+            value: option?.value || ''
+        }));
+    };
+
+    const handleCategoriesChange = (options: OptionType[]) => {
+        dispatch(setAddFormValue({
+            field: 'categories',
+            value: options.map(o => o.value)
+        }));
+    };
+
+    const handlePartnersChange = (options: OptionType[]) => {
+        dispatch(setAddFormValue({
+            field: 'partners',
+            value: options.map(o => o.value)
+        }));
     };
 
     return (
@@ -77,7 +106,7 @@ const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                         <Select
                             options={programOptions}
                             value={selectedProgram}
-                            onChange={(option) => setSelectedProgram(option as OptionType)}
+                            onChange={handleProgramChange}
                             placeholder="Choisissez un programme"
                         />
                     </Col>
@@ -89,7 +118,7 @@ const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                             isMulti
                             options={categoryOptions}
                             value={selectedCategory}
-                            onChange={(option) => setSelectedCategory(option as OptionType[])}
+                            onChange={handleCategoriesChange}
                             placeholder="Choisissez une categorie"
                         />
                     </Col>
@@ -101,7 +130,7 @@ const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                             isMulti
                             options={partnerOptions}
                             value={selectedPartners}
-                            onChange={(selected) => setSelectedPartners(selected as OptionType[])}
+                            onChange={handlePartnersChange}
                             placeholder="Sélectionnez des partenaires"
                         />
                     </Col>
@@ -114,7 +143,7 @@ const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                                 inputClass="form-control"
                                 range
                                 value={value}
-                                onChange={(dates) => setValue(dates as DateObject[])}
+                                onChange={handleDateChange}
                             />
                         </InputGroup>
                     </Col>
@@ -128,4 +157,4 @@ const BaseInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackA
     );
 };
 
-export default BaseInformations;
+export default DetailInformations;

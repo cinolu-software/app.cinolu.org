@@ -1,16 +1,12 @@
-import {ChangeEvent} from "react";
-
 export interface NavComponentProp {
     activeTab?: number | undefined;
     callbackActive: (val: number | undefined) => void;
 }
-
 export interface ActivityFormTabContentPropsType {
     activeTab?: number | undefined;
     callbackActive: (val: number | undefined) => void;
     differentId?: boolean;
 }
-
 export interface ActivityFormpropsType {
     horizontalWizardClass?: string;
     heading: string;
@@ -18,18 +14,6 @@ export interface ActivityFormpropsType {
     secondXl?: number;
     xs?: number;
 }
-
-export interface BankLogoListProp {
-    getUserData: (event: ChangeEvent<HTMLInputElement>) => void;
-    differentId?: boolean;
-}
-
-
-
-
-
-
-
 export interface FormInputType {
     name: string;
     type: string;
@@ -51,7 +35,6 @@ export interface ReviewFormType {
     phase: string;
     fields: FormFieldType[];
 }
-
 export interface formValueType {
     id: string,
     name: string,
@@ -62,8 +45,19 @@ export interface formValueType {
     form: DynamicFormType[] | null,
     review_form: ReviewFormType[] | null,
     categories: string[],
+    partners: string[],
 }
-
+export interface createActivityType {
+    name: string;
+    description: string;
+    started_at: string;
+    ended_at: string;
+    program: string;
+    form: DynamicFormType[];
+    review_form: ReviewFormType[];
+    categories: string[];
+    partners: string[];
+}
 export interface InitialStateActivityType {
     originalProjectData : [];
     publishedProjectData : [];

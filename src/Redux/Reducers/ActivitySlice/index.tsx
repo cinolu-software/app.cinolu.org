@@ -36,14 +36,7 @@ const ActivitySlice = createSlice({
     name: "ActivitySlice",
     initialState,
     reducers: {
-        handleBackButton: (state, action) => {
-            if(state.numberLevel > 1) {
-                state.numberLevel--;
-            }
-        },
-        handleNextButton: (state, action) => {
-            state.numberLevel ++;
-        },
+
         setAddFormValue: (state, action: PayloadAction<{field: keyof formValueType, value: any}>) => {
             const {field, value} = action.payload;
             if(field === "started_at" || field === "ended_at") {
@@ -87,6 +80,6 @@ const ActivitySlice = createSlice({
     },
 });
 
-export const { handleBackButton, handleNextButton, setAddFormValue, setFormField, resetForm } = ActivitySlice.actions;
+export const { setAddFormValue, setFormField, resetForm } = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;

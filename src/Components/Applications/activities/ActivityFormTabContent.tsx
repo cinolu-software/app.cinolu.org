@@ -7,7 +7,7 @@ import Details from "@/Components/Applications/activities/Steps/Details";
 import FormActivity from "@/Components/Applications/activities/Steps/FormActivity";
 import ReviewForm from "@/Components/Applications/activities/Steps/ReviewForm";
 
-const BusinessVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
+const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
     return (
         <TabContent className="dark-field" activeTab={activeTab}>
             <TabPane tabId={1}>
@@ -29,4 +29,4 @@ const BusinessVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType
     );
 };
 
-export default BusinessVerticalWizardTabContent;
+export default ActivityVerticalWizardTabContent;
