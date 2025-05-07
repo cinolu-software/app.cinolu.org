@@ -86,9 +86,10 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                             <tbody className="text-center">
                             {fields.map((field, index) => (
                                 <tr key={field.id}>
-                                    <td className="align-middle">
+                                    <td className="">
                                         {editingIndex === index ? (
                                             <Input
+
                                                 value={editedField?.label || ""}
                                                 onChange={(e) =>
                                                     setEditedField({ ...editedField!, label: e.target.value })
@@ -102,6 +103,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                                         {editingIndex === index ? (
                                             <Input
                                                 type="select"
+                                                className={'border border-primary'}
                                                 value={editedField?.type || "text"}
                                                 onChange={(e) =>
                                                     setEditedField({

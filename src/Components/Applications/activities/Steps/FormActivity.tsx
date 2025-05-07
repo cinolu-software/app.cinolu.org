@@ -69,7 +69,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
 
 
     return (
-        <div className="border ps-3 rounded ">
+        <div className="border ps-3 rounded pb-3">
             <Form className="theme-form theme-form-2 mega-form">
                 <Row className="g-2 mx-5">
                     <Col xs="12">
@@ -90,9 +90,9 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                     <td className="align-middle">
                                         {editingIndex === index ? (
                                             <Input
-                                                type={'text'}
+                                                style={{ border: '1px solid #0d6efd' }}
+                                                className="form-control"
                                                 value={editedField?.label || ""}
-                                                className={'border border-primary'}
                                                 onChange={(e) =>
                                                     setEditedField({ ...editedField, label: e.target.value })
                                                 }
@@ -106,7 +106,6 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                             <Input
 
                                                 type="select"
-                                                className={'border border-primary'}
                                                 value={editedField?.type || "text"}
                                                 onChange={(e) =>
                                                     setEditedField({ ...editedField, type: e.target.value })
@@ -142,16 +141,16 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                     <td className="align-middle text-center">
                                         {
                                             editingIndex === index ? (
-                                                <Button color="success" size="sm" onClick={handleSaveField} className="me-2">
+                                                <Button color={'primary'} size="sm" onClick={handleSaveField} className="me-2">
                                                     Enregistrer
                                                 </Button>
                                             ) : (
-                                                <Button color="warning" size="sm" onClick={() => handleEditField(index, field)} className="me-2">
+                                                <Button color={'primary'} size="sm" onClick={() => handleEditField(index, field)} className="me-2">
                                                     Modifier
                                                 </Button>
                                             )
                                         }
-                                        <Button color="danger" size="sm" onClick={() => handleRemoveField(field.id)}>
+                                        <Button  size="sm" onClick={() => handleRemoveField(field.id)}>
                                             Supprimer
                                         </Button>
                                     </td>
@@ -161,22 +160,23 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                         </Table>
                     </Col>
 
-                    <Col xs="12" className="mt-2">
+                    <Col xs="12" className="mt-4">
                         <h5 className="mb-3 mt-4">Ajouter un champ</h5>
                         <FormGroup>
                             <Label for="fieldLabel">Nom du champ</Label>
                             <Input
                                 id="fieldLabel"
-                                placeholder="Nom du champ"
+                                className={'border txt-primary'}
                                 value={newField.label}
                                 onChange={(e) => setNewField({ ...newField, label: e.target.value })}
                             />
                         </FormGroup>
 
-                        <FormGroup>
+                        <FormGroup className="mt-3">
                             <Label for="fieldType">Type de champ</Label>
                             <Input
                                 id="fieldType"
+                                className={'border txt-primary'}
                                 type="select"
                                 value={newField.type}
                                 onChange={(e) => setNewField({ ...newField, type: e.target.value })}

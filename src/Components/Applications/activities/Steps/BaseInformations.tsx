@@ -1,9 +1,7 @@
 import React, {ChangeEvent} from "react";
-import {Button, Col, Form, Input, Label, Row} from "reactstrap";
+import {Button, Col, Form, Input, Label } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import {handleNextButton, handleBackButton} from "@/Redux/Reducers/ActivitySlice";
-import {AccountName, Continue, Email, InqMail, Previous} from "@/Constant";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 
