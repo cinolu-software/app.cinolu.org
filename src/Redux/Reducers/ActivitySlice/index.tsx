@@ -15,7 +15,8 @@ const initialState : InitialStateActivityType ={
         program: '',
         categories: [],
         form: [],
-        review_form: []
+        review_form: [],
+        partners: []
     },
     editFormValue : {
         id: "",
@@ -26,7 +27,8 @@ const initialState : InitialStateActivityType ={
         program: '',
         categories: [],
         form: [],
-        review_form: []
+        review_form: [],
+        partners: []
     },
     numberLevel: 1,
     showFinish: false,
@@ -55,7 +57,8 @@ const ActivitySlice = createSlice({
                 program: '',
                 categories: [],
                 form: [],
-                review_form: []
+                review_form: [],
+                partners: []
             };
             state.editFormValue = {
             id: "",
@@ -66,7 +69,8 @@ const ActivitySlice = createSlice({
             program: '',
             categories: [],
                 form: [],
-                review_form: []
+                review_form: [],
+                partners:[]
             }
         },
         setFormField: (state, action: PayloadAction<{ form?: any, curationForm?: any }>) => {

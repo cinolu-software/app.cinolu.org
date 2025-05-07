@@ -89,7 +89,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                                     <td className="">
                                         {editingIndex === index ? (
                                             <Input
-
+                                                className="border text-secondary"
                                                 value={editedField?.label || ""}
                                                 onChange={(e) =>
                                                     setEditedField({ ...editedField!, label: e.target.value })
@@ -140,12 +140,12 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                                     </td>
                                     <td className="align-middle">
                                         {editingIndex === index ? (
-                                            <Button color="success" size="sm" onClick={handleSaveField} className="me-2">
+                                            <Button color="primary" size="sm" onClick={handleSaveField} className="me-2">
                                                 Enregistrer
                                             </Button>
                                         ) : (
                                             <Button
-                                                color="warning"
+                                                color="primary"
                                                 size="sm"
                                                 onClick={() => handleEditField(index, field)}
                                                 className="me-2"
@@ -153,7 +153,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                                                 Modifier
                                             </Button>
                                         )}
-                                        <Button color="danger" size="sm" onClick={() => handleRemoveField(field.id)}>
+                                        <Button  size="sm" onClick={() => handleRemoveField(field.id)}>
                                             Supprimer
                                         </Button>
                                     </td>

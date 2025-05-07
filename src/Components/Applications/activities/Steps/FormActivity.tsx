@@ -74,7 +74,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                 <Row className="g-2 mx-5">
                     <Col xs="12">
                         <h4 className="mb-3 mt-5">Formulaire Dynamique de Candidature</h4>
-                        <Table>
+                        <Table striped>
                             <thead className="text-center">
                             <tr className={'border-bottom border-primary mb-3'}>
                                 <th>Nom du champ</th>

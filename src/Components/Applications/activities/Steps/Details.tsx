@@ -6,12 +6,12 @@ import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { fetchProgram } from "@/Redux/Reducers/programSlice/programSlice";
 import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
-import {fetchCategory} from "@/Redux/Reducers/projectSlice/ProjectCategory";
+import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
 import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
-import {ProjectCategoryType} from "@/Types/Projects/ProjectCategoryType";
+import { ProjectCategoryType } from "@/Types/Projects/ProjectCategoryType";
 import { PartnerType } from "@/Types/PartnerType/PartnerType";
-import Select from "react-select";
-import {setAddFormValue} from "@/Redux/Reducers/ActivitySlice";
+import Select, { MultiValue, SingleValue } from "react-select";
+import { setAddFormValue } from "@/Redux/Reducers/ActivitySlice";
 
 interface OptionType {
     value: string;
@@ -19,15 +19,12 @@ interface OptionType {
 }
 
 const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
-
-    const [value, setValue] = useState<DateObject[]>([new DateObject()]);
     const dispatch = useAppDispatch();
+    const { addFormValue } = useAppSelector(state => state.activity);
     const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
     const { partnerData, status: partnerStatus } = useAppSelector(state => state.partner);
     const {projectCategoryData, status: categoryStatus} = useAppSelector(state=>state.projectCategory);
-    const [selectedProgram, setSelectedProgram] = useState<OptionType | null>(null);
-    const [selectedPartners, setSelectedPartners] = useState<OptionType[] | null>(null);
-    const [selectedCategory, setSelectedCategory] = useState<OptionType[] | null>(null);
+
 
     useEffect(() => {
         if (programStatus === 'idle') {
@@ -47,6 +44,18 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }
     }, [dispatch, categoryStatus]);
 
+
+    const [dateRange, setDateRange] = useState<DateObject[]>(() => {
+        if (addFormValue.started_at && addFormValue.ended_at) {
+            return [
+                new DateObject(new Date(addFormValue.started_at)),
+                new DateObject(new Date(addFormValue.ended_at))
+            ];
+        }
+        return [new DateObject()];
+    });
+
+
     const programOptions: OptionType[] = transformedPrograms.map((program: TransformedProjectTypeType) => ({
         value: program.id,
         label: program.name,
@@ -60,9 +69,19 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     const categoryOptions: OptionType[] = projectCategoryData.map((category: ProjectCategoryType) => ({
         value: category.id,
         label: category.name,
-    }))
+    }));
+
+
+    const selectedProgram = programOptions.find(option => option.value === addFormValue.program);
+    const selectedCategories = categoryOptions.filter(option =>
+        addFormValue.categories?.includes(option.value)
+    );
+    const selectedPartners = partnerOptions.filter(option =>
+        addFormValue.partners?.includes(option.value)
+    );
 
     const handleDateChange = (dates: DateObject[]) => {
+        setDateRange(dates);
         if (dates.length === 2) {
             dispatch(setAddFormValue({
                 field: 'started_at',
@@ -75,21 +94,21 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }
     };
 
-    const handleProgramChange = (option: OptionType | null) => {
+    const handleProgramChange = (option: SingleValue<OptionType>) => {
         dispatch(setAddFormValue({
             field: 'program',
             value: option?.value || ''
         }));
     };
 
-    const handleCategoriesChange = (options: OptionType[]) => {
+    const handleCategoriesChange = (options: MultiValue<OptionType>) => {
         dispatch(setAddFormValue({
             field: 'categories',
             value: options.map(o => o.value)
         }));
     };
 
-    const handlePartnersChange = (options: OptionType[]) => {
+    const handlePartnersChange = (options: MultiValue<OptionType>) => {
         dispatch(setAddFormValue({
             field: 'partners',
             value: options.map(o => o.value)
@@ -117,7 +136,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                         <Select
                             isMulti
                             options={categoryOptions}
-                            value={selectedCategory}
+                            value={selectedCategories}
                             onChange={handleCategoriesChange}
                             placeholder="Choisissez une categorie"
                         />
@@ -136,13 +155,13 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                     </Col>
                 </Row>
                 <Row className={'p-3 mb-2'}>
-                    <Col >
+                    <Col>
                         <Label className={'mb-2'} >{"Durée de l'activité"}</Label>
                         <InputGroup className="flatpicker-calender border rounded">
                             <DatePicker
                                 inputClass="form-control"
                                 range
-                                value={value}
+                                value={dateRange}
                                 onChange={handleDateChange}
                             />
                         </InputGroup>
