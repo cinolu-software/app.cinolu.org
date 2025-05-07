@@ -90,8 +90,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                     <td className="align-middle">
                                         {editingIndex === index ? (
                                             <Input
-                                                style={{ border: '1px solid #0d6efd' }}
-                                                className="form-control"
+                                                className="border text-secondary"
                                                 value={editedField?.label || ""}
                                                 onChange={(e) =>
                                                     setEditedField({ ...editedField, label: e.target.value })

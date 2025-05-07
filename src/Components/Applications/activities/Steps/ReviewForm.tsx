@@ -76,7 +76,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                         <h4 className="mb-3 mt-5">Formulaire Dynamique de Sélection</h4>
                         <Table striped>
                             <thead className="text-center">
-                            <tr>
+                            <tr className={'border-bottom border-primary mb-3'}>
                                 <th>Nom du champ</th>
                                 <th>Type</th>
                                 <th>Requis</th>
@@ -163,12 +163,13 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                         </Table>
                     </Col>
 
-                    <Col xs="12" className="mt-2">
+                    <Col xs="12" className="mt-4">
                         <h4 className="mb-3">Ajouter un nouveau champ</h4>
 
                         <FormGroup>
                             <Label for="fieldLabel">Nom du champ</Label>
                             <Input
+                                className={'border txt-primary'}
                                 id="fieldLabel"
                                 placeholder="Nom du champ"
                                 value={newField.label}
@@ -180,6 +181,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                             <Label for="fieldType">Type de champ</Label>
                             <Input
                                 id="fieldType"
+                                className={'border txt-primary'}
                                 type="select"
                                 value={newField.type}
                                 onChange={(e) =>
