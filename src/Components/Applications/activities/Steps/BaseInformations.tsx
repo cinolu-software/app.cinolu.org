@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import {Button, Col, Form, Input, Label } from "reactstrap";
+import {Button, Col, Form, Input, Label, Spinner} from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import ReactQuill from "react-quill";
@@ -49,7 +49,9 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                 </div>
 
                 <Col xs="12" className="text-end p-3">
-                    <Button className="ms-1" color="primary" onClick={handleNextButton}>{"Suivant"}</Button>
+                    <button className={'btn btn-outline-primary'} onClick={handleNextButton}>
+                        {"Suivant"}
+                    </button>
                 </Col>
             </Form>
         </div>

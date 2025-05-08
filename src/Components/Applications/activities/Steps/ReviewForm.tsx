@@ -213,12 +213,15 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
             </Form>
 
             <Col xs="12" className="text-end p-3">
-                <Button onClick={() => callbackActive(3)} color="primary">
-                    Précédent
-                </Button>
-                <Button className="ms-1" color="primary" onClick={() => callbackActive(5)}>
-                    Terminer
-                </Button>
+                <Col xs="12" className="text-end p-3 ">
+                    <button className={'btn btn-outline-primary me-3'} onClick={() => callbackActive(3)}>
+                        {"Précedent"}
+                    </button>
+
+                    <button className={'btn btn-outline-primary'} onClick={() => callbackActive(5)}>
+                        {"Suivant"}
+                    </button>
+                </Col>
             </Col>
         </div>
     );

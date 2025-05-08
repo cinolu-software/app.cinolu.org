@@ -167,9 +167,14 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                         </InputGroup>
                     </Col>
                 </Row>
-                <Col xs="12" className="text-end p-3">
-                    <Button onClick={() => callbackActive(1)} color="primary">{'Précedent'}</Button>
-                    <Button className="ms-1" color="primary" onClick={() => callbackActive(3)}>{'Suivant'}</Button>
+                <Col xs="12" className="text-end p-3 ">
+                    <button className={'btn btn-outline-primary me-3'} onClick={() => callbackActive(1)}>
+                        {"Précedent"}
+                    </button>
+
+                    <button className={'btn btn-outline-primary'} onClick={() => callbackActive(3)}>
+                        {"Suivant"}
+                    </button>
                 </Col>
             </div>
         </div>

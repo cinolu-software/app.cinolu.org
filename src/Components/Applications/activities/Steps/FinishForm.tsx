@@ -1,5 +1,5 @@
 import { Congratulations, ImagePath } from "@/Constant";
-import { Col, Form, Row, Button } from "reactstrap";
+import { Col, Row, Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { createActivityType } from "@/Types/ActivitiesTypes";
 import {createActivity} from "@/Redux/Reducers/ActivitySlice";
@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
 const FinishForm = () => {
+
     const dispatch = useAppDispatch();
     const { addFormValue } = useAppSelector(state => state.activity);
     const router = useRouter();
@@ -23,7 +24,6 @@ const FinishForm = () => {
             form: addFormValue.form || [],
             review_form: addFormValue.review_form || []
         };
-
         try{
             dispatch(createActivity(projectData));
             toast.success("L'activité a été créée avec succès", {
@@ -31,14 +31,14 @@ const FinishForm = () => {
                 position: toast.POSITION.TOP_CENTER
             });
             router.push("/project");
-        }catch (e) {
+        }
+        catch (e) {
             toast.error("Une erreur est survenue lors de la création de l'activité", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
-            })
+            });
             router.push("/project");
         }
-
     };
 
     return (
@@ -51,7 +51,11 @@ const FinishForm = () => {
                         <p>Well done! You have successfully completed</p>
                     </div>
                 </Col>
-                <Button onClick={handleSubmit}>Créer l'activité</Button>
+            </Row>
+            <Row className={'justify-content-center mt-3'}>
+                <Col xs={2} md={2}>
+                    <Button onClick={handleSubmit} color={'primary'}>Créer l'activité</Button>
+                </Col>
             </Row>
         </div>
     );
