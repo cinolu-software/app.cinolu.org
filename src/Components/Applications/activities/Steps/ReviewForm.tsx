@@ -1,72 +1,88 @@
 import React, { useState } from "react";
-import { Button, Col, Form, Input, Label, Row, FormGroup, Table } from "reactstrap";
+import { Button, Col, Form, Input, Label, Row, FormGroup } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { setFormField } from "@/Redux/Reducers/ActivitySlice";
 import { toast } from "react-toastify";
-import { FormFieldType } from "@/Types/ActivitiesTypes";
+import { ReviewFormType, FormFieldType } from "@/Types/ActivitiesTypes";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 
 const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
-    
+
     const dispatch = useAppDispatch();
-    const { addFormValue: AddFormValue } = useAppSelector((state) => state.activity);
+    const { addFormValue } = useAppSelector((state) => state.activity);
 
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
-    const [editedField, setEditedField] = useState<FormFieldType | null>(null);
-
-    const [fields, setFields] = useState<FormFieldType[]>(
-        //@ts-ignore
-        AddFormValue.review_form || []
+    const [phases, setPhases] = useState<ReviewFormType[]>(() =>
+        addFormValue.review_form ? [...addFormValue.review_form] : []
     );
 
-    const [newField, setNewField] = useState<FormFieldType>({
-        id: "0",
+    const [newPhaseName, setNewPhaseName] = useState("");
+    //@ts-ignore
+    const [newField, setNewField] = useState<Omit<FormFieldType, 'id'>>({
         label: "",
-        type: "text",
-        required: false,
-        options: [""]
+        type: "number",
+        required: true
     });
 
-    const handleAddField = () => {
-        const updatedField = { ...newField, id: Date.now() };
-        const updatedFields = [...fields, updatedField];
-        //@ts-ignore
-        setFields(updatedFields);
-        dispatch(setFormField({ curationForm: updatedFields }));
+    const handleAddPhase = () => {
+        if (newPhaseName.trim()) {
+            const updatedPhases = [
+                ...phases,
+                {
+                    phase: newPhaseName,
+                    fields: []
+                }
+            ];
+            setPhases(updatedPhases);
+            dispatch(setFormField({ curationForm: updatedPhases }));
+            setNewPhaseName("");
+            toast.success("Phase ajoutée avec succès");
+        }
+    };
 
+
+    const handleRemovePhase = (phaseIndex: number) => {
+        const updatedPhases = phases.filter((_, index) => index !== phaseIndex);
+        setPhases(updatedPhases);
+        dispatch(setFormField({ curationForm: updatedPhases }));
+        toast.success("Phase supprimée avec succès");
+    };
+
+
+    const handleAddCriteria = (phaseIndex: number) => {
+        const updatedPhases = phases.map((phase, index) =>
+            index === phaseIndex ? {
+                ...phase,
+                fields: [
+                    ...phase.fields,
+                    {
+                        ...newField,
+                        id: `field_${Date.now()}`,
+                        options: newField.type === 'select' ? newField.options || [] : []
+                    }
+                ]
+            } : phase
+        );
+
+        setPhases(updatedPhases);
+        dispatch(setFormField({ curationForm: updatedPhases }));
+        //@ts-ignore
         setNewField({
-            id: "0",
             label: "",
-            type: "text",
-            required: false,
-            options: [""]
+            type: "number",
+            required: true
         });
     };
 
-    const handleRemoveField = (fieldId: number | string) => {
-        const updatedFields = fields.filter((f) => f.id !== fieldId);
-        setFields(updatedFields);
-        dispatch(setFormField({ curationForm: updatedFields }));
-    };
+    const handleRemoveCriteria = (phaseIndex: number, fieldId: string) => {
+        const updatedPhases = phases.map((phase, index) =>
+            index === phaseIndex ? {
+                ...phase,
+                fields: phase.fields.filter(f => f.id !== fieldId)
+            } : phase
+        );
 
-    const handleEditField = (index: number, field: FormFieldType) => {
-        setEditingIndex(index);
-        setEditedField({ ...field });
-    };
-
-    const handleSaveField = () => {
-        if (editingIndex !== null && editedField) {
-            const updatedFields = fields.map((f, i) =>
-                i === editingIndex ? editedField : f
-            );
-
-            setFields(updatedFields);
-            dispatch(setFormField({ curationForm: updatedFields }));
-
-            setEditingIndex(null);
-            setEditedField(null);
-            toast.success("Champ mis à jour avec succès");
-        }
+        setPhases(updatedPhases);
+        dispatch(setFormField({ curationForm: updatedPhases }));
     };
 
     return (
@@ -74,195 +90,135 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
             <Form className="theme-form theme-form-2 mega-form">
                 <Row className="g-2 mx-5">
                     <Col xs="12">
-                        <h4 className="mb-3 mt-5">Formulaire Dynamique de Sélection</h4>
-                        <Table striped>
-                            <thead className="text-center">
-                            <tr className={'border-bottom border-primary mb-3'}>
-                                <th>Nom du champ</th>
-                                <th>Type</th>
-                                <th>Requis</th>
-                                <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody className="text-center">
-                            {fields.map((field, index) => (
-                                <tr key={field.id}>
-                                    <td className="">
-                                        {editingIndex === index ? (
-                                            <Input
-                                                className="border text-secondary"
-                                                value={editedField?.label || ""}
-                                                onChange={(e) =>
-                                                    setEditedField({ ...editedField!, label: e.target.value })
-                                                }
-                                            />
-                                        ) : (
-                                            field.label
-                                        )}
-                                    </td>
-                                    <td className="align-middle">
-                                        {editingIndex === index ? (
-                                            <Input
-                                                type="select"
-                                                className={'border border-primary'}
-                                                value={editedField?.type || "text"}
-                                                onChange={(e) =>
-                                                    setEditedField({
-                                                        ...editedField!,
-                                                        type: e.target.value as FormFieldType["type"]
-                                                    })
-                                                }
-                                            >
-                                                <option value="text">Texte</option>
-                                                <option value="number">Nombre</option>
-                                                <option value="textarea">Zone de texte</option>
-                                                <option value="file">Fichier</option>
-                                                <option value="date">Date</option>
-                                                <option value="select">Sélection</option>
-                                            </Input>
-                                        ) : (
-                                            field.type
-                                        )}
-                                    </td>
-                                    <td className="align-middle">
-                                        {editingIndex === index ? (
-                                            <Input
-                                                type="checkbox"
-                                                checked={editedField?.required || false}
-                                                onChange={(e) =>
-                                                    setEditedField({ ...editedField!, required: e.target.checked })
-                                                }
-                                            />
-                                        ) : field.required ? (
-                                            "Oui"
-                                        ) : (
-                                            "Non"
-                                        )}
-                                    </td>
-                                    <td className="align-middle">
-                                        {editingIndex === index ? (
-                                            <Button color="primary" size="sm" onClick={handleSaveField} className="me-2">
-                                                Enregistrer
-                                            </Button>
-                                        ) : (
+                        <h4 className="mb-3 mt-5">Configuration des Phases et Critères d'Évaluation</h4>
+
+                        <div className="mb-4 p-3 border rounded">
+                                <Row className={'justify-content-center align-items-center mb-4'}>
+                                <Col md={8}>
+                                    <FormGroup>
+                                        <Label>Nom de la phase</Label>
+                                        <Input
+                                            className={'border txt-primary'}
+                                            value={newPhaseName}
+                                            onChange={(e) => setNewPhaseName(e.target.value)}
+                                            placeholder="Ex: Qualification, Finale, etc."
+                                        />
+                                    </FormGroup>
+                                </Col>
+                                <Col md={4} className="d-flex align-items-end">
+                                    <Button
+                                        color="success"
+                                        onClick={handleAddPhase}
+                                        disabled={!newPhaseName.trim()}
+                                    >
+                                        Ajouter une Phase
+                                    </Button>
+                                </Col>
+                            </Row>
+                        </div>
+
+                        {phases.map((phase, phaseIndex) => (
+                            <div key={phaseIndex} className="mb-5 p-3 border rounded">
+                                <div className="d-flex justify-content-between align-items-center mb-4">
+                                    <h5>{phase.phase}</h5>
+                                    <Button onClick={() => handleRemovePhase(phaseIndex)}>
+                                        Supprimer cette Phase
+                                    </Button>
+                                </div>
+
+
+                                {phase.fields.map((field) => (
+                                    <div key={field.id} className="mb-3 p-2 border-bottom">
+                                        <Row>
+                                            <Col md={4}>
+                                                <strong>{field.label}</strong>
+                                            </Col>
+                                            <Col md={3}>
+                                                Type: {field.type}
+                                            </Col>
+                                            <Col md={3}>
+                                                Requis: {field.required ? 'Oui' : 'Non'}
+                                            </Col>
+                                            <Col md={2}>
+                                                <Button
+                                                    size="sm"
+                                                    onClick={() => handleRemoveCriteria(phaseIndex, field.id)}
+                                                >
+                                                    Supprimer
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                ))}
+
+                                <div className="mt-4 p-3 bg-light rounded">
+                                    <h6 className={'txt-primary mb-4'}>Ajouter un nouveau critère à cette phase</h6>
+                                    <Row className={"d-flex justify-content-between align-items-center mb-4"}>
+                                        <Col md={4}>
+                                            <FormGroup>
+                                                <Label className={'txt-primary'}>Intitulé du critère</Label>
+                                                <Input
+                                                    className={'border txt-primary'}
+                                                    value={newField.label}
+                                                    onChange={(e) => setNewField({...newField, label: e.target.value})}
+                                                />
+                                            </FormGroup>
+                                        </Col>
+
+                                        <Col md={3}>
+                                            <FormGroup>
+                                                <Label className={'txt-primary'}>Type</Label>
+                                                <Input
+                                                    type="select"
+                                                    value={newField.type}
+                                                    onChange={(e) => setNewField({...newField, type: e.target.value as any})}
+                                                >
+                                                    <option value="number">Note numérique</option>
+                                                    <option value="textarea">Commentaire</option>
+                                                    <option value="select">Liste de choix</option>
+                                                </Input>
+                                            </FormGroup>
+                                        </Col>
+
+                                        <Col md={2}>
+                                            <FormGroup check>
+                                                <Label check className={'txt-primary'}>
+                                                    <Input
+
+                                                        type="checkbox"
+                                                        checked={newField.required}
+                                                        onChange={(e) => setNewField({...newField, required: e.target.checked})}
+                                                    />
+                                                    Requis
+                                                </Label>
+                                            </FormGroup>
+                                        </Col>
+
+                                        <Col md={3} className="d-flex align-items-end">
                                             <Button
                                                 color="primary"
                                                 size="sm"
-                                                onClick={() => handleEditField(index, field)}
-                                                className="me-2"
+                                                onClick={() => handleAddCriteria(phaseIndex)}
+                                                disabled={!newField.label.trim()}
                                             >
-                                                Modifier
-                                            </Button>
-                                        )}
-                                        <Button  size="sm" onClick={() => handleRemoveField(field.id)}>
-                                            Supprimer
-                                        </Button>
-                                    </td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </Table>
-                    </Col>
-
-                    <Col xs="12" className="mt-4">
-                        <h4 className="mb-3">Ajouter un nouveau champ</h4>
-
-                        <FormGroup>
-                            <Label for="fieldLabel">Nom du champ</Label>
-                            <Input
-                                className={'border txt-primary'}
-                                id="fieldLabel"
-                                placeholder="Nom du champ"
-                                value={newField.label}
-                                onChange={(e) => setNewField({ ...newField, label: e.target.value })}
-                            />
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="fieldType">Type de champ</Label>
-                            <Input
-                                id="fieldType"
-                                className={'border txt-primary'}
-                                type="select"
-                                value={newField.type}
-                                onChange={(e) =>
-                                    setNewField({
-                                        ...newField,
-                                        type: e.target.value as FormFieldType["type"]
-                                    })
-                                }
-                            >
-                                <option value="text">Texte</option>
-                                <option value="number">Nombre</option>
-                                <option value="textarea">Zone de texte</option>
-                                <option value="file">Fichier</option>
-                                <option value="date">Date</option>
-                                <option value="select">Sélection</option>
-                            </Input>
-                        </FormGroup>
-
-                        <FormGroup check>
-                            <Label for="fieldRequired">Requis</Label>
-                            <Input
-                                id="fieldRequired"
-                                type="checkbox"
-                                checked={newField.required}
-                                onChange={() => setNewField({ ...newField, required: !newField.required })}
-                            />
-                        </FormGroup>
-
-                        {newField.type === "select" && (
-                            <FormGroup>
-                                <Label>Options du Select</Label>
-                                {newField.options.map((option, index) => (
-                                    <Row key={index} className="align-items-center mb-2">
-                                        <Col xs="10">
-                                            <Input
-                                                placeholder={`Option ${index + 1}`}
-                                                value={option}
-                                                onChange={(e) => {
-                                                    const updatedOptions = [...newField.options];
-                                                    updatedOptions[index] = e.target.value;
-                                                    setNewField({ ...newField, options: updatedOptions });
-                                                }}
-                                            />
-                                        </Col>
-                                        <Col xs="2">
-                                            <Button
-                                                color="danger"
-                                                size="sm"
-                                                onClick={() => {
-                                                    const updatedOptions = newField.options.filter((_, i) => i !== index);
-                                                    setNewField({ ...newField, options: updatedOptions });
-                                                }}
-                                            >
-                                                Supprimer
+                                                Ajouter le Critère
                                             </Button>
                                         </Col>
                                     </Row>
-                                ))}
-                                <Button
-                                    color="primary"
-                                    size="sm"
-                                    onClick={() => setNewField({ ...newField, options: [...newField.options, ""] })}
-                                >
-                                    Ajouter une option
-                                </Button>
-                            </FormGroup>
-                        )}
-
-                        <Button color="primary" className="mt-3" onClick={handleAddField}>
-                            Ajouter le champ
-                        </Button>
+                                </div>
+                            </div>
+                        ))}
                     </Col>
                 </Row>
             </Form>
 
             <Col xs="12" className="text-end p-3">
                 <Button onClick={() => callbackActive(3)} color="primary">
-                    Précedent
+                    Précédent
                 </Button>
-                <Button className="ms-1" color="primary" onClick={() => callbackActive(5)}>{'Suivant'}</Button>
+                <Button className="ms-1" color="primary" onClick={() => callbackActive(5)}>
+                    Terminer
+                </Button>
             </Col>
         </div>
     );
