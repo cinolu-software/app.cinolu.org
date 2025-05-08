@@ -4,8 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import {setFormField} from "@/Redux/Reducers/ActivitySlice";
 import { toast } from "react-toastify";
-
-
 import 'react-quill/dist/quill.snow.css';
 
 

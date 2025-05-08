@@ -58,14 +58,64 @@ export interface createActivityType {
     categories: string[];
     partners: string[];
 }
+export interface ProgramType {
+    id: string;
+    name: string;
+    description: string;
+    created_at: string;
+    updated_at: string;
+}
+export interface CategoryType {
+    id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+}
+export interface RequirementType {
+    name: string;
+    description: string;
+}
+export interface PhaseType {
+    id: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+    name: string;
+    description: string;
+    started_at: string;
+    ended_at: string;
+    requirements: RequirementType[];
+}
+
+export interface ActivityReceive {
+    id: string;
+    name: string;
+    slug: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+    description: string;
+    started_at: string;
+    ended_at: string;
+    program: ProgramType;
+    categories: CategoryType;
+    phases: PhaseType[];
+    is_published: boolean;
+    form: DynamicFormType[];
+    review_form: ReviewFormType[];
+}
+
 export interface InitialStateActivityType {
-    originalProjectData : [];
-    publishedProjectData : [];
+    originalProjectData : ActivityReceive[];
+    publishedProjectData : ActivityReceive[];
+    selectedActivity: ActivityReceive | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     addFormValue: formValueType;
     editFormValue: formValueType;
     numberLevel: number;
     showFinish: boolean;
+    error: null;
 }
 
 

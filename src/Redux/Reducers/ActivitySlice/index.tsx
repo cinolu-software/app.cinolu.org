@@ -1,10 +1,11 @@
 import {createAsyncThunk, PayloadAction, createSlice} from "@reduxjs/toolkit";
-import {formValueType, InitialStateActivityType} from "@/Types/ActivitiesTypes";
+import {formValueType, InitialStateActivityType, ActivityReceive, createActivityType} from "@/Types/ActivitiesTypes";
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
 
 const initialState : InitialStateActivityType ={
     originalProjectData: [],
     publishedProjectData: [],
+    selectedActivity: null,
     status: "idle",
     addFormValue : {
         id: "",
@@ -32,7 +33,20 @@ const initialState : InitialStateActivityType ={
     },
     numberLevel: 1,
     showFinish: false,
+    error: null
 }
+
+export const createActivity = createAsyncThunk<ActivityReceive,createActivityType, {rejectValue: any}>(
+    'activity/createActivity',
+    async(newActivity, thunkAPI) => {
+        try {
+            const response = await axiosInstance.post(`${apiBaseUrl}/projects`, newActivity);
+            return response.data.data as ActivityReceive
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors de la création.");
+        }
+    }
+)
 
 const ActivitySlice = createSlice({
     name: "ActivitySlice",
@@ -82,6 +96,23 @@ const ActivitySlice = createSlice({
             }
         },
     },
+    extraReducers: (builder) => {
+        builder
+            .addCase(createActivity.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(createActivity.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
+                state.status = "succeeded";
+                state.originalProjectData.push(action.payload);
+                state.selectedActivity = action.payload;
+                state.error = null;
+            })
+            .addCase(createActivity.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload || "Erreur lors de la création de l'activité";
+            });
+    }
 });
 
 export const { setAddFormValue, setFormField, resetForm } = ActivitySlice.actions;

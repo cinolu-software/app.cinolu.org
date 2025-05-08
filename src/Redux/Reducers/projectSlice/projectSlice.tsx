@@ -98,15 +98,15 @@ export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: s
     }
 );
 
-export const deleteProject = createAsyncThunk<{ id: string }, string, { rejectValue: any }>('project/deleteProject', async (projectId, thunkAPI) => {
-        try {
-            await axiosInstance.delete(`${apiBaseUrl}/projects/${projectId}`);
-            return { id: projectId };
-        } catch (err: any) {
-            return thunkAPI.rejectWithValue(err.response.data);
+    export const deleteProject = createAsyncThunk<{ id: string }, string, { rejectValue: any }>('project/deleteProject', async (projectId, thunkAPI) => {
+            try {
+                await axiosInstance.delete(`${apiBaseUrl}/projects/${projectId}`);
+                return { id: projectId };
+            } catch (err: any) {
+                return thunkAPI.rejectWithValue(err.response.data);
+            }
         }
-    }
-);
+    );
 
 export const updatedAttachmentProjectImage = createAsyncThunk<{ projectId: string ; imageUrl: string }, { projectId: string; imageFile: File },{ rejectValue: any }>
     ('project/updateAttachmentProjectImage', async ({ projectId, imageFile }, thunkAPI) => {

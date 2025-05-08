@@ -7,6 +7,7 @@ import { FormFieldType } from "@/Types/ActivitiesTypes";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 
 const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
+    
     const dispatch = useAppDispatch();
     const { addFormValue: AddFormValue } = useAppSelector((state) => state.activity);
 
