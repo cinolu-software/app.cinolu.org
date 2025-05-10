@@ -4,6 +4,7 @@ import NoSsr from "@/utils/NoSsr";
 import MainProvider from "./MainProvider";
 import { I18nProvider } from "./i18n/i18n-context";
 import { detectLanguage } from "./i18n/server";
+import {Provider} from "@/components/ui/provider";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 
@@ -11,7 +12,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <I18nProvider language={lng}>
-      <html>
+      <html suppressHydrationWarning>
         <head>
           <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon" />
           <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon" />
@@ -23,7 +24,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </head>
         <body suppressHydrationWarning={true}>
           <NoSsr>
-            <MainProvider>{children}</MainProvider>
+            <MainProvider>
+              <Provider>
+                {children}
+              </Provider>
+            </MainProvider>
           </NoSsr>
         </body>
       </html>
