@@ -81,6 +81,7 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleEdit}
+                        className={'btn-info'}
                         disabled={loadingEdit}
                     >
                         {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
@@ -90,6 +91,7 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDetail}
+                        className={'btn-info'}
                         disabled={loadingDetail}
                     >
                         {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
@@ -99,15 +101,17 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handlePublish}
-                        disabled={loadingPublish}
+                        className={'btn-info'}
+                        disabled={loadingPublish}fill-calendar
                     >
-                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="fill-calendar"/>}
+                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="published"/>}
                     </button>
                 </div>
                 <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDelete}
+                        className={'btn-info'}
                         disabled={loadingDelete}
                     >
                         {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}

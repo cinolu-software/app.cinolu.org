@@ -75,6 +75,7 @@ const PublishedProjectListTableAction: React.FC<{ project: ReceiveProjectType }>
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleEdit}
+                        className={'btn-info'}
                         disabled={loadingEdit}
                     >
                         {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
@@ -84,6 +85,7 @@ const PublishedProjectListTableAction: React.FC<{ project: ReceiveProjectType }>
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDetail}
+                        className={'btn-info'}
                         disabled={loadingDetail}
                     >
                         {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
@@ -93,9 +95,10 @@ const PublishedProjectListTableAction: React.FC<{ project: ReceiveProjectType }>
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleUnPublish}
+                        className={'btn-info'}
                         disabled={loadingPublish}
                     >
-                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="fill-calendar"/>}
+                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="unpublished"/>}
                     </button>
                 </div>
             </div>

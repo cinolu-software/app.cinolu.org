@@ -1,5 +1,5 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
-import { Button, Col, Form, InputGroup, Label, Row } from "reactstrap";
+import React, { useState, useEffect } from "react";
+import { Col, InputGroup, Label, Row } from "reactstrap";
 import 'react-quill/dist/quill.snow.css';
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
@@ -19,6 +19,7 @@ interface OptionType {
 }
 
 const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
+
     const dispatch = useAppDispatch();
     const { addFormValue } = useAppSelector(state => state.activity);
     const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);

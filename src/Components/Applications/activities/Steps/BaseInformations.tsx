@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from "react";
-import {Button, Col, Form, Input, Label, Spinner} from "reactstrap";
+import { Col, Form, Input, Label } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import ReactQuill from "react-quill";
@@ -10,6 +10,7 @@ import {setAddFormValue} from "@/Redux/Reducers/ActivitySlice";
 const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
+
     const {addFormValue} = useAppSelector(state => state.activity)
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,16 +21,9 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
         dispatch(setAddFormValue({ field: 'description', value }));
     };
 
-
-    const handleNextButton = () => {
-        callbackActive(2);
-    };
-
     return (
         <div className={'border ps-3 rounded'}>
             <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
-            <Form>
-
                 <div className={'p-3 mb-2'}>
                     <Col className={'mb-3'} >
                         <Label check>{"Nom de l'activité"}<span className="txt-danger">*</span></Label>
@@ -44,16 +38,14 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                             placeholder="Entrez la description ici..."
                             className="quill-editor"
                         />
-
                     </Col>
                 </div>
 
                 <Col xs="12" className="text-end p-3">
-                    <button className={'btn btn-outline-primary'} onClick={handleNextButton}>
+                    <button className={'btn btn-outline-primary'} onClick={() => callbackActive(2)}>
                         {"Suivant"}
                     </button>
                 </Col>
-            </Form>
         </div>
     )
 }
