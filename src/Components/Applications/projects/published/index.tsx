@@ -22,7 +22,7 @@ const PublishedProjectListContainer = () => {
                 <Label className="me-2">{"Chercher"}:</Label>
                 <Input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)}
-                    className={'border border-primary px-3 py-2'}
+                    className={'border border-primary'}
                     type="search"
                     value={filterText}
                 />

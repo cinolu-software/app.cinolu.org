@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {ReceiveProjectType} from "@/Types/Projects/ProjectType";
+import {ActivityReceive} from "@/Types/ActivitiesTypes";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useAppDispatch} from "@/Redux/Hooks";
-import { publishProject, setSelectedProject} from "@/Redux/Reducers/projectSlice/projectSlice";
+import { publishProject} from "@/Redux/Reducers/projectSlice/projectSlice";
+import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
@@ -21,25 +22,24 @@ const PublishedProjectListTableName: React.FC<{ image: string, name: string }> =
     );
 };
 
-const PublishedProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ project }) => {
+const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ project }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
-    const [loadingDelete, setLoadingDelete] = useState(false);
     const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
         setLoadingEdit(true);
-        router.push('/project/edit_project');
-        dispatch(setSelectedProject({project}));
+        router.push('/act/edit');
+        dispatch(setSelectedActivity(project));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
         router.push('/project/detail_project');
-        dispatch(setSelectedProject({project}));
+        dispatch(setSelectedActivity(project));
     };
 
     const handleUnPublish = async () => {
@@ -106,10 +106,10 @@ const PublishedProjectListTableAction: React.FC<{ project: ReceiveProjectType }>
     );
 };
 
-export const PublishedProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
+export const PublishedProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     {
         name: "Nom",
-        cell: (row: ReceiveProjectType) => (
+        cell: (row: ActivityReceive) => (
             <PublishedProjectListTableName
                 image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
@@ -119,25 +119,25 @@ export const PublishedProjectListTableDataColumn: TableColumn<ReceiveProjectType
     },
     {
         name: "Date de début",
-        selector: (row: ReceiveProjectType) => row.started_at,
+        selector: (row: ActivityReceive) => row.started_at,
         sortable: true,
         grow: 1
     },
     {
         name: "Date de fin",
-        selector: (row: ReceiveProjectType) => row.ended_at,
+        selector: (row: ActivityReceive) => row.ended_at,
         sortable: true,
         grow: 1
     },
-    {
-        name: "Nombre de participants",
-        selector: (row: ReceiveProjectType) => row.report?.["Nombre total de participants"] ?? 0,
-        sortable: true,
-        grow: 1
-    },
+    // {
+    //     name: "Nombre de participants",
+    //     selector: (row: ActivityReceive) => row.report?.["Nombre total de participants"] ?? 0,
+    //     sortable: true,
+    //     grow: 1
+    // },
     {
         name: "Actions",
-        cell: (row: ReceiveProjectType) => <PublishedProjectListTableAction project={row}/>,
+        cell: (row: ActivityReceive) => <PublishedProjectListTableAction project={row}/>,
         grow: 2
     },
 ];

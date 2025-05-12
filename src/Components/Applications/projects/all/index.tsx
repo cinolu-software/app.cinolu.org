@@ -23,7 +23,10 @@ const ProjectListContainer = () => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
                 <Label className="me-2">{"Chercher"}:</Label>
-                <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
+                <Input
+                    className={'border border-primary'}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText}
+                />
             </div>
         );
     }, [filterText]);

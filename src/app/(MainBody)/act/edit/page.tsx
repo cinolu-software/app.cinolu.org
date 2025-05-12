@@ -9,7 +9,7 @@ export default function Home() {
     useEffect(() => {
         (async () => {
             if (typeof window !== "undefined") {
-                const newClient = (await import("@/Components/Applications/activities/create")).default;
+                const newClient = (await import("@/Components/Applications/activities/edit")).default;
                 setClient(() => newClient);
             }
         })();

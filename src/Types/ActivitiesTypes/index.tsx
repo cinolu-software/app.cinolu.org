@@ -76,6 +76,7 @@ export interface RequirementType {
     name: string;
     description: string;
 }
+
 export interface PhaseType {
     id: string;
     created_at: string;
@@ -98,6 +99,7 @@ export interface ActivityReceive {
     description: string;
     started_at: string;
     ended_at: string;
+    image?:string;
     program: ProgramType;
     categories: CategoryType;
     phases: PhaseType[];

@@ -1,11 +1,11 @@
 import React from 'react';
 import { TabContent, TabPane } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
-import FinishForm from "@/Components/Applications/activities/Steps/FinishForm";
-import BaseInformations from "@/Components/Applications/activities/Steps/BaseInformations";
-import Details from "@/Components/Applications/activities/Steps/Details";
-import FormActivity from "@/Components/Applications/activities/Steps/FormActivity";
-import ReviewForm from "@/Components/Applications/activities/Steps/ReviewForm";
+import FinishForm from "@/Components/Applications/activities/create/Steps/FinishForm";
+import BaseInformations from "@/Components/Applications/activities/create/Steps/BaseInformations";
+import Details from "@/Components/Applications/activities/create/Steps/Details";
+import FormActivity from "@/Components/Applications/activities/create/Steps/FormActivity";
+import ReviewForm from "@/Components/Applications/activities/create/Steps/ReviewForm";
 
 const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
     return (
