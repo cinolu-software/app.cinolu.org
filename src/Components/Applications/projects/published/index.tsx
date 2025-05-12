@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
 import { fetchPublishedProject } from "@/Redux/Reducers/projectSlice/projectSlice";
-import { ProjectListTableDataColumn } from "@/Data/Application/Project/";
+import {PublishedProjectListTableDataColumn} from "@/Data/Application/Project/published";
 import DeleteProjectModal from "@/Components/Applications/projects/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import { ToastContainer} from "react-toastify";
@@ -18,9 +18,14 @@ const PublishedProjectListContainer = () => {
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
-            <div className="dataTables_filter d-flex align-items-center">
+            <div className="dataTables_filter d-flex align-items-center me-2">
                 <Label className="me-2">{"Chercher"}:</Label>
-                <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
+                <Input
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)}
+                    className={'border border-primary px-3 py-2'}
+                    type="search"
+                    value={filterText}
+                />
             </div>
         );
     }, [filterText]);
@@ -47,7 +52,7 @@ const PublishedProjectListContainer = () => {
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems}
-                                        columns={ProjectListTableDataColumn}
+                                        columns={PublishedProjectListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination

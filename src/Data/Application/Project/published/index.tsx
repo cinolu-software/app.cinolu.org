@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ReceiveProjectType} from "@/Types/Projects/ProjectType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useAppDispatch} from "@/Redux/Hooks";
-import { publishProject, setSelectedProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
+import { publishProject, setSelectedProject} from "@/Redux/Reducers/projectSlice/projectSlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
@@ -10,7 +10,7 @@ import SVG from '@/CommonComponent/SVG';
 import {Spinner} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
-const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
+const PublishedProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -21,7 +21,7 @@ const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image,
     );
 };
 
-const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ project }) => {
+const PublishedProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ project }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -42,17 +42,11 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
         dispatch(setSelectedProject({project}));
     };
 
-    const handleDelete = async () => {
-        setLoadingDelete(true);
-        dispatch(setModalDeleteProject({ isOpen: true, project }));
-        setLoadingDelete(false);
-    };
-
-    const handlePublish = async () => {
+    const handleUnPublish = async () => {
         try {
             setLoadingPublish(true);
             setTimeout(() => {
-                // @ts-ignore
+                    // @ts-ignore
                     dispatch(publishProject({projectId: project.id}));
                     toast.success("Projet publié avec succès", {
                         autoClose: 5000,
@@ -60,8 +54,8 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                         transition: Flip,
                     });
                     setLoadingPublish(false);
-            }
-            , 1000);
+                }
+                , 1000);
         }
         catch (e) {
             setLoadingPublish(false);
@@ -77,7 +71,7 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center">
-                <div className="col-3">
+                <div className="col-4">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleEdit}
@@ -86,7 +80,7 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                         {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
                     </button>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDetail}
@@ -95,22 +89,13 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                         {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
                     </button>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
-                        onClick={handlePublish}
+                        onClick={handleUnPublish}
                         disabled={loadingPublish}
                     >
                         {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="fill-calendar"/>}
-                    </button>
-                </div>
-                <div className="col-3">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
-                        onClick={handleDelete}
-                        disabled={loadingDelete}
-                    >
-                        {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
                     </button>
                 </div>
             </div>
@@ -118,11 +103,11 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
     );
 };
 
-export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
+export const PublishedProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
     {
         name: "Nom",
         cell: (row: ReceiveProjectType) => (
-            <ProjectListTableName
+            <PublishedProjectListTableName
                 image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
         ),
@@ -149,7 +134,7 @@ export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
     },
     {
         name: "Actions",
-        cell: (row: ReceiveProjectType) => <ProjectListTableAction project={row}/>,
+        cell: (row: ReceiveProjectType) => <PublishedProjectListTableAction project={row}/>,
         grow: 2
     },
 ];
