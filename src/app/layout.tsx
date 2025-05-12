@@ -4,7 +4,6 @@ import NoSsr from "@/utils/NoSsr";
 import MainProvider from "./MainProvider";
 import { I18nProvider } from "./i18n/i18n-context";
 import { detectLanguage } from "./i18n/server";
-import {Provider} from "@/components/ui/provider";
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
 
@@ -25,9 +24,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <body suppressHydrationWarning={true}>
           <NoSsr>
             <MainProvider>
-              <Provider>
                 {children}
-              </Provider>
             </MainProvider>
           </NoSsr>
         </body>

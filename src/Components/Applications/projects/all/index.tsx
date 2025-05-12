@@ -47,8 +47,8 @@ const ProjectListContainer = () => {
                                 <ProjectHeader />
                                 <CollapseFilterData/>
                             </div>
-                            <div className="list-product">
-                                <div className="table-responsive">
+                            <div >
+                                <div>
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems}

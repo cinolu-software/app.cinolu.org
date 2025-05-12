@@ -18,8 +18,7 @@ export const ProjectHeader = () => {
                     <i className={`icon-close filter-close ${filterToggle ? "show" : "hide"}`} />
                 </a>
             </div>
-            <AddButton link={'/project/new'} name={AddActivity} />
+            <AddButton link={'/act'} name={AddActivity} />
         </div>
     );
 };
-
