@@ -18,12 +18,14 @@ const ProgramsTypesListContainer: React.FC = () => {
     const dispatch = useAppDispatch()
     const {status, dataEventType, isOpenModalDeleteEventType, selectedEventType } = useAppSelector(state=>state.eventType);
 
-
     const subHeaderComponentMemo = useMemo(() => {
         return (
-            <div className="dataTables_filter d-flex align-items-center">
+            <div className="dataTables_filter d-flex align-items-center me-3 mt-3">
                 <Label className="me-2">{"Chercher"}:</Label>
-                <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText}/>
+                <Input
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText}
+                    className={'border-1 border-primary'}
+                />
             </div>
         );
     }, [filterText]);
@@ -43,7 +45,7 @@ const ProgramsTypesListContainer: React.FC = () => {
             <UpdateEventsTypeModal />
             <DeleteEntityModal
                 isOpen={isOpenModalDeleteEventType}
-                entityName="type d'événement"
+                entityName="catégorie d'événement"
                 selectedEntity={selectedEventType}
                 entities={dataEventType}
                 setModalAction={setModalDeleteEventTypes as any}
@@ -79,7 +81,6 @@ const ProgramsTypesListContainer: React.FC = () => {
                     </Row>
                 )
             }
-
         </Container>
     );
 };

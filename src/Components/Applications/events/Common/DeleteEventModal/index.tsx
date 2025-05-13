@@ -62,13 +62,13 @@ const DeleteEventModal = () => {
                         </h4>
                         <div className="d-flex justify-content-center mt-5">
                             <Button
-                                color="secondary"
+                                color="primary"
                                 className="me-2"
                                 onClick={() => dispatch(setModalDeleteEvent({ isOpen: false, event: null }))}
                             >
                                 {"Fermer"}
                             </Button>
-                            <Button color="danger" onClick={handleDelete}>
+                            <Button  onClick={handleDelete}>
                                 {"Supprimer"}
                             </Button>
                         </div>

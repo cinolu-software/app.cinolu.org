@@ -2,14 +2,14 @@ import { Congratulations, ImagePath } from "@/Constant";
 import { Col, Row, Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { createActivityType } from "@/Types/ActivitiesTypes";
-import {updateActivity} from "@/Redux/Reducers/ActivitySlice";
+import {createActivity} from "@/Redux/Reducers/ActivitySlice";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
 const FinishForm = () => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue, selectedActivity } = useAppSelector(state => state.activity);
+    const { addFormValue } = useAppSelector(state => state.activity);
     const router = useRouter();
 
     const handleSubmit = () => {
@@ -25,9 +25,7 @@ const FinishForm = () => {
             review_form: addFormValue.review_form || []
         };
         try{
-            if(selectedActivity){
-                dispatch(updateActivity({activityId: selectedActivity?.id, updatedActivity: projectData }));
-            }
+            dispatch(createActivity(projectData));
             toast.success("L'activité a été créée avec succès", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ActivityReceive} from "@/Types/ActivitiesTypes";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useAppDispatch} from "@/Redux/Hooks";
-import { publishProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
+import { publishProject} from "@/Redux/Reducers/projectSlice/projectSlice";
 import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
@@ -11,7 +11,7 @@ import SVG from '@/CommonComponent/SVG';
 import {Spinner} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
-const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
+const PublishedProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -22,13 +22,12 @@ const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image,
     );
 };
 
-const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ project }) => {
+const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ project }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
-    const [loadingDelete, setLoadingDelete] = useState(false);
     const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
@@ -43,18 +42,11 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
         dispatch(setSelectedActivity(project));
     };
 
-    const handleDelete = async () => {
-        setLoadingDelete(true);
-        //@ts-ignore
-        dispatch(setModalDeleteProject({ isOpen: true, project }));
-        setLoadingDelete(false);
-    };
-
-    const handlePublish = async () => {
+    const handleUnPublish = async () => {
         try {
             setLoadingPublish(true);
             setTimeout(() => {
-                // @ts-ignore
+                    // @ts-ignore
                     dispatch(publishProject({projectId: project.id}));
                     toast.success("Projet publié avec succès", {
                         autoClose: 5000,
@@ -62,8 +54,8 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
                         transition: Flip,
                     });
                     setLoadingPublish(false);
-            }
-            , 1000);
+                }
+                , 1000);
         }
         catch (e) {
             setLoadingPublish(false);
@@ -79,7 +71,7 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center">
-                <div className="col-3">
+                <div className="col-4">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleEdit}
@@ -89,7 +81,7 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
                         {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
                     </button>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDetail}
@@ -99,24 +91,14 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
                         {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
                     </button>
                 </div>
-                <div className="col-3">
+                <div className="col-4">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
-                        onClick={handlePublish}
+                        onClick={handleUnPublish}
                         className={'btn-info'}
                         disabled={loadingPublish}
                     >
-                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="published"/>}
-                    </button>
-                </div>
-                <div className="col-3">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
-                        onClick={handleDelete}
-                        className={'btn-info'}
-                        disabled={loadingDelete}
-                    >
-                        {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
+                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="unpublished"/>}
                     </button>
                 </div>
             </div>
@@ -124,11 +106,11 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
     );
 };
 
-export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
+export const PublishedProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     {
         name: "Nom",
         cell: (row: ActivityReceive) => (
-            <ProjectListTableName
+            <PublishedProjectListTableName
                 image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
         ),
@@ -155,7 +137,7 @@ export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     // },
     {
         name: "Actions",
-        cell: (row: ActivityReceive) => <ProjectListTableAction project={row}/>,
+        cell: (row: ActivityReceive) => <PublishedProjectListTableAction project={row}/>,
         grow: 2
     },
 ];

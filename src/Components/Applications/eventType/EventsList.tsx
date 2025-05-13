@@ -11,7 +11,7 @@ export const EventsTypesHeader = () => {
     return (
         <div>
             <AddWithModalButton
-                buttonText="Ajouter un Type d'événement"
+                buttonText="Ajouter une catégorie d'événement"
                 onClick={() => dispatch(setModalCreateEventType({ isOpen : !isOpenModalCreateEventType}))}
             />
         </div>

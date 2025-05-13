@@ -24,7 +24,7 @@ const transformProgramsType = (types: EventType[]) => {
 export const fetchEventsType = createAsyncThunk(
     'events/fetchEventsType',
     async () => {
-        const response = await axiosInstance.get<{data : EventType[]}>(`${apiBaseUrl}/event-types`);
+        const response = await axiosInstance.get<{data : EventType[]}>(`${apiBaseUrl}/event-categories`);
         const originalEventType = response.data.data;
         const transformedEvents = transformProgramsType(originalEventType);
         return { data : transformedEvents}
@@ -34,7 +34,7 @@ export const fetchEventsType = createAsyncThunk(
 export const createEventType = createAsyncThunk(
     'events/createEventType', async (newEventType: CreateEventType, {rejectWithValue}) => {
         try{
-          const response = await axiosInstance.post<{data: EventType}>(`${apiBaseUrl}/event-types`, newEventType);
+          const response = await axiosInstance.post<{data: EventType}>(`${apiBaseUrl}/event-categories`, newEventType);
           return response.data.data;
         }
         catch(err : any){
@@ -47,7 +47,7 @@ export const updateEventsType = createAsyncThunk(
     'events/updateEventType',
     async (updatedEventType: UpdateEventType, {rejectWithValue}) => {
         try{
-            const response = await axiosInstance.patch<{data: EventType}>(`${apiBaseUrl}/event-types/${updatedEventType.id}`, updatedEventType);
+            const response = await axiosInstance.patch<{data: EventType}>(`${apiBaseUrl}/event-categories/${updatedEventType.id}`, updatedEventType);
             return response.data.data;
         }catch(err: any){
             return rejectWithValue(err.response.data);
@@ -59,7 +59,7 @@ export const deleteEventType = createAsyncThunk(
     'events/deleteEventType',
     async (eventTypeId: string, {rejectWithValue}) => {
         try{
-            await axiosInstance.delete(`${apiBaseUrl}/event-types/${eventTypeId}`);
+            await axiosInstance.delete(`${apiBaseUrl}/event-categories/${eventTypeId}`);
             return eventTypeId;
         }catch (err: any){
             return rejectWithValue(err.reponse.data);

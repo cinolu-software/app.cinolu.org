@@ -34,7 +34,11 @@ const EventsListTableAction: React.FC<{ eventType: EventType }> = ({ eventType }
         <div className="product-action">
             <div className={'row w-100 justify-content-center'}>
                 <div className={'col-6'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleEdit}>
+                    <button
+                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                        onClick={handleEdit}
+                        className={'btn-info'}
+                    >
                 <span>
                   <SVG iconId="editTable"/>
                 </span>
@@ -42,7 +46,11 @@ const EventsListTableAction: React.FC<{ eventType: EventType }> = ({ eventType }
                 </div>
 
                 <div className={'col-6'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
+                    <button
+                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                        onClick={handleDelete}
+                        className={'btn-info'}
+                    >
                         <SVG iconId="trashTable" />
                     </button>
                 </div>

@@ -73,8 +73,6 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
         }
     }
 
-
-
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center">
@@ -82,6 +80,7 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleEdit}
+                        className={'btn-info'}
                         disabled={loadingEdit}
                     >
                         {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
@@ -91,6 +90,7 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDetail}
+                        className={'btn-info'}
                         disabled={loadingDetail}
                     >
                         {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
@@ -101,9 +101,10 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handlePublish}
+                        className={'btn-info'}
                         disabled={loadingPublish}
                     >
-                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="fill-calendar"/>}
+                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="published"/>}
                     </button>
                 </div>
                 <div className="col-3">
@@ -111,8 +112,9 @@ const EventsListTableAction: React.FC<{ event: any }> = ({ event }) => {
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDelete}
                         disabled={loadingDelete}
+                        className={'btn-info'}
                     >
-                        {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
+                        { <SVG iconId="trashTable"/>}
                     </button>
                 </div>
             </div>

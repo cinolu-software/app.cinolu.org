@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {ActivityReceive} from "@/Types/ActivitiesTypes";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useAppDispatch} from "@/Redux/Hooks";
-import { publishProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
+import { publishProject, setSelectedProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
 import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
@@ -104,7 +104,7 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handlePublish}
                         className={'btn-info'}
-                        disabled={loadingPublish}
+                        disabled={loadingPublish}fill-calendar
                     >
                         {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="published"/>}
                     </button>

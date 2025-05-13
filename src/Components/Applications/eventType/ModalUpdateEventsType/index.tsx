@@ -105,12 +105,12 @@ const UpdateEventsTypeModal = () => {
                 </ModalBody>
                 <ModalFooter>
                     <button
-                        className="btn btn-outline-light"
+                        className="btn btn-info"
                         onClick={() => dispatch(setModalEditEventTypes({ isOpen: false, EventType: null }))}
                     >
                         {"Annuler"}
                     </button>
-                    <button className="btn btn-outline-primary" onClick={handleSubmit}>
+                    <button className="btn btn-primary" onClick={handleSubmit}>
                         {"Mettre à jour"}
                     </button>
                 </ModalFooter>

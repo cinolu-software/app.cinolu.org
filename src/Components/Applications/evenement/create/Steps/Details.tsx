@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Col, InputGroup, Label, Row } from "reactstrap";
+
 import 'react-quill/dist/quill.snow.css';
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { fetchProgram } from "@/Redux/Reducers/programSlice/programSlice";
-import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
 import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
+import {fetchEventsType} from "@/Redux/Reducers/eventSlice/EventTypeSlice";
 import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import { ProjectCategoryType } from "@/Types/Projects/ProjectCategoryType";
 import { PartnerType } from "@/Types/PartnerType/PartnerType";
@@ -21,9 +22,11 @@ interface OptionType {
 const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue, selectedActivity } = useAppSelector(state => state.activity);
+    const { addFormValue } = useAppSelector(state => state.evenement);
+
     const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
     const { partnerData, status: partnerStatus } = useAppSelector(state => state.partner);
+
     const {projectCategoryData, status: categoryStatus} = useAppSelector(state=>state.projectCategory);
 
 
@@ -32,12 +35,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
             dispatch(fetchProgram());
         }
     }, [dispatch, programStatus]);
-
-    useEffect(() => {
-        if (partnerStatus === 'idle') {
-            dispatch(fetchPartner());
-        }
-    }, [dispatch, partnerStatus]);
 
     useEffect(() => {
         if (categoryStatus === 'idle') {

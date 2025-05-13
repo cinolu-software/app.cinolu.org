@@ -81,12 +81,12 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
                         <div className="d-flex justify-content-center mt-5">
                             <button
 
-                                className="me-2 btn btn-outline-secondary"
+                                className="me-2 btn btn-info"
                                 onClick={() => dispatch(setModalAction({isOpen: false, entity: null}))}
                             >
                                 Fermer
                             </button>
-                            <button className={'btn btn-outline-danger'} onClick={handleDelete}>
+                            <button className={'btn btn-secondary'} onClick={handleDelete}>
                                 Supprimer
                             </button>
                         </div>

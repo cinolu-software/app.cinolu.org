@@ -54,7 +54,7 @@ const ProjectListContainer = () => {
                                 <div>
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={filteredItems}
+                                        data={filteredItems as any[]}
                                         columns={ProjectListTableDataColumn}
                                         striped
                                         highlightOnHover

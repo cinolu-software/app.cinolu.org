@@ -1,17 +1,13 @@
 import React from 'react';
 import { TabContent, TabPane } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
-import FinishForm from "@/Components/Applications/activities/edit/Steps/FinishForm";
-import BaseInformations from "@/Components/Applications/activities/edit/Steps/BaseInformations";
-import Details from "@/Components/Applications/activities/edit/Steps/Details";
-import FormActivity from "@/Components/Applications/activities/edit/Steps/FormActivity";
-import ReviewForm from "@/Components/Applications/activities/edit/Steps/ReviewForm";
-import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import FinishForm from "@/Components/Applications/evenement/create/Steps/FinishForm";
+import BaseInformations from "@/Components/Applications/evenement/create/Steps/BaseInformations";
+import Details from "@/Components/Applications/evenement/create/Steps/Details";
+import FormActivity from "@/Components/Applications/evenement/create/Steps/FormActivity";
+import ReviewForm from "@/Components/Applications/evenement/create/Steps/ReviewForm";
 
 const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
-
-
     return (
         <TabContent className="dark-field" activeTab={activeTab}>
             <TabPane tabId={1}>

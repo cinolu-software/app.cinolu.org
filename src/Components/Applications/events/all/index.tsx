@@ -38,9 +38,7 @@ const EventsListContainer = () => {
                 status !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
                         <Col sm="12">
-                            <Card>
-                                <CardBody>
-                                    <div className="list-product-header">
+                            <div className="list-product-header">
                                         <EventsHeader />
                                     </div>
                                     <div className="list-product">
@@ -57,9 +55,7 @@ const EventsListContainer = () => {
                                             />
                                         </div>
                                     </div>
-                                </CardBody>
-                            </Card>
-                        </Col>
+                            </Col>
                     </Row>
                 )
             }

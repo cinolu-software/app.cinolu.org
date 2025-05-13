@@ -10,7 +10,6 @@ const initialState: InitialStateApplicationPhaseType = {
 }
 
 export const fetchApplicationByproject = createAsyncThunk('project-application/fetchApplicationByProject', async (id: string)=>{
-
     const response = await axiosInstance.get<ApplicationPhaseType[]>(`${apiBaseUrl}/project-applications/project/${id}`);
     // @ts-ignore
     return {data : response.data.data}
