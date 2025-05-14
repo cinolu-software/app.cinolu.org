@@ -16,7 +16,7 @@ const ActivityForm = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/evenement/add'}/>
+            <BackButton link={'/events'}/>
             <Col md={12}>
                 <Card>
                     <CardBody>

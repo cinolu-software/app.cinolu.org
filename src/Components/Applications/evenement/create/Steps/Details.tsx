@@ -33,9 +33,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }
     }, [dispatch, statusStaff]);
 
-    console.log(statusStaff)
-
-
     useEffect(() => {
         if (programStatus === 'idle') {
             dispatch(fetchProgram());

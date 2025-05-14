@@ -1,6 +1,5 @@
 
 export interface formValueType {
-    id: string,
     name: string,
     description: string,
     location: string,

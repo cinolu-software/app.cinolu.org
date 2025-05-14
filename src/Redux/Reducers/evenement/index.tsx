@@ -3,7 +3,6 @@ import {InitialStateEvenementType, formValueType, EvenementType, } from "@/Types
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
 
 const initialFormValue: formValueType = {
-    id: "",
     name: "",
     link: "",
     responsible: "",

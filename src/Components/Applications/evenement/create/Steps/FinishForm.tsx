@@ -1,43 +1,47 @@
 import { Congratulations, ImagePath } from "@/Constant";
 import { Col, Row, Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createActivityType } from "@/Types/ActivitiesTypes";
-import {createActivity} from "@/Redux/Reducers/ActivitySlice";
+
+import {createEvenement} from "@/Redux/Reducers/evenement";
+import {formValueType} from "@/Types/evenement";
+
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
 const FinishForm = () => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue } = useAppSelector(state => state.activity);
+    const { addFormValue } = useAppSelector(state => state.evenement);
     const router = useRouter();
 
     const handleSubmit = () => {
-        const projectData: createActivityType = {
+
+        const EvenementData : formValueType = {
             name: addFormValue.name,
             description: addFormValue.description,
+            link : addFormValue.link,
+            responsible: addFormValue.responsible,
+            location: addFormValue.location,
             started_at: addFormValue.started_at,
             ended_at: addFormValue.ended_at,
             program: addFormValue.program,
             categories: addFormValue.categories,
-            partners: addFormValue.partners,
-            form: addFormValue.form || [],
-            review_form: addFormValue.review_form || []
         };
+
         try{
-            dispatch(createActivity(projectData));
-            toast.success("L'activité a été créée avec succès", {
+            dispatch(createEvenement(EvenementData));
+            toast.success("L'évènement a été créé avec succès", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/project");
+            router.push("/events");
         }
         catch (e) {
-            toast.error("Une erreur est survenue lors de la création de l'activité", {
+            toast.error("Une erreur est survenue lors de la création de l'évènement", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/project");
+            router.push("/events");
         }
     };
 
@@ -54,7 +58,7 @@ const FinishForm = () => {
             </Row>
             <Row className={'justify-content-center mt-3'}>
                 <Col xs={2} md={2}>
-                    <Button onClick={handleSubmit} color={'primary'}>Créer l'activité</Button>
+                    <Button onClick={handleSubmit} color={'primary'}>Créer l'évènement</Button>
                 </Col>
             </Row>
         </div>
