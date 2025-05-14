@@ -17,6 +17,14 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
         dispatch(setAddFormValue({ field: 'name', value: event.target.value }));
     };
 
+    const handleLinkChange = (event: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setAddFormValue({ field: 'link', value: event.target.value }));
+    }
+
+    const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setAddFormValue({ field: 'location', value: event.target.value }));
+    }
+
     const handleDescriptionChange = (value: string) => {
         dispatch(setAddFormValue({ field: 'description', value }));
     };
@@ -31,11 +39,11 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                     </Col>
                     <Col className={'mb-3'} >
                         <Label check>{"Lieu de l'évènement"}<span className="txt-danger"></span></Label>
-                        <Input name="accountName" value={addFormValue.name} onChange={handleNameChange} type="text" className={'border'}/>
+                        <Input name="accountName" value={addFormValue.location} onChange={handleLocationChange} type="text" className={'border'}/>
                     </Col>
                     <Col className={'mb-3'} >
                         <Label check>{"Lien de l'évènement"}<span className="txt-danger"></span></Label>
-                        <Input name="accountName" value={addFormValue.name} onChange={handleNameChange} type="text" className={'border'}/>
+                        <Input name="accountName" value={addFormValue.link} onChange={handleLinkChange} type="text" className={'border'}/>
                     </Col>
                     <Col >
                         <Label check>{"Description de l'évènement"}<span className="txt-danger">*</span></Label>

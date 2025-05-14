@@ -11,6 +11,7 @@ import SVG from '@/CommonComponent/SVG';
 import {Spinner} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
+
 const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
     return (
         <div className="product-names my-2">
@@ -157,5 +158,19 @@ export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
         name: "Actions",
         cell: (row: ActivityReceive) => <ProjectListTableAction project={row}/>,
         grow: 2
+    },
+];
+
+export const EvenementVerticalData = [
+    {
+        activeTab: 1,
+        title: "Informations",
+    },
+    {
+        activeTab: 2,
+        title: "Détail",
+    },
+    {
+        title: "Finalisation",
     },
 ];

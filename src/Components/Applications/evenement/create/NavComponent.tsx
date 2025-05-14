@@ -1,7 +1,9 @@
 import React from "react";
-import { ActivitiesVerticalData } from "@/Data/Application/Project/new";
+import {EvenementVerticalData} from "@/Data/Application/evenement";
 import { NavComponentProp } from "@/Types/ActivitiesTypes";
 import { Nav, NavItem, NavLink } from "reactstrap";
+
+
 
 const NavComponent : React.FC<NavComponentProp> = ({callbackActive, activeTab}) => {
 
@@ -12,7 +14,7 @@ const NavComponent : React.FC<NavComponentProp> = ({callbackActive, activeTab}) 
     return (
         <Nav className="nav-pills horizontal-options">
             {
-                ActivitiesVerticalData.map((data, index) => (
+                EvenementVerticalData.map((data, index) => (
                     <NavItem key={index}>
                         <NavLink className={`${activeTab === index + 1 ? "active" : ""}`} onClick={() => handleTab(data.activeTab)}>
                             <div className="horizontal-wizard">

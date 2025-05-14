@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Col, InputGroup, Label, Row } from "reactstrap";
-
 import 'react-quill/dist/quill.snow.css';
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { fetchProgram } from "@/Redux/Reducers/programSlice/programSlice";
-import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
 import {fetchEventsType} from "@/Redux/Reducers/eventSlice/EventTypeSlice";
+import {fetchStaffMembers} from "@/Redux/Reducers/userSlice/UserSlice";
 import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import { ProjectCategoryType } from "@/Types/Projects/ProjectCategoryType";
-import { PartnerType } from "@/Types/PartnerType/PartnerType";
 import Select, { MultiValue, SingleValue } from "react-select";
-import { setAddFormValue } from "@/Redux/Reducers/ActivitySlice";
+import {setAddFormValue} from "@/Redux/Reducers/evenement";
+import {StaffMemberType} from "@/Types/Users/UsersType";
 
 interface OptionType {
     value: string;
@@ -23,11 +22,18 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
     const dispatch = useAppDispatch();
     const { addFormValue } = useAppSelector(state => state.evenement);
+    const {staffMemberData, statusStaff} = useAppSelector(state => state.users)
 
     const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
-    const { partnerData, status: partnerStatus } = useAppSelector(state => state.partner);
+    const {status: categoryStatus, dataEventType } = useAppSelector(state => state.eventType)
 
-    const {projectCategoryData, status: categoryStatus} = useAppSelector(state=>state.projectCategory);
+    useEffect(() => {
+        if(statusStaff === 'idle'){
+            dispatch(fetchStaffMembers());
+        }
+    }, [dispatch, statusStaff]);
+
+    console.log(statusStaff)
 
 
     useEffect(() => {
@@ -38,10 +44,9 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
     useEffect(() => {
         if (categoryStatus === 'idle') {
-            dispatch(fetchCategory());
+            dispatch(fetchEventsType());
         }
     }, [dispatch, categoryStatus]);
-
 
     const [dateRange, setDateRange] = useState<DateObject[]>(() => {
         if (addFormValue.started_at && addFormValue.ended_at) {
@@ -53,29 +58,27 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         return [new DateObject()];
     });
 
-
     const programOptions: OptionType[] = transformedPrograms.map((program: TransformedProjectTypeType) => ({
         value: program.id,
         label: program.name,
     }));
 
-    const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
-        value: partner.id,
-        label: partner.name,
-    }));
+    const staffOptions: OptionType[] = staffMemberData.map((staff: StaffMemberType) => ({
+        value: staff.id,
+        label: staff.name,
+    }))
 
-    const categoryOptions: OptionType[] = projectCategoryData.map((category: ProjectCategoryType) => ({
+
+    const categoryOptions: OptionType[] = dataEventType.map((category: ProjectCategoryType) => ({
         value: category.id,
         label: category.name,
     }));
 
 
     const selectedProgram = programOptions.find(option => option.value === addFormValue.program);
+    const selectedStaff = staffOptions.find(option => option.value === addFormValue.responsible);
     const selectedCategories = categoryOptions.filter(option =>
         addFormValue.categories?.includes(option.value)
-    );
-    const selectedPartners = partnerOptions.filter(option =>
-        addFormValue.partners?.includes(option.value)
     );
 
     const handleDateChange = (dates: DateObject[]) => {
@@ -99,16 +102,16 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }));
     };
 
+    const handleStaffChange = (option : SingleValue<OptionType>) => (
+        dispatch(setAddFormValue({
+            field: 'responsible',
+            value: option?.value || ''
+        }))
+    )
+
     const handleCategoriesChange = (options: MultiValue<OptionType>) => {
         dispatch(setAddFormValue({
             field: 'categories',
-            value: options.map(o => o.value)
-        }));
-    };
-
-    const handlePartnersChange = (options: MultiValue<OptionType>) => {
-        dispatch(setAddFormValue({
-            field: 'partners',
             value: options.map(o => o.value)
         }));
     };
@@ -130,7 +133,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                 </Row>
                 <Row className={'p-3 mb-2'}>
                     <Col>
-                        <Label className={'mb-2'}>{"Categorie de l'activité associée"}</Label>
+                        <Label className={'mb-2'}>{"Categorie de l'évènement"}</Label>
                         <Select
                             isMulti
                             options={categoryOptions}
@@ -140,18 +143,19 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                         />
                     </Col>
                 </Row>
+
                 <Row className={'p-3 mb-2'}>
                     <Col>
-                        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>
+                        <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>
                         <Select
-                            isMulti
-                            options={partnerOptions}
-                            value={selectedPartners}
-                            onChange={handlePartnersChange}
-                            placeholder="Sélectionnez des partenaires"
+                            options={staffOptions}
+                            value={selectedStaff}
+                            onChange={handleStaffChange}
+                            placeholder="Choisissez le responsable"
                         />
                     </Col>
                 </Row>
+
                 <Row className={'p-3 mb-2'}>
                     <Col>
                         <Label className={'mb-2'} >{"Durée de l'activité"}</Label>
