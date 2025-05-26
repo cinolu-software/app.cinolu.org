@@ -6,7 +6,6 @@ import {RootState} from "@/Redux/Store";
 
 
 const initialState : InitialStateProjectType = {
-    
     originalProjectData: [],
     publishedProjectData: [],
     status: "idle",
@@ -89,7 +88,8 @@ export const createProject = createAsyncThunk<ReceiveProjectType, CreateProjectT
     }
 );
 
-export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: string, updatedProject: UpdateProjectType }, { rejectValue: any }>( 'project/updateProject', async ({ projectId, updatedProject }, thunkAPI) => {
+export const updateProject = createAsyncThunk<ReceiveProjectType, { projectId: string, updatedProject: UpdateProjectType }, { rejectValue: any }>( 'project/updateProject', 
+    async ({ projectId, updatedProject }, thunkAPI) => {
         try {
             const response = await axiosInstance.patch<{ data: ReceiveProjectType }>(`${apiBaseUrl}/projects/${projectId}`, updatedProject);
             return response.data.data;

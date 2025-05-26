@@ -1,83 +1,79 @@
-$theme-font-color: darken(#4e5c33, 15%);
-$theme-body-font-color: #4e5c33;
+$theme-font-color: lighten(#164C45, 20%);  // Using dark teal as base
+$theme-body-font-color: lighten(#164C45, 15%); // Using dark teal
 $theme-body-sub-title-color: $theme-font-color;
-$body-color: #dfefd8;
-$main-body-color: #fff;
-$primary-color: #556c1f;
-$secondary-color: lighten(#4e5c33, 15%);
-$tertiary-color: lighten(#556c1f, 20%);
+$body-color: lighten(#E3C75F, 8%);  // Using light yellow as base
+$main-body-color: #f8f8f8;
+$primary-color: #164C45;          // Dark teal
+$secondary-color: #CC8D1A;        // Mustard yellow
+$tertiary-color: lighten(#E3C75F, 15%); // Lightened light yellow
 
-$success-color: darken(#556c1f, 15%);
-$info-color: lighten(#4e5c33, 10%);
-$warning-color: lighten(#D77748, 10%);
-$danger-color: lighten(#E44141, 10%);
-$light-color: lighten(#F4F4F4, 10%);
-$badge-light-color: lighten(#52526c, 10%);
-$light-gray: rgba(#4e5c33, 0.3);
-$light-widget-border: lighten(#dfefd8, 20%);
-$light-semi-gray: lighten(#dfefd8, 10%);
-$font-gray-color: lighten(#4e5c33, 30%);
+$success-color: #a7c957;
+$info-color: #c8d3b9;
+$warning-color: desaturate(lighten(#D77748, 40%), 40%);
+$danger-color: desaturate(lighten(#E44141, 40%), 40%);
+$light-color: #f0f0f0;
+$badge-light-color: #d8ded8;
+$light-gray: rgba(#a3ac90, 0.05);
+$light-widget-border: rgba(#a3ac90, 0.1);
+$light-semi-gray: #e6f0e0;
+$font-gray-color: #d1dcb0;
 $dark-light: $theme-font-color;
-$dark-gray: darken(#4e5c33, 20%);
-$dark-color: lighten(#2C323F, 10%);
-$dark-color-light: rgba(#2C323F, 0.72);
-$gray-60: rgba(#4e5c33, 0.3);
-$card-body-color: lighten(#f9f9fa, 5%);
+$dark-gray: #c8d3b9;
+$dark-color: #164C45;          // Dark teal
+$dark-color-light: rgba(#164C45, 0.3); // Dark teal transparent
+$gray-60: rgba(#a3ac90, 0.05);
+$card-body-color: #f2fafa;
 $transparent-color: transparent;
-$auth-bg-color: lighten(#FAFAFA, 5%);
-$light: lighten(#FDFFFE, 5%);
-$semi-dark: darken(#4e5c33, 10%);
-$light-text: lighten(#999999, 10%);
-$light-text: lighten(#4e5c33, 20%);
-$light-paragraph: lighten(#dfefd8, 20%);
-$light-background: lighten(#dfefd8, 10%);
-$light-font: rgba(#4e5c33, 0.4);
+$auth-bg-color: #f5fafa;
+$light: #f8f8f8;
+$semi-dark: #BDA523;          // Darker yellow
+$light-text: #c8d3b9;
+$light-paragraph: #e6f0e0;
+$light-background: rgba(227, 199, 95, 0.1);  // Light yellow (from style.scss)
+$light-font: rgba(#a3ac90, 0.1);
 $light-semi-font: $semi-dark;
-$light-chartist-grid-color: lighten(#f6f9fd, 5%);
-$pitch-color: lighten(#FE8A7D, 10%);
-$color-scarpa: lighten(#4c5667, 10%);
-$color-fiord: lighten(#455a64, 10%);
-$black: #000;
+$light-chartist-grid-color: #f8fcf7;
+$pitch-color: #ffead4;
+$color-scarpa: #b3bdac;
+$color-fiord: #a8b3a3;
+$black: #16232E;              // Dark navy
 $white: #fff;
-$off-white: lighten(#F7F6FF, 5%);
-$theme-medium-color: lighten(#4e5c33, 5%);
-$dropdown-border-color: lighten(#918E99, 10%);
+$off-white: #fcfcfc;
+$theme-medium-color: #b3bd9a;
+$dropdown-border-color: #cdd2c5;
 
-$light-primary: lighten(#556c1f, 30%);
-$light-secondary: lighten(#4e5c33, 30%);
-$light-tertiary: lighten(#556c1f, 40%);
-$light-success: lighten(#556c1f, 25%);
-$light-info: lighten(#4e5c33, 25%);
-$light-warning: lighten(#DF8752, 20%);
-$light-danger: lighten(#EB5959, 20%);
-$light-white: lighten(#F9F9FB, 5%);
-$light-dark: lighten(#EAEBF2, 10%);
+$light-primary: lighten(#164C45, 20%);   // Lightened dark teal
+$light-secondary: lighten(#CC8D1A, 15%); // Lightened mustard yellow
+$light-tertiary: lighten(#E3C75F, 20%);  // Lightened light yellow
+$light-success: #c0d890;
+$light-info: #e0e7d7;
+$light-warning: desaturate(lighten(#DF8752, 50%), 50%);
+$light-danger: desaturate(lighten(#EB5959, 50%), 50%);
+$light-white: #fcfcfc;
+$light-dark: #e8ece8;
 
-$sidebar-color: darken(#556c1f, 10%);
-$sidebar-font: lighten(#4e5c33, 50%);
-$light-sidebar-bg: lighten(#556c1f, 15%);
-$header-light-bg: transparentize(#4e5c33, 0.9);
-$card-header-color: darken(#4e5c33, 30%);
-$light-text-color: lighten(#4e5c33, 20%);
+$sidebar-color: #8f9e6f;
+$sidebar-font: #e0f2d7;
+$light-sidebar-bg: rgba(#a3ac90, 0.05);
+$header-light-bg: rgba(#a3ac90, 0.02);
+$card-header-color: #6a7a4d;
+$light-text-color: #c8d3b9;
 
+$gradient-primary: linear-gradient(26deg, $primary-color 0%, lighten(#a26cf8, 40%) 40%);
+$gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -20%, $primary-color 40%);
 
-$gradient-primary: linear-gradient(26deg, var(--theme-default) 0%, #a26cf8 100%);
-$gradient-bg-primary: linear-gradient(103.75deg, #33B1EE -13.9%, var(--theme-default) 79.68%);
+$fb: #a0b1cc;
+$twitter: #b8d8e8;
+$google-plus: #f0a09a;
+$linkedin: #0099d0;
 
-$fb: lighten(#50598e, 10%);
-$twitter: lighten(#6fa2d8, 10%);
-$google-plus: lighten(#c64e40, 10%);
-$linkedin: #0077B5;
+$fb-color: #a0c0f0;
+$insta-color: #ffdfba;
+$pintrest-color: #c8d3b9;
+$twitter-color: #a7e1fa;
+$youtube-color: #ff8a8a;
 
-$fb-color: lighten(#2F84F4, 10%);
-$insta-color: lighten(#FC971E, 10%);
-$pintrest-color: $secondary-color;
-$twitter-color: lighten(#57B9F6, 10%);
-$youtube-color: lighten(#F42F2F, 10%);
-
-$light-body-bg-color: lighten(#fafdff, 5%);
-
-
+$light-body-bg-color: #f2fafa;
 
 $font-outfit: 'Outfit', sans-serif;
 $font-serif: sans-serif;
@@ -87,7 +83,6 @@ $font-themify: themify;
 $font-awesome: FontAwesome;
 $font-ICO: IcoFont;
 
-// dark layout variables
 $dark-body-background: $light-sidebar-bg;
 $dark-card-background: $sidebar-color;
 $dark-card-inbox: $light-sidebar-bg;
@@ -103,7 +98,6 @@ $dark-datatable-sorting: $sidebar-color;
 $dark-datatable-sorting-even: $light-sidebar-bg;
 $dark-even-hover-sorting: rgba(255, 255, 255, 0.2);
 
-//General tag settings
 $body-font-size: 14px;
 $body-font-color: $theme-body-font-color;
 $ul-padding-left: 0px;
@@ -135,8 +129,6 @@ $list-group-active-border-color: var(--theme-default);
 $list-group-img-size: 40px;
 $list-group-margin: 10px;
 
-
-// Tables settings
 $table-b-margin: 0px;
 $table-heading-color: $theme-body-font-color;
 $table-row-color: $theme-body-font-color;
@@ -158,7 +150,6 @@ $horizontal-border-color: #f2f4ff;
 $horizontal-padding: .75rem 2rem;
 $table-inverse-bg-color: #292b2c;
 
-//According setting
 $according-card-top-margin : 10px;
 $according-btn-weight : 500;
 $according-btn-color : $theme-body-font-color;
@@ -167,28 +158,23 @@ $according-card-header-icon : $font-ICO;
 $according-open-icon : "\eb73";
 $according-close-icon : "\eb7a";
 
-//Alert settings
 $alert-hover-color :$dark-color;
 $alert-border-radious :0.15rem;
 $alert-padding :15px;
 $alert-msg-icon-size :16px;
 
-//badge settings
 $badge-padding :0.44em 0.7em;
 $badge-svg-size :16px;
 
-//form input settings
 $form-group-margin-bottom : 1.25em;
 $col-form-label-font-size : 14px;
 $form-control-font-size : 14px;
 $form-control-border-radious : 2px;
 $form-control-border-color : $light-gray;
 
-//breadcrumb setting
 $breadcrumb-ancher-color : $white;
 $breadcrumb-ancher-dark-color : $black;
 
-//buttons setting
 $btn-font-size : 14px;
 $btn-padding : 0.375rem 1.75rem;
 $btn-lg-font-size: 18px;
@@ -196,7 +182,6 @@ $btn-sm-font-size: 12px;
 $btn-xs-font-size: 11px;
 $btn-xs-padding: 0.05rem 0.4rem;
 
-//Card settings
 $card-padding :16px 24px;
 $card-margin-bottom :30px;
 $card-border-color :1px dashed $light-gray;
@@ -211,19 +196,16 @@ $card-body-bg-color : $transparent-color;
 $card-footer-bg-color : $white;
 $card-hover-box-shadow : 0 0 40px rgba(8, 21, 66, .05);
 
-// According settings
 $card-border-width :0px;
 $card-header-font-weight : 600;
 $card-header-font-size : 18px;
 $card-header-font-color : $theme-body-font-color;
 
-//footer settings
 $footer_bg_color : $white;
 $footer_box_shadow : 0 0 20px rgba($semi-dark, 0.1);
 $footer_dark_color : $theme-font-color;
 $footer_dark__txt_color : $white;
 
-//form settings
 $form-group-margin-bottom :20px;
 $sm-form-margin-bottom : 14px;
 $form-placeholder-color : $dark-gray;
@@ -233,10 +215,8 @@ $form-placeholder-font-weight : 100;
 $form-input-border-color : $light-semi-gray;
 $form-input-bg-color : $white;
 
-//Tour settings
 $tour-color: var(--theme-default);
 
-//sidabr main settings
 $sidebar-width: 250px;
 $sidebar-position: fixed;
 $sidebar-background-color: $white;
@@ -246,7 +226,6 @@ $sidebar-z-index: 9;
 $sidebar-transition: 0.5s;
 $sidebar-fill-icon-color: #757589;
 
-//sidebar profile settings
 $sidebar-profile-edit-icon-size: 14px;
 $sidebar-profile-name-txt-color : var(--theme-default);
 $sidebar-profile-name-txt-transfer : uppercase;
@@ -257,7 +236,6 @@ $sidebar-profile-sub-title-font-size: 10px;
 $sidebar-profile-sub-title-margin: 0px;
 $sidebar-profile-img-shadow: 0 0 15px rgba(68, 102, 242, 0.3);
 
-//Sidebar main menu setting
 $sidebar-menu-padding: 15px;
 $sidebar-menu-list-style: none;
 $sidebar-menu-list-margin: 0;
@@ -284,13 +262,11 @@ $sidebar-icon-font-family: $font-awesome;
 $sidebar-height: calc(100vh - 105px);
 $sidebar-compact-width: 252px;
 
-//Header settings
 $main-header-position: fixed;
 $main-header-top: 0;
 $main-header-shadow: 0 0 20px rgba($semi-dark, 0.1);
 $main-header-shadow-1: 0px 4px 40px rgba(39, 32, 120, 0.1);
 
-//page settings
 $page-body-padding : 0 15px 0 15px;
 $page-body-bg-color: $light-color;
 $page-body-margin-bottom: 0px;
@@ -307,8 +283,6 @@ $page-small-title-text-color: $theme-body-sub-title-color;
 $breadcrumb-size: 16px;
 $breadcrumb-content: "/";
 
-
-//main header left settings
 $header-left-bg-color : $white;
 $main-header-padding : 27px 22px;
 $main-header-z-index : 8;
@@ -320,7 +294,6 @@ $header-wrapper-nav-icon-align : middle;
 $header-size: 136px;
 $box-layout-space : 40px;
 
-// typography variables
 $heading_1: 30px;
 $heading_2: 26px;
 $heading_3: 22px;
@@ -329,5 +302,4 @@ $heading_5: 16px;
 $heading_6: 14px;
 $common_letter_spacing: 0.6px;
 
-// widgets variables
 $widget-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);

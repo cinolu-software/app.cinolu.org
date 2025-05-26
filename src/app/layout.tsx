@@ -11,7 +11,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <I18nProvider language={lng}>
-      <html>
+      <html suppressHydrationWarning>
         <head>
           <link rel="icon" href="/assets/images/favicon.png" type="image/x-icon" />
           <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-icon" />
@@ -23,7 +23,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </head>
         <body suppressHydrationWarning={true}>
           <NoSsr>
-            <MainProvider>{children}</MainProvider>
+            <MainProvider>
+                {children}
+            </MainProvider>
           </NoSsr>
         </body>
       </html>

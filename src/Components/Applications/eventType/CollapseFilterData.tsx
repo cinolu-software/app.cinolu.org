@@ -1,10 +1,9 @@
 // import { FiltersData } from "@/Data/Application/UsersData/Partners";
-
 import { useAppSelector } from "@/Redux/Hooks";
 
 import React from "react";
 
-import { Card, CardBody, Col, Collapse, Input, Row } from "reactstrap";
+import { Card, CardBody, Collapse, Row } from "reactstrap";
 
 export const CollapseFilterData = () => {
 

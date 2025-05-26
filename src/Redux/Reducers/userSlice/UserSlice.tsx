@@ -51,7 +51,7 @@ export const fetchUsers = createAsyncThunk<{ data: UserType[] }>(
 export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
     'users/fetchStaffMembers',
     async () => {
-        const response = await axiosInstance.get<{ data: StaffMemberType[] }>(`${apiBaseUrl}/users/staff`);
+        const response = await axiosInstance.get<{ data: StaffMemberType[] }>(`${apiBaseUrl}/users/roles/staff`);
         return { data: response.data.data };
     }
 );
@@ -59,7 +59,7 @@ export const fetchStaffMembers = createAsyncThunk<{ data: StaffMemberType[] }>(
 export const fetchCoaches = createAsyncThunk<{ data: UserType[] }>(
     'users/fetchCoaches',
     async () => {
-        const response = await axiosInstance.get<{ data: UserType[] }>(`${apiBaseUrl}/users/coachs`);
+        const response = await axiosInstance.get<{ data: UserType[] }>(`${apiBaseUrl}/users/roles/coachs`);
         return { data: response.data.data };
     }
 );

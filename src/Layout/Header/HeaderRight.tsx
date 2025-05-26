@@ -19,7 +19,7 @@ export const HeaderRight = () => {
                 <MaximizeScreen/>
                 {/*<DarkMode />*/}
                 <Languages/>
-                <Notification/>
+                {/*<Notification/>*/}
                 <Profile/>
             </ul>
         </Col>

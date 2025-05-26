@@ -23,14 +23,16 @@ const ProjectListContainer = () => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
                 <Label className="me-2">{"Chercher"}:</Label>
-                <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
+                <Input
+                    className={'border border-primary'}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText}
+                />
             </div>
         );
     }, [filterText]);
 
     useEffect(() => {
         if (status === "idle" || status === "loading") {
-            console.log(status)
             dispatch(fetchProjects());
         }
     }, [status, dispatch]);
@@ -48,11 +50,11 @@ const ProjectListContainer = () => {
                                 <ProjectHeader />
                                 <CollapseFilterData/>
                             </div>
-                            <div className="list-product">
-                                <div className="table-responsive">
+                            <div >
+                                <div>
                                     <DataTable
                                         className="theme-scrollbar"
-                                        data={filteredItems}
+                                        data={filteredItems as any[]}
                                         columns={ProjectListTableDataColumn}
                                         striped
                                         highlightOnHover

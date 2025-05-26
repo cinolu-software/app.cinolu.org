@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
-import { PartnerType, InitialStatePatnerType, FormValuePartnerType } from "@/Types/PartnerType/PartnerType";
+import { PartnerType, InitialStatePatnerType } from "@/Types/PartnerType/PartnerType";
 import {ShowError} from "@/utils/MultiStepForm.service";
 
 const initialState: InitialStatePatnerType = {
@@ -33,7 +33,7 @@ const initialState: InitialStatePatnerType = {
 export const fetchPartner = createAsyncThunk<{ data: PartnerType[] }>(
     "partner/fetchPartner",
     async () => {
-        const response = await axiosInstance.get<{ data: PartnerType[] }>(`${apiBaseUrl}/partners`);
+        const response = await axiosInstance.get<{ data: PartnerType[] }>(`${apiBaseUrl}/organizations`);
         const partnerData = response.data.data;
         return { data: partnerData };
     }
@@ -43,7 +43,7 @@ export const createPartner = createAsyncThunk(
     "partner/createPartner",
     async (newPartner: any, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.post<{ data: PartnerType }>(`${apiBaseUrl}/partners`, newPartner);
+            const response = await axiosInstance.post<{ data: PartnerType }>(`${apiBaseUrl}/organizations`, newPartner);
             return { data: response.data.data };
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la création du partenaire.");
@@ -55,7 +55,7 @@ export const deletePartner = createAsyncThunk(
     "partner/deletePartner",
     async (id: string, { rejectWithValue }) => {
         try {
-            await axiosInstance.delete(`${apiBaseUrl}/partners/${id}`);
+            await axiosInstance.delete(`${apiBaseUrl}/organizations/${id}`);
             return id;
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la suppression du partenaire.");
@@ -67,7 +67,7 @@ export const updatePartner = createAsyncThunk(
     "partner/updatePartner",
     async (partner: PartnerType, { rejectWithValue }) => {
         try {
-            const response = await axiosInstance.patch<{ data: PartnerType }>(`${apiBaseUrl}/partners/${partner.id}`, partner);
+            const response = await axiosInstance.patch<{ data: PartnerType }>(`${apiBaseUrl}/organizations/${partner.id}`, partner);
             return { data: response.data.data };
         } catch (error: any) {
             return rejectWithValue(error.response?.data || "Une erreur est survenue lors de la modification du partenaire.");
@@ -80,7 +80,7 @@ export const addProfileImage = createAsyncThunk<{ data: PartnerType }, { id: str
     async ({ id, formData }, { rejectWithValue }) => {
         try {
             const response = await axiosInstance.post<{ data: PartnerType }>(
-                `${apiBaseUrl}/partners/${id}/profile`,
+                `${apiBaseUrl}/organizations/${id}/profile`,
                 formData,
                 {
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -159,13 +159,7 @@ const PartnerSlice = createSlice({
         },
         setFormValue: (state, action: PayloadAction<{field: keyof any, value: string}>) => {
             const {field, value} = action.payload;
-
             state.formValue[field] = value
-
-            // if(field === 'partnerships'){
-            // }else{
-            //     state.formValue[field] = value
-            // }
         },
         setShowFinish: (state, action) => {
           state.showFinish = action.payload

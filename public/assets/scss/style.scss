@@ -1,115 +1,91 @@
 @import "utils/variables";
 
 :root {
-    --theme-default: #556c1f;
-    --theme-secondary: lighten(#556c1f, 5%);
-    --light-background: rgba(91, 108, 31, 0.7);
-    --body-font-color: #4e5c33;
-    --chart-border: #4e5c33;
-    --recent-chart-bg: lighten(#4e5c33, 10%);
-    --light-bg: #dfefd8;
+    /* ========== COULEURS PRINCIPALES ========== */
+    --theme-default: #164C45; /* Dark teal */
+    --theme-secondary: #CC8D1A; /* Mustard yellow */
+    --light-background: rgba(227, 199, 95, 0.1); /* Light yellow */
+    --body-font-color: #16232E; /* Dark navy */
+
+    /* ========== COMPOSANTS & GRAPHIQUES ========== */
+    --chart-border: #164C45;
+    --recent-chart-bg: #E3C75F; /* Light yellow */
+    --light-bg: rgba(227, 199, 95, 0.05); /* Very light yellow */
     --white: #FFFFFF;
-    --light2: lighten(#dfefd8, 10%);
-    --sidebar-border: rgba(78, 92, 51, 0.1);
-    --chart-text-color: rgba(78, 92, 51, 0.8);
-    --recent-dashed-border: rgba(78, 92, 51, 0.3);
-    --chart-dashed-border: rgba(78, 92, 51, 0.2);
-    --chart-progress-light: rgba(78, 92, 51, 0.1);
-    --recent-box-bg: lighten(#dfefd8, 5%);
-    --recent-border: rgba(117, 121, 142, 0.25);
-    --course-light-btn: lighten(#dfefd8, 10%);
-    --course-bg: #dfefd8;
-    --balance-profie-bg: lighten(#dfefd8, 15%);
-    --view-grid-bg: lighten(#dfefd8, 20%); /* Vert très clair encore plus clair */
-    --view-border-marker: lighten(#4e5c33, 20%); /* Vert moyen éclairci */
-    --light-slate: lighten(#dfefd8, 5%); /* Vert très clair légèrement éclairci */
-    --text-gray: rgba(78, 92, 51, 0.8); /* Dérivé du vert moyen */
-    --product-shadow: 0px 1px 0px rgba(78, 92, 51, 0.15); /* Dérivé du vert moyen */
-    --light-shade-primary: rgba(91, 108, 31, 0.7); /* Dérivé du vert soutenu */
-    --fc-button-bg-color: var(--theme-default); /* Vert soutenu */
-    --fc-button-active-bg-color: darken(var(--theme-default), 10%); /* Vert soutenu assombri */
-    --fc-button-active-border-color: darken(var(--theme-default), 10%); /* Vert soutenu assombri */
-    --fc-button-border-color: var(--theme-default); /* Vert soutenu */
-    --fc-button-hover-bg-color: lighten(var(--theme-default), 10%); /* Vert soutenu éclairci */
-    --fc-button-hover-border-color: lighten(var(--theme-default), 10%); /* Vert soutenu éclairci */
+    --light2: lighten(#E3C75F, 10%); /* Lighter yellow */
+    --sidebar-border: rgba(22, 76, 69, 0.1); /* Dark teal transparent */
 
-    --bs-heading-color: #4e5c33; /* Vert moyen */
+    /* ========== TEXTES & DETAILS ========== */
+    --chart-text-color: rgba(22, 35, 46, 0.8); /* Dark navy transparent */
+    --recent-dashed-border: rgba(22, 76, 69, 0.3); /* Dark teal transparent */
+    --chart-dashed-border: rgba(204, 141, 26, 0.2); /* Mustard transparent */
+    --chart-progress-light: rgba(227, 199, 95, 0.2); /* Light yellow transparent */
 
-    --normal: #4e5c33; /* Vert moyen */
-    --normal-shadow: darken(#4e5c33, 10%); /* Vert moyen assombri */
-    --normal-mouth: #B0AFBC; /* Gris existant */
-    --normal-eye: #6F6F78; /* Gris existant */
-    --active: #FAE48A; /* Jaune existant (pour contraste si nécessaire) */
-    --active-shadow: #F7C67D; /* Jaune existant */
-    --active-mouth: #F47456; /* Orange existant */
-    --active-eye: #4B4A4F; /* Gris foncé existant */
-    --active-tear: #88c4f3; /* Bleu clair existant */
-    --active-shadow-angry: #ee7150; /* Orange-rouge existant */
+    /* ========== INTERACTIONS ========== */
+    --recent-box-bg: lighten(#E3C75F, 35%); /* Very light yellow */
+    --course-light-btn: lighten(#E3C75F, 25%); /* Lighter yellow */
+    --course-bg: #E3C75F; /* Light yellow */
+    --view-grid-bg: lighten(#E3C75F, 40%); /* Very light yellow */
+    --view-border-marker: #164C45;
 
+    /* ========== CALENDRIER ========== */
+    --fc-button-bg-color: var(--theme-default);
+    --fc-button-active-bg-color: darken(var(--theme-default), 10%);
+    --fc-button-active-border-color: darken(var(--theme-default), 10%);
+    --fc-button-border-color: var(--theme-default);
+    --fc-button-hover-bg-color: lighten(var(--theme-default), 10%);
+    --fc-button-hover-border-color: lighten(var(--theme-default), 10%);
+
+    /* ========== ÉMOTICÔNES ========== */
+    --normal: #4e5c33; /* Darker green (approx.) */
+    --normal-shadow: darken(#4e5c33, 10%);
+    --normal-mouth: #B0AFBC; /* Light gray (approx.) */
+    --normal-eye: #6F6F78; /* Darker gray (approx.) */
+    --active: #FAE48A; /* Bright yellow (approx.) */
+    --active-shadow: #F7C67D; /* Darker yellow (approx.) */
+    --active-mouth: #F47456; /* Orange (approx.) */
+    --active-eye: #4B4A4F; /* Darker gray (approx.) */
+    --active-tear: #88c4f3; /* Light blue (approx.) */
+    --active-shadow-angry: #ee7150; /* Darker orange (approx.) */
+
+    /* ========== SYSTÈME DE TAGS ========== */
     .customLook {
-        --tag-bg: var(--theme-default); /* Vert soutenu */
-        --tag-hover: var(--theme-secondary); /* Vert soutenu éclairci */
+        --tag-bg: var(--theme-default);
+        --tag-hover: var(--theme-secondary);
         --tag-text-color: var(--white);
-        --tags-border-color: silver; /* Gris existant */
-        --tag-border-radius: 25px;
-        --tag-text-color--edit: #111111;
+        --tags-border-color: #BDA523; /* Darker yellow */
         --tag-remove-bg: var(--tag-hover);
-        --tag-pad: .6em 1em;
-        --tag-inset-shadow-size: 1.35em;
-        --tag-remove-btn-bg--hover: #000000;
-        --tagify-dd-color-primary: var(--theme-default);
         --tagify-dd-bg-color: var(--course-light-btn);
     }
 }
 
-body[class='dark-only'] {
-    --light-background: #14532D;
-    --recent-chart-bg: #333741;
-    --light-bg: #282930;
-    --white: #333741;
-    --sidebar-border: rgba(255, 255, 255, 0.2);
-    --light2: #282930;
-    --chart-border: #4A5874;
-    --recent-box-bg: #282930;
-    --recent-border: #4A5874;
-    --body-font-color: rgba(255, 255, 255, 0.8);
-    --course-light-btn: var(--light-bg);
-    --view-grid-bg: var(--light-bg);
-    --view-border-marker: #373764;
-    --light-slate: #272830;
-    --text-gray: rgba(179, 179, 192, 0.8);
-    --product-shadow: 0px 1px 0px rgb(74 88 116);
-    --light-shade-primary: rgba(58, 67, 85, 1);
-    --bs-heading-color: rgba(255, 255, 255, 0.9);
+/* ========== THÈME SOMBRE ========== */
+body[class^='dark'] {
+    --theme-default: darken(#164C45, 20%); /* Darker teal */
+    --light-background: darken(#164C45, 40%); /* Very dark teal */
+    --body-font-color: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+    --light-bg: darken(#16232E, 40%); /* Very dark navy */
+    --white: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
+    --chart-border: darken(#164C45, 20%);
+    --course-bg: darken(#164C45, 40%);
+    --normal: darken(#164C45, 20%);
+    --active-shadow: darken(#16232E, 20%);
+}
+
+/* ========== VARIANTES SPÉCIFIQUES ========== */
+body[class="dark-only box-layout"] {
+    --light-background: darken(#164C45, 50%);
+    --recent-chart-bg: darken(#164C45, 40%);
+    --light-bg: darken(#16232E, 50%);
+    --chart-border: darken(#164C45, 30%);
 }
 
 body[class="rtl dark-only"] {
-    --light-background: #14532D;
-    --recent-chart-bg: #333741;
-    --light-bg: #282930;
-    --white: #333741;
-    --sidebar-border: rgba(255, 255, 255, 0.2);
-    --light2: #282930;
-    --chart-border: #4A5874;
-    --recent-box-bg: #282930;
-    --recent-border: #4A5874;
-    --body-font-color: rgba(255, 255, 255, 0.8);
-    --course-light-btn: var(--light-bg);
-    --view-grid-bg: var(--light-bg);
-    --view-border-marker: #373764;
-    --light-slate: #272830;
-    --text-gray: rgba(179, 179, 192, 0.8);
-    --product-shadow: 0px 1px 0px rgb(74 88 116);
-    --light-shade-primary: rgba(58, 67, 85, 1);
+    --light-shade-primary: rgba(22, 76, 69, 0.8);
     --bs-heading-color: rgba(255, 255, 255, 0.9);
 }
 
-body[class="dark-only modal-open"] {
-    --light-shade-primary: rgba(58, 67, 85, 1);
-    --light-slate: #272830;
-    --bs-heading-color: rgba(255, 255, 255, 0.9);
-}
-
+body[class="dark-only modal-open"],
 body[class="rtl dark-only modal-open"] {
     --light-shade-primary: rgba(58, 67, 85, 1);
     --light-slate: #272830;
@@ -145,7 +121,7 @@ body.dark-only.box-layout {
 @import "components/avatars";
 @import "components/badge";
 @import "components/bookmark";
-@import "components/breadcrumb"; 
+@import "components/breadcrumb";
 @import "components/basic-card";
 @import "components/builders";
 @import "components/buttons";

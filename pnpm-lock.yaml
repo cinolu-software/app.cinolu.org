@@ -13,7 +13,7 @@ importers:
         version: 40.2.0
       '@ckeditor/ckeditor5-react':
         specifier: ^6.2.0
-        version: 6.3.0(@ckeditor/ckeditor5-core@40.2.0)(@ckeditor/ckeditor5-editor-multi-root@45.0.0)(@ckeditor/ckeditor5-engine@40.2.0)(@ckeditor/ckeditor5-utils@40.2.0)(@ckeditor/ckeditor5-watchdog@40.2.0)(react@18.3.1)
+        version: 6.3.0(@ckeditor/ckeditor5-core@45.0.0)(@ckeditor/ckeditor5-editor-multi-root@45.0.0)(@ckeditor/ckeditor5-engine@45.0.0)(@ckeditor/ckeditor5-utils@45.0.0)(@ckeditor/ckeditor5-watchdog@45.0.0)(react@18.3.1)
       '@dropzone-ui/react':
         specifier: ^7.0.4
         version: 7.0.4(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -23,6 +23,9 @@ importers:
       '@emoji-mart/react':
         specifier: ^1.1.1
         version: 1.1.1(emoji-mart@5.6.0)(react@18.3.1)
+      '@emotion/react':
+        specifier: ^11.14.0
+        version: 11.14.0(@types/react@18.3.20)(react@18.3.1)
       '@fullcalendar/core':
         specifier: ^6.1.9
         version: 6.1.17
@@ -95,6 +98,12 @@ importers:
       accept-language:
         specifier: ^3.0.18
         version: 3.0.20
+      ag-grid-community:
+        specifier: ^33.2.4
+        version: 33.2.4
+      ag-grid-react:
+        specifier: ^33.2.4
+        version: 33.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       apexcharts:
         specifier: ^3.43.0
         version: 3.54.1
@@ -182,6 +191,9 @@ importers:
       next:
         specifier: ^14.0.4
         version: 14.2.28(@babel/core@7.26.10)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.87.0)
+      next-themes:
+        specifier: ^0.4.6
+        version: 0.4.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       photoswipe:
         specifier: ^5.4.2
         version: 5.4.4
@@ -249,7 +261,7 @@ importers:
         specifier: ^13.2.2
         version: 13.5.0(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-icons:
-        specifier: ^4.11.0
+        specifier: ^4.12.0
         version: 4.12.0(react@18.3.1)
       react-image-crop:
         specifier: ^10.1.8
@@ -2341,6 +2353,18 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  ag-charts-types@11.2.4:
+    resolution: {integrity: sha512-a1aQjtQ9ZH+J8BF3YcWAIHUt9ZLiL9IVZ8R5h7z2CkTNu2TPq5UlsCcF0/YZKc1M8CM0CdSNLSGQuWUwDNxAcA==}
+
+  ag-grid-community@33.2.4:
+    resolution: {integrity: sha512-7XT1+wxmMlMVXB27BJOzlft9ATB0C5HOJcCGMc8dCO2W17JXbNknVEEDGTBKoSvA4Cei8sARrRDxmPgY8mWopQ==}
+
+  ag-grid-react@33.2.4:
+    resolution: {integrity: sha512-rP6zwrGxRimAf6blJQZDahE0t2LM2zqqOEEeBacD6M5coWP+zOESja9vklpyzU+UfIlyqToZ2O+rboBQt3Wqxg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   ajv@6.12.6:
     resolution: {integrity: sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==}
 
@@ -3916,6 +3940,12 @@ packages:
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
+
+  next-themes@0.4.6:
+    resolution: {integrity: sha512-pZvgD5L0IEvX5/9GWyHMf3m8BKiVQwsCMHfoFosXtXBMnaS0ZnIJ9ST4b4NqLVKDEm8QBxoNNGNaBv2JNF6XNA==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
 
   next-tick@1.1.0:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
@@ -5524,6 +5554,10 @@ snapshots:
       '@ckeditor/ckeditor5-utils': 45.0.0
       '@ckeditor/ckeditor5-watchdog': 45.0.0
       es-toolkit: 1.32.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-document-outline@45.0.0':
     dependencies:
@@ -5548,6 +5582,10 @@ snapshots:
       '@ckeditor/ckeditor5-upload': 45.0.0
       '@ckeditor/ckeditor5-utils': 45.0.0
       ckeditor5: 45.0.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-editor-balloon@45.0.0':
     dependencies:
@@ -5655,10 +5693,6 @@ snapshots:
       '@ckeditor/ckeditor5-ui': 45.0.0
       '@ckeditor/ckeditor5-undo': 45.0.0
       ckeditor5: 45.0.0
-    transitivePeerDependencies:
-      - bufferutil
-      - supports-color
-      - utf-8-validate
 
   '@ckeditor/ckeditor5-find-and-replace@45.0.0':
     dependencies:
@@ -5982,13 +6016,13 @@ snapshots:
       '@ckeditor/ckeditor5-engine': 45.0.0
       ckeditor5: 45.0.0
 
-  '@ckeditor/ckeditor5-react@6.3.0(@ckeditor/ckeditor5-core@40.2.0)(@ckeditor/ckeditor5-editor-multi-root@45.0.0)(@ckeditor/ckeditor5-engine@40.2.0)(@ckeditor/ckeditor5-utils@40.2.0)(@ckeditor/ckeditor5-watchdog@40.2.0)(react@18.3.1)':
+  '@ckeditor/ckeditor5-react@6.3.0(@ckeditor/ckeditor5-core@45.0.0)(@ckeditor/ckeditor5-editor-multi-root@45.0.0)(@ckeditor/ckeditor5-engine@45.0.0)(@ckeditor/ckeditor5-utils@45.0.0)(@ckeditor/ckeditor5-watchdog@45.0.0)(react@18.3.1)':
     dependencies:
-      '@ckeditor/ckeditor5-core': 40.2.0
+      '@ckeditor/ckeditor5-core': 45.0.0
       '@ckeditor/ckeditor5-editor-multi-root': 45.0.0
-      '@ckeditor/ckeditor5-engine': 40.2.0
-      '@ckeditor/ckeditor5-utils': 40.2.0
-      '@ckeditor/ckeditor5-watchdog': 40.2.0
+      '@ckeditor/ckeditor5-engine': 45.0.0
+      '@ckeditor/ckeditor5-utils': 45.0.0
+      '@ckeditor/ckeditor5-watchdog': 45.0.0
       prop-types: 15.8.1
       react: 18.3.1
 
@@ -6195,6 +6229,10 @@ snapshots:
       color-parse: 1.4.2
       es-toolkit: 1.32.0
       vanilla-colorful: 0.7.2
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-undo@40.2.0':
     dependencies:
@@ -6229,6 +6267,10 @@ snapshots:
     dependencies:
       '@ckeditor/ckeditor5-ui': 45.0.0
       es-toolkit: 1.32.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-watchdog@40.2.0':
     dependencies:
@@ -6241,6 +6283,10 @@ snapshots:
       '@ckeditor/ckeditor5-engine': 45.0.0
       '@ckeditor/ckeditor5-utils': 45.0.0
       es-toolkit: 1.32.0
+    transitivePeerDependencies:
+      - bufferutil
+      - supports-color
+      - utf-8-validate
 
   '@ckeditor/ckeditor5-widget@40.2.0':
     dependencies:
@@ -8204,6 +8250,19 @@ snapshots:
       acorn: 8.14.1
 
   acorn@8.14.1: {}
+
+  ag-charts-types@11.2.4: {}
+
+  ag-grid-community@33.2.4:
+    dependencies:
+      ag-charts-types: 11.2.4
+
+  ag-grid-react@33.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      ag-grid-community: 33.2.4
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   ajv@6.12.6:
     dependencies:
@@ -10299,6 +10358,11 @@ snapshots:
   napi-postinstall@0.2.3: {}
 
   natural-compare@1.4.0: {}
+
+  next-themes@0.4.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
 
   next-tick@1.1.0: {}
 

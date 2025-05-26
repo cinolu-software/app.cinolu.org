@@ -1,6 +1,6 @@
 import {createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import axiosInstance, {apiBaseUrl} from "@/services/axios";
-import {ProjectCategoryType,InitialStateCategoryType,CreateCategoryType, UpdateCategoryType} from '@/Types/Projects/ProjectCategoryType';
+import {InitialStateCategoryType,CreateCategoryType, UpdateCategoryType} from '@/Types/Projects/ProjectCategoryType';
 
 const initialState: InitialStateCategoryType = {
     projectCategoryData: [],

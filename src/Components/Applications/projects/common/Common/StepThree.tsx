@@ -25,7 +25,6 @@ const StepThree: React.FC<StepPropsType> = ({ data }) => {
         dispatch(setNewFormValue({ field: 'types', value: updatedTypes }));
     };
 
-
     return (
         <Col>
             <section className="main-upgrade">
@@ -38,23 +37,25 @@ const StepThree: React.FC<StepPropsType> = ({ data }) => {
                     </p>
                 </div>
                 <div className="variation-box">
-                    {transformedProjectData.map((type : TransformedProjectTypeType) => {
-                        return (
-                            <div className="selection-box" key={type.id}>
-                                <Input
-                                    id={`type${type.id}`}
-                                    type="checkbox"
-                                    checked={data?.types.includes(type.id)}
-                                    onChange={() => handleTypeChange(type.id)}
-                                />
-                                <div className="custom--mega-checkbox">
-                                    <ul>
-                                        <li>{type.name}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        );
-                    })}
+                    {
+                            transformedProjectData.map((type : TransformedProjectTypeType) => {
+                                return (
+                                    <div className="selection-box" key={type.id}>
+                                        <Input
+                                            id={`type${type.id}`}
+                                            type="checkbox"
+                                            checked={data?.types.includes(type.id)}
+                                            onChange={() => handleTypeChange(type.id)}
+                                        />
+                                        <div className="custom--mega-checkbox">
+                                            <ul>
+                                                <li>{type.name}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                );
+                            })
+                    }
                 </div>
             </section>
         </Col>

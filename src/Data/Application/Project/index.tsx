@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {ReceiveProjectType} from "@/Types/Projects/ProjectType";
+import {ActivityReceive} from "@/Types/ActivitiesTypes";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useAppDispatch} from "@/Redux/Hooks";
-import { publishProject, setSelectedProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
+import { publishProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
+import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
@@ -21,7 +22,7 @@ const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image,
     );
 };
 
-const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ project }) => {
+const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ project }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -32,18 +33,19 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
 
     const handleEdit = async () => {
         setLoadingEdit(true);
-        router.push('/project/edit_project');
-        dispatch(setSelectedProject({project}));
+        router.push('/act/edit');
+        dispatch(setSelectedActivity(project));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
         router.push('/project/detail_project');
-        dispatch(setSelectedProject({project}));
+        dispatch(setSelectedActivity(project));
     };
 
     const handleDelete = async () => {
         setLoadingDelete(true);
+        //@ts-ignore
         dispatch(setModalDeleteProject({ isOpen: true, project }));
         setLoadingDelete(false);
     };
@@ -81,6 +83,7 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleEdit}
+                        className={'btn-info'}
                         disabled={loadingEdit}
                     >
                         {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
@@ -90,6 +93,7 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDetail}
+                        className={'btn-info'}
                         disabled={loadingDetail}
                     >
                         {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
@@ -99,15 +103,17 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handlePublish}
+                        className={'btn-info'}
                         disabled={loadingPublish}
                     >
-                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="fill-calendar"/>}
+                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="published"/>}
                     </button>
                 </div>
                 <div className="col-3">
                     <button
                         style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
                         onClick={handleDelete}
+                        className={'btn-info'}
                         disabled={loadingDelete}
                     >
                         {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
@@ -118,10 +124,10 @@ const ProjectListTableAction: React.FC<{ project: ReceiveProjectType }> = ({ pro
     );
 };
 
-export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
+export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     {
         name: "Nom",
-        cell: (row: ReceiveProjectType) => (
+        cell: (row: ActivityReceive) => (
             <ProjectListTableName
                 image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
@@ -131,65 +137,25 @@ export const ProjectListTableDataColumn: TableColumn<ReceiveProjectType>[] = [
     },
     {
         name: "Date de début",
-        selector: (row: ReceiveProjectType) => row.started_at,
+        selector: (row: ActivityReceive) => row.started_at,
         sortable: true,
         grow: 1
     },
     {
         name: "Date de fin",
-        selector: (row: ReceiveProjectType) => row.ended_at,
+        selector: (row: ActivityReceive) => row.ended_at,
         sortable: true,
         grow: 1
     },
-    {
-        name: "Nombre de participants",
-        selector: (row: ReceiveProjectType) => row.report?.["Nombre total de participants"] ?? 0,
-        sortable: true,
-        grow: 1
-    },
+    // {
+    //     name: "Nombre de participants",
+    //     selector: (row: ActivityReceive) => row.report?.["Nombre total de participants"] ?? 0,
+    //     sortable: true,
+    //     grow: 1
+    // },
     {
         name: "Actions",
-        cell: (row: ReceiveProjectType) => <ProjectListTableAction project={row}/>,
+        cell: (row: ActivityReceive) => <ProjectListTableAction project={row}/>,
         grow: 2
     },
-];
-
-
-export const AddProgram = [
-    {
-      id: 1,
-      // icon: "info",
-      title: "Information du programme",
-      detail:"Nom et Description",
-    },
-    {
-      id: 2,
-      // icon: "calendar",
-      title: "Durée du programme",
-      detail: "date de début et de fin"
-    },
-    {
-      id: 3,
-      // icon: "type",
-      title: "Type de programme",
-      detail: "Sélectionner le type de programme"
-    },
-    {
-      id: 4,
-      // icon: "pricing",
-      // icon: "requirement",
-      title: "Exigence",
-      detail: "Requirements"
-    },
-    {
-        id: 5,
-        // icon: "pricing",
-        // icon: "partners",
-        title: "Partenaires",
-        detail: "Partenaires"
-      },
-];
-
-export const NumberWizardData = [
-    {text: "Fill up your details and proceed next steps.",},
 ];
