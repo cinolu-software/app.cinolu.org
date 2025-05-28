@@ -86,14 +86,6 @@ export const EventsListTableDataColumn = [
         sortable: true,
         grow: 3,
     },
-    // {
-    //     name: "Description",
-    //     selector: (row: ProgramsListTypeTableColumnType) => (
-    //         <div>{row.description}</div>
-    //     ),
-    //     sortable: false,
-    //     grow: 1
-    // },
     {
         name: "Action",
         cell: (row: EventsListTypeTableColumnType) => <EventsListTableAction eventType={row} />,
