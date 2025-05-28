@@ -1,9 +1,10 @@
 import React from 'react';
-import {ImagePath} from '@/Constant';
-import { CardBody, Col} from 'reactstrap';
+import {closeModal, deleteBtnModal, ImagePath} from '@/Constant';
+import {Button, CardBody, Col, Spinner} from 'reactstrap';
 import CommonModal from '@/CommonComponent/CommonModalType/CommonModal';
 import { useAppDispatch } from '@/Redux/Hooks';
 import {toast, Flip} from 'react-toastify';
+import {setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
 
 
 const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setModalAction, deleteEntityThunk}: {
@@ -79,16 +80,17 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
                             </p>
                         )}
                         <div className="d-flex justify-content-center mt-5">
-                            <button
-
-                                className="me-2 btn btn-info"
+                            <Button
+                                color="info"
+                                outline
+                                className="me-2"
                                 onClick={() => dispatch(setModalAction({isOpen: false, entity: null}))}
                             >
-                                Fermer
-                            </button>
-                            <button className={'btn btn-danger'} onClick={handleDelete}>
-                                Supprimer
-                            </button>
+                                {"Fermer"}
+                            </Button>
+                            <Button onClick={handleDelete}  outline color="danger">
+                                {"Supprimer"}
+                            </Button>
                         </div>
                     </div>
                 </CommonModal>

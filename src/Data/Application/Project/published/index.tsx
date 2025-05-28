@@ -73,7 +73,7 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
             <div className="row w-100 justify-content-center g-2">
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleEdit}
                         disabled={loadingEdit}
@@ -88,14 +88,15 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                         {loadingEdit ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleDetail}
                         disabled={loadingDetail}
@@ -110,14 +111,15 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                         {loadingDetail ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color={'warning'}
+                        color={'info'}
                         outline
                         onClick={handleUnPublish}
                         disabled={loadingPublish}
@@ -132,7 +134,8 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                         {loadingPublish ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                            <></>
+                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
                         )}
                         <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
                     </Button>

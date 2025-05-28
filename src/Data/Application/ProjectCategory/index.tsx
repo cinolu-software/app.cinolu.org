@@ -45,7 +45,8 @@ const ProjectCategoryListTableAction: React.FC<{ projectCategoryType: any }> = (
                         }}
                     >
                         {
-                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         }
                         <span className="text-truncate">Modifier</span>
                     </Button>
@@ -65,7 +66,8 @@ const ProjectCategoryListTableAction: React.FC<{ projectCategoryType: any }> = (
                         }}
                     >
                         {
-                            <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />
                         }
                         <span className="text-truncate">Supprimer</span>
                     </Button>
