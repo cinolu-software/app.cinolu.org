@@ -1,8 +1,8 @@
 import React from 'react';
 import {ImagePath} from '@/Constant';
-import {Button, CardBody, Col} from 'reactstrap';
+import { CardBody, Col} from 'reactstrap';
 import CommonModal from '@/CommonComponent/CommonModalType/CommonModal';
-import {useAppDispatch, useAppSelector} from '@/Redux/Hooks';
+import { useAppDispatch } from '@/Redux/Hooks';
 import {toast, Flip} from 'react-toastify';
 
 
@@ -86,7 +86,7 @@ const DeleteEntityModal = ({isOpen, entityName, selectedEntity, entities, setMod
                             >
                                 Fermer
                             </button>
-                            <button className={'btn btn-secondary'} onClick={handleDelete}>
+                            <button className={'btn btn-danger'} onClick={handleDelete}>
                                 Supprimer
                             </button>
                         </div>

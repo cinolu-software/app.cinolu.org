@@ -103,7 +103,7 @@ const UpdateProgramModal = () => {
                 </ModalBody>
                 <ModalFooter>
                     <button
-                        className="btn btn-outline-light"
+                        className="btn btn-outline-warning"
                         onClick={() => dispatch(setModalEditProgram({ isOpen: false, program: null }))}
                     >
                         {"Annuler"}

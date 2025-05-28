@@ -47,15 +47,16 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
                             fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
                         }}
                     >
-                        {
-                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
-                        }
+                        {/*{*/}
+                        {/*    <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />*/}
+                        {/*}*/}
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
 
                 <div className={'col-6'}>
                     <Button
+                        color={'danger'}
                         onClick={handleDelete}
                         outline
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
@@ -66,9 +67,9 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
                             fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
                         }}
                     >
-                        {
-                            <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />
-                        }
+                        {/*{*/}
+                        {/*    <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />*/}
+                        {/*}*/}
                         <span className="text-truncate">Supprimer</span>
                     </Button>
                 </div>

@@ -82,7 +82,7 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
             <div className="row w-100 justify-content-center g-2">
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleEdit}
                         disabled={loadingEdit}
@@ -97,14 +97,15 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                         {loadingEdit ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleDetail}
                         disabled={loadingDetail}
@@ -119,14 +120,15 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                         {loadingDetail ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color={'warning'}
+                        color={'info'}
                         outline
                         onClick={handlePublish}
                         disabled={loadingPublish}
@@ -141,7 +143,8 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                         {loadingPublish ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                            <></>
                         )}
                         <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
                     </Button>
@@ -161,7 +164,9 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                         }}
                     >
                         {
-                            loadingDelete ? <Spinner size="sm" className="flex-shrink-0"  /> : <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
+                            loadingDelete ?
+                                <Spinner size="sm" className="flex-shrink-0"  /> : <></>
+                                // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
                         }
                         <span className="text-truncate">Supprimer</span>
                     </Button>
@@ -197,36 +202,6 @@ export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     {
         name: "Actions",
         cell: (row: ActivityReceive) => <ProjectListTableAction project={row}/>,
-        grow: 2
-    },
-];
-
-export const PublishedProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
-    {
-        name: "Nom",
-        cell: (row: ActivityReceive) => (
-            <ProjectListTableName
-                image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
-                name={row.name}/>
-        ),
-        sortable: true,
-        grow: 2,
-    },
-    {
-        name: "Date de début",
-        selector: (row: ActivityReceive) => row.started_at,
-        sortable: true,
-        grow: 1
-    },
-    {
-        name: "Date de fin",
-        selector: (row: ActivityReceive) => row.ended_at,
-        sortable: true,
-        grow: 1
-    },
-    {
-        name: "Actions",
-        cell: (row: ActivityReceive) => <ProjectListTableAction project={row} isPublished={true}/>,
         grow: 2
     },
 ];

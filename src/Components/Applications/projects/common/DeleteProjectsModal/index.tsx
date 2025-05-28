@@ -69,13 +69,14 @@ const DeleteProjectModal = () => {
                         <div className="d-flex justify-content-center mt-5">
                             <Button
                                 color="primary"
+                                outline
                                 className="me-2"
                                 onClick={() => dispatch(setModalDeleteProject({ isOpen: false, project: null }))}
                                 disabled={isLoading}
                             >
                                 {closeModal}
                             </Button>
-                            <Button onClick={handleDelete} disabled={isLoading}>
+                            <Button onClick={handleDelete} disabled={isLoading} outline color="danger">
                                 {isLoading ? <><Spinner size="sm" color="light" /></> : deleteBtnModal}
                             </Button>
                         </div>
