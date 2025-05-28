@@ -24,12 +24,9 @@ const Project = () => {
                 </Nav>
                 <TabsContent basicTab={basicTab}/>
             </CardBody>
-<<<<<<< HEAD
         </Card>
     )
-=======
-        </Card>)
->>>>>>> develop
+
 }
 
 export default Project;
