@@ -53,40 +53,40 @@ const PhaseForm: React.FC<{ navId: string }> = ({ navId }) => {
 
     const handleSavePhase = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-
-        if (!phase) return;
-
-        setIsSaving(true);
-        try {
-            const updatedPhase = {
-                ...phase,
-                form: { ...phase.form, inputs: formFields },
-            };
-            await dispatch(updateProjectPhase(updatedPhase));
-            toast.success(
-                <p className="text-white tx-16 mb-0">{"Phase mise à jour avec succès !"}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
-        } catch (error) {
-            toast.error(
-                <p className="text-white tx-16 mb-0">{"Une erreur est survenue lors de la mise à jour."}</p>,
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    hideProgressBar: false,
-                    transition: Flip,
-                    theme: "colored",
-                }
-            );
-        } finally {
-            setIsSaving(false);
-        }
+        //
+        // if (!phase) return;
+        //
+        // setIsSaving(true);
+        // try {
+        //     const updatedPhase = {
+        //         ...phase,
+        //         form: { ...phase.form, inputs: formFields },
+        //     };
+        //     await dispatch(updateProjectPhase(updatedPhase));
+        //     toast.success(
+        //         <p className="text-white tx-16 mb-0">{"Phase mise à jour avec succès !"}</p>,
+        //         {
+        //             autoClose: 5000,
+        //             position: toast.POSITION.TOP_CENTER,
+        //             hideProgressBar: false,
+        //             transition: Flip,
+        //             theme: "colored",
+        //         }
+        //     );
+        // } catch (error) {
+        //     toast.error(
+        //         <p className="text-white tx-16 mb-0">{"Une erreur est survenue lors de la mise à jour."}</p>,
+        //         {
+        //             autoClose: 5000,
+        //             position: toast.POSITION.TOP_CENTER,
+        //             hideProgressBar: false,
+        //             transition: Flip,
+        //             theme: "colored",
+        //         }
+        //     );
+        // } finally {
+        //     setIsSaving(false);
+        // }
     };
 
     if (!phase) {

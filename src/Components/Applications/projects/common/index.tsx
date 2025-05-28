@@ -35,6 +35,7 @@ const ProjectListContainer: React.FC<ReceiveProjectTypeTable> = ({project, proje
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
+                                        // @ts-ignore
                                         data={filteredItems}
                                         columns={ProjectListTableDataColumn}
                                         striped

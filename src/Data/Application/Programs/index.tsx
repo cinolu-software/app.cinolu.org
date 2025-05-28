@@ -37,6 +37,7 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
                 <div className={'col-6'}>
                     <Button
                         color="info"
+                        outline
                         onClick={handleEdit}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
                         style={{
@@ -56,6 +57,7 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
                 <div className={'col-6'}>
                     <Button
                         onClick={handleDelete}
+                        outline
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
                         style={{
                             padding: '6px 10px',
