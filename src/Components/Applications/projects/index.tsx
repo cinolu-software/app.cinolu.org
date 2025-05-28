@@ -26,7 +26,6 @@ const Project = () => {
             </CardBody>
         </Card>
     )
-
 }
 
 export default Project;

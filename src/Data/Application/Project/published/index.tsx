@@ -8,7 +8,7 @@ import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
 import SVG from '@/CommonComponent/SVG';
-import {Spinner} from 'reactstrap';
+import {Spinner, Button} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
 const PublishedProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
@@ -22,7 +22,7 @@ const PublishedProjectListTableName: React.FC<{ image: string, name: string }> =
     );
 };
 
-const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ project }) => {
+const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isPublished?: boolean }> = ({ project, isPublished }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -70,36 +70,68 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive }> = 
 
     return (
         <div className="product-action">
-            <div className="row w-100 justify-content-center">
-                <div className="col-4">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+            <div className="row w-100 justify-content-center g-2">
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color="primary"
                         onClick={handleEdit}
-                        className={'btn-info'}
                         disabled={loadingEdit}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
                     >
-                        {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
-                    </button>
+                        {loadingEdit ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                        )}
+                        <span className="text-truncate">Modifier</span>
+                    </Button>
                 </div>
-                <div className="col-4">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color="info"
                         onClick={handleDetail}
-                        className={'btn-info'}
                         disabled={loadingDetail}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
                     >
-                        {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
-                    </button>
+                        {loadingDetail ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
+                        )}
+                        <span className="text-truncate">Détails</span>
+                    </Button>
                 </div>
-                <div className="col-4">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
                         onClick={handleUnPublish}
-                        className={'btn-info'}
                         disabled={loadingPublish}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
                     >
-                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="unpublished"/>}
-                    </button>
+                        {loadingPublish ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                        )}
+                        <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -129,15 +161,9 @@ export const PublishedProjectListTableDataColumn: TableColumn<ActivityReceive>[]
         sortable: true,
         grow: 1
     },
-    // {
-    //     name: "Nombre de participants",
-    //     selector: (row: ActivityReceive) => row.report?.["Nombre total de participants"] ?? 0,
-    //     sortable: true,
-    //     grow: 1
-    // },
     {
         name: "Actions",
-        cell: (row: ActivityReceive) => <PublishedProjectListTableAction project={row}/>,
+        cell: (row: ActivityReceive) => <PublishedProjectListTableAction project={row} isPublished={true}/>,
         grow: 2
     },
 ];
