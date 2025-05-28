@@ -51,6 +51,7 @@ const PublishedProjectListContainer = () => {
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
+                                        // @ts-ignore
                                         data={filteredItems}
                                         columns={PublishedProjectListTableDataColumn}
                                         striped
