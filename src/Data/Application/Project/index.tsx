@@ -194,12 +194,6 @@ export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
         sortable: true,
         grow: 1
     },
-    // {
-    //     name: "Nombre de participants",
-    //     selector: (row: ActivityReceive) => row.report?.["Nombre total de participants"] ?? 0,
-    //     sortable: true,
-    //     grow: 1
-    // },
     {
         name: "Actions",
         cell: (row: ActivityReceive) => <ProjectListTableAction project={row}/>,
@@ -230,12 +224,6 @@ export const PublishedProjectListTableDataColumn: TableColumn<ActivityReceive>[]
         sortable: true,
         grow: 1
     },
-    // {
-    //     name: "Nombre de participants",
-    //     selector: (row: ActivityReceive) => row.report?.["Nombre total de participants"] ?? 0,
-    //     sortable: true,
-    //     grow: 1
-    // },
     {
         name: "Actions",
         cell: (row: ActivityReceive) => <ProjectListTableAction project={row} isPublished={true}/>,

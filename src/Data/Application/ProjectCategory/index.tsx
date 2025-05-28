@@ -5,6 +5,7 @@ import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
 import {setModalCreateCategory, setModalDeleteCategory, setModalEditCategory} from "@/Redux/Reducers/projectSlice/ProjectCategory";
 import SVG from '@/CommonComponent/SVG';
+import {Button} from "reactstrap";
 
 const ProjectCategoryListTableName: React.FC<{ image: string; name: string }> = ({ image, name }) => {
     return (
@@ -31,17 +32,43 @@ const ProjectCategoryListTableAction: React.FC<{ projectCategoryType: any }> = (
         <div className="product-action">
             <div className={'row w-100 justify-content-center'}>
                 <div className={'col-6'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleEdit}>
-                <span>
-                  <SVG iconId="editTable"/>
-                </span>
-                    </button>
+                    <Button
+                        color="primary"
+                        outline
+                        onClick={handleEdit}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {
+                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                        }
+                        <span className="text-truncate">Modifier</span>
+                    </Button>
                 </div>
 
                 <div className={'col-6'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-                        <SVG iconId="trashTable" />
-                    </button>
+                    <Button
+                        color="danger"
+                        outline
+                        onClick={handleDelete}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {
+                            <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />
+                        }
+                        <span className="text-truncate">Supprimer</span>
+                    </Button>
                 </div>
             </div>
         </div>
