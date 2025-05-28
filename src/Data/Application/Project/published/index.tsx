@@ -73,7 +73,8 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
             <div className="row w-100 justify-content-center g-2">
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color="primary"
+                        color="warning"
+                        outline
                         onClick={handleEdit}
                         disabled={loadingEdit}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
@@ -94,7 +95,8 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                 </div>
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color="info"
+                        color="warning"
+                        outline
                         onClick={handleDetail}
                         disabled={loadingDetail}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
@@ -115,6 +117,8 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                 </div>
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
+                        color={'warning'}
+                        outline
                         onClick={handleUnPublish}
                         disabled={loadingPublish}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"

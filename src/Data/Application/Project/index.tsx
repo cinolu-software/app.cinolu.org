@@ -11,6 +11,7 @@ import SVG from '@/CommonComponent/SVG';
 import {Spinner, Button} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
+
 const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
     return (
         <div className="product-names my-2">
@@ -81,7 +82,8 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
             <div className="row w-100 justify-content-center g-2">
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color="primary"
+                        color="warning"
+                        outline
                         onClick={handleEdit}
                         disabled={loadingEdit}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
@@ -102,7 +104,8 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color="info"
+                        color="warning"
+                        outline
                         onClick={handleDetail}
                         disabled={loadingDetail}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
@@ -123,7 +126,8 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color={isPublished ? '' : 'success'}
+                        color={'warning'}
+                        outline
                         onClick={handlePublish}
                         disabled={loadingPublish}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
@@ -144,6 +148,8 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
+                        color={'danger'}
+                        outline
                         onClick={handleDelete}
                         disabled={loadingDelete}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
@@ -155,7 +161,7 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                         }}
                     >
                         {
-                            loadingDelete ? <Spinner size="sm" className="flex-shrink-0"  /> : <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0"/>
+                            loadingDelete ? <Spinner size="sm" className="flex-shrink-0"  /> : <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
                         }
                         <span className="text-truncate">Supprimer</span>
                     </Button>
