@@ -72,7 +72,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                         <Col xs="12">
                             <h4 className="mb-4 mt-4">Formulaire Dynamique de Candidature</h4>
                             <div className="responsive-table">
-                                <Table striped responsive>
+                                <Table responsive>
                                     <thead className="text-center">
                                     <tr className="border-bottom border-primary mb-3">
                                         <th>Nom du champ</th>
@@ -139,6 +139,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                                 {editingIndex === index ? (
                                                     <Button
                                                         color="primary"
+                                                        outline
                                                         size="sm"
                                                         onClick={handleSaveField}
                                                         className="me-2"
@@ -148,6 +149,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                                 ) : (
                                                     <Button
                                                         color="primary"
+                                                        outline
                                                         size="sm"
                                                         onClick={() => handleEditField(index, field)}
                                                         className="me-2"
@@ -155,7 +157,7 @@ const FormActivity :React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                                         Modifier
                                                     </Button>
                                                 )}
-                                                <Button size="sm" onClick={() => handleRemoveField(field.id)}>
+                                                <Button size="sm" onClick={() => handleRemoveField(field.id)} outline color="danger">
                                                     Supprimer
                                                 </Button>
                                             </td>

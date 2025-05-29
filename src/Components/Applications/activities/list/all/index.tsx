@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import {  Col, Container, Input, Label, Row } from "reactstrap";
 import {fetchActivities} from "@/Redux/Reducers/ActivitySlice";
-import { ProjectListTableDataColumn } from "@/Data/Application/Project/";
+import { ActivityListTableDataColumn } from "@/Data/Application/activity";
 import DeleteProjectModal from "@/Components/Applications/activities/list/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import { ToastContainer} from "react-toastify";
@@ -54,7 +54,7 @@ const ProjectListContainer = () => {
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems as any[]}
-                                        columns={ProjectListTableDataColumn}
+                                        columns={ActivityListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination

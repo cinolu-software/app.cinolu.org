@@ -31,14 +31,14 @@ const FinishForm = () => {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/project");
+            router.push("/act/list");
         }
         catch (e) {
             toast.error("Une erreur est survenue lors de la création de l'activité", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/project");
+            router.push("/act/list");
         }
     };
 

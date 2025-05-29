@@ -5,7 +5,7 @@ import TabsContent from "@/Components/Applications/activities/list/TabsContent";
 
 const Project = () => {
 
-    const [basicTab, setBasicTab] = useState("2");
+    const [basicTab, setBasicTab] = useState("1");
 
     return (
         <Card>

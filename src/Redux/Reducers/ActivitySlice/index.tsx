@@ -96,6 +96,19 @@ export const fetchPublishedActivities = createAsyncThunk<ActivityReceive[], void
     }
 );
 
+
+export const publishUnpublishActivity = createAsyncThunk<ActivityReceive, {activityId: string}, {rejectValue: any}>(
+    'activity/publishActivity',
+    async ({activityId}, thunkAPI) => {
+        try {
+            const response = await axiosInstance.post(`${apiBaseUrl}/projects/publish/${activityId}`);
+            return response.data.data as ActivityReceive;
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors de la publication de l'activité.");
+        }
+    }
+);
+
 const ActivitySlice = createSlice({
     name: "ActivitySlice",
     initialState,
@@ -174,9 +187,45 @@ const ActivitySlice = createSlice({
                 state.fetchPublishedStatus = "failed";
                 state.error = action.payload ? action.payload : "Erreur lors du chargement des activités publiées.";
             })
-
             
 
+            .addCase(publishUnpublishActivity.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(publishUnpublishActivity.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
+               
+                state.status = "succeeded";
+            
+                
+                const originalIndex = state.originalProjectData.findIndex(a => a.id === action.payload.id);
+                if (originalIndex !== -1) {
+                    state.originalProjectData[originalIndex] = action.payload;
+                }
+                
+                
+                const publishedIndex = state.publishedProjectData.findIndex(a => a.id === action.payload.id);
+                
+                if (action.payload.is_published) {
+                    
+                    if (publishedIndex === -1) {
+                        state.publishedProjectData.push(action.payload);
+                    } else {
+                        state.publishedProjectData[publishedIndex] = action.payload;
+                    }
+                } else {
+                    
+                    if (publishedIndex !== -1) {
+                        state.publishedProjectData.splice(publishedIndex, 1);
+                    }
+                }
+                
+                state.error = null;
+            })
+            .addCase(publishUnpublishActivity.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors de la publication de l'activité.";
+            })
 
 
             .addCase(createActivity.pending, (state) => {
@@ -186,12 +235,13 @@ const ActivitySlice = createSlice({
             .addCase(createActivity.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
                 state.status = "succeeded";
                 state.originalProjectData.push(action.payload);
-                state.selectedActivity = action.payload;
                 state.error = null;
             })
             .addCase(createActivity.rejected, (state, action) => {
                 state.status = "failed";
             })
+
+
             .addCase(updateActivity.pending, (state) => {
                 state.status = "loading";
                 state.error = null;
@@ -208,6 +258,8 @@ const ActivitySlice = createSlice({
             .addCase(updateActivity.rejected, (state, action) => {
                 state.status = "failed";
             })
+
+
             .addCase(fetchActivityById.pending, (state) => {
                 state.fetchActivityByIdStatus = "loading";
                 state.selectedActivity = null;

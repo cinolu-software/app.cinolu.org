@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
 import BackButton from "@/CommonComponent/BackButton";
 import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
-import ProjectImage from "@/Components/Applications/activities/list/common/DetailProject/ProjectImage";
-import ProjectTabs from "@/Components/Applications/activities/list/common/DetailProject/ProjectTabs";
+import ProjectImage from "@/Components/Applications/activities/list/common/DetailActivity/ActivityImage";
+import ProjectTabs from "@/Components/Applications/activities/list/common/DetailActivity/ActivityTabs";
 import {useRouter} from "next/navigation";
 import {fetchProjectById} from "@/Redux/Reducers/projectSlice/projectSlice";
 

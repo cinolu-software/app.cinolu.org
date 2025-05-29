@@ -1,17 +1,18 @@
 import React, {useState} from 'react';
-import {ActivityReceive} from "@/Types/ActivitiesTypes";
-import RatioImage from "@/CommonComponent/RatioImage";
-import {useAppDispatch} from "@/Redux/Hooks";
-import { publishProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
-import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
-import {TableColumn} from "react-data-table-component";
-import {useRouter} from "next/navigation";
-import {imageBaseUrl} from "@/services/axios";
-import {Spinner, Button} from 'reactstrap';
-import { Flip, toast } from "react-toastify";
+import { ActivityReceive } from '@/Types/ActivitiesTypes';
+import RatioImage from '@/CommonComponent/RatioImage';
+import { useAppDispatch } from '@/Redux/Hooks';
+import { publishUnpublishActivity, setModalDeleteActivity } from '@/Redux/Reducers/ActivitySlice';
+import { setSelectedActivity } from '@/Redux/Reducers/ActivitySlice';
+import { TableColumn } from 'react-data-table-component';
+import { useRouter } from 'next/navigation';
+import { imageBaseUrl } from '@/services/axios';
+import { Spinner, Button } from 'reactstrap';
+import { Flip, toast } from 'react-toastify';
 
 
-const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
+const ActivityListTableName: React.FC<{image: string, name: string}>=({image, name}) => {
+
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -19,10 +20,10 @@ const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image,
             </div>
             <p>{name}</p>
         </div>
-    );
+    )
 };
 
-const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?: boolean }> = ({ project, isPublished }) => {
+const ActivityListTableAction: React.FC<{ activity: ActivityReceive}> = ({ activity }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -34,44 +35,44 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
     const handleEdit = async () => {
         setLoadingEdit(true);
         router.push('/act/edit');
-        dispatch(setSelectedActivity(project));
+        dispatch(setSelectedActivity(activity));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
-        router.push('/project/detail_project');
-        dispatch(setSelectedActivity(project));
+        router.push('/act/detail');
+        dispatch(setSelectedActivity(activity));
     };
 
     const handleDelete = async () => {
         setLoadingDelete(true);
-        //@ts-ignore
-        dispatch(setModalDeleteProject({ isOpen: true, project }));
+        dispatch(setModalDeleteActivity({ isOpen: true, activity }));
         setLoadingDelete(false);
     };
 
-    const handlePublish = async () => {
+    const handlePublishUnPublish = async () => {
         try {
             setLoadingPublish(true);
-            setTimeout(() => {
-                // @ts-ignore
-                    dispatch(publishProject({projectId: project.id}));
-                    toast.success("Projet publié avec succès", {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        transition: Flip,
-                    });
-                    setLoadingPublish(false);
-            }
-            , 1000);
-        }
-        catch (e) {
-            setLoadingPublish(false);
-            toast.error("Une erreur est survenue", {
+            const result = await dispatch(publishUnpublishActivity({activityId: activity.id})).unwrap();
+            
+            toast.success(
+                result.is_published 
+                    ? "Activité publiée avec succès" 
+                    : "Activité dépubliée avec succès",
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    transition: Flip,
+                }
+            );
+        } catch (error) {
+            toast.error(error || "Erreur lors de l'opération", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER,
                 transition: Flip,
             });
+        } finally {
+            setLoadingPublish(false);
         }
     }
 
@@ -97,7 +98,6 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Modifier</span>
                     </Button>
@@ -120,7 +120,6 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Détails</span>
                     </Button>
@@ -129,7 +128,7 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                     <Button
                         color={'info'}
                         outline
-                        onClick={handlePublish}
+                        onClick={handlePublishUnPublish}
                         disabled={loadingPublish}
                         className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
                         style={{
@@ -141,11 +140,10 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                     >
                         {loadingPublish ? (
                             <Spinner size="sm" className="flex-shrink-0" />
-                        ) : (
-                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
-                            <></>
-                        )}
-                        <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
+                        ) : null}
+                        <span className="text-truncate">
+                            {activity.is_published ? 'Dépublier' : 'Publier'}
+                        </span>
                     </Button>
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
@@ -165,7 +163,6 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
                         {
                             loadingDelete ?
                                 <Spinner size="sm" className="flex-shrink-0"  /> : <></>
-                                // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
                         }
                         <span className="text-truncate">Supprimer</span>
                     </Button>
@@ -175,11 +172,11 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive; isPublished?:
     );
 };
 
-export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
+export const ActivityListTableDataColumn: TableColumn<ActivityReceive>[] = [
     {
         name: "Nom",
         cell: (row: ActivityReceive) => (
-            <ProjectListTableName
+            <ActivityListTableName
                 image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
         ),
@@ -200,7 +197,37 @@ export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     },
     {
         name: "Actions",
-        cell: (row: ActivityReceive) => <ProjectListTableAction project={row}/>,
+        cell: (row: ActivityReceive) => <ActivityListTableAction activity={row}/>,
+        grow: 2
+    },
+];
+
+export const ActivityPublishedListTableDataColumn: TableColumn<ActivityReceive>[] = [
+    {
+        name: "Nom",
+        cell: (row: ActivityReceive) => (
+            <ActivityListTableName
+                image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
+                name={row.name}/>
+        ),
+        sortable: true,
+        grow: 2,
+    },
+    {
+        name: "Date de début",
+        selector: (row: ActivityReceive) => row.started_at,
+        sortable: true,
+        grow: 1
+    },
+    {
+        name: "Date de fin",
+        selector: (row: ActivityReceive) => row.ended_at,
+        sortable: true,
+        grow: 1
+    },
+    {
+        name: "Actions",
+        cell: (row: ActivityReceive) => <ActivityListTableAction activity={row} />,
         grow: 2
     },
 ];

@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
 import {fetchPublishedActivities} from "@/Redux/Reducers/ActivitySlice";
-import {PublishedProjectListTableDataColumn} from "@/Data/Application/Project/published";
+import { ActivityPublishedListTableDataColumn } from "@/Data/Application/activity";
 import DeleteProjectModal from "@/Components/Applications/activities/list/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import { ToastContainer} from "react-toastify";
@@ -32,10 +32,10 @@ const PublishedProjectListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (fetchPublishedStatus === "idle" || fetchPublishedStatus === "loading") {
+        if (fetchPublishedStatus === 'idle' || fetchPublishedStatus === 'loading') {
             dispatch(fetchPublishedActivities());
         }
-    }, [fetchPublishedStatus, dispatch]);
+    }, [ fetchPublishedStatus, dispatch]);
 
 
     return (
@@ -52,9 +52,8 @@ const PublishedProjectListContainer = () => {
                                 <div className="table-responsive">
                                     <DataTable
                                         className="theme-scrollbar"
-                                        // @ts-ignore
                                         data={filteredItems}
-                                        columns={PublishedProjectListTableDataColumn}
+                                        columns={ActivityPublishedListTableDataColumn}
                                         striped
                                         highlightOnHover
                                         pagination

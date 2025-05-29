@@ -13,12 +13,9 @@ const ActivityForm = () => {
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
     const dispatch = useAppDispatch();
 
-
     useEffect(() => {
         dispatch(resetForm());
     }, [dispatch]);
-
-
 
     const callback = useCallback((tab: number | undefined) => {
         setActiveTab(tab);
@@ -26,7 +23,7 @@ const ActivityForm = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/project'}/>
+            <BackButton link={'/act/list'}/>
             <Col md={12}>
                 <Card>
                     <CardBody>
