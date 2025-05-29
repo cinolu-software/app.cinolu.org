@@ -8,8 +8,6 @@ import { TableColumn } from 'react-data-table-component';
 import { useRouter } from 'next/navigation';
 import { imageBaseUrl } from '@/services/axios';
 import { Spinner, Button } from 'reactstrap';
-import { Flip, toast } from 'react-toastify';
-
 
 const ActivityListTableName: React.FC<{image: string, name: string}>=({image, name}) => {
 
@@ -23,7 +21,8 @@ const ActivityListTableName: React.FC<{image: string, name: string}>=({image, na
     )
 };
 
-const ActivityListTableAction: React.FC<{ activity: ActivityReceive}> = ({ activity }) => {
+const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?: boolean  // Ajouter une nouvelle prop
+}> = ({ activity, showDelete = true }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -53,24 +52,9 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive}> = ({ activ
     const handlePublishUnPublish = async () => {
         try {
             setLoadingPublish(true);
-            const result = await dispatch(publishUnpublishActivity({activityId: activity.id})).unwrap();
-            
-            toast.success(
-                result.is_published 
-                    ? "Activité publiée avec succès" 
-                    : "Activité dépubliée avec succès",
-                {
-                    autoClose: 5000,
-                    position: toast.POSITION.TOP_CENTER,
-                    transition: Flip,
-                }
-            );
+            await dispatch(publishUnpublishActivity({activityId: activity.id})).unwrap();
         } catch (error) {
-            toast.error(error || "Erreur lors de l'opération", {
-                autoClose: 5000,
-                position: toast.POSITION.TOP_CENTER,
-                transition: Flip,
-            });
+            console.error("Error publishing/unpublishing activity:", error);
         } finally {
             setLoadingPublish(false);
         }
@@ -80,7 +64,7 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive}> = ({ activ
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center g-2">
-                <div className="col-6 col-md-3 d-flex justify-content-center">
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
                     <Button
                         color="info"
                         outline
@@ -102,7 +86,7 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive}> = ({ activ
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
-                <div className="col-6 col-md-3 d-flex justify-content-center">
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
                     <Button
                         color="info"
                         outline
@@ -124,7 +108,7 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive}> = ({ activ
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
-                <div className="col-6 col-md-3 d-flex justify-content-center">
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
                     <Button
                         color={'info'}
                         outline
@@ -146,26 +130,30 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive}> = ({ activ
                         </span>
                     </Button>
                 </div>
-                <div className="col-6 col-md-3 d-flex justify-content-center">
-                    <Button
-                        color={'danger'}
-                        outline
-                        onClick={handleDelete}
-                        disabled={loadingDelete}
-                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
-                        style={{
-                            padding: '6px 10px',
-                            borderRadius: '8px',
-                            width: '100%',
-                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
-                        }}
-                    >
-                        {
-                            loadingDelete ?
-                                <Spinner size="sm" className="flex-shrink-0"  /> : <></>
-                        }
-                        <span className="text-truncate">Supprimer</span>
-                    </Button>
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+                    {
+                        showDelete && (
+                            <Button
+                                color={'danger'}
+                                outline
+                                onClick={handleDelete}
+                                disabled={loadingDelete}
+                                className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                                style={{
+                                    padding: '6px 10px',
+                                    borderRadius: '8px',
+                                    width: '100%',
+                                    fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                                }}
+                            >
+                                {
+                                    loadingDelete ?
+                                        <Spinner size="sm" className="flex-shrink-0" /> : <></>
+                                }
+                                <span className="text-truncate">Supprimer</span>
+                            </Button>
+                        )
+                    }
                 </div>
             </div>
         </div>
@@ -197,7 +185,12 @@ export const ActivityListTableDataColumn: TableColumn<ActivityReceive>[] = [
     },
     {
         name: "Actions",
-        cell: (row: ActivityReceive) => <ActivityListTableAction activity={row}/>,
+        cell: (row: ActivityReceive) => (
+            <ActivityListTableAction
+                activity={row}
+                showDelete={true}
+            />
+        ),
         grow: 2
     },
 ];
@@ -227,7 +220,12 @@ export const ActivityPublishedListTableDataColumn: TableColumn<ActivityReceive>[
     },
     {
         name: "Actions",
-        cell: (row: ActivityReceive) => <ActivityListTableAction activity={row} />,
+        cell: (row: ActivityReceive) => (
+            <ActivityListTableAction
+                activity={row}
+                showDelete={false}
+            />
+        ),
         grow: 2
     },
 ];

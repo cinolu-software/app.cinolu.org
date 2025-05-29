@@ -109,6 +109,17 @@ export const publishUnpublishActivity = createAsyncThunk<ActivityReceive, {activ
     }
 );
 
+
+export const deleteActivity = createAsyncThunk<{ id: string }, string, { rejectValue: any }>('activity/deleteActivity', async (activityId, thunkAPI) => {
+        try {
+            await axiosInstance.delete(`${apiBaseUrl}/projects/${activityId}`);
+            return { id: activityId };
+        } catch (err: any) {
+            return thunkAPI.rejectWithValue(err.response.data);
+        }
+    }
+);
+
 const ActivitySlice = createSlice({
     name: "ActivitySlice",
     initialState,
@@ -263,6 +274,21 @@ const ActivitySlice = createSlice({
                 state.fetchActivityByIdStatus = "failed";
                 state.selectedActivity = null;
                 state.error = action.payload ? action.payload : "Erreur lors du chargement de l'activité."
+            })
+
+            .addCase(deleteActivity.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(deleteActivity.fulfilled, (state, action: PayloadAction<{ id: string }>) => {
+                state.status = "succeeded";
+                state.originalProjectData = state.originalProjectData.filter(activity => activity.id !== action.payload.id);
+                state.publishedProjectData = state.publishedProjectData.filter(activity => activity.id !== action.payload.id);
+                state.selectedActivity = null;
+            })
+            .addCase(deleteActivity.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors de la suppression de l'activité."
             })
         ;
     }

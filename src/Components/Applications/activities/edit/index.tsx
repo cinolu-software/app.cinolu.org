@@ -76,7 +76,7 @@ const EditActivityForm = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/project'}/>
+            <BackButton link={'/act/list'}/>
             <Col md={12}>
                 <Card>
                     <CardBody>

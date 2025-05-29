@@ -16,7 +16,6 @@ const ProjectListContainer = () => {
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
     const {status, originalProjectData} = useAppSelector(state=> state.activity);
-    // const filteredItems = originalProjectData?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const filteredItems = originalProjectData?.filter((item) => 
         item.name && item.name.toLowerCase().includes(filterText.toLowerCase())
     );

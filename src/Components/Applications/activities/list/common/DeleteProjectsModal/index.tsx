@@ -3,15 +3,15 @@ import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col, Spinner } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setModalDeleteProject, deleteProject } from "@/Redux/Reducers/projectSlice/projectSlice";
+import {deleteActivity, setModalDeleteActivity} from "@/Redux/Reducers/ActivitySlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
 import {activitySuccessMessageDelete, activityErrorMessageDelete, activityWarningDeleteMessage, deleteBtnModal, closeModal, activityTitleDeleteModal} from "@/Constant";
 
 const DeleteProjectModal = () => {
 
     const dispatch = useAppDispatch();
-    const { isOpenModalDeleteProject, selectedProject, originalProjectData } = useAppSelector((state) => state.project);
-    const selectedProjectData = originalProjectData?.find((item: { id: any; }) => item.id === selectedProject?.id);
+    const { isOpenModalDeleteActivity, selectedActivity, originalProjectData} = useAppSelector((state) => state.activity);
+    const selectedProjectData = originalProjectData?.find((item: { id: any; }) => item.id === selectedActivity?.id);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -19,8 +19,8 @@ const DeleteProjectModal = () => {
         if (selectedProjectData && selectedProjectData.id !== undefined) {
             setIsLoading(true);
             try {
-                await dispatch(deleteProject(selectedProjectData.id)).unwrap();
-                dispatch(setModalDeleteProject({ isOpen: false, project: null }));
+                await dispatch(deleteActivity(selectedProjectData.id)).unwrap();
+                dispatch(setModalDeleteActivity({ isOpen: false, activity: null }));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{activitySuccessMessageDelete}</p>,
                     {
@@ -53,8 +53,8 @@ const DeleteProjectModal = () => {
             <CardBody className="badge-spacing">
                 <CommonModal
                     centered
-                    isOpen={isOpenModalDeleteProject}
-                    toggle={() => dispatch(setModalDeleteProject({ isOpen: false, project: null }))}
+                    isOpen={isOpenModalDeleteActivity}
+                    toggle={() => dispatch(setModalDeleteActivity({ isOpen: false, activity: null }))}
                     title={activityTitleDeleteModal}
                 >
                     <div className="modal-toggle-wrapper">
@@ -71,7 +71,7 @@ const DeleteProjectModal = () => {
                                 color="primary"
                                 outline
                                 className="me-2"
-                                onClick={() => dispatch(setModalDeleteProject({ isOpen: false, project: null }))}
+                                onClick={() => dispatch(setModalDeleteActivity({ isOpen: false, activity: null }))}
                                 disabled={isLoading}
                             >
                                 {closeModal}
