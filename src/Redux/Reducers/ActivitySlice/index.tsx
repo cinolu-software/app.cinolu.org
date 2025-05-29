@@ -79,6 +79,14 @@ const ActivitySlice = createSlice({
                 state.addFormValue[field] = value;
             }
         },
+        setEditFormValue: (state, action: PayloadAction<{field: keyof formValueType; value: any}>) => {
+            const { field, value } = action.payload;
+            if (field === "started_at" || field === "ended_at") {
+                state.editFormValue[field] = new Date(value).toISOString().split("T")[0];
+            } else {
+                state.editFormValue[field] = value;
+            }
+        },
         resetForm: (state) => {
             state.addFormValue = { ...initialFormValue };
             state.editFormValue = { ...initialFormValue };
@@ -137,6 +145,6 @@ const ActivitySlice = createSlice({
     }
 });
 
-export const { setAddFormValue, setFormField, resetForm, setSelectedActivity } = ActivitySlice.actions;
+export const { setAddFormValue,setEditFormValue ,setFormField, resetForm, setSelectedActivity } = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;

@@ -10,6 +10,7 @@ import {imageBaseUrl} from "@/services/axios";
 import {Spinner, Button} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
+
 const PublishedProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
     return (
         <div className="product-names my-2">
@@ -88,7 +89,6 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Modifier</span>
                     </Button>
@@ -111,7 +111,6 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Détails</span>
                     </Button>
@@ -134,7 +133,6 @@ const PublishedProjectListTableAction: React.FC<{ project: ActivityReceive ; isP
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
                         )}
                         <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
                     </Button>

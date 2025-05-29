@@ -6,8 +6,7 @@ import BaseInformations from "@/Components/Applications/activities/edit/Steps/Ba
 import Details from "@/Components/Applications/activities/edit/Steps/Details";
 import FormActivity from "@/Components/Applications/activities/edit/Steps/FormActivity";
 import ReviewForm from "@/Components/Applications/activities/edit/Steps/ReviewForm";
-import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+
 
 const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
 
