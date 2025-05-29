@@ -115,9 +115,14 @@ export interface ActivityReceive {
 export interface InitialStateActivityType {
     originalProjectData : ActivityReceive[];
     publishedProjectData : ActivityReceive[];
+    isOpenModalCreateActivity: boolean;
+    isOpenModalEditActivity: boolean;
+    isOpenModalDeleteActivity: boolean;
+    filterToggle: boolean;
     selectedActivity: ActivityReceive | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     fetchActivityByIdStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
+    fetchPublishedStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
     addFormValue: formValueType;
     editFormValue: formValueType ;
     numberLevel: number;

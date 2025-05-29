@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
-import { fetchPublishedProject } from "@/Redux/Reducers/projectSlice/projectSlice";
+import {fetchPublishedActivities} from "@/Redux/Reducers/ActivitySlice";
 import {PublishedProjectListTableDataColumn} from "@/Data/Application/Project/published";
 import DeleteProjectModal from "@/Components/Applications/activities/list/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
@@ -13,7 +13,7 @@ const PublishedProjectListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const { publishedProjectData, publishedProjectStatus } = useAppSelector((state) => state.project);
+    const {publishedProjectData,fetchPublishedStatus } = useAppSelector((state) => state.activity);
     const filteredItems = publishedProjectData?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
 
@@ -32,17 +32,17 @@ const PublishedProjectListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if (publishedProjectStatus === "idle" || publishedProjectStatus === "loading") {
-            dispatch(fetchPublishedProject());
+        if (fetchPublishedStatus === "idle" || fetchPublishedStatus === "loading") {
+            dispatch(fetchPublishedActivities());
         }
-    }, [publishedProjectStatus, dispatch]);
+    }, [fetchPublishedStatus, dispatch]);
 
 
     return (
         <Container fluid>
             <DeleteProjectModal />
             {
-                publishedProjectStatus !== 'succeeded' ? <TableSkeleton/> : (
+                fetchPublishedStatus !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
                         <Col sm="12">
                             <div className="list-product-header">

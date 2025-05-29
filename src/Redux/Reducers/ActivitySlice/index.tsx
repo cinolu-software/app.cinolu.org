@@ -2,6 +2,7 @@ import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {formValueType,InitialStateActivityType,ActivityReceive,createActivityType} from "@/Types/ActivitiesTypes";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
 
+
 const initialFormValue: formValueType = {
     id: "",
     name: "",
@@ -18,9 +19,14 @@ const initialFormValue: formValueType = {
 const initialState: InitialStateActivityType = {
     originalProjectData: [],
     publishedProjectData: [],
+    isOpenModalCreateActivity: false,
+    isOpenModalEditActivity: false,
+    isOpenModalDeleteActivity: false,
+    filterToggle: false,
     selectedActivity: null,
     status: "idle",
     fetchActivityByIdStatus: "idle",
+    fetchPublishedStatus: "idle",
     addFormValue: { ...initialFormValue },
     editFormValue: { ...initialFormValue },
     numberLevel: 1,
@@ -28,11 +34,7 @@ const initialState: InitialStateActivityType = {
     error: null
 };
 
-export const createActivity = createAsyncThunk<
-    ActivityReceive,
-    createActivityType,
-    { rejectValue: string }
->(
+export const createActivity = createAsyncThunk<ActivityReceive,createActivityType,{ rejectValue: string }>(
     'activity/createActivity',
     async (newActivity, thunkAPI) => {
         try {
@@ -44,11 +46,7 @@ export const createActivity = createAsyncThunk<
     }
 );
 
-export const updateActivity = createAsyncThunk<
-    ActivityReceive,
-    { activityId: string; updatedActivity: createActivityType },
-    { rejectValue: string }
->(
+export const updateActivity = createAsyncThunk<ActivityReceive,{ activityId: string; updatedActivity: createActivityType },{ rejectValue: string }>(
     'activity/updateActivity',
     async ({ activityId, updatedActivity }, thunkAPI) => {
         try {
@@ -63,8 +61,7 @@ export const updateActivity = createAsyncThunk<
     }
 );
 
-export const fetchActivityById = createAsyncThunk<ActivityReceive, string, {rejectValue: any}>(
-    'activity/fetchById',
+export const fetchActivityById = createAsyncThunk<ActivityReceive, string, {rejectValue: any}>('activity/fetchById',
     async (activityId, thunkAPI) => {
         try {
             const response = await axiosInstance.get(`${apiBaseUrl}/projects/${activityId}`);
@@ -74,6 +71,30 @@ export const fetchActivityById = createAsyncThunk<ActivityReceive, string, {reje
         }
     }
 )
+
+export const fetchActivities = createAsyncThunk<ActivityReceive[], void, {rejectValue: any}>(
+    'activity/fetchActivities',
+    async (_, thunkAPI) => {
+        try {
+            const response = await axiosInstance.get(`${apiBaseUrl}/projects`);
+            return response.data.data as ActivityReceive[];
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors du chargement des activités.");
+        }
+    }
+);
+
+export const fetchPublishedActivities = createAsyncThunk<ActivityReceive[], void, {rejectValue: any}>(
+    'activity/fetchPublishedActivities',
+    async (_, thunkAPI) => {
+        try {
+            const response = await axiosInstance.get(`${apiBaseUrl}/projects/find-published`);
+            return response.data.data[0] as ActivityReceive[];
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors du chargement des activités publiées.");
+        }
+    }
+);
 
 const ActivitySlice = createSlice({
     name: "ActivitySlice",
@@ -109,10 +130,55 @@ const ActivitySlice = createSlice({
         },
         setSelectedActivity : (state, action: PayloadAction<ActivityReceive | null>) => {
             state.selectedActivity = action.payload;
+        },
+        setModalCreateActivity: (state, action: PayloadAction<{isOpen: boolean}>) => {
+            state.isOpenModalCreateActivity = action.payload.isOpen;
+        },
+        setModalEditActivity: (state, action: PayloadAction<{isOpen: boolean, activity: ActivityReceive | null}>) => {
+            state.isOpenModalEditActivity = action.payload.isOpen;
+            state.selectedActivity = action.payload.activity;
+        },
+        setModalDeleteActivity: (state, action: PayloadAction<{isOpen: boolean, activity: ActivityReceive | null}>) => {
+            state.isOpenModalDeleteActivity = action.payload.isOpen;
+            state.selectedActivity = action.payload.activity;
+        },
+        setFilterToggle: (state) => {
+            state.filterToggle = !state.filterToggle;
         }
     },
     extraReducers: (builder) => {
         builder
+            .addCase(fetchActivities.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(fetchActivities.fulfilled, (state, action: PayloadAction<ActivityReceive[]>) => {
+                state.status = "succeeded";
+                state.originalProjectData = action.payload;
+            })
+            .addCase(fetchActivities.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors du chargement des activités.";
+            })
+
+
+            .addCase(fetchPublishedActivities.pending, (state) => {
+                state.fetchPublishedStatus = "loading";
+                state.error = null;
+            })
+            .addCase(fetchPublishedActivities.fulfilled, (state, action: PayloadAction<ActivityReceive[]>) => {
+                state.fetchPublishedStatus = "succeeded";
+                state.publishedProjectData = action.payload;
+            })
+            .addCase(fetchPublishedActivities.rejected, (state, action) => {
+                state.fetchPublishedStatus = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors du chargement des activités publiées.";
+            })
+
+            
+
+
+
             .addCase(createActivity.pending, (state) => {
                 state.status = "loading";
                 state.error = null;
@@ -159,6 +225,6 @@ const ActivitySlice = createSlice({
     }
 });
 
-export const { setAddFormValue,setEditFormValue ,setFormField, resetForm, setSelectedActivity } = ActivitySlice.actions;
+export const { setAddFormValue,setEditFormValue ,setFormField, resetForm, setSelectedActivity, setModalCreateActivity, setModalDeleteActivity, setFilterToggle, setModalEditActivity } = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;

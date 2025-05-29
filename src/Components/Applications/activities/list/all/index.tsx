@@ -1,11 +1,10 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import {  Col, Container, Input, Label, Row } from "reactstrap";
-import {  fetchProjects } from "@/Redux/Reducers/projectSlice/projectSlice";
+import {fetchActivities} from "@/Redux/Reducers/ActivitySlice";
 import { ProjectListTableDataColumn } from "@/Data/Application/Project/";
 import DeleteProjectModal from "@/Components/Applications/activities/list/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {RootState} from "@/Redux/Store";
 import { ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 import {ProjectHeader} from "@/Components/Applications/activities/list/common/ProjectList";
@@ -16,7 +15,7 @@ const ProjectListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {status, originalProjectData} = useAppSelector((state: RootState) => state.project);
+    const {status, originalProjectData} = useAppSelector(state=> state.activity);
     const filteredItems = originalProjectData?.filter((item: { name: string; })=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -33,7 +32,7 @@ const ProjectListContainer = () => {
 
     useEffect(() => {
         if (status === "idle" || status === "loading") {
-            dispatch(fetchProjects());
+            dispatch(fetchActivities());
         }
     }, [status, dispatch]);
 
