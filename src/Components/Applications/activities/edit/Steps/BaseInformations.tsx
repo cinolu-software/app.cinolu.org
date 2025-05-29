@@ -24,7 +24,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                 value: selectedActivity?.description
             }));
         }
-    }, [selectedActivity, dispatch]);
+    }, [ dispatch]);
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(setEditFormValue({ field: 'name', value: event.target.value }));

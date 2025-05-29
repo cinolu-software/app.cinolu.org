@@ -1,3 +1,5 @@
+import {PartnerType} from "@/Types/PartnerType/PartnerType";
+
 export interface NavComponentProp {
     activeTab?: number | undefined;
     callbackActive: (val: number | undefined) => void;
@@ -89,6 +91,7 @@ export interface PhaseType {
     requirements: RequirementType[];
 }
 
+
 export interface ActivityReceive {
     id: string;
     name: string;
@@ -106,6 +109,7 @@ export interface ActivityReceive {
     is_published: boolean;
     form: DynamicFormType[];
     review_form: ReviewFormType[];
+    partners: PartnerType;
 }
 
 export interface InitialStateActivityType {

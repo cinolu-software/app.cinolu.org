@@ -67,6 +67,18 @@ export const updateActivity = createAsyncThunk<
     }
 );
 
+export const fetchActivityById = createAsyncThunk<ActivityReceive, string, {rejectValue: any}>(
+    'activity/fetchById',
+    async (activityId, thunkAPI) => {
+        try {
+            const response = await axiosInstance.get(`${apiBaseUrl}/projects/${activityId}`);
+            return response.data.data as ActivityReceive;
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors du chargement.");
+        }
+    }
+)
+
 const ActivitySlice = createSlice({
     name: "ActivitySlice",
     initialState,
@@ -141,7 +153,11 @@ const ActivitySlice = createSlice({
             .addCase(updateActivity.rejected, (state, action) => {
                 state.status = "failed";
                 // state.error= action.payload || "Erreur lors de la mise à jour de l'activité.";
-            });
+            })
+            .addCase(fetchActivityById.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
+                state.selectedActivity = action.payload
+            })
+        ;
     }
 });
 

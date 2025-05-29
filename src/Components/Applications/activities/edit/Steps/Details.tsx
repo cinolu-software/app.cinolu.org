@@ -11,7 +11,7 @@ import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import { ProjectCategoryType } from "@/Types/Projects/ProjectCategoryType";
 import { PartnerType } from "@/Types/PartnerType/PartnerType";
 import Select, { MultiValue, SingleValue } from "react-select";
-import { setAddFormValue } from "@/Redux/Reducers/ActivitySlice";
+import { setEditFormValue } from "@/Redux/Reducers/ActivitySlice";
 
 interface OptionType {
     value: string;
@@ -21,11 +21,10 @@ interface OptionType {
 const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue, selectedActivity } = useAppSelector(state => state.activity);
+    const { selectedActivity } = useAppSelector(state => state.activity);
     const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
     const { partnerData, status: partnerStatus } = useAppSelector(state => state.partner);
     const {projectCategoryData, status: categoryStatus} = useAppSelector(state=>state.projectCategory);
-
 
     useEffect(() => {
         if (programStatus === 'idle') {
@@ -45,17 +44,24 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }
     }, [dispatch, categoryStatus]);
 
-
     const [dateRange, setDateRange] = useState<DateObject[]>(() => {
-        if (addFormValue.started_at && addFormValue.ended_at) {
+        if (selectedActivity) {
             return [
-                new DateObject(new Date(addFormValue.started_at)),
-                new DateObject(new Date(addFormValue.ended_at))
+                new DateObject(new Date(selectedActivity.started_at)),
+                new DateObject(new Date(selectedActivity.ended_at))
             ];
         }
         return [new DateObject()];
     });
 
+    useEffect(() => {
+        if (selectedActivity) {
+            setDateRange([
+                new DateObject(new Date(selectedActivity.started_at)),
+                new DateObject(new Date(selectedActivity.ended_at))
+            ]);
+        }
+    }, [selectedActivity]);
 
     const programOptions: OptionType[] = transformedPrograms.map((program: TransformedProjectTypeType) => ({
         value: program.id,
@@ -73,44 +79,47 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     }));
 
 
-    const selectedProgram = programOptions.find(option => option.value === addFormValue.program);
-    const selectedCategories = categoryOptions.filter(option =>
-        addFormValue.categories?.includes(option.value)
-    );
-    const selectedPartners = partnerOptions.filter(option =>
-        addFormValue.partners?.includes(option.value)
-    );
+    const programId = selectedActivity?.program?.id || '';
+    //@ts-ignore
+    const categoryIds = selectedActivity?.categories?.map(c => c.id) || [];
+    //@ts-ignore
+    const partnerIds = selectedActivity?.partners?.map(p => p.id) || [];
+
+
+    const selectedProgram = programOptions.find(option => option.value === programId);
+    const selectedCategories = categoryOptions.filter(option => categoryIds.includes(option.value));
+    const selectedPartners = partnerOptions.filter(option => partnerIds.includes(option.value));
 
     const handleDateChange = (dates: DateObject[]) => {
         setDateRange(dates);
         if (dates.length === 2) {
-            dispatch(setAddFormValue({
+            dispatch(setEditFormValue({
                 field: 'started_at',
-                value: dates[0].toDate().toISOString()
+                value: dates[0].toDate().toISOString().split('T')[0]
             }));
-            dispatch(setAddFormValue({
+            dispatch(setEditFormValue({
                 field: 'ended_at',
-                value: dates[1].toDate().toISOString()
+                value: dates[1].toDate().toISOString().split('T')[0]
             }));
         }
     };
 
     const handleProgramChange = (option: SingleValue<OptionType>) => {
-        dispatch(setAddFormValue({
+        dispatch(setEditFormValue({
             field: 'program',
             value: option?.value || ''
         }));
     };
 
     const handleCategoriesChange = (options: MultiValue<OptionType>) => {
-        dispatch(setAddFormValue({
+        dispatch(setEditFormValue({
             field: 'categories',
             value: options.map(o => o.value)
         }));
     };
 
     const handlePartnersChange = (options: MultiValue<OptionType>) => {
-        dispatch(setAddFormValue({
+        dispatch(setEditFormValue({
             field: 'partners',
             value: options.map(o => o.value)
         }));

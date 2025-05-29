@@ -10,7 +10,6 @@ import ReviewForm from "@/Components/Applications/activities/edit/Steps/ReviewFo
 
 const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
 
-
     return (
         <TabContent className="dark-field" activeTab={activeTab}>
             <TabPane tabId={1}>

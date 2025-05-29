@@ -1,14 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
 import {useCallback, useState} from 'react';
 import NavComponent from "@/Components/Applications/activities/edit/NavComponent";
 import ActivityFormTabContent from "@/Components/Applications/activities/edit/ActivityFormTabContent";
 import BackButton from "@/CommonComponent/BackButton";
+import {useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import {fetchActivityById} from "@/Redux/Reducers/ActivitySlice";
+import {useRouter} from "next/navigation";
 
 
 const EditActivityForm = () => {
 
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    const {selectedActivity} = useAppSelector(state => state.activity);
+
+    useEffect(() => {
+        if(selectedActivity){
+            dispatch(fetchActivityById(selectedActivity?.id));
+        }else {
+            router.push('/project');
+        }
+    }, [ dispatch]);
 
     const callback = useCallback((tab: number | undefined) => {
         setActiveTab(tab);
