@@ -1,10 +1,5 @@
 import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
-import {
-    formValueType,
-    InitialStateActivityType,
-    ActivityReceive,
-    createActivityType
-} from "@/Types/ActivitiesTypes";
+import {formValueType,InitialStateActivityType,ActivityReceive,createActivityType} from "@/Types/ActivitiesTypes";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
 
 const initialFormValue: formValueType = {
@@ -25,6 +20,7 @@ const initialState: InitialStateActivityType = {
     publishedProjectData: [],
     selectedActivity: null,
     status: "idle",
+    fetchActivityByIdStatus: "idle",
     addFormValue: { ...initialFormValue },
     editFormValue: { ...initialFormValue },
     numberLevel: 1,
@@ -113,12 +109,6 @@ const ActivitySlice = createSlice({
         },
         setSelectedActivity : (state, action: PayloadAction<ActivityReceive | null>) => {
             state.selectedActivity = action.payload;
-            if(action.payload !== null) {
-                //@ts-ignore
-                state.addFormValue = {...action.payload};
-                //@ts-ignore
-                state.editFormValue = { ...action.payload };
-            }
         }
     },
     extraReducers: (builder) => {
@@ -135,7 +125,6 @@ const ActivitySlice = createSlice({
             })
             .addCase(createActivity.rejected, (state, action) => {
                 state.status = "failed";
-                // state.error = action.payload || "Erreur lors de la création de l'activité.";
             })
             .addCase(updateActivity.pending, (state) => {
                 state.status = "loading";
@@ -152,10 +141,19 @@ const ActivitySlice = createSlice({
             })
             .addCase(updateActivity.rejected, (state, action) => {
                 state.status = "failed";
-                // state.error= action.payload || "Erreur lors de la mise à jour de l'activité.";
+            })
+            .addCase(fetchActivityById.pending, (state) => {
+                state.fetchActivityByIdStatus = "loading";
+                state.selectedActivity = null;
             })
             .addCase(fetchActivityById.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
+                state.fetchActivityByIdStatus = "succeeded";
                 state.selectedActivity = action.payload
+            })
+            .addCase(fetchActivityById.rejected, (state, action) => {
+                state.fetchActivityByIdStatus = "failed";
+                state.selectedActivity = null;
+                state.error = action.payload ? action.payload : "Erreur lors du chargement de l'activité."
             })
         ;
     }

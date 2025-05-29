@@ -117,8 +117,9 @@ export interface InitialStateActivityType {
     publishedProjectData : ActivityReceive[];
     selectedActivity: ActivityReceive | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    fetchActivityByIdStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
     addFormValue: formValueType;
-    editFormValue: formValueType;
+    editFormValue: formValueType ;
     numberLevel: number;
     showFinish: boolean;
     error: null;

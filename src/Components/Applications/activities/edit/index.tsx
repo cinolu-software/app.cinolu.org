@@ -5,7 +5,7 @@ import NavComponent from "@/Components/Applications/activities/edit/NavComponent
 import ActivityFormTabContent from "@/Components/Applications/activities/edit/ActivityFormTabContent";
 import BackButton from "@/CommonComponent/BackButton";
 import {useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import {fetchActivityById} from "@/Redux/Reducers/ActivitySlice";
+import {fetchActivityById, setEditFormValue} from "@/Redux/Reducers/ActivitySlice";
 import {useRouter} from "next/navigation";
 
 
@@ -14,15 +14,61 @@ const EditActivityForm = () => {
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const {selectedActivity} = useAppSelector(state => state.activity);
+    const {selectedActivity, fetchActivityByIdStatus} = useAppSelector(state => state.activity);
+
+    useEffect(
+        () => {
+            if(selectedActivity){
+                dispatch(fetchActivityById(selectedActivity?.id));
+            } else {
+                router.push('/project');
+            }
+        }
+    , [dispatch]);
 
     useEffect(() => {
-        if(selectedActivity){
-            dispatch(fetchActivityById(selectedActivity?.id));
-        }else {
-            router.push('/project');
+        if(fetchActivityByIdStatus === 'succeeded') {
+        
+            dispatch(setEditFormValue({
+                field: 'name',
+                value: selectedActivity?.name
+            }));
+            dispatch(setEditFormValue({
+                field: 'description',
+                value: selectedActivity?.description
+            }));
+            dispatch(setEditFormValue({
+                field: 'started_at',
+                value: selectedActivity?.started_at
+            }));
+            dispatch(setEditFormValue({
+                field: 'ended_at',
+                value: selectedActivity?.ended_at
+            }));
+            dispatch(setEditFormValue({
+                field: 'program',
+                value: selectedActivity?.program?.id || ''
+            }));
+            dispatch(setEditFormValue({
+                field: 'categories',
+                //@ts-ignore
+                value: selectedActivity?.categories?.map(c => c.id) || []
+            }));
+            dispatch(setEditFormValue({
+                field: 'partners',
+                //@ts-ignore
+                value: selectedActivity?.partners?.map(p => p.id) || []
+            }));
+            dispatch(setEditFormValue({
+                field: 'form',
+                value: selectedActivity?.form || []
+            }));
+            dispatch(setEditFormValue({
+                field: 'review_form',
+                value: selectedActivity?.review_form || []
+            }));
         }
-    }, [ dispatch]);
+    }, [dispatch, fetchActivityByIdStatus]);
 
     const callback = useCallback((tab: number | undefined) => {
         setActiveTab(tab);

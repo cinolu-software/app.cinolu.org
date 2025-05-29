@@ -11,20 +11,7 @@ import {setEditFormValue } from "@/Redux/Reducers/ActivitySlice";
 const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
-    const {editFormValue, selectedActivity} = useAppSelector(state => state.activity);
-
-    useEffect(() => {
-        if(selectedActivity){
-            dispatch(setEditFormValue({
-                field: 'name',
-                value: selectedActivity?.name
-            }));
-            dispatch(setEditFormValue({
-                field: 'description',
-                value: selectedActivity?.description
-            }));
-        }
-    }, [ dispatch]);
+    const {editFormValue} = useAppSelector(state => state.activity);
 
     const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(setEditFormValue({ field: 'name', value: event.target.value }));
@@ -34,20 +21,18 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
         dispatch(setEditFormValue({ field: 'description', value }));
     };
 
-    console.log("===>|",selectedActivity);
-
     return (
         <div className={'border ps-3 rounded'}>
             <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
                 <div className={'p-3 mb-2'}>
                     <Col className={'mb-3'} >
                         <Label check>{"Nom de l'activité"}<span className="txt-danger">*</span></Label>
-                        <Input name="accountName" value={editFormValue.name} onChange={handleNameChange} type="text" className={'border'}/>
+                        <Input name="accountName" value={editFormValue?.name} onChange={handleNameChange} type="text" className={'border'}/>
                     </Col>
                     <Col >
                         <Label check>{"Description de l'activité"}<span className="txt-danger">*</span></Label>
                         <ReactQuill
-                            value={editFormValue.description}
+                            value={editFormValue?.description}
                             onChange={handleDescriptionChange}
                             theme={'snow'}
                             placeholder="Entrez la description ici..."
