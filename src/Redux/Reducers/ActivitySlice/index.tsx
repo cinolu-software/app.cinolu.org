@@ -167,7 +167,7 @@ const ActivitySlice = createSlice({
             })
             .addCase(fetchActivities.fulfilled, (state, action: PayloadAction<ActivityReceive[]>) => {
                 state.status = "succeeded";
-                state.originalProjectData = action.payload;
+                state.originalProjectData = action.payload.filter(activity => !activity.is_published);
             })
             .addCase(fetchActivities.rejected, (state, action) => {
                 state.status = "failed";
