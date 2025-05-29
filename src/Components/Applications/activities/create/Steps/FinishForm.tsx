@@ -2,7 +2,7 @@ import { Congratulations, ImagePath } from "@/Constant";
 import { Col, Row, Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { createActivityType } from "@/Types/ActivitiesTypes";
-import {createActivity} from "@/Redux/Reducers/ActivitySlice";
+import {createActivity, resetForm} from "@/Redux/Reducers/ActivitySlice";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
@@ -26,6 +26,7 @@ const FinishForm = () => {
         };
         try{
             dispatch(createActivity(projectData));
+            dispatch(resetForm);
             toast.success("L'activité a été créée avec succès", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER

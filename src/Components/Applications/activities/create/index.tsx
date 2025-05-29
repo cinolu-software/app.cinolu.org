@@ -1,14 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
 import {useCallback, useState} from 'react';
 import NavComponent from "@/Components/Applications/activities/create/NavComponent";
 import ActivityFormTabContent from "@/Components/Applications/activities/create/ActivityFormTabContent";
 import BackButton from "@/CommonComponent/BackButton";
+import { resetForm } from '@/Redux/Reducers/ActivitySlice';
+import { useAppDispatch } from '@/Redux/Hooks';
 
 
 const ActivityForm = () => {
 
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
+    const dispatch = useAppDispatch();
+
+
+    useEffect(() => {
+        dispatch(resetForm());
+    }, [dispatch]);
+
+
 
     const callback = useCallback((tab: number | undefined) => {
         setActiveTab(tab);
