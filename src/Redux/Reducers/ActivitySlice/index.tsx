@@ -196,30 +196,21 @@ const ActivitySlice = createSlice({
             .addCase(publishUnpublishActivity.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
                
                 state.status = "succeeded";
-            
-                
+                    
+                    
                 const originalIndex = state.originalProjectData.findIndex(a => a.id === action.payload.id);
                 if (originalIndex !== -1) {
                     state.originalProjectData[originalIndex] = action.payload;
+                } else {
+                    state.originalProjectData.push(action.payload);
                 }
-                
                 
                 const publishedIndex = state.publishedProjectData.findIndex(a => a.id === action.payload.id);
                 
-                if (action.payload.is_published) {
-                    
-                    if (publishedIndex === -1) {
-                        state.publishedProjectData.push(action.payload);
-                    } else {
-                        state.publishedProjectData[publishedIndex] = action.payload;
-                    }
-                } else {
-                    
-                    if (publishedIndex !== -1) {
-                        state.publishedProjectData.splice(publishedIndex, 1);
-                    }
+                if (publishedIndex !== -1) {
+                    state.publishedProjectData.splice(publishedIndex, 1);
                 }
-                
+                    
                 state.error = null;
             })
             .addCase(publishUnpublishActivity.rejected, (state, action) => {
