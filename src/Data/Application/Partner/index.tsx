@@ -6,7 +6,7 @@ import {useAppDispatch} from "@/Redux/Hooks";
 import {setModalDeletePartner, setSelectedPartner} from "@/Redux/Reducers/PartnersSlice/partnerSlice";
 import SVG from '@/CommonComponent/SVG';
 import {useRouter} from "next/navigation";
-import {Spinner} from "reactstrap";
+import {Button, Spinner} from "reactstrap";
 import {imageBaseUrl} from "@/services/axios";
 import {truncateText} from "@/utils";
 
@@ -50,25 +50,75 @@ const PartnerListTableAction: React.FC<{partner: PartnerType}> = ({partner}) =>{
 
     return (
         <div className="product-action">
-            <div className={'row w-100 justify-content-center'}>
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleEdit} >
-                      <span>
-                        {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
-                      </span>
-                    </button>
+            <div className="row w-100 justify-content-center g-2">
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color="info"
+                        outline
+                        onClick={handleEdit}
+                        disabled={loadingEdit}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {loadingEdit ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                        )}
+                        <span className="text-truncate">Modifier</span>
+                    </Button>
                 </div>
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleShowDetail}>
-                      <span>
-                        {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
-                      </span>
-                    </button>
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color="info"
+                        outline
+                        onClick={handleShowDetail}
+                        disabled={loadingDetail}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {loadingDetail ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
+                        )}
+                        <span className="text-truncate">Détails</span>
+                    </Button>
                 </div>
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-                        {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
-                    </button>
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color={'danger'}
+                        outline
+                        onClick={handleDelete}
+                        disabled={loadingDelete}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {loadingDelete ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                        )}
+                        <span className="text-truncate">{'Supprimer'}</span>
+                    </Button>
                 </div>
             </div>
         </div>

@@ -2,7 +2,6 @@ import React, {useMemo, useState, useEffect} from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
 import {fetchPublishedEvents} from "@/Redux/Reducers/eventSlice/eventSlice";
-// import {EventsListTableDataColumn} from "@/Data/Application/events";
 import {PublishedEventsListTableDataColumn} from "@/Data/Application/events";
 import DeleteEventModal from "@/Components/Applications/events/Common/DeleteEventModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";

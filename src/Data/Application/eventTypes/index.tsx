@@ -1,11 +1,10 @@
 import React from 'react';
 import { Button } from "reactstrap";
-import {EventsListTypeTableColumnType, EventType} from "@/Types/EventsType/eventsTypeType"
+import {EventsListTypeTableColumnType, EventType} from "@/Types/EventsType/eventsTypeType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import {useAppDispatch} from "@/Redux/Hooks";
-import { setModalDeleteEventTypes , setModalEditEventTypes} from "@/Redux/Reducers/eventSlice/EventTypeSlice"
-import SVG from '@/CommonComponent/SVG';
+import { setModalDeleteEventTypes , setModalEditEventTypes} from "@/Redux/Reducers/eventSlice/EventTypeSlice";
 
 
 const EventsListTableName: React.FC<{ image: string; name: string }> = ({ image, name }) => {
@@ -47,7 +46,8 @@ const EventsListTableAction: React.FC<{ eventType: EventType }> = ({ eventType }
                         }}
                     >
                         {
-                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         }
                         <span className="text-truncate">Modifier</span>
                     </Button>
@@ -67,7 +67,8 @@ const EventsListTableAction: React.FC<{ eventType: EventType }> = ({ eventType }
                         }}
                     >
                         {
-                            <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />
                         }
                         <span className="text-truncate">Supprimer</span>
                     </Button>

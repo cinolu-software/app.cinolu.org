@@ -81,7 +81,7 @@ const CreateProgramModal = () => {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className={'btn btn-outline-warning'} onClick={() => dispatch(setModalCreateProgram({ isOpen: false }))}>
+                    <button className={'btn btn-outline-danger'} onClick={() => dispatch(setModalCreateProgram({ isOpen: false }))}>
                         {"Annuler"}
                     </button>
                     <button className={'btn btn-outline-primary'} onClick={handleSubmit}>

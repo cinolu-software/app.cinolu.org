@@ -7,7 +7,6 @@ import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
-import SVG from '@/CommonComponent/SVG';
 import {Spinner, Button} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 

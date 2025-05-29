@@ -12,6 +12,7 @@ import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 
+
 const ProgramsTypesListContainer: React.FC = () => {
 
     const [filterText, setFilterText] = useState("");

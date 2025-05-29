@@ -6,7 +6,6 @@ import {setModalDeleteEvent, setSelectedEvent, publishEvent } from "@/Redux/Redu
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
-import SVG from '@/CommonComponent/SVG';
 import {Button, Spinner} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
 
@@ -77,7 +76,7 @@ const EventsListTableAction: React.FC<{ event: any ; isPublished: boolean }> = (
             <div className="row w-100 justify-content-center g-2">
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleEdit}
                         disabled={loadingEdit}
@@ -92,14 +91,15 @@ const EventsListTableAction: React.FC<{ event: any ; isPublished: boolean }> = (
                         {loadingEdit ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleDetail}
                         disabled={loadingDetail}
@@ -114,14 +114,15 @@ const EventsListTableAction: React.FC<{ event: any ; isPublished: boolean }> = (
                         {loadingDetail ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
                 <div className="col-6 col-md-3 d-flex justify-content-center">
                     <Button
-                        color={'warning'}
+                        color={'info'}
                         outline
                         onClick={handlePublish}
                         disabled={loadingPublish}
@@ -136,7 +137,8 @@ const EventsListTableAction: React.FC<{ event: any ; isPublished: boolean }> = (
                         {loadingPublish ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                            <></>
+                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
                         )}
                         <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
                     </Button>
@@ -156,7 +158,12 @@ const EventsListTableAction: React.FC<{ event: any ; isPublished: boolean }> = (
                         }}
                     >
                         {
-                            loadingDelete ? <Spinner size="sm" className="flex-shrink-0"  /> : <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
+                            loadingDelete ?
+                                (<Spinner size="sm" className="flex-shrink-0"  />) :
+                                (
+                                    <></>
+                                    // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
+                                )
                         }
                         <span className="text-truncate">Supprimer</span>
                     </Button>
@@ -174,7 +181,6 @@ const PublishedEventsListTableAction: React.FC<{ event: any ; isPublished: boole
 
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
-    const [loadingDelete, setLoadingDelete] = useState(false);
     const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
@@ -218,7 +224,7 @@ const PublishedEventsListTableAction: React.FC<{ event: any ; isPublished: boole
             <div className="row w-100 justify-content-center g-2">
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleEdit}
                         disabled={loadingEdit}
@@ -233,14 +239,15 @@ const PublishedEventsListTableAction: React.FC<{ event: any ; isPublished: boole
                         {loadingEdit ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color="warning"
+                        color="info"
                         outline
                         onClick={handleDetail}
                         disabled={loadingDetail}
@@ -255,14 +262,15 @@ const PublishedEventsListTableAction: React.FC<{ event: any ; isPublished: boole
                         {loadingDetail ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
+                            <></>
+                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
                 <div className="col-4 col-md-4 d-flex justify-content-center">
                     <Button
-                        color={'warning'}
+                        color={'info'}
                         outline
                         onClick={handlePublish}
                         disabled={loadingPublish}
@@ -277,7 +285,8 @@ const PublishedEventsListTableAction: React.FC<{ event: any ; isPublished: boole
                         {loadingPublish ? (
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
-                            <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                            <></>
+                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
                         )}
                         <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
                     </Button>

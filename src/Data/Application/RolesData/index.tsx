@@ -1,10 +1,10 @@
-import { Button } from "reactstrap";
+import {Button} from "reactstrap";
 import { RoleListTableColumnType, RoleListTableNameType, RoleType } from "@/Types/AdminOptions/Roles/RoleType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
 import { setModalEditRole, setModalDeleteRole } from "@/Redux/Reducers/AdminOptions/roleSlice/RoleSlice";
-import SVG from "@/CommonComponent/SVG";
+import React from "react";
 
 const RoleListTableName: React.FC<RoleListTableNameType> = ({ image, name }) => {
     return (
@@ -30,27 +30,53 @@ const RoleListTableAction: React.FC<{ role: RoleType }> = ({ role }) => {
 
     return (
         <div className="product-action">
-            <div className={'row w-100 justify-content-center'}>
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
-              <span>
-                <SVG iconId="editTable"/>
-              </span>
-                    </button>
+            <div className="row w-100 justify-content-center g-2">
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color="info"
+                        outline
+                        onClick={handleEdit}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        <span className="text-truncate">Modifier</span>
+                    </Button>
                 </div>
-
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}>
-              <span>
-                <SVG iconId="moreTable"/>
-              </span>
-                    </button>
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color="info"
+                        outline
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        <span className="text-truncate">Détails</span>
+                    </Button>
                 </div>
-
-                <div className={'col-4'}>
-                    <button style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}} onClick={handleDelete} >
-                        <SVG iconId="trashTable" />
-                    </button>
+                <div className="col-4 col-md-4 d-flex justify-content-center">
+                    <Button
+                        color={'danger'}
+                        outline
+                        onClick={handleDelete}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        <span className="text-truncate">{'Supprimer'}</span>
+                    </Button>
                 </div>
             </div>
         </div>
