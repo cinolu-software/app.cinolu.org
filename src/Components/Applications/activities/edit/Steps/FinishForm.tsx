@@ -2,40 +2,43 @@ import { Congratulations, ImagePath } from "@/Constant";
 import { Col, Row, Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { createActivityType } from "@/Types/ActivitiesTypes";
-import {updateActivity} from "@/Redux/Reducers/ActivitySlice";
+import {updateActivity, resetForm} from "@/Redux/Reducers/ActivitySlice";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
 const FinishForm = () => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue, selectedActivity } = useAppSelector(state => state.activity);
+    const { editFormValue, selectedActivity } = useAppSelector(state => state.activity); 
     const router = useRouter();
 
     const handleSubmit = () => {
+        
         const projectData: createActivityType = {
-            name: addFormValue.name,
-            description: addFormValue.description,
-            started_at: addFormValue.started_at,
-            ended_at: addFormValue.ended_at,
-            program: addFormValue.program,
-            categories: addFormValue.categories,
-            partners: addFormValue.partners,
-            form: addFormValue.form || [],
-            review_form: addFormValue.review_form || []
+            name: editFormValue.name,
+            description: editFormValue.description,
+            started_at: editFormValue.started_at,
+            ended_at: editFormValue.ended_at,
+            program: editFormValue.program,
+            categories: editFormValue.categories || [],
+            partners: editFormValue.partners || [],
+            form: editFormValue.form || [],
+            review_form: editFormValue.review_form || []
         };
-        try{
+        
+        try {
             if(selectedActivity){
                 dispatch(updateActivity({activityId: selectedActivity?.id, updatedActivity: projectData }));
+                dispatch(resetForm());
             }
-            toast.success("L'activité a été créée avec succès", {
+            toast.success("L'activité mise à jour avec succès", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
             router.push("/project");
         }
         catch (e) {
-            toast.error("Une erreur est survenue lors de la création de l'activité", {
+            toast.error("Une erreur est survenue lors de la mise à jour de l'activité", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
@@ -55,8 +58,8 @@ const FinishForm = () => {
                 </Col>
             </Row>
             <Row className={'justify-content-center mt-3'}>
-                <Col xs={2} md={2}>
-                    <Button onClick={handleSubmit} color={'primary'}>Créer l'activité</Button>
+                <Col xs={3} md={3}>
+                    <Button onClick={handleSubmit} color={'primary'} outline>{"Mettre à  jour l'activité"}</Button>
                 </Col>
             </Row>
         </div>

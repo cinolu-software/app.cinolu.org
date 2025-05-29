@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Input, Label, Row, FormGroup } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { setFormField } from "@/Redux/Reducers/ActivitySlice";
+import { setEditFormValue } from "@/Redux/Reducers/ActivitySlice"; 
 import { toast } from "react-toastify";
 import { ReviewFormType, FormFieldType } from "@/Types/ActivitiesTypes";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
@@ -9,12 +9,9 @@ import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue } = useAppSelector((state) => state.activity);
+    const { editFormValue } = useAppSelector((state) => state.activity); 
 
-    const [phases, setPhases] = useState<ReviewFormType[]>(() =>
-        addFormValue.review_form ? [...addFormValue.review_form] : []
-    );
-
+    const [phases, setPhases] = useState<ReviewFormType[]>([]);
     const [newPhaseName, setNewPhaseName] = useState("");
     //@ts-ignore
     const [newField, setNewField] = useState<Omit<FormFieldType, 'id'>>({
@@ -22,6 +19,13 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
         type: "number",
         required: true
     });
+
+    // Initialiser les phases à partir de l'activité sélectionnée
+    useEffect(() => {
+        if (editFormValue.review_form) {
+            setPhases([...editFormValue.review_form]);
+        }
+    }, [editFormValue.review_form]);
 
     const handleAddPhase = () => {
         if (newPhaseName.trim()) {
@@ -33,20 +37,25 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                 }
             ];
             setPhases(updatedPhases);
-            dispatch(setFormField({ curationForm: updatedPhases }));
+            // Mettre à jour le state Redux
+            dispatch(setEditFormValue({
+                field: 'review_form',
+                value: updatedPhases
+            }));
             setNewPhaseName("");
             toast.success("Phase ajoutée avec succès");
         }
     };
 
-
     const handleRemovePhase = (phaseIndex: number) => {
         const updatedPhases = phases.filter((_, index) => index !== phaseIndex);
         setPhases(updatedPhases);
-        dispatch(setFormField({ curationForm: updatedPhases }));
+        dispatch(setEditFormValue({
+            field: 'review_form',
+            value: updatedPhases
+        }));
         toast.success("Phase supprimée avec succès");
     };
-
 
     const handleAddCriteria = (phaseIndex: number) => {
         const updatedPhases = phases.map((phase, index) =>
@@ -64,7 +73,10 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
         );
 
         setPhases(updatedPhases);
-        dispatch(setFormField({ curationForm: updatedPhases }));
+        dispatch(setEditFormValue({
+            field: 'review_form',
+            value: updatedPhases
+        }));
         //@ts-ignore
         setNewField({
             label: "",
@@ -82,7 +94,10 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
         );
 
         setPhases(updatedPhases);
-        dispatch(setFormField({ curationForm: updatedPhases }));
+        dispatch(setEditFormValue({
+            field: 'review_form',
+            value: updatedPhases
+        }));
     };
 
     return (
@@ -93,7 +108,7 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                         <h4 className="mb-3 mt-5">Configuration des Phases et Critères d'Évaluation</h4>
 
                         <div className="mb-4 p-3 border rounded">
-                                <Row className={'justify-content-center align-items-center mb-4'}>
+                            <Row className={'justify-content-center align-items-center mb-4'}>
                                 <Col md={8}>
                                     <FormGroup>
                                         <Label>Nom de la phase</Label>
@@ -125,7 +140,6 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                                         Supprimer cette Phase
                                     </Button>
                                 </div>
-
 
                                 {phase.fields.map((field) => (
                                     <div key={field.id} className="mb-3 p-2 border-bottom">
@@ -184,7 +198,6 @@ const ReviewForm: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive 
                                             <FormGroup check>
                                                 <Label check className={'txt-primary'}>
                                                     <Input
-
                                                         type="checkbox"
                                                         checked={newField.required}
                                                         onChange={(e) => setNewField({...newField, required: e.target.checked})}

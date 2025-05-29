@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Col, Form, Input, Label, Row, FormGroup, Table } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
-import { setEditFormValue } from "@/Redux/Reducers/ActivitySlice"; // Modifier l'import
+import { setEditFormValue } from "@/Redux/Reducers/ActivitySlice"; 
 import { toast } from "react-toastify";
 import 'react-quill/dist/quill.snow.css';
 
@@ -10,7 +10,7 @@ const FormActivity: React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
     const dispatch = useAppDispatch();
     const [editingIndex, setEditingIndex] = useState<number | null>(null);
     const [editedField, setEditedField] = useState<any>(null);
-    const { editFormValue } = useAppSelector((state) => state.activity); // Utiliser editFormValue
+    const { editFormValue } = useAppSelector((state) => state.activity); 
     const [newField, setNewField] = useState({
         label: "",
         type: "text",
@@ -18,7 +18,6 @@ const FormActivity: React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
         options: [""]
     });
 
-    // Initialiser les champs à partir de l'activité sélectionnée
     useEffect(() => {
         if (editFormValue.form && editFormValue.form.length > 0) {
             setEditedField(null);
@@ -87,7 +86,7 @@ const FormActivity: React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                     <Col xs="12">
                         <h4 className="mb-4 mt-4">Formulaire Dynamique de Candidature</h4>
                         <div className="responsive-table">
-                            <Table striped responsive>
+                            <Table responsive>
                                 <thead className="text-center">
                                     <tr className="border-bottom border-primary mb-3">
                                         <th>Nom du champ</th>
@@ -154,6 +153,7 @@ const FormActivity: React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                                 {editingIndex === index ? (
                                                     <Button
                                                         color="primary"
+                                                        outline
                                                         size="sm"
                                                         onClick={handleSaveField}
                                                         className="me-2"
@@ -163,6 +163,7 @@ const FormActivity: React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                                 ) : (
                                                     <Button
                                                         color="primary"
+                                                        outline
                                                         size="sm"
                                                         onClick={() => handleEditField(index, field)}
                                                         className="me-2"
@@ -171,7 +172,9 @@ const FormActivity: React.FC<ActivityFormTabContentPropsType> = ({ callbackActiv
                                                     </Button>
                                                 )}
                                                 <Button 
+                                                    color="danger"
                                                     size="sm" 
+                                                    outline
                                                     onClick={() => handleRemoveField(field.id)}
                                                 >
                                                     Supprimer

@@ -21,10 +21,14 @@ interface OptionType {
 const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
-    const { selectedActivity } = useAppSelector(state => state.activity);
+    const { selectedActivity, editFormValue } = useAppSelector(state => state.activity);
     const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
     const { partnerData, status: partnerStatus } = useAppSelector(state => state.partner);
     const {projectCategoryData, status: categoryStatus} = useAppSelector(state=>state.projectCategory);
+
+    const programId = editFormValue.program || '';
+    const categoryIds = editFormValue.categories || [];
+    const partnerIds = editFormValue.partners || [];
 
     useEffect(() => {
         if (programStatus === 'idle') {
@@ -78,12 +82,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         label: category.name,
     }));
 
-
-    const programId = selectedActivity?.program?.id || '';
-    //@ts-ignore
-    const categoryIds = selectedActivity?.categories?.map(c => c.id) || [];
-    //@ts-ignore
-    const partnerIds = selectedActivity?.partners?.map(p => p.id) || [];
 
 
     const selectedProgram = programOptions.find(option => option.value === programId);
