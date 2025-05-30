@@ -93,13 +93,7 @@ export const MenuList: MenuItem [] | undefined = [
                                 type: "link",
                                 lanClass: "lan-6"
                             },
-                            // {
-                            //     path: "/project/projectTypes",
-                            //     title: "types",
-                            //     type: "link",
-                            //     lanClass: "lan-6"
-                            // },
-                            {path: "/project/projectCategory", title: "catégorie", type: "link", lanClass: "lan-6"},
+                            {path: "/act/category", title: "catégorie", type: "link", lanClass: "lan-6"},
                         ]
                     },
                     {

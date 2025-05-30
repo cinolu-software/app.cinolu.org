@@ -8,7 +8,7 @@ const EditEvenement = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/evenement/edit")).default;
+                const newClient = (await import("@/Components/Applications/evenement/edit/editStep")).default;
                 setClient(() => newClient);
             }
         })();
