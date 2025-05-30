@@ -31,7 +31,7 @@ const initialState: InitialStateActivityType = {
     editFormValue: { ...initialFormValue },
     numberLevel: 1,
     showFinish: false,
-    error: null
+    error: null,
 };
 
 export const createActivity = createAsyncThunk<ActivityReceive,createActivityType,{ rejectValue: string }>(
@@ -115,6 +115,28 @@ export const deleteActivity = createAsyncThunk<{ id: string }, string, { rejectV
             await axiosInstance.delete(`${apiBaseUrl}/projects/${activityId}`);
             return { id: activityId };
         } catch (err: any) {
+            return thunkAPI.rejectWithValue(err.response.data);
+        }
+    }
+);
+
+export const updatedAttachmentActivityImage = createAsyncThunk<{ activityId: string ; imageUrl: string }, { activityId: string; imageFile: File },{ rejectValue: any }>
+    ('activity/updateAttachmentActivityImage', async ({ activityId, imageFile }, thunkAPI) => {
+        try {
+
+            const formData = new FormData();
+
+            formData.append('thumb', imageFile);
+
+            const response = await axiosInstance.post<{ data: { image: string } }>(
+                `${apiBaseUrl}/projects/image/${activityId}`,
+                formData,
+                { headers: { 'Content-Type': 'multipart/form-data' } }
+            );
+            
+            return { activityId, imageUrl: response.data.data.image };
+        }
+        catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
         }
     }
@@ -290,7 +312,40 @@ const ActivitySlice = createSlice({
                 state.status = "failed";
                 state.error = action.payload ? action.payload : "Erreur lors de la suppression de l'activité."
             })
-        ;
+
+
+            .addCase(updatedAttachmentActivityImage.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(updatedAttachmentActivityImage.fulfilled, (state, action: PayloadAction<{ activityId: string; imageUrl: string }>) => {
+                state.status = "succeeded";
+                const { activityId, imageUrl } = action.payload;
+
+                // Mise à jour dans originalProjectData
+                const originalIndex = state.originalProjectData.findIndex(a => a.id === activityId);
+                if (originalIndex !== -1) {
+                    state.originalProjectData[originalIndex].image = imageUrl;
+                }
+
+                // Mise à jour dans publishedProjectData
+                const publishedIndex = state.publishedProjectData.findIndex(a => a.id === activityId);
+                if (publishedIndex !== -1) {
+                    state.publishedProjectData[publishedIndex].image = imageUrl;
+                }
+
+                // Mise à jour de selectedActivity si c'est la même activité
+                if (state.selectedActivity && state.selectedActivity.id === activityId) {
+                    state.selectedActivity = {
+                        ...state.selectedActivity,
+                        image: imageUrl
+                    };
+                }
+            })
+            .addCase(updatedAttachmentActivityImage.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors de la mise à jour de l'image de l'activité."
+            });
     }
 });
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
 import {useCallback, useState} from 'react';
-import NavComponent from "@/Components/Applications/activities/edit/NavComponent";
-import ActivityFormTabContent from "@/Components/Applications/activities/edit/ActivityFormTabContent";
+import NavComponent from "@/Components/Applications/activities/edit/editStep/NavComponent";
+import ActivityFormTabContent from "@/Components/Applications/activities/edit/editStep/ActivityFormTabContent";
 import BackButton from "@/CommonComponent/BackButton";
 
 

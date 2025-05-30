@@ -5,6 +5,7 @@ import {imageBaseUrl} from "@/services/axios";
 
 const ProjectImage : React.FC<{image: string | undefined}> = ({image}) => {
 
+
     return (
         <>
             <Row className={'program-detail'}>

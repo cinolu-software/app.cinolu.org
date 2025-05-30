@@ -4,7 +4,6 @@ import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
 import {setModalDeleteProgram, setModalEditProgram} from "@/Redux/Reducers/programSlice/programSlice";
-import SVG from '@/CommonComponent/SVG';
 import {Button} from "reactstrap";
 
 
@@ -34,7 +33,7 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
     return (
         <div className="product-action">
             <div className={'row w-100 justify-content-center'}>
-                <div className={'col-6'}>
+                <div className={'col-6 col-md-6 col-lg-6 col-xl-6'}>
                     <Button
                         color="info"
                         outline
@@ -47,14 +46,11 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
                             fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
                         }}
                     >
-                        {/*{*/}
-                        {/*    <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />*/}
-                        {/*}*/}
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
 
-                <div className={'col-6'}>
+                <div className={'col-6 col-md-6 col-lg-6 col-xl-6'}>
                     <Button
                         color={'danger'}
                         onClick={handleDelete}
@@ -67,9 +63,6 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
                             fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
                         }}
                     >
-                        {/*{*/}
-                        {/*    <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />*/}
-                        {/*}*/}
                         <span className="text-truncate">Supprimer</span>
                     </Button>
                 </div>

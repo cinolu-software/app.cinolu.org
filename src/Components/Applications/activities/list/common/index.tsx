@@ -19,7 +19,6 @@ const ProjectListContainer: React.FC<ReceiveProjectTypeTable> = ({project, proje
         );
     }, [filterText]);
 
-
     return (
         <>
             <Row>

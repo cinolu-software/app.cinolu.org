@@ -27,6 +27,12 @@ const ActivityForm = () => {
             <Col md={12}>
                 <Card>
                     <CardBody>
+                        <h3 className="mb-0">{"Créer l'activité"}</h3>
+                        <p className="text-muted mb-0">{"Vous pouvez créer l'activité avec les détail ici."}</p>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
                         <div className={'horizontal-wizard-wrapper  vertical-variations vertical-options'}>
                             <Row className="g-3 flex-column flex-md-row">
                                 <Col xs="12" md="3" lg="2" className="main-horizontal-header mb-3 mb-md-0">

@@ -3,9 +3,9 @@ import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col, Spinner } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import {deleteActivity, setModalDeleteActivity} from "@/Redux/Reducers/ActivitySlice";
+import { deleteActivity, setModalDeleteActivity } from "@/Redux/Reducers/ActivitySlice";
 import { toast, ToastContainer, Flip } from "react-toastify";
-import {activitySuccessMessageDelete, activityErrorMessageDelete, activityWarningDeleteMessage, deleteBtnModal, closeModal, activityTitleDeleteModal} from "@/Constant";
+import { activitySuccessMessageDelete, activityErrorMessageDelete, activityWarningDeleteMessage, deleteBtnModal, closeModal, activityTitleDeleteModal } from "@/Constant";
 
 const DeleteProjectModal = () => {
 

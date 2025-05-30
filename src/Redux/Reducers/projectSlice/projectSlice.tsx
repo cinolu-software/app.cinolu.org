@@ -382,7 +382,8 @@ const ProjectSlice = createSlice({
             .addCase(fetchProjectById.rejected, (state, action) => {
                 state.status = 'failed';
                 state.error = action.error.message || 'Something went wrong';
-            });
+            })
+        ;
     }
 });
 

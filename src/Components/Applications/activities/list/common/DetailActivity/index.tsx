@@ -5,32 +5,33 @@ import {useAppSelector, useAppDispatch} from "@/Redux/Hooks";
 import ProjectImage from "@/Components/Applications/activities/list/common/DetailActivity/ActivityImage";
 import ProjectTabs from "@/Components/Applications/activities/list/common/DetailActivity/ActivityTabs";
 import {useRouter} from "next/navigation";
-import {fetchProjectById} from "@/Redux/Reducers/projectSlice/projectSlice";
+import {fetchActivityById} from "@/Redux/Reducers/ActivitySlice";
 
 
 const DetailProjectContainer = () => {
 
-    const {selectedProject, projectData} = useAppSelector(state=> state.project);
+
+    const {selectedActivity } = useAppSelector(state => state.activity);
     const router = useRouter();
     const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        if(selectedProject){
-            dispatch(fetchProjectById(selectedProject.id));
-        }
-        else {
-            router.push('/project');
-        }
-    }, [selectedProject]);
+    // useEffect(() => {
+    //     if(selectedActivity){
+    //         dispatch(fetchActivityById(selectedActivity.id));
+    //     }
+    //     else {
+    //         router.push('/act/list');
+    //     }
+    // }, [selectedActivity]);
 
     return (
         <Container fluid>
-            <BackButton link={'/project'} />
+            <BackButton link={'/act/list'} />
             {
-                projectData && (
+                selectedActivity && (
                     <>
-                        <ProjectImage image={projectData?.image} />
-                        <ProjectTabs/>
+                        {/*<ProjectImage image={selectedActivity?.image} />*/}
+                        {/*<ProjectTabs/>*/}
                     </>
                 )
             }
