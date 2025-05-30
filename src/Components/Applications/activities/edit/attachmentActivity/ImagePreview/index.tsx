@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 registerPlugin(FilePondPluginImagePreview, FilePondPluginImageExifOrientation);
 
 const ImagePreview = () => {
-
     const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +20,6 @@ const ImagePreview = () => {
     const router = useRouter();
 
     const handleUpdateImage = () => {
-
         if (files.length === 0) {
             toast.error(
                 <p className="text-white tx-16 mb-0">{"Veuillez sélectionner une image."}</p>,
@@ -53,6 +51,7 @@ const ImagePreview = () => {
                             theme: "colored",
                         }
                     );
+                    router.push(`/act/list`);
                 })
                 .catch(() => {
                     toast.error(
@@ -85,7 +84,12 @@ const ImagePreview = () => {
                 />
                 <button className="btn btn-outline-primary" onClick={handleUpdateImage} disabled={isLoading}>
                     {
-                        isLoading ? (<>{"Mise à jour en cours"} <Spinner size="sm" color="light" /></> ) : "Mettre à jour l'image de couverture"}
+                        isLoading ?
+                            (
+                                <>{"Mise à jour en cours"} <Spinner size="sm" color="light" /></>
+                            ) :
+                            "Mettre à jour l'image de couverture"
+                    }
                 </button>
             </CardBody>
         </Col>
