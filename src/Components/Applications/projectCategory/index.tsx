@@ -35,9 +35,7 @@ const ProjectCategoryListContainer: React.FC = () => {
         }
     }, [status, dispatch]);
 
-
     const filteredProjectCategory = projectCategoryData?.filter(projectCategory => projectCategory.name?.toLowerCase()?.includes(filterText.toLowerCase()));
-
 
     return (
         <Container fluid>
