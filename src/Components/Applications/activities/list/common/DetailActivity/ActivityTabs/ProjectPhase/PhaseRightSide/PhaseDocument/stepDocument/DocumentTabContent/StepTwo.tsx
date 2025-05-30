@@ -1,5 +1,5 @@
 import React from 'react';
-import UploadDocument from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseDocument/stepDocument/DocumentTabContent/UploadDocument";
+// import UploadDocument from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide/PhaseDocument/stepDocument/DocumentTabContent/UploadDocument";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { addAttachmentDocumentFile } from "@/Redux/Reducers/projectSlice/ProjectDocumentSlice";
 
@@ -31,12 +31,12 @@ const StepTwo = () => {
                                 <p className="text-sm text-gray-600">{document.description}</p>
                             </div>
 
-                            <UploadDocument
-                                // @ts-ignore
-                                documentId={document.id}
-                                // @ts-ignore
-                                onUpload={(file: File) => handleUploadFile(document.id, file)}
-                            />
+                            {/*<UploadDocument*/}
+                            {/*    // @ts-ignore*/}
+                            {/*    documentId={document.id}*/}
+                            {/*    // @ts-ignore*/}
+                            {/*    onUpload={(file: File) => handleUploadFile(document.id, file)}*/}
+                            {/*/>*/}
                         </li>
                     ))}
                 </ul>

@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {Row, Container, TabPane} from "reactstrap";
-import PhaseSideBar from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseSideBar";
-import PhaseRightSide from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide";
-import CreatePhaseModal from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseSideBar/CreatePhaseModal";
+// import PhaseSideBar from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseSideBar";
+// import PhaseRightSide from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseRightSide";
+// import CreatePhaseModal from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/ProjectPhase/PhaseSideBar/CreatePhaseModal";
 
 const ProjectPhase = () => {
 
@@ -13,9 +13,9 @@ const ProjectPhase = () => {
             <Container>
                 <div className={'email-wrap email-main-wrapper'}>
                     <Row>
-                        <CreatePhaseModal/>
-                        <PhaseSideBar navId={activeTab} setNavId={setActiveTab} />
-                        <PhaseRightSide navId={activeTab}/>
+                        {/*<CreatePhaseModal/>*/}
+                        {/*<PhaseSideBar navId={activeTab} setNavId={setActiveTab} />*/}
+                        {/*<PhaseRightSide navId={activeTab}/>*/}
                     </Row>
                 </div>
             </Container>

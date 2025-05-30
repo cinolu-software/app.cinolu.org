@@ -1,5 +1,5 @@
 import React from 'react';
-import ProjectNavTab from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/TabsHeader/ProjectNavTab";
+// import ProjectNavTab from "@/Components/Applications/projects/common/DetailProject/ProjectTabs/TabsHeader/ProjectNavTab";
 
 const TabsHeader: React.FC<{navId: string, setNavId: React.Dispatch<React.SetStateAction<string>>}> = ({navId, setNavId}) => {
 
@@ -7,7 +7,7 @@ const TabsHeader: React.FC<{navId: string, setNavId: React.Dispatch<React.SetSta
         <div className={'mail-header-wrapper'}>
             <div className={'mail-header'}>
                 <div className={'form-check form-check-inline m-0'}>
-                    <ProjectNavTab navId={navId} setNavId={setNavId} />
+                    {/*<ProjectNavTab navId={navId} setNavId={setNavId} />*/}
                 </div>
             </div>
         </div>
