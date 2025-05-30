@@ -8,12 +8,6 @@ const Project = () => {
 
     return (
         <Row>
-            {/*<Card>*/}
-            {/*    <CardBody>*/}
-            {/*        <h3 className="mb-0">{"Liste des activités"}</h3>*/}
-            {/*        <p className="text-muted mb-0">{"Vous pouvez consulter la liste des activités ici."}</p>*/}
-            {/*    </CardBody>*/}
-            {/*</Card>*/}
             <Card>
                 <CardBody>
                     <Nav tabs className="border-tab border-0 mb-0 nav-primary">

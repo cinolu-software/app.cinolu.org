@@ -322,19 +322,16 @@ const ActivitySlice = createSlice({
                 state.status = "succeeded";
                 const { activityId, imageUrl } = action.payload;
 
-                // Mise à jour dans originalProjectData
                 const originalIndex = state.originalProjectData.findIndex(a => a.id === activityId);
                 if (originalIndex !== -1) {
                     state.originalProjectData[originalIndex].image = imageUrl;
                 }
 
-                // Mise à jour dans publishedProjectData
                 const publishedIndex = state.publishedProjectData.findIndex(a => a.id === activityId);
                 if (publishedIndex !== -1) {
                     state.publishedProjectData[publishedIndex].image = imageUrl;
                 }
 
-                // Mise à jour de selectedActivity si c'est la même activité
                 if (state.selectedActivity && state.selectedActivity.id === activityId) {
                     state.selectedActivity = {
                         ...state.selectedActivity,
