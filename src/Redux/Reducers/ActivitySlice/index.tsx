@@ -110,7 +110,9 @@ export const publishUnpublishActivity = createAsyncThunk<ActivityReceive, {activ
 );
 
 
-export const deleteActivity = createAsyncThunk<{ id: string }, string, { rejectValue: any }>('activity/deleteActivity', async (activityId, thunkAPI) => {
+export const deleteActivity = createAsyncThunk<{ id: string }, string, { rejectValue: any }>(
+    'activity/deleteActivity', 
+    async (activityId, thunkAPI) => {
         try {
             await axiosInstance.delete(`${apiBaseUrl}/projects/${activityId}`);
             return { id: activityId };

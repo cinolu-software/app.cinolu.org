@@ -1,6 +1,6 @@
 import {Card, CardBody, Nav, NavItem, NavLink, Container, Row} from "reactstrap";
 import React, {useState} from 'react'
-import EventEditTabContent from "@/Components/Applications/events/EditEvent/EventEditTabContent";
+import EventEditTabContent from "@/Components/Applications/evenement/list/EditEvent/EventEditTabContent";
 import BackButton from "@/CommonComponent/BackButton";
 import {editProgramEventDetail, editProgramEventImagedeCouverture} from "@/Constant";
 

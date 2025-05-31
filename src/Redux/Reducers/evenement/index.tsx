@@ -2,6 +2,7 @@ import { createAsyncThunk, PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {InitialStateEvenementType, formValueType, EvenementType, } from "@/Types/evenement";
 import axiosInstance, { apiBaseUrl } from "@/services/axios";
 
+
 const initialFormValue: formValueType = {
     name: "",
     link: "",
@@ -18,7 +19,13 @@ const initialState: InitialStateEvenementType = {
     originalProjectData: [],
     publishedProjectData: [],
     selectedEvenement: null,
+    isOpenModalCreateEvenement: false,
+    isOpenModalDeleteEvenement: false,
+    isOpenModalEditEvenement: false,
     status: "idle",
+    statusFetchPublishedEvenements: 'idle',
+    statusFetchEvenementById: 'idle',
+    filterToggle: false,
     addFormValue: { ...initialFormValue },
     editFormValue: { ...initialFormValue },
     numberLevel: 1,
@@ -38,6 +45,44 @@ export const createEvenement = createAsyncThunk<EvenementType, formValueType, { 
     }
 );
 
+export const fetchEvenements = createAsyncThunk<EvenementType[], void, {rejectValue: any}>(
+    'evenements/fetchEvenements',
+    async(_, thunkAPI) => {
+        try{
+            const response = await axiosInstance.get(`${apiBaseUrl}/events`);
+            return response.data.data as EvenementType[];
+        } catch(error: any){
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors du chargement des événement");
+        }
+    }
+);
+
+
+export const fetchPublishedEvenements = createAsyncThunk<EvenementType[], void, {rejectValue: any}>(
+    'evenements/fetchPublishedEvenements',
+    async(_, thunkAPI)=>{
+        try{
+            const response = await axiosInstance.get(`${apiBaseUrl}/events/find-published`);
+            return response.data.data as EvenementType[];
+        } catch (error: any){
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors du chargement des événement publiés")
+        }
+    }
+);
+
+
+export const fetchEvenementById = createAsyncThunk<EvenementType, string, {rejectValue: any}>(
+    'evenements/fetchEvenementById',
+    async(evenementId, thunkAPI) => {
+        try{
+            const response = await axiosInstance.get(`${apiBaseUrl}/events/${evenementId}`);
+            return response.data.data as  EvenementType;
+        } catch (error : any) {
+            return thunkAPI.rejectWithValue(error.response?.data?.message || 'Erreur lors du chargement.')
+        }
+    }
+)
+
 export const updateEvenement = createAsyncThunk<EvenementType, { evenementId: string; updatedEvenement: formValueType }, { rejectValue: string }>(
     'evenement/updateEvenement',
     async ({ evenementId, updatedEvenement }, thunkAPI) => {
@@ -49,6 +94,53 @@ export const updateEvenement = createAsyncThunk<EvenementType, { evenementId: st
             return response.data.data;
         } catch (err: any) {
             return thunkAPI.rejectWithValue(err.response?.data?.message || "Erreur lors de la mise à jour.");
+        }
+    }
+);
+
+export const publishUnpublishEvenement = createAsyncThunk<EvenementType, {evenementId: string}, {rejectValue: any} >(
+    'evenement/publishUnpublishEvenement',
+    async({evenementId}, thunkAPI)=>{
+        try{
+            const response = await axiosInstance.post(`${apiBaseUrl}/event/publish/${evenementId}`);
+            return response.data.data as EvenementType;
+        }catch(error: any){
+            return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors de la publication jour.");
+        }
+    }
+);
+
+
+export const deleteEvenement = createAsyncThunk<{id: string}, string, {rejectValue: any}>(
+    'evenements/deleteEvenement',
+    async (evenementId, thunkAPI)=>{
+        try{
+            await axiosInstance.delete(`${apiBaseUrl}/events/${evenementId}`);
+            return {id: evenementId};
+        }catch (error: any){
+            return thunkAPI.rejectWithValue(error.response.data)
+        }
+    }
+);
+
+
+export const updatedAttachmentEvenementImage = createAsyncThunk<{evenementId: string ; imageUrl: string}, {evenementId: string; imageFile: File}, {rejectValue: any}>(
+    'evenements/updateEvenementImage',
+    async({evenementId, imageFile}, thunkAPI)=>{
+        try{
+            const formData = new FormData();
+            formData.append('thumb', imageFile);
+
+            const response = await axiosInstance.post<{data: {image: string}}>(
+                `${apiBaseUrl}/events/image/${evenementId}`,
+                formData,
+                {headers: {'Content-Type': 'multipart/form-data'}}
+            )
+
+            return {evenementId, imageUrl: response.data.data.image}
+        }
+        catch (error : any) {
+            return thunkAPI.rejectWithValue(err.response.data);
         }
     }
 );
@@ -65,6 +157,15 @@ const EvenementSlice = createSlice({
                 state.addFormValue[field] = value;
             }
         },
+        setEditFormValue: (state, action: PayloadAction<{ field: keyof formValueType }>) => {
+            const { field, value } = action.payload;
+            if (field === "started_at" || field === "ended_at") {
+                state.editFormValue[field] = new Date(value).toISOString().split("T")[0];
+            } else {
+                state.editFormValue[field] = value;
+            }
+        }
+        ,
         resetForm: (state) => {
             state.addFormValue = { ...initialFormValue };
             state.editFormValue = { ...initialFormValue };

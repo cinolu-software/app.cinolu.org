@@ -43,8 +43,14 @@ export interface EvenementType {
 export interface InitialStateEvenementType {
     originalProjectData : EvenementType[];
     publishedProjectData : EvenementType[];
+    isOpenModalCreateEvenement : boolean;
+    isOpenModalDeleteEvenement : boolean;
+    isOpenModalEditEvenement : boolean;
+    filterToggle: boolean;
     selectedEvenement: EvenementType | null;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusFetchPublishedEvenements : 'idle' | 'loading' | 'succeeded' | 'failed';
+    statusFetchEvenementById: 'idle' | 'loading' | 'succeeded' | 'failed';
     addFormValue: formValueType;
     editFormValue: formValueType;
     numberLevel: number;

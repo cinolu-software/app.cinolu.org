@@ -1,7 +1,7 @@
 import React from 'react';
 import {TabContent, TabPane} from "reactstrap";
-import EditEventContainer from "@/Components/Applications/events/EditEvent/EditInfoEvent";
-import AttachmentEvent from "@/Components/Applications/events/EditEvent/AttachmentEvent";
+import EditEventContainer from "@/Components/Applications/evenement/list/EditEvent/EditInfoEvent";
+import AttachmentEvent from "@/Components/Applications/evenement/list/EditEvent/AttachmentEvent";
 
 
 const EventEditTabContent: React.FC<{activeTab: string}> = ({activeTab}) => {

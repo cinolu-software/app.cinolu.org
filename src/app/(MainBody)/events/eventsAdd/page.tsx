@@ -8,7 +8,7 @@ const AddPartner = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/events/Common/AddEventNew")).default;
+                const newClient = (await import("@/Components/Applications/evenement/list/Common/AddEventNew")).default;
                 setClient(() => newClient);
             }
         })();

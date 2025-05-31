@@ -3,7 +3,7 @@ import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
 import {fetchPublishedEvents} from "@/Redux/Reducers/eventSlice/eventSlice";
 import {PublishedEventsListTableDataColumn} from "@/Data/Application/events";
-import DeleteEventModal from "@/Components/Applications/events/Common/DeleteEventModal";
+import DeleteEventModal from "@/Components/Applications/evenement/list/Common/DeleteEventModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
 import {ToastContainer} from "react-toastify";

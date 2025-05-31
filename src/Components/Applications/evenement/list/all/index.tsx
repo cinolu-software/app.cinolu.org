@@ -1,13 +1,13 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
-import {  Col, Container, Input, Label, Row, Card, CardBody } from "reactstrap";
+import {  Col, Container, Input, Label, Row } from "reactstrap";
 import { fetchEvents } from "@/Redux/Reducers/eventSlice/eventSlice";
 import { EventsListTableDataColumn } from "@/Data/Application/events";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {EventsHeader} from "@/Components/Applications/events/Common/EventsList";
-import DeleteEventModal from "@/Components/Applications/events/Common/DeleteEventModal";
+import {EventsHeader} from "@/Components/Applications/evenement/list/Common/EventsList";
+import DeleteEventModal from "@/Components/Applications/evenement/list/Common/DeleteEventModal";
 
 const EventsListContainer = () => {
 

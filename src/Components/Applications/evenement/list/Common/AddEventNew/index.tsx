@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Row} from 'reactstrap';
 import BackButton from "@/CommonComponent/BackButton";
-import NumberingWizard from "@/Components/Applications/events/Common/Common/NumberingWizard";
+import NumberingWizard from "@/Components/Applications/evenement/list/Common/Common/NumberingWizard";
 const AddNewEventContainer = () => {
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TabContent, TabPane } from 'reactstrap';
-import EventsListContainer from "@/Components/Applications/events/all";
-import PublishedEventsListContainer from "@/Components/Applications/events/published";
+import EventsListContainer from "@/Components/Applications/evenement/list/all";
+import PublishedEventsListContainer from "@/Components/Applications/evenement/list/published";
 
 
 
@@ -17,7 +17,6 @@ const TabsContent : React.FC<{basicTab: string}> = ({basicTab}) => {
             </TabPane>
         </TabContent>
     )
-
 }
 
 export default TabsContent;

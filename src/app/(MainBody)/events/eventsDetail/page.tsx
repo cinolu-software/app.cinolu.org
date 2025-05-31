@@ -8,7 +8,7 @@ const EventDetail = () => {
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/events/Common/DetailEvent")).default;
+                const newClient = (await import("@/Components/Applications/evenement/list/Common/DetailEvent")).default;
                 setClient(() => newClient);
             }
         })();
