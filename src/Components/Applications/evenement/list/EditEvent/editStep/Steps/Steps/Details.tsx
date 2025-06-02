@@ -10,7 +10,7 @@ import {fetchStaffMembers} from "@/Redux/Reducers/userSlice/UserSlice";
 import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import { ProjectCategoryType } from "@/Types/Projects/ProjectCategoryType";
 import Select, { MultiValue, SingleValue } from "react-select";
-import {setAddFormValue} from "@/Redux/Reducers/evenement";
+import {setEditFormValue} from "@/Redux/Reducers/evenement";
 import {StaffMemberType} from "@/Types/Users/UsersType";
 
 interface OptionType {
@@ -21,11 +21,15 @@ interface OptionType {
 const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue } = useAppSelector(state => state.evenement);
+    const { editFormValue, selectedEvenement } = useAppSelector(state => state.evenement);
     const {staffMemberData, statusStaff} = useAppSelector(state => state.users)
 
     const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
     const {status: categoryStatus, dataEventType } = useAppSelector(state => state.eventType)
+
+    const programId = editFormValue.program || '';
+    const categoryIds = editFormValue.categories || [];
+    const staffId = editFormValue.responsible || '';
 
     useEffect(() => {
         if(statusStaff === 'idle'){
@@ -46,10 +50,10 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     }, [dispatch, categoryStatus]);
 
     const [dateRange, setDateRange] = useState<DateObject[]>(() => {
-        if (addFormValue.started_at && addFormValue.ended_at) {
+        if (selectedEvenement) {
             return [
-                new DateObject(new Date(addFormValue.started_at)),
-                new DateObject(new Date(addFormValue.ended_at))
+                new DateObject(new Date(selectedEvenement.started_at)),
+                new DateObject(new Date(selectedEvenement.ended_at))
             ];
         }
         return [new DateObject()];
@@ -72,20 +76,18 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     }));
 
 
-    const selectedProgram = programOptions.find(option => option.value === addFormValue.program);
-    const selectedStaff = staffOptions.find(option => option.value === addFormValue.responsible);
-    const selectedCategories = categoryOptions.filter(option =>
-        addFormValue.categories?.includes(option.value)
-    );
+    const selectedProgram = programOptions.find(option => option.value === programId);
+    const selectedStaff = staffOptions.find(option => option.value === staffId);
+    const selectedCategories = categoryOptions.filter(option => categoryIds.includes(option.value));
 
     const handleDateChange = (dates: DateObject[]) => {
         setDateRange(dates);
         if (dates.length === 2) {
-            dispatch(setAddFormValue({
+            dispatch(setEditFormValue({
                 field: 'started_at',
                 value: dates[0].toDate().toISOString()
             }));
-            dispatch(setAddFormValue({
+            dispatch(setEditFormValue({
                 field: 'ended_at',
                 value: dates[1].toDate().toISOString()
             }));
@@ -93,21 +95,21 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     };
 
     const handleProgramChange = (option: SingleValue<OptionType>) => {
-        dispatch(setAddFormValue({
+        dispatch(setEditFormValue({
             field: 'program',
             value: option?.value || ''
         }));
     };
 
     const handleStaffChange = (option : SingleValue<OptionType>) => (
-        dispatch(setAddFormValue({
+        dispatch(setEditFormValue({
             field: 'responsible',
             value: option?.value || ''
         }))
     )
 
     const handleCategoriesChange = (options: MultiValue<OptionType>) => {
-        dispatch(setAddFormValue({
+        dispatch(setEditFormValue({
             field: 'categories',
             value: options.map(o => o.value)
         }));
