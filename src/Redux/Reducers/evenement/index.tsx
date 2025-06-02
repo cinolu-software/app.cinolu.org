@@ -7,7 +7,7 @@ const initialFormValue: formValueType = {
     name: "",
     link: "",
     responsible: "",
-    location: "",
+    place: "",
     description: "",
     started_at: "",
     ended_at: "",

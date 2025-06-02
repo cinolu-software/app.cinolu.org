@@ -2,7 +2,7 @@
 export interface formValueType {
     name: string,
     description: string,
-    location: string,
+    place: string,
     link: string,
     started_at: string,
     ended_at: string,
@@ -33,7 +33,7 @@ export interface EvenementType {
     image: string,
     slug: string,
     description: string,
-    location: string,
+    place: string,
     is_published: boolean,
     link: string,
     started_at: string,

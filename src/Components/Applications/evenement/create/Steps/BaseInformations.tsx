@@ -22,7 +22,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
     }
 
     const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
-        dispatch(setAddFormValue({ field: 'location', value: event.target.value }));
+        dispatch(setAddFormValue({ field: 'place', value: event.target.value }));
     }
 
     const handleDescriptionChange = (value: string) => {
@@ -39,7 +39,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                     </Col>
                     <Col className={'mb-3'} >
                         <Label check>{"Lieu de l'évènement"}<span className="txt-danger"></span></Label>
-                        <Input name="accountName" value={addFormValue.location} onChange={handleLocationChange} type="text" className={'border'}/>
+                        <Input name="accountName" value={addFormValue.place} onChange={handleLocationChange} type="text" className={'border'}/>
                     </Col>
                     <Col className={'mb-3'} >
                         <Label check>{"Lien de l'évènement"}<span className="txt-danger"></span></Label>

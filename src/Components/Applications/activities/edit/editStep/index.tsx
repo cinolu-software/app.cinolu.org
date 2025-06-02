@@ -18,9 +18,9 @@ const EditActivityForm = () => {
     useEffect(
         () => {
             if(selectedActivity){
-                dispatch(fetchActivityById(selectedActivity?.id));
+                dispatch(fetchActivityById(selectedActivity.id));
             } else {
-                router.push('/project');
+                router.push('/act/list');
             }
         }
     , [dispatch]);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
 import {useCallback, useState} from 'react';
 import NavComponent from "@/Components/Applications/evenement/edit/editStep/NavComponent";
@@ -12,10 +12,58 @@ import {useRouter} from "next/navigation";
 const EditEvenementForm = () => {
 
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    const { selectedEvenement, statusFetchEvenementById } = useAppSelector(state => state.evenement);
+
+    useEffect(() => {
+        if(selectedEvenement){
+            dispatch(fetchEvenementById(selectedEvenement.id));
+        }else {
+            router.push('/evenement/list');
+        }
+    }, [dispatch]);
+
+    useEffect(
+        ()=>{
+            dispatch(setEditFormValue({
+                field: 'name',
+                value: selectedEvenement?.name
+            }));
+            dispatch(setEditFormValue({
+                field: 'description',
+                value: selectedEvenement?.description
+            }));
+            dispatch(setEditFormValue({
+                field: 'place',
+                value: selectedEvenement?.place
+            }));
+            dispatch(setEditFormValue({
+                field: 'link',
+                value: selectedEvenement?.link
+            }));
+            dispatch(setEditFormValue({
+                field: 'started_at',
+                value: selectedEvenement?.started_at
+            }));
+            dispatch(setEditFormValue({
+                field: 'ended_at',
+                value: selectedEvenement?.ended_at
+            }));
+            dispatch(setEditFormValue({
+                field: 'responsible',
+                value: selectedEvenement?.responsible
+            }));
+            dispatch(setEditFormValue({
+                field: 'categories',
+                value: selectedEvenement?.categories?.map(c => c.id) || []
+            }));
+        }, [dispatch, statusFetchEvenementById]
+    )
 
     const callback = useCallback((tab: number | undefined) => {
         setActiveTab(tab);
-    }, []);
+    }, [dispatch, router]);
 
     return (
         <Container fluid>
