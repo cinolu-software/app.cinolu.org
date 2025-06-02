@@ -1,11 +1,12 @@
 import React from 'react';
 import { TabContent, TabPane } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
-import FinishForm from "@/Components/Applications/evenement/create/Steps/FinishForm";
-import BaseInformations from "@/Components/Applications/evenement/create/Steps/BaseInformations";
-import Details from "@/Components/Applications/evenement/create/Steps/Details";
+import BaseInformations from "@/Components/Applications/evenement/edit/editStep/Steps/BaseInformations";
+import Details from "@/Components/Applications/evenement/edit/editStep/Steps/Details";
+import FinishForm from "@/Components/Applications/evenement/edit/editStep/Steps/FinishForm";
 
-const EvenementVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
+
+const EvenementTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
     return (
         <TabContent className="dark-field" activeTab={activeTab}>
             <TabPane tabId={1}>
@@ -21,4 +22,4 @@ const EvenementVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsTyp
     );
 };
 
-export default EvenementVerticalWizardTabContent;
+export default EvenementTabContent;

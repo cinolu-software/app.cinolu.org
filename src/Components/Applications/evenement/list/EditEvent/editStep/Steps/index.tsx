@@ -1,12 +1,15 @@
 import React from 'react';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
 import {useCallback, useState} from 'react';
-import NavComponent from "@/Components/Applications/evenement/create/NavComponent";
-import ActivityFormTabContent from "@/Components/Applications/evenement/create/ActivityFormTabContent";
+import NavComponent from "@/Components/Applications/evenement/edit/editStep/NavComponent";
+import EvenementTabContent from "@/Components/Applications/evenement/list/EditEvent/editStep/Steps/EvenementTabContent";
 import BackButton from "@/CommonComponent/BackButton";
+import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
+import {fetchEvenementById, setEditFormValue} from "@/Redux/Reducers/evenement";
+import {useRouter} from "next/navigation";
 
 
-const ActivityForm = () => {
+const EditEvenementForm = () => {
 
     const [activeTab, setActiveTab] = useState<number | undefined>(1);
 
@@ -16,7 +19,7 @@ const ActivityForm = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/events'}/>
+            <BackButton link={'/evenement/list'}/>
             <Col md={12}>
                 <Card>
                     <CardBody>
@@ -26,7 +29,7 @@ const ActivityForm = () => {
                                     <NavComponent callbackActive={callback} activeTab={activeTab} />
                                 </Col>
                                 <Col xs="12" md="9" lg="10" className="main-horizontal-content">
-                                    <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
+                                    <EvenementTabContent activeTab={activeTab} callbackActive={callback}/>
                                 </Col>
                             </Row>
                         </div>
@@ -37,4 +40,4 @@ const ActivityForm = () => {
     )
 }
 
-export default ActivityForm;
+export default EditEvenementForm;

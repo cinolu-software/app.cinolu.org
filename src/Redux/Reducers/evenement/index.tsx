@@ -189,6 +189,25 @@ const EvenementSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+
+            .addCase(deleteEvenement.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(deleteEvenement.fulfilled, (state, action: PayloadAction<{id: string}>) => {
+                state.status = "succeeded";
+                state.originalProjectData = state.originalProjectData.filter(evenement => evenement.id !== action.payload.id);
+                state.publishedProjectData = state.publishedProjectData.filter(evenement => evenement.id !== action.payload.id);
+                if (state.selectedEvenement && state.selectedEvenement.id === action.payload.id) {
+                    state.selectedEvenement = null;
+                }
+            })
+            .addCase(deleteEvenement.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors de la suppression de l'événement";
+            })
+
+
             .addCase(fetchEvenements.pending, (state)=>{
                 state.status = "loading";
                 state.error = null;

@@ -16,5 +16,4 @@ export default function List () {
     }, []);
 
     return MyAwesomeMap ? <MyAwesomeMap/> : "";
-
 }
