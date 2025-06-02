@@ -129,6 +129,7 @@ export const updatedAttachmentEvenementImage = createAsyncThunk<{evenementId: st
     async({evenementId, imageFile}, thunkAPI)=>{
         try{
             const formData = new FormData();
+
             formData.append('thumb', imageFile);
 
             const response = await axiosInstance.post<{data: {image: string}}>(
@@ -140,7 +141,7 @@ export const updatedAttachmentEvenementImage = createAsyncThunk<{evenementId: st
             return {evenementId, imageUrl: response.data.data.image}
         }
         catch (error : any) {
-            return thunkAPI.rejectWithValue(err.response.data);
+            return thunkAPI.rejectWithValue(error.response.data);
         }
     }
 );
@@ -157,7 +158,7 @@ const EvenementSlice = createSlice({
                 state.addFormValue[field] = value;
             }
         },
-        setEditFormValue: (state, action: PayloadAction<{ field: keyof formValueType }>) => {
+        setEditFormValue: (state, action: PayloadAction<{ field: keyof formValueType; value: any }>) => {
             const { field, value } = action.payload;
             if (field === "started_at" || field === "ended_at") {
                 state.editFormValue[field] = new Date(value).toISOString().split("T")[0];
@@ -172,16 +173,88 @@ const EvenementSlice = createSlice({
         },
         setSelectedEvenement : (state, action: PayloadAction<EvenementType | null>) => {
             state.selectedEvenement = action.payload;
-            if(action.payload !== null) {
-                //@ts-ignore
-                state.addFormValue = {...action.payload};
-                //@ts-ignore
-                state.editFormValue = { ...action.payload };
-            }
+        },
+        setModalCreateEvenement : (state, action : PayloadAction<{ isOpen: boolean }>) => {
+            state.isOpenModalCreateEvenement = action.payload.isOpen;
+        },
+        setModalDeleteEvenement : (state, action: PayloadAction<{ isOpen: boolean }>) => {
+            state.isOpenModalDeleteEvenement = action.payload.isOpen;
+        },
+        setModalEditEvenement : (state, action: PayloadAction<{ isOpen: boolean }>) => {
+            state.isOpenModalEditEvenement = action.payload.isOpen;
+        },
+        setFilterToggle: (state) => {
+            state.filterToggle = !state.filterToggle;
         }
     },
     extraReducers: (builder) => {
         builder
+            .addCase(fetchEvenements.pending, (state)=>{
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(fetchEvenements.fulfilled, (state, action: PayloadAction<EvenementType[]>)=>{
+                state.status = "succeeded";
+                state.originalProjectData = action.payload.filter(evenement => !evenement.is_published);
+            })
+            .addCase(fetchEvenements.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors du chargement des événements"
+            })
+
+            .addCase(fetchPublishedEvenements.pending, (state)=>{
+                state.statusFetchPublishedEvenements = "loading";
+                state.error = null;
+            })
+            .addCase(fetchPublishedEvenements.fulfilled, (state, action: PayloadAction<EvenementType[]>)=>{
+                state.statusFetchPublishedEvenements = "succeeded";
+                state.publishedProjectData = action.payload;
+            })
+            .addCase(fetchPublishedEvenements.rejected, (state, action) => {
+                state.statusFetchPublishedEvenements = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors du chargement des événement publiés.";
+            })
+
+            .addCase(fetchEvenementById .pending, (state, action) => {
+                state.statusFetchEvenementById = 'loading';
+                state.selectedEvenement = null;
+            })
+            .addCase(fetchEvenementById.fulfilled, (state, action: PayloadAction<EvenementType>)=>{
+                state.statusFetchEvenementById = "succeeded";
+                state.selectedEvenement = action.payload;
+            })
+            .addCase(fetchEvenementById.rejected, (state, action)=>{
+                state.statusFetchEvenementById = "failed";
+                state.selectedEvenement= null;
+                state.error = action.payload ? action.payload : "Erreur lors du chargement de l'événement"
+            })
+
+            .addCase(publishUnpublishEvenement.pending, (state, action) => {
+                state.statusFetchPublishedEvenements = "loading";
+            })
+            .addCase(publishUnpublishEvenement.fulfilled, (state, action : PayloadAction<EvenementType>)=>{
+                state.statusFetchPublishedEvenements = 'succeeded';
+                const originalIndex = state.originalProjectData.findIndex(a => a.id === action.payload.id);
+                if (originalIndex !== -1) {
+                    state.originalProjectData[originalIndex] = action.payload;
+                } else {
+                    state.originalProjectData.push(action.payload);
+                }
+
+                const publishedIndex = state.publishedProjectData.findIndex(a => a.id === action.payload.id);
+
+                if (publishedIndex !== -1) {
+                    state.publishedProjectData.splice(publishedIndex, 1);
+                }
+
+                state.error = null;
+            })
+            .addCase(publishUnpublishEvenement.rejected, (state, actstatusion)=>{
+                state.statusFetchPublishedEvenements = "failed";
+                state.error =  null
+            })
+
+
             .addCase(createEvenement.pending, (state) => {
                 state.status = "loading";
                 state.error = null;
@@ -195,6 +268,8 @@ const EvenementSlice = createSlice({
             .addCase(createEvenement.rejected, (state) => {
                 state.status = "failed";
             })
+
+
             .addCase(updateEvenement.pending, (state) => {
                 state.status = "loading";
                 state.error = null;
@@ -210,10 +285,43 @@ const EvenementSlice = createSlice({
             })
             .addCase(updateEvenement.rejected, (state) => {
                 state.status = "failed";
-            });
+            })
+
+            .addCase(updatedAttachmentEvenementImage.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
+            .addCase(updatedAttachmentEvenementImage.fulfilled, (state, action: PayloadAction<{evenementId: string; imageUrl: string}>) => {
+                state.status = "succeeded";
+                const { evenementId, imageUrl } = action.payload;
+
+                const originalIndex = state.originalProjectData.findIndex(evenement => evenement.id === evenementId);
+
+                if( originalIndex !== -1) {
+                    state.originalProjectData[originalIndex].image = imageUrl;
+                }
+
+                const publishedIndex = state.publishedProjectData.findIndex(evenement => evenement.id === evenementId);
+
+                if(publishedIndex !== -1) {
+                    state.publishedProjectData[publishedIndex].image = imageUrl;
+                }
+
+                if(state.selectedEvenement && state.selectedEvenement.id === evenementId) {
+                    state.selectedEvenement = {
+                        ...state.selectedEvenement,
+                        image: imageUrl
+                    }
+                }
+
+            })
+            .addCase(updatedAttachmentEvenementImage.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.payload ? action.payload : "Erreur lors de la mise à jour de l'image.";
+            })
     }
 });
 
-export const { setAddFormValue, resetForm, setSelectedEvenement } = EvenementSlice.actions;
+export const { setAddFormValue, resetForm, setSelectedEvenement, setModalDeleteEvenement, setModalCreateEvenement, setModalEditEvenement, setEditFormValue, setFilterToggle} = EvenementSlice.actions;
 
 export default EvenementSlice.reducer;

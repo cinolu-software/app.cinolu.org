@@ -316,7 +316,7 @@ const ActivitySlice = createSlice({
             })
 
 
-            .addCase(updatedAttachmentActivityImage.pending, (state) => {
+            .addCase(updatedAttachmentActivityImage.pending, (state) => {   
                 state.status = "loading";
                 state.error = null;
             })
