@@ -16,13 +16,13 @@ const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType
             <TabPane tabId={2}>
                 <Details callbackActive={callbackActive}/>
             </TabPane>
+            {/*<TabPane tabId={3}>*/}
+            {/*    <FormActivity callbackActive={callbackActive}/>*/}
+            {/*</TabPane>*/}
+            {/*<TabPane tabId={4}>*/}
+            {/*    <ReviewForm callbackActive={callbackActive}/>*/}
+            {/*</TabPane>*/}
             <TabPane tabId={3}>
-                <FormActivity callbackActive={callbackActive}/>
-            </TabPane>
-            <TabPane tabId={4}>
-                <ReviewForm callbackActive={callbackActive}/>
-            </TabPane>
-            <TabPane tabId={5}>
                 <FinishForm />
             </TabPane>
         </TabContent>

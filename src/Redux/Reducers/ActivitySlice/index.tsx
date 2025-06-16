@@ -7,12 +7,11 @@ const initialFormValue: formValueType = {
     id: "",
     name: "",
     description: "",
+    form_link: "",
     started_at: '',
     ended_at: '',
     program: '',
     categories: [],
-    form: [],
-    review_form: [],
     partners: []
 };
 
@@ -169,12 +168,12 @@ const ActivitySlice = createSlice({
             state.editFormValue = { ...initialFormValue };
         },
         setFormField: (state, action: PayloadAction<{ form?: any[]; curationForm?: any[] }>) => {
-            if (action.payload.form !== undefined) {
-                state.addFormValue.form = action.payload.form;
-            }
-            if (action.payload.curationForm !== undefined) {
-                state.addFormValue.review_form = action.payload.curationForm;
-            }
+            // if (action.payload.form !== undefined) {
+            //     state.addFormValue.form = action.payload.form;
+            // }
+            // if (action.payload.curationForm !== undefined) {
+            //     state.addFormValue.review_form = action.payload.curationForm;
+            // }
         },
         setSelectedActivity : (state, action: PayloadAction<ActivityReceive | null>) => {
             state.selectedActivity = action.payload;

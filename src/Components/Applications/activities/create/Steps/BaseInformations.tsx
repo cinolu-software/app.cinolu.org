@@ -21,6 +21,10 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
         dispatch(setAddFormValue({ field: 'description', value }));
     };
 
+    const handleFormLinkChange = (event: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setAddFormValue({ field: 'form_link', value: event.target.value }));
+    }
+
     return (
         <div className={'border ps-3 rounded'}>
             <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
@@ -28,6 +32,10 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                     <Col className={'mb-3'} >
                         <Label check>{"Nom de l'activité"}<span className="txt-danger">*</span></Label>
                         <Input name="accountName" value={addFormValue.name} onChange={handleNameChange} type="text" className={'border'}/>
+                    </Col>
+                    <Col className={'mb-3'} >
+                        <Label check>{"Lien"}<span className="txt-danger">*</span></Label>
+                        <Input name="accountName" value={addFormValue.form_link} onChange={handleFormLinkChange} type="text" className={'border'}/>
                     </Col>
                     <Col >
                         <Label check>{"Description de l'activité"}<span className="txt-danger">*</span></Label>

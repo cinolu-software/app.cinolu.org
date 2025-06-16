@@ -8,7 +8,7 @@ const AdminDashboardContainer = () => {
   return (
     <Container fluid className="dashboard-4">
       <Row>
-        <TotalCoach/>
+        {/*<TotalCoach/>*/}
       </Row>
     </Container>
   );
