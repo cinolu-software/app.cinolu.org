@@ -1,10 +1,10 @@
 import React, {ChangeEvent} from "react";
-import { Col, Form, Input, Label } from "reactstrap";
+import { Col, Input, Label } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
-import {setAddFormValue, setEditFormValue} from "@/Redux/Reducers/ActivitySlice";
+import {setEditFormValue} from "@/Redux/Reducers/ActivitySlice";
 
 
 const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
@@ -23,7 +23,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
 
     return (
         <div className={'border ps-3 rounded'}>
-            <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
+            <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'événement</h2>
                 <div className={'p-3 mb-2'}>
                     <Col className={'mb-3'} >
                         <Label check>{"Nom de l'activité"}<span className="txt-danger">*</span></Label>

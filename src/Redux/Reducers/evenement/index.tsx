@@ -150,23 +150,35 @@ const EvenementSlice = createSlice({
     name: "EvenementSlice",
     initialState,
     reducers: {
+
         setAddFormValue: (state, action: PayloadAction<{ field: keyof formValueType; value: any }>) => {
             const { field, value } = action.payload;
-            if (field === "started_at" || field === "ended_at") {
-                state.addFormValue[field] = new Date(value).toISOString().split("T")[0];
+            if ((field === "started_at" || field === "ended_at") && value) {
+                const date = new Date(value);
+                if (!isNaN(date.getTime())) {
+                    state.addFormValue[field] = date.toISOString().split("T")[0];
+                } else {
+                    state.addFormValue[field] = "";
+                }
             } else {
                 state.addFormValue[field] = value;
             }
         },
+
         setEditFormValue: (state, action: PayloadAction<{ field: keyof formValueType; value: any }>) => {
             const { field, value } = action.payload;
-            if (field === "started_at" || field === "ended_at") {
-                state.editFormValue[field] = new Date(value).toISOString().split("T")[0];
+            if ((field === "started_at" || field === "ended_at") && value) {
+                const date = new Date(value);
+                if (!isNaN(date.getTime())) {
+                    state.editFormValue[field] = date.toISOString().split("T")[0];
+                } else {
+                    state.editFormValue[field] = ""; 
+                }
             } else {
                 state.editFormValue[field] = value;
             }
-        }
-        ,
+        },      
+
         resetForm: (state) => {
             state.addFormValue = { ...initialFormValue };
             state.editFormValue = { ...initialFormValue };
@@ -269,12 +281,10 @@ const EvenementSlice = createSlice({
 
                 state.error = null;
             })
-            .addCase(publishUnpublishEvenement.rejected, (state, actstatusion)=>{
+            .addCase(publishUnpublishEvenement.rejected, (state)=>{
                 state.statusFetchPublishedEvenements = "failed";
                 state.error =  null
             })
-
-
             .addCase(createEvenement.pending, (state) => {
                 state.status = "loading";
                 state.error = null;

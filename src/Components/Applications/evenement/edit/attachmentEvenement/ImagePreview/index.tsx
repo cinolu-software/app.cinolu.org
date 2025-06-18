@@ -51,7 +51,7 @@ const ImagePreview = () => {
                             theme: "colored",
                         }
                     );
-                    router.push(`/act/list`);
+                    router.push(`/evenement/list`);
                 })
                 .catch(() => {
                     toast.error(

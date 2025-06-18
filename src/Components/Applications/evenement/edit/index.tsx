@@ -1,11 +1,13 @@
 import {Card, CardBody, Nav, NavItem, NavLink, Container, Row} from "reactstrap";
-import React, {useState} from 'react'
-import EventEditTabContent from "@/Components/Applications/evenement/list/EditEvent/EventEditTabContent";
+import React, {useState} from 'react';
 import BackButton from "@/CommonComponent/BackButton";
+import EvenementEditTabContent from "@/Components/Applications/evenement/edit/EvenementEditTabContent";
+
 
 const EditEvenementTabs = () => {
 
     const [activeTab, setActiveTab] = useState('1');
+
 
     return (
         <Container fluid>
@@ -13,8 +15,8 @@ const EditEvenementTabs = () => {
             <Row>
                 <Card>
                     <CardBody>
-                        <h3 className="mb-0">{"Modifier l'activité"}</h3>
-                        <p className="text-muted mb-0">{"Vous pouvez modifier les détails de l'activité ici."}</p>
+                        <h3 className="mb-0">{"Modifier l'événement"}</h3>
+                        <p className="text-muted mb-0">{"Vous pouvez modifier les détails de l'événement ici."}</p>
                     </CardBody>
                 </Card>
                 <Card>
@@ -24,7 +26,7 @@ const EditEvenementTabs = () => {
                                 <NavItem>
                                     <NavLink className={`txt-secondary ${activeTab === "1" ? "active" : ""}`} onClick={() => setActiveTab("1")}>
                                         <i className="icofont icofont-files"></i>
-                                        <span>{"Détail de l'activité"}</span>
+                                        <span>{"Détail de l'événement"}</span>
                                     </NavLink>
                                 </NavItem>
                             </NavItem>
@@ -39,7 +41,7 @@ const EditEvenementTabs = () => {
                                 </NavItem>
                             </NavItem>
                         </Nav>
-                        <EventEditTabContent activeTab={activeTab}/>
+                        <EvenementEditTabContent activeTab={activeTab}/>
                     </CardBody>
                 </Card>
             </Row>
