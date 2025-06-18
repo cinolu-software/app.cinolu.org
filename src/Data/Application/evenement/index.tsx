@@ -23,7 +23,7 @@ const EvenementListTableName: React.FC<{ image: string, name: string }> = ({imag
     );
 };
 
-const EvenementListTableAction: React.FC<{ event: EvenementType ; isPublished?: boolean }> = ({ event, isPublished }) => {
+const EvenementListTableAction: React.FC<{ event: EvenementType ; showDelete?:boolean }> = ({ event, showDelete = true }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
@@ -78,7 +78,7 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; isPublished?: 
     return (
         <div className="product-action">
             <div className="row w-100 justify-content-center g-2">
-                <div className="col-6 col-md-3 d-flex justify-content-center">
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
                     <Button
                         color="info"
                         outline
@@ -96,12 +96,11 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; isPublished?: 
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
-                <div className="col-6 col-md-3 d-flex justify-content-center">
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
                     <Button
                         color="info"
                         outline
@@ -119,12 +118,11 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; isPublished?: 
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
                         )}
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
-                <div className="col-6 col-md-3 d-flex justify-content-center">
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
                     <Button
                         color={'info'}
                         outline
@@ -142,35 +140,37 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; isPublished?: 
                             <Spinner size="sm" className="flex-shrink-0" />
                         ) : (
                             <></>
-                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
                         )}
-                        <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
+                        <span className="text-truncate">{event.is_published ? 'Dépublier' : 'Publier'}</span>
                     </Button>
                 </div>
-                <div className="col-6 col-md-3 d-flex justify-content-center">
-                    <Button
-                        color={'danger'}
-                        outline
-                        onClick={handleDelete}
-                        disabled={loadingDelete}
-                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
-                        style={{
-                            padding: '6px 10px',
-                            borderRadius: '8px',
-                            width: '100%',
-                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
-                        }}
-                    >
-                        {
-                            loadingDelete ?
-                                (<Spinner size="sm" className="flex-shrink-0"  />) :
-                                (
-                                    <></>
-                                    // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
-                                )
-                        }
-                        <span className="text-truncate">Supprimer</span>
-                    </Button>
+                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+                    {
+                        showDelete && (
+                            <Button
+                                color={'danger'}
+                                outline
+                                onClick={handleDelete}
+                                disabled={loadingDelete}
+                                className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                                style={{
+                                    padding: '6px 10px',
+                                    borderRadius: '8px',
+                                    width: '100%',
+                                    fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                                }}
+                            >
+                                {
+                                    loadingDelete ?
+                                        (<Spinner size="sm" className="flex-shrink-0"  />) :
+                                        (
+                                            <></>
+                                        )
+                                }
+                                <span className="text-truncate">Supprimer</span>
+                            </Button>
+                        )
+                    }
                 </div>
             </div>
         </div>
@@ -201,18 +201,42 @@ export const EvenementListTableDataColumn: TableColumn<EvenementType>[] = [
         sortable: true,
         grow: 1
     },
-    // {
-    //     name: "Nombre de participants",
-    //     selector: (row: ActivityReceive) => row.report?.["Nombre total de participants"] ?? 0,
-    //     sortable: true,
-    //     grow: 1
-    // },
     {
         name: "Actions",
-        cell: (row: EvenementType) => <EvenementListTableAction event={row}/>,
+        cell: (row: EvenementType) => <EvenementListTableAction event={row} showDelete={true}/>,
         grow: 2
     },
 ];
+
+export const EvenementPublishedListTableData : TableColumn<EvenementType>[] = [
+    {
+        name: "Nom",
+        cell: (row: EvenementType) => (
+            <EvenementListTableName
+                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/programs.png'}
+                name={row.name}/>
+        ),
+        sortable: true,
+        grow: 2,
+    },
+    {
+        name: "Date de début",
+        selector: (row: EvenementType) => row.started_at,
+        sortable: true,
+        grow: 1
+    },
+    {
+        name: "Date de fin",
+        selector: (row: EvenementType) => row.ended_at,
+        sortable: true,
+        grow: 1
+    },
+    {
+        name: "Actions",
+        cell: (row: EvenementType) => <EvenementListTableAction event={row} showDelete={false}/>,
+        grow: 2
+    },
+]
 
 export const EvenementVerticalData = [
     {

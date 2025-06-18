@@ -102,7 +102,7 @@ export const publishUnpublishEvenement = createAsyncThunk<EvenementType, {evenem
     'evenement/publishUnpublishEvenement',
     async({evenementId}, thunkAPI)=>{
         try{
-            const response = await axiosInstance.post(`${apiBaseUrl}/event/publish/${evenementId}`);
+            const response = await axiosInstance.post(`${apiBaseUrl}/events/publish/${evenementId}`);
             return response.data.data as EvenementType;
         }catch(error: any){
             return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors de la publication jour.");

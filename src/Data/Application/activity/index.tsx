@@ -21,8 +21,7 @@ const ActivityListTableName: React.FC<{image: string, name: string}>=({image, na
     )
 };
 
-const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?: boolean
-}> = ({ activity, showDelete = true }) => {
+const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?: boolean}> = ({ activity, showDelete = true }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();

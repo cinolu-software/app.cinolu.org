@@ -1,8 +1,8 @@
 import React, {useMemo, useState, useEffect} from "react";
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row } from "reactstrap";
-import {fetchPublishedEvents} from "@/Redux/Reducers/eventSlice/eventSlice";
-import {PublishedEventsListTableDataColumn} from "@/Data/Application/events";
+import {fetchPublishedEvenements} from "@/Redux/Reducers/evenement";
+import {EvenementPublishedListTableData} from "@/Data/Application/evenement";
 import DeleteEventModal from "@/Components/Applications/evenement/list/Common/DeleteEventModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
@@ -14,9 +14,9 @@ const PublishedEventsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {publishedEventData, publishedEventStatus} = useAppSelector(state=>state.event);
+    const {publishedProjectData, statusFetchPublishedEvenements} = useAppSelector(state=>state.evenement);
     // @ts-ignore
-    const filteredItems = publishedEventData[0]?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = publishedProjectData[0]?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -27,16 +27,16 @@ const PublishedEventsListContainer = () => {
     }, [filterText]);
 
     useEffect(() => {
-        if(publishedEventStatus === "idle" || publishedEventStatus === "loading"){
-            dispatch(fetchPublishedEvents())
+        if(statusFetchPublishedEvenements === "idle" || statusFetchPublishedEvenements === "loading"){
+            dispatch(fetchPublishedEvenements())
         }
-    }, [publishedEventStatus, dispatch]);
+    }, [statusFetchPublishedEvenements, dispatch]);
 
     return (
         <Container fluid>
             <DeleteEventModal />
             {
-                publishedEventStatus !== 'succeeded' ? <TableSkeleton/> : (
+                statusFetchPublishedEvenements !== 'succeeded' ? <TableSkeleton/> : (
                     <Row>
                         <Col sm="12">
 
@@ -47,7 +47,7 @@ const PublishedEventsListContainer = () => {
                                     <DataTable
                                         className="theme-scrollbar"
                                         data={filteredItems}
-                                        columns={PublishedEventsListTableDataColumn}
+                                        columns={EvenementPublishedListTableData}
                                         striped
                                         highlightOnHover
                                         pagination
