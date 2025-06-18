@@ -21,7 +21,7 @@ const FinishForm = () => {
             description: addFormValue.description,
             link : addFormValue.link,
             responsible: addFormValue.responsible,
-            location: addFormValue.location,
+            place: addFormValue.place,
             started_at: addFormValue.started_at,
             ended_at: addFormValue.ended_at,
             program: addFormValue.program,

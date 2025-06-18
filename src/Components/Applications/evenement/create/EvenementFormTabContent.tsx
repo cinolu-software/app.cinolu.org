@@ -5,7 +5,7 @@ import FinishForm from "@/Components/Applications/evenement/create/Steps/FinishF
 import BaseInformations from "@/Components/Applications/evenement/create/Steps/BaseInformations";
 import Details from "@/Components/Applications/evenement/create/Steps/Details";
 
-const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
+const EvenementVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType> = ({ activeTab, callbackActive }) => {
     return (
         <TabContent className="dark-field" activeTab={activeTab}>
             <TabPane tabId={1}>
@@ -21,4 +21,4 @@ const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType
     );
 };
 
-export default ActivityVerticalWizardTabContent;
+export default EvenementVerticalWizardTabContent;

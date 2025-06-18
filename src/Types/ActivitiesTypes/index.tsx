@@ -75,7 +75,7 @@ export interface ActivityReceive {
     form_link: string;
     started_at: string;
     ended_at: string;
-    image?:string;
+    cover?:string;
     program: ProgramType;
     categories: CategoryType;
     phases: PhaseType[];

@@ -1,18 +1,18 @@
 import React, {useState} from 'react';
-import {ActivityReceive} from "@/Types/ActivitiesTypes";
 import RatioImage from "@/CommonComponent/RatioImage";
 import {useAppDispatch} from "@/Redux/Hooks";
-import { publishProject, setSelectedProject, setModalDeleteProject} from "@/Redux/Reducers/projectSlice/projectSlice";
-import {setSelectedActivity} from "@/Redux/Reducers/ActivitySlice";
+import {setSelectedEvenement} from "@/Redux/Reducers/evenement";
 import {TableColumn} from "react-data-table-component";
 import {useRouter} from "next/navigation";
 import {imageBaseUrl} from "@/services/axios";
-import SVG from '@/CommonComponent/SVG';
-import {Spinner} from 'reactstrap';
+import {publishUnpublishEvenement} from "@/Redux/Reducers/evenement";
+import {Spinner, Button} from 'reactstrap';
 import { Flip, toast } from "react-toastify";
+import {EvenementType} from "@/Types/evenement";
+import {setModalDeleteEvenement} from "@/Redux/Reducers/evenement";
 
 
-const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
+const EvenementListTableName: React.FC<{ image: string, name: string }> = ({image, name}) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -23,10 +23,11 @@ const ProjectListTableName: React.FC<{ image: string, name: string }> = ({image,
     );
 };
 
-const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ project }) => {
+const EvenementListTableAction: React.FC<{ event: EvenementType ; isPublished?: boolean }> = ({ event, isPublished }) => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
+
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
@@ -34,20 +35,19 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
 
     const handleEdit = async () => {
         setLoadingEdit(true);
-        router.push('/act/edit');
-        dispatch(setSelectedActivity(project));
+        router.push('/evenement/edit');
+        dispatch(setSelectedEvenement(event));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
-        router.push('/project/detail_project');
-        dispatch(setSelectedActivity(project));
+        router.push('/evenement/detail');
+        dispatch(setSelectedEvenement(event));
     };
 
     const handleDelete = async () => {
         setLoadingDelete(true);
-        //@ts-ignore
-        dispatch(setModalDeleteProject({ isOpen: true, project }));
+        dispatch(setModalDeleteEvenement({isOpen: true, evenement: event}));
         setLoadingDelete(false);
     };
 
@@ -55,16 +55,15 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
         try {
             setLoadingPublish(true);
             setTimeout(() => {
-                // @ts-ignore
-                    dispatch(publishProject({projectId: project.id}));
-                    toast.success("Projet publié avec succès", {
+                    dispatch(publishUnpublishEvenement({ evenementId: event.id }));
+                    toast.success("Evénement publié avec succès", {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
                         transition: Flip,
                     });
                     setLoadingPublish(false);
-            }
-            , 1000);
+                }
+                , 1000);
         }
         catch (e) {
             setLoadingPublish(false);
@@ -76,61 +75,115 @@ const ProjectListTableAction: React.FC<{ project: ActivityReceive }> = ({ projec
         }
     }
 
-
     return (
         <div className="product-action">
-            <div className="row w-100 justify-content-center">
-                <div className="col-3">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+            <div className="row w-100 justify-content-center g-2">
+                <div className="col-6 col-md-3 d-flex justify-content-center">
+                    <Button
+                        color="info"
+                        outline
                         onClick={handleEdit}
-                        className={'btn-info'}
                         disabled={loadingEdit}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
                     >
-                        {loadingEdit ? <Spinner size="sm"/> : <SVG iconId="editTable"/>}
-                    </button>
+                        {loadingEdit ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
+                        )}
+                        <span className="text-truncate">Modifier</span>
+                    </Button>
                 </div>
-                <div className="col-3">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                <div className="col-6 col-md-3 d-flex justify-content-center">
+                    <Button
+                        color="info"
+                        outline
                         onClick={handleDetail}
-                        className={'btn-info'}
                         disabled={loadingDetail}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
                     >
-                        {loadingDetail ? <Spinner size="sm"/> : <SVG iconId="moreTable"/>}
-                    </button>
+                        {loadingDetail ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                            // <SVG iconId="moreTable" className="d-none d-md-inline flex-shrink-0" />
+                        )}
+                        <span className="text-truncate">Détails</span>
+                    </Button>
                 </div>
-                <div className="col-3">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                <div className="col-6 col-md-3 d-flex justify-content-center">
+                    <Button
+                        color={'info'}
+                        outline
                         onClick={handlePublish}
-                        className={'btn-info'}
-                        disabled={loadingPublish}fill-calendar
+                        disabled={loadingPublish}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
                     >
-                        {loadingPublish ? <Spinner size="sm"/> : <SVG iconId="published"/>}
-                    </button>
+                        {loadingPublish ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                            // <SVG iconId={isPublished ? 'unpublish_call' : 'publish_call'} />
+                        )}
+                        <span className="text-truncate">{isPublished ? 'Dépublier' : 'Publier'}</span>
+                    </Button>
                 </div>
-                <div className="col-3">
-                    <button
-                        style={{border: 'none', paddingTop: 10, paddingLeft: 10, paddingBottom: 5, borderRadius: 100}}
+                <div className="col-6 col-md-3 d-flex justify-content-center">
+                    <Button
+                        color={'danger'}
+                        outline
                         onClick={handleDelete}
-                        className={'btn-info'}
                         disabled={loadingDelete}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
                     >
-                        {loadingDelete ? <Spinner size="sm"/> : <SVG iconId="trashTable"/>}
-                    </button>
+                        {
+                            loadingDelete ?
+                                (<Spinner size="sm" className="flex-shrink-0"  />) :
+                                (
+                                    <></>
+                                    // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0 txt-danger"/>
+                                )
+                        }
+                        <span className="text-truncate">Supprimer</span>
+                    </Button>
                 </div>
             </div>
         </div>
     );
+
 };
 
-export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
+export const EvenementListTableDataColumn: TableColumn<EvenementType>[] = [
     {
         name: "Nom",
-        cell: (row: ActivityReceive) => (
-            <ProjectListTableName
-                image={row?.image ? `${imageBaseUrl}/projects/${row.image}` : '/assets/images/programs/programs.png'}
+        cell: (row: EvenementType) => (
+            <EvenementListTableName
+                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/programs.png'}
                 name={row.name}/>
         ),
         sortable: true,
@@ -138,13 +191,13 @@ export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     },
     {
         name: "Date de début",
-        selector: (row: ActivityReceive) => row.started_at,
+        selector: (row: EvenementType) => row.started_at,
         sortable: true,
         grow: 1
     },
     {
         name: "Date de fin",
-        selector: (row: ActivityReceive) => row.ended_at,
+        selector: (row: EvenementType) => row.ended_at,
         sortable: true,
         grow: 1
     },
@@ -156,7 +209,7 @@ export const ProjectListTableDataColumn: TableColumn<ActivityReceive>[] = [
     // },
     {
         name: "Actions",
-        cell: (row: ActivityReceive) => <ProjectListTableAction project={row}/>,
+        cell: (row: EvenementType) => <EvenementListTableAction event={row}/>,
         grow: 2
     },
 ];

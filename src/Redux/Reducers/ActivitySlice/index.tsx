@@ -95,7 +95,6 @@ export const fetchPublishedActivities = createAsyncThunk<ActivityReceive[], void
     }
 );
 
-
 export const publishUnpublishActivity = createAsyncThunk<ActivityReceive, {activityId: string}, {rejectValue: any}>(
     'activity/publishActivity',
     async ({activityId}, thunkAPI) => {
@@ -121,21 +120,20 @@ export const deleteActivity = createAsyncThunk<{ id: string }, string, { rejectV
     }
 );
 
-export const updatedAttachmentActivityImage = createAsyncThunk<{ activityId: string ; imageUrl: string }, { activityId: string; imageFile: File },{ rejectValue: any }>
-    ('activity/updateAttachmentActivityImage', async ({ activityId, imageFile }, thunkAPI) => {
+export const updatedAttachmentActivityImage = createAsyncThunk<ActivityReceive, { activityId: string; imageFile: File },{ rejectValue: any }>
+    (
+        'activity/updateAttachmentActivityImage',
+        async ({ activityId, imageFile }, thunkAPI) => {
         try {
-
             const formData = new FormData();
+            formData.append('cover', imageFile);
 
-            formData.append('thumb', imageFile);
-
-            const response = await axiosInstance.post<{ data: { image: string } }>(
-                `${apiBaseUrl}/projects/image/${activityId}`,
+            const response = await axiosInstance.post(
+                `${apiBaseUrl}/projects/cover/${activityId}`,
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
-            
-            return { activityId, imageUrl: response.data.data.image };
+            return response.data.data as ActivityReceive;
         }
         catch (err: any) {
             return thunkAPI.rejectWithValue(err.response.data);
@@ -168,12 +166,7 @@ const ActivitySlice = createSlice({
             state.editFormValue = { ...initialFormValue };
         },
         setFormField: (state, action: PayloadAction<{ form?: any[]; curationForm?: any[] }>) => {
-            // if (action.payload.form !== undefined) {
-            //     state.addFormValue.form = action.payload.form;
-            // }
-            // if (action.payload.curationForm !== undefined) {
-            //     state.addFormValue.review_form = action.payload.curationForm;
-            // }
+
         },
         setSelectedActivity : (state, action: PayloadAction<ActivityReceive | null>) => {
             state.selectedActivity = action.payload;
@@ -207,8 +200,6 @@ const ActivitySlice = createSlice({
                 state.status = "failed";
                 state.error = action.payload ? action.payload : "Erreur lors du chargement des activités.";
             })
-
-
             .addCase(fetchPublishedActivities.pending, (state) => {
                 state.fetchPublishedStatus = "loading";
                 state.error = null;
@@ -265,8 +256,6 @@ const ActivitySlice = createSlice({
             .addCase(createActivity.rejected, (state, action) => {
                 state.status = "failed";
             })
-
-
             .addCase(updateActivity.pending, (state) => {
                 state.status = "loading";
                 state.error = null;
@@ -280,7 +269,7 @@ const ActivitySlice = createSlice({
                 state.selectedActivity = action.payload;
                 state.error = null;
             })
-            .addCase(updateActivity.rejected, (state, action) => {
+            .addCase(updateActivity.rejected, (state) => {
                 state.status = "failed";
             })
 
@@ -319,24 +308,23 @@ const ActivitySlice = createSlice({
                 state.status = "loading";
                 state.error = null;
             })
-            .addCase(updatedAttachmentActivityImage.fulfilled, (state, action: PayloadAction<{ activityId: string; imageUrl: string }>) => {
+            .addCase(updatedAttachmentActivityImage.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
                 state.status = "succeeded";
-                const { activityId, imageUrl } = action.payload;
 
-                const originalIndex = state.originalProjectData.findIndex(a => a.id === activityId);
+                const originalIndex = state.originalProjectData.findIndex(a => a.id === action.payload.id);
                 if (originalIndex !== -1) {
-                    state.originalProjectData[originalIndex].image = imageUrl;
+                    state.originalProjectData[originalIndex].cover = action.payload.cover;
                 }
 
-                const publishedIndex = state.publishedProjectData.findIndex(a => a.id === activityId);
+                const publishedIndex = state.publishedProjectData.findIndex(a => a.id === action.payload.id);
                 if (publishedIndex !== -1) {
-                    state.publishedProjectData[publishedIndex].image = imageUrl;
+                    state.publishedProjectData[publishedIndex].cover = action.payload.cover;
                 }
 
-                if (state.selectedActivity && state.selectedActivity.id === activityId) {
+                if (state.selectedActivity && state.selectedActivity.id === action.payload.id) {
                     state.selectedActivity = {
                         ...state.selectedActivity,
-                        image: imageUrl
+                        cover: action.payload.cover
                     };
                 }
             })
@@ -347,6 +335,6 @@ const ActivitySlice = createSlice({
     }
 });
 
-export const { setAddFormValue,setEditFormValue ,setFormField, resetForm, setSelectedActivity, setModalCreateActivity, setModalDeleteActivity, setFilterToggle, setModalEditActivity } = ActivitySlice.actions;
+export const { setAddFormValue,setEditFormValue ,setFormField, resetForm, setSelectedActivity, setModalDeleteActivity } = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;

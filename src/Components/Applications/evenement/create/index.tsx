@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, CardBody, Col, Container, Row} from 'reactstrap';
 import {useCallback, useState} from 'react';
 import NavComponent from "@/Components/Applications/evenement/create/NavComponent";
-import ActivityFormTabContent from "@/Components/Applications/evenement/create/ActivityFormTabContent";
+import EvenementVerticalWizardTabContent from "@/Components/Applications/evenement/create/EvenementFormTabContent";
 import BackButton from "@/CommonComponent/BackButton";
 
 
@@ -16,7 +16,7 @@ const ActivityForm = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/events'}/>
+            <BackButton link={'/evenement/list'}/>
             <Col md={12}>
                 <Card>
                     <CardBody>
@@ -26,7 +26,7 @@ const ActivityForm = () => {
                                     <NavComponent callbackActive={callback} activeTab={activeTab} />
                                 </Col>
                                 <Col xs="12" md="9" lg="10" className="main-horizontal-content">
-                                    <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
+                                    <EvenementVerticalWizardTabContent activeTab={activeTab} callbackActive={callback}/>
                                 </Col>
                             </Row>
                         </div>

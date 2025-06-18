@@ -17,13 +17,12 @@ const FinishForm = () => {
         const projectData: createActivityType = {
             name: editFormValue.name,
             description: editFormValue.description,
+            form_link: editFormValue.form_link,
             started_at: editFormValue.started_at,
             ended_at: editFormValue.ended_at,
             program: editFormValue.program,
             categories: editFormValue.categories || [],
             partners: editFormValue.partners || [],
-            form: editFormValue.form || [],
-            review_form: editFormValue.review_form || []
         };
         
         try {

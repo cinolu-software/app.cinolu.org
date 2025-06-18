@@ -3,20 +3,21 @@ import { ImagePath } from "@/Constant";
 import { Button, CardBody, Col } from "reactstrap";
 import CommonModal from "@/CommonComponent/CommonModalType/CommonModal";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import {setModalDeleteEvent, deleteEvent} from "@/Redux/Reducers/eventSlice/eventSlice";
+import {setModalDeleteEvenement, deleteEvenement} from "@/Redux/Reducers/evenement";
 import { toast, ToastContainer, Flip } from "react-toastify";
+
 
 const DeleteEventModal = () => {
 
     const dispatch = useAppDispatch();
-    const {isOpenModalDeleteEvent, selectedEvent, dataEvent} = useAppSelector(state=>state.event)
-    const selectedEventData = dataEvent?.find((item) => item.id === selectedEvent?.id);
+    const {isOpenModalDeleteEvenement, selectedEvenement, originalProjectData} = useAppSelector(state => state.evenement);
+    const selectedEventData = originalProjectData?.find((item) => item.id === selectedEvenement?.id);
 
     const handleDelete = async () => {
-        if (selectedEventData && selectedEventData.id !== undefined) {
+        if (selectedEvenement && selectedEventData?.id !== undefined) {
             try {
-                await dispatch(deleteEvent(selectedEventData.id)).unwrap();
-                dispatch(setModalDeleteEvent({ isOpen: false, event: null }));
+                await dispatch(deleteEvenement(selectedEventData.id)).unwrap();
+                dispatch(setModalDeleteEvenement({ isOpen: false, evenement: null }));
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"Suppression effectuée avec succès"}</p>,
                     {
@@ -47,8 +48,8 @@ const DeleteEventModal = () => {
             <CardBody className="badge-spacing">
                 <CommonModal
                     centered
-                    isOpen={isOpenModalDeleteEvent}
-                    toggle={() => dispatch(setModalDeleteEvent({ isOpen: false, event: null }))}
+                    isOpen={isOpenModalDeleteEvenement}
+                    toggle={() => dispatch(setModalDeleteEvenement({ isOpen: false, evenement: null }))}
                     title="Supprimer le programme"
                 >
                     <div className="modal-toggle-wrapper">
@@ -64,11 +65,12 @@ const DeleteEventModal = () => {
                             <Button
                                 color="primary"
                                 className="me-2"
-                                onClick={() => dispatch(setModalDeleteEvent({ isOpen: false, event: null }))}
+                                outline={true}
+                                onClick={() => dispatch(setModalDeleteEvenement({ isOpen: false, evenement: null }))}
                             >
                                 {"Fermer"}
                             </Button>
-                            <Button  onClick={handleDelete}>
+                            <Button  onClick={handleDelete} outline={true} color={'danger'}>
                                 {"Supprimer"}
                             </Button>
                         </div>

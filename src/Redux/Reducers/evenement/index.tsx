@@ -177,8 +177,9 @@ const EvenementSlice = createSlice({
         setModalCreateEvenement : (state, action : PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalCreateEvenement = action.payload.isOpen;
         },
-        setModalDeleteEvenement : (state, action: PayloadAction<{ isOpen: boolean }>) => {
+        setModalDeleteEvenement : (state, action: PayloadAction<{ isOpen: boolean, evenement: EvenementType | null }>) => {
             state.isOpenModalDeleteEvenement = action.payload.isOpen;
+            state.selectedEvenement = action.payload.evenement;
         },
         setModalEditEvenement : (state, action: PayloadAction<{ isOpen: boolean }>) => {
             state.isOpenModalEditEvenement = action.payload.isOpen;
@@ -214,7 +215,8 @@ const EvenementSlice = createSlice({
             })
             .addCase(fetchEvenements.fulfilled, (state, action: PayloadAction<EvenementType[]>)=>{
                 state.status = "succeeded";
-                state.originalProjectData = action.payload.filter(evenement => !evenement.is_published);
+                // state.originalProjectData = action.payload.filter(evenement => !evenement.is_published);
+                state.originalProjectData = action.payload;
             })
             .addCase(fetchEvenements.rejected, (state, action) => {
                 state.status = "failed";
@@ -233,7 +235,6 @@ const EvenementSlice = createSlice({
                 state.statusFetchPublishedEvenements = "failed";
                 state.error = action.payload ? action.payload : "Erreur lors du chargement des événement publiés.";
             })
-
             .addCase(fetchEvenementById .pending, (state, action) => {
                 state.statusFetchEvenementById = 'loading';
                 state.selectedEvenement = null;
@@ -317,19 +318,19 @@ const EvenementSlice = createSlice({
                 const originalIndex = state.originalProjectData.findIndex(evenement => evenement.id === evenementId);
 
                 if( originalIndex !== -1) {
-                    state.originalProjectData[originalIndex].image = imageUrl;
+                    state.originalProjectData[originalIndex].cover = imageUrl;
                 }
 
                 const publishedIndex = state.publishedProjectData.findIndex(evenement => evenement.id === evenementId);
 
                 if(publishedIndex !== -1) {
-                    state.publishedProjectData[publishedIndex].image = imageUrl;
+                    state.publishedProjectData[publishedIndex].cover = imageUrl;
                 }
 
                 if(state.selectedEvenement && state.selectedEvenement.id === evenementId) {
                     state.selectedEvenement = {
                         ...state.selectedEvenement,
-                        image: imageUrl
+                        cover: imageUrl
                     }
                 }
 
@@ -341,6 +342,6 @@ const EvenementSlice = createSlice({
     }
 });
 
-export const { setAddFormValue, resetForm, setSelectedEvenement, setModalDeleteEvenement, setModalCreateEvenement, setModalEditEvenement, setEditFormValue, setFilterToggle} = EvenementSlice.actions;
+export const { setAddFormValue, resetForm, setEditFormValue, setSelectedEvenement, setModalDeleteEvenement, setModalCreateEvenement, setModalEditEvenement} = EvenementSlice.actions;
 
 export default EvenementSlice.reducer;

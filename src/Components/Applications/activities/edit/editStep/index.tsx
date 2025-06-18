@@ -33,6 +33,10 @@ const EditActivityForm = () => {
                 value: selectedActivity?.name
             }));
             dispatch(setEditFormValue({
+                field: 'form_link',
+                value: selectedActivity?.form_link
+            }));
+            dispatch(setEditFormValue({
                 field: 'description',
                 value: selectedActivity?.description
             }));
@@ -53,19 +57,11 @@ const EditActivityForm = () => {
                 //@ts-ignore
                 value: selectedActivity?.categories?.map(c => c.id) || []
             }));
-            dispatch(setEditFormValue({
-                field: 'partners',
-                //@ts-ignore
-                value: selectedActivity?.partners?.map(p => p.id) || []
-            }));
-            dispatch(setEditFormValue({
-                field: 'form',
-                value: selectedActivity?.form || []
-            }));
-            dispatch(setEditFormValue({
-                field: 'review_form',
-                value: selectedActivity?.review_form || []
-            }));
+            // dispatch(setEditFormValue({
+            //     field: 'partners',
+            //     //@ts-ignore
+            //     value: selectedActivity?.partners?.map(p => p.id) || []
+            // }));
         }
     }, [dispatch, fetchActivityByIdStatus]);
 

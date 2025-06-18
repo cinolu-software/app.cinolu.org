@@ -1,11 +1,11 @@
 import React from 'react'
 import ImagePreview from './ImagePreview'
 
-const AttachmentActivity = () => {
+const AttachmentEvenement = () => {
     return (
         <div>
             <ImagePreview/>
         </div>
     )
 }
-export default AttachmentActivity
+export default AttachmentEvenement

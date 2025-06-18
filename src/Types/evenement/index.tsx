@@ -30,7 +30,7 @@ export type ProgrammeEvenement = {
 export interface EvenementType {
     id: string,
     name: string,
-    image: string,
+    cover: string,
     slug: string,
     description: string,
     place: string,

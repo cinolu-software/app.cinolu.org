@@ -4,7 +4,7 @@ import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
-import {setEditFormValue } from "@/Redux/Reducers/ActivitySlice";
+import { setEditFormValue} from "@/Redux/Reducers/ActivitySlice";
 
 
 
@@ -21,6 +21,11 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
         dispatch(setEditFormValue({ field: 'description', value }));
     };
 
+    const handleFormLinkChange = (event: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setEditFormValue({ field: 'form_link', value: event.target.value }));
+    }
+
+
     return (
         <div className={'border ps-3 rounded'}>
             <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
@@ -28,6 +33,10 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                     <Col className={'mb-3'} >
                         <Label check>{"Nom de l'activité"}<span className="txt-danger">*</span></Label>
                         <Input name="accountName" value={editFormValue?.name} onChange={handleNameChange} type="text" className={'border'}/>
+                    </Col>
+                    <Col className={'mb-3'} >
+                        <Label check>{"Lien"}<span className="txt-danger">*</span></Label>
+                        <Input name="accountName" value={editFormValue?.form_link} onChange={handleFormLinkChange} type="text" className={'border'}/>
                     </Col>
                     <Col >
                         <Label check>{"Description de l'activité"}<span className="txt-danger">*</span></Label>
