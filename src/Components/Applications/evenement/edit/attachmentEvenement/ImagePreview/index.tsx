@@ -5,7 +5,7 @@ import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orien
 import "filepond/dist/filepond.min.css";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { toast, Flip } from "react-toastify";
-import {updatedAttachmentActivityImage} from "@/Redux/Reducers/ActivitySlice";
+import {updatedAttachmentEvenementImage} from "@/Redux/Reducers/evenement";
 import { CardBody, Col, Spinner } from "reactstrap";
 import { FilePond, registerPlugin } from "react-filepond";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,7 @@ const ImagePreview = () => {
     const dispatch = useAppDispatch();
     const [files, setFiles] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
-    const { selectedActivity } = useAppSelector(state => state.activity);
+    const {selectedEvenement} = useAppSelector(state => state.evenement)
     const router = useRouter();
 
     const handleUpdateImage = () => {
@@ -34,11 +34,11 @@ const ImagePreview = () => {
             return;
         }
 
-        if (selectedActivity) {
+        if (selectedEvenement) {
             const imageFile = files[0].file as File;
 
             setIsLoading(true);
-            dispatch(updatedAttachmentActivityImage({ activityId: selectedActivity.id, imageFile }))
+            dispatch(updatedAttachmentEvenementImage({ evenementId: selectedEvenement.id, imageFile }))
                 .unwrap()
                 .then(() => {
                     toast.success(
