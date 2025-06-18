@@ -26,8 +26,41 @@ const EditEvenementForm = () => {
     , [dispatch]);
 
     useEffect(() => {
-        if(statusFetchEvenementById === "success") {
-            dispatch(setE)
+        if(statusFetchEvenementById === "succeeded") {
+            dispatch(setEditFormValue({
+                field: 'name',
+                value: selectedEvenement?.name
+            }));
+            dispatch(setEditFormValue({
+                field: 'description',
+                value: selectedEvenement?.description
+            }));
+            dispatch(setEditFormValue({
+                field: 'place',
+                value: selectedEvenement?.place
+            }));
+            dispatch(setEditFormValue({
+                field: 'started_at',
+                value: selectedEvenement?.started_at
+            }));
+            dispatch(setEditFormValue({
+                field: 'ended_at',
+                value: selectedEvenement?.ended_at
+            }));
+            dispatch(setEditFormValue({
+                field: 'program',
+                value: selectedEvenement?.program?.id || ''
+            }));
+            dispatch(setEditFormValue({
+                field: 'categories',
+                //@ts-ignore
+                value: selectedEvenement?.categories?.map(c => c.id) || []
+            }));
+            dispatch(setEditFormValue({
+                field: 'responsible',
+                //@ts-ignore
+                value: selectedEvenement?.responsible?.map(r => r.id) || []
+            }));
         }
     }, [dispatch, statusFetchEvenementById]);
 

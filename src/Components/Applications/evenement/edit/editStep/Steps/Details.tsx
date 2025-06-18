@@ -5,13 +5,13 @@ import DatePicker, { DateObject } from "react-multi-date-picker";
 import { ActivityFormTabContentPropsType } from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import { fetchProgram } from "@/Redux/Reducers/programSlice/programSlice";
-import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
-import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
+import {fetchEventsType} from "@/Redux/Reducers/eventSlice/EventTypeSlice";
+import {fetchStaffMembers} from "@/Redux/Reducers/userSlice/UserSlice";
 import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import { ProjectCategoryType } from "@/Types/Projects/ProjectCategoryType";
-import { PartnerType } from "@/Types/PartnerType/PartnerType";
 import Select, { MultiValue, SingleValue } from "react-select";
-import { setAddFormValue } from "@/Redux/Reducers/ActivitySlice";
+import { setEditFormValue} from "@/Redux/Reducers/evenement";
+import {StaffMemberType} from "@/Types/Users/UsersType";
 
 interface OptionType {
     value: string;
@@ -21,11 +21,21 @@ interface OptionType {
 const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue, selectedActivity } = useAppSelector(state => state.activity);
-    const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
-    const { partnerData, status: partnerStatus } = useAppSelector(state => state.partner);
-    const {projectCategoryData, status: categoryStatus} = useAppSelector(state=>state.projectCategory);
+    const { editFormValue, selectedEvenement } = useAppSelector(state => state.evenement);
+    const {staffMemberData, statusStaff} = useAppSelector(state => state.users)
 
+    const { transformedPrograms, status: programStatus } = useAppSelector(state => state.program);
+    const {status: categoryStatus, dataEventType } = useAppSelector(state => state.eventType);
+
+    const programId = editFormValue.program || '';
+    const categoryIds = editFormValue.categories || [];
+    const responsibleId = editFormValue.responsible || '';
+
+    useEffect(() => {
+        if(statusStaff === 'idle'){
+            dispatch(fetchStaffMembers());
+        }
+    }, [dispatch, statusStaff]);
 
     useEffect(() => {
         if (programStatus === 'idle') {
@@ -34,84 +44,72 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     }, [dispatch, programStatus]);
 
     useEffect(() => {
-        if (partnerStatus === 'idle') {
-            dispatch(fetchPartner());
-        }
-    }, [dispatch, partnerStatus]);
-
-    useEffect(() => {
         if (categoryStatus === 'idle') {
-            dispatch(fetchCategory());
+            dispatch(fetchEventsType());
         }
     }, [dispatch, categoryStatus]);
 
-
     const [dateRange, setDateRange] = useState<DateObject[]>(() => {
-        if (addFormValue.started_at && addFormValue.ended_at) {
+        if (selectedEvenement) {
             return [
-                new DateObject(new Date(addFormValue.started_at)),
-                new DateObject(new Date(addFormValue.ended_at))
+                new DateObject(new Date(selectedEvenement.started_at)),
+                new DateObject(new Date(selectedEvenement.ended_at))
             ];
         }
         return [new DateObject()];
     });
-
 
     const programOptions: OptionType[] = transformedPrograms.map((program: TransformedProjectTypeType) => ({
         value: program.id,
         label: program.name,
     }));
 
-    const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
-        value: partner.id,
-        label: partner.name,
-    }));
+    const staffOptions: OptionType[] = staffMemberData.map((staff: StaffMemberType) => ({
+        value: staff.id,
+        label: staff.name,
+    }))
 
-    const categoryOptions: OptionType[] = projectCategoryData.map((category: ProjectCategoryType) => ({
+    const categoryOptions: OptionType[] = dataEventType.map((category: ProjectCategoryType) => ({
         value: category.id,
         label: category.name,
     }));
 
 
-    const selectedProgram = programOptions.find(option => option.value === addFormValue.program);
-    const selectedCategories = categoryOptions.filter(option =>
-        addFormValue.categories?.includes(option.value)
-    );
-    const selectedPartners = partnerOptions.filter(option =>
-        addFormValue.partners?.includes(option.value)
-    );
+    const selectedProgram = programOptions.find(option => option.value === programId);
+    const selectedStaff = staffOptions.find(option => option.value === responsibleId);
+    const selectedCategories = categoryOptions.filter(option => categoryIds.includes(option.value));
 
     const handleDateChange = (dates: DateObject[]) => {
         setDateRange(dates);
         if (dates.length === 2) {
-            dispatch(setAddFormValue({
+            dispatch(setEditFormValue({
                 field: 'started_at',
-                value: dates[0].toDate().toISOString()
+                value: dates[0].toDate().toISOString().split('T')[0]
             }));
-            dispatch(setAddFormValue({
+            dispatch(setEditFormValue({
                 field: 'ended_at',
-                value: dates[1].toDate().toISOString()
+                value: dates[1].toDate().toISOString().split('T')[0]
             }));
         }
     };
 
     const handleProgramChange = (option: SingleValue<OptionType>) => {
-        dispatch(setAddFormValue({
+        dispatch(setEditFormValue({
             field: 'program',
             value: option?.value || ''
         }));
     };
 
-    const handleCategoriesChange = (options: MultiValue<OptionType>) => {
-        dispatch(setAddFormValue({
-            field: 'categories',
-            value: options.map(o => o.value)
-        }));
-    };
+    const handleStaffChange = (option : SingleValue<OptionType>) => (
+        dispatch(setEditFormValue({
+            field: 'responsible',
+            value: option?.value || ''
+        }))
+    )
 
-    const handlePartnersChange = (options: MultiValue<OptionType>) => {
-        dispatch(setAddFormValue({
-            field: 'partners',
+    const handleCategoriesChange = (options: MultiValue<OptionType>) => {
+        dispatch(setEditFormValue({
+            field: 'categories',
             value: options.map(o => o.value)
         }));
     };
@@ -133,7 +131,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                 </Row>
                 <Row className={'p-3 mb-2'}>
                     <Col>
-                        <Label className={'mb-2'}>{"Categorie de l'activité associée"}</Label>
+                        <Label className={'mb-2'}>{"Categorie de l'évènement"}</Label>
                         <Select
                             isMulti
                             options={categoryOptions}
@@ -143,18 +141,19 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                         />
                     </Col>
                 </Row>
+
                 <Row className={'p-3 mb-2'}>
                     <Col>
-                        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>
+                        <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>
                         <Select
-                            isMulti
-                            options={partnerOptions}
-                            value={selectedPartners}
-                            onChange={handlePartnersChange}
-                            placeholder="Sélectionnez des partenaires"
+                            options={staffOptions}
+                            value={selectedStaff}
+                            onChange={handleStaffChange}
+                            placeholder="Choisissez le responsable"
                         />
                     </Col>
                 </Row>
+
                 <Row className={'p-3 mb-2'}>
                     <Col>
                         <Label className={'mb-2'} >{"Durée de l'activité"}</Label>

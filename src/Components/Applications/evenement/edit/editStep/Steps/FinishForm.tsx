@@ -1,45 +1,48 @@
 import { Congratulations, ImagePath } from "@/Constant";
 import { Col, Row, Button } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import { createActivityType } from "@/Types/ActivitiesTypes";
-import {updateActivity} from "@/Redux/Reducers/ActivitySlice";
+import {updateEvenement, resetForm} from "@/Redux/Reducers/evenement";
+import {formValueType} from "@/Types/evenement";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 
 const FinishForm = () => {
 
     const dispatch = useAppDispatch();
-    const { addFormValue, selectedActivity } = useAppSelector(state => state.activity);
+    const { editFormValue, selectedEvenement } = useAppSelector(state => state.evenement);
     const router = useRouter();
 
     const handleSubmit = () => {
-        const projectData: createActivityType = {
-            name: addFormValue.name,
-            description: addFormValue.description,
-            started_at: addFormValue.started_at,
-            ended_at: addFormValue.ended_at,
-            program: addFormValue.program,
-            categories: addFormValue.categories,
-            partners: addFormValue.partners,
-            form: addFormValue.form || [],
-            review_form: addFormValue.review_form || []
+
+        const EvenementData : formValueType = {
+            name: editFormValue.name,
+            description: editFormValue.description,
+            link : editFormValue.link,
+            responsible: editFormValue.responsible,
+            place: editFormValue.place,
+            started_at: editFormValue.started_at,
+            ended_at: editFormValue.ended_at,
+            program: editFormValue.program,
+            categories: editFormValue.categories || [],
         };
+
         try{
-            if(selectedActivity){
-                dispatch(updateActivity({activityId: selectedActivity?.id, updatedActivity: projectData }));
+            if(selectedEvenement){
+                dispatch(updateEvenement({evenementId: selectedEvenement?.id, updatedEvenement: EvenementData}));
+                dispatch(resetForm());
             }
-            toast.success("L'activité a été créée avec succès", {
+            toast.success("L'évènement a été modifié avec succès", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/project");
+            router.push("/evenement/list");
         }
         catch (e) {
-            toast.error("Une erreur est survenue lors de la création de l'activité", {
+            toast.error("Une erreur est survenue lors de la modification de l'évènement", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/project");
+            router.push("/evenement/list");
         }
     };
 
@@ -56,7 +59,7 @@ const FinishForm = () => {
             </Row>
             <Row className={'justify-content-center mt-3'}>
                 <Col xs={2} md={2}>
-                    <Button onClick={handleSubmit} color={'primary'}>Créer l'activité</Button>
+                    <Button onClick={handleSubmit} color={'primary'}>Modifier l'évènement</Button>
                 </Col>
             </Row>
         </div>
