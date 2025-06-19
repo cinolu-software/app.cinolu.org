@@ -104,7 +104,7 @@ export const MenuList: MenuItem [] | undefined = [
                                 lanClass: "lan-6"
                             },
                             {
-                                path: "/events/eventsTypes",
+                                path: "/evenement/category",
                                 title: "Catégorie",
                                 type: "link",
                                 lanClass: "lan-6"

@@ -2,13 +2,13 @@
 
 import React, {FunctionComponent, useEffect, useState} from "react";
 
-const AddEvenement = () => {
+const CategoryEvenement = () => {
     const [MyAwesomeMap, setClient] = useState<FunctionComponent>();
 
     useEffect(() => {
         (async () => {
             if (typeof navigator !== "undefined") {
-                const newClient = (await import("@/Components/Applications/evenement/create")).default;
+                const newClient = (await import("@/Components/Applications/evenement/evenementCategory")).default;
                 setClient(() => newClient);
             }
         })();
@@ -17,4 +17,4 @@ const AddEvenement = () => {
     return MyAwesomeMap ? <MyAwesomeMap /> : "";
 }
 
-export default AddEvenement;
+export default CategoryEvenement;

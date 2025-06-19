@@ -164,7 +164,7 @@ export const ActivityListTableDataColumn: TableColumn<ActivityReceive>[] = [
         name: "Nom",
         cell: (row: ActivityReceive) => (
             <ActivityListTableName
-                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/programs.png'}
+                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/call.jpg'}
                 name={row.name}/>
         ),
         sortable: true,
@@ -199,7 +199,7 @@ export const ActivityPublishedListTableDataColumn: TableColumn<ActivityReceive>[
         name: "Nom",
         cell: (row: ActivityReceive) => (
             <ActivityListTableName
-                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/programs.png'}
+                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : "/assets/images/programs/call.jpg"}
                 name={row.name}/>
         ),
         sortable: true,

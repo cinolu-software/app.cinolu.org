@@ -17,7 +17,7 @@ const transformProgramsType = (types: EventType[]) => {
         if(type.id === undefined){
             throw new Error("Event type must have an id");
         }
-        return {...type, image : 'programs/types/typeProgram.png'}
+        return {...type, image : "programs/bg-img2.jpg"}
     })
 }
 
