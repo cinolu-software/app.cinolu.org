@@ -34,12 +34,12 @@ const ActivityForm = () => {
                 <Card>
                     <CardBody>
                         <div className={'horizontal-wizard-wrapper  vertical-variations vertical-options'}>
-                            <Row className="g-3 flex-column flex-md-row">
-                                <Col xs="12" md="3" lg="2" className="main-horizontal-header mb-3 mb-md-0">
+                            <Row className="g-3 d-flex flex-column flex-md-row flex-wrap">
+                                <Col xs="12" md="4" lg="3" className="main-horizontal-header mb-3 mb-md-0">
                                     <NavComponent callbackActive={callback} activeTab={activeTab} />
                                 </Col>
-                                <Col xs="12" md="9" lg="10" className="main-horizontal-content">
-                                    <ActivityFormTabContent activeTab={activeTab} callbackActive={callback}/>
+                                <Col xs="12" md="8" lg="9" className="main-horizontal-content">
+                                    <ActivityFormTabContent activeTab={activeTab} callbackActive={callback} />
                                 </Col>
                             </Row>
                         </div>
