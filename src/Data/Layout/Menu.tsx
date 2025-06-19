@@ -2,26 +2,6 @@ import {MenuItem} from "@/Types/LayoutTypes";
 
 export const MenuList: MenuItem [] | undefined = [
     {
-        id: 1,
-        title : "Mon Compte",
-        lanClass : "lan-1",
-        menucontent : "Compte",
-        Items: [
-            {
-                title: "Compte",
-                id: 2,
-                icon: "user",
-                type: "sub",
-                lanClass: "lan-1",
-                active: false,
-                children: [
-                    {path: "/users/profile", title: "Profile", type: "link", lanClass: "lan-6"},
-                ]
-            },
-        ],
-        requiredRoles: ["admin", "coach", "staff", 'user'],
-    },
-    {
         id: 2,
         title: "Administration",
         lanClass: "lan-1",
@@ -83,11 +63,11 @@ export const MenuList: MenuItem [] | undefined = [
                         lanClass: "lan-6",
                     },
                     {
-                        title: "Activités",
+                        title: "Projects",
                         type: "sub",
                         lanClass: "lan-6",
                         children: [
-                            { path: "/act/list", title: "Activités", type: "link", lanClass: "lan-6"},
+                            { path: "/act/list", title: "Projects", type: "link", lanClass: "lan-6"},
                             {path: "/act/category", title: "catégorie", type: "link", lanClass: "lan-6"},
                         ]
                     },
