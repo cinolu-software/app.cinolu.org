@@ -53,8 +53,9 @@ const FinishForm = () => {
                 </Col>
             </Row>
             <Row className={'justify-content-center mt-3'}>
-                <Col xs={2} md={2}>
-                    <Button onClick={handleSubmit} color={'primary'}>Créer l'activité</Button>
+                <Col
+                xs="12" md="6" lg="4" className="text-center">
+                    <Button onClick={handleSubmit} color={'primary'}>Créer le projet</Button>
                 </Col>
             </Row>
         </div>

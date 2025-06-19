@@ -30,7 +30,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
             <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
                 <div className={'p-3 mb-2'}>
                     <Col className={'mb-3'} >
-                        <Label check>{"Nom de l'activité"}<span className="txt-danger">*</span></Label>
+                        <Label check>{"Nom du projet"}<span className="txt-danger">*</span></Label>
                         <Input name="accountName" value={addFormValue.name} onChange={handleNameChange} type="text" className={'border'}/>
                     </Col>
                     <Col className={'mb-3'} >
@@ -38,7 +38,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                         <Input name="accountName" value={addFormValue.form_link} onChange={handleFormLinkChange} type="text" className={'border'}/>
                     </Col>
                     <Col >
-                        <Label check>{"Description de l'activité"}<span className="txt-danger">*</span></Label>
+                        <Label check>{"Description du projet"}<span className="txt-danger">*</span></Label>
                         <ReactQuill
                             value={addFormValue.description}
                             onChange={handleDescriptionChange}

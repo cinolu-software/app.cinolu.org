@@ -143,18 +143,18 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                         />
                     </Col>
                 </Row>
-                <Row className={'p-3 mb-2'}>
-                    <Col>
-                        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>
-                        <Select
-                            isMulti
-                            options={partnerOptions}
-                            value={selectedPartners}
-                            onChange={handlePartnersChange}
-                            placeholder="Sélectionnez des partenaires"
-                        />
-                    </Col>
-                </Row>
+                {/*<Row className={'p-3 mb-2'}>*/}
+                {/*    <Col>*/}
+                {/*        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>*/}
+                {/*        <Select*/}
+                {/*            isMulti*/}
+                {/*            options={partnerOptions}*/}
+                {/*            value={selectedPartners}*/}
+                {/*            onChange={handlePartnersChange}*/}
+                {/*            placeholder="Sélectionnez des partenaires"*/}
+                {/*        />*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
                 <Row className={'p-3 mb-2'}>
                     <Col>
                         <Label className={'mb-2'} >{"Durée de l'activité"}</Label>

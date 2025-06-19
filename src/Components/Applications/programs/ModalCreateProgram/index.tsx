@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Col, Input, Label, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
-import {createProgram, setModalCreateProgram} from "@/Redux/Reducers/programSlice/programSlice";
+import {createProgram, setModalCreateProgram, reset} from "@/Redux/Reducers/programSlice/programSlice";
 import { Flip, toast } from "react-toastify";
 import {CreateProgramType} from "@/Types/Programs/ProgramType";
 
@@ -23,6 +23,7 @@ const CreateProgramModal = () => {
         await dispatch(createProgram(program)).unwrap()
             .then(() => {
                 dispatch(setModalCreateProgram({ isOpen: false }));
+                setProgram({ name: '', description: '' });
                 toast.success(
                     <p className="text-white tx-16 mb-0">{"programme créé avec succès"}</p>,
                     {

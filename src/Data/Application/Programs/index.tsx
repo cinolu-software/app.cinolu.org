@@ -32,7 +32,7 @@ const ProgramListTableAction: React.FC<{ program: ProgramType }> = ({ program })
 
     return (
         <div className="product-action">
-            <div className={'row w-100 justify-content-center'}>
+            <div className={'row w-auto justify-content-center'}>
                 <div className={'col-6 col-md-6 col-lg-6 col-xl-6'}>
                     <Button
                         color="info"
@@ -83,6 +83,6 @@ export const ProgramTypeListTableDataColumn = [
     {
         name: "Action",
         cell: (row: ProgramListTypeTableColumnType) => <ProgramListTableAction program={row} />,
-        grow: 1
+        grow: 3
     },
 ];

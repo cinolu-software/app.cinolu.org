@@ -27,8 +27,8 @@ const ActivityForm = () => {
             <Col md={12}>
                 <Card>
                     <CardBody>
-                        <h3 className="mb-0">{"Créer l'activité"}</h3>
-                        <p className="text-muted mb-0">{"Vous pouvez créer l'activité avec les détail ici."}</p>
+                        <h3 className="mb-0">{"Création du projet"}</h3>
+                        <p className="text-muted mb-0">{"Vous pouvez créer le projet avec les détail ici."}</p>
                     </CardBody>
                 </Card>
                 <Card>

@@ -24,7 +24,7 @@ const transformProgram = (program: ProgramType[]): ProgramTypeWithImage[] => {
             description: p.description || "",
             created_at: p.created_at || "",
             updated_at: p.updated_at || "",
-            image: "programs/types/typeProgram.png"
+            image: "/programs/call.jpg"
         };
     });
 };
@@ -90,7 +90,7 @@ const ProgramSlice = createSlice({
             state.isOpenModalDeleteProgram = action.payload.isOpen;
             state.selectedProgram = action.payload.program;
         },
-        resetProjectTypeState: (state) => {
+        reset: (state) => {
             state.selectedProgram = null;
         }
     },
@@ -170,6 +170,6 @@ const ProgramSlice = createSlice({
     }
 });
 
-export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram } = ProgramSlice.actions;
+export const { setModalCreateProgram, setModalEditProgram, setModalDeleteProgram, reset } = ProgramSlice.actions;
 
 export default ProgramSlice.reducer;
