@@ -183,7 +183,7 @@ export const EvenementListTableDataColumn: TableColumn<EvenementType>[] = [
         name: "Nom",
         cell: (row: EvenementType) => (
             <EvenementListTableName
-                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/programs.png'}
+                image={row?.cover ? `${imageBaseUrl}/events/${row.cover}` : '/assets/images/programs/bg-img2.jpg'}
                 name={row.name}/>
         ),
         sortable: true,
@@ -213,7 +213,7 @@ export const EvenementPublishedListTableData : TableColumn<EvenementType>[] = [
         name: "Nom",
         cell: (row: EvenementType) => (
             <EvenementListTableName
-                image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/programs.png'}
+                image={row?.cover ? `${imageBaseUrl}/events/${row.cover}` : '/assets/images/programs/bg-img2.jpg'}
                 name={row.name}/>
         ),
         sortable: true,

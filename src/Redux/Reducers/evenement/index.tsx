@@ -130,10 +130,10 @@ export const updatedAttachmentEvenementImage = createAsyncThunk<{evenementId: st
         try{
             const formData = new FormData();
 
-            formData.append('thumb', imageFile);
+            formData.append('cover', imageFile);
 
             const response = await axiosInstance.post<{data: {image: string}}>(
-                `${apiBaseUrl}/events/image/${evenementId}`,
+                `${apiBaseUrl}/events/cover/${evenementId}`,
                 formData,
                 {headers: {'Content-Type': 'multipart/form-data'}}
             )
