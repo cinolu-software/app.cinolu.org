@@ -118,7 +118,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
     return (
         <div className={'border ps-3 rounded'}>
-            <h2 className={'ms-3 mt-3 mb-4'}>Détail de l'activité</h2>
+            <h2 className={'ms-3 mt-3 mb-4'}>Détail du projet</h2>
             <div>
                 <Row className={'p-3 mb-2'}>
                     <Col>
@@ -133,7 +133,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                 </Row>
                 <Row className={'p-3 mb-2'}>
                     <Col>
-                        <Label className={'mb-2'}>{"Categorie de l'activité associée"}</Label>
+                        <Label className={'mb-2'}>{"Categorie du projet associée"}</Label>
                         <Select
                             isMulti
                             options={categoryOptions}
@@ -157,7 +157,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                 {/*</Row>*/}
                 <Row className={'p-3 mb-2'}>
                     <Col>
-                        <Label className={'mb-2'} >{"Durée de l'activité"}</Label>
+                        <Label className={'mb-2'} >{"Durée du projet"}</Label>
                         <InputGroup className="flatpicker-calender border rounded">
                             <DatePicker
                                 inputClass="form-control"
