@@ -27,7 +27,7 @@ const CreateNewEventType = () => {
                 setEvent({ name: '', description: '' });
                 dispatch(setModalCreateEventType({ isOpen: false }));
                 toast.success(
-                    <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
+                    <p className="text-white tx-16 mb-0">{"catégorie de programme créé avec succès"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -39,7 +39,7 @@ const CreateNewEventType = () => {
             })
             .catch(() => {
                 toast.error(
-                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du type de programme"}</p>,
+                    <p className="text-white tx-16 mb-0">{"Erreur survenue lors de la création du catégorie de programme"}</p>,
                     {
                         autoClose: 5000,
                         position: toast.POSITION.TOP_CENTER,
@@ -58,13 +58,13 @@ const CreateNewEventType = () => {
         <Col xs="12">
             <Modal isOpen={isOpenModalCreateEventType} toggle={() => dispatch(setModalCreateEventType({ isOpen: false }))} size="lg">
                 <div className="modal-header">
-                    <h1 className="modal-title fs-5">{"Ajouter un type d'événement"}</h1>
+                    <h1 className="modal-title fs-5">{"Ajouter une catégorie d'événement"}</h1>
                     <Button close onClick={() => dispatch(setModalCreateEventType({ isOpen: false }))} />
                 </div>
                 <ModalBody className="custom-input">
                     <div className="create-category">
                         <Label for="programName" check>
-                            Nom du type d'événement <span className="txt-danger">*</span>
+                            Nom de la catégorie d'événement <span className="txt-danger">*</span>
                         </Label>
                         <Input
                             className="m-0"
@@ -74,16 +74,16 @@ const CreateNewEventType = () => {
                             onChange={handleNameChange}
                             required
                         />
-                        <Label for="programDescription" className="mt-2" check>
-                            Description du type d'événement
-                        </Label>
-                        <textarea
-                            id="programDescription"
-                            className="form-control"
-                            rows={5}
-                            value={event.description}
-                            onChange={handleDescriptionChange}
-                        />
+                        {/*<Label for="programDescription" className="mt-2" check>*/}
+                        {/*    Description du type d'événement*/}
+                        {/*</Label>*/}
+                        {/*<textarea*/}
+                        {/*    id="programDescription"*/}
+                        {/*    className="form-control"*/}
+                        {/*    rows={5}*/}
+                        {/*    value={event.description}*/}
+                        {/*    onChange={handleDescriptionChange}*/}
+                        {/*/>*/}
                     </div>
                 </ModalBody>
                 <ModalFooter>

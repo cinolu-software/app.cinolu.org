@@ -58,11 +58,11 @@ const EditEvenementForm = () => {
                 //@ts-ignore
                 value: selectedEvenement?.categories?.map(c => c.id) || []
             }));
-            dispatch(setEditFormValue({
-                field: 'responsible',
-                //@ts-ignore
-                value: selectedEvenement?.responsible
-            }));
+            // dispatch(setEditFormValue({
+            //     field: 'responsible',
+            //     //@ts-ignore
+            //     value: selectedEvenement?.responsible
+            // }));
         }
     }, [dispatch, statusFetchEvenementById]);
 

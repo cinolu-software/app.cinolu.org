@@ -8,7 +8,7 @@ export interface formValueType {
     ended_at: string,
     program: string,
     categories: string[],
-    responsible: string
+    // responsible: string
 }
 
 export type CategorieEvenement = {

@@ -18,7 +18,7 @@ const FinishForm = () => {
             name: editFormValue.name,
             description: editFormValue.description,
             link : editFormValue.link,
-            responsible: editFormValue.responsible,
+            // responsible: editFormValue.responsible,
             place: editFormValue.place,
             started_at: editFormValue.started_at,
             ended_at: editFormValue.ended_at,
@@ -58,7 +58,7 @@ const FinishForm = () => {
                 </Col>
             </Row>
             <Row className={'justify-content-center mt-3'}>
-                <Col xs={2} md={2}>
+                <Col xs="12" md="6" lg="4" className="text-center">
                     <Button onClick={handleSubmit} color={'primary'}>Modifier l'évènement</Button>
                 </Col>
             </Row>

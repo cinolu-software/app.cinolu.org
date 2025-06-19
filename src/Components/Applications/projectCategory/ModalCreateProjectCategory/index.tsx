@@ -17,6 +17,7 @@ const CreateNewProjectCategory = () => {
         await dispatch(createCategory(category)).unwrap()
         .then(() => {
             dispatch(setModalCreateCategory({ isOpen: false }));
+            setCategory({name: ''});
             toast.success(
                 <p className="text-white tx-16 mb-0">{"Type de programme créé avec succès"}</p>,
                 {

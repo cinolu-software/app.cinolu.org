@@ -12,7 +12,7 @@ const initialFormValue: formValueType = {
     ended_at: '',
     program: '',
     categories: [],
-    partners: []
+    // partners: []
 };
 
 const initialState: InitialStateActivityType = {

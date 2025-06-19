@@ -29,7 +29,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
     const programId = editFormValue.program || '';
     const categoryIds = editFormValue.categories || [];
-    const responsibleId = editFormValue.responsible || '';
+    // const responsibleId = editFormValue.responsible || '';
 
     useEffect(() => {
         if(statusStaff === 'idle'){
@@ -76,7 +76,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
 
     const selectedProgram = programOptions.find(option => option.value === programId);
-    const selectedStaff = staffOptions.find(option => option.value === responsibleId);
+    // const selectedStaff = staffOptions.find(option => option.value === responsibleId);
     const selectedCategories = categoryOptions.filter(option => categoryIds.includes(option.value));
 
     const handleDateChange = (dates: DateObject[]) => {
@@ -100,12 +100,12 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }));
     };
 
-    const handleStaffChange = (option : SingleValue<OptionType>) => (
-        dispatch(setEditFormValue({
-            field: 'responsible',
-            value: option?.value || ''
-        }))
-    )
+    // const handleStaffChange = (option : SingleValue<OptionType>) => (
+    //     dispatch(setEditFormValue({
+    //         field: 'responsible',
+    //         value: option?.value || ''
+    //     }))
+    // )
 
     const handleCategoriesChange = (options: MultiValue<OptionType>) => {
         dispatch(setEditFormValue({
@@ -142,17 +142,17 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                     </Col>
                 </Row>
 
-                <Row className={'p-3 mb-2'}>
-                    <Col>
-                        <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>
-                        <Select
-                            options={staffOptions}
-                            value={selectedStaff}
-                            onChange={handleStaffChange}
-                            placeholder="Choisissez le responsable"
-                        />
-                    </Col>
-                </Row>
+                {/*<Row className={'p-3 mb-2'}>*/}
+                {/*    <Col>*/}
+                {/*        <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>*/}
+                {/*        <Select*/}
+                {/*            options={staffOptions}*/}
+                {/*            value={selectedStaff}*/}
+                {/*            onChange={handleStaffChange}*/}
+                {/*            placeholder="Choisissez le responsable"*/}
+                {/*        />*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
 
                 <Row className={'p-3 mb-2'}>
                     <Col>

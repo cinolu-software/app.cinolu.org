@@ -10,13 +10,13 @@ const ActivityVerticalWizardTabContent :React.FC<ActivityFormTabContentPropsType
     return (
         <TabContent className="dark-field" activeTab={activeTab}>
             <TabPane tabId={1}>
-                <BaseInformations callbackActive={callbackActive} />
+                <BaseInformations callbackActive={callbackActive}/>
             </TabPane>
             <TabPane tabId={2}>
                 <Details callbackActive={callbackActive}/>
             </TabPane>
             <TabPane tabId={3}>
-                <FinishForm />
+                <FinishForm/>
             </TabPane>
         </TabContent>
     );

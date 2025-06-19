@@ -62,10 +62,10 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         label: program.name,
     }));
 
-    const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
-        value: partner.id,
-        label: partner.name,
-    }));
+    // const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
+    //     value: partner.id,
+    //     label: partner.name,
+    // }));
 
     const categoryOptions: OptionType[] = projectCategoryData.map((category: ProjectCategoryType) => ({
         value: category.id,
@@ -77,9 +77,9 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     const selectedCategories = categoryOptions.filter(option =>
         addFormValue.categories?.includes(option.value)
     );
-    const selectedPartners = partnerOptions.filter(option =>
-        addFormValue.partners?.includes(option.value)
-    );
+    // const selectedPartners = partnerOptions.filter(option =>
+    //     addFormValue.partners?.includes(option.value)
+    // );
 
     const handleDateChange = (dates: DateObject[]) => {
         setDateRange(dates);
@@ -109,12 +109,12 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }));
     };
 
-    const handlePartnersChange = (options: MultiValue<OptionType>) => {
-        dispatch(setAddFormValue({
-            field: 'partners',
-            value: options.map(o => o.value)
-        }));
-    };
+    // const handlePartnersChange = (options: MultiValue<OptionType>) => {
+    //     dispatch(setAddFormValue({
+    //         field: 'partners',
+    //         value: options.map(o => o.value)
+    //     }));
+    // };
 
     return (
         <div className={'border ps-3 rounded'}>

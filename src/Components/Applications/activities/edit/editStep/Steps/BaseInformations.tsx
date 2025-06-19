@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useEffect} from "react";
-import { Col, Form, Input, Label } from "reactstrap";
+import React, {ChangeEvent} from "react";
+import { Col, Input, Label } from "reactstrap";
 import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import ReactQuill from "react-quill";
@@ -25,10 +25,9 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
         dispatch(setEditFormValue({ field: 'form_link', value: event.target.value }));
     }
 
-
     return (
         <div className={'border ps-3 rounded'}>
-            <h2 className={'ms-3 mt-3 mb-4'}>Information de base de l'activité</h2>
+            <h2 className={'ms-3 mt-3 mb-4'}>Information de base du projet</h2>
                 <div className={'p-3 mb-2'}>
                     <Col className={'mb-3'} >
                         <Label check>{"Nom de l'activité"}<span className="txt-danger">*</span></Label>

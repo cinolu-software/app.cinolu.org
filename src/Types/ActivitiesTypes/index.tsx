@@ -19,7 +19,7 @@ export interface formValueType {
     ended_at: string,
     program: string,
     categories: string[],
-    partners: string[],
+    // partners: string[],
 }
 
 export interface createActivityType {
@@ -30,7 +30,7 @@ export interface createActivityType {
     ended_at: string;
     program: string;
     categories: string[];
-    partners: string[];
+    // partners: string[];
 }
 export interface ProgramType {
     id: string;

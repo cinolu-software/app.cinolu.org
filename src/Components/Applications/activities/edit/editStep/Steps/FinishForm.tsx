@@ -22,7 +22,7 @@ const FinishForm = () => {
             ended_at: editFormValue.ended_at,
             program: editFormValue.program,
             categories: editFormValue.categories || [],
-            partners: editFormValue.partners || [],
+            // partners: editFormValue.partners || [],
         };
         
         try {
@@ -57,7 +57,7 @@ const FinishForm = () => {
                 </Col>
             </Row>
             <Row className={'justify-content-center mt-3'}>
-                <Col xs={3} md={3}>
+                <Col xs="12" md="6" lg="4" className="text-center">
                     <Button onClick={handleSubmit} color={'primary'} outline>{"Mettre à  jour l'activité"}</Button>
                 </Col>
             </Row>

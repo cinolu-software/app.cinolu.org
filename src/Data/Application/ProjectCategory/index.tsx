@@ -30,7 +30,7 @@ const ProjectCategoryListTableAction: React.FC<{ projectCategoryType: any }> = (
 
     return (
         <div className="product-action">
-            <div className={'row w-100 justify-content-center'}>
+            <div className={'row w-auto justify-content-center'}>
                 <div className={'col-6'}>
                     <Button
                         color="primary"

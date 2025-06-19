@@ -39,11 +39,21 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }
     }, [dispatch, programStatus]);
 
-    useEffect(() => {
-        if (categoryStatus === 'idle') {
-            dispatch(fetchEventsType());
-        }
-    }, [dispatch, categoryStatus]);
+    // useEffect(() => {
+    //     if (categoryStatus === 'idle') {                <Row className={'p-3 mb-2'}>
+    //                 <Col>
+    //                     <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>
+    //                     <Select
+    //                         options={staffOptions}
+    //                         value={selectedStaff}
+    //                         onChange={handleStaffChange}
+    //                         placeholder="Choisissez le responsable"
+    //                     />
+    //                 </Col>
+    //             </Row>
+    //         dispatch(fetchEventsType());
+    //     }
+    // }, [dispatch, categoryStatus]);
 
     const [dateRange, setDateRange] = useState<DateObject[]>(() => {
         if (addFormValue.started_at && addFormValue.ended_at) {
@@ -73,7 +83,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
 
     const selectedProgram = programOptions.find(option => option.value === addFormValue.program);
-    const selectedStaff = staffOptions.find(option => option.value === addFormValue.responsible);
+    // const selectedStaff = staffOptions.find(option => option.value === addFormValue.responsible);
     const selectedCategories = categoryOptions.filter(option =>
         addFormValue.categories?.includes(option.value)
     );
@@ -99,12 +109,12 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }));
     };
 
-    const handleStaffChange = (option : SingleValue<OptionType>) => (
-        dispatch(setAddFormValue({
-            field: 'responsible',
-            value: option?.value || ''
-        }))
-    )
+    // const handleStaffChange = (option : SingleValue<OptionType>) => (
+    //     dispatch(setAddFormValue({
+    //         field: 'responsible',
+    //         value: option?.value || ''
+    //     }))
+    // )
 
     const handleCategoriesChange = (options: MultiValue<OptionType>) => {
         dispatch(setAddFormValue({
@@ -141,17 +151,17 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                     </Col>
                 </Row>
 
-                <Row className={'p-3 mb-2'}>
-                    <Col>
-                        <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>
-                        <Select
-                            options={staffOptions}
-                            value={selectedStaff}
-                            onChange={handleStaffChange}
-                            placeholder="Choisissez le responsable"
-                        />
-                    </Col>
-                </Row>
+                {/*<Row className={'p-3 mb-2'}>*/}
+                {/*    <Col>*/}
+                {/*        <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>*/}
+                {/*        <Select*/}
+                {/*            options={staffOptions}*/}
+                {/*            value={selectedStaff}*/}
+                {/*            onChange={handleStaffChange}*/}
+                {/*            placeholder="Choisissez le responsable"*/}
+                {/*        />*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
 
                 <Row className={'p-3 mb-2'}>
                     <Col>

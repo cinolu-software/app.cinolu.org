@@ -20,7 +20,7 @@ const FinishForm = () => {
             name: addFormValue.name,
             description: addFormValue.description,
             link : addFormValue.link,
-            responsible: addFormValue.responsible,
+            // responsible: addFormValue.responsible,
             place: addFormValue.place,
             started_at: addFormValue.started_at,
             ended_at: addFormValue.ended_at,
@@ -34,14 +34,14 @@ const FinishForm = () => {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/events");
+            router.push("/evenement/list");
         }
         catch (e) {
             toast.error("Une erreur est survenue lors de la création de l'évènement", {
                 autoClose: 5000,
                 position: toast.POSITION.TOP_CENTER
             });
-            router.push("/events");
+            router.push("/evenement/list");
         }
     };
 
@@ -57,7 +57,7 @@ const FinishForm = () => {
                 </Col>
             </Row>
             <Row className={'justify-content-center mt-3'}>
-                <Col xs={2} md={2}>
+                <Col xs="12" md="6" lg="4" className="text-center">
                     <Button onClick={handleSubmit} color={'primary'}>Créer l'évènement</Button>
                 </Col>
             </Row>

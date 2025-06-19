@@ -3,6 +3,7 @@
 import React, {FunctionComponent, useEffect, useState} from "react";
 
 const CategoryEvenement = () => {
+    
     const [MyAwesomeMap, setClient] = useState<FunctionComponent>();
 
     useEffect(() => {

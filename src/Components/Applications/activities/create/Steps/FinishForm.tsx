@@ -21,7 +21,6 @@ const FinishForm = () => {
             ended_at: addFormValue.ended_at,
             program: addFormValue.program,
             categories: addFormValue.categories,
-            partners: addFormValue.partners,
         };
         try{
             dispatch(createActivity(projectData));

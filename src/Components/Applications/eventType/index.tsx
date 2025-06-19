@@ -6,8 +6,8 @@ import { EventsTypesHeader } from "./EventsList";
 import {fetchEventsType, setModalDeleteEventTypes, deleteEventType} from "@/Redux/Reducers/eventSlice/EventTypeSlice"
 import {EventsListTableDataColumn} from "@/Data/Application/eventTypes";
 import {EventsListTypeTableColumnType} from "@/Types/EventsType/eventsTypeType";
-import CreateNewEventType from "@/Components/Applications/eventType/ModalCreateEventsType";
-import UpdateEventsTypeModal from "@/Components/Applications/eventType/ModalUpdateEventsType";
+import CreateNewEventType from "@/Components/Applications/evenement/evenementCategory/ModalCreateEventsType";
+import UpdateEventsTypeModal from "@/Components/Applications/evenement/evenementCategory/ModalUpdateEventsType";
 import DeleteEntityModal from "@/CommonComponent/DeleteEntityModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";

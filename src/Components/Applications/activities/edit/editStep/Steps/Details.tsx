@@ -28,7 +28,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
     const programId = editFormValue.program || '';
     const categoryIds = editFormValue.categories || [];
-    const partnerIds = editFormValue.partners || [];
+    // const partnerIds = editFormValue.partners || [];
 
     useEffect(() => {
         if (programStatus === 'idle') {
@@ -72,10 +72,10 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         label: program.name,
     }));
 
-    const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
-        value: partner.id,
-        label: partner.name,
-    }));
+    // const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
+    //     value: partner.id,
+    //     label: partner.name,
+    // }));
 
     const categoryOptions: OptionType[] = projectCategoryData.map((category: ProjectCategoryType) => ({
         value: category.id,
@@ -86,7 +86,7 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
 
     const selectedProgram = programOptions.find(option => option.value === programId);
     const selectedCategories = categoryOptions.filter(option => categoryIds.includes(option.value));
-    const selectedPartners = partnerOptions.filter(option => partnerIds.includes(option.value));
+    // const selectedPartners = partnerOptions.filter(option => partnerIds.includes(option.value));
 
     const handleDateChange = (dates: DateObject[]) => {
         setDateRange(dates);
@@ -116,12 +116,12 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }));
     };
 
-    const handlePartnersChange = (options: MultiValue<OptionType>) => {
-        dispatch(setEditFormValue({
-            field: 'partners',
-            value: options.map(o => o.value)
-        }));
-    };
+    // const handlePartnersChange = (options: MultiValue<OptionType>) => {
+    //     dispatch(setEditFormValue({
+    //         field: 'partners',
+    //         value: options.map(o => o.value)
+    //     }));
+    // };
 
     return (
         <div className={'border ps-3 rounded'}>
@@ -150,18 +150,18 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                         />
                     </Col>
                 </Row>
-                <Row className={'p-3 mb-2'}>
-                    <Col>
-                        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>
-                        <Select
-                            isMulti
-                            options={partnerOptions}
-                            value={selectedPartners}
-                            onChange={handlePartnersChange}
-                            placeholder="Sélectionnez des partenaires"
-                        />
-                    </Col>
-                </Row>
+                {/*<Row className={'p-3 mb-2'}>*/}
+                {/*    <Col>*/}
+                {/*        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>*/}
+                {/*        <Select*/}
+                {/*            isMulti*/}
+                {/*            options={partnerOptions}*/}
+                {/*            value={selectedPartners}*/}
+                {/*            onChange={handlePartnersChange}*/}
+                {/*            placeholder="Sélectionnez des partenaires"*/}
+                {/*        />*/}
+                {/*    </Col>*/}
+                {/*</Row>*/}
                 <Row className={'p-3 mb-2'}>
                     <Col>
                         <Label className={'mb-2'} >{"Durée de l'activité"}</Label>

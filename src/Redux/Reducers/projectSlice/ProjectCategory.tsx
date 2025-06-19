@@ -21,7 +21,7 @@ export const fetchCategory = createAsyncThunk('projectCategory/fetchCategory', a
 
 export const createCategory = createAsyncThunk('projectCategory/createCategory', async (category: CreateCategoryType) => {
     const response = await axiosInstance.post(`${apiBaseUrl}/project-categories`, category);
-    return response.data;
+    return response.data.data;
 });
 
 export const updateCategory = createAsyncThunk('programsCategory/updateCategory', async (category: UpdateCategoryType) => {
