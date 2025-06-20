@@ -3,8 +3,7 @@ import {ProjectListTypeTableColumnType} from "@/Types/Projects/ProjectTypeType";
 import RatioImage from "@/CommonComponent/RatioImage";
 import { ImagePath } from "@/Constant";
 import { useDispatch } from "react-redux";
-import {setModalCreateCategory, setModalDeleteCategory, setModalEditCategory} from "@/Redux/Reducers/projectSlice/ProjectCategory";
-import SVG from '@/CommonComponent/SVG';
+import { setModalDeleteCategory, setModalEditCategory} from "@/Redux/Reducers/projectSlice/ProjectCategory";
 import {Button} from "reactstrap";
 
 const ProjectCategoryListTableName: React.FC<{ image: string; name: string }> = ({ image, name }) => {
@@ -44,10 +43,6 @@ const ProjectCategoryListTableAction: React.FC<{ projectCategoryType: any }> = (
                             fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
                         }}
                     >
-                        {
-                            <></>
-                            // <SVG iconId="editTable" className="d-none d-md-inline flex-shrink-0" />
-                        }
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
@@ -65,10 +60,6 @@ const ProjectCategoryListTableAction: React.FC<{ projectCategoryType: any }> = (
                             fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
                         }}
                     >
-                        {
-                            <></>
-                            // <SVG iconId="trashTable" className="d-none d-md-inline flex-shrink-0" />
-                        }
                         <span className="text-truncate">Supprimer</span>
                     </Button>
                 </div>
@@ -81,7 +72,7 @@ export const ProjectCategoryListTableDataColumn = [
     {
         name: "Nom",
         cell: (row: ProjectListTypeTableColumnType) => (
-            <ProjectCategoryListTableName image={'programs/programs.png'} name={row.name || "Unnamed"} />
+            <ProjectCategoryListTableName image={'programs/bg-img2.jpg'} name={row.name || "Unnamed"} />
         ),
         sortable: true,
         grow: 3,

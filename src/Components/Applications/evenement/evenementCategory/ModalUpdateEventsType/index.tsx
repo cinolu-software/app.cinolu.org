@@ -91,16 +91,6 @@ const UpdateEventsTypeModal = () => {
                             onChange={handleNameChange}
                             required
                         />
-                        <Label for="programDescription" className="mt-2" check>
-                            Description du type d'événement
-                        </Label>
-                        <textarea
-                            id="programDescription"
-                            className="form-control"
-                            rows={5}
-                            value={eventType.description}
-                            onChange={handleDescriptionChange}
-                        />
                     </div>
                 </ModalBody>
                 <ModalFooter>

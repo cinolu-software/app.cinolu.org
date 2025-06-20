@@ -9,7 +9,7 @@ import { fetchPartner } from '@/Redux/Reducers/PartnersSlice/partnerSlice';
 import { fetchCategory } from "@/Redux/Reducers/projectSlice/ProjectCategory";
 import { TransformedProjectTypeType } from "@/Types/Projects/ProjectTypeType";
 import { ProjectCategoryType } from "@/Types/Projects/ProjectCategoryType";
-import { PartnerType } from "@/Types/PartnerType/PartnerType";
+
 import Select, { MultiValue, SingleValue } from "react-select";
 import { setAddFormValue } from "@/Redux/Reducers/ActivitySlice";
 
@@ -62,11 +62,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         label: program.name,
     }));
 
-    // const partnerOptions: OptionType[] = partnerData.map((partner: PartnerType) => ({
-    //     value: partner.id,
-    //     label: partner.name,
-    // }));
-
     const categoryOptions: OptionType[] = projectCategoryData.map((category: ProjectCategoryType) => ({
         value: category.id,
         label: category.name,
@@ -77,9 +72,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
     const selectedCategories = categoryOptions.filter(option =>
         addFormValue.categories?.includes(option.value)
     );
-    // const selectedPartners = partnerOptions.filter(option =>
-    //     addFormValue.partners?.includes(option.value)
-    // );
 
     const handleDateChange = (dates: DateObject[]) => {
         setDateRange(dates);
@@ -109,13 +101,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }));
     };
 
-    // const handlePartnersChange = (options: MultiValue<OptionType>) => {
-    //     dispatch(setAddFormValue({
-    //         field: 'partners',
-    //         value: options.map(o => o.value)
-    //     }));
-    // };
-
     return (
         <div className={'border ps-3 rounded'}>
             <h2 className={'ms-3 mt-3 mb-4'}>Détail du projet</h2>
@@ -143,18 +128,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                         />
                     </Col>
                 </Row>
-                {/*<Row className={'p-3 mb-2'}>*/}
-                {/*    <Col>*/}
-                {/*        <Label className={'mb-2'}>{'Partenaires Associés'}</Label>*/}
-                {/*        <Select*/}
-                {/*            isMulti*/}
-                {/*            options={partnerOptions}*/}
-                {/*            value={selectedPartners}*/}
-                {/*            onChange={handlePartnersChange}*/}
-                {/*            placeholder="Sélectionnez des partenaires"*/}
-                {/*        />*/}
-                {/*    </Col>*/}
-                {/*</Row>*/}
                 <Row className={'p-3 mb-2'}>
                     <Col>
                         <Label className={'mb-2'} >{"Durée du projet"}</Label>

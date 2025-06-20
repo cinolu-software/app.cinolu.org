@@ -83,6 +83,6 @@ export const ProgramTypeListTableDataColumn = [
     {
         name: "Action",
         cell: (row: ProgramListTypeTableColumnType) => <ProgramListTableAction program={row} />,
-        grow: 3
+        grow: 1
     },
 ];

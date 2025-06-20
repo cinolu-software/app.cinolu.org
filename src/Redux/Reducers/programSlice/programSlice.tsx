@@ -24,7 +24,7 @@ const transformProgram = (program: ProgramType[]): ProgramTypeWithImage[] => {
             description: p.description || "",
             created_at: p.created_at || "",
             updated_at: p.updated_at || "",
-            image: "/programs/call.jpg"
+            image: "/programs/bg-img2.jpg"
         };
     });
 };
