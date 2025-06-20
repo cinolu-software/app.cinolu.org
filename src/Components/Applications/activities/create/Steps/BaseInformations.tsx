@@ -35,7 +35,7 @@ const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackA
                     </Col>
                     <Col className={'mb-3'} >
                         <Label check>{"Lien"}</Label>
-                        <Input name="accountName" value={addFormValue.form_link} onChange={handleFormLinkChange} type="text" className={'border'}/>
+                        <Input name="accountName" value={addFormValue.form_link || ''} onChange={handleFormLinkChange} type="text" className={'border'}/>
                     </Col>
                     <Col >
                         <Label check>{"Description du projet"}</Label>
