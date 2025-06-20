@@ -4,7 +4,7 @@ import {ActivityFormTabContentPropsType} from "@/Types/ActivitiesTypes";
 import { useAppDispatch, useAppSelector } from "@/Redux/Hooks";
 import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
-import {setEditFormValue} from "@/Redux/Reducers/ActivitySlice";
+import { setEditFormValue } from "@/Redux/Reducers/evenement";
 
 
 const BaseInformations :React.FC<ActivityFormTabContentPropsType> = ({ callbackActive }) => {

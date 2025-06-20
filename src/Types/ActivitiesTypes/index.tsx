@@ -14,23 +14,21 @@ export interface formValueType {
     id: string,
     name: string,
     description: string,
-    form_link: string,
+    form_link: string | null,
     started_at: string,
     ended_at: string,
     program: string,
     categories: string[],
-    // partners: string[],
 }
 
 export interface createActivityType {
     name: string;
     description: string;
-    form_link: string;
+    form_link: string | null;
     started_at: string;
     ended_at: string;
     program: string;
     categories: string[];
-    // partners: string[];
 }
 export interface ProgramType {
     id: string;

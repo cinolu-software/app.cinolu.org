@@ -6,7 +6,6 @@ import axiosInstance, { apiBaseUrl } from "@/services/axios";
 const initialFormValue: formValueType = {
     name: "",
     link: "",
-    // responsible: "",
     place: "",
     description: "",
     started_at: "",

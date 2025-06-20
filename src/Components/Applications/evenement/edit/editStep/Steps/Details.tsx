@@ -100,12 +100,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
         }));
     };
 
-    // const handleStaffChange = (option : SingleValue<OptionType>) => (
-    //     dispatch(setEditFormValue({
-    //         field: 'responsible',
-    //         value: option?.value || ''
-    //     }))
-    // )
 
     const handleCategoriesChange = (options: MultiValue<OptionType>) => {
         dispatch(setEditFormValue({
@@ -142,17 +136,6 @@ const DetailInformations: React.FC<ActivityFormTabContentPropsType> = ({ callbac
                     </Col>
                 </Row>
 
-                {/*<Row className={'p-3 mb-2'}>*/}
-                {/*    <Col>*/}
-                {/*        <Label className={'mb-2'}>{"Responsable de l'évènement"}</Label>*/}
-                {/*        <Select*/}
-                {/*            options={staffOptions}*/}
-                {/*            value={selectedStaff}*/}
-                {/*            onChange={handleStaffChange}*/}
-                {/*            placeholder="Choisissez le responsable"*/}
-                {/*        />*/}
-                {/*    </Col>*/}
-                {/*</Row>*/}
 
                 <Row className={'p-3 mb-2'}>
                     <Col>

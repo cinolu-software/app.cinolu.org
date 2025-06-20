@@ -18,7 +18,6 @@ const FinishForm = () => {
             name: editFormValue.name,
             description: editFormValue.description,
             link : editFormValue.link,
-            // responsible: editFormValue.responsible,
             place: editFormValue.place,
             started_at: editFormValue.started_at,
             ended_at: editFormValue.ended_at,

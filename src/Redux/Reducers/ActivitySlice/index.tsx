@@ -7,12 +7,11 @@ const initialFormValue: formValueType = {
     id: "",
     name: "",
     description: "",
-    form_link: "",
+    form_link: null,
     started_at: '',
     ended_at: '',
     program: '',
     categories: [],
-    // partners: []
 };
 
 const initialState: InitialStateActivityType = {

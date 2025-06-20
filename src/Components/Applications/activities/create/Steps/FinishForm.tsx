@@ -16,12 +16,13 @@ const FinishForm = () => {
         const projectData: createActivityType = {
             name: addFormValue.name,
             description: addFormValue.description,
-            form_link: addFormValue.form_link,
+            form_link: addFormValue?.form_link ,
             started_at: addFormValue.started_at,
             ended_at: addFormValue.ended_at,
             program: addFormValue.program,
             categories: addFormValue.categories,
         };
+
         try{
             dispatch(createActivity(projectData));
             dispatch(resetForm);

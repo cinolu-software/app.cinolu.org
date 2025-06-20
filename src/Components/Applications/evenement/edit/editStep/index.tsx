@@ -6,7 +6,6 @@ import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {fetchEvenementById, setEditFormValue} from "@/Redux/Reducers/evenement";
 import {useRouter} from "next/navigation";
 import NavComponent from "@/Components/Applications/evenement/edit/editStep/NavComponent";
-import BackButton from "@/CommonComponent/BackButton";
 
 
 
@@ -58,11 +57,6 @@ const EditEvenementForm = () => {
                 //@ts-ignore
                 value: selectedEvenement?.categories?.map(c => c.id) || []
             }));
-            // dispatch(setEditFormValue({
-            //     field: 'responsible',
-            //     //@ts-ignore
-            //     value: selectedEvenement?.responsible
-            // }));
         }
     }, [dispatch, statusFetchEvenementById]);
 
