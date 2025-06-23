@@ -127,7 +127,7 @@ const ProgramSlice = createSlice({
                     description: action.payload.description || "",
                     created_at: action.payload.created_at || "",
                     updated_at: action.payload.updated_at || "",
-                    image: "programs/types/typeProgram.png"
+                    image: "programs/call.jpg"
                 });
             })
             .addCase(createProgram.rejected, (state, action) => {
