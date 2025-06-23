@@ -12,7 +12,7 @@ export const Profile = () => {
 
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const { user } = useAppSelector((state) => state.auth);
+    const { user, statusAuth } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
         try {
@@ -27,6 +27,12 @@ export const Profile = () => {
             router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string);
         }
     }, [user]);
+
+    useEffect(() => {
+        if (statusAuth === "failed") {
+            router.push(process.env.NEXT_PUBLIC_HOST_CLIENT as string);
+        }
+    }, [statusAuth, router]);
 
     const LogOutUser = async () => {
         await dispatch(logout());
@@ -47,26 +53,6 @@ export const Profile = () => {
                         }
                     alt="profile utilisateur"
                 />
-                {/* <div className="flex-grow-1">
-                    <span>{user ? user.name : "Utilisateur"}</span>
-                    <p className="mb-0 font-outfit">
-                        {
-                            user?.roles && Array.isArray(user.roles) ? (
-                                user.roles.map((role, index) => (
-                                    <span key={index} className="me-1">
-                                        {role}
-                                    </span>
-                                ))
-                            ) :
-                                (
-                                    <span>
-                                        Aucun rôle
-                                    </span>
-                                )
-                        }
-                        <i className="ms-2 fa fa-angle-down"></i>
-                    </p>
-                </div> */}
             </div>
             <ul className="profile-dropdown onhover-show-div">
                 <li onClick={LogOutUser}>

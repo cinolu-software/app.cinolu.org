@@ -29,10 +29,11 @@ const UserLogin = () => {
             <Row className="m-0">
                 <Col xs="12" className="p-0">
                     <div className="login-card login-dark">
-                        {statusAuth === "loading" &&
-                            (
-                                <Spinner style={{ width: '3rem', height: '3rem' }} color="primary" />
-                            )
+                        {
+                            statusAuth === "loading" &&
+                                (
+                                    <Spinner style={{ width: '3rem', height: '3rem' }} color="primary" />
+                                )
                         }
                     </div>
                 </Col>
