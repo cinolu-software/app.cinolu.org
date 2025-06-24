@@ -17,6 +17,7 @@ const initialFormValue: formValueType = {
 const initialState: InitialStateActivityType = {
     originalProjectData: [],
     publishedProjectData: [],
+    unPublishedProjectData: [],
     isOpenModalCreateActivity: false,
     isOpenModalEditActivity: false,
     isOpenModalDeleteActivity: false,
@@ -193,7 +194,10 @@ const ActivitySlice = createSlice({
             })
             .addCase(fetchActivities.fulfilled, (state, action: PayloadAction<ActivityReceive[]>) => {
                 state.status = "succeeded";
-                state.originalProjectData = action.payload.filter(activity => !activity.is_published);
+
+                state.unPublishedProjectData = action.payload.filter(activity => !activity.is_published);
+                state.originalProjectData = action.payload;
+
             })
             .addCase(fetchActivities.rejected, (state, action) => {
                 state.status = "failed";
@@ -211,30 +215,22 @@ const ActivitySlice = createSlice({
                 state.fetchPublishedStatus = "failed";
                 state.error = action.payload ? action.payload : "Erreur lors du chargement des activités publiées.";
             })
-            
-
             .addCase(publishUnpublishActivity.pending, (state) => {
                 state.status = "loading";
                 state.error = null;
             })
             .addCase(publishUnpublishActivity.fulfilled, (state, action: PayloadAction<ActivityReceive>) => {
-               
                 state.status = "succeeded";
-                    
-                    
                 const originalIndex = state.originalProjectData.findIndex(a => a.id === action.payload.id);
                 if (originalIndex !== -1) {
                     state.originalProjectData[originalIndex] = action.payload;
                 } else {
                     state.originalProjectData.push(action.payload);
                 }
-                
                 const publishedIndex = state.publishedProjectData.findIndex(a => a.id === action.payload.id);
-                
                 if (publishedIndex !== -1) {
                     state.publishedProjectData.splice(publishedIndex, 1);
                 }
-                    
                 state.error = null;
             })
             .addCase(publishUnpublishActivity.rejected, (state, action) => {
@@ -334,6 +330,6 @@ const ActivitySlice = createSlice({
     }
 });
 
-export const { setAddFormValue,setEditFormValue ,setFormField, resetForm, setSelectedActivity, setModalDeleteActivity } = ActivitySlice.actions;
+export const { setAddFormValue, setEditFormValue, resetForm, setSelectedActivity, setModalDeleteActivity } = ActivitySlice.actions;
 
 export default ActivitySlice.reducer;

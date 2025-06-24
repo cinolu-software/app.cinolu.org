@@ -1,32 +1,85 @@
-import React, {useState} from "react";
-import {Card, NavItem, Nav, NavLink, CardBody,Row} from "reactstrap";
-import TabsContent from "@/Components/Applications/activities/list/TabsContent";
+import React, { useMemo, useState, useEffect } from "react";
+import DataTable from "react-data-table-component";
+import {  Col, Container, Input, Label, Row, Card, CardBody, CardHeader } from "reactstrap";
+import {fetchActivities} from "@/Redux/Reducers/ActivitySlice";
+import { ActivityListTableDataColumn } from "@/Data/Application/activity";
+import DeleteProjectModal from "@/Components/Applications/activities/list/allProject/common/DeleteProjectsModal";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import { ToastContainer} from "react-toastify";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
+import {ProjectHeader} from "@/Components/Applications/activities/list/allProject/common/ProjectList";
+import {CollapseFilterData} from "@/Components/Applications/activities/list/allProject/common/CollapseFilterData";
 
-const Project = () => {
 
-    const [basicTab, setBasicTab] = useState("1");
+const ProjectListContainer = () => {
+
+    const [filterText, setFilterText] = useState("");
+
+
+    const dispatch = useAppDispatch();
+
+    const {status, originalProjectData} = useAppSelector(state=> state.activity);
+
+    const filteredItems = originalProjectData?.filter((item) => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+
+
+    const subHeaderComponentMemo = useMemo(() => {
+        return (
+            <div className="dataTables_filter d-flex align-items-center">
+                <Label className="me-2">{"Chercher"}:</Label>
+                <Input className={'border border-primary'} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
+            </div>
+        );
+    }, [filterText]);
+
+    useEffect(() => {
+        if (status === "idle" || status === "loading") {
+            dispatch(fetchActivities());
+        }
+    }, [status, dispatch]);
+
 
     return (
-        <Row>
+        <Container fluid>
+            <DeleteProjectModal />
             <Card>
+                <CardHeader className="d-flex justify-content-between align-items-center">
+                    <h4 className="mb-0">Liste des projets</h4>
+                </CardHeader>
                 <CardBody>
-                    <Nav tabs className="border-tab border-0 mb-0 nav-primary">
-                        <NavItem>
-                            <NavLink className={`nav-border pt-0 nav-danger ${basicTab === "1" ? "active" : ""}`} onClick={() => setBasicTab("1")}>
-                                <i className="icofont icofont-files"></i>{"Projets non publiés"}
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink  className={`nav-border nav-danger ${basicTab === "2" ? "active" : ""}`} onClick={() => setBasicTab("2")}>
-                                <i className="icofont icofont-ui-clip-board"></i>{"Projets publiés"}
-                            </NavLink>
-                        </NavItem>
-                    </Nav>
-                    <TabsContent basicTab={basicTab}/>
+                    {
+                        status !== 'succeeded' ? <TableSkeleton/> : (
+                            <Row>
+                                <Col sm="12">
+
+                                    <div className="list-product-header">
+                                        <ProjectHeader />
+                                        <CollapseFilterData/>
+                                    </div>
+                                    <div >
+                                        <div>
+                                            <DataTable
+                                                className="theme-scrollbar"
+                                                data={filteredItems as any[]}
+                                                columns={ActivityListTableDataColumn}
+                                                striped
+                                                highlightOnHover
+                                                pagination
+                                                subHeader
+                                                subHeaderComponent={subHeaderComponentMemo}
+                                            />
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
+                        )
+                    }
                 </CardBody>
             </Card>
-        </Row>
-    )
-}
 
-export default Project;
+            <ToastContainer/>
+        </Container>
+    );
+};
+
+export default ProjectListContainer;

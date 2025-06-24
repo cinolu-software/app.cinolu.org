@@ -9,7 +9,7 @@ const EditProgramTabs = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/act/list'}/>
+            <BackButton link={'/projects/list'}/>
             <Row>
                 <Card>
                     <CardBody>

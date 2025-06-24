@@ -9,8 +9,8 @@ import { useRouter } from 'next/navigation';
 import { imageBaseUrl } from '@/services/axios';
 import { Spinner, Button } from 'reactstrap';
 
-const ActivityListTableName: React.FC<{image: string, name: string}>=({image, name}) => {
 
+const ActivityListTableName: React.FC<{image: string, name: string}>=({image, name}) => {
     return (
         <div className="product-names my-2">
             <div className="light-product-box bg-img-cover">
@@ -32,13 +32,13 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?
 
     const handleEdit = async () => {
         setLoadingEdit(true);
-        router.push('/act/edit');
+        router.push('/projects/edit');
         dispatch(setSelectedActivity(activity));
     };
 
     const handleDetail = async () => {
         setLoadingDetail(true);
-        router.push('/act/detail');
+        router.push('/projects/detail');
         dispatch(setSelectedActivity(activity));
     };
 
@@ -62,8 +62,8 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?
 
     return (
         <div className="product-action">
-            <div className="row w-100 justify-content-center g-2">
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+            <div className="row w-auto justify-content-center g-2">
+                <div className={`col-4 d-flex justify-content-center`}>
                     <Button
                         color="info"
                         outline
@@ -85,7 +85,7 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+                <div className={`col-4 d-flex justify-content-center`}>
                     <Button
                         color="info"
                         outline
@@ -107,29 +107,7 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
-                    <Button
-                        color={'info'}
-                        outline
-                        onClick={handlePublishUnPublish}
-                        disabled={loadingPublish}
-                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
-                        style={{
-                            padding: '6px 10px',
-                            borderRadius: '8px',
-                            width: '100%',
-                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
-                        }}
-                    >
-                        {loadingPublish ? (
-                            <Spinner size="sm" className="flex-shrink-0" />
-                        ) : null}
-                        <span className="text-truncate">
-                            {activity.is_published ? 'Dépublier' : 'Publier'}
-                        </span>
-                    </Button>
-                </div>
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+                <div className={`col-4 d-flex justify-content-center`}>
                     {
                         showDelete && (
                             <Button
@@ -153,6 +131,82 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?
                             </Button>
                         )
                     }
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const PublishProjectListTableAction: React.FC<{ activity: ActivityReceive; showDelete?: boolean}> = ({ activity, showDelete = true }) => {
+
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+    const [loadingDetail, setLoadingDetail] = useState(false);
+    const [loadingPublish, setLoadingPublish] = useState(false);
+
+    const handleDetail = async () => {
+        setLoadingDetail(true);
+        router.push('/projects/detail');
+        dispatch(setSelectedActivity(activity));
+    };
+
+    const handlePublishUnPublish = async () => {
+        try {
+            setLoadingPublish(true);
+            await dispatch(publishUnpublishActivity({activityId: activity.id})).unwrap();
+        } catch (error) {
+            console.error("Error publishing/unpublishing activity:", error);
+        } finally {
+            setLoadingPublish(false);
+        }
+    }
+
+    return (
+        <div className="product-action">
+            <div className="row w-auto justify-content-center g-2">
+                <div className={`col-6 d-flex justify-content-center`}>
+                    <Button
+                        color="info"
+                        outline
+                        onClick={handleDetail}
+                        disabled={loadingDetail}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {loadingDetail ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                        )}
+                        <span className="text-truncate">Détails</span>
+                    </Button>
+                </div>
+                <div className={`col-6 d-flex justify-content-center`}>
+                    <Button
+                        color={'info'}
+                        outline
+                        onClick={handlePublishUnPublish}
+                        disabled={loadingPublish}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {loadingPublish ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : null}
+                        <span className="text-truncate">
+                            {activity.is_published ? 'Dépublier' : 'Publier'}
+                        </span>
+                    </Button>
                 </div>
             </div>
         </div>
@@ -200,7 +254,8 @@ export const ActivityPublishedListTableDataColumn: TableColumn<ActivityReceive>[
         cell: (row: ActivityReceive) => (
             <ActivityListTableName
                 image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : "/assets/images/programs/call.jpg"}
-                name={row.name}/>
+                name={row.name}
+            />
         ),
         sortable: true,
         grow: 2,
@@ -220,7 +275,7 @@ export const ActivityPublishedListTableDataColumn: TableColumn<ActivityReceive>[
     {
         name: "Actions",
         cell: (row: ActivityReceive) => (
-            <ActivityListTableAction
+            <PublishProjectListTableAction
                 activity={row}
                 showDelete={false}
             />

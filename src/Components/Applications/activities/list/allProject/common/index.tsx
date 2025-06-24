@@ -1,8 +1,8 @@
 import React, {useState, useMemo} from 'react';
 import {ReceiveProjectType, ReceiveProjectTypeTable} from "@/Types/Projects/ProjectType";
 import {Card, CardBody, Col, Input, Label, Row} from "reactstrap";
-import {ProjectHeader} from "@/Components/Applications/activities/list/common/ProjectList";
-import {CollapseFilterData} from "@/Components/Applications/activities/list/common/CollapseFilterData";
+import {ProjectHeader} from "@/Components/Applications/activities/list/allProject/common/ProjectList";
+import {CollapseFilterData} from "@/Components/Applications/activities/list/allProject/common/CollapseFilterData";
 import DataTable from "react-data-table-component";
 import {ProjectListTableDataColumn} from "@/Data/Application/Project";
 

@@ -23,7 +23,7 @@ const ActivityForm = () => {
 
     return (
         <Container fluid>
-            <BackButton link={'/act/list'}/>
+            <BackButton link={'/projects/list'}/>
             <Col md={12}>
                 <Card>
                     <CardBody>

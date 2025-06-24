@@ -84,6 +84,7 @@ export interface ActivityReceive {
 export interface InitialStateActivityType {
     originalProjectData : ActivityReceive[];
     publishedProjectData : ActivityReceive[];
+    unPublishedProjectData : ActivityReceive[];
     isOpenModalCreateActivity: boolean;
     isOpenModalEditActivity: boolean;
     isOpenModalDeleteActivity: boolean;
