@@ -8,6 +8,7 @@ import { TableColumn } from 'react-data-table-component';
 import { useRouter } from 'next/navigation';
 import { imageBaseUrl } from '@/services/axios';
 import { Spinner, Button } from 'reactstrap';
+import { Flip, toast } from "react-toastify";
 
 
 const ActivityListTableName: React.FC<{image: string, name: string}>=({image, name}) => {
@@ -154,6 +155,16 @@ const PublishProjectListTableAction: React.FC<{ activity: ActivityReceive; showD
         try {
             setLoadingPublish(true);
             await dispatch(publishUnpublishActivity({activityId: activity.id})).unwrap();
+            toast.success(
+                <p className="text-white tx-16 mb-0">{activity.is_published ? 'Dépublication effectuée avec succès' : 'Publication effectuée avec succès'}</p>,
+                {
+                    autoClose: 5000,
+                    position: toast.POSITION.TOP_CENTER,
+                    hideProgressBar: false,
+                    transition: Flip,
+                    theme: "colored",
+                }
+            );
         } catch (error) {
             console.error("Error publishing/unpublishing activity:", error);
         } finally {

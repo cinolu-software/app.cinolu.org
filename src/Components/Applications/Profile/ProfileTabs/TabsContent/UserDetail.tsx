@@ -225,7 +225,7 @@ const UserDetail = () => {
                                     value={formData.socials.Facebook}
                                     onChange={(e) =>
                                         handleInputChange("socials", {
-                                            ...formData.socials,
+                                            ...forAmData.socials,
                                             Facebook: e.target.value,
                                         })
                                     }

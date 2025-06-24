@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 
 import DataTable from "react-data-table-component";
 import { Col, Container, Input, Label, Row, Card, CardBody, CardHeader } from "reactstrap";
-import {fetchPublishedActivities} from "@/Redux/Reducers/ActivitySlice";
+import {fetchActivities, fetchPublishedActivities} from "@/Redux/Reducers/ActivitySlice";
 import { ActivityPublishedListTableDataColumn } from "@/Data/Application/activity";
 import DeleteProjectModal from "@/Components/Applications/activities/list/allProject/common/DeleteProjectsModal";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
@@ -14,7 +14,7 @@ const PublishedProjectListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {unPublishedProjectData,fetchPublishedStatus } = useAppSelector((state) => state.activity);
+    const {unPublishedProjectData,status } = useAppSelector((state) => state.activity);
     const filteredItems = unPublishedProjectData?.filter((item) => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
     const subHeaderComponentMemo = useMemo(() => {
@@ -33,10 +33,10 @@ const PublishedProjectListContainer = () => {
 
 
     useEffect(() => {
-        if (fetchPublishedStatus === 'idle' || fetchPublishedStatus === 'loading') {
-            dispatch(fetchPublishedActivities());
+        if (status === "idle" || status === "loading") {
+            dispatch(fetchActivities());
         }
-    }, [ fetchPublishedStatus, dispatch]);
+    }, [status, dispatch]);
 
 
     return (
@@ -48,7 +48,7 @@ const PublishedProjectListContainer = () => {
                 </CardHeader>
                 <CardBody>
                     {
-                        fetchPublishedStatus !== 'succeeded' ? <TableSkeleton/> : (
+                        status !== 'succeeded' ? <TableSkeleton/> : (
                             <Row>
                                 <Col sm="12">
                                     <div className="list-product-header">
