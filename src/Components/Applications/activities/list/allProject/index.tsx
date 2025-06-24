@@ -22,6 +22,10 @@ const ProjectListContainer = () => {
 
     const filteredItems = originalProjectData?.filter((item) => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
+    useEffect(() => {
+        dispatch(fetchActivities());
+    }, []);
+
 
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -31,12 +35,6 @@ const ProjectListContainer = () => {
             </div>
         );
     }, [filterText]);
-
-    useEffect(() => {
-        if (status === "idle" || status === "loading") {
-            dispatch(fetchActivities());
-        }
-    }, [status, dispatch]);
 
 
     return (

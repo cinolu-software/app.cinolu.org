@@ -17,6 +17,11 @@ const PublishedProjectListContainer = () => {
     const {publishedProjectData,fetchPublishedStatus } = useAppSelector((state) => state.activity);
     const filteredItems = publishedProjectData?.filter((item) => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
 
+    useEffect(() => {
+        dispatch(fetchPublishedActivities());
+    }, []);
+
+
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center me-2">
@@ -32,11 +37,11 @@ const PublishedProjectListContainer = () => {
     }, [filterText]);
 
 
-    useEffect(() => {
-        if (fetchPublishedStatus === 'idle' || fetchPublishedStatus === 'loading') {
-            dispatch(fetchPublishedActivities());
-        }
-    }, [ fetchPublishedStatus, dispatch]);
+    // useEffect(() => {
+    //     if (fetchPublishedStatus === 'idle' || fetchPublishedStatus === 'loading') {
+    //         dispatch(fetchPublishedActivities());
+    //     }
+    // }, [ fetchPublishedStatus, dispatch]);
 
 
     return (

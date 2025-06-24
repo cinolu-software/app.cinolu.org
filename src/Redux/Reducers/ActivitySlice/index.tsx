@@ -87,8 +87,8 @@ export const fetchPublishedActivities = createAsyncThunk<ActivityReceive[], void
     'activity/fetchPublishedActivities',
     async (_, thunkAPI) => {
         try {
-            const response = await axiosInstance.get(`${apiBaseUrl}/projects/find-published`);
-            return response.data.data[0] as ActivityReceive[];
+            const response = await axiosInstance.get(`${apiBaseUrl}/projects/find-unpaginated-published`);
+            return response.data.data as ActivityReceive[];
         } catch (error: any) {
             return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors du chargement des activités publiées.");
         }
