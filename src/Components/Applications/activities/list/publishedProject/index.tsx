@@ -37,13 +37,6 @@ const PublishedProjectListContainer = () => {
     }, [filterText]);
 
 
-    // useEffect(() => {
-    //     if (fetchPublishedStatus === 'idle' || fetchPublishedStatus === 'loading') {
-    //         dispatch(fetchPublishedActivities());
-    //     }
-    // }, [ fetchPublishedStatus, dispatch]);
-
-
     return (
         <Container fluid>
             <DeleteProjectModal />

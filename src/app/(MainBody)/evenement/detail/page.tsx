@@ -9,7 +9,7 @@ export default function DetailEvenement() {
     useEffect(() => {
         (async () => {
             if (typeof window !== "undefined") {
-                const newClient = (await import("@/Components/Applications/evenement/list/Common/DetailEvenement")).default;
+                const newClient = (await import("@/Components/Applications/evenement/list/all/Common/DetailEvenement")).default;
                 setClient(() => newClient);
             }
         })();

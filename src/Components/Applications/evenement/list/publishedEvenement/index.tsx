@@ -1,52 +1,57 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, {useMemo, useState, useEffect} from "react";
 import DataTable from "react-data-table-component";
-import {  Col, Container, Input, Label, Row } from "reactstrap";
-import {fetchEvenements} from "@/Redux/Reducers/evenement";
-import {EvenementListTableDataColumn} from "@/Data/Application/evenement";
-import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
-import {ToastContainer} from "react-toastify";
-import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {EventsHeader} from "@/Components/Applications/evenement/list/all/Common/EventsList";
+import { Col, Container, Input, Label, Row, Card, CardHeader, CardBody } from "reactstrap";
+import {fetchPublishedEvenements} from "@/Redux/Reducers/evenement";
+import {EvenementPublishedListTableData} from "@/Data/Application/evenement";
 import DeleteEventModal from "@/Components/Applications/evenement/list/all/Common/DeleteEventModal";
+import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
+import TableSkeleton from "@/CommonComponent/TableSkeleton";
+import {ToastContainer} from "react-toastify";
+import {inputSearch} from "@/Constant";
 
-const EventsListContainer = () => {
+
+const PublishedEventsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {status, originalProjectData} = useAppSelector((state)=> state.evenement);
-
-    const filteredItems = originalProjectData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const {publishedProjectData, statusFetchPublishedEvenements} = useAppSelector(state=>state.evenement);
+    // @ts-ignore
+    const filteredItems = publishedProjectData[0]?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
-                <Label className="me-2">{"Chercher"}:</Label>
+                <Label className="me-2">{inputSearch}:</Label>
                 <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFilterText(e.target.value)} type="search" value={filterText} />
             </div>
         );
     }, [filterText]);
 
     useEffect(() => {
-        if (status === "idle" || status === "loading") {
-            dispatch(fetchEvenements());
+        if(statusFetchPublishedEvenements === "idle" || statusFetchPublishedEvenements === "loading"){
+            dispatch(fetchPublishedEvenements())
         }
-    }, [status, dispatch]);
+    }, [statusFetchPublishedEvenements, dispatch]);
 
     return (
         <Container fluid>
             <DeleteEventModal />
-            {
-                status !== 'succeeded' ? <TableSkeleton/> : (
-                    <Row>
-                        <Col sm="12">
-                            <div className="list-product-header">
-                                        <EventsHeader />
+            <Card>
+                <CardHeader className={"d-flex justify-content-between align-items-center"}>
+                    <h4 className={"mb-0"}>Liste d'évènements publiés</h4>
+                </CardHeader>
+                <CardBody>
+                    {
+                        statusFetchPublishedEvenements !== 'succeeded' ? <TableSkeleton/> : (
+                            <Row>
+                                <Col sm="12">
+                                    <div className="list-product-header">
                                     </div>
                                     <div className="list-product">
                                         <div className="table-responsive">
                                             <DataTable
                                                 className="theme-scrollbar"
-                                                data={filteredItems as any}
-                                                columns={EvenementListTableDataColumn}
+                                                data={filteredItems}
+                                                columns={EvenementPublishedListTableData}
                                                 striped
                                                 highlightOnHover
                                                 pagination
@@ -55,13 +60,16 @@ const EventsListContainer = () => {
                                             />
                                         </div>
                                     </div>
-                            </Col>
-                    </Row>
-                )
-            }
+
+                                </Col>
+                            </Row>
+                        )
+                    }
+                </CardBody>
+            </Card>
             <ToastContainer/>
         </Container>
     );
 }
 
-export default EventsListContainer;
+export default PublishedEventsListContainer;

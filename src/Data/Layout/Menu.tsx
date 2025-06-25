@@ -79,18 +79,10 @@ export const MenuList: MenuItem [] | undefined = [
                         type: "sub",
                         lanClass: "lan-6",
                         children: [
-                            {
-                                path: "/evenement/list",
-                                title: "Tevenements",
-                                type: "link",
-                                lanClass: "lan-6"
-                            },
-                            {
-                                path: "/evenement/category",
-                                title: "Catégorie",
-                                type: "link",
-                                lanClass: "lan-6"
-                            },
+                            { path: "/evenement/list", title: "Tevenements", type: "link", lanClass: "lan-6"},
+                            { path: "/evenement/list/published", title: "Evènements publiés", type: "link", lanClass: "lan-6"},
+                            { path: "/evenement/list/unPublished", title: "Evènements non publiés", type: "link", lanClass: "lan-6"},
+                            { path: "/evenement/category", title: "Catégorie", type: "link", lanClass: "lan-6"},
                         ]
                     },
                 ]

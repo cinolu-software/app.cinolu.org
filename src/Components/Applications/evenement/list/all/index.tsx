@@ -1,13 +1,13 @@
 import React, { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
-import {  Col, Container, Input, Label, Row } from "reactstrap";
+import {  Col, Container, Input, Label, Row, Card, CardBody, CardHeader } from "reactstrap";
 import {fetchEvenements} from "@/Redux/Reducers/evenement";
 import {EvenementListTableDataColumn} from "@/Data/Application/evenement";
 import {useAppDispatch, useAppSelector} from "@/Redux/Hooks";
 import {ToastContainer} from "react-toastify";
 import TableSkeleton from "@/CommonComponent/TableSkeleton";
-import {EventsHeader} from "@/Components/Applications/evenement/list/Common/EventsList";
-import DeleteEventModal from "@/Components/Applications/evenement/list/Common/DeleteEventModal";
+import {EventsHeader} from "@/Components/Applications/evenement/list/all/Common/EventsList";
+import DeleteEventModal from "@/Components/Applications/evenement/list/all/Common/DeleteEventModal";
 
 const EventsListContainer = () => {
 
@@ -34,11 +34,16 @@ const EventsListContainer = () => {
     return (
         <Container fluid>
             <DeleteEventModal />
-            {
-                status !== 'succeeded' ? <TableSkeleton/> : (
-                    <Row>
-                        <Col sm="12">
-                            <div className="list-product-header">
+            <Card>
+                <CardHeader className="d-flex justify-content-between align-items-center">
+                    <h4 className={'mb-0'}>Liste d'évènements</h4>
+                </CardHeader>
+                <CardBody>
+                    {
+                        status !== 'succeeded' ? <TableSkeleton/> : (
+                            <Row>
+                                <Col sm="12">
+                                    <div className="list-product-header">
                                         <EventsHeader />
                                     </div>
                                     <div className="list-product">
@@ -55,10 +60,13 @@ const EventsListContainer = () => {
                                             />
                                         </div>
                                     </div>
-                            </Col>
-                    </Row>
-                )
-            }
+                                </Col>
+                            </Row>
+                        )
+                    }
+                </CardBody>
+            </Card>
+
             <ToastContainer/>
         </Container>
     );
