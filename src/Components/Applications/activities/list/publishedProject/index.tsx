@@ -37,6 +37,7 @@ const PublishedProjectListContainer = () => {
     }, [filterText]);
 
 
+
     return (
         <Container fluid>
             <DeleteProjectModal />

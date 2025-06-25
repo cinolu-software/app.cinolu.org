@@ -31,7 +31,6 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; showDelete?:bo
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
-    const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
         setLoadingEdit(true);
@@ -51,34 +50,12 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; showDelete?:bo
         setLoadingDelete(false);
     };
 
-    const handlePublish = async () => {
-        try {
-            setLoadingPublish(true);
-            setTimeout(() => {
-                    dispatch(publishUnpublishEvenement({ evenementId: event.id }));
-                    toast.success("Evénement publié avec succès", {
-                        autoClose: 5000,
-                        position: toast.POSITION.TOP_CENTER,
-                        transition: Flip,
-                    });
-                    setLoadingPublish(false);
-                }
-                , 1000);
-        }
-        catch (e) {
-            setLoadingPublish(false);
-            toast.error("Une erreur est survenue", {
-                autoClose: 5000,
-                position: toast.POSITION.TOP_CENTER,
-                transition: Flip,
-            });
-        }
-    }
+
 
     return (
         <div className="product-action">
-            <div className="row w-100 justify-content-center g-2">
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+            <div className="row w-auto justify-content-center g-2">
+                <div className={`col-4 d-flex justify-content-center`}>
                     <Button
                         color="info"
                         outline
@@ -100,7 +77,7 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; showDelete?:bo
                         <span className="text-truncate">Modifier</span>
                     </Button>
                 </div>
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+                <div className={`col-4 d-flex justify-content-center`}>
                     <Button
                         color="info"
                         outline
@@ -122,29 +99,7 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; showDelete?:bo
                         <span className="text-truncate">Détails</span>
                     </Button>
                 </div>
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
-                    <Button
-                        color={'info'}
-                        outline
-                        onClick={handlePublish}
-                        disabled={loadingPublish}
-                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
-                        style={{
-                            padding: '6px 10px',
-                            borderRadius: '8px',
-                            width: '100%',
-                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
-                        }}
-                    >
-                        {loadingPublish ? (
-                            <Spinner size="sm" className="flex-shrink-0" />
-                        ) : (
-                            <></>
-                        )}
-                        <span className="text-truncate">{event.is_published ? 'Dépublier' : 'Publier'}</span>
-                    </Button>
-                </div>
-                <div className={showDelete ? `col-6 col-md-3 d-flex justify-content-center` : 'col-6 col-md-4 d-flex justify-content-center'}>
+                <div className={`col-4 d-flex justify-content-center`}>
                     {
                         showDelete && (
                             <Button
@@ -172,6 +127,101 @@ const EvenementListTableAction: React.FC<{ event: EvenementType ; showDelete?:bo
                         )
                     }
                 </div>
+            </div>
+        </div>
+    );
+
+};
+
+const PublishEvenementListTableAction: React.FC<{ event: EvenementType ; showDelete?:boolean }> = ({ event, showDelete = true }) => {
+
+    const dispatch = useAppDispatch();
+    const router = useRouter();
+
+    const [loadingDetail, setLoadingDetail] = useState(false);
+    const [loadingPublish, setLoadingPublish] = useState(false);
+
+
+    const handleDetail = async () => {
+        setLoadingDetail(true);
+        router.push('/evenement/detail');
+        dispatch(setSelectedEvenement(event));
+    };
+
+
+    const handlePublish = async () => {
+        try {
+            setLoadingPublish(true);
+            setTimeout(() => {
+                    dispatch(publishUnpublishEvenement({ evenementId: event.id }));
+                    toast.success("Evénement publié avec succès", {
+                        autoClose: 5000,
+                        position: toast.POSITION.TOP_CENTER,
+                        transition: Flip,
+                    });
+                    setLoadingPublish(false);
+                }
+                , 1000);
+        }
+        catch (e) {
+            setLoadingPublish(false);
+            toast.error("Une erreur est survenue", {
+                autoClose: 5000,
+                position: toast.POSITION.TOP_CENTER,
+                transition: Flip,
+            });
+        }
+    }
+
+    return (
+        <div className="product-action">
+            <div className="row w-auto justify-content-center g-2">
+
+                <div className={`col-6 d-flex justify-content-center`}>
+                    <Button
+                        color="info"
+                        outline
+                        onClick={handleDetail}
+                        disabled={loadingDetail}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {loadingDetail ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                        )}
+                        <span className="text-truncate">Détails</span>
+                    </Button>
+                </div>
+                <div className={`col-6 d-flex justify-content-center`}>
+                    <Button
+                        color={'info'}
+                        outline
+                        onClick={handlePublish}
+                        disabled={loadingPublish}
+                        className="d-flex align-items-center justify-content-center gap-1 text-nowrap"
+                        style={{
+                            padding: '6px 10px',
+                            borderRadius: '8px',
+                            width: '100%',
+                            fontSize: 'clamp(0.75rem, 1.5vw, 0.875rem)',
+                        }}
+                    >
+                        {loadingPublish ? (
+                            <Spinner size="sm" className="flex-shrink-0" />
+                        ) : (
+                            <></>
+                        )}
+                        <span className="text-truncate">{event.is_published ? 'Dépublier' : 'Publier'}</span>
+                    </Button>
+                </div>
+
             </div>
         </div>
     );
@@ -233,7 +283,7 @@ export const EvenementPublishedListTableData : TableColumn<EvenementType>[] = [
     },
     {
         name: "Actions",
-        cell: (row: EvenementType) => <EvenementListTableAction event={row} showDelete={false}/>,
+        cell: (row: EvenementType) => <PublishEvenementListTableAction event={row} showDelete={false}/>,
         grow: 2
     },
 ]

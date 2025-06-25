@@ -15,6 +15,10 @@ const EventsListContainer = () => {
     const dispatch = useAppDispatch();
     const {status, originalProjectData} = useAppSelector((state)=> state.evenement);
 
+    useEffect(() => {
+        dispatch(fetchEvenements());
+    }, []);
+
     const filteredItems = originalProjectData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
         return (
@@ -25,11 +29,7 @@ const EventsListContainer = () => {
         );
     }, [filterText]);
 
-    useEffect(() => {
-        if (status === "idle" || status === "loading") {
-            dispatch(fetchEvenements());
-        }
-    }, [status, dispatch]);
+
 
     return (
         <Container fluid>

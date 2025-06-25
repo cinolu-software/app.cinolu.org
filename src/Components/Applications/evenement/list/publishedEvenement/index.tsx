@@ -15,8 +15,13 @@ const PublishedEventsListContainer = () => {
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
     const {publishedProjectData, statusFetchPublishedEvenements} = useAppSelector(state=>state.evenement);
+
+    useEffect(() => {
+        dispatch(fetchPublishedEvenements())
+    }, []);
+
     // @ts-ignore
-    const filteredItems = publishedProjectData[0]?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
+    const filteredItems = publishedProjectData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
         return (
             <div className="dataTables_filter d-flex align-items-center">
@@ -26,11 +31,7 @@ const PublishedEventsListContainer = () => {
         );
     }, [filterText]);
 
-    useEffect(() => {
-        if(statusFetchPublishedEvenements === "idle" || statusFetchPublishedEvenements === "loading"){
-            dispatch(fetchPublishedEvenements())
-        }
-    }, [statusFetchPublishedEvenements, dispatch]);
+
 
     return (
         <Container fluid>

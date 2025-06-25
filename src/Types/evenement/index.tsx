@@ -8,7 +8,6 @@ export interface formValueType {
     ended_at: string,
     program: string,
     categories: string[],
-    // responsible: string
 }
 
 export type CategorieEvenement = {
@@ -46,6 +45,7 @@ export interface EvenementType {
 export interface InitialStateEvenementType {
     originalProjectData : EvenementType[];
     publishedProjectData : EvenementType[];
+    unpublishedProjectData : EvenementType[];
     isOpenModalCreateEvenement : boolean;
     isOpenModalDeleteEvenement : boolean;
     isOpenModalEditEvenement : boolean;

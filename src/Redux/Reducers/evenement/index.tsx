@@ -17,6 +17,7 @@ const initialFormValue: formValueType = {
 const initialState: InitialStateEvenementType = {
     originalProjectData: [],
     publishedProjectData: [],
+    unpublishedProjectData: [],
     selectedEvenement: null,
     isOpenModalCreateEvenement: false,
     isOpenModalDeleteEvenement: false,
@@ -61,7 +62,7 @@ export const fetchPublishedEvenements = createAsyncThunk<EvenementType[], void, 
     'evenements/fetchPublishedEvenements',
     async(_, thunkAPI)=>{
         try{
-            const response = await axiosInstance.get(`${apiBaseUrl}/events/find-published`);
+            const response = await axiosInstance.get(`${apiBaseUrl}/events/find-unpaginated-published`);
             return response.data.data as EvenementType[];
         } catch (error: any){
             return thunkAPI.rejectWithValue(error.response?.data?.message || "Erreur lors du chargement des événement publiés")
@@ -226,7 +227,7 @@ const EvenementSlice = createSlice({
             })
             .addCase(fetchEvenements.fulfilled, (state, action: PayloadAction<EvenementType[]>)=>{
                 state.status = "succeeded";
-                // state.originalProjectData = action.payload.filter(evenement => !evenement.is_published);
+                state.unpublishedProjectData = action.payload.filter(evenement => !evenement.is_published);
                 state.originalProjectData = action.payload;
             })
             .addCase(fetchEvenements.rejected, (state, action) => {

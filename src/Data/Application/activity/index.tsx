@@ -29,7 +29,6 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?
     const [loadingEdit, setLoadingEdit] = useState(false);
     const [loadingDetail, setLoadingDetail] = useState(false);
     const [loadingDelete, setLoadingDelete] = useState(false);
-    const [loadingPublish, setLoadingPublish] = useState(false);
 
     const handleEdit = async () => {
         setLoadingEdit(true);
@@ -48,17 +47,6 @@ const ActivityListTableAction: React.FC<{ activity: ActivityReceive; showDelete?
         dispatch(setModalDeleteActivity({ isOpen: true, activity }));
         setLoadingDelete(false);
     };
-
-    const handlePublishUnPublish = async () => {
-        try {
-            setLoadingPublish(true);
-            await dispatch(publishUnpublishActivity({activityId: activity.id})).unwrap();
-        } catch (error) {
-            console.error("Error publishing/unpublishing activity:", error);
-        } finally {
-            setLoadingPublish(false);
-        }
-    }
 
 
     return (
@@ -228,9 +216,10 @@ export const ActivityListTableDataColumn: TableColumn<ActivityReceive>[] = [
     {
         name: "Nom",
         cell: (row: ActivityReceive) => (
-            <ActivityListTableName
+            <ActivityListTableName 
                 image={row?.cover ? `${imageBaseUrl}/projects/${row.cover}` : '/assets/images/programs/call.jpg'}
-                name={row.name}/>
+                name={row.name}
+                />
         ),
         sortable: true,
         grow: 2,
