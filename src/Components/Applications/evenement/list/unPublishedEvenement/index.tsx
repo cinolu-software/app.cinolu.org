@@ -14,7 +14,7 @@ const PublishedEventsListContainer = () => {
 
     const [filterText, setFilterText] = useState("");
     const dispatch = useAppDispatch();
-    const {unpublishedProjectData, statusFetchPublishedEvenements} = useAppSelector(state=>state.evenement);
+    const {unpublishedProjectData, status} = useAppSelector(state=>state.evenement);
     // @ts-ignore
     const filteredItems = unpublishedProjectData?.filter((item)=>item.name && item.name.toLowerCase().includes(filterText.toLowerCase()));
     const subHeaderComponentMemo = useMemo(() => {
@@ -38,7 +38,7 @@ const PublishedEventsListContainer = () => {
                 </CardHeader>
                 <CardBody>
                     {
-                        statusFetchPublishedEvenements !== 'succeeded' ? <TableSkeleton/> : (
+                        status !== 'succeeded' ? <TableSkeleton/> : (
                             <Row>
                                 <Col sm="12">
                                     <div className="list-product-header">
